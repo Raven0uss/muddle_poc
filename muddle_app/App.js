@@ -14,8 +14,7 @@ import { apolloClient } from "./apollo";
 const GET_USERS = gql`
   query {
     users {
-      username
-      email
+      name
     }
   }
 `;
@@ -25,6 +24,11 @@ function RootComponent() {
 
   if (error) {
     console.error("error", error);
+    return (
+      <View style={styles.container}>
+        <Text style={styles.name}>Error</Text>
+      </View>
+    );
   }
   if (loading) {
     return (
@@ -38,13 +42,13 @@ function RootComponent() {
   return (
     <View style={styles.container}>
       {users.map((user) => (
-          <View style={styles.profileContainer} key={user.username}>
-            {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
-            <View style={styles.details}>
-              <Text style={styles.name}>{user.username}</Text>
-              <Text style={styles.username}>{user.email}</Text>
-            </View>
+        <View style={styles.profileContainer} key={user.name}>
+          {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
+          <View style={styles.details}>
+            <Text style={styles.name}>{user.name}</Text>
+            {/* <Text style={styles.username}>{user.email}</Text> */}
           </View>
+        </View>
       ))}
       {/* <View style={styles.tweetContainer}>
         <Text style={styles.tweet}>{tweet.text}</Text>
