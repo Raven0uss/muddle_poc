@@ -1,104 +1,16 @@
 import React from "react";
-import {
-  Text,
-  View,
-  SafeAreaView,
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-} from "react-native";
-import { ApolloProvider, useQuery, gql } from "@apollo/client";
-
+import { ApolloProvider } from "@apollo/client";
+import { Provider as PaperProvider } from "react-native-paper";
 import { apolloClient } from "./apollo";
 
-const GET_USERS = gql`
-  query {
-    users {
-      name
-    }
-  }
-`;
-
-function RootComponent() {
-  const { data, loading, error } = useQuery(GET_USERS);
-
-  if (error) {
-    console.error("error", error);
-    return (
-      <View style={styles.container}>
-        <Text style={styles.name}>Error</Text>
-      </View>
-    );
-  }
-  if (loading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
-
-  const { users } = data;
-  return (
-    <View style={styles.container}>
-      {users.map((user) => (
-        <View style={styles.profileContainer} key={user.name}>
-          {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
-          <View style={styles.details}>
-            <Text style={styles.name}>{user.name}</Text>
-            {/* <Text style={styles.username}>{user.email}</Text> */}
-          </View>
-        </View>
-      ))}
-      {/* <View style={styles.tweetContainer}>
-        <Text style={styles.tweet}>{tweet.text}</Text>
-      </View> */}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 50,
-  },
-  profileContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  image: {
-    height: 50,
-    width: 50,
-    borderRadius: 100,
-  },
-  details: {
-    marginLeft: 5,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  username: {
-    color: "gray",
-  },
-  tweetContainer: {
-    marginTop: 10,
-  },
-  tweet: {
-    fontSize: 16,
-  },
-});
+import RootComponent from "./Components/Home"
 
 export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <RootComponent />
+      <PaperProvider>
+        <RootComponent />
+      </PaperProvider>
     </ApolloProvider>
   );
 }
