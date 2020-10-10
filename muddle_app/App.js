@@ -1,16 +1,31 @@
+import "react-native-gesture-handler";
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { Provider as PaperProvider } from "react-native-paper";
 import { apolloClient } from "./apollo";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import RootComponent from "./Components/Home"
+import HomeScreen from "./Screens/Home";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <ApolloProvider client={apolloClient}>
-      <PaperProvider>
-        <RootComponent />
-      </PaperProvider>
-    </ApolloProvider>
+    <NavigationContainer>
+      <ApolloProvider client={apolloClient}>
+        <PaperProvider>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </PaperProvider>
+      </ApolloProvider>
+    </NavigationContainer>
   );
 }

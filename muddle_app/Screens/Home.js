@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
-import Icon from "./Icon"
+import Icon from "../Components/Icon"
 
 const GET_USERS = gql`
   query {
