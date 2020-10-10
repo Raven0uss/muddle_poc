@@ -2,18 +2,19 @@
 - Bouton commentaire
 - qu'est ce qu'une pub
 - Bouton lancer un debat
-- Rendu pourcentage apres vote bouton
+- Rendu pourcentage apres vote bouton sur un debat
 - ECRAN LANCER UN DEBAT (Pour se souvenir limite de temps)
 - Maquette afficher une interaction dans l'historique du profil
 - A discuter compte prive
-- Ecran centres d'interets
 - Maquette afficher les notifications + definir actions chaque notification 
 - Maquette ecran liste d'amis
 - Maquette ecran de signalement
 - Maquette ecran de conversation
 ///
 
-- Une fois par mois le compte Muddle peut donner un privilege a un user
+- Swipe vers la gauche retour vers l'ecran pour l'historique
+
+- Une fois par mois l'administrateur peut donner un privilege a un user
  distinguable par couronne = peut lancer un seul debat visible par tout le monde 
 
 Types d'utilisateurs :
@@ -70,7 +71,7 @@ Ecran d'Accueil
 ]
 - Bouton lancer un debat a voir avec la maquette A CREUSER
 - Fil d'actualite [
-    - Est compose de plusieurs debats
+    - Est compose de plusieurs debats tries par date de derniere interaction
         - Un debat est affiche dans mon fil d'actualite SI [
             - Quelu'un que je follow, a interagit dessus ou l'a cree
             - Soit c'est un debat genere par Muddle
@@ -133,6 +134,8 @@ Ecran des Debats
         - Quand je clique dessus, ouvre l'Ecran Debats en Duo
     - Les Debat generee
         - Quand je clique dessus, ouvre un fil avec uniquement les debats Muddle
+    - Les Debat clos
+        - Quand je clique dessus, ouvre un fil avec uniquement les debats clos
 -------------------------------------------
 -------------------------------------------
 Ecran de Profil
@@ -147,6 +150,7 @@ Dans tout les cas =>
     - Photo de couverture : affiche en grand au clic
     - Photo de profil : affiche en grand au clic
     - Nom
+    - Phrase de bio : Si c'est mon profil je peux la changer
     - Liste avec historique des interactions (trie par date)
         - Historique des interactions => SI profil TIER cachees lorsque l'on est en mode prive
         et que l'on est pas ami avec la personne SINON afficher normalement
@@ -158,7 +162,7 @@ Dans tout les cas =>
                 - Je remporte un debat si, lors d'un debat duo j'obtiens le plus de vote
         ]
         - Lorsque je clique sur le trophee j'arrive sur l'ecran trophee
-    
+
     - Bouton d'interaction profil
         SI c'est MON profil
             - Modifier Photo de Profil
@@ -169,10 +173,11 @@ Dans tout les cas =>
                 - Lorsque l'on m'ajoute, une demande est envoye au prealable
                 - Mes historiques d'interactions sur mon profil ne sont visibles que par mes amis
             ]
-            - Centres d'interet : A definir avec la maquette A CREUSER
         SI c'est un profil TIER
             - Ajouter : SI le profil est mode prive ALORS envoie une demande pour suivre la personne
                         dans notification (maquette a CREUSER) SINON suit directement la personne
+            - [Accepter] : SI le profil vous a envoyer une demande de follow dans le cas prive 
+            - [Refuser] : SI le profil vous a envoyer une demande de follow dans le cas prive 
             - Bloquer : Si je le bloque, il ne peut plus me trouver via la recherche, ne peut pas contacter, ne peut pas voir le profil
                         Les commentaires ne s'affiche pas, a la place un message pour dire que c'est bloque ()
             - Signaler : Si je clique sur signaler, ouvre un ecran de signalement > Ecran de signalement A CREUSER maquette
@@ -180,6 +185,18 @@ Dans tout les cas =>
 -------------------------------------------
 -------------------------------------------
 Ecran des Chats
+
+- Barre du haut [
+    - Logo a gauche
+    - Bouton lancer une nouvelle conversation a droite [
+        - Dirige vers Ecran Recherche
+    ]
+]
+
+- Barre de recherche, permet de chercher parmis les conversations existantes
+- Liste des conversations triees par date avec en visuel, dernier message de la conversation,
+photo et nom de la personne > Au clic ouvre le chat
+- Swipe gauche la conversation affiche une poubelle pour Supprimer
 
 -------------------------------------------
 -------------------------------------------
@@ -190,11 +207,30 @@ Ecran de conversation
 -------------------------------------------
 Ecran de Recherche
 
+- Barre du haut [
+    - Logo a gauche
+    - Marteau a droite redirige vers ecran des debats
+]
+        - Barre de recherche qui cherche parmis les contacts
+        - Ecran avec liste des contacts, et barre de recherche au dessus
+        - Lorsque l'on clic sur le contact la fenetre de chat s'ouvre
 
 -------------------------------------------
 -------------------------------------------
 Ecran des Notifications
 
+- Barre du haut [
+    - Logo a gauche
+    - Marteau a droite redirige vers ecran des debats
+]
+
+- Liste des notifications triees par date.
+- Qu'est-ce qu'une notification >
+    [
+        - Ca peut etre compose d'un espace avec photo, au clic, permet d'aller sur le profil
+        - Dans le cas, d'un ajout, choix de reponse oui ou non
+    ]
+- Si je swipe une notification vers la gauche affiche la poubelle pour supprimer la notification
 
 -------------------------------------------
 -------------------------------------------
@@ -212,9 +248,34 @@ Ecran Menu
 -------------------------------------------
 Ecran des Trophees
 
+- Barre du haut [
+    -Logo au milieu avec une couronne
+]
+
+- Une barre de recherche qui permet de chercher parmi les debats perdus et gagnes
+ - Qu'est ce qu'un debat remporte [
+            - Je remporte un debat uniquement qd le debat est clos => Conditions =>
+                - Je remporte un debat si j'ai obtenu le plus de Like dans l'espace commentaire d'un debat
+                    genere par Muddle
+                - Je remporte un debat si, lors d'un debat duo j'obtiens le plus de vote
+        ]
+- Qu'est ce qu'un debat perdu [
+    - S'applique uniquement aux debats en duos, lorsque j'ai le moins de votes
+]
+
+- Liste des debats =>
+    - Pastille verte pour gagner, pastille rouge pour perdu
+    - Au clic redirige vers le debat en mode isole => Toutes les interactions sont impossibles dans le debat
+
 -------------------------------------------
 -------------------------------------------
 Ecran Debats en Duo
+
+- Barre du haut [
+    - Profil a gauche
+        - Acceder au profil
+    - Logo a droite
+]
 
 -------------------------------------------
 -------------------------------------------
@@ -229,11 +290,6 @@ Ecran de liste des amis
 
 -------------------------------------------
 -------------------------------------------
-Ecran Centres d'interets
-==Waiting for maquette==
-
--------------------------------------------
--------------------------------------------
 Ecran Lancer un Debat
 ==Waiting for maquette==
 
@@ -241,6 +297,8 @@ Ecran Lancer un Debat
 -------------------------------------------
 Ecran Parametres
 ==Waiting for maquette==
+
+- Changer la langue
 
 
 -------------------------------------------
