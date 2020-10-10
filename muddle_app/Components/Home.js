@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
+import Icon from "./Icon"
 
 const GET_USERS = gql`
   query {
@@ -53,6 +54,7 @@ function HomeComponent(props) {
           <Button>Ok</Button>
         </Card.Actions>
       </Card>
+      <Icon name="gavel" size={24} color={colors.primary}/>
       {users.map((user) => (
         <View style={styles.profileContainer} key={user.name}>
           {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
