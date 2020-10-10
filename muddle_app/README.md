@@ -1,4 +1,4 @@
-# Apollo GraphQL Example
+# Muddle use Apollo GraphQL
 
 <p>
   <!-- iOS -->
