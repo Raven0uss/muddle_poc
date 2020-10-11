@@ -1,5 +1,5 @@
 import { GraphQLScalarType } from "graphql";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 import adResolver from "./adResolver";
 import adTargetResolver from "./adTargetResolver";
@@ -19,15 +19,15 @@ export default [
       name: "Date",
       description: "Date custom scalar type",
       parseValue(value) {
-        return new Date(value); // value from the client
+        return new Date(value); // Value from the client
       },
       serialize(value) {
-        return value.getTime(); // value sent to the client
+        return value.getTime(); // Value sent to the client
       },
       parseLiteral(ast) {
         console.log(ast);
         if (ast.kind === "IntValue") {
-          return parseInt(ast.value, 10); // ast value is always in string format
+          return parseInt(ast.value, 10);
         }
         if (ast.kind === "StringValue") {
           return dayjs(ast.value);
