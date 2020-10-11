@@ -53,6 +53,6 @@ export default gql`
   }
 
   extend type Mutation {
-    createUser(pseudo: String!, password: String!, mail: String!): User!
+    createUser(pseudo: String!, password: String!, mail: String!, birthdate: Date!): User!
   }
 `;

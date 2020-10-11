@@ -1,4 +1,5 @@
 import { GraphQLScalarType } from "graphql";
+import dayjs from 'dayjs';
 
 import adResolver from "./adResolver";
 import adTargetResolver from "./adTargetResolver";
@@ -24,8 +25,12 @@ export default [
         return value.getTime(); // value sent to the client
       },
       parseLiteral(ast) {
-        if (ast.kind === Kind.INT) {
+        console.log(ast);
+        if (ast.kind === "IntValue") {
           return parseInt(ast.value, 10); // ast value is always in string format
+        }
+        if (ast.kind === "StringValue") {
+          return dayjs(ast.value);
         }
         return null;
       },

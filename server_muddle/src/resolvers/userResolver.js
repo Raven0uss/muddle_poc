@@ -46,11 +46,16 @@ export default {
   Mutation: {
     createUser: async (
       parent,
-      { pseudo, password, mail },
+      { pseudo, password, mail, birthdate },
       { models: { userModel } },
       info
     ) => {
-      const user = await userModel.create({ pseudo, password, mail });
+      const user = await userModel.create({
+        pseudo,
+        password,
+        mail,
+        birthdate,
+      });
       return user;
     },
   },

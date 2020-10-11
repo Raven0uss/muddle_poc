@@ -13,6 +13,8 @@ import trophySchema from "./trophySchema";
 import userSchema from "./userSchema";
 
 const linkSchema = gql`
+  scalar Date
+
   type Query {
     _: Boolean
   }
