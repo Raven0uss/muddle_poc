@@ -1,6 +1,16 @@
-import userSchema from './userSchema';
-import postSchema from './postSchema';
-import { gql } from 'apollo-server';
+import { gql } from "apollo-server";
+
+import adSchema from "./adSchema";
+import adTargetSchema from "./adTargetSchema";
+import commentSchema from "./commentSchema";
+import conversationSchema from "./conversationSchema";
+import debateSchema from "./debateSchema";
+import interactionSchema from "./interactionSchema";
+import messageSchema from "./messageSchema";
+// import notificationSchema from "./notificationSchema";
+import reportSchema from "./reportSchema";
+import trophySchema from "./trophySchema";
+import userSchema from "./userSchema";
 
 const linkSchema = gql`
   type Query {
@@ -11,4 +21,17 @@ const linkSchema = gql`
   }
 `;
 
-export default [linkSchema, userSchema, postSchema];
+export default [
+  linkSchema,
+  adSchema,
+  adTargetSchema,
+  commentSchema,
+  conversationSchema,
+  debateSchema,
+  interactionSchema,
+  messageSchema,
+  // notificationSchema,
+  reportSchema,
+  trophySchema,
+  userSchema,
+];

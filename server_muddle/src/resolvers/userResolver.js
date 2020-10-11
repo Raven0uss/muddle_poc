@@ -33,7 +33,8 @@ export default {
         throw new AuthenticationError("Invalid credentials");
       }
 
-      const token = jwt.sign({ id: user.id }, "riddlemethis", { // key have to change
+      const token = jwt.sign({ id: user.id }, "riddlemethis", {
+        // key have to change
         expiresIn: 24 * 10 * 50,
       });
 
@@ -45,18 +46,18 @@ export default {
   Mutation: {
     createUser: async (
       parent,
-      { name, password },
+      { pseudo, password, mail },
       { models: { userModel } },
       info
     ) => {
-      const user = await userModel.create({ name, password });
+      const user = await userModel.create({ pseudo, password, mail });
       return user;
     },
   },
   User: {
-    posts: async ({ id }, args, { models: { postModel } }, info) => {
-      const posts = await postModel.find({ author: id }).exec();
-      return posts;
-    },
+    // posts: async ({ id }, args, { models: { postModel } }, info) => {
+    //   const posts = await postModel.find({ author: id }).exec();
+    //   return posts;
+    // },
   },
 };

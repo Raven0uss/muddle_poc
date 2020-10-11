@@ -44,14 +44,14 @@ const debateSchema = new mongoose.Schema({
       ref: "report",
     },
   ],
-  positive: [
+  positives: [
     // STANDARD DEBATE ONLY
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
   ],
-  negative: [
+  negatives: [
     // STANDARD DEBATE ONLY
     {
       type: mongoose.Schema.Types.ObjectId,
