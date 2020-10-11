@@ -9,8 +9,18 @@ import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import schemas from "./schemas";
 import resolvers from "./resolvers";
 
+import adModel from "./models/adModel";
+import adTargetModel from "./models/adTargetModel";
+import commentModel from "./models/commentModel";
+import conversationModel from "./models/conversationModel";
+import debateModel from "./models/debateModel";
+import interactionModel from "./models/interactionModel";
+import messageModel from "./models/messageModel";
+// import notificationModel from "./models/notificationModel";
+import reportModel from "./models/reportModel";
+import trophyModel from "./models/trophyModel";
 import userModel from "./models/userModel";
-import postModel from "./models/postModel";
+// import postModel from "./models/postModel";
 
 const app = express();
 app.use(cors());
@@ -37,8 +47,18 @@ const server = new ApolloServer({
       return {
         me,
         models: {
+          adModel,
+          adTargetModel,
+          commentModel,
+          conversationModel,
+          debateModel,
+          interactionModel,
+          messageModel,
+          // notificationModel,
+          reportModel,
+          trophyModel,
           userModel,
-          postModel,
+          // postModel,
         },
       };
     }
