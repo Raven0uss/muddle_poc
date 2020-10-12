@@ -7,6 +7,7 @@ export default gql`
   }
 
   type Debate {
+    id: ID!
     owner: User
     ownerBlue: User
     ownerRed: User
@@ -25,5 +26,10 @@ export default gql`
     closed: Boolean!
     crowned: Boolean!
     interactions: [Interaction]
+  }
+
+  extend type Query {
+    debate(id: ID!): Debate!
+    debates: [Debate]
   }
 `;

@@ -33,8 +33,7 @@ export default {
         throw new AuthenticationError("Invalid credentials");
       }
 
-      const token = jwt.sign({ id: user.id }, "riddlemethis", {
-        // key have to change
+      const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, {
         expiresIn: 24 * 10 * 50,
       });
 
@@ -46,16 +45,29 @@ export default {
   Mutation: {
     createUser: async (
       parent,
-      { pseudo, password, mail, birthdate },
+      { input },
       { models: { userModel } },
       info
     ) => {
-      const user = await userModel.create({
-        pseudo,
-        password,
-        mail,
-        birthdate,
-      });
+      console.log(input);
+      const { pseudo, password, mail, birthdate } = input;
+      console.log(pseudo);
+      const user = await userModel.create(input);
+      console.log(user);
+      return user;
+    },
+    updateUser: async (
+      parent,
+      { input },
+      { models: { userModel } },
+      info
+    ) => {
+      const { id } = input;
+      console.log(input.followers[0].id);
+      const user = await userModel.findById({ _id: id }).exec();
+      const followingUser = await userModel.findById({ _id: input.followers[0].id }).exec()
+      user.followers.push(followingUser);
+      // console.log(user);
       return user;
     },
   },

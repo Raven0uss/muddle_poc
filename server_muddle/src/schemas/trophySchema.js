@@ -7,10 +7,16 @@ export default gql`
   }
 
   type Trophy {
+    id: ID!
     user: User!
     won: Boolean!
     type: TrophyType
     debate: Debate
     comment: Comment
+  }
+
+  extend type Query {
+    trophy(id: ID!): Trophy!
+    trophies: [Trophy]
   }
 `;

@@ -12,9 +12,15 @@ export default gql`
   }
 
   type Interaction {
+    id: ID!
     type: InteractionType!
     who: User!
     debate: Debate
     comment: Comment
+  }
+
+  extend type Query {
+    interaction(id: ID!): Interaction!
+    interactions: [Interaction]
   }
 `;

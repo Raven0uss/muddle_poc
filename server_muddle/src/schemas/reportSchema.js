@@ -15,6 +15,7 @@ export default gql`
   }
 
   type Report {
+    id: ID!
     from: User
     to: User
     type: ReportType!
@@ -23,5 +24,10 @@ export default gql`
     debate: Debate
     comment: Comment
     treated: Boolean!
+  }
+
+  extend type Query {
+    report(id: ID!): Report!
+    reports: [Report]
   }
 `;

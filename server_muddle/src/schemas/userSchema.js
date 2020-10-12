@@ -52,7 +52,41 @@ export default gql`
     login(pseudo: String!, password: String!): Token!
   }
 
+  input CreateUserInput {
+    pseudo: String!
+    password: String!
+    mail: String!
+    birthdate: Date!
+    gender: Gender
+  }
+
+  input UpdateUserInput {
+    id: ID!
+    password: String
+    mail: String
+    birthdate: Date
+    gender: Gender
+    role: Role
+    certified: Boolean
+    profilePicture: String
+    coverPicture: String
+    bio: String
+    language: Language
+    crowned: Boolean
+    lastConnected: Date
+    followers: [UpdateUserInput]
+    following: [UpdateUserInput]
+  }
+
   extend type Mutation {
-    createUser(pseudo: String!, password: String!, mail: String!, birthdate: Date!): User!
+    createUser(input: CreateUserInput): User!
+    updateUser(input: UpdateUserInput): User!
   }
 `;
+
+
+// blocked: [UpdateUserInput]
+// debates: [UpdateDebateInput]
+// trophies: [Trophy]
+// conversations: [Conversation]
+// interactions: [Interaction]
