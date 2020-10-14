@@ -1938,7 +1938,7 @@ type Query {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]!
   conversation(where: ConversationWhereUniqueInput!): Conversation
   conversations(after: String, before: String, first: Int, last: Int, orderBy: ConversationOrderByInput, skip: Int, where: ConversationWhereInput): [Conversation!]!
-  currentUser(id: ID): User!
+  currentUser: User!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
   message(where: MessageWhereUniqueInput!): Message

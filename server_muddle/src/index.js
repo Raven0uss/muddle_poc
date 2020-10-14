@@ -45,14 +45,17 @@ const isAuthenticated = rule({ cache: "contextual" })(
   }
 );
 
-const permissions = shield({
-  Query: {
-    users: isAuthenticated,
+const permissions = shield(
+  {
+    Query: {
+      users: isAuthenticated,
+    },
+    Mutation: {
+      // createConversation: isAuthenticated,
+    },
   },
-  Mutation: {
-    // addFruitToBasket: isAuthenticated,
-  },
-});
+  { allowExternalErrors: true }
+);
 
 const server = new GraphQLServer({
   schema,

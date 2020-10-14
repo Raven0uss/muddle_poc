@@ -3901,9 +3901,6 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['ConversationWhereInput'] | null; // ConversationWhereInput
     }
-    currentUser: { // args
-      id?: string | null; // ID
-    }
     interaction: { // args
       where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
     }

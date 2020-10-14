@@ -80,10 +80,8 @@ const Query = prismaObjectType({
     // currentUser
     t.field("currentUser", {
       type: "User",
-      args: {
-        id: idArg(),
-      },
-      resolve: async (parent, { id }, { prisma, currentUser }) => {
+      args: {},
+      resolve: async (parent, args, { prisma, currentUser }) => {
         const user = await prisma.user({ id: currentUser.user.id });
         return user;
       },
