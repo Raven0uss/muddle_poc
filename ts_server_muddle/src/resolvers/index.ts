@@ -1,7 +1,6 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-
 import { combineResolvers, skip } from "graphql-resolvers";
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userIsAuthenticated = (parent, args, { me }) => {
   return me ? skip : new Error("Not authenticated");
@@ -13,12 +12,13 @@ export default {
       const user = await prisma.user({ id: me.user.id });
       return user;
     },
-    getUser: combineResolvers(
+    getUser:
+     combineResolvers(
       userIsAuthenticated,
       async (parent, { id }, { prisma }) => {
         const user = await prisma.user({ id });
         return user;
-      }
+      },
     ),
     signIn: async (parent, { email, password }, { prisma }) => {
       try {
