@@ -1,7 +1,5 @@
-import { config } from "dotenv";
-config();
+require("dotenv").config();
 
-console.log(process.env.PRISMA_MANAGEMENT_API_SECRET);
 import { stringArg, idArg } from "nexus";
 import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
 import { GraphQLServer } from "graphql-yoga";
@@ -34,7 +32,6 @@ const Query = prismaObjectType({
   },
 });
 
-console.log(__dirname);
 const schema = makePrismaSchema({
   types: [Query],
 
