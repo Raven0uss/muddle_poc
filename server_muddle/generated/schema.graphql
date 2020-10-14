@@ -2,6 +2,441 @@
 ### Do not make changes to this file directly
 
 
+type Comment {
+  content: String!
+  createdAt: DateTime!
+  debate: Debate!
+  dislikes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  from: String!
+  id: ID!
+  likes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
+  updatedAt: DateTime!
+}
+
+enum CommentOrderByInput {
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  from_ASC
+  from_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  debate: DebateWhereInput
+  dislikes_some: UserWhereInput
+  from: String
+  from_contains: String
+  from_ends_with: String
+  from_gt: String
+  from_gte: String
+  from_in: [String!]
+  from_lt: String
+  from_lte: String
+  from_not: String
+  from_not_contains: String
+  from_not_ends_with: String
+  from_not_in: [String!]
+  from_not_starts_with: String
+  from_starts_with: String
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  likes_some: UserWhereInput
+  reports_some: ReportWhereInput
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+type Conversation {
+  createdAt: DateTime!
+  id: ID!
+  messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]
+  speakers(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  updatedAt: DateTime!
+}
+
+enum ConversationOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input ConversationWhereInput {
+  AND: [ConversationWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  messages_some: MessageWhereInput
+  speakers_some: UserWhereInput
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+scalar DateTime
+
+type Debate {
+  blueVotes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  closed: Boolean!
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]
+  content: String!
+  createdAt: DateTime!
+  crowned: Boolean!
+  id: ID!
+  interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]
+  loser: User
+  negatives(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  owner: User
+  ownerBlue: User
+  ownerRed: User
+  positives(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  redVotes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
+  timelimit: DateTime
+  topComment: Comment
+  type: DebateType!
+  updatedAt: DateTime!
+  winner: User
+}
+
+enum DebateOrderByInput {
+  closed_ASC
+  closed_DESC
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  crowned_ASC
+  crowned_DESC
+  id_ASC
+  id_DESC
+  timelimit_ASC
+  timelimit_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum DebateType {
+  DUO
+  STANDARD
+}
+
+input DebateWhereInput {
+  AND: [DebateWhereInput!]
+  blueVotes_some: UserWhereInput
+  closed: Boolean
+  closed_not: Boolean
+  comments_some: CommentWhereInput
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  crowned: Boolean
+  crowned_not: Boolean
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  interactions_some: InteractionWhereInput
+  loser: UserWhereInput
+  negatives_some: UserWhereInput
+  owner: UserWhereInput
+  ownerBlue: UserWhereInput
+  ownerRed: UserWhereInput
+  positives_some: UserWhereInput
+  redVotes_some: UserWhereInput
+  reports_some: ReportWhereInput
+  timelimit: DateTime
+  timelimit_gt: DateTime
+  timelimit_gte: DateTime
+  timelimit_in: [DateTime!]
+  timelimit_lt: DateTime
+  timelimit_lte: DateTime
+  timelimit_not: DateTime
+  timelimit_not_in: [DateTime!]
+  topComment: CommentWhereInput
+  type: DebateType
+  type_in: [DebateType!]
+  type_not: DebateType
+  type_not_in: [DebateType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+  winner: UserWhereInput
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  NO_INDICATION
+}
+
+type Interaction {
+  comment: Comment
+  createdAt: DateTime!
+  debate: Debate
+  id: ID!
+  type: InteractionType!
+  updatedAt: DateTime!
+  who: User!
+}
+
+enum InteractionOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum InteractionType {
+  BLUE_VOTE
+  COMMENT
+  DISLIKE
+  LIKE
+  NEGATIVE_VOTE
+  POSITIVE_VOTE
+  RED_VOTE
+}
+
+input InteractionWhereInput {
+  AND: [InteractionWhereInput!]
+  comment: CommentWhereInput
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  debate: DebateWhereInput
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  type: InteractionType
+  type_in: [InteractionType!]
+  type_not: InteractionType
+  type_not_in: [InteractionType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+  who: UserWhereInput
+}
+
+enum Language {
+  EN
+  FR
+}
+
+type Message {
+  content: String!
+  createdAt: DateTime!
+  from: User!
+  id: ID!
+  sendDate: DateTime!
+  to: User!
+  updatedAt: DateTime!
+}
+
+enum MessageOrderByInput {
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  sendDate_ASC
+  sendDate_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input MessageWhereInput {
+  AND: [MessageWhereInput!]
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  from: UserWhereInput
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  sendDate: DateTime
+  sendDate_gt: DateTime
+  sendDate_gte: DateTime
+  sendDate_in: [DateTime!]
+  sendDate_lt: DateTime
+  sendDate_lte: DateTime
+  sendDate_not: DateTime
+  sendDate_not_in: [DateTime!]
+  to: UserWhereInput
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
 type Mutation {
   signUp(email: String, password: String): Token!
 }
@@ -13,17 +448,404 @@ type Query {
   user(where: UserWhereUniqueInput!): User
 }
 
+type Report {
+  comment: Comment
+  createdAt: DateTime!
+  debate: Debate
+  from: User
+  id: ID!
+  reason: ReportReason!
+  reasonText: String
+  to: User
+  treated: Boolean!
+  type: ReportType!
+  updatedAt: DateTime!
+}
+
+enum ReportOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  reason_ASC
+  reason_DESC
+  reasonText_ASC
+  reasonText_DESC
+  treated_ASC
+  treated_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum ReportReason {
+  INSULT
+  PORNOGRAPHY
+  RACISM
+  SEXISM
+  VIOLENCE
+}
+
+enum ReportType {
+  COMMENT
+  DEBATE
+}
+
+input ReportWhereInput {
+  AND: [ReportWhereInput!]
+  comment: CommentWhereInput
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  debate: DebateWhereInput
+  from: UserWhereInput
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  reason: ReportReason
+  reason_in: [ReportReason!]
+  reason_not: ReportReason
+  reason_not_in: [ReportReason!]
+  reasonText: String
+  reasonText_contains: String
+  reasonText_ends_with: String
+  reasonText_gt: String
+  reasonText_gte: String
+  reasonText_in: [String!]
+  reasonText_lt: String
+  reasonText_lte: String
+  reasonText_not: String
+  reasonText_not_contains: String
+  reasonText_not_ends_with: String
+  reasonText_not_in: [String!]
+  reasonText_not_starts_with: String
+  reasonText_starts_with: String
+  to: UserWhereInput
+  treated: Boolean
+  treated_not: Boolean
+  type: ReportType
+  type_in: [ReportType!]
+  type_not: ReportType
+  type_not_in: [ReportType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  MUDDLE
+  STANDARD
+}
+
 type Token {
   token: String!
 }
 
-type User {
-  email: String!
+type Trophy {
+  comment: Comment
+  createdAt: DateTime!
+  debate: Debate
   id: ID!
-  password: String!
+  type: TrophyType
+  updatedAt: DateTime!
+  user: User!
+  won: Boolean!
+}
+
+enum TrophyOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  won_ASC
+  won_DESC
+}
+
+enum TrophyType {
+  DUO
+  TOP_COMMENT
+}
+
+input TrophyWhereInput {
+  AND: [TrophyWhereInput!]
+  comment: CommentWhereInput
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  debate: DebateWhereInput
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  type: TrophyType
+  type_in: [TrophyType!]
+  type_not: TrophyType
+  type_not_in: [TrophyType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+  user: UserWhereInput
+  won: Boolean
+  won_not: Boolean
+}
+
+type User {
+  bio: String
+  birthdate: DateTime!
+  blocked(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  blocking(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  certified: Boolean!
+  conversations(after: String, before: String, first: Int, last: Int, orderBy: ConversationOrderByInput, skip: Int, where: ConversationWhereInput): [Conversation!]
+  coverPicture: String
+  createdAt: DateTime!
+  crowned: Boolean!
+  debates(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
+  debatesBlue(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
+  debatesRed(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
+  email: String!
+  followers(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  following(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  gender: Gender!
+  id: ID!
+  interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]
+  language: Language!
+  lastConnected: DateTime
+  profilePicture: String
+  pseudo: String!
+  role: Role!
+  trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]
+  updatedAt: DateTime!
+}
+
+enum UserOrderByInput {
+  bio_ASC
+  bio_DESC
+  birthdate_ASC
+  birthdate_DESC
+  certified_ASC
+  certified_DESC
+  coverPicture_ASC
+  coverPicture_DESC
+  createdAt_ASC
+  createdAt_DESC
+  crowned_ASC
+  crowned_DESC
+  email_ASC
+  email_DESC
+  gender_ASC
+  gender_DESC
+  id_ASC
+  id_DESC
+  language_ASC
+  language_DESC
+  lastConnected_ASC
+  lastConnected_DESC
+  profilePicture_ASC
+  profilePicture_DESC
+  pseudo_ASC
+  pseudo_DESC
+  role_ASC
+  role_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  bio: String
+  bio_contains: String
+  bio_ends_with: String
+  bio_gt: String
+  bio_gte: String
+  bio_in: [String!]
+  bio_lt: String
+  bio_lte: String
+  bio_not: String
+  bio_not_contains: String
+  bio_not_ends_with: String
+  bio_not_in: [String!]
+  bio_not_starts_with: String
+  bio_starts_with: String
+  birthdate: DateTime
+  birthdate_gt: DateTime
+  birthdate_gte: DateTime
+  birthdate_in: [DateTime!]
+  birthdate_lt: DateTime
+  birthdate_lte: DateTime
+  birthdate_not: DateTime
+  birthdate_not_in: [DateTime!]
+  blocked_some: UserWhereInput
+  blocking_some: UserWhereInput
+  certified: Boolean
+  certified_not: Boolean
+  conversations_some: ConversationWhereInput
+  coverPicture: String
+  coverPicture_contains: String
+  coverPicture_ends_with: String
+  coverPicture_gt: String
+  coverPicture_gte: String
+  coverPicture_in: [String!]
+  coverPicture_lt: String
+  coverPicture_lte: String
+  coverPicture_not: String
+  coverPicture_not_contains: String
+  coverPicture_not_ends_with: String
+  coverPicture_not_in: [String!]
+  coverPicture_not_starts_with: String
+  coverPicture_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  crowned: Boolean
+  crowned_not: Boolean
+  debates_some: DebateWhereInput
+  debatesBlue_some: DebateWhereInput
+  debatesRed_some: DebateWhereInput
+  email: String
+  email_contains: String
+  email_ends_with: String
+  email_gt: String
+  email_gte: String
+  email_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_not: String
+  email_not_contains: String
+  email_not_ends_with: String
+  email_not_in: [String!]
+  email_not_starts_with: String
+  email_starts_with: String
+  followers_some: UserWhereInput
+  following_some: UserWhereInput
+  gender: Gender
+  gender_in: [Gender!]
+  gender_not: Gender
+  gender_not_in: [Gender!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  interactions_some: InteractionWhereInput
+  language: Language
+  language_in: [Language!]
+  language_not: Language
+  language_not_in: [Language!]
+  lastConnected: DateTime
+  lastConnected_gt: DateTime
+  lastConnected_gte: DateTime
+  lastConnected_in: [DateTime!]
+  lastConnected_lt: DateTime
+  lastConnected_lte: DateTime
+  lastConnected_not: DateTime
+  lastConnected_not_in: [DateTime!]
+  profilePicture: String
+  profilePicture_contains: String
+  profilePicture_ends_with: String
+  profilePicture_gt: String
+  profilePicture_gte: String
+  profilePicture_in: [String!]
+  profilePicture_lt: String
+  profilePicture_lte: String
+  profilePicture_not: String
+  profilePicture_not_contains: String
+  profilePicture_not_ends_with: String
+  profilePicture_not_in: [String!]
+  profilePicture_not_starts_with: String
+  profilePicture_starts_with: String
+  pseudo: String
+  pseudo_contains: String
+  pseudo_ends_with: String
+  pseudo_gt: String
+  pseudo_gte: String
+  pseudo_in: [String!]
+  pseudo_lt: String
+  pseudo_lte: String
+  pseudo_not: String
+  pseudo_not_contains: String
+  pseudo_not_ends_with: String
+  pseudo_not_in: [String!]
+  pseudo_not_starts_with: String
+  pseudo_starts_with: String
+  role: Role
+  role_in: [Role!]
+  role_not: Role
+  role_not_in: [Role!]
+  trophies_some: TrophyWhereInput
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
 }
 
 input UserWhereUniqueInput {
   email: String
   id: ID
+  pseudo: String
 }

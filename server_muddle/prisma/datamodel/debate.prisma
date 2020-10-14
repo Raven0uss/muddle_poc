@@ -1,0 +1,28 @@
+enum DebateType {
+  STANDARD
+  DUO
+}
+
+type Debate {
+  id: ID! @id
+  owner: User @relation(link: INLINE, name: "Owner")
+  ownerBlue: User @relation(link: INLINE, name: "OwnerBlue")
+  ownerRed: User @relation(link: INLINE, name: "OwnerRed")
+  content: String!
+  timelimit: DateTime
+  type: DebateType!
+  comments: [Comment] @relation(name: "Comments")
+  topComment: Comment @relation(link: INLINE, name: "TopComment")
+  reports: [Report]
+  positives: [User] @relation(link: INLINE, name: "Positives")
+  negatives: [User] @relation(link: INLINE, name: "Negatives")
+  redVotes: [User] @relation(link: INLINE, name: "RedVotes")
+  blueVotes: [User] @relation(link: INLINE, name: "BlueVotes")
+  winner: User @relation(link: INLINE, name: "Winner")
+  loser: User @relation(link: INLINE, name: "Loser")
+  closed: Boolean! @default(value: false)
+  crowned: Boolean! @default(value: false)
+  interactions: [Interaction]
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

@@ -1,0 +1,45 @@
+enum Role {
+  STANDARD
+  MODERATOR
+  ADMIN
+  MUDDLE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NO_INDICATION
+}
+
+enum Language {
+  FR
+  EN
+}
+
+type User {
+  id: ID! @id
+  pseudo: String! @unique
+  email: String! @unique
+  birthdate: DateTime!
+  role: Role! @default(value: STANDARD)
+  certified: Boolean! @default(value: false)
+  gender: Gender! @default(value: NO_INDICATION)
+  profilePicture: String
+  coverPicture: String
+  bio: String
+  language: Language! @default(value: FR)
+  crowned: Boolean! @default(value: false)
+  lastConnected: DateTime
+  followers: [User] @relation(name: "FollowRelation")
+  following: [User] @relation(link: INLINE, name: "FollowRelation")
+  blocked: [User] @relation(name: "BlockRelation")
+  blocking: [User] @relation(link: INLINE, name: "BlockRelation")
+  debates: [Debate] @relation(name: "Owner")
+  debatesBlue: [Debate] @relation(name: "OwnerBlue")
+  debatesRed: [Debate] @relation(name: "OwnerRed")
+  trophies: [Trophy]
+  conversations: [Conversation]
+  interactions: [Interaction]
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

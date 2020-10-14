@@ -1,10 +1,20 @@
 endpoint: http://localhost:4466
-datamodel: datamodel.prisma
+datamodel:
+  - ./datamodel/ad.prisma
+  - ./datamodel/adTarget.prisma
+  - ./datamodel/comment.prisma
+  - ./datamodel/conversation.prisma
+  - ./datamodel/debate.prisma
+  - ./datamodel/interaction.prisma
+  - ./datamodel/message.prisma
+  - ./datamodel/report.prisma
+  - ./datamodel/trophy.prisma
+  - ./datamodel/user.prisma
 databaseType: document
 
 generate:
-    - generator: javascript-client
-      output: ../generated/prisma-client/
+  - generator: javascript-client
+    output: ../generated/prisma-client/
 
 hooks:
   post-deploy:

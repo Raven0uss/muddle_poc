@@ -15,43 +15,409 @@ export interface NexusPrismaTypes {
   objectTypes: {
     fields: {
       Query: QueryObject
-      User: UserObject
-      UserConnection: UserConnectionObject
+      Ad: AdObject
+      AdTarget: AdTargetObject
+      AdConnection: AdConnectionObject
       PageInfo: PageInfoObject
+      AdEdge: AdEdgeObject
+      AggregateAd: AggregateAdObject
+      AdTargetConnection: AdTargetConnectionObject
+      AdTargetEdge: AdTargetEdgeObject
+      AggregateAdTarget: AggregateAdTargetObject
+      Comment: CommentObject
+      User: UserObject
+      Debate: DebateObject
+      Report: ReportObject
+      Interaction: InteractionObject
+      Trophy: TrophyObject
+      Conversation: ConversationObject
+      Message: MessageObject
+      CommentConnection: CommentConnectionObject
+      CommentEdge: CommentEdgeObject
+      AggregateComment: AggregateCommentObject
+      ConversationConnection: ConversationConnectionObject
+      ConversationEdge: ConversationEdgeObject
+      AggregateConversation: AggregateConversationObject
+      DebateConnection: DebateConnectionObject
+      DebateEdge: DebateEdgeObject
+      AggregateDebate: AggregateDebateObject
+      InteractionConnection: InteractionConnectionObject
+      InteractionEdge: InteractionEdgeObject
+      AggregateInteraction: AggregateInteractionObject
+      MessageConnection: MessageConnectionObject
+      MessageEdge: MessageEdgeObject
+      AggregateMessage: AggregateMessageObject
+      ReportConnection: ReportConnectionObject
+      ReportEdge: ReportEdgeObject
+      AggregateReport: AggregateReportObject
+      TrophyConnection: TrophyConnectionObject
+      TrophyEdge: TrophyEdgeObject
+      AggregateTrophy: AggregateTrophyObject
+      UserConnection: UserConnectionObject
       UserEdge: UserEdgeObject
       AggregateUser: AggregateUserObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
+      AdSubscriptionPayload: AdSubscriptionPayloadObject
+      AdPreviousValues: AdPreviousValuesObject
+      AdTargetSubscriptionPayload: AdTargetSubscriptionPayloadObject
+      AdTargetPreviousValues: AdTargetPreviousValuesObject
+      CommentSubscriptionPayload: CommentSubscriptionPayloadObject
+      CommentPreviousValues: CommentPreviousValuesObject
+      ConversationSubscriptionPayload: ConversationSubscriptionPayloadObject
+      ConversationPreviousValues: ConversationPreviousValuesObject
+      DebateSubscriptionPayload: DebateSubscriptionPayloadObject
+      DebatePreviousValues: DebatePreviousValuesObject
+      InteractionSubscriptionPayload: InteractionSubscriptionPayloadObject
+      InteractionPreviousValues: InteractionPreviousValuesObject
+      MessageSubscriptionPayload: MessageSubscriptionPayloadObject
+      MessagePreviousValues: MessagePreviousValuesObject
+      ReportSubscriptionPayload: ReportSubscriptionPayloadObject
+      ReportPreviousValues: ReportPreviousValuesObject
+      TrophySubscriptionPayload: TrophySubscriptionPayloadObject
+      TrophyPreviousValues: TrophyPreviousValuesObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
       UserPreviousValues: UserPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
-      User: UserFieldDetails
-      UserConnection: UserConnectionFieldDetails
+      Ad: AdFieldDetails
+      AdTarget: AdTargetFieldDetails
+      AdConnection: AdConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
+      AdEdge: AdEdgeFieldDetails
+      AggregateAd: AggregateAdFieldDetails
+      AdTargetConnection: AdTargetConnectionFieldDetails
+      AdTargetEdge: AdTargetEdgeFieldDetails
+      AggregateAdTarget: AggregateAdTargetFieldDetails
+      Comment: CommentFieldDetails
+      User: UserFieldDetails
+      Debate: DebateFieldDetails
+      Report: ReportFieldDetails
+      Interaction: InteractionFieldDetails
+      Trophy: TrophyFieldDetails
+      Conversation: ConversationFieldDetails
+      Message: MessageFieldDetails
+      CommentConnection: CommentConnectionFieldDetails
+      CommentEdge: CommentEdgeFieldDetails
+      AggregateComment: AggregateCommentFieldDetails
+      ConversationConnection: ConversationConnectionFieldDetails
+      ConversationEdge: ConversationEdgeFieldDetails
+      AggregateConversation: AggregateConversationFieldDetails
+      DebateConnection: DebateConnectionFieldDetails
+      DebateEdge: DebateEdgeFieldDetails
+      AggregateDebate: AggregateDebateFieldDetails
+      InteractionConnection: InteractionConnectionFieldDetails
+      InteractionEdge: InteractionEdgeFieldDetails
+      AggregateInteraction: AggregateInteractionFieldDetails
+      MessageConnection: MessageConnectionFieldDetails
+      MessageEdge: MessageEdgeFieldDetails
+      AggregateMessage: AggregateMessageFieldDetails
+      ReportConnection: ReportConnectionFieldDetails
+      ReportEdge: ReportEdgeFieldDetails
+      AggregateReport: AggregateReportFieldDetails
+      TrophyConnection: TrophyConnectionFieldDetails
+      TrophyEdge: TrophyEdgeFieldDetails
+      AggregateTrophy: AggregateTrophyFieldDetails
+      UserConnection: UserConnectionFieldDetails
       UserEdge: UserEdgeFieldDetails
       AggregateUser: AggregateUserFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
+      AdSubscriptionPayload: AdSubscriptionPayloadFieldDetails
+      AdPreviousValues: AdPreviousValuesFieldDetails
+      AdTargetSubscriptionPayload: AdTargetSubscriptionPayloadFieldDetails
+      AdTargetPreviousValues: AdTargetPreviousValuesFieldDetails
+      CommentSubscriptionPayload: CommentSubscriptionPayloadFieldDetails
+      CommentPreviousValues: CommentPreviousValuesFieldDetails
+      ConversationSubscriptionPayload: ConversationSubscriptionPayloadFieldDetails
+      ConversationPreviousValues: ConversationPreviousValuesFieldDetails
+      DebateSubscriptionPayload: DebateSubscriptionPayloadFieldDetails
+      DebatePreviousValues: DebatePreviousValuesFieldDetails
+      InteractionSubscriptionPayload: InteractionSubscriptionPayloadFieldDetails
+      InteractionPreviousValues: InteractionPreviousValuesFieldDetails
+      MessageSubscriptionPayload: MessageSubscriptionPayloadFieldDetails
+      MessagePreviousValues: MessagePreviousValuesFieldDetails
+      ReportSubscriptionPayload: ReportSubscriptionPayloadFieldDetails
+      ReportPreviousValues: ReportPreviousValuesFieldDetails
+      TrophySubscriptionPayload: TrophySubscriptionPayloadFieldDetails
+      TrophyPreviousValues: TrophyPreviousValuesFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
       UserPreviousValues: UserPreviousValuesFieldDetails
     }
   }
   inputTypes: {
     fields: {
-      UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      AdWhereUniqueInput: AdWhereUniqueInputInputObject
+      AdTargetWhereInput: AdTargetWhereInputInputObject
+      AdWhereInput: AdWhereInputInputObject
+      AdTargetWhereUniqueInput: AdTargetWhereUniqueInputInputObject
+      CommentWhereUniqueInput: CommentWhereUniqueInputInputObject
       UserWhereInput: UserWhereInputInputObject
+      DebateWhereInput: DebateWhereInputInputObject
+      CommentWhereInput: CommentWhereInputInputObject
+      ReportWhereInput: ReportWhereInputInputObject
+      InteractionWhereInput: InteractionWhereInputInputObject
+      TrophyWhereInput: TrophyWhereInputInputObject
+      ConversationWhereInput: ConversationWhereInputInputObject
+      MessageWhereInput: MessageWhereInputInputObject
+      ConversationWhereUniqueInput: ConversationWhereUniqueInputInputObject
+      DebateWhereUniqueInput: DebateWhereUniqueInputInputObject
+      InteractionWhereUniqueInput: InteractionWhereUniqueInputInputObject
+      MessageWhereUniqueInput: MessageWhereUniqueInputInputObject
+      ReportWhereUniqueInput: ReportWhereUniqueInputInputObject
+      TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
+      UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      AdCreateInput: AdCreateInputInputObject
+      AdTargetCreateManyInput: AdTargetCreateManyInputInputObject
+      AdTargetCreateInput: AdTargetCreateInputInputObject
+      AdUpdateInput: AdUpdateInputInputObject
+      AdTargetUpdateManyInput: AdTargetUpdateManyInputInputObject
+      AdTargetUpdateWithWhereUniqueNestedInput: AdTargetUpdateWithWhereUniqueNestedInputInputObject
+      AdTargetUpdateDataInput: AdTargetUpdateDataInputInputObject
+      AdTargetUpsertWithWhereUniqueNestedInput: AdTargetUpsertWithWhereUniqueNestedInputInputObject
+      AdTargetScalarWhereInput: AdTargetScalarWhereInputInputObject
+      AdTargetUpdateManyWithWhereNestedInput: AdTargetUpdateManyWithWhereNestedInputInputObject
+      AdTargetUpdateManyDataInput: AdTargetUpdateManyDataInputInputObject
+      AdUpdateManyMutationInput: AdUpdateManyMutationInputInputObject
+      AdTargetUpdateInput: AdTargetUpdateInputInputObject
+      AdTargetUpdateManyMutationInput: AdTargetUpdateManyMutationInputInputObject
+      CommentCreateInput: CommentCreateInputInputObject
+      UserCreateManyInput: UserCreateManyInputInputObject
       UserCreateInput: UserCreateInputInputObject
+      UserCreateManyWithoutFollowingInput: UserCreateManyWithoutFollowingInputInputObject
+      UserCreateWithoutFollowingInput: UserCreateWithoutFollowingInputInputObject
+      UserCreateManyWithoutBlockingInput: UserCreateManyWithoutBlockingInputInputObject
+      UserCreateWithoutBlockingInput: UserCreateWithoutBlockingInputInputObject
+      UserCreateManyWithoutFollowersInput: UserCreateManyWithoutFollowersInputInputObject
+      UserCreateWithoutFollowersInput: UserCreateWithoutFollowersInputInputObject
+      UserCreateManyWithoutBlockedInput: UserCreateManyWithoutBlockedInputInputObject
+      UserCreateWithoutBlockedInput: UserCreateWithoutBlockedInputInputObject
+      DebateCreateManyWithoutOwnerInput: DebateCreateManyWithoutOwnerInputInputObject
+      DebateCreateWithoutOwnerInput: DebateCreateWithoutOwnerInputInputObject
+      UserCreateOneWithoutDebatesBlueInput: UserCreateOneWithoutDebatesBlueInputInputObject
+      UserCreateWithoutDebatesBlueInput: UserCreateWithoutDebatesBlueInputInputObject
+      DebateCreateManyWithoutOwnerRedInput: DebateCreateManyWithoutOwnerRedInputInputObject
+      DebateCreateWithoutOwnerRedInput: DebateCreateWithoutOwnerRedInputInputObject
+      UserCreateOneWithoutDebatesInput: UserCreateOneWithoutDebatesInputInputObject
+      UserCreateWithoutDebatesInput: UserCreateWithoutDebatesInputInputObject
+      DebateCreateManyWithoutOwnerBlueInput: DebateCreateManyWithoutOwnerBlueInputInputObject
+      DebateCreateWithoutOwnerBlueInput: DebateCreateWithoutOwnerBlueInputInputObject
+      UserCreateOneWithoutDebatesRedInput: UserCreateOneWithoutDebatesRedInputInputObject
+      UserCreateWithoutDebatesRedInput: UserCreateWithoutDebatesRedInputInputObject
+      TrophyCreateManyWithoutUserInput: TrophyCreateManyWithoutUserInputInputObject
+      TrophyCreateWithoutUserInput: TrophyCreateWithoutUserInputInputObject
+      DebateCreateOneInput: DebateCreateOneInputInputObject
+      DebateCreateInput: DebateCreateInputInputObject
+      CommentCreateManyWithoutDebateInput: CommentCreateManyWithoutDebateInputInputObject
+      CommentCreateWithoutDebateInput: CommentCreateWithoutDebateInputInputObject
+      ReportCreateManyWithoutCommentInput: ReportCreateManyWithoutCommentInputInputObject
+      ReportCreateWithoutCommentInput: ReportCreateWithoutCommentInputInputObject
+      UserCreateOneInput: UserCreateOneInputInputObject
+      DebateCreateOneWithoutReportsInput: DebateCreateOneWithoutReportsInputInputObject
+      DebateCreateWithoutReportsInput: DebateCreateWithoutReportsInputInputObject
+      CommentCreateOneInput: CommentCreateOneInputInputObject
+      InteractionCreateManyWithoutDebateInput: InteractionCreateManyWithoutDebateInputInputObject
+      InteractionCreateWithoutDebateInput: InteractionCreateWithoutDebateInputInputObject
+      UserCreateOneWithoutInteractionsInput: UserCreateOneWithoutInteractionsInputInputObject
+      UserCreateWithoutInteractionsInput: UserCreateWithoutInteractionsInputInputObject
+      ConversationCreateManyWithoutSpeakersInput: ConversationCreateManyWithoutSpeakersInputInputObject
+      ConversationCreateWithoutSpeakersInput: ConversationCreateWithoutSpeakersInputInputObject
+      MessageCreateManyInput: MessageCreateManyInputInputObject
+      MessageCreateInput: MessageCreateInputInputObject
+      ReportCreateManyWithoutDebateInput: ReportCreateManyWithoutDebateInputInputObject
+      ReportCreateWithoutDebateInput: ReportCreateWithoutDebateInputInputObject
+      CommentCreateOneWithoutReportsInput: CommentCreateOneWithoutReportsInputInputObject
+      CommentCreateWithoutReportsInput: CommentCreateWithoutReportsInputInputObject
+      DebateCreateOneWithoutCommentsInput: DebateCreateOneWithoutCommentsInputInputObject
+      DebateCreateWithoutCommentsInput: DebateCreateWithoutCommentsInputInputObject
+      InteractionCreateManyWithoutWhoInput: InteractionCreateManyWithoutWhoInputInputObject
+      InteractionCreateWithoutWhoInput: InteractionCreateWithoutWhoInputInputObject
+      DebateCreateOneWithoutInteractionsInput: DebateCreateOneWithoutInteractionsInputInputObject
+      DebateCreateWithoutInteractionsInput: DebateCreateWithoutInteractionsInputInputObject
+      CommentUpdateInput: CommentUpdateInputInputObject
+      UserUpdateManyInput: UserUpdateManyInputInputObject
+      UserUpdateWithWhereUniqueNestedInput: UserUpdateWithWhereUniqueNestedInputInputObject
+      UserUpdateDataInput: UserUpdateDataInputInputObject
+      UserUpdateManyWithoutFollowingInput: UserUpdateManyWithoutFollowingInputInputObject
+      UserUpdateWithWhereUniqueWithoutFollowingInput: UserUpdateWithWhereUniqueWithoutFollowingInputInputObject
+      UserUpdateWithoutFollowingDataInput: UserUpdateWithoutFollowingDataInputInputObject
+      UserUpdateManyWithoutBlockingInput: UserUpdateManyWithoutBlockingInputInputObject
+      UserUpdateWithWhereUniqueWithoutBlockingInput: UserUpdateWithWhereUniqueWithoutBlockingInputInputObject
+      UserUpdateWithoutBlockingDataInput: UserUpdateWithoutBlockingDataInputInputObject
+      UserUpdateManyWithoutFollowersInput: UserUpdateManyWithoutFollowersInputInputObject
+      UserUpdateWithWhereUniqueWithoutFollowersInput: UserUpdateWithWhereUniqueWithoutFollowersInputInputObject
+      UserUpdateWithoutFollowersDataInput: UserUpdateWithoutFollowersDataInputInputObject
+      UserUpdateManyWithoutBlockedInput: UserUpdateManyWithoutBlockedInputInputObject
+      UserUpdateWithWhereUniqueWithoutBlockedInput: UserUpdateWithWhereUniqueWithoutBlockedInputInputObject
+      UserUpdateWithoutBlockedDataInput: UserUpdateWithoutBlockedDataInputInputObject
+      DebateUpdateManyWithoutOwnerInput: DebateUpdateManyWithoutOwnerInputInputObject
+      DebateUpdateWithWhereUniqueWithoutOwnerInput: DebateUpdateWithWhereUniqueWithoutOwnerInputInputObject
+      DebateUpdateWithoutOwnerDataInput: DebateUpdateWithoutOwnerDataInputInputObject
+      UserUpdateOneWithoutDebatesBlueInput: UserUpdateOneWithoutDebatesBlueInputInputObject
+      UserUpdateWithoutDebatesBlueDataInput: UserUpdateWithoutDebatesBlueDataInputInputObject
+      DebateUpdateManyWithoutOwnerRedInput: DebateUpdateManyWithoutOwnerRedInputInputObject
+      DebateUpdateWithWhereUniqueWithoutOwnerRedInput: DebateUpdateWithWhereUniqueWithoutOwnerRedInputInputObject
+      DebateUpdateWithoutOwnerRedDataInput: DebateUpdateWithoutOwnerRedDataInputInputObject
+      UserUpdateOneWithoutDebatesInput: UserUpdateOneWithoutDebatesInputInputObject
+      UserUpdateWithoutDebatesDataInput: UserUpdateWithoutDebatesDataInputInputObject
+      DebateUpdateManyWithoutOwnerBlueInput: DebateUpdateManyWithoutOwnerBlueInputInputObject
+      DebateUpdateWithWhereUniqueWithoutOwnerBlueInput: DebateUpdateWithWhereUniqueWithoutOwnerBlueInputInputObject
+      DebateUpdateWithoutOwnerBlueDataInput: DebateUpdateWithoutOwnerBlueDataInputInputObject
+      UserUpdateOneWithoutDebatesRedInput: UserUpdateOneWithoutDebatesRedInputInputObject
+      UserUpdateWithoutDebatesRedDataInput: UserUpdateWithoutDebatesRedDataInputInputObject
+      TrophyUpdateManyWithoutUserInput: TrophyUpdateManyWithoutUserInputInputObject
+      TrophyUpdateWithWhereUniqueWithoutUserInput: TrophyUpdateWithWhereUniqueWithoutUserInputInputObject
+      TrophyUpdateWithoutUserDataInput: TrophyUpdateWithoutUserDataInputInputObject
+      DebateUpdateOneInput: DebateUpdateOneInputInputObject
+      DebateUpdateDataInput: DebateUpdateDataInputInputObject
+      CommentUpdateManyWithoutDebateInput: CommentUpdateManyWithoutDebateInputInputObject
+      CommentUpdateWithWhereUniqueWithoutDebateInput: CommentUpdateWithWhereUniqueWithoutDebateInputInputObject
+      CommentUpdateWithoutDebateDataInput: CommentUpdateWithoutDebateDataInputInputObject
+      ReportUpdateManyWithoutCommentInput: ReportUpdateManyWithoutCommentInputInputObject
+      ReportUpdateWithWhereUniqueWithoutCommentInput: ReportUpdateWithWhereUniqueWithoutCommentInputInputObject
+      ReportUpdateWithoutCommentDataInput: ReportUpdateWithoutCommentDataInputInputObject
+      UserUpdateOneInput: UserUpdateOneInputInputObject
+      UserUpsertNestedInput: UserUpsertNestedInputInputObject
+      DebateUpdateOneWithoutReportsInput: DebateUpdateOneWithoutReportsInputInputObject
+      DebateUpdateWithoutReportsDataInput: DebateUpdateWithoutReportsDataInputInputObject
+      CommentUpdateOneInput: CommentUpdateOneInputInputObject
+      CommentUpdateDataInput: CommentUpdateDataInputInputObject
+      DebateUpdateOneRequiredWithoutCommentsInput: DebateUpdateOneRequiredWithoutCommentsInputInputObject
+      DebateUpdateWithoutCommentsDataInput: DebateUpdateWithoutCommentsDataInputInputObject
+      ReportUpdateManyWithoutDebateInput: ReportUpdateManyWithoutDebateInputInputObject
+      ReportUpdateWithWhereUniqueWithoutDebateInput: ReportUpdateWithWhereUniqueWithoutDebateInputInputObject
+      ReportUpdateWithoutDebateDataInput: ReportUpdateWithoutDebateDataInputInputObject
+      CommentUpdateOneWithoutReportsInput: CommentUpdateOneWithoutReportsInputInputObject
+      CommentUpdateWithoutReportsDataInput: CommentUpdateWithoutReportsDataInputInputObject
+      CommentUpsertWithoutReportsInput: CommentUpsertWithoutReportsInputInputObject
+      ReportUpsertWithWhereUniqueWithoutDebateInput: ReportUpsertWithWhereUniqueWithoutDebateInputInputObject
+      ReportScalarWhereInput: ReportScalarWhereInputInputObject
+      ReportUpdateManyWithWhereNestedInput: ReportUpdateManyWithWhereNestedInputInputObject
+      ReportUpdateManyDataInput: ReportUpdateManyDataInputInputObject
+      InteractionUpdateManyWithoutDebateInput: InteractionUpdateManyWithoutDebateInputInputObject
+      InteractionUpdateWithWhereUniqueWithoutDebateInput: InteractionUpdateWithWhereUniqueWithoutDebateInputInputObject
+      InteractionUpdateWithoutDebateDataInput: InteractionUpdateWithoutDebateDataInputInputObject
+      UserUpdateOneRequiredWithoutInteractionsInput: UserUpdateOneRequiredWithoutInteractionsInputInputObject
+      UserUpdateWithoutInteractionsDataInput: UserUpdateWithoutInteractionsDataInputInputObject
+      ConversationUpdateManyWithoutSpeakersInput: ConversationUpdateManyWithoutSpeakersInputInputObject
+      ConversationUpdateWithWhereUniqueWithoutSpeakersInput: ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject
+      ConversationUpdateWithoutSpeakersDataInput: ConversationUpdateWithoutSpeakersDataInputInputObject
+      MessageUpdateManyInput: MessageUpdateManyInputInputObject
+      MessageUpdateWithWhereUniqueNestedInput: MessageUpdateWithWhereUniqueNestedInputInputObject
+      MessageUpdateDataInput: MessageUpdateDataInputInputObject
+      UserUpdateOneRequiredInput: UserUpdateOneRequiredInputInputObject
+      MessageUpsertWithWhereUniqueNestedInput: MessageUpsertWithWhereUniqueNestedInputInputObject
+      MessageScalarWhereInput: MessageScalarWhereInputInputObject
+      MessageUpdateManyWithWhereNestedInput: MessageUpdateManyWithWhereNestedInputInputObject
+      MessageUpdateManyDataInput: MessageUpdateManyDataInputInputObject
+      ConversationUpsertWithWhereUniqueWithoutSpeakersInput: ConversationUpsertWithWhereUniqueWithoutSpeakersInputInputObject
+      ConversationScalarWhereInput: ConversationScalarWhereInputInputObject
+      UserUpsertWithoutInteractionsInput: UserUpsertWithoutInteractionsInputInputObject
+      InteractionUpsertWithWhereUniqueWithoutDebateInput: InteractionUpsertWithWhereUniqueWithoutDebateInputInputObject
+      InteractionScalarWhereInput: InteractionScalarWhereInputInputObject
+      InteractionUpdateManyWithWhereNestedInput: InteractionUpdateManyWithWhereNestedInputInputObject
+      InteractionUpdateManyDataInput: InteractionUpdateManyDataInputInputObject
+      DebateUpsertWithoutCommentsInput: DebateUpsertWithoutCommentsInputInputObject
+      CommentUpsertNestedInput: CommentUpsertNestedInputInputObject
+      DebateUpsertWithoutReportsInput: DebateUpsertWithoutReportsInputInputObject
+      ReportUpsertWithWhereUniqueWithoutCommentInput: ReportUpsertWithWhereUniqueWithoutCommentInputInputObject
+      CommentUpsertWithWhereUniqueWithoutDebateInput: CommentUpsertWithWhereUniqueWithoutDebateInputInputObject
+      CommentScalarWhereInput: CommentScalarWhereInputInputObject
+      CommentUpdateManyWithWhereNestedInput: CommentUpdateManyWithWhereNestedInputInputObject
+      CommentUpdateManyDataInput: CommentUpdateManyDataInputInputObject
+      DebateUpsertNestedInput: DebateUpsertNestedInputInputObject
+      TrophyUpsertWithWhereUniqueWithoutUserInput: TrophyUpsertWithWhereUniqueWithoutUserInputInputObject
+      TrophyScalarWhereInput: TrophyScalarWhereInputInputObject
+      TrophyUpdateManyWithWhereNestedInput: TrophyUpdateManyWithWhereNestedInputInputObject
+      TrophyUpdateManyDataInput: TrophyUpdateManyDataInputInputObject
+      InteractionUpdateManyWithoutWhoInput: InteractionUpdateManyWithoutWhoInputInputObject
+      InteractionUpdateWithWhereUniqueWithoutWhoInput: InteractionUpdateWithWhereUniqueWithoutWhoInputInputObject
+      InteractionUpdateWithoutWhoDataInput: InteractionUpdateWithoutWhoDataInputInputObject
+      DebateUpdateOneWithoutInteractionsInput: DebateUpdateOneWithoutInteractionsInputInputObject
+      DebateUpdateWithoutInteractionsDataInput: DebateUpdateWithoutInteractionsDataInputInputObject
+      DebateUpsertWithoutInteractionsInput: DebateUpsertWithoutInteractionsInputInputObject
+      InteractionUpsertWithWhereUniqueWithoutWhoInput: InteractionUpsertWithWhereUniqueWithoutWhoInputInputObject
+      UserUpsertWithoutDebatesRedInput: UserUpsertWithoutDebatesRedInputInputObject
+      DebateUpsertWithWhereUniqueWithoutOwnerBlueInput: DebateUpsertWithWhereUniqueWithoutOwnerBlueInputInputObject
+      DebateScalarWhereInput: DebateScalarWhereInputInputObject
+      DebateUpdateManyWithWhereNestedInput: DebateUpdateManyWithWhereNestedInputInputObject
+      DebateUpdateManyDataInput: DebateUpdateManyDataInputInputObject
+      UserUpsertWithoutDebatesInput: UserUpsertWithoutDebatesInputInputObject
+      DebateUpsertWithWhereUniqueWithoutOwnerRedInput: DebateUpsertWithWhereUniqueWithoutOwnerRedInputInputObject
+      UserUpsertWithoutDebatesBlueInput: UserUpsertWithoutDebatesBlueInputInputObject
+      DebateUpsertWithWhereUniqueWithoutOwnerInput: DebateUpsertWithWhereUniqueWithoutOwnerInputInputObject
+      UserUpsertWithWhereUniqueWithoutBlockedInput: UserUpsertWithWhereUniqueWithoutBlockedInputInputObject
+      UserScalarWhereInput: UserScalarWhereInputInputObject
+      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
+      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
+      UserUpsertWithWhereUniqueWithoutFollowersInput: UserUpsertWithWhereUniqueWithoutFollowersInputInputObject
+      UserUpsertWithWhereUniqueWithoutBlockingInput: UserUpsertWithWhereUniqueWithoutBlockingInputInputObject
+      UserUpsertWithWhereUniqueWithoutFollowingInput: UserUpsertWithWhereUniqueWithoutFollowingInputInputObject
+      UserUpsertWithWhereUniqueNestedInput: UserUpsertWithWhereUniqueNestedInputInputObject
+      CommentUpdateManyMutationInput: CommentUpdateManyMutationInputInputObject
+      ConversationCreateInput: ConversationCreateInputInputObject
+      UserCreateManyWithoutConversationsInput: UserCreateManyWithoutConversationsInputInputObject
+      UserCreateWithoutConversationsInput: UserCreateWithoutConversationsInputInputObject
+      ConversationUpdateInput: ConversationUpdateInputInputObject
+      UserUpdateManyWithoutConversationsInput: UserUpdateManyWithoutConversationsInputInputObject
+      UserUpdateWithWhereUniqueWithoutConversationsInput: UserUpdateWithWhereUniqueWithoutConversationsInputInputObject
+      UserUpdateWithoutConversationsDataInput: UserUpdateWithoutConversationsDataInputInputObject
+      UserUpsertWithWhereUniqueWithoutConversationsInput: UserUpsertWithWhereUniqueWithoutConversationsInputInputObject
+      DebateUpdateInput: DebateUpdateInputInputObject
+      DebateUpdateManyMutationInput: DebateUpdateManyMutationInputInputObject
+      InteractionCreateInput: InteractionCreateInputInputObject
+      InteractionUpdateInput: InteractionUpdateInputInputObject
+      InteractionUpdateManyMutationInput: InteractionUpdateManyMutationInputInputObject
+      MessageUpdateInput: MessageUpdateInputInputObject
+      MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
+      ReportCreateInput: ReportCreateInputInputObject
+      ReportUpdateInput: ReportUpdateInputInputObject
+      ReportUpdateManyMutationInput: ReportUpdateManyMutationInputInputObject
+      TrophyCreateInput: TrophyCreateInputInputObject
+      UserCreateOneWithoutTrophiesInput: UserCreateOneWithoutTrophiesInputInputObject
+      UserCreateWithoutTrophiesInput: UserCreateWithoutTrophiesInputInputObject
+      TrophyUpdateInput: TrophyUpdateInputInputObject
+      UserUpdateOneRequiredWithoutTrophiesInput: UserUpdateOneRequiredWithoutTrophiesInputInputObject
+      UserUpdateWithoutTrophiesDataInput: UserUpdateWithoutTrophiesDataInputInputObject
+      UserUpsertWithoutTrophiesInput: UserUpsertWithoutTrophiesInputInputObject
+      TrophyUpdateManyMutationInput: TrophyUpdateManyMutationInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      AdSubscriptionWhereInput: AdSubscriptionWhereInputInputObject
+      AdTargetSubscriptionWhereInput: AdTargetSubscriptionWhereInputInputObject
+      CommentSubscriptionWhereInput: CommentSubscriptionWhereInputInputObject
+      ConversationSubscriptionWhereInput: ConversationSubscriptionWhereInputInputObject
+      DebateSubscriptionWhereInput: DebateSubscriptionWhereInputInputObject
+      InteractionSubscriptionWhereInput: InteractionSubscriptionWhereInputInputObject
+      MessageSubscriptionWhereInput: MessageSubscriptionWhereInputInputObject
+      ReportSubscriptionWhereInput: ReportSubscriptionWhereInputInputObject
+      TrophySubscriptionWhereInput: TrophySubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
+    GenderFilter: GenderFilterValues,
+    AdTargetOrderByInput: AdTargetOrderByInputValues,
+    AdOrderByInput: AdOrderByInputValues,
+    Role: RoleValues,
+    Gender: GenderValues,
+    Language: LanguageValues,
+    DebateType: DebateTypeValues,
+    ReportType: ReportTypeValues,
+    ReportReason: ReportReasonValues,
+    InteractionType: InteractionTypeValues,
+    TrophyType: TrophyTypeValues,
     UserOrderByInput: UserOrderByInputValues,
+    DebateOrderByInput: DebateOrderByInputValues,
+    CommentOrderByInput: CommentOrderByInputValues,
+    ReportOrderByInput: ReportOrderByInputValues,
+    InteractionOrderByInput: InteractionOrderByInputValues,
+    TrophyOrderByInput: TrophyOrderByInputValues,
+    ConversationOrderByInput: ConversationOrderByInputValues,
+    MessageOrderByInput: MessageOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -60,16 +426,232 @@ export interface NexusPrismaTypes {
 
 type QueryObject =
   | QueryFields
+  | { name: 'ad', args?: QueryAdArgs[] | false, alias?: string  } 
+  | { name: 'ads', args?: QueryAdsArgs[] | false, alias?: string  } 
+  | { name: 'adsConnection', args?: QueryAdsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'adTarget', args?: QueryAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'adTargets', args?: QueryAdTargetsArgs[] | false, alias?: string  } 
+  | { name: 'adTargetsConnection', args?: QueryAdTargetsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'comment', args?: QueryCommentArgs[] | false, alias?: string  } 
+  | { name: 'comments', args?: QueryCommentsArgs[] | false, alias?: string  } 
+  | { name: 'commentsConnection', args?: QueryCommentsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'conversation', args?: QueryConversationArgs[] | false, alias?: string  } 
+  | { name: 'conversations', args?: QueryConversationsArgs[] | false, alias?: string  } 
+  | { name: 'conversationsConnection', args?: QueryConversationsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'debate', args?: QueryDebateArgs[] | false, alias?: string  } 
+  | { name: 'debates', args?: QueryDebatesArgs[] | false, alias?: string  } 
+  | { name: 'debatesConnection', args?: QueryDebatesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'interaction', args?: QueryInteractionArgs[] | false, alias?: string  } 
+  | { name: 'interactions', args?: QueryInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'interactionsConnection', args?: QueryInteractionsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'message', args?: QueryMessageArgs[] | false, alias?: string  } 
+  | { name: 'messages', args?: QueryMessagesArgs[] | false, alias?: string  } 
+  | { name: 'messagesConnection', args?: QueryMessagesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'report', args?: QueryReportArgs[] | false, alias?: string  } 
+  | { name: 'reports', args?: QueryReportsArgs[] | false, alias?: string  } 
+  | { name: 'reportsConnection', args?: QueryReportsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'trophy', args?: QueryTrophyArgs[] | false, alias?: string  } 
+  | { name: 'trophies', args?: QueryTrophiesArgs[] | false, alias?: string  } 
+  | { name: 'trophiesConnection', args?: QueryTrophiesConnectionArgs[] | false, alias?: string  } 
   | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
   | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
   | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
+  | 'ad'
+  | 'ads'
+  | 'adsConnection'
+  | 'adTarget'
+  | 'adTargets'
+  | 'adTargetsConnection'
+  | 'comment'
+  | 'comments'
+  | 'commentsConnection'
+  | 'conversation'
+  | 'conversations'
+  | 'conversationsConnection'
+  | 'debate'
+  | 'debates'
+  | 'debatesConnection'
+  | 'interaction'
+  | 'interactions'
+  | 'interactionsConnection'
+  | 'message'
+  | 'messages'
+  | 'messagesConnection'
+  | 'report'
+  | 'reports'
+  | 'reportsConnection'
+  | 'trophy'
+  | 'trophies'
+  | 'trophiesConnection'
   | 'user'
   | 'users'
   | 'usersConnection'
 
 
+type QueryAdArgs =
+  | 'where'
+type QueryAdsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryAdsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryAdTargetArgs =
+  | 'where'
+type QueryAdTargetsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryAdTargetsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryCommentArgs =
+  | 'where'
+type QueryCommentsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryCommentsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryConversationArgs =
+  | 'where'
+type QueryConversationsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryConversationsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryDebateArgs =
+  | 'where'
+type QueryDebatesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryDebatesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryInteractionArgs =
+  | 'where'
+type QueryInteractionsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryInteractionsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryMessageArgs =
+  | 'where'
+type QueryMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryMessagesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryReportArgs =
+  | 'where'
+type QueryReportsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryReportsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTrophyArgs =
+  | 'where'
+type QueryTrophiesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTrophiesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
 type QueryUserArgs =
   | 'where'
 type QueryUsersArgs =
@@ -91,6 +673,357 @@ type QueryUsersConnectionArgs =
   
 
 export interface QueryFieldDetails {
+  ad: {
+    type: 'Ad'
+    args: Record<QueryAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: AdWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad | null> | prisma.Ad | null
+  }
+  ads: {
+    type: 'Ad'
+    args: Record<QueryAdsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: AdWhereInput | null, orderBy?: prisma.AdOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad[]> | prisma.Ad[]
+  }
+  adsConnection: {
+    type: 'AdConnection'
+    args: Record<QueryAdsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: AdWhereInput | null, orderBy?: prisma.AdOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdConnection> | prisma.AdConnection
+  }
+  adTarget: {
+    type: 'AdTarget'
+    args: Record<QueryAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: AdTargetWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget | null> | prisma.AdTarget | null
+  }
+  adTargets: {
+    type: 'AdTarget'
+    args: Record<QueryAdTargetsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: AdTargetWhereInput | null, orderBy?: prisma.AdTargetOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget[]> | prisma.AdTarget[]
+  }
+  adTargetsConnection: {
+    type: 'AdTargetConnection'
+    args: Record<QueryAdTargetsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: AdTargetWhereInput | null, orderBy?: prisma.AdTargetOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTargetConnection> | prisma.AdTargetConnection
+  }
+  comment: {
+    type: 'Comment'
+    args: Record<QueryCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: CommentWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  comments: {
+    type: 'Comment'
+    args: Record<QueryCommentsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: CommentWhereInput | null, orderBy?: prisma.CommentOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment[]> | prisma.Comment[]
+  }
+  commentsConnection: {
+    type: 'CommentConnection'
+    args: Record<QueryCommentsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: CommentWhereInput | null, orderBy?: prisma.CommentOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CommentConnection> | prisma.CommentConnection
+  }
+  conversation: {
+    type: 'Conversation'
+    args: Record<QueryConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ConversationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation | null> | prisma.Conversation | null
+  }
+  conversations: {
+    type: 'Conversation'
+    args: Record<QueryConversationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ConversationWhereInput | null, orderBy?: prisma.ConversationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation[]> | prisma.Conversation[]
+  }
+  conversationsConnection: {
+    type: 'ConversationConnection'
+    args: Record<QueryConversationsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ConversationWhereInput | null, orderBy?: prisma.ConversationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConversationConnection> | prisma.ConversationConnection
+  }
+  debate: {
+    type: 'Debate'
+    args: Record<QueryDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: DebateWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  debates: {
+    type: 'Debate'
+    args: Record<QueryDebatesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: DebateWhereInput | null, orderBy?: prisma.DebateOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate[]> | prisma.Debate[]
+  }
+  debatesConnection: {
+    type: 'DebateConnection'
+    args: Record<QueryDebatesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: DebateWhereInput | null, orderBy?: prisma.DebateOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebateConnection> | prisma.DebateConnection
+  }
+  interaction: {
+    type: 'Interaction'
+    args: Record<QueryInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: InteractionWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction | null> | prisma.Interaction | null
+  }
+  interactions: {
+    type: 'Interaction'
+    args: Record<QueryInteractionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: InteractionWhereInput | null, orderBy?: prisma.InteractionOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction[]> | prisma.Interaction[]
+  }
+  interactionsConnection: {
+    type: 'InteractionConnection'
+    args: Record<QueryInteractionsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: InteractionWhereInput | null, orderBy?: prisma.InteractionOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionConnection> | prisma.InteractionConnection
+  }
+  message: {
+    type: 'Message'
+    args: Record<QueryMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  messages: {
+    type: 'Message'
+    args: Record<QueryMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message[]> | prisma.Message[]
+  }
+  messagesConnection: {
+    type: 'MessageConnection'
+    args: Record<QueryMessagesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageConnection> | prisma.MessageConnection
+  }
+  report: {
+    type: 'Report'
+    args: Record<QueryReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ReportWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report | null> | prisma.Report | null
+  }
+  reports: {
+    type: 'Report'
+    args: Record<QueryReportsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ReportWhereInput | null, orderBy?: prisma.ReportOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report[]> | prisma.Report[]
+  }
+  reportsConnection: {
+    type: 'ReportConnection'
+    args: Record<QueryReportsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ReportWhereInput | null, orderBy?: prisma.ReportOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportConnection> | prisma.ReportConnection
+  }
+  trophy: {
+    type: 'Trophy'
+    args: Record<QueryTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TrophyWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy | null> | prisma.Trophy | null
+  }
+  trophies: {
+    type: 'Trophy'
+    args: Record<QueryTrophiesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TrophyWhereInput | null, orderBy?: prisma.TrophyOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy[]> | prisma.Trophy[]
+  }
+  trophiesConnection: {
+    type: 'TrophyConnection'
+    args: Record<QueryTrophiesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TrophyWhereInput | null, orderBy?: prisma.TrophyOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophyConnection> | prisma.TrophyConnection
+  }
   user: {
     type: 'User'
     args: Record<QueryUserArgs, core.NexusArgDef<string>>
@@ -133,26 +1066,807 @@ export interface QueryFieldDetails {
 }
   
 
-// Types for User
+// Types for Ad
 
-type UserObject =
-  | UserFields
+type AdObject =
+  | AdFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'email', args?: [] | false, alias?: string  } 
-  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'targets', args?: AdTargetsArgs[] | false, alias?: string  } 
+  | { name: 'active', args?: [] | false, alias?: string  } 
+  | { name: 'ratio', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
-type UserFields =
+type AdFields =
   | 'id'
-  | 'email'
-  | 'password'
+  | 'name'
+  | 'content'
+  | 'targets'
+  | 'active'
+  | 'ratio'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type AdTargetsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface AdFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  targets: {
+    type: 'AdTarget'
+    args: Record<AdTargetsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Ad">,
+      args: { where?: AdTargetWhereInput | null, orderBy?: prisma.AdTargetOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget[]> | prisma.AdTarget[]
+  }
+  active: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  ratio: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdTarget
+
+type AdTargetObject =
+  | AdTargetFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMin', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMax', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type AdTargetFields =
+  | 'id'
+  | 'name'
+  | 'gender'
+  | 'birthdateMin'
+  | 'birthdateMax'
+  | 'createdAt'
+  | 'updatedAt'
 
 
 
   
 
+export interface AdTargetFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  gender: {
+    type: 'GenderFilter'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTarget">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.GenderFilter> | prisma.GenderFilter
+  }
+  birthdateMin: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  birthdateMax: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdConnection
+
+type AdConnectionObject =
+  | AdConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type AdConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface AdConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'AdEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdEdge[]> | prisma.AdEdge[]
+  }
+  aggregate: {
+    type: 'AggregateAd'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateAd> | prisma.AggregateAd
+  }
+}
+  
+
+// Types for PageInfo
+
+type PageInfoObject =
+  | PageInfoFields
+  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
+  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
+  | { name: 'startCursor', args?: [] | false, alias?: string  } 
+  | { name: 'endCursor', args?: [] | false, alias?: string  } 
+
+type PageInfoFields =
+  | 'hasNextPage'
+  | 'hasPreviousPage'
+  | 'startCursor'
+  | 'endCursor'
+
+
+
+  
+
+export interface PageInfoFieldDetails {
+  hasNextPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  hasPreviousPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  startCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  endCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdEdge
+
+type AdEdgeObject =
+  | AdEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type AdEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface AdEdgeFieldDetails {
+  node: {
+    type: 'Ad'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad> | prisma.Ad
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateAd
+
+type AggregateAdObject =
+  | AggregateAdFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateAdFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateAdFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdTargetConnection
+
+type AdTargetConnectionObject =
+  | AdTargetConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type AdTargetConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface AdTargetConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'AdTargetEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTargetEdge[]> | prisma.AdTargetEdge[]
+  }
+  aggregate: {
+    type: 'AggregateAdTarget'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateAdTarget> | prisma.AggregateAdTarget
+  }
+}
+  
+
+// Types for AdTargetEdge
+
+type AdTargetEdgeObject =
+  | AdTargetEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type AdTargetEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface AdTargetEdgeFieldDetails {
+  node: {
+    type: 'AdTarget'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget> | prisma.AdTarget
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateAdTarget
+
+type AggregateAdTargetObject =
+  | AggregateAdTargetFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateAdTargetFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateAdTargetFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Comment
+
+type CommentObject =
+  | CommentFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'from', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'likes', args?: CommentLikesArgs[] | false, alias?: string  } 
+  | { name: 'dislikes', args?: CommentDislikesArgs[] | false, alias?: string  } 
+  | { name: 'reports', args?: CommentReportsArgs[] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type CommentFields =
+  | 'id'
+  | 'from'
+  | 'content'
+  | 'likes'
+  | 'dislikes'
+  | 'reports'
+  | 'debate'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type CommentLikesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type CommentDislikesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type CommentReportsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface CommentFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  from: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  likes: {
+    type: 'User'
+    args: Record<CommentLikesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  dislikes: {
+    type: 'User'
+    args: Record<CommentDislikesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  reports: {
+    type: 'Report'
+    args: Record<CommentReportsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: { where?: ReportWhereInput | null, orderBy?: prisma.ReportOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report[]> | prisma.Report[]
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate> | prisma.Debate
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for User
+
+type UserObject =
+  | UserFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'pseudo', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'birthdate', args?: [] | false, alias?: string  } 
+  | { name: 'role', args?: [] | false, alias?: string  } 
+  | { name: 'certified', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'profilePicture', args?: [] | false, alias?: string  } 
+  | { name: 'coverPicture', args?: [] | false, alias?: string  } 
+  | { name: 'bio', args?: [] | false, alias?: string  } 
+  | { name: 'language', args?: [] | false, alias?: string  } 
+  | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'lastConnected', args?: [] | false, alias?: string  } 
+  | { name: 'followers', args?: UserFollowersArgs[] | false, alias?: string  } 
+  | { name: 'following', args?: UserFollowingArgs[] | false, alias?: string  } 
+  | { name: 'blocked', args?: UserBlockedArgs[] | false, alias?: string  } 
+  | { name: 'blocking', args?: UserBlockingArgs[] | false, alias?: string  } 
+  | { name: 'debates', args?: UserDebatesArgs[] | false, alias?: string  } 
+  | { name: 'debatesBlue', args?: UserDebatesBlueArgs[] | false, alias?: string  } 
+  | { name: 'debatesRed', args?: UserDebatesRedArgs[] | false, alias?: string  } 
+  | { name: 'trophies', args?: UserTrophiesArgs[] | false, alias?: string  } 
+  | { name: 'conversations', args?: UserConversationsArgs[] | false, alias?: string  } 
+  | { name: 'interactions', args?: UserInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type UserFields =
+  | 'id'
+  | 'pseudo'
+  | 'email'
+  | 'birthdate'
+  | 'role'
+  | 'certified'
+  | 'gender'
+  | 'profilePicture'
+  | 'coverPicture'
+  | 'bio'
+  | 'language'
+  | 'crowned'
+  | 'lastConnected'
+  | 'followers'
+  | 'following'
+  | 'blocked'
+  | 'blocking'
+  | 'debates'
+  | 'debatesBlue'
+  | 'debatesRed'
+  | 'trophies'
+  | 'conversations'
+  | 'interactions'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type UserFollowersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserFollowingArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserBlockedArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserBlockingArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserDebatesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserDebatesBlueArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserDebatesRedArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserTrophiesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserConversationsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserInteractionsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
 export interface UserFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  pseudo: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -167,8 +1881,2026 @@ export interface UserFieldDetails {
     nullable: false
     resolve: undefined
   }
-  password: {
+  birthdate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  role: {
+    type: 'Role'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Role> | prisma.Role
+  }
+  certified: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  gender: {
+    type: 'Gender'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Gender> | prisma.Gender
+  }
+  profilePicture: {
     type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  coverPicture: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  bio: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  language: {
+    type: 'Language'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Language> | prisma.Language
+  }
+  crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastConnected: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  followers: {
+    type: 'User'
+    args: Record<UserFollowersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  following: {
+    type: 'User'
+    args: Record<UserFollowingArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  blocked: {
+    type: 'User'
+    args: Record<UserBlockedArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  blocking: {
+    type: 'User'
+    args: Record<UserBlockingArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  debates: {
+    type: 'Debate'
+    args: Record<UserDebatesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: DebateWhereInput | null, orderBy?: prisma.DebateOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate[]> | prisma.Debate[]
+  }
+  debatesBlue: {
+    type: 'Debate'
+    args: Record<UserDebatesBlueArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: DebateWhereInput | null, orderBy?: prisma.DebateOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate[]> | prisma.Debate[]
+  }
+  debatesRed: {
+    type: 'Debate'
+    args: Record<UserDebatesRedArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: DebateWhereInput | null, orderBy?: prisma.DebateOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate[]> | prisma.Debate[]
+  }
+  trophies: {
+    type: 'Trophy'
+    args: Record<UserTrophiesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: TrophyWhereInput | null, orderBy?: prisma.TrophyOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy[]> | prisma.Trophy[]
+  }
+  conversations: {
+    type: 'Conversation'
+    args: Record<UserConversationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: ConversationWhereInput | null, orderBy?: prisma.ConversationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation[]> | prisma.Conversation[]
+  }
+  interactions: {
+    type: 'Interaction'
+    args: Record<UserInteractionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: InteractionWhereInput | null, orderBy?: prisma.InteractionOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction[]> | prisma.Interaction[]
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Debate
+
+type DebateObject =
+  | DebateFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'owner', args?: [] | false, alias?: string  } 
+  | { name: 'ownerBlue', args?: [] | false, alias?: string  } 
+  | { name: 'ownerRed', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'timelimit', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'comments', args?: DebateCommentsArgs[] | false, alias?: string  } 
+  | { name: 'topComment', args?: [] | false, alias?: string  } 
+  | { name: 'reports', args?: DebateReportsArgs[] | false, alias?: string  } 
+  | { name: 'positives', args?: DebatePositivesArgs[] | false, alias?: string  } 
+  | { name: 'negatives', args?: DebateNegativesArgs[] | false, alias?: string  } 
+  | { name: 'redVotes', args?: DebateRedVotesArgs[] | false, alias?: string  } 
+  | { name: 'blueVotes', args?: DebateBlueVotesArgs[] | false, alias?: string  } 
+  | { name: 'winner', args?: [] | false, alias?: string  } 
+  | { name: 'loser', args?: [] | false, alias?: string  } 
+  | { name: 'closed', args?: [] | false, alias?: string  } 
+  | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'interactions', args?: DebateInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type DebateFields =
+  | 'id'
+  | 'owner'
+  | 'ownerBlue'
+  | 'ownerRed'
+  | 'content'
+  | 'timelimit'
+  | 'type'
+  | 'comments'
+  | 'topComment'
+  | 'reports'
+  | 'positives'
+  | 'negatives'
+  | 'redVotes'
+  | 'blueVotes'
+  | 'winner'
+  | 'loser'
+  | 'closed'
+  | 'crowned'
+  | 'interactions'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type DebateCommentsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebateReportsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebatePositivesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebateNegativesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebateRedVotesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebateBlueVotesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type DebateInteractionsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface DebateFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  owner: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  ownerBlue: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  ownerRed: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  timelimit: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  type: {
+    type: 'DebateType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebateType> | prisma.DebateType
+  }
+  comments: {
+    type: 'Comment'
+    args: Record<DebateCommentsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: CommentWhereInput | null, orderBy?: prisma.CommentOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment[]> | prisma.Comment[]
+  }
+  topComment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  reports: {
+    type: 'Report'
+    args: Record<DebateReportsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: ReportWhereInput | null, orderBy?: prisma.ReportOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report[]> | prisma.Report[]
+  }
+  positives: {
+    type: 'User'
+    args: Record<DebatePositivesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  negatives: {
+    type: 'User'
+    args: Record<DebateNegativesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  redVotes: {
+    type: 'User'
+    args: Record<DebateRedVotesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  blueVotes: {
+    type: 'User'
+    args: Record<DebateBlueVotesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  winner: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  loser: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  closed: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  interactions: {
+    type: 'Interaction'
+    args: Record<DebateInteractionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Debate">,
+      args: { where?: InteractionWhereInput | null, orderBy?: prisma.InteractionOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction[]> | prisma.Interaction[]
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Report
+
+type ReportObject =
+  | ReportFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'from', args?: [] | false, alias?: string  } 
+  | { name: 'to', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'reason', args?: [] | false, alias?: string  } 
+  | { name: 'reasonText', args?: [] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'comment', args?: [] | false, alias?: string  } 
+  | { name: 'treated', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ReportFields =
+  | 'id'
+  | 'from'
+  | 'to'
+  | 'type'
+  | 'reason'
+  | 'reasonText'
+  | 'debate'
+  | 'comment'
+  | 'treated'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface ReportFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  from: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  to: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  type: {
+    type: 'ReportType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportType> | prisma.ReportType
+  }
+  reason: {
+    type: 'ReportReason'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportReason> | prisma.ReportReason
+  }
+  reasonText: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  comment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Report">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  treated: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Interaction
+
+type InteractionObject =
+  | InteractionFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'who', args?: [] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'comment', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type InteractionFields =
+  | 'id'
+  | 'type'
+  | 'who'
+  | 'debate'
+  | 'comment'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface InteractionFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'InteractionType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Interaction">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionType> | prisma.InteractionType
+  }
+  who: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Interaction">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Interaction">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  comment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Interaction">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Trophy
+
+type TrophyObject =
+  | TrophyFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+  | { name: 'won', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'comment', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type TrophyFields =
+  | 'id'
+  | 'user'
+  | 'won'
+  | 'type'
+  | 'debate'
+  | 'comment'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface TrophyFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Trophy">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  won: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'TrophyType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Trophy">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophyType | null> | prisma.TrophyType | null
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Trophy">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  comment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Trophy">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Conversation
+
+type ConversationObject =
+  | ConversationFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'speakers', args?: ConversationSpeakersArgs[] | false, alias?: string  } 
+  | { name: 'messages', args?: ConversationMessagesArgs[] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ConversationFields =
+  | 'id'
+  | 'speakers'
+  | 'messages'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type ConversationSpeakersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type ConversationMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface ConversationFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  speakers: {
+    type: 'User'
+    args: Record<ConversationSpeakersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Conversation">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  messages: {
+    type: 'Message'
+    args: Record<ConversationMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Conversation">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message[]> | prisma.Message[]
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Message
+
+type MessageObject =
+  | MessageFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'to', args?: [] | false, alias?: string  } 
+  | { name: 'from', args?: [] | false, alias?: string  } 
+  | { name: 'sendDate', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type MessageFields =
+  | 'id'
+  | 'content'
+  | 'to'
+  | 'from'
+  | 'sendDate'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface MessageFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  to: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Message">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  from: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Message">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  sendDate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for CommentConnection
+
+type CommentConnectionObject =
+  | CommentConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type CommentConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface CommentConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CommentConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'CommentEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CommentConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CommentEdge[]> | prisma.CommentEdge[]
+  }
+  aggregate: {
+    type: 'AggregateComment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CommentConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateComment> | prisma.AggregateComment
+  }
+}
+  
+
+// Types for CommentEdge
+
+type CommentEdgeObject =
+  | CommentEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type CommentEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface CommentEdgeFieldDetails {
+  node: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CommentEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment> | prisma.Comment
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateComment
+
+type AggregateCommentObject =
+  | AggregateCommentFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateCommentFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateCommentFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ConversationConnection
+
+type ConversationConnectionObject =
+  | ConversationConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ConversationConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ConversationConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConversationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ConversationEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConversationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConversationEdge[]> | prisma.ConversationEdge[]
+  }
+  aggregate: {
+    type: 'AggregateConversation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConversationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateConversation> | prisma.AggregateConversation
+  }
+}
+  
+
+// Types for ConversationEdge
+
+type ConversationEdgeObject =
+  | ConversationEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ConversationEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ConversationEdgeFieldDetails {
+  node: {
+    type: 'Conversation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConversationEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation> | prisma.Conversation
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateConversation
+
+type AggregateConversationObject =
+  | AggregateConversationFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateConversationFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateConversationFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for DebateConnection
+
+type DebateConnectionObject =
+  | DebateConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type DebateConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface DebateConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebateConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'DebateEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebateConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebateEdge[]> | prisma.DebateEdge[]
+  }
+  aggregate: {
+    type: 'AggregateDebate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebateConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateDebate> | prisma.AggregateDebate
+  }
+}
+  
+
+// Types for DebateEdge
+
+type DebateEdgeObject =
+  | DebateEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type DebateEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface DebateEdgeFieldDetails {
+  node: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebateEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate> | prisma.Debate
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateDebate
+
+type AggregateDebateObject =
+  | AggregateDebateFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateDebateFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateDebateFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for InteractionConnection
+
+type InteractionConnectionObject =
+  | InteractionConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type InteractionConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface InteractionConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'InteractionEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionEdge[]> | prisma.InteractionEdge[]
+  }
+  aggregate: {
+    type: 'AggregateInteraction'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateInteraction> | prisma.AggregateInteraction
+  }
+}
+  
+
+// Types for InteractionEdge
+
+type InteractionEdgeObject =
+  | InteractionEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type InteractionEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface InteractionEdgeFieldDetails {
+  node: {
+    type: 'Interaction'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction> | prisma.Interaction
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateInteraction
+
+type AggregateInteractionObject =
+  | AggregateInteractionFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateInteractionFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateInteractionFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for MessageConnection
+
+type MessageConnectionObject =
+  | MessageConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type MessageConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface MessageConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'MessageEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageEdge[]> | prisma.MessageEdge[]
+  }
+  aggregate: {
+    type: 'AggregateMessage'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateMessage> | prisma.AggregateMessage
+  }
+}
+  
+
+// Types for MessageEdge
+
+type MessageEdgeObject =
+  | MessageEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type MessageEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface MessageEdgeFieldDetails {
+  node: {
+    type: 'Message'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateMessage
+
+type AggregateMessageObject =
+  | AggregateMessageFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateMessageFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateMessageFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ReportConnection
+
+type ReportConnectionObject =
+  | ReportConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ReportConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ReportConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ReportEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportEdge[]> | prisma.ReportEdge[]
+  }
+  aggregate: {
+    type: 'AggregateReport'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateReport> | prisma.AggregateReport
+  }
+}
+  
+
+// Types for ReportEdge
+
+type ReportEdgeObject =
+  | ReportEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ReportEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ReportEdgeFieldDetails {
+  node: {
+    type: 'Report'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report> | prisma.Report
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateReport
+
+type AggregateReportObject =
+  | AggregateReportFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateReportFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateReportFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TrophyConnection
+
+type TrophyConnectionObject =
+  | TrophyConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TrophyConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TrophyConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TrophyConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TrophyEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TrophyConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophyEdge[]> | prisma.TrophyEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTrophy'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TrophyConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTrophy> | prisma.AggregateTrophy
+  }
+}
+  
+
+// Types for TrophyEdge
+
+type TrophyEdgeObject =
+  | TrophyEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TrophyEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TrophyEdgeFieldDetails {
+  node: {
+    type: 'Trophy'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TrophyEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy> | prisma.Trophy
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTrophy
+
+type AggregateTrophyObject =
+  | AggregateTrophyFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTrophyFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTrophyFieldDetails {
+  count: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -234,61 +3966,6 @@ export interface UserConnectionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.AggregateUser> | prisma.AggregateUser
-  }
-}
-  
-
-// Types for PageInfo
-
-type PageInfoObject =
-  | PageInfoFields
-  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
-  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
-  | { name: 'startCursor', args?: [] | false, alias?: string  } 
-  | { name: 'endCursor', args?: [] | false, alias?: string  } 
-
-type PageInfoFields =
-  | 'hasNextPage'
-  | 'hasPreviousPage'
-  | 'startCursor'
-  | 'endCursor'
-
-
-
-  
-
-export interface PageInfoFieldDetails {
-  hasNextPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  hasPreviousPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  startCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
-  }
-  endCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
   }
 }
   
@@ -362,6 +4039,59 @@ export interface AggregateUserFieldDetails {
 
 type MutationObject =
   | MutationFields
+  | { name: 'createAd', args?: MutationCreateAdArgs[] | false, alias?: string  } 
+  | { name: 'updateAd', args?: MutationUpdateAdArgs[] | false, alias?: string  } 
+  | { name: 'updateManyAds', args?: MutationUpdateManyAdsArgs[] | false, alias?: string  } 
+  | { name: 'upsertAd', args?: MutationUpsertAdArgs[] | false, alias?: string  } 
+  | { name: 'deleteAd', args?: MutationDeleteAdArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyAds', args?: MutationDeleteManyAdsArgs[] | false, alias?: string  } 
+  | { name: 'createAdTarget', args?: MutationCreateAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'updateAdTarget', args?: MutationUpdateAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'updateManyAdTargets', args?: MutationUpdateManyAdTargetsArgs[] | false, alias?: string  } 
+  | { name: 'upsertAdTarget', args?: MutationUpsertAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'deleteAdTarget', args?: MutationDeleteAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyAdTargets', args?: MutationDeleteManyAdTargetsArgs[] | false, alias?: string  } 
+  | { name: 'createComment', args?: MutationCreateCommentArgs[] | false, alias?: string  } 
+  | { name: 'updateComment', args?: MutationUpdateCommentArgs[] | false, alias?: string  } 
+  | { name: 'updateManyComments', args?: MutationUpdateManyCommentsArgs[] | false, alias?: string  } 
+  | { name: 'upsertComment', args?: MutationUpsertCommentArgs[] | false, alias?: string  } 
+  | { name: 'deleteComment', args?: MutationDeleteCommentArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyComments', args?: MutationDeleteManyCommentsArgs[] | false, alias?: string  } 
+  | { name: 'createConversation', args?: MutationCreateConversationArgs[] | false, alias?: string  } 
+  | { name: 'updateConversation', args?: MutationUpdateConversationArgs[] | false, alias?: string  } 
+  | { name: 'upsertConversation', args?: MutationUpsertConversationArgs[] | false, alias?: string  } 
+  | { name: 'deleteConversation', args?: MutationDeleteConversationArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyConversations', args?: MutationDeleteManyConversationsArgs[] | false, alias?: string  } 
+  | { name: 'createDebate', args?: MutationCreateDebateArgs[] | false, alias?: string  } 
+  | { name: 'updateDebate', args?: MutationUpdateDebateArgs[] | false, alias?: string  } 
+  | { name: 'updateManyDebates', args?: MutationUpdateManyDebatesArgs[] | false, alias?: string  } 
+  | { name: 'upsertDebate', args?: MutationUpsertDebateArgs[] | false, alias?: string  } 
+  | { name: 'deleteDebate', args?: MutationDeleteDebateArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyDebates', args?: MutationDeleteManyDebatesArgs[] | false, alias?: string  } 
+  | { name: 'createInteraction', args?: MutationCreateInteractionArgs[] | false, alias?: string  } 
+  | { name: 'updateInteraction', args?: MutationUpdateInteractionArgs[] | false, alias?: string  } 
+  | { name: 'updateManyInteractions', args?: MutationUpdateManyInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'upsertInteraction', args?: MutationUpsertInteractionArgs[] | false, alias?: string  } 
+  | { name: 'deleteInteraction', args?: MutationDeleteInteractionArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyInteractions', args?: MutationDeleteManyInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'createMessage', args?: MutationCreateMessageArgs[] | false, alias?: string  } 
+  | { name: 'updateMessage', args?: MutationUpdateMessageArgs[] | false, alias?: string  } 
+  | { name: 'updateManyMessages', args?: MutationUpdateManyMessagesArgs[] | false, alias?: string  } 
+  | { name: 'upsertMessage', args?: MutationUpsertMessageArgs[] | false, alias?: string  } 
+  | { name: 'deleteMessage', args?: MutationDeleteMessageArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyMessages', args?: MutationDeleteManyMessagesArgs[] | false, alias?: string  } 
+  | { name: 'createReport', args?: MutationCreateReportArgs[] | false, alias?: string  } 
+  | { name: 'updateReport', args?: MutationUpdateReportArgs[] | false, alias?: string  } 
+  | { name: 'updateManyReports', args?: MutationUpdateManyReportsArgs[] | false, alias?: string  } 
+  | { name: 'upsertReport', args?: MutationUpsertReportArgs[] | false, alias?: string  } 
+  | { name: 'deleteReport', args?: MutationDeleteReportArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyReports', args?: MutationDeleteManyReportsArgs[] | false, alias?: string  } 
+  | { name: 'createTrophy', args?: MutationCreateTrophyArgs[] | false, alias?: string  } 
+  | { name: 'updateTrophy', args?: MutationUpdateTrophyArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTrophies', args?: MutationUpdateManyTrophiesArgs[] | false, alias?: string  } 
+  | { name: 'upsertTrophy', args?: MutationUpsertTrophyArgs[] | false, alias?: string  } 
+  | { name: 'deleteTrophy', args?: MutationDeleteTrophyArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTrophies', args?: MutationDeleteManyTrophiesArgs[] | false, alias?: string  } 
   | { name: 'createUser', args?: MutationCreateUserArgs[] | false, alias?: string  } 
   | { name: 'updateUser', args?: MutationUpdateUserArgs[] | false, alias?: string  } 
   | { name: 'updateManyUsers', args?: MutationUpdateManyUsersArgs[] | false, alias?: string  } 
@@ -370,6 +4100,59 @@ type MutationObject =
   | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
 
 type MutationFields =
+  | 'createAd'
+  | 'updateAd'
+  | 'updateManyAds'
+  | 'upsertAd'
+  | 'deleteAd'
+  | 'deleteManyAds'
+  | 'createAdTarget'
+  | 'updateAdTarget'
+  | 'updateManyAdTargets'
+  | 'upsertAdTarget'
+  | 'deleteAdTarget'
+  | 'deleteManyAdTargets'
+  | 'createComment'
+  | 'updateComment'
+  | 'updateManyComments'
+  | 'upsertComment'
+  | 'deleteComment'
+  | 'deleteManyComments'
+  | 'createConversation'
+  | 'updateConversation'
+  | 'upsertConversation'
+  | 'deleteConversation'
+  | 'deleteManyConversations'
+  | 'createDebate'
+  | 'updateDebate'
+  | 'updateManyDebates'
+  | 'upsertDebate'
+  | 'deleteDebate'
+  | 'deleteManyDebates'
+  | 'createInteraction'
+  | 'updateInteraction'
+  | 'updateManyInteractions'
+  | 'upsertInteraction'
+  | 'deleteInteraction'
+  | 'deleteManyInteractions'
+  | 'createMessage'
+  | 'updateMessage'
+  | 'updateManyMessages'
+  | 'upsertMessage'
+  | 'deleteMessage'
+  | 'deleteManyMessages'
+  | 'createReport'
+  | 'updateReport'
+  | 'updateManyReports'
+  | 'upsertReport'
+  | 'deleteReport'
+  | 'deleteManyReports'
+  | 'createTrophy'
+  | 'updateTrophy'
+  | 'updateManyTrophies'
+  | 'upsertTrophy'
+  | 'deleteTrophy'
+  | 'deleteManyTrophies'
   | 'createUser'
   | 'updateUser'
   | 'updateManyUsers'
@@ -378,6 +4161,147 @@ type MutationFields =
   | 'deleteManyUsers'
 
 
+type MutationCreateAdArgs =
+  | 'data'
+type MutationUpdateAdArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyAdsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertAdArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteAdArgs =
+  | 'where'
+type MutationDeleteManyAdsArgs =
+  | 'where'
+type MutationCreateAdTargetArgs =
+  | 'data'
+type MutationUpdateAdTargetArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyAdTargetsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertAdTargetArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteAdTargetArgs =
+  | 'where'
+type MutationDeleteManyAdTargetsArgs =
+  | 'where'
+type MutationCreateCommentArgs =
+  | 'data'
+type MutationUpdateCommentArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyCommentsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertCommentArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteCommentArgs =
+  | 'where'
+type MutationDeleteManyCommentsArgs =
+  | 'where'
+type MutationCreateConversationArgs =
+  | 'data'
+type MutationUpdateConversationArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertConversationArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteConversationArgs =
+  | 'where'
+type MutationDeleteManyConversationsArgs =
+  | 'where'
+type MutationCreateDebateArgs =
+  | 'data'
+type MutationUpdateDebateArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyDebatesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertDebateArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteDebateArgs =
+  | 'where'
+type MutationDeleteManyDebatesArgs =
+  | 'where'
+type MutationCreateInteractionArgs =
+  | 'data'
+type MutationUpdateInteractionArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyInteractionsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertInteractionArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteInteractionArgs =
+  | 'where'
+type MutationDeleteManyInteractionsArgs =
+  | 'where'
+type MutationCreateMessageArgs =
+  | 'data'
+type MutationUpdateMessageArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyMessagesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertMessageArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteMessageArgs =
+  | 'where'
+type MutationDeleteManyMessagesArgs =
+  | 'where'
+type MutationCreateReportArgs =
+  | 'data'
+type MutationUpdateReportArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyReportsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertReportArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteReportArgs =
+  | 'where'
+type MutationDeleteManyReportsArgs =
+  | 'where'
+type MutationCreateTrophyArgs =
+  | 'data'
+type MutationUpdateTrophyArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTrophiesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTrophyArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTrophyArgs =
+  | 'where'
+type MutationDeleteManyTrophiesArgs =
+  | 'where'
 type MutationCreateUserArgs =
   | 'data'
 type MutationUpdateUserArgs =
@@ -397,6 +4321,695 @@ type MutationDeleteManyUsersArgs =
   
 
 export interface MutationFieldDetails {
+  createAd: {
+    type: 'Ad'
+    args: Record<MutationCreateAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad> | prisma.Ad
+  }
+  updateAd: {
+    type: 'Ad'
+    args: Record<MutationUpdateAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdUpdateInput, where: AdWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad | null> | prisma.Ad | null
+  }
+  updateManyAds: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyAdsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdUpdateManyMutationInput, where?: AdWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertAd: {
+    type: 'Ad'
+    args: Record<MutationUpsertAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: AdWhereUniqueInput, create: AdCreateInput, update: AdUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad> | prisma.Ad
+  }
+  deleteAd: {
+    type: 'Ad'
+    args: Record<MutationDeleteAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: AdWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad | null> | prisma.Ad | null
+  }
+  deleteManyAds: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyAdsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: AdWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createAdTarget: {
+    type: 'AdTarget'
+    args: Record<MutationCreateAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdTargetCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget> | prisma.AdTarget
+  }
+  updateAdTarget: {
+    type: 'AdTarget'
+    args: Record<MutationUpdateAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdTargetUpdateInput, where: AdTargetWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget | null> | prisma.AdTarget | null
+  }
+  updateManyAdTargets: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyAdTargetsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: AdTargetUpdateManyMutationInput, where?: AdTargetWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertAdTarget: {
+    type: 'AdTarget'
+    args: Record<MutationUpsertAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: AdTargetWhereUniqueInput, create: AdTargetCreateInput, update: AdTargetUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget> | prisma.AdTarget
+  }
+  deleteAdTarget: {
+    type: 'AdTarget'
+    args: Record<MutationDeleteAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: AdTargetWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget | null> | prisma.AdTarget | null
+  }
+  deleteManyAdTargets: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyAdTargetsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: AdTargetWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createComment: {
+    type: 'Comment'
+    args: Record<MutationCreateCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CommentCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment> | prisma.Comment
+  }
+  updateComment: {
+    type: 'Comment'
+    args: Record<MutationUpdateCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CommentUpdateInput, where: CommentWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  updateManyComments: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyCommentsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CommentUpdateManyMutationInput, where?: CommentWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertComment: {
+    type: 'Comment'
+    args: Record<MutationUpsertCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: CommentWhereUniqueInput, create: CommentCreateInput, update: CommentUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment> | prisma.Comment
+  }
+  deleteComment: {
+    type: 'Comment'
+    args: Record<MutationDeleteCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: CommentWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  deleteManyComments: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyCommentsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: CommentWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createConversation: {
+    type: 'Conversation'
+    args: Record<MutationCreateConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConversationCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation> | prisma.Conversation
+  }
+  updateConversation: {
+    type: 'Conversation'
+    args: Record<MutationUpdateConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConversationUpdateInput, where: ConversationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation | null> | prisma.Conversation | null
+  }
+  upsertConversation: {
+    type: 'Conversation'
+    args: Record<MutationUpsertConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ConversationWhereUniqueInput, create: ConversationCreateInput, update: ConversationUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation> | prisma.Conversation
+  }
+  deleteConversation: {
+    type: 'Conversation'
+    args: Record<MutationDeleteConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ConversationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation | null> | prisma.Conversation | null
+  }
+  deleteManyConversations: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyConversationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ConversationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createDebate: {
+    type: 'Debate'
+    args: Record<MutationCreateDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DebateCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate> | prisma.Debate
+  }
+  updateDebate: {
+    type: 'Debate'
+    args: Record<MutationUpdateDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DebateUpdateInput, where: DebateWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  updateManyDebates: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyDebatesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DebateUpdateManyMutationInput, where?: DebateWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertDebate: {
+    type: 'Debate'
+    args: Record<MutationUpsertDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: DebateWhereUniqueInput, create: DebateCreateInput, update: DebateUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate> | prisma.Debate
+  }
+  deleteDebate: {
+    type: 'Debate'
+    args: Record<MutationDeleteDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: DebateWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  deleteManyDebates: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyDebatesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: DebateWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createInteraction: {
+    type: 'Interaction'
+    args: Record<MutationCreateInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: InteractionCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction> | prisma.Interaction
+  }
+  updateInteraction: {
+    type: 'Interaction'
+    args: Record<MutationUpdateInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: InteractionUpdateInput, where: InteractionWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction | null> | prisma.Interaction | null
+  }
+  updateManyInteractions: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyInteractionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: InteractionUpdateManyMutationInput, where?: InteractionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertInteraction: {
+    type: 'Interaction'
+    args: Record<MutationUpsertInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: InteractionWhereUniqueInput, create: InteractionCreateInput, update: InteractionUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction> | prisma.Interaction
+  }
+  deleteInteraction: {
+    type: 'Interaction'
+    args: Record<MutationDeleteInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: InteractionWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction | null> | prisma.Interaction | null
+  }
+  deleteManyInteractions: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyInteractionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: InteractionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createMessage: {
+    type: 'Message'
+    args: Record<MutationCreateMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  updateMessage: {
+    type: 'Message'
+    args: Record<MutationUpdateMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  updateManyMessages: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertMessage: {
+    type: 'Message'
+    args: Record<MutationUpsertMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  deleteMessage: {
+    type: 'Message'
+    args: Record<MutationDeleteMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  deleteManyMessages: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: MessageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createReport: {
+    type: 'Report'
+    args: Record<MutationCreateReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ReportCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report> | prisma.Report
+  }
+  updateReport: {
+    type: 'Report'
+    args: Record<MutationUpdateReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ReportUpdateInput, where: ReportWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report | null> | prisma.Report | null
+  }
+  updateManyReports: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyReportsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ReportUpdateManyMutationInput, where?: ReportWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertReport: {
+    type: 'Report'
+    args: Record<MutationUpsertReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ReportWhereUniqueInput, create: ReportCreateInput, update: ReportUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report> | prisma.Report
+  }
+  deleteReport: {
+    type: 'Report'
+    args: Record<MutationDeleteReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ReportWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report | null> | prisma.Report | null
+  }
+  deleteManyReports: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyReportsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ReportWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createTrophy: {
+    type: 'Trophy'
+    args: Record<MutationCreateTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TrophyCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy> | prisma.Trophy
+  }
+  updateTrophy: {
+    type: 'Trophy'
+    args: Record<MutationUpdateTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TrophyUpdateInput, where: TrophyWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy | null> | prisma.Trophy | null
+  }
+  updateManyTrophies: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTrophiesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TrophyUpdateManyMutationInput, where?: TrophyWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTrophy: {
+    type: 'Trophy'
+    args: Record<MutationUpsertTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TrophyWhereUniqueInput, create: TrophyCreateInput, update: TrophyUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy> | prisma.Trophy
+  }
+  deleteTrophy: {
+    type: 'Trophy'
+    args: Record<MutationDeleteTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TrophyWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy | null> | prisma.Trophy | null
+  }
+  deleteManyTrophies: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTrophiesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TrophyWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createUser: {
     type: 'User'
     args: Record<MutationCreateUserArgs, core.NexusArgDef<string>>
@@ -507,17 +5120,170 @@ export interface BatchPayloadFieldDetails {
 
 type SubscriptionObject =
   | SubscriptionFields
+  | { name: 'ad', args?: SubscriptionAdArgs[] | false, alias?: string  } 
+  | { name: 'adTarget', args?: SubscriptionAdTargetArgs[] | false, alias?: string  } 
+  | { name: 'comment', args?: SubscriptionCommentArgs[] | false, alias?: string  } 
+  | { name: 'conversation', args?: SubscriptionConversationArgs[] | false, alias?: string  } 
+  | { name: 'debate', args?: SubscriptionDebateArgs[] | false, alias?: string  } 
+  | { name: 'interaction', args?: SubscriptionInteractionArgs[] | false, alias?: string  } 
+  | { name: 'message', args?: SubscriptionMessageArgs[] | false, alias?: string  } 
+  | { name: 'report', args?: SubscriptionReportArgs[] | false, alias?: string  } 
+  | { name: 'trophy', args?: SubscriptionTrophyArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
+  | 'ad'
+  | 'adTarget'
+  | 'comment'
+  | 'conversation'
+  | 'debate'
+  | 'interaction'
+  | 'message'
+  | 'report'
+  | 'trophy'
   | 'user'
 
 
+type SubscriptionAdArgs =
+  | 'where'
+type SubscriptionAdTargetArgs =
+  | 'where'
+type SubscriptionCommentArgs =
+  | 'where'
+type SubscriptionConversationArgs =
+  | 'where'
+type SubscriptionDebateArgs =
+  | 'where'
+type SubscriptionInteractionArgs =
+  | 'where'
+type SubscriptionMessageArgs =
+  | 'where'
+type SubscriptionReportArgs =
+  | 'where'
+type SubscriptionTrophyArgs =
+  | 'where'
 type SubscriptionUserArgs =
   | 'where'
   
 
 export interface SubscriptionFieldDetails {
+  ad: {
+    type: 'AdSubscriptionPayload'
+    args: Record<SubscriptionAdArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: AdSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdSubscriptionPayload | null> | prisma.AdSubscriptionPayload | null
+  }
+  adTarget: {
+    type: 'AdTargetSubscriptionPayload'
+    args: Record<SubscriptionAdTargetArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: AdTargetSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTargetSubscriptionPayload | null> | prisma.AdTargetSubscriptionPayload | null
+  }
+  comment: {
+    type: 'CommentSubscriptionPayload'
+    args: Record<SubscriptionCommentArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: CommentSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CommentSubscriptionPayload | null> | prisma.CommentSubscriptionPayload | null
+  }
+  conversation: {
+    type: 'ConversationSubscriptionPayload'
+    args: Record<SubscriptionConversationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ConversationSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConversationSubscriptionPayload | null> | prisma.ConversationSubscriptionPayload | null
+  }
+  debate: {
+    type: 'DebateSubscriptionPayload'
+    args: Record<SubscriptionDebateArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: DebateSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebateSubscriptionPayload | null> | prisma.DebateSubscriptionPayload | null
+  }
+  interaction: {
+    type: 'InteractionSubscriptionPayload'
+    args: Record<SubscriptionInteractionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: InteractionSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionSubscriptionPayload | null> | prisma.InteractionSubscriptionPayload | null
+  }
+  message: {
+    type: 'MessageSubscriptionPayload'
+    args: Record<SubscriptionMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: MessageSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageSubscriptionPayload | null> | prisma.MessageSubscriptionPayload | null
+  }
+  report: {
+    type: 'ReportSubscriptionPayload'
+    args: Record<SubscriptionReportArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ReportSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportSubscriptionPayload | null> | prisma.ReportSubscriptionPayload | null
+  }
+  trophy: {
+    type: 'TrophySubscriptionPayload'
+    args: Record<SubscriptionTrophyArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TrophySubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophySubscriptionPayload | null> | prisma.TrophySubscriptionPayload | null
+  }
   user: {
     type: 'UserSubscriptionPayload'
     args: Record<SubscriptionUserArgs, core.NexusArgDef<string>>
@@ -530,6 +5296,1311 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
+}
+  
+
+// Types for AdSubscriptionPayload
+
+type AdSubscriptionPayloadObject =
+  | AdSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type AdSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface AdSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Ad'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"AdSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Ad | null> | prisma.Ad | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'AdPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"AdSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdPreviousValues | null> | prisma.AdPreviousValues | null
+  }
+}
+  
+
+// Types for AdPreviousValues
+
+type AdPreviousValuesObject =
+  | AdPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'active', args?: [] | false, alias?: string  } 
+  | { name: 'ratio', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type AdPreviousValuesFields =
+  | 'id'
+  | 'name'
+  | 'content'
+  | 'active'
+  | 'ratio'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface AdPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  active: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  ratio: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdTargetSubscriptionPayload
+
+type AdTargetSubscriptionPayloadObject =
+  | AdTargetSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type AdTargetSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface AdTargetSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'AdTarget'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"AdTargetSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTarget | null> | prisma.AdTarget | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'AdTargetPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"AdTargetSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AdTargetPreviousValues | null> | prisma.AdTargetPreviousValues | null
+  }
+}
+  
+
+// Types for AdTargetPreviousValues
+
+type AdTargetPreviousValuesObject =
+  | AdTargetPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMin', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMax', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type AdTargetPreviousValuesFields =
+  | 'id'
+  | 'name'
+  | 'gender'
+  | 'birthdateMin'
+  | 'birthdateMax'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface AdTargetPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  gender: {
+    type: 'GenderFilter'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTargetPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.GenderFilter> | prisma.GenderFilter
+  }
+  birthdateMin: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  birthdateMax: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for CommentSubscriptionPayload
+
+type CommentSubscriptionPayloadObject =
+  | CommentSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type CommentSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface CommentSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CommentSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"CommentSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'CommentPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"CommentSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CommentPreviousValues | null> | prisma.CommentPreviousValues | null
+  }
+}
+  
+
+// Types for CommentPreviousValues
+
+type CommentPreviousValuesObject =
+  | CommentPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'from', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type CommentPreviousValuesFields =
+  | 'id'
+  | 'from'
+  | 'content'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface CommentPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  from: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ConversationSubscriptionPayload
+
+type ConversationSubscriptionPayloadObject =
+  | ConversationSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ConversationSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ConversationSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConversationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Conversation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ConversationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation | null> | prisma.Conversation | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ConversationPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ConversationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConversationPreviousValues | null> | prisma.ConversationPreviousValues | null
+  }
+}
+  
+
+// Types for ConversationPreviousValues
+
+type ConversationPreviousValuesObject =
+  | ConversationPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ConversationPreviousValuesFields =
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface ConversationPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for DebateSubscriptionPayload
+
+type DebateSubscriptionPayloadObject =
+  | DebateSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type DebateSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface DebateSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebateSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"DebateSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'DebatePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"DebateSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebatePreviousValues | null> | prisma.DebatePreviousValues | null
+  }
+}
+  
+
+// Types for DebatePreviousValues
+
+type DebatePreviousValuesObject =
+  | DebatePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'timelimit', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'closed', args?: [] | false, alias?: string  } 
+  | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type DebatePreviousValuesFields =
+  | 'id'
+  | 'content'
+  | 'timelimit'
+  | 'type'
+  | 'closed'
+  | 'crowned'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface DebatePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  timelimit: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  type: {
+    type: 'DebateType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DebatePreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DebateType> | prisma.DebateType
+  }
+  closed: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for InteractionSubscriptionPayload
+
+type InteractionSubscriptionPayloadObject =
+  | InteractionSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type InteractionSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface InteractionSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Interaction'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"InteractionSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Interaction | null> | prisma.Interaction | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'InteractionPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"InteractionSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionPreviousValues | null> | prisma.InteractionPreviousValues | null
+  }
+}
+  
+
+// Types for InteractionPreviousValues
+
+type InteractionPreviousValuesObject =
+  | InteractionPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type InteractionPreviousValuesFields =
+  | 'id'
+  | 'type'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface InteractionPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'InteractionType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"InteractionPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.InteractionType> | prisma.InteractionType
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for MessageSubscriptionPayload
+
+type MessageSubscriptionPayloadObject =
+  | MessageSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type MessageSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface MessageSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Message'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'MessagePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessagePreviousValues | null> | prisma.MessagePreviousValues | null
+  }
+}
+  
+
+// Types for MessagePreviousValues
+
+type MessagePreviousValuesObject =
+  | MessagePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'sendDate', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type MessagePreviousValuesFields =
+  | 'id'
+  | 'content'
+  | 'sendDate'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface MessagePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  sendDate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ReportSubscriptionPayload
+
+type ReportSubscriptionPayloadObject =
+  | ReportSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ReportSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ReportSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Report'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ReportSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Report | null> | prisma.Report | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ReportPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ReportSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportPreviousValues | null> | prisma.ReportPreviousValues | null
+  }
+}
+  
+
+// Types for ReportPreviousValues
+
+type ReportPreviousValuesObject =
+  | ReportPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'reason', args?: [] | false, alias?: string  } 
+  | { name: 'reasonText', args?: [] | false, alias?: string  } 
+  | { name: 'treated', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ReportPreviousValuesFields =
+  | 'id'
+  | 'type'
+  | 'reason'
+  | 'reasonText'
+  | 'treated'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface ReportPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'ReportType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportType> | prisma.ReportType
+  }
+  reason: {
+    type: 'ReportReason'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ReportPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ReportReason> | prisma.ReportReason
+  }
+  reasonText: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  treated: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TrophySubscriptionPayload
+
+type TrophySubscriptionPayloadObject =
+  | TrophySubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TrophySubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TrophySubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TrophySubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Trophy'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TrophySubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Trophy | null> | prisma.Trophy | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TrophyPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TrophySubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophyPreviousValues | null> | prisma.TrophyPreviousValues | null
+  }
+}
+  
+
+// Types for TrophyPreviousValues
+
+type TrophyPreviousValuesObject =
+  | TrophyPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'won', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type TrophyPreviousValuesFields =
+  | 'id'
+  | 'won'
+  | 'type'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface TrophyPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  won: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'TrophyType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TrophyPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TrophyType | null> | prisma.TrophyType | null
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -609,13 +6680,37 @@ export interface UserSubscriptionPayloadFieldDetails {
 type UserPreviousValuesObject =
   | UserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'pseudo', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
-  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'birthdate', args?: [] | false, alias?: string  } 
+  | { name: 'role', args?: [] | false, alias?: string  } 
+  | { name: 'certified', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'profilePicture', args?: [] | false, alias?: string  } 
+  | { name: 'coverPicture', args?: [] | false, alias?: string  } 
+  | { name: 'bio', args?: [] | false, alias?: string  } 
+  | { name: 'language', args?: [] | false, alias?: string  } 
+  | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'lastConnected', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type UserPreviousValuesFields =
   | 'id'
+  | 'pseudo'
   | 'email'
-  | 'password'
+  | 'birthdate'
+  | 'role'
+  | 'certified'
+  | 'gender'
+  | 'profilePicture'
+  | 'coverPicture'
+  | 'bio'
+  | 'language'
+  | 'crowned'
+  | 'lastConnected'
+  | 'createdAt'
+  | 'updatedAt'
 
 
 
@@ -630,6 +6725,14 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
+  pseudo: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
   email: {
     type: 'String'
     args: {}
@@ -638,8 +6741,111 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
-  password: {
+  birthdate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  role: {
+    type: 'Role'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Role> | prisma.Role
+  }
+  certified: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  gender: {
+    type: 'Gender'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Gender> | prisma.Gender
+  }
+  profilePicture: {
     type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  coverPicture: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  bio: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  language: {
+    type: 'Language'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Language> | prisma.Language
+  }
+  crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastConnected: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -650,14 +6856,310 @@ export interface UserPreviousValuesFieldDetails {
   
 
 
-export interface UserWhereUniqueInput {
+export interface AdWhereUniqueInput {
   id?: string | null
-  email?: string | null
+  name?: string | null
 }
-export type UserWhereUniqueInputInputObject =
-  | Extract<keyof UserWhereUniqueInput, string>
+export type AdWhereUniqueInputInputObject =
+  | Extract<keyof AdWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'email', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  
+export interface AdTargetWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  gender?: prisma.GenderFilter | null
+  gender_not?: prisma.GenderFilter | null
+  gender_in?: prisma.GenderFilter[]
+  gender_not_in?: prisma.GenderFilter[]
+  birthdateMin?: string | null
+  birthdateMin_not?: string | null
+  birthdateMin_in?: string[]
+  birthdateMin_not_in?: string[]
+  birthdateMin_lt?: string | null
+  birthdateMin_lte?: string | null
+  birthdateMin_gt?: string | null
+  birthdateMin_gte?: string | null
+  birthdateMax?: string | null
+  birthdateMax_not?: string | null
+  birthdateMax_in?: string[]
+  birthdateMax_not_in?: string[]
+  birthdateMax_lt?: string | null
+  birthdateMax_lte?: string | null
+  birthdateMax_gt?: string | null
+  birthdateMax_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: AdTargetWhereInput[]
+}
+export type AdTargetWhereInputInputObject =
+  | Extract<keyof AdTargetWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMin_not', alias?: string  } 
+  | { name: 'birthdateMin_in', alias?: string  } 
+  | { name: 'birthdateMin_not_in', alias?: string  } 
+  | { name: 'birthdateMin_lt', alias?: string  } 
+  | { name: 'birthdateMin_lte', alias?: string  } 
+  | { name: 'birthdateMin_gt', alias?: string  } 
+  | { name: 'birthdateMin_gte', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  | { name: 'birthdateMax_not', alias?: string  } 
+  | { name: 'birthdateMax_in', alias?: string  } 
+  | { name: 'birthdateMax_not_in', alias?: string  } 
+  | { name: 'birthdateMax_lt', alias?: string  } 
+  | { name: 'birthdateMax_lte', alias?: string  } 
+  | { name: 'birthdateMax_gt', alias?: string  } 
+  | { name: 'birthdateMax_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface AdWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  targets_some?: AdTargetWhereInput | null
+  active?: boolean | null
+  active_not?: boolean | null
+  ratio?: number | null
+  ratio_not?: number | null
+  ratio_in?: number[]
+  ratio_not_in?: number[]
+  ratio_lt?: number | null
+  ratio_lte?: number | null
+  ratio_gt?: number | null
+  ratio_gte?: number | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: AdWhereInput[]
+}
+export type AdWhereInputInputObject =
+  | Extract<keyof AdWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'targets_some', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'active_not', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  | { name: 'ratio_not', alias?: string  } 
+  | { name: 'ratio_in', alias?: string  } 
+  | { name: 'ratio_not_in', alias?: string  } 
+  | { name: 'ratio_lt', alias?: string  } 
+  | { name: 'ratio_lte', alias?: string  } 
+  | { name: 'ratio_gt', alias?: string  } 
+  | { name: 'ratio_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface AdTargetWhereUniqueInput {
+  id?: string | null
+  name?: string | null
+}
+export type AdTargetWhereUniqueInputInputObject =
+  | Extract<keyof AdTargetWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  
+export interface CommentWhereUniqueInput {
+  id?: string | null
+}
+export type CommentWhereUniqueInputInputObject =
+  | Extract<keyof CommentWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
   
 export interface UserWhereInput {
   id?: string | null
@@ -674,6 +7176,20 @@ export interface UserWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  pseudo?: string | null
+  pseudo_not?: string | null
+  pseudo_in?: string[]
+  pseudo_not_in?: string[]
+  pseudo_lt?: string | null
+  pseudo_lte?: string | null
+  pseudo_gt?: string | null
+  pseudo_gte?: string | null
+  pseudo_contains?: string | null
+  pseudo_not_contains?: string | null
+  pseudo_starts_with?: string | null
+  pseudo_not_starts_with?: string | null
+  pseudo_ends_with?: string | null
+  pseudo_not_ends_with?: string | null
   email?: string | null
   email_not?: string | null
   email_in?: string[]
@@ -688,20 +7204,106 @@ export interface UserWhereInput {
   email_not_starts_with?: string | null
   email_ends_with?: string | null
   email_not_ends_with?: string | null
-  password?: string | null
-  password_not?: string | null
-  password_in?: string[]
-  password_not_in?: string[]
-  password_lt?: string | null
-  password_lte?: string | null
-  password_gt?: string | null
-  password_gte?: string | null
-  password_contains?: string | null
-  password_not_contains?: string | null
-  password_starts_with?: string | null
-  password_not_starts_with?: string | null
-  password_ends_with?: string | null
-  password_not_ends_with?: string | null
+  birthdate?: string | null
+  birthdate_not?: string | null
+  birthdate_in?: string[]
+  birthdate_not_in?: string[]
+  birthdate_lt?: string | null
+  birthdate_lte?: string | null
+  birthdate_gt?: string | null
+  birthdate_gte?: string | null
+  role?: prisma.Role | null
+  role_not?: prisma.Role | null
+  role_in?: prisma.Role[]
+  role_not_in?: prisma.Role[]
+  certified?: boolean | null
+  certified_not?: boolean | null
+  gender?: prisma.Gender | null
+  gender_not?: prisma.Gender | null
+  gender_in?: prisma.Gender[]
+  gender_not_in?: prisma.Gender[]
+  profilePicture?: string | null
+  profilePicture_not?: string | null
+  profilePicture_in?: string[]
+  profilePicture_not_in?: string[]
+  profilePicture_lt?: string | null
+  profilePicture_lte?: string | null
+  profilePicture_gt?: string | null
+  profilePicture_gte?: string | null
+  profilePicture_contains?: string | null
+  profilePicture_not_contains?: string | null
+  profilePicture_starts_with?: string | null
+  profilePicture_not_starts_with?: string | null
+  profilePicture_ends_with?: string | null
+  profilePicture_not_ends_with?: string | null
+  coverPicture?: string | null
+  coverPicture_not?: string | null
+  coverPicture_in?: string[]
+  coverPicture_not_in?: string[]
+  coverPicture_lt?: string | null
+  coverPicture_lte?: string | null
+  coverPicture_gt?: string | null
+  coverPicture_gte?: string | null
+  coverPicture_contains?: string | null
+  coverPicture_not_contains?: string | null
+  coverPicture_starts_with?: string | null
+  coverPicture_not_starts_with?: string | null
+  coverPicture_ends_with?: string | null
+  coverPicture_not_ends_with?: string | null
+  bio?: string | null
+  bio_not?: string | null
+  bio_in?: string[]
+  bio_not_in?: string[]
+  bio_lt?: string | null
+  bio_lte?: string | null
+  bio_gt?: string | null
+  bio_gte?: string | null
+  bio_contains?: string | null
+  bio_not_contains?: string | null
+  bio_starts_with?: string | null
+  bio_not_starts_with?: string | null
+  bio_ends_with?: string | null
+  bio_not_ends_with?: string | null
+  language?: prisma.Language | null
+  language_not?: prisma.Language | null
+  language_in?: prisma.Language[]
+  language_not_in?: prisma.Language[]
+  crowned?: boolean | null
+  crowned_not?: boolean | null
+  lastConnected?: string | null
+  lastConnected_not?: string | null
+  lastConnected_in?: string[]
+  lastConnected_not_in?: string[]
+  lastConnected_lt?: string | null
+  lastConnected_lte?: string | null
+  lastConnected_gt?: string | null
+  lastConnected_gte?: string | null
+  followers_some?: UserWhereInput | null
+  following_some?: UserWhereInput | null
+  blocked_some?: UserWhereInput | null
+  blocking_some?: UserWhereInput | null
+  debates_some?: DebateWhereInput | null
+  debatesBlue_some?: DebateWhereInput | null
+  debatesRed_some?: DebateWhereInput | null
+  trophies_some?: TrophyWhereInput | null
+  conversations_some?: ConversationWhereInput | null
+  interactions_some?: InteractionWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
   AND?: UserWhereInput[]
 }
 export type UserWhereInputInputObject =
@@ -720,6 +7322,20 @@ export type UserWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'pseudo_not', alias?: string  } 
+  | { name: 'pseudo_in', alias?: string  } 
+  | { name: 'pseudo_not_in', alias?: string  } 
+  | { name: 'pseudo_lt', alias?: string  } 
+  | { name: 'pseudo_lte', alias?: string  } 
+  | { name: 'pseudo_gt', alias?: string  } 
+  | { name: 'pseudo_gte', alias?: string  } 
+  | { name: 'pseudo_contains', alias?: string  } 
+  | { name: 'pseudo_not_contains', alias?: string  } 
+  | { name: 'pseudo_starts_with', alias?: string  } 
+  | { name: 'pseudo_not_starts_with', alias?: string  } 
+  | { name: 'pseudo_ends_with', alias?: string  } 
+  | { name: 'pseudo_not_ends_with', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'email_not', alias?: string  } 
   | { name: 'email_in', alias?: string  } 
@@ -734,50 +7350,6090 @@ export type UserWhereInputInputObject =
   | { name: 'email_not_starts_with', alias?: string  } 
   | { name: 'email_ends_with', alias?: string  } 
   | { name: 'email_not_ends_with', alias?: string  } 
-  | { name: 'password', alias?: string  } 
-  | { name: 'password_not', alias?: string  } 
-  | { name: 'password_in', alias?: string  } 
-  | { name: 'password_not_in', alias?: string  } 
-  | { name: 'password_lt', alias?: string  } 
-  | { name: 'password_lte', alias?: string  } 
-  | { name: 'password_gt', alias?: string  } 
-  | { name: 'password_gte', alias?: string  } 
-  | { name: 'password_contains', alias?: string  } 
-  | { name: 'password_not_contains', alias?: string  } 
-  | { name: 'password_starts_with', alias?: string  } 
-  | { name: 'password_not_starts_with', alias?: string  } 
-  | { name: 'password_ends_with', alias?: string  } 
-  | { name: 'password_not_ends_with', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'birthdate_not', alias?: string  } 
+  | { name: 'birthdate_in', alias?: string  } 
+  | { name: 'birthdate_not_in', alias?: string  } 
+  | { name: 'birthdate_lt', alias?: string  } 
+  | { name: 'birthdate_lte', alias?: string  } 
+  | { name: 'birthdate_gt', alias?: string  } 
+  | { name: 'birthdate_gte', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'role_not', alias?: string  } 
+  | { name: 'role_in', alias?: string  } 
+  | { name: 'role_not_in', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'certified_not', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'profilePicture_not', alias?: string  } 
+  | { name: 'profilePicture_in', alias?: string  } 
+  | { name: 'profilePicture_not_in', alias?: string  } 
+  | { name: 'profilePicture_lt', alias?: string  } 
+  | { name: 'profilePicture_lte', alias?: string  } 
+  | { name: 'profilePicture_gt', alias?: string  } 
+  | { name: 'profilePicture_gte', alias?: string  } 
+  | { name: 'profilePicture_contains', alias?: string  } 
+  | { name: 'profilePicture_not_contains', alias?: string  } 
+  | { name: 'profilePicture_starts_with', alias?: string  } 
+  | { name: 'profilePicture_not_starts_with', alias?: string  } 
+  | { name: 'profilePicture_ends_with', alias?: string  } 
+  | { name: 'profilePicture_not_ends_with', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'coverPicture_not', alias?: string  } 
+  | { name: 'coverPicture_in', alias?: string  } 
+  | { name: 'coverPicture_not_in', alias?: string  } 
+  | { name: 'coverPicture_lt', alias?: string  } 
+  | { name: 'coverPicture_lte', alias?: string  } 
+  | { name: 'coverPicture_gt', alias?: string  } 
+  | { name: 'coverPicture_gte', alias?: string  } 
+  | { name: 'coverPicture_contains', alias?: string  } 
+  | { name: 'coverPicture_not_contains', alias?: string  } 
+  | { name: 'coverPicture_starts_with', alias?: string  } 
+  | { name: 'coverPicture_not_starts_with', alias?: string  } 
+  | { name: 'coverPicture_ends_with', alias?: string  } 
+  | { name: 'coverPicture_not_ends_with', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'bio_not', alias?: string  } 
+  | { name: 'bio_in', alias?: string  } 
+  | { name: 'bio_not_in', alias?: string  } 
+  | { name: 'bio_lt', alias?: string  } 
+  | { name: 'bio_lte', alias?: string  } 
+  | { name: 'bio_gt', alias?: string  } 
+  | { name: 'bio_gte', alias?: string  } 
+  | { name: 'bio_contains', alias?: string  } 
+  | { name: 'bio_not_contains', alias?: string  } 
+  | { name: 'bio_starts_with', alias?: string  } 
+  | { name: 'bio_not_starts_with', alias?: string  } 
+  | { name: 'bio_ends_with', alias?: string  } 
+  | { name: 'bio_not_ends_with', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'language_not', alias?: string  } 
+  | { name: 'language_in', alias?: string  } 
+  | { name: 'language_not_in', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'crowned_not', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'lastConnected_not', alias?: string  } 
+  | { name: 'lastConnected_in', alias?: string  } 
+  | { name: 'lastConnected_not_in', alias?: string  } 
+  | { name: 'lastConnected_lt', alias?: string  } 
+  | { name: 'lastConnected_lte', alias?: string  } 
+  | { name: 'lastConnected_gt', alias?: string  } 
+  | { name: 'lastConnected_gte', alias?: string  } 
+  | { name: 'followers_some', alias?: string  } 
+  | { name: 'following_some', alias?: string  } 
+  | { name: 'blocked_some', alias?: string  } 
+  | { name: 'blocking_some', alias?: string  } 
+  | { name: 'debates_some', alias?: string  } 
+  | { name: 'debatesBlue_some', alias?: string  } 
+  | { name: 'debatesRed_some', alias?: string  } 
+  | { name: 'trophies_some', alias?: string  } 
+  | { name: 'conversations_some', alias?: string  } 
+  | { name: 'interactions_some', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
+  
+export interface DebateWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  owner?: UserWhereInput | null
+  ownerBlue?: UserWhereInput | null
+  ownerRed?: UserWhereInput | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  timelimit?: string | null
+  timelimit_not?: string | null
+  timelimit_in?: string[]
+  timelimit_not_in?: string[]
+  timelimit_lt?: string | null
+  timelimit_lte?: string | null
+  timelimit_gt?: string | null
+  timelimit_gte?: string | null
+  type?: prisma.DebateType | null
+  type_not?: prisma.DebateType | null
+  type_in?: prisma.DebateType[]
+  type_not_in?: prisma.DebateType[]
+  comments_some?: CommentWhereInput | null
+  topComment?: CommentWhereInput | null
+  reports_some?: ReportWhereInput | null
+  positives_some?: UserWhereInput | null
+  negatives_some?: UserWhereInput | null
+  redVotes_some?: UserWhereInput | null
+  blueVotes_some?: UserWhereInput | null
+  winner?: UserWhereInput | null
+  loser?: UserWhereInput | null
+  closed?: boolean | null
+  closed_not?: boolean | null
+  crowned?: boolean | null
+  crowned_not?: boolean | null
+  interactions_some?: InteractionWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: DebateWhereInput[]
+}
+export type DebateWhereInputInputObject =
+  | Extract<keyof DebateWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimit_not', alias?: string  } 
+  | { name: 'timelimit_in', alias?: string  } 
+  | { name: 'timelimit_not_in', alias?: string  } 
+  | { name: 'timelimit_lt', alias?: string  } 
+  | { name: 'timelimit_lte', alias?: string  } 
+  | { name: 'timelimit_gt', alias?: string  } 
+  | { name: 'timelimit_gte', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'comments_some', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports_some', alias?: string  } 
+  | { name: 'positives_some', alias?: string  } 
+  | { name: 'negatives_some', alias?: string  } 
+  | { name: 'redVotes_some', alias?: string  } 
+  | { name: 'blueVotes_some', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'closed_not', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'crowned_not', alias?: string  } 
+  | { name: 'interactions_some', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface CommentWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  from?: string | null
+  from_not?: string | null
+  from_in?: string[]
+  from_not_in?: string[]
+  from_lt?: string | null
+  from_lte?: string | null
+  from_gt?: string | null
+  from_gte?: string | null
+  from_contains?: string | null
+  from_not_contains?: string | null
+  from_starts_with?: string | null
+  from_not_starts_with?: string | null
+  from_ends_with?: string | null
+  from_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  likes_some?: UserWhereInput | null
+  dislikes_some?: UserWhereInput | null
+  reports_some?: ReportWhereInput | null
+  debate?: DebateWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: CommentWhereInput[]
+}
+export type CommentWhereInputInputObject =
+  | Extract<keyof CommentWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'from_not', alias?: string  } 
+  | { name: 'from_in', alias?: string  } 
+  | { name: 'from_not_in', alias?: string  } 
+  | { name: 'from_lt', alias?: string  } 
+  | { name: 'from_lte', alias?: string  } 
+  | { name: 'from_gt', alias?: string  } 
+  | { name: 'from_gte', alias?: string  } 
+  | { name: 'from_contains', alias?: string  } 
+  | { name: 'from_not_contains', alias?: string  } 
+  | { name: 'from_starts_with', alias?: string  } 
+  | { name: 'from_not_starts_with', alias?: string  } 
+  | { name: 'from_ends_with', alias?: string  } 
+  | { name: 'from_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'likes_some', alias?: string  } 
+  | { name: 'dislikes_some', alias?: string  } 
+  | { name: 'reports_some', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface ReportWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  from?: UserWhereInput | null
+  to?: UserWhereInput | null
+  type?: prisma.ReportType | null
+  type_not?: prisma.ReportType | null
+  type_in?: prisma.ReportType[]
+  type_not_in?: prisma.ReportType[]
+  reason?: prisma.ReportReason | null
+  reason_not?: prisma.ReportReason | null
+  reason_in?: prisma.ReportReason[]
+  reason_not_in?: prisma.ReportReason[]
+  reasonText?: string | null
+  reasonText_not?: string | null
+  reasonText_in?: string[]
+  reasonText_not_in?: string[]
+  reasonText_lt?: string | null
+  reasonText_lte?: string | null
+  reasonText_gt?: string | null
+  reasonText_gte?: string | null
+  reasonText_contains?: string | null
+  reasonText_not_contains?: string | null
+  reasonText_starts_with?: string | null
+  reasonText_not_starts_with?: string | null
+  reasonText_ends_with?: string | null
+  reasonText_not_ends_with?: string | null
+  debate?: DebateWhereInput | null
+  comment?: CommentWhereInput | null
+  treated?: boolean | null
+  treated_not?: boolean | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ReportWhereInput[]
+}
+export type ReportWhereInputInputObject =
+  | Extract<keyof ReportWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reason_not', alias?: string  } 
+  | { name: 'reason_in', alias?: string  } 
+  | { name: 'reason_not_in', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'reasonText_not', alias?: string  } 
+  | { name: 'reasonText_in', alias?: string  } 
+  | { name: 'reasonText_not_in', alias?: string  } 
+  | { name: 'reasonText_lt', alias?: string  } 
+  | { name: 'reasonText_lte', alias?: string  } 
+  | { name: 'reasonText_gt', alias?: string  } 
+  | { name: 'reasonText_gte', alias?: string  } 
+  | { name: 'reasonText_contains', alias?: string  } 
+  | { name: 'reasonText_not_contains', alias?: string  } 
+  | { name: 'reasonText_starts_with', alias?: string  } 
+  | { name: 'reasonText_not_starts_with', alias?: string  } 
+  | { name: 'reasonText_ends_with', alias?: string  } 
+  | { name: 'reasonText_not_ends_with', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  | { name: 'treated_not', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface InteractionWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  type?: prisma.InteractionType | null
+  type_not?: prisma.InteractionType | null
+  type_in?: prisma.InteractionType[]
+  type_not_in?: prisma.InteractionType[]
+  who?: UserWhereInput | null
+  debate?: DebateWhereInput | null
+  comment?: CommentWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: InteractionWhereInput[]
+}
+export type InteractionWhereInputInputObject =
+  | Extract<keyof InteractionWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface TrophyWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  user?: UserWhereInput | null
+  won?: boolean | null
+  won_not?: boolean | null
+  type?: prisma.TrophyType | null
+  type_not?: prisma.TrophyType | null
+  type_in?: prisma.TrophyType[]
+  type_not_in?: prisma.TrophyType[]
+  debate?: DebateWhereInput | null
+  comment?: CommentWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: TrophyWhereInput[]
+}
+export type TrophyWhereInputInputObject =
+  | Extract<keyof TrophyWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'won_not', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface ConversationWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  speakers_some?: UserWhereInput | null
+  messages_some?: MessageWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ConversationWhereInput[]
+}
+export type ConversationWhereInputInputObject =
+  | Extract<keyof ConversationWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'speakers_some', alias?: string  } 
+  | { name: 'messages_some', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface MessageWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  to?: UserWhereInput | null
+  from?: UserWhereInput | null
+  sendDate?: string | null
+  sendDate_not?: string | null
+  sendDate_in?: string[]
+  sendDate_not_in?: string[]
+  sendDate_lt?: string | null
+  sendDate_lte?: string | null
+  sendDate_gt?: string | null
+  sendDate_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: MessageWhereInput[]
+}
+export type MessageWhereInputInputObject =
+  | Extract<keyof MessageWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'sendDate', alias?: string  } 
+  | { name: 'sendDate_not', alias?: string  } 
+  | { name: 'sendDate_in', alias?: string  } 
+  | { name: 'sendDate_not_in', alias?: string  } 
+  | { name: 'sendDate_lt', alias?: string  } 
+  | { name: 'sendDate_lte', alias?: string  } 
+  | { name: 'sendDate_gt', alias?: string  } 
+  | { name: 'sendDate_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface ConversationWhereUniqueInput {
+  id?: string | null
+}
+export type ConversationWhereUniqueInputInputObject =
+  | Extract<keyof ConversationWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface DebateWhereUniqueInput {
+  id?: string | null
+}
+export type DebateWhereUniqueInputInputObject =
+  | Extract<keyof DebateWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface InteractionWhereUniqueInput {
+  id?: string | null
+}
+export type InteractionWhereUniqueInputInputObject =
+  | Extract<keyof InteractionWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface MessageWhereUniqueInput {
+  id?: string | null
+}
+export type MessageWhereUniqueInputInputObject =
+  | Extract<keyof MessageWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface ReportWhereUniqueInput {
+  id?: string | null
+}
+export type ReportWhereUniqueInputInputObject =
+  | Extract<keyof ReportWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface TrophyWhereUniqueInput {
+  id?: string | null
+}
+export type TrophyWhereUniqueInputInputObject =
+  | Extract<keyof TrophyWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface UserWhereUniqueInput {
+  id?: string | null
+  pseudo?: string | null
+  email?: string | null
+}
+export type UserWhereUniqueInputInputObject =
+  | Extract<keyof UserWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  
+export interface AdCreateInput {
+  id?: string | null
+  name?: string
+  content?: string
+  targets?: AdTargetCreateManyInput | null
+  active?: boolean | null
+  ratio?: number | null
+}
+export type AdCreateInputInputObject =
+  | Extract<keyof AdCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'targets', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  
+export interface AdTargetCreateManyInput {
+  create?: AdTargetCreateInput[]
+  connect?: AdTargetWhereUniqueInput[]
+}
+export type AdTargetCreateManyInputInputObject =
+  | Extract<keyof AdTargetCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface AdTargetCreateInput {
+  id?: string | null
+  name?: string
+  gender?: prisma.GenderFilter | null
+  birthdateMin?: string
+  birthdateMax?: string
+}
+export type AdTargetCreateInputInputObject =
+  | Extract<keyof AdTargetCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  
+export interface AdUpdateInput {
+  name?: string | null
+  content?: string | null
+  targets?: AdTargetUpdateManyInput | null
+  active?: boolean | null
+  ratio?: number | null
+}
+export type AdUpdateInputInputObject =
+  | Extract<keyof AdUpdateInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'targets', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  
+export interface AdTargetUpdateManyInput {
+  create?: AdTargetCreateInput[]
+  update?: AdTargetUpdateWithWhereUniqueNestedInput[]
+  upsert?: AdTargetUpsertWithWhereUniqueNestedInput[]
+  delete?: AdTargetWhereUniqueInput[]
+  connect?: AdTargetWhereUniqueInput[]
+  set?: AdTargetWhereUniqueInput[]
+  disconnect?: AdTargetWhereUniqueInput[]
+  deleteMany?: AdTargetScalarWhereInput[]
+  updateMany?: AdTargetUpdateManyWithWhereNestedInput[]
+}
+export type AdTargetUpdateManyInputInputObject =
+  | Extract<keyof AdTargetUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface AdTargetUpdateWithWhereUniqueNestedInput {
+  where?: AdTargetWhereUniqueInput
+  data?: AdTargetUpdateDataInput
+}
+export type AdTargetUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof AdTargetUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface AdTargetUpdateDataInput {
+  name?: string | null
+  gender?: prisma.GenderFilter | null
+  birthdateMin?: string | null
+  birthdateMax?: string | null
+}
+export type AdTargetUpdateDataInputInputObject =
+  | Extract<keyof AdTargetUpdateDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  
+export interface AdTargetUpsertWithWhereUniqueNestedInput {
+  where?: AdTargetWhereUniqueInput
+  update?: AdTargetUpdateDataInput
+  create?: AdTargetCreateInput
+}
+export type AdTargetUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof AdTargetUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface AdTargetScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  gender?: prisma.GenderFilter | null
+  gender_not?: prisma.GenderFilter | null
+  gender_in?: prisma.GenderFilter[]
+  gender_not_in?: prisma.GenderFilter[]
+  birthdateMin?: string | null
+  birthdateMin_not?: string | null
+  birthdateMin_in?: string[]
+  birthdateMin_not_in?: string[]
+  birthdateMin_lt?: string | null
+  birthdateMin_lte?: string | null
+  birthdateMin_gt?: string | null
+  birthdateMin_gte?: string | null
+  birthdateMax?: string | null
+  birthdateMax_not?: string | null
+  birthdateMax_in?: string[]
+  birthdateMax_not_in?: string[]
+  birthdateMax_lt?: string | null
+  birthdateMax_lte?: string | null
+  birthdateMax_gt?: string | null
+  birthdateMax_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: AdTargetScalarWhereInput[]
+  OR?: AdTargetScalarWhereInput[]
+  NOT?: AdTargetScalarWhereInput[]
+}
+export type AdTargetScalarWhereInputInputObject =
+  | Extract<keyof AdTargetScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMin_not', alias?: string  } 
+  | { name: 'birthdateMin_in', alias?: string  } 
+  | { name: 'birthdateMin_not_in', alias?: string  } 
+  | { name: 'birthdateMin_lt', alias?: string  } 
+  | { name: 'birthdateMin_lte', alias?: string  } 
+  | { name: 'birthdateMin_gt', alias?: string  } 
+  | { name: 'birthdateMin_gte', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  | { name: 'birthdateMax_not', alias?: string  } 
+  | { name: 'birthdateMax_in', alias?: string  } 
+  | { name: 'birthdateMax_not_in', alias?: string  } 
+  | { name: 'birthdateMax_lt', alias?: string  } 
+  | { name: 'birthdateMax_lte', alias?: string  } 
+  | { name: 'birthdateMax_gt', alias?: string  } 
+  | { name: 'birthdateMax_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface AdTargetUpdateManyWithWhereNestedInput {
+  where?: AdTargetScalarWhereInput
+  data?: AdTargetUpdateManyDataInput
+}
+export type AdTargetUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof AdTargetUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface AdTargetUpdateManyDataInput {
+  name?: string | null
+  gender?: prisma.GenderFilter | null
+  birthdateMin?: string | null
+  birthdateMax?: string | null
+}
+export type AdTargetUpdateManyDataInputInputObject =
+  | Extract<keyof AdTargetUpdateManyDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  
+export interface AdUpdateManyMutationInput {
+  name?: string | null
+  content?: string | null
+  active?: boolean | null
+  ratio?: number | null
+}
+export type AdUpdateManyMutationInputInputObject =
+  | Extract<keyof AdUpdateManyMutationInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  
+export interface AdTargetUpdateInput {
+  name?: string | null
+  gender?: prisma.GenderFilter | null
+  birthdateMin?: string | null
+  birthdateMax?: string | null
+}
+export type AdTargetUpdateInputInputObject =
+  | Extract<keyof AdTargetUpdateInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  
+export interface AdTargetUpdateManyMutationInput {
+  name?: string | null
+  gender?: prisma.GenderFilter | null
+  birthdateMin?: string | null
+  birthdateMax?: string | null
+}
+export type AdTargetUpdateManyMutationInputInputObject =
+  | Extract<keyof AdTargetUpdateManyMutationInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'birthdateMin', alias?: string  } 
+  | { name: 'birthdateMax', alias?: string  } 
+  
+export interface CommentCreateInput {
+  id?: string | null
+  from?: string
+  content?: string
+  likes?: UserCreateManyInput | null
+  dislikes?: UserCreateManyInput | null
+  reports?: ReportCreateManyWithoutCommentInput | null
+  debate?: DebateCreateOneWithoutCommentsInput
+}
+export type CommentCreateInputInputObject =
+  | Extract<keyof CommentCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  
+export interface UserCreateManyInput {
+  create?: UserCreateInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyInputInputObject =
+  | Extract<keyof UserCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
   
 export interface UserCreateInput {
   id?: string | null
+  pseudo?: string
   email?: string
-  password?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
-  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateManyWithoutFollowingInput {
+  create?: UserCreateWithoutFollowingInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutFollowingInputInputObject =
+  | Extract<keyof UserCreateManyWithoutFollowingInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutFollowingInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutFollowingInputInputObject =
+  | Extract<keyof UserCreateWithoutFollowingInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateManyWithoutBlockingInput {
+  create?: UserCreateWithoutBlockingInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutBlockingInputInputObject =
+  | Extract<keyof UserCreateManyWithoutBlockingInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutBlockingInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutBlockingInputInputObject =
+  | Extract<keyof UserCreateWithoutBlockingInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateManyWithoutFollowersInput {
+  create?: UserCreateWithoutFollowersInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutFollowersInputInputObject =
+  | Extract<keyof UserCreateManyWithoutFollowersInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutFollowersInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutFollowersInputInputObject =
+  | Extract<keyof UserCreateWithoutFollowersInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateManyWithoutBlockedInput {
+  create?: UserCreateWithoutBlockedInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutBlockedInputInputObject =
+  | Extract<keyof UserCreateManyWithoutBlockedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutBlockedInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutBlockedInputInputObject =
+  | Extract<keyof UserCreateWithoutBlockedInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateCreateManyWithoutOwnerInput {
+  create?: DebateCreateWithoutOwnerInput[]
+  connect?: DebateWhereUniqueInput[]
+}
+export type DebateCreateManyWithoutOwnerInputInputObject =
+  | Extract<keyof DebateCreateManyWithoutOwnerInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutOwnerInput {
+  id?: string | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateWithoutOwnerInputInputObject =
+  | Extract<keyof DebateCreateWithoutOwnerInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateOneWithoutDebatesBlueInput {
+  create?: UserCreateWithoutDebatesBlueInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutDebatesBlueInputInputObject =
+  | Extract<keyof UserCreateOneWithoutDebatesBlueInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutDebatesBlueInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutDebatesBlueInputInputObject =
+  | Extract<keyof UserCreateWithoutDebatesBlueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateCreateManyWithoutOwnerRedInput {
+  create?: DebateCreateWithoutOwnerRedInput[]
+  connect?: DebateWhereUniqueInput[]
+}
+export type DebateCreateManyWithoutOwnerRedInputInputObject =
+  | Extract<keyof DebateCreateManyWithoutOwnerRedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutOwnerRedInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateWithoutOwnerRedInputInputObject =
+  | Extract<keyof DebateCreateWithoutOwnerRedInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateOneWithoutDebatesInput {
+  create?: UserCreateWithoutDebatesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutDebatesInputInputObject =
+  | Extract<keyof UserCreateOneWithoutDebatesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutDebatesInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutDebatesInputInputObject =
+  | Extract<keyof UserCreateWithoutDebatesInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateCreateManyWithoutOwnerBlueInput {
+  create?: DebateCreateWithoutOwnerBlueInput[]
+  connect?: DebateWhereUniqueInput[]
+}
+export type DebateCreateManyWithoutOwnerBlueInputInputObject =
+  | Extract<keyof DebateCreateManyWithoutOwnerBlueInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutOwnerBlueInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateWithoutOwnerBlueInputInputObject =
+  | Extract<keyof DebateCreateWithoutOwnerBlueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserCreateOneWithoutDebatesRedInput {
+  create?: UserCreateWithoutDebatesRedInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutDebatesRedInputInputObject =
+  | Extract<keyof UserCreateOneWithoutDebatesRedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutDebatesRedInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutDebatesRedInputInputObject =
+  | Extract<keyof UserCreateWithoutDebatesRedInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface TrophyCreateManyWithoutUserInput {
+  create?: TrophyCreateWithoutUserInput[]
+  connect?: TrophyWhereUniqueInput[]
+}
+export type TrophyCreateManyWithoutUserInputInputObject =
+  | Extract<keyof TrophyCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TrophyCreateWithoutUserInput {
+  id?: string | null
+  won?: boolean
+  type?: prisma.TrophyType | null
+  debate?: DebateCreateOneInput | null
+  comment?: CommentCreateOneInput | null
+}
+export type TrophyCreateWithoutUserInputInputObject =
+  | Extract<keyof TrophyCreateWithoutUserInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface DebateCreateOneInput {
+  create?: DebateCreateInput | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateCreateOneInputInputObject =
+  | Extract<keyof DebateCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateInputInputObject =
+  | Extract<keyof DebateCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface CommentCreateManyWithoutDebateInput {
+  create?: CommentCreateWithoutDebateInput[]
+  connect?: CommentWhereUniqueInput[]
+}
+export type CommentCreateManyWithoutDebateInputInputObject =
+  | Extract<keyof CommentCreateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface CommentCreateWithoutDebateInput {
+  id?: string | null
+  from?: string
+  content?: string
+  likes?: UserCreateManyInput | null
+  dislikes?: UserCreateManyInput | null
+  reports?: ReportCreateManyWithoutCommentInput | null
+}
+export type CommentCreateWithoutDebateInputInputObject =
+  | Extract<keyof CommentCreateWithoutDebateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  
+export interface ReportCreateManyWithoutCommentInput {
+  create?: ReportCreateWithoutCommentInput[]
+  connect?: ReportWhereUniqueInput[]
+}
+export type ReportCreateManyWithoutCommentInputInputObject =
+  | Extract<keyof ReportCreateManyWithoutCommentInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ReportCreateWithoutCommentInput {
+  id?: string | null
+  from?: UserCreateOneInput | null
+  to?: UserCreateOneInput | null
+  type?: prisma.ReportType
+  reason?: prisma.ReportReason
+  reasonText?: string | null
+  debate?: DebateCreateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportCreateWithoutCommentInputInputObject =
+  | Extract<keyof ReportCreateWithoutCommentInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface UserCreateOneInput {
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneInputInputObject =
+  | Extract<keyof UserCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateOneWithoutReportsInput {
+  create?: DebateCreateWithoutReportsInput | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateCreateOneWithoutReportsInputInputObject =
+  | Extract<keyof DebateCreateOneWithoutReportsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutReportsInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateWithoutReportsInputInputObject =
+  | Extract<keyof DebateCreateWithoutReportsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface CommentCreateOneInput {
+  create?: CommentCreateInput | null
+  connect?: CommentWhereUniqueInput | null
+}
+export type CommentCreateOneInputInputObject =
+  | Extract<keyof CommentCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface InteractionCreateManyWithoutDebateInput {
+  create?: InteractionCreateWithoutDebateInput[]
+  connect?: InteractionWhereUniqueInput[]
+}
+export type InteractionCreateManyWithoutDebateInputInputObject =
+  | Extract<keyof InteractionCreateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface InteractionCreateWithoutDebateInput {
+  id?: string | null
+  type?: prisma.InteractionType
+  who?: UserCreateOneWithoutInteractionsInput
+  comment?: CommentCreateOneInput | null
+}
+export type InteractionCreateWithoutDebateInputInputObject =
+  | Extract<keyof InteractionCreateWithoutDebateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface UserCreateOneWithoutInteractionsInput {
+  create?: UserCreateWithoutInteractionsInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutInteractionsInputInputObject =
+  | Extract<keyof UserCreateOneWithoutInteractionsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutInteractionsInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+}
+export type UserCreateWithoutInteractionsInputInputObject =
+  | Extract<keyof UserCreateWithoutInteractionsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  
+export interface ConversationCreateManyWithoutSpeakersInput {
+  create?: ConversationCreateWithoutSpeakersInput[]
+  connect?: ConversationWhereUniqueInput[]
+}
+export type ConversationCreateManyWithoutSpeakersInputInputObject =
+  | Extract<keyof ConversationCreateManyWithoutSpeakersInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ConversationCreateWithoutSpeakersInput {
+  id?: string | null
+  messages?: MessageCreateManyInput | null
+}
+export type ConversationCreateWithoutSpeakersInputInputObject =
+  | Extract<keyof ConversationCreateWithoutSpeakersInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
+  
+export interface MessageCreateManyInput {
+  create?: MessageCreateInput[]
+  connect?: MessageWhereUniqueInput[]
+}
+export type MessageCreateManyInputInputObject =
+  | Extract<keyof MessageCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface MessageCreateInput {
+  id?: string | null
+  content?: string
+  to?: UserCreateOneInput
+  from?: UserCreateOneInput
+}
+export type MessageCreateInputInputObject =
+  | Extract<keyof MessageCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  
+export interface ReportCreateManyWithoutDebateInput {
+  create?: ReportCreateWithoutDebateInput[]
+  connect?: ReportWhereUniqueInput[]
+}
+export type ReportCreateManyWithoutDebateInputInputObject =
+  | Extract<keyof ReportCreateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ReportCreateWithoutDebateInput {
+  id?: string | null
+  from?: UserCreateOneInput | null
+  to?: UserCreateOneInput | null
+  type?: prisma.ReportType
+  reason?: prisma.ReportReason
+  reasonText?: string | null
+  comment?: CommentCreateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportCreateWithoutDebateInputInputObject =
+  | Extract<keyof ReportCreateWithoutDebateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface CommentCreateOneWithoutReportsInput {
+  create?: CommentCreateWithoutReportsInput | null
+  connect?: CommentWhereUniqueInput | null
+}
+export type CommentCreateOneWithoutReportsInputInputObject =
+  | Extract<keyof CommentCreateOneWithoutReportsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface CommentCreateWithoutReportsInput {
+  id?: string | null
+  from?: string
+  content?: string
+  likes?: UserCreateManyInput | null
+  dislikes?: UserCreateManyInput | null
+  debate?: DebateCreateOneWithoutCommentsInput
+}
+export type CommentCreateWithoutReportsInputInputObject =
+  | Extract<keyof CommentCreateWithoutReportsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  
+export interface DebateCreateOneWithoutCommentsInput {
+  create?: DebateCreateWithoutCommentsInput | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateCreateOneWithoutCommentsInputInputObject =
+  | Extract<keyof DebateCreateOneWithoutCommentsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutCommentsInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionCreateManyWithoutDebateInput | null
+}
+export type DebateCreateWithoutCommentsInputInputObject =
+  | Extract<keyof DebateCreateWithoutCommentsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface InteractionCreateManyWithoutWhoInput {
+  create?: InteractionCreateWithoutWhoInput[]
+  connect?: InteractionWhereUniqueInput[]
+}
+export type InteractionCreateManyWithoutWhoInputInputObject =
+  | Extract<keyof InteractionCreateManyWithoutWhoInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface InteractionCreateWithoutWhoInput {
+  id?: string | null
+  type?: prisma.InteractionType
+  debate?: DebateCreateOneWithoutInteractionsInput | null
+  comment?: CommentCreateOneInput | null
+}
+export type InteractionCreateWithoutWhoInputInputObject =
+  | Extract<keyof InteractionCreateWithoutWhoInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface DebateCreateOneWithoutInteractionsInput {
+  create?: DebateCreateWithoutInteractionsInput | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateCreateOneWithoutInteractionsInputInputObject =
+  | Extract<keyof DebateCreateOneWithoutInteractionsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateCreateWithoutInteractionsInput {
+  id?: string | null
+  owner?: UserCreateOneWithoutDebatesInput | null
+  ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserCreateOneWithoutDebatesRedInput | null
+  content?: string
+  timelimit?: string | null
+  type?: prisma.DebateType
+  comments?: CommentCreateManyWithoutDebateInput | null
+  topComment?: CommentCreateOneInput | null
+  reports?: ReportCreateManyWithoutDebateInput | null
+  positives?: UserCreateManyInput | null
+  negatives?: UserCreateManyInput | null
+  redVotes?: UserCreateManyInput | null
+  blueVotes?: UserCreateManyInput | null
+  winner?: UserCreateOneInput | null
+  loser?: UserCreateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+}
+export type DebateCreateWithoutInteractionsInputInputObject =
+  | Extract<keyof DebateCreateWithoutInteractionsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  
+export interface CommentUpdateInput {
+  from?: string | null
+  content?: string | null
+  likes?: UserUpdateManyInput | null
+  dislikes?: UserUpdateManyInput | null
+  reports?: ReportUpdateManyWithoutCommentInput | null
+  debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+}
+export type CommentUpdateInputInputObject =
+  | Extract<keyof CommentUpdateInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[]
+  update?: UserUpdateWithWhereUniqueNestedInput[]
+  upsert?: UserUpsertWithWhereUniqueNestedInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyInputInputObject =
+  | Extract<keyof UserUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateDataInput
+}
+export type UserUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateDataInputInputObject =
+  | Extract<keyof UserUpdateDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateManyWithoutFollowingInput {
+  create?: UserCreateWithoutFollowingInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutFollowingInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutFollowingInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutFollowingInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutFollowingInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutFollowingInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutFollowingDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutFollowingInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutFollowingInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutFollowingDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutFollowingDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutFollowingDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateManyWithoutBlockingInput {
+  create?: UserCreateWithoutBlockingInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutBlockingInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutBlockingInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutBlockingInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutBlockingInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutBlockingInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutBlockingDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutBlockingInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutBlockingInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutBlockingDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutBlockingDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutBlockingDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateManyWithoutFollowersInput {
+  create?: UserCreateWithoutFollowersInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutFollowersInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutFollowersInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutFollowersInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutFollowersInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutFollowersInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutFollowersDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutFollowersInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutFollowersInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutFollowersDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutFollowersDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutFollowersDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateManyWithoutBlockedInput {
+  create?: UserCreateWithoutBlockedInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutBlockedInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutBlockedInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutBlockedInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutBlockedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutBlockedInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutBlockedDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutBlockedInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutBlockedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutBlockedDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutBlockedDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutBlockedDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateUpdateManyWithoutOwnerInput {
+  create?: DebateCreateWithoutOwnerInput[]
+  delete?: DebateWhereUniqueInput[]
+  connect?: DebateWhereUniqueInput[]
+  set?: DebateWhereUniqueInput[]
+  disconnect?: DebateWhereUniqueInput[]
+  update?: DebateUpdateWithWhereUniqueWithoutOwnerInput[]
+  upsert?: DebateUpsertWithWhereUniqueWithoutOwnerInput[]
+  deleteMany?: DebateScalarWhereInput[]
+  updateMany?: DebateUpdateManyWithWhereNestedInput[]
+}
+export type DebateUpdateManyWithoutOwnerInputInputObject =
+  | Extract<keyof DebateUpdateManyWithoutOwnerInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface DebateUpdateWithWhereUniqueWithoutOwnerInput {
+  where?: DebateWhereUniqueInput
+  data?: DebateUpdateWithoutOwnerDataInput
+}
+export type DebateUpdateWithWhereUniqueWithoutOwnerInputInputObject =
+  | Extract<keyof DebateUpdateWithWhereUniqueWithoutOwnerInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface DebateUpdateWithoutOwnerDataInput {
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateWithoutOwnerDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutOwnerDataInput, string>
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateOneWithoutDebatesBlueInput {
+  create?: UserCreateWithoutDebatesBlueInput | null
+  update?: UserUpdateWithoutDebatesBlueDataInput | null
+  upsert?: UserUpsertWithoutDebatesBlueInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutDebatesBlueInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutDebatesBlueInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutDebatesBlueDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutDebatesBlueDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutDebatesBlueDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateUpdateManyWithoutOwnerRedInput {
+  create?: DebateCreateWithoutOwnerRedInput[]
+  delete?: DebateWhereUniqueInput[]
+  connect?: DebateWhereUniqueInput[]
+  set?: DebateWhereUniqueInput[]
+  disconnect?: DebateWhereUniqueInput[]
+  update?: DebateUpdateWithWhereUniqueWithoutOwnerRedInput[]
+  upsert?: DebateUpsertWithWhereUniqueWithoutOwnerRedInput[]
+  deleteMany?: DebateScalarWhereInput[]
+  updateMany?: DebateUpdateManyWithWhereNestedInput[]
+}
+export type DebateUpdateManyWithoutOwnerRedInputInputObject =
+  | Extract<keyof DebateUpdateManyWithoutOwnerRedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface DebateUpdateWithWhereUniqueWithoutOwnerRedInput {
+  where?: DebateWhereUniqueInput
+  data?: DebateUpdateWithoutOwnerRedDataInput
+}
+export type DebateUpdateWithWhereUniqueWithoutOwnerRedInputInputObject =
+  | Extract<keyof DebateUpdateWithWhereUniqueWithoutOwnerRedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface DebateUpdateWithoutOwnerRedDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateWithoutOwnerRedDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutOwnerRedDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateOneWithoutDebatesInput {
+  create?: UserCreateWithoutDebatesInput | null
+  update?: UserUpdateWithoutDebatesDataInput | null
+  upsert?: UserUpsertWithoutDebatesInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutDebatesInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutDebatesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutDebatesDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutDebatesDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutDebatesDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateUpdateManyWithoutOwnerBlueInput {
+  create?: DebateCreateWithoutOwnerBlueInput[]
+  delete?: DebateWhereUniqueInput[]
+  connect?: DebateWhereUniqueInput[]
+  set?: DebateWhereUniqueInput[]
+  disconnect?: DebateWhereUniqueInput[]
+  update?: DebateUpdateWithWhereUniqueWithoutOwnerBlueInput[]
+  upsert?: DebateUpsertWithWhereUniqueWithoutOwnerBlueInput[]
+  deleteMany?: DebateScalarWhereInput[]
+  updateMany?: DebateUpdateManyWithWhereNestedInput[]
+}
+export type DebateUpdateManyWithoutOwnerBlueInputInputObject =
+  | Extract<keyof DebateUpdateManyWithoutOwnerBlueInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
+  where?: DebateWhereUniqueInput
+  data?: DebateUpdateWithoutOwnerBlueDataInput
+}
+export type DebateUpdateWithWhereUniqueWithoutOwnerBlueInputInputObject =
+  | Extract<keyof DebateUpdateWithWhereUniqueWithoutOwnerBlueInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface DebateUpdateWithoutOwnerBlueDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutOwnerBlueDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpdateOneWithoutDebatesRedInput {
+  create?: UserCreateWithoutDebatesRedInput | null
+  update?: UserUpdateWithoutDebatesRedDataInput | null
+  upsert?: UserUpsertWithoutDebatesRedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutDebatesRedInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutDebatesRedInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutDebatesRedDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutDebatesRedDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutDebatesRedDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface TrophyUpdateManyWithoutUserInput {
+  create?: TrophyCreateWithoutUserInput[]
+  delete?: TrophyWhereUniqueInput[]
+  connect?: TrophyWhereUniqueInput[]
+  set?: TrophyWhereUniqueInput[]
+  disconnect?: TrophyWhereUniqueInput[]
+  update?: TrophyUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: TrophyUpsertWithWhereUniqueWithoutUserInput[]
+  deleteMany?: TrophyScalarWhereInput[]
+  updateMany?: TrophyUpdateManyWithWhereNestedInput[]
+}
+export type TrophyUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpdateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TrophyUpdateWithWhereUniqueWithoutUserInput {
+  where?: TrophyWhereUniqueInput
+  data?: TrophyUpdateWithoutUserDataInput
+}
+export type TrophyUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpdateWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TrophyUpdateWithoutUserDataInput {
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+  debate?: DebateUpdateOneInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type TrophyUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof TrophyUpdateWithoutUserDataInput, string>
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface DebateUpdateOneInput {
+  create?: DebateCreateInput | null
+  update?: DebateUpdateDataInput | null
+  upsert?: DebateUpsertNestedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateUpdateOneInputInputObject =
+  | Extract<keyof DebateUpdateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateUpdateDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateDataInputInputObject =
+  | Extract<keyof DebateUpdateDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface CommentUpdateManyWithoutDebateInput {
+  create?: CommentCreateWithoutDebateInput[]
+  delete?: CommentWhereUniqueInput[]
+  connect?: CommentWhereUniqueInput[]
+  set?: CommentWhereUniqueInput[]
+  disconnect?: CommentWhereUniqueInput[]
+  update?: CommentUpdateWithWhereUniqueWithoutDebateInput[]
+  upsert?: CommentUpsertWithWhereUniqueWithoutDebateInput[]
+  deleteMany?: CommentScalarWhereInput[]
+  updateMany?: CommentUpdateManyWithWhereNestedInput[]
+}
+export type CommentUpdateManyWithoutDebateInputInputObject =
+  | Extract<keyof CommentUpdateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface CommentUpdateWithWhereUniqueWithoutDebateInput {
+  where?: CommentWhereUniqueInput
+  data?: CommentUpdateWithoutDebateDataInput
+}
+export type CommentUpdateWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof CommentUpdateWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface CommentUpdateWithoutDebateDataInput {
+  from?: string | null
+  content?: string | null
+  likes?: UserUpdateManyInput | null
+  dislikes?: UserUpdateManyInput | null
+  reports?: ReportUpdateManyWithoutCommentInput | null
+}
+export type CommentUpdateWithoutDebateDataInputInputObject =
+  | Extract<keyof CommentUpdateWithoutDebateDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  
+export interface ReportUpdateManyWithoutCommentInput {
+  create?: ReportCreateWithoutCommentInput[]
+  delete?: ReportWhereUniqueInput[]
+  connect?: ReportWhereUniqueInput[]
+  set?: ReportWhereUniqueInput[]
+  disconnect?: ReportWhereUniqueInput[]
+  update?: ReportUpdateWithWhereUniqueWithoutCommentInput[]
+  upsert?: ReportUpsertWithWhereUniqueWithoutCommentInput[]
+  deleteMany?: ReportScalarWhereInput[]
+  updateMany?: ReportUpdateManyWithWhereNestedInput[]
+}
+export type ReportUpdateManyWithoutCommentInputInputObject =
+  | Extract<keyof ReportUpdateManyWithoutCommentInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface ReportUpdateWithWhereUniqueWithoutCommentInput {
+  where?: ReportWhereUniqueInput
+  data?: ReportUpdateWithoutCommentDataInput
+}
+export type ReportUpdateWithWhereUniqueWithoutCommentInputInputObject =
+  | Extract<keyof ReportUpdateWithWhereUniqueWithoutCommentInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ReportUpdateWithoutCommentDataInput {
+  from?: UserUpdateOneInput | null
+  to?: UserUpdateOneInput | null
+  type?: prisma.ReportType | null
+  reason?: prisma.ReportReason | null
+  reasonText?: string | null
+  debate?: DebateUpdateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportUpdateWithoutCommentDataInputInputObject =
+  | Extract<keyof ReportUpdateWithoutCommentDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface UserUpdateOneInput {
+  create?: UserCreateInput | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneInputInputObject =
+  | Extract<keyof UserUpdateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpsertNestedInput {
+  update?: UserUpdateDataInput
+  create?: UserCreateInput
+}
+export type UserUpsertNestedInputInputObject =
+  | Extract<keyof UserUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpdateOneWithoutReportsInput {
+  create?: DebateCreateWithoutReportsInput | null
+  update?: DebateUpdateWithoutReportsDataInput | null
+  upsert?: DebateUpsertWithoutReportsInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateUpdateOneWithoutReportsInputInputObject =
+  | Extract<keyof DebateUpdateOneWithoutReportsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateUpdateWithoutReportsDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateWithoutReportsDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutReportsDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface CommentUpdateOneInput {
+  create?: CommentCreateInput | null
+  update?: CommentUpdateDataInput | null
+  upsert?: CommentUpsertNestedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: CommentWhereUniqueInput | null
+}
+export type CommentUpdateOneInputInputObject =
+  | Extract<keyof CommentUpdateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface CommentUpdateDataInput {
+  from?: string | null
+  content?: string | null
+  likes?: UserUpdateManyInput | null
+  dislikes?: UserUpdateManyInput | null
+  reports?: ReportUpdateManyWithoutCommentInput | null
+  debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+}
+export type CommentUpdateDataInputInputObject =
+  | Extract<keyof CommentUpdateDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  
+export interface DebateUpdateOneRequiredWithoutCommentsInput {
+  create?: DebateCreateWithoutCommentsInput | null
+  update?: DebateUpdateWithoutCommentsDataInput | null
+  upsert?: DebateUpsertWithoutCommentsInput | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateUpdateOneRequiredWithoutCommentsInputInputObject =
+  | Extract<keyof DebateUpdateOneRequiredWithoutCommentsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateUpdateWithoutCommentsDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateWithoutCommentsDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutCommentsDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface ReportUpdateManyWithoutDebateInput {
+  create?: ReportCreateWithoutDebateInput[]
+  delete?: ReportWhereUniqueInput[]
+  connect?: ReportWhereUniqueInput[]
+  set?: ReportWhereUniqueInput[]
+  disconnect?: ReportWhereUniqueInput[]
+  update?: ReportUpdateWithWhereUniqueWithoutDebateInput[]
+  upsert?: ReportUpsertWithWhereUniqueWithoutDebateInput[]
+  deleteMany?: ReportScalarWhereInput[]
+  updateMany?: ReportUpdateManyWithWhereNestedInput[]
+}
+export type ReportUpdateManyWithoutDebateInputInputObject =
+  | Extract<keyof ReportUpdateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface ReportUpdateWithWhereUniqueWithoutDebateInput {
+  where?: ReportWhereUniqueInput
+  data?: ReportUpdateWithoutDebateDataInput
+}
+export type ReportUpdateWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof ReportUpdateWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ReportUpdateWithoutDebateDataInput {
+  from?: UserUpdateOneInput | null
+  to?: UserUpdateOneInput | null
+  type?: prisma.ReportType | null
+  reason?: prisma.ReportReason | null
+  reasonText?: string | null
+  comment?: CommentUpdateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportUpdateWithoutDebateDataInputInputObject =
+  | Extract<keyof ReportUpdateWithoutDebateDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface CommentUpdateOneWithoutReportsInput {
+  create?: CommentCreateWithoutReportsInput | null
+  update?: CommentUpdateWithoutReportsDataInput | null
+  upsert?: CommentUpsertWithoutReportsInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: CommentWhereUniqueInput | null
+}
+export type CommentUpdateOneWithoutReportsInputInputObject =
+  | Extract<keyof CommentUpdateOneWithoutReportsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface CommentUpdateWithoutReportsDataInput {
+  from?: string | null
+  content?: string | null
+  likes?: UserUpdateManyInput | null
+  dislikes?: UserUpdateManyInput | null
+  debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+}
+export type CommentUpdateWithoutReportsDataInputInputObject =
+  | Extract<keyof CommentUpdateWithoutReportsDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'likes', alias?: string  } 
+  | { name: 'dislikes', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  
+export interface CommentUpsertWithoutReportsInput {
+  update?: CommentUpdateWithoutReportsDataInput
+  create?: CommentCreateWithoutReportsInput
+}
+export type CommentUpsertWithoutReportsInputInputObject =
+  | Extract<keyof CommentUpsertWithoutReportsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ReportUpsertWithWhereUniqueWithoutDebateInput {
+  where?: ReportWhereUniqueInput
+  update?: ReportUpdateWithoutDebateDataInput
+  create?: ReportCreateWithoutDebateInput
+}
+export type ReportUpsertWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof ReportUpsertWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ReportScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  type?: prisma.ReportType | null
+  type_not?: prisma.ReportType | null
+  type_in?: prisma.ReportType[]
+  type_not_in?: prisma.ReportType[]
+  reason?: prisma.ReportReason | null
+  reason_not?: prisma.ReportReason | null
+  reason_in?: prisma.ReportReason[]
+  reason_not_in?: prisma.ReportReason[]
+  reasonText?: string | null
+  reasonText_not?: string | null
+  reasonText_in?: string[]
+  reasonText_not_in?: string[]
+  reasonText_lt?: string | null
+  reasonText_lte?: string | null
+  reasonText_gt?: string | null
+  reasonText_gte?: string | null
+  reasonText_contains?: string | null
+  reasonText_not_contains?: string | null
+  reasonText_starts_with?: string | null
+  reasonText_not_starts_with?: string | null
+  reasonText_ends_with?: string | null
+  reasonText_not_ends_with?: string | null
+  treated?: boolean | null
+  treated_not?: boolean | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ReportScalarWhereInput[]
+  OR?: ReportScalarWhereInput[]
+  NOT?: ReportScalarWhereInput[]
+}
+export type ReportScalarWhereInputInputObject =
+  | Extract<keyof ReportScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reason_not', alias?: string  } 
+  | { name: 'reason_in', alias?: string  } 
+  | { name: 'reason_not_in', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'reasonText_not', alias?: string  } 
+  | { name: 'reasonText_in', alias?: string  } 
+  | { name: 'reasonText_not_in', alias?: string  } 
+  | { name: 'reasonText_lt', alias?: string  } 
+  | { name: 'reasonText_lte', alias?: string  } 
+  | { name: 'reasonText_gt', alias?: string  } 
+  | { name: 'reasonText_gte', alias?: string  } 
+  | { name: 'reasonText_contains', alias?: string  } 
+  | { name: 'reasonText_not_contains', alias?: string  } 
+  | { name: 'reasonText_starts_with', alias?: string  } 
+  | { name: 'reasonText_not_starts_with', alias?: string  } 
+  | { name: 'reasonText_ends_with', alias?: string  } 
+  | { name: 'reasonText_not_ends_with', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  | { name: 'treated_not', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ReportUpdateManyWithWhereNestedInput {
+  where?: ReportScalarWhereInput
+  data?: ReportUpdateManyDataInput
+}
+export type ReportUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof ReportUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ReportUpdateManyDataInput {
+  type?: prisma.ReportType | null
+  reason?: prisma.ReportReason | null
+  reasonText?: string | null
+  treated?: boolean | null
+}
+export type ReportUpdateManyDataInputInputObject =
+  | Extract<keyof ReportUpdateManyDataInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface InteractionUpdateManyWithoutDebateInput {
+  create?: InteractionCreateWithoutDebateInput[]
+  delete?: InteractionWhereUniqueInput[]
+  connect?: InteractionWhereUniqueInput[]
+  set?: InteractionWhereUniqueInput[]
+  disconnect?: InteractionWhereUniqueInput[]
+  update?: InteractionUpdateWithWhereUniqueWithoutDebateInput[]
+  upsert?: InteractionUpsertWithWhereUniqueWithoutDebateInput[]
+  deleteMany?: InteractionScalarWhereInput[]
+  updateMany?: InteractionUpdateManyWithWhereNestedInput[]
+}
+export type InteractionUpdateManyWithoutDebateInputInputObject =
+  | Extract<keyof InteractionUpdateManyWithoutDebateInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface InteractionUpdateWithWhereUniqueWithoutDebateInput {
+  where?: InteractionWhereUniqueInput
+  data?: InteractionUpdateWithoutDebateDataInput
+}
+export type InteractionUpdateWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof InteractionUpdateWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface InteractionUpdateWithoutDebateDataInput {
+  type?: prisma.InteractionType | null
+  who?: UserUpdateOneRequiredWithoutInteractionsInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type InteractionUpdateWithoutDebateDataInputInputObject =
+  | Extract<keyof InteractionUpdateWithoutDebateDataInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface UserUpdateOneRequiredWithoutInteractionsInput {
+  create?: UserCreateWithoutInteractionsInput | null
+  update?: UserUpdateWithoutInteractionsDataInput | null
+  upsert?: UserUpsertWithoutInteractionsInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredWithoutInteractionsInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredWithoutInteractionsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutInteractionsDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+}
+export type UserUpdateWithoutInteractionsDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutInteractionsDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  
+export interface ConversationUpdateManyWithoutSpeakersInput {
+  create?: ConversationCreateWithoutSpeakersInput[]
+  delete?: ConversationWhereUniqueInput[]
+  connect?: ConversationWhereUniqueInput[]
+  set?: ConversationWhereUniqueInput[]
+  disconnect?: ConversationWhereUniqueInput[]
+  update?: ConversationUpdateWithWhereUniqueWithoutSpeakersInput[]
+  upsert?: ConversationUpsertWithWhereUniqueWithoutSpeakersInput[]
+  deleteMany?: ConversationScalarWhereInput[]
+}
+export type ConversationUpdateManyWithoutSpeakersInputInputObject =
+  | Extract<keyof ConversationUpdateManyWithoutSpeakersInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  
+export interface ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
+  where?: ConversationWhereUniqueInput
+  data?: ConversationUpdateWithoutSpeakersDataInput
+}
+export type ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject =
+  | Extract<keyof ConversationUpdateWithWhereUniqueWithoutSpeakersInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ConversationUpdateWithoutSpeakersDataInput {
+  messages?: MessageUpdateManyInput | null
+}
+export type ConversationUpdateWithoutSpeakersDataInputInputObject =
+  | Extract<keyof ConversationUpdateWithoutSpeakersDataInput, string>
+  | { name: 'messages', alias?: string  } 
+  
+export interface MessageUpdateManyInput {
+  create?: MessageCreateInput[]
+  update?: MessageUpdateWithWhereUniqueNestedInput[]
+  upsert?: MessageUpsertWithWhereUniqueNestedInput[]
+  delete?: MessageWhereUniqueInput[]
+  connect?: MessageWhereUniqueInput[]
+  set?: MessageWhereUniqueInput[]
+  disconnect?: MessageWhereUniqueInput[]
+  deleteMany?: MessageScalarWhereInput[]
+  updateMany?: MessageUpdateManyWithWhereNestedInput[]
+}
+export type MessageUpdateManyInputInputObject =
+  | Extract<keyof MessageUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface MessageUpdateWithWhereUniqueNestedInput {
+  where?: MessageWhereUniqueInput
+  data?: MessageUpdateDataInput
+}
+export type MessageUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof MessageUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface MessageUpdateDataInput {
+  content?: string | null
+  to?: UserUpdateOneRequiredInput | null
+  from?: UserUpdateOneRequiredInput | null
+}
+export type MessageUpdateDataInputInputObject =
+  | Extract<keyof MessageUpdateDataInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  
+export interface UserUpdateOneRequiredInput {
+  create?: UserCreateInput | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface MessageUpsertWithWhereUniqueNestedInput {
+  where?: MessageWhereUniqueInput
+  update?: MessageUpdateDataInput
+  create?: MessageCreateInput
+}
+export type MessageUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof MessageUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface MessageScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  sendDate?: string | null
+  sendDate_not?: string | null
+  sendDate_in?: string[]
+  sendDate_not_in?: string[]
+  sendDate_lt?: string | null
+  sendDate_lte?: string | null
+  sendDate_gt?: string | null
+  sendDate_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: MessageScalarWhereInput[]
+  OR?: MessageScalarWhereInput[]
+  NOT?: MessageScalarWhereInput[]
+}
+export type MessageScalarWhereInputInputObject =
+  | Extract<keyof MessageScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'sendDate', alias?: string  } 
+  | { name: 'sendDate_not', alias?: string  } 
+  | { name: 'sendDate_in', alias?: string  } 
+  | { name: 'sendDate_not_in', alias?: string  } 
+  | { name: 'sendDate_lt', alias?: string  } 
+  | { name: 'sendDate_lte', alias?: string  } 
+  | { name: 'sendDate_gt', alias?: string  } 
+  | { name: 'sendDate_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface MessageUpdateManyWithWhereNestedInput {
+  where?: MessageScalarWhereInput
+  data?: MessageUpdateManyDataInput
+}
+export type MessageUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof MessageUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface MessageUpdateManyDataInput {
+  content?: string | null
+}
+export type MessageUpdateManyDataInputInputObject =
+  | Extract<keyof MessageUpdateManyDataInput, string>
+  | { name: 'content', alias?: string  } 
+  
+export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
+  where?: ConversationWhereUniqueInput
+  update?: ConversationUpdateWithoutSpeakersDataInput
+  create?: ConversationCreateWithoutSpeakersInput
+}
+export type ConversationUpsertWithWhereUniqueWithoutSpeakersInputInputObject =
+  | Extract<keyof ConversationUpsertWithWhereUniqueWithoutSpeakersInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ConversationScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ConversationScalarWhereInput[]
+  OR?: ConversationScalarWhereInput[]
+  NOT?: ConversationScalarWhereInput[]
+}
+export type ConversationScalarWhereInputInputObject =
+  | Extract<keyof ConversationScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserUpsertWithoutInteractionsInput {
+  update?: UserUpdateWithoutInteractionsDataInput
+  create?: UserCreateWithoutInteractionsInput
+}
+export type UserUpsertWithoutInteractionsInputInputObject =
+  | Extract<keyof UserUpsertWithoutInteractionsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface InteractionUpsertWithWhereUniqueWithoutDebateInput {
+  where?: InteractionWhereUniqueInput
+  update?: InteractionUpdateWithoutDebateDataInput
+  create?: InteractionCreateWithoutDebateInput
+}
+export type InteractionUpsertWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof InteractionUpsertWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface InteractionScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  type?: prisma.InteractionType | null
+  type_not?: prisma.InteractionType | null
+  type_in?: prisma.InteractionType[]
+  type_not_in?: prisma.InteractionType[]
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: InteractionScalarWhereInput[]
+  OR?: InteractionScalarWhereInput[]
+  NOT?: InteractionScalarWhereInput[]
+}
+export type InteractionScalarWhereInputInputObject =
+  | Extract<keyof InteractionScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface InteractionUpdateManyWithWhereNestedInput {
+  where?: InteractionScalarWhereInput
+  data?: InteractionUpdateManyDataInput
+}
+export type InteractionUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof InteractionUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface InteractionUpdateManyDataInput {
+  type?: prisma.InteractionType | null
+}
+export type InteractionUpdateManyDataInputInputObject =
+  | Extract<keyof InteractionUpdateManyDataInput, string>
+  | { name: 'type', alias?: string  } 
+  
+export interface DebateUpsertWithoutCommentsInput {
+  update?: DebateUpdateWithoutCommentsDataInput
+  create?: DebateCreateWithoutCommentsInput
+}
+export type DebateUpsertWithoutCommentsInputInputObject =
+  | Extract<keyof DebateUpsertWithoutCommentsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CommentUpsertNestedInput {
+  update?: CommentUpdateDataInput
+  create?: CommentCreateInput
+}
+export type CommentUpsertNestedInputInputObject =
+  | Extract<keyof CommentUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpsertWithoutReportsInput {
+  update?: DebateUpdateWithoutReportsDataInput
+  create?: DebateCreateWithoutReportsInput
+}
+export type DebateUpsertWithoutReportsInputInputObject =
+  | Extract<keyof DebateUpsertWithoutReportsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ReportUpsertWithWhereUniqueWithoutCommentInput {
+  where?: ReportWhereUniqueInput
+  update?: ReportUpdateWithoutCommentDataInput
+  create?: ReportCreateWithoutCommentInput
+}
+export type ReportUpsertWithWhereUniqueWithoutCommentInputInputObject =
+  | Extract<keyof ReportUpsertWithWhereUniqueWithoutCommentInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CommentUpsertWithWhereUniqueWithoutDebateInput {
+  where?: CommentWhereUniqueInput
+  update?: CommentUpdateWithoutDebateDataInput
+  create?: CommentCreateWithoutDebateInput
+}
+export type CommentUpsertWithWhereUniqueWithoutDebateInputInputObject =
+  | Extract<keyof CommentUpsertWithWhereUniqueWithoutDebateInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CommentScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  from?: string | null
+  from_not?: string | null
+  from_in?: string[]
+  from_not_in?: string[]
+  from_lt?: string | null
+  from_lte?: string | null
+  from_gt?: string | null
+  from_gte?: string | null
+  from_contains?: string | null
+  from_not_contains?: string | null
+  from_starts_with?: string | null
+  from_not_starts_with?: string | null
+  from_ends_with?: string | null
+  from_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: CommentScalarWhereInput[]
+  OR?: CommentScalarWhereInput[]
+  NOT?: CommentScalarWhereInput[]
+}
+export type CommentScalarWhereInputInputObject =
+  | Extract<keyof CommentScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'from_not', alias?: string  } 
+  | { name: 'from_in', alias?: string  } 
+  | { name: 'from_not_in', alias?: string  } 
+  | { name: 'from_lt', alias?: string  } 
+  | { name: 'from_lte', alias?: string  } 
+  | { name: 'from_gt', alias?: string  } 
+  | { name: 'from_gte', alias?: string  } 
+  | { name: 'from_contains', alias?: string  } 
+  | { name: 'from_not_contains', alias?: string  } 
+  | { name: 'from_starts_with', alias?: string  } 
+  | { name: 'from_not_starts_with', alias?: string  } 
+  | { name: 'from_ends_with', alias?: string  } 
+  | { name: 'from_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface CommentUpdateManyWithWhereNestedInput {
+  where?: CommentScalarWhereInput
+  data?: CommentUpdateManyDataInput
+}
+export type CommentUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof CommentUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface CommentUpdateManyDataInput {
+  from?: string | null
+  content?: string | null
+}
+export type CommentUpdateManyDataInputInputObject =
+  | Extract<keyof CommentUpdateManyDataInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  
+export interface DebateUpsertNestedInput {
+  update?: DebateUpdateDataInput
+  create?: DebateCreateInput
+}
+export type DebateUpsertNestedInputInputObject =
+  | Extract<keyof DebateUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
+  where?: TrophyWhereUniqueInput
+  update?: TrophyUpdateWithoutUserDataInput
+  create?: TrophyCreateWithoutUserInput
+}
+export type TrophyUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TrophyScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  won?: boolean | null
+  won_not?: boolean | null
+  type?: prisma.TrophyType | null
+  type_not?: prisma.TrophyType | null
+  type_in?: prisma.TrophyType[]
+  type_not_in?: prisma.TrophyType[]
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: TrophyScalarWhereInput[]
+  OR?: TrophyScalarWhereInput[]
+  NOT?: TrophyScalarWhereInput[]
+}
+export type TrophyScalarWhereInputInputObject =
+  | Extract<keyof TrophyScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'won_not', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TrophyUpdateManyWithWhereNestedInput {
+  where?: TrophyScalarWhereInput
+  data?: TrophyUpdateManyDataInput
+}
+export type TrophyUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof TrophyUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TrophyUpdateManyDataInput {
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+}
+export type TrophyUpdateManyDataInputInputObject =
+  | Extract<keyof TrophyUpdateManyDataInput, string>
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  
+export interface InteractionUpdateManyWithoutWhoInput {
+  create?: InteractionCreateWithoutWhoInput[]
+  delete?: InteractionWhereUniqueInput[]
+  connect?: InteractionWhereUniqueInput[]
+  set?: InteractionWhereUniqueInput[]
+  disconnect?: InteractionWhereUniqueInput[]
+  update?: InteractionUpdateWithWhereUniqueWithoutWhoInput[]
+  upsert?: InteractionUpsertWithWhereUniqueWithoutWhoInput[]
+  deleteMany?: InteractionScalarWhereInput[]
+  updateMany?: InteractionUpdateManyWithWhereNestedInput[]
+}
+export type InteractionUpdateManyWithoutWhoInputInputObject =
+  | Extract<keyof InteractionUpdateManyWithoutWhoInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface InteractionUpdateWithWhereUniqueWithoutWhoInput {
+  where?: InteractionWhereUniqueInput
+  data?: InteractionUpdateWithoutWhoDataInput
+}
+export type InteractionUpdateWithWhereUniqueWithoutWhoInputInputObject =
+  | Extract<keyof InteractionUpdateWithWhereUniqueWithoutWhoInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface InteractionUpdateWithoutWhoDataInput {
+  type?: prisma.InteractionType | null
+  debate?: DebateUpdateOneWithoutInteractionsInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type InteractionUpdateWithoutWhoDataInputInputObject =
+  | Extract<keyof InteractionUpdateWithoutWhoDataInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface DebateUpdateOneWithoutInteractionsInput {
+  create?: DebateCreateWithoutInteractionsInput | null
+  update?: DebateUpdateWithoutInteractionsDataInput | null
+  upsert?: DebateUpsertWithoutInteractionsInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: DebateWhereUniqueInput | null
+}
+export type DebateUpdateOneWithoutInteractionsInputInputObject =
+  | Extract<keyof DebateUpdateOneWithoutInteractionsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface DebateUpdateWithoutInteractionsDataInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+}
+export type DebateUpdateWithoutInteractionsDataInputInputObject =
+  | Extract<keyof DebateUpdateWithoutInteractionsDataInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  
+export interface DebateUpsertWithoutInteractionsInput {
+  update?: DebateUpdateWithoutInteractionsDataInput
+  create?: DebateCreateWithoutInteractionsInput
+}
+export type DebateUpsertWithoutInteractionsInputInputObject =
+  | Extract<keyof DebateUpsertWithoutInteractionsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface InteractionUpsertWithWhereUniqueWithoutWhoInput {
+  where?: InteractionWhereUniqueInput
+  update?: InteractionUpdateWithoutWhoDataInput
+  create?: InteractionCreateWithoutWhoInput
+}
+export type InteractionUpsertWithWhereUniqueWithoutWhoInputInputObject =
+  | Extract<keyof InteractionUpsertWithWhereUniqueWithoutWhoInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithoutDebatesRedInput {
+  update?: UserUpdateWithoutDebatesRedDataInput
+  create?: UserCreateWithoutDebatesRedInput
+}
+export type UserUpsertWithoutDebatesRedInputInputObject =
+  | Extract<keyof UserUpsertWithoutDebatesRedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpsertWithWhereUniqueWithoutOwnerBlueInput {
+  where?: DebateWhereUniqueInput
+  update?: DebateUpdateWithoutOwnerBlueDataInput
+  create?: DebateCreateWithoutOwnerBlueInput
+}
+export type DebateUpsertWithWhereUniqueWithoutOwnerBlueInputInputObject =
+  | Extract<keyof DebateUpsertWithWhereUniqueWithoutOwnerBlueInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  timelimit?: string | null
+  timelimit_not?: string | null
+  timelimit_in?: string[]
+  timelimit_not_in?: string[]
+  timelimit_lt?: string | null
+  timelimit_lte?: string | null
+  timelimit_gt?: string | null
+  timelimit_gte?: string | null
+  type?: prisma.DebateType | null
+  type_not?: prisma.DebateType | null
+  type_in?: prisma.DebateType[]
+  type_not_in?: prisma.DebateType[]
+  closed?: boolean | null
+  closed_not?: boolean | null
+  crowned?: boolean | null
+  crowned_not?: boolean | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: DebateScalarWhereInput[]
+  OR?: DebateScalarWhereInput[]
+  NOT?: DebateScalarWhereInput[]
+}
+export type DebateScalarWhereInputInputObject =
+  | Extract<keyof DebateScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimit_not', alias?: string  } 
+  | { name: 'timelimit_in', alias?: string  } 
+  | { name: 'timelimit_not_in', alias?: string  } 
+  | { name: 'timelimit_lt', alias?: string  } 
+  | { name: 'timelimit_lte', alias?: string  } 
+  | { name: 'timelimit_gt', alias?: string  } 
+  | { name: 'timelimit_gte', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'closed_not', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'crowned_not', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface DebateUpdateManyWithWhereNestedInput {
+  where?: DebateScalarWhereInput
+  data?: DebateUpdateManyDataInput
+}
+export type DebateUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof DebateUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface DebateUpdateManyDataInput {
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  closed?: boolean | null
+  crowned?: boolean | null
+}
+export type DebateUpdateManyDataInputInputObject =
+  | Extract<keyof DebateUpdateManyDataInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  
+export interface UserUpsertWithoutDebatesInput {
+  update?: UserUpdateWithoutDebatesDataInput
+  create?: UserCreateWithoutDebatesInput
+}
+export type UserUpsertWithoutDebatesInputInputObject =
+  | Extract<keyof UserUpsertWithoutDebatesInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpsertWithWhereUniqueWithoutOwnerRedInput {
+  where?: DebateWhereUniqueInput
+  update?: DebateUpdateWithoutOwnerRedDataInput
+  create?: DebateCreateWithoutOwnerRedInput
+}
+export type DebateUpsertWithWhereUniqueWithoutOwnerRedInputInputObject =
+  | Extract<keyof DebateUpsertWithWhereUniqueWithoutOwnerRedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithoutDebatesBlueInput {
+  update?: UserUpdateWithoutDebatesBlueDataInput
+  create?: UserCreateWithoutDebatesBlueInput
+}
+export type UserUpsertWithoutDebatesBlueInputInputObject =
+  | Extract<keyof UserUpsertWithoutDebatesBlueInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpsertWithWhereUniqueWithoutOwnerInput {
+  where?: DebateWhereUniqueInput
+  update?: DebateUpdateWithoutOwnerDataInput
+  create?: DebateCreateWithoutOwnerInput
+}
+export type DebateUpsertWithWhereUniqueWithoutOwnerInputInputObject =
+  | Extract<keyof DebateUpsertWithWhereUniqueWithoutOwnerInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutBlockedInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutBlockedDataInput
+  create?: UserCreateWithoutBlockedInput
+}
+export type UserUpsertWithWhereUniqueWithoutBlockedInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutBlockedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  pseudo?: string | null
+  pseudo_not?: string | null
+  pseudo_in?: string[]
+  pseudo_not_in?: string[]
+  pseudo_lt?: string | null
+  pseudo_lte?: string | null
+  pseudo_gt?: string | null
+  pseudo_gte?: string | null
+  pseudo_contains?: string | null
+  pseudo_not_contains?: string | null
+  pseudo_starts_with?: string | null
+  pseudo_not_starts_with?: string | null
+  pseudo_ends_with?: string | null
+  pseudo_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  birthdate?: string | null
+  birthdate_not?: string | null
+  birthdate_in?: string[]
+  birthdate_not_in?: string[]
+  birthdate_lt?: string | null
+  birthdate_lte?: string | null
+  birthdate_gt?: string | null
+  birthdate_gte?: string | null
+  role?: prisma.Role | null
+  role_not?: prisma.Role | null
+  role_in?: prisma.Role[]
+  role_not_in?: prisma.Role[]
+  certified?: boolean | null
+  certified_not?: boolean | null
+  gender?: prisma.Gender | null
+  gender_not?: prisma.Gender | null
+  gender_in?: prisma.Gender[]
+  gender_not_in?: prisma.Gender[]
+  profilePicture?: string | null
+  profilePicture_not?: string | null
+  profilePicture_in?: string[]
+  profilePicture_not_in?: string[]
+  profilePicture_lt?: string | null
+  profilePicture_lte?: string | null
+  profilePicture_gt?: string | null
+  profilePicture_gte?: string | null
+  profilePicture_contains?: string | null
+  profilePicture_not_contains?: string | null
+  profilePicture_starts_with?: string | null
+  profilePicture_not_starts_with?: string | null
+  profilePicture_ends_with?: string | null
+  profilePicture_not_ends_with?: string | null
+  coverPicture?: string | null
+  coverPicture_not?: string | null
+  coverPicture_in?: string[]
+  coverPicture_not_in?: string[]
+  coverPicture_lt?: string | null
+  coverPicture_lte?: string | null
+  coverPicture_gt?: string | null
+  coverPicture_gte?: string | null
+  coverPicture_contains?: string | null
+  coverPicture_not_contains?: string | null
+  coverPicture_starts_with?: string | null
+  coverPicture_not_starts_with?: string | null
+  coverPicture_ends_with?: string | null
+  coverPicture_not_ends_with?: string | null
+  bio?: string | null
+  bio_not?: string | null
+  bio_in?: string[]
+  bio_not_in?: string[]
+  bio_lt?: string | null
+  bio_lte?: string | null
+  bio_gt?: string | null
+  bio_gte?: string | null
+  bio_contains?: string | null
+  bio_not_contains?: string | null
+  bio_starts_with?: string | null
+  bio_not_starts_with?: string | null
+  bio_ends_with?: string | null
+  bio_not_ends_with?: string | null
+  language?: prisma.Language | null
+  language_not?: prisma.Language | null
+  language_in?: prisma.Language[]
+  language_not_in?: prisma.Language[]
+  crowned?: boolean | null
+  crowned_not?: boolean | null
+  lastConnected?: string | null
+  lastConnected_not?: string | null
+  lastConnected_in?: string[]
+  lastConnected_not_in?: string[]
+  lastConnected_lt?: string | null
+  lastConnected_lte?: string | null
+  lastConnected_gt?: string | null
+  lastConnected_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: UserScalarWhereInput[]
+  OR?: UserScalarWhereInput[]
+  NOT?: UserScalarWhereInput[]
+}
+export type UserScalarWhereInputInputObject =
+  | Extract<keyof UserScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'pseudo_not', alias?: string  } 
+  | { name: 'pseudo_in', alias?: string  } 
+  | { name: 'pseudo_not_in', alias?: string  } 
+  | { name: 'pseudo_lt', alias?: string  } 
+  | { name: 'pseudo_lte', alias?: string  } 
+  | { name: 'pseudo_gt', alias?: string  } 
+  | { name: 'pseudo_gte', alias?: string  } 
+  | { name: 'pseudo_contains', alias?: string  } 
+  | { name: 'pseudo_not_contains', alias?: string  } 
+  | { name: 'pseudo_starts_with', alias?: string  } 
+  | { name: 'pseudo_not_starts_with', alias?: string  } 
+  | { name: 'pseudo_ends_with', alias?: string  } 
+  | { name: 'pseudo_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'birthdate_not', alias?: string  } 
+  | { name: 'birthdate_in', alias?: string  } 
+  | { name: 'birthdate_not_in', alias?: string  } 
+  | { name: 'birthdate_lt', alias?: string  } 
+  | { name: 'birthdate_lte', alias?: string  } 
+  | { name: 'birthdate_gt', alias?: string  } 
+  | { name: 'birthdate_gte', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'role_not', alias?: string  } 
+  | { name: 'role_in', alias?: string  } 
+  | { name: 'role_not_in', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'certified_not', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'profilePicture_not', alias?: string  } 
+  | { name: 'profilePicture_in', alias?: string  } 
+  | { name: 'profilePicture_not_in', alias?: string  } 
+  | { name: 'profilePicture_lt', alias?: string  } 
+  | { name: 'profilePicture_lte', alias?: string  } 
+  | { name: 'profilePicture_gt', alias?: string  } 
+  | { name: 'profilePicture_gte', alias?: string  } 
+  | { name: 'profilePicture_contains', alias?: string  } 
+  | { name: 'profilePicture_not_contains', alias?: string  } 
+  | { name: 'profilePicture_starts_with', alias?: string  } 
+  | { name: 'profilePicture_not_starts_with', alias?: string  } 
+  | { name: 'profilePicture_ends_with', alias?: string  } 
+  | { name: 'profilePicture_not_ends_with', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'coverPicture_not', alias?: string  } 
+  | { name: 'coverPicture_in', alias?: string  } 
+  | { name: 'coverPicture_not_in', alias?: string  } 
+  | { name: 'coverPicture_lt', alias?: string  } 
+  | { name: 'coverPicture_lte', alias?: string  } 
+  | { name: 'coverPicture_gt', alias?: string  } 
+  | { name: 'coverPicture_gte', alias?: string  } 
+  | { name: 'coverPicture_contains', alias?: string  } 
+  | { name: 'coverPicture_not_contains', alias?: string  } 
+  | { name: 'coverPicture_starts_with', alias?: string  } 
+  | { name: 'coverPicture_not_starts_with', alias?: string  } 
+  | { name: 'coverPicture_ends_with', alias?: string  } 
+  | { name: 'coverPicture_not_ends_with', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'bio_not', alias?: string  } 
+  | { name: 'bio_in', alias?: string  } 
+  | { name: 'bio_not_in', alias?: string  } 
+  | { name: 'bio_lt', alias?: string  } 
+  | { name: 'bio_lte', alias?: string  } 
+  | { name: 'bio_gt', alias?: string  } 
+  | { name: 'bio_gte', alias?: string  } 
+  | { name: 'bio_contains', alias?: string  } 
+  | { name: 'bio_not_contains', alias?: string  } 
+  | { name: 'bio_starts_with', alias?: string  } 
+  | { name: 'bio_not_starts_with', alias?: string  } 
+  | { name: 'bio_ends_with', alias?: string  } 
+  | { name: 'bio_not_ends_with', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'language_not', alias?: string  } 
+  | { name: 'language_in', alias?: string  } 
+  | { name: 'language_not_in', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'crowned_not', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'lastConnected_not', alias?: string  } 
+  | { name: 'lastConnected_in', alias?: string  } 
+  | { name: 'lastConnected_not_in', alias?: string  } 
+  | { name: 'lastConnected_lt', alias?: string  } 
+  | { name: 'lastConnected_lte', alias?: string  } 
+  | { name: 'lastConnected_gt', alias?: string  } 
+  | { name: 'lastConnected_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserUpdateManyWithWhereNestedInput {
+  where?: UserScalarWhereInput
+  data?: UserUpdateManyDataInput
+}
+export type UserUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateManyDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+}
+export type UserUpdateManyDataInputInputObject =
+  | Extract<keyof UserUpdateManyDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutFollowersDataInput
+  create?: UserCreateWithoutFollowersInput
+}
+export type UserUpsertWithWhereUniqueWithoutFollowersInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutFollowersInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutBlockingInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutBlockingDataInput
+  create?: UserCreateWithoutBlockingInput
+}
+export type UserUpsertWithWhereUniqueWithoutBlockingInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutBlockingInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutFollowingInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutFollowingDataInput
+  create?: UserCreateWithoutFollowingInput
+}
+export type UserUpsertWithWhereUniqueWithoutFollowingInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutFollowingInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateDataInput
+  create?: UserCreateInput
+}
+export type UserUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CommentUpdateManyMutationInput {
+  from?: string | null
+  content?: string | null
+}
+export type CommentUpdateManyMutationInputInputObject =
+  | Extract<keyof CommentUpdateManyMutationInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  
+export interface ConversationCreateInput {
+  id?: string | null
+  speakers?: UserCreateManyWithoutConversationsInput | null
+  messages?: MessageCreateManyInput | null
+}
+export type ConversationCreateInputInputObject =
+  | Extract<keyof ConversationCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'speakers', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
+  
+export interface UserCreateManyWithoutConversationsInput {
+  create?: UserCreateWithoutConversationsInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutConversationsInputInputObject =
+  | Extract<keyof UserCreateManyWithoutConversationsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutConversationsInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutConversationsInputInputObject =
+  | Extract<keyof UserCreateWithoutConversationsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface ConversationUpdateInput {
+  speakers?: UserUpdateManyWithoutConversationsInput | null
+  messages?: MessageUpdateManyInput | null
+}
+export type ConversationUpdateInputInputObject =
+  | Extract<keyof ConversationUpdateInput, string>
+  | { name: 'speakers', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
+  
+export interface UserUpdateManyWithoutConversationsInput {
+  create?: UserCreateWithoutConversationsInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutConversationsInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutConversationsInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutConversationsInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutConversationsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutConversationsInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutConversationsDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutConversationsInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutConversationsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutConversationsDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutConversationsDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutConversationsDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutConversationsInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutConversationsDataInput
+  create?: UserCreateWithoutConversationsInput
+}
+export type UserUpsertWithWhereUniqueWithoutConversationsInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutConversationsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface DebateUpdateInput {
+  owner?: UserUpdateOneWithoutDebatesInput | null
+  ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
+  ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  comments?: CommentUpdateManyWithoutDebateInput | null
+  topComment?: CommentUpdateOneInput | null
+  reports?: ReportUpdateManyWithoutDebateInput | null
+  positives?: UserUpdateManyInput | null
+  negatives?: UserUpdateManyInput | null
+  redVotes?: UserUpdateManyInput | null
+  blueVotes?: UserUpdateManyInput | null
+  winner?: UserUpdateOneInput | null
+  loser?: UserUpdateOneInput | null
+  closed?: boolean | null
+  crowned?: boolean | null
+  interactions?: InteractionUpdateManyWithoutDebateInput | null
+}
+export type DebateUpdateInputInputObject =
+  | Extract<keyof DebateUpdateInput, string>
+  | { name: 'owner', alias?: string  } 
+  | { name: 'ownerBlue', alias?: string  } 
+  | { name: 'ownerRed', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'topComment', alias?: string  } 
+  | { name: 'reports', alias?: string  } 
+  | { name: 'positives', alias?: string  } 
+  | { name: 'negatives', alias?: string  } 
+  | { name: 'redVotes', alias?: string  } 
+  | { name: 'blueVotes', alias?: string  } 
+  | { name: 'winner', alias?: string  } 
+  | { name: 'loser', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface DebateUpdateManyMutationInput {
+  content?: string | null
+  timelimit?: string | null
+  type?: prisma.DebateType | null
+  closed?: boolean | null
+  crowned?: boolean | null
+}
+export type DebateUpdateManyMutationInputInputObject =
+  | Extract<keyof DebateUpdateManyMutationInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'timelimit', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'closed', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  
+export interface InteractionCreateInput {
+  id?: string | null
+  type?: prisma.InteractionType
+  who?: UserCreateOneWithoutInteractionsInput
+  debate?: DebateCreateOneWithoutInteractionsInput | null
+  comment?: CommentCreateOneInput | null
+}
+export type InteractionCreateInputInputObject =
+  | Extract<keyof InteractionCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface InteractionUpdateInput {
+  type?: prisma.InteractionType | null
+  who?: UserUpdateOneRequiredWithoutInteractionsInput | null
+  debate?: DebateUpdateOneWithoutInteractionsInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type InteractionUpdateInputInputObject =
+  | Extract<keyof InteractionUpdateInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface InteractionUpdateManyMutationInput {
+  type?: prisma.InteractionType | null
+}
+export type InteractionUpdateManyMutationInputInputObject =
+  | Extract<keyof InteractionUpdateManyMutationInput, string>
+  | { name: 'type', alias?: string  } 
+  
+export interface MessageUpdateInput {
+  content?: string | null
+  to?: UserUpdateOneRequiredInput | null
+  from?: UserUpdateOneRequiredInput | null
+}
+export type MessageUpdateInputInputObject =
+  | Extract<keyof MessageUpdateInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  
+export interface MessageUpdateManyMutationInput {
+  content?: string | null
+}
+export type MessageUpdateManyMutationInputInputObject =
+  | Extract<keyof MessageUpdateManyMutationInput, string>
+  | { name: 'content', alias?: string  } 
+  
+export interface ReportCreateInput {
+  id?: string | null
+  from?: UserCreateOneInput | null
+  to?: UserCreateOneInput | null
+  type?: prisma.ReportType
+  reason?: prisma.ReportReason
+  reasonText?: string | null
+  debate?: DebateCreateOneWithoutReportsInput | null
+  comment?: CommentCreateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportCreateInputInputObject =
+  | Extract<keyof ReportCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface ReportUpdateInput {
+  from?: UserUpdateOneInput | null
+  to?: UserUpdateOneInput | null
+  type?: prisma.ReportType | null
+  reason?: prisma.ReportReason | null
+  reasonText?: string | null
+  debate?: DebateUpdateOneWithoutReportsInput | null
+  comment?: CommentUpdateOneWithoutReportsInput | null
+  treated?: boolean | null
+}
+export type ReportUpdateInputInputObject =
+  | Extract<keyof ReportUpdateInput, string>
+  | { name: 'from', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface ReportUpdateManyMutationInput {
+  type?: prisma.ReportType | null
+  reason?: prisma.ReportReason | null
+  reasonText?: string | null
+  treated?: boolean | null
+}
+export type ReportUpdateManyMutationInputInputObject =
+  | Extract<keyof ReportUpdateManyMutationInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'reason', alias?: string  } 
+  | { name: 'reasonText', alias?: string  } 
+  | { name: 'treated', alias?: string  } 
+  
+export interface TrophyCreateInput {
+  id?: string | null
+  user?: UserCreateOneWithoutTrophiesInput
+  won?: boolean
+  type?: prisma.TrophyType | null
+  debate?: DebateCreateOneInput | null
+  comment?: CommentCreateOneInput | null
+}
+export type TrophyCreateInputInputObject =
+  | Extract<keyof TrophyCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface UserCreateOneWithoutTrophiesInput {
+  create?: UserCreateWithoutTrophiesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutTrophiesInputInputObject =
+  | Extract<keyof UserCreateOneWithoutTrophiesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutTrophiesInput {
+  id?: string | null
+  pseudo?: string
+  email?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutTrophiesInputInputObject =
+  | Extract<keyof UserCreateWithoutTrophiesInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface TrophyUpdateInput {
+  user?: UserUpdateOneRequiredWithoutTrophiesInput | null
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+  debate?: DebateUpdateOneInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type TrophyUpdateInputInputObject =
+  | Extract<keyof TrophyUpdateInput, string>
+  | { name: 'user', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface UserUpdateOneRequiredWithoutTrophiesInput {
+  create?: UserCreateWithoutTrophiesInput | null
+  update?: UserUpdateWithoutTrophiesDataInput | null
+  upsert?: UserUpsertWithoutTrophiesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredWithoutTrophiesInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredWithoutTrophiesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutTrophiesDataInput {
+  pseudo?: string | null
+  email?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutTrophiesDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutTrophiesDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpsertWithoutTrophiesInput {
+  update?: UserUpdateWithoutTrophiesDataInput
+  create?: UserCreateWithoutTrophiesInput
+}
+export type UserUpsertWithoutTrophiesInputInputObject =
+  | Extract<keyof UserUpsertWithoutTrophiesInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TrophyUpdateManyMutationInput {
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+}
+export type TrophyUpdateManyMutationInputInputObject =
+  | Extract<keyof TrophyUpdateManyMutationInput, string>
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
   
 export interface UserUpdateInput {
+  pseudo?: string | null
   email?: string | null
-  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
+  | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
-  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
+  pseudo?: string | null
   email?: string | null
-  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
+  | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
-  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  
+export interface AdSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: AdWhereInput | null
+  AND?: AdSubscriptionWhereInput[]
+}
+export type AdSubscriptionWhereInputInputObject =
+  | Extract<keyof AdSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface AdTargetSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: AdTargetWhereInput | null
+  AND?: AdTargetSubscriptionWhereInput[]
+}
+export type AdTargetSubscriptionWhereInputInputObject =
+  | Extract<keyof AdTargetSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface CommentSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: CommentWhereInput | null
+  AND?: CommentSubscriptionWhereInput[]
+}
+export type CommentSubscriptionWhereInputInputObject =
+  | Extract<keyof CommentSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface ConversationSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ConversationWhereInput | null
+  AND?: ConversationSubscriptionWhereInput[]
+}
+export type ConversationSubscriptionWhereInputInputObject =
+  | Extract<keyof ConversationSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface DebateSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: DebateWhereInput | null
+  AND?: DebateSubscriptionWhereInput[]
+}
+export type DebateSubscriptionWhereInputInputObject =
+  | Extract<keyof DebateSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface InteractionSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: InteractionWhereInput | null
+  AND?: InteractionSubscriptionWhereInput[]
+}
+export type InteractionSubscriptionWhereInputInputObject =
+  | Extract<keyof InteractionSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface MessageSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: MessageWhereInput | null
+  AND?: MessageSubscriptionWhereInput[]
+}
+export type MessageSubscriptionWhereInputInputObject =
+  | Extract<keyof MessageSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface ReportSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ReportWhereInput | null
+  AND?: ReportSubscriptionWhereInput[]
+}
+export type ReportSubscriptionWhereInputInputObject =
+  | Extract<keyof ReportSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface TrophySubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TrophyWhereInput | null
+  AND?: TrophySubscriptionWhereInput[]
+}
+export type TrophySubscriptionWhereInputInputObject =
+  | Extract<keyof TrophySubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -797,13 +13453,205 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'AND', alias?: string  } 
   
 
+export type GenderFilterValues =
+  | 'MALE'
+  | 'FEMALE'
+  | 'ALL'
+  
+export type AdTargetOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'gender_ASC'
+  | 'gender_DESC'
+  | 'birthdateMin_ASC'
+  | 'birthdateMin_DESC'
+  | 'birthdateMax_ASC'
+  | 'birthdateMax_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type AdOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'active_ASC'
+  | 'active_DESC'
+  | 'ratio_ASC'
+  | 'ratio_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type RoleValues =
+  | 'STANDARD'
+  | 'MODERATOR'
+  | 'ADMIN'
+  | 'MUDDLE'
+  
+export type GenderValues =
+  | 'MALE'
+  | 'FEMALE'
+  | 'NO_INDICATION'
+  
+export type LanguageValues =
+  | 'FR'
+  | 'EN'
+  
+export type DebateTypeValues =
+  | 'STANDARD'
+  | 'DUO'
+  
+export type ReportTypeValues =
+  | 'DEBATE'
+  | 'COMMENT'
+  
+export type ReportReasonValues =
+  | 'INSULT'
+  | 'RACISM'
+  | 'SEXISM'
+  | 'VIOLENCE'
+  | 'PORNOGRAPHY'
+  
+export type InteractionTypeValues =
+  | 'LIKE'
+  | 'DISLIKE'
+  | 'COMMENT'
+  | 'POSITIVE_VOTE'
+  | 'NEGATIVE_VOTE'
+  | 'BLUE_VOTE'
+  | 'RED_VOTE'
+  
+export type TrophyTypeValues =
+  | 'DUO'
+  | 'TOP_COMMENT'
+  
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'pseudo_ASC'
+  | 'pseudo_DESC'
   | 'email_ASC'
   | 'email_DESC'
-  | 'password_ASC'
-  | 'password_DESC'
+  | 'birthdate_ASC'
+  | 'birthdate_DESC'
+  | 'role_ASC'
+  | 'role_DESC'
+  | 'certified_ASC'
+  | 'certified_DESC'
+  | 'gender_ASC'
+  | 'gender_DESC'
+  | 'profilePicture_ASC'
+  | 'profilePicture_DESC'
+  | 'coverPicture_ASC'
+  | 'coverPicture_DESC'
+  | 'bio_ASC'
+  | 'bio_DESC'
+  | 'language_ASC'
+  | 'language_DESC'
+  | 'crowned_ASC'
+  | 'crowned_DESC'
+  | 'lastConnected_ASC'
+  | 'lastConnected_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type DebateOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'timelimit_ASC'
+  | 'timelimit_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'closed_ASC'
+  | 'closed_DESC'
+  | 'crowned_ASC'
+  | 'crowned_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type CommentOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'from_ASC'
+  | 'from_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type ReportOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'reason_ASC'
+  | 'reason_DESC'
+  | 'reasonText_ASC'
+  | 'reasonText_DESC'
+  | 'treated_ASC'
+  | 'treated_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type InteractionOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TrophyOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'won_ASC'
+  | 'won_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type ConversationOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type MessageOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'sendDate_ASC'
+  | 'sendDate_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

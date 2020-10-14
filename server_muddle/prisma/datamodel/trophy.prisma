@@ -1,0 +1,15 @@
+enum TrophyType {
+  DUO
+  TOP_COMMENT
+}
+
+type Trophy {
+  id: ID! @id
+  user: User! @relation(link: INLINE)
+  won: Boolean!
+  type: TrophyType
+  debate: Debate @relation(link: INLINE)
+  comment: Comment @relation(link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

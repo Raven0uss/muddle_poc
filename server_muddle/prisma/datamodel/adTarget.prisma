@@ -1,0 +1,15 @@
+enum GenderFilter {
+  MALE
+  FEMALE
+  ALL
+}
+
+type AdTarget {
+  id: ID! @id
+  name: String! @unique
+  gender: GenderFilter! @default(value: ALL)
+  birthdateMin: DateTime!
+  birthdateMax: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

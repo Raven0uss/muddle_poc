@@ -5,22 +5,19 @@ import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
 import { combineResolvers, skip } from "graphql-resolvers";
 import { idArg, objectType, stringArg } from "nexus/dist";
 
+import Types from './Types';
+
 const userIsAuthenticated = (parent, args, { me }) => {
   return me ? skip : new Error("Not authenticated");
 };
 
-const Token = objectType({
-  name: "Token",
-  definition(t) {
-    t.string("token");
-  },
-});
 
 const Query = prismaObjectType({
   name: "Query",
   definition(t) {
     t.prismaFields(["user"]);
 
+    // SignIn
     t.field("signIn", {
       type: "Token",
       args: {
@@ -52,6 +49,7 @@ const Query = prismaObjectType({
       },
     });
 
+    // me
     t.field("me", {
       type: "User",
       args: {
@@ -63,6 +61,7 @@ const Query = prismaObjectType({
       },
     });
 
+    // getUser
     t.field("getUser", {
       type: "User",
       args: { id: idArg() },
@@ -80,6 +79,8 @@ const Query = prismaObjectType({
 const Mutation = prismaObjectType({
   name: "Mutation",
   definition(t) {
+
+    // signUp
     t.field("signUp", {
       type: "Token",
       args: { email: stringArg(), password: stringArg() },
@@ -108,6 +109,6 @@ export default {
   resolvers: {
     Mutation,
     Query,
-    Token,
+    ...Types,
   },
 };

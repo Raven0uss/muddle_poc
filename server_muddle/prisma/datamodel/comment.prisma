@@ -1,0 +1,11 @@
+type Comment {
+  id: ID! @id
+  from: String!
+  content: String!
+  likes: [User] @relation(link: INLINE, name: "Likes")
+  dislikes: [User] @relation(link: INLINE, name: "Dislikes")
+  reports: [Report]
+  debate: Debate! @relation(link: INLINE, name: "Comments")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

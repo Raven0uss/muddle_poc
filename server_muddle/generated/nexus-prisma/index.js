@@ -11,38 +11,723 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CommentWhereInput: { // input type
+    AND?: NexusGenInputs['CommentWhereInput'][] | null; // [CommentWhereInput!]
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    debate?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    dislikes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    from?: string | null; // String
+    from_contains?: string | null; // String
+    from_ends_with?: string | null; // String
+    from_gt?: string | null; // String
+    from_gte?: string | null; // String
+    from_in?: string[] | null; // [String!]
+    from_lt?: string | null; // String
+    from_lte?: string | null; // String
+    from_not?: string | null; // String
+    from_not_contains?: string | null; // String
+    from_not_ends_with?: string | null; // String
+    from_not_in?: string[] | null; // [String!]
+    from_not_starts_with?: string | null; // String
+    from_starts_with?: string | null; // String
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    likes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    reports_some?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  ConversationWhereInput: { // input type
+    AND?: NexusGenInputs['ConversationWhereInput'][] | null; // [ConversationWhereInput!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    messages_some?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    speakers_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  DebateWhereInput: { // input type
+    AND?: NexusGenInputs['DebateWhereInput'][] | null; // [DebateWhereInput!]
+    blueVotes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    closed?: boolean | null; // Boolean
+    closed_not?: boolean | null; // Boolean
+    comments_some?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    crowned?: boolean | null; // Boolean
+    crowned_not?: boolean | null; // Boolean
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    interactions_some?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
+    loser?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    negatives_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    owner?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    ownerBlue?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    ownerRed?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    positives_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    redVotes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    reports_some?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
+    timelimit?: any | null; // DateTime
+    timelimit_gt?: any | null; // DateTime
+    timelimit_gte?: any | null; // DateTime
+    timelimit_in?: any[] | null; // [DateTime!]
+    timelimit_lt?: any | null; // DateTime
+    timelimit_lte?: any | null; // DateTime
+    timelimit_not?: any | null; // DateTime
+    timelimit_not_in?: any[] | null; // [DateTime!]
+    topComment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    type_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
+    type_not?: NexusGenEnums['DebateType'] | null; // DebateType
+    type_not_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+    winner?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  InteractionWhereInput: { // input type
+    AND?: NexusGenInputs['InteractionWhereInput'][] | null; // [InteractionWhereInput!]
+    comment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    debate?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    type_in?: NexusGenEnums['InteractionType'][] | null; // [InteractionType!]
+    type_not?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    type_not_in?: NexusGenEnums['InteractionType'][] | null; // [InteractionType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+    who?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  MessageWhereInput: { // input type
+    AND?: NexusGenInputs['MessageWhereInput'][] | null; // [MessageWhereInput!]
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    from?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    sendDate?: any | null; // DateTime
+    sendDate_gt?: any | null; // DateTime
+    sendDate_gte?: any | null; // DateTime
+    sendDate_in?: any[] | null; // [DateTime!]
+    sendDate_lt?: any | null; // DateTime
+    sendDate_lte?: any | null; // DateTime
+    sendDate_not?: any | null; // DateTime
+    sendDate_not_in?: any[] | null; // [DateTime!]
+    to?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  ReportWhereInput: { // input type
+    AND?: NexusGenInputs['ReportWhereInput'][] | null; // [ReportWhereInput!]
+    comment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    debate?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    from?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reason_in?: NexusGenEnums['ReportReason'][] | null; // [ReportReason!]
+    reason_not?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reason_not_in?: NexusGenEnums['ReportReason'][] | null; // [ReportReason!]
+    reasonText?: string | null; // String
+    reasonText_contains?: string | null; // String
+    reasonText_ends_with?: string | null; // String
+    reasonText_gt?: string | null; // String
+    reasonText_gte?: string | null; // String
+    reasonText_in?: string[] | null; // [String!]
+    reasonText_lt?: string | null; // String
+    reasonText_lte?: string | null; // String
+    reasonText_not?: string | null; // String
+    reasonText_not_contains?: string | null; // String
+    reasonText_not_ends_with?: string | null; // String
+    reasonText_not_in?: string[] | null; // [String!]
+    reasonText_not_starts_with?: string | null; // String
+    reasonText_starts_with?: string | null; // String
+    to?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    treated?: boolean | null; // Boolean
+    treated_not?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+    type_in?: NexusGenEnums['ReportType'][] | null; // [ReportType!]
+    type_not?: NexusGenEnums['ReportType'] | null; // ReportType
+    type_not_in?: NexusGenEnums['ReportType'][] | null; // [ReportType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  TrophyWhereInput: { // input type
+    AND?: NexusGenInputs['TrophyWhereInput'][] | null; // [TrophyWhereInput!]
+    comment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    debate?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    type_in?: NexusGenEnums['TrophyType'][] | null; // [TrophyType!]
+    type_not?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    type_not_in?: NexusGenEnums['TrophyType'][] | null; // [TrophyType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    won?: boolean | null; // Boolean
+    won_not?: boolean | null; // Boolean
+  }
+  UserWhereInput: { // input type
+    AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    bio?: string | null; // String
+    bio_contains?: string | null; // String
+    bio_ends_with?: string | null; // String
+    bio_gt?: string | null; // String
+    bio_gte?: string | null; // String
+    bio_in?: string[] | null; // [String!]
+    bio_lt?: string | null; // String
+    bio_lte?: string | null; // String
+    bio_not?: string | null; // String
+    bio_not_contains?: string | null; // String
+    bio_not_ends_with?: string | null; // String
+    bio_not_in?: string[] | null; // [String!]
+    bio_not_starts_with?: string | null; // String
+    bio_starts_with?: string | null; // String
+    birthdate?: any | null; // DateTime
+    birthdate_gt?: any | null; // DateTime
+    birthdate_gte?: any | null; // DateTime
+    birthdate_in?: any[] | null; // [DateTime!]
+    birthdate_lt?: any | null; // DateTime
+    birthdate_lte?: any | null; // DateTime
+    birthdate_not?: any | null; // DateTime
+    birthdate_not_in?: any[] | null; // [DateTime!]
+    blocked_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    blocking_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    certified?: boolean | null; // Boolean
+    certified_not?: boolean | null; // Boolean
+    conversations_some?: NexusGenInputs['ConversationWhereInput'] | null; // ConversationWhereInput
+    coverPicture?: string | null; // String
+    coverPicture_contains?: string | null; // String
+    coverPicture_ends_with?: string | null; // String
+    coverPicture_gt?: string | null; // String
+    coverPicture_gte?: string | null; // String
+    coverPicture_in?: string[] | null; // [String!]
+    coverPicture_lt?: string | null; // String
+    coverPicture_lte?: string | null; // String
+    coverPicture_not?: string | null; // String
+    coverPicture_not_contains?: string | null; // String
+    coverPicture_not_ends_with?: string | null; // String
+    coverPicture_not_in?: string[] | null; // [String!]
+    coverPicture_not_starts_with?: string | null; // String
+    coverPicture_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    crowned?: boolean | null; // Boolean
+    crowned_not?: boolean | null; // Boolean
+    debates_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    debatesBlue_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    debatesRed_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    email?: string | null; // String
+    email_contains?: string | null; // String
+    email_ends_with?: string | null; // String
+    email_gt?: string | null; // String
+    email_gte?: string | null; // String
+    email_in?: string[] | null; // [String!]
+    email_lt?: string | null; // String
+    email_lte?: string | null; // String
+    email_not?: string | null; // String
+    email_not_contains?: string | null; // String
+    email_not_ends_with?: string | null; // String
+    email_not_in?: string[] | null; // [String!]
+    email_not_starts_with?: string | null; // String
+    email_starts_with?: string | null; // String
+    followers_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    following_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    gender_in?: NexusGenEnums['Gender'][] | null; // [Gender!]
+    gender_not?: NexusGenEnums['Gender'] | null; // Gender
+    gender_not_in?: NexusGenEnums['Gender'][] | null; // [Gender!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    interactions_some?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    language_in?: NexusGenEnums['Language'][] | null; // [Language!]
+    language_not?: NexusGenEnums['Language'] | null; // Language
+    language_not_in?: NexusGenEnums['Language'][] | null; // [Language!]
+    lastConnected?: any | null; // DateTime
+    lastConnected_gt?: any | null; // DateTime
+    lastConnected_gte?: any | null; // DateTime
+    lastConnected_in?: any[] | null; // [DateTime!]
+    lastConnected_lt?: any | null; // DateTime
+    lastConnected_lte?: any | null; // DateTime
+    lastConnected_not?: any | null; // DateTime
+    lastConnected_not_in?: any[] | null; // [DateTime!]
+    profilePicture?: string | null; // String
+    profilePicture_contains?: string | null; // String
+    profilePicture_ends_with?: string | null; // String
+    profilePicture_gt?: string | null; // String
+    profilePicture_gte?: string | null; // String
+    profilePicture_in?: string[] | null; // [String!]
+    profilePicture_lt?: string | null; // String
+    profilePicture_lte?: string | null; // String
+    profilePicture_not?: string | null; // String
+    profilePicture_not_contains?: string | null; // String
+    profilePicture_not_ends_with?: string | null; // String
+    profilePicture_not_in?: string[] | null; // [String!]
+    profilePicture_not_starts_with?: string | null; // String
+    profilePicture_starts_with?: string | null; // String
+    pseudo?: string | null; // String
+    pseudo_contains?: string | null; // String
+    pseudo_ends_with?: string | null; // String
+    pseudo_gt?: string | null; // String
+    pseudo_gte?: string | null; // String
+    pseudo_in?: string[] | null; // [String!]
+    pseudo_lt?: string | null; // String
+    pseudo_lte?: string | null; // String
+    pseudo_not?: string | null; // String
+    pseudo_not_contains?: string | null; // String
+    pseudo_not_ends_with?: string | null; // String
+    pseudo_not_in?: string[] | null; // [String!]
+    pseudo_not_starts_with?: string | null; // String
+    pseudo_starts_with?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    role_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    role_not?: NexusGenEnums['Role'] | null; // Role
+    role_not_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    trophies_some?: NexusGenInputs['TrophyWhereInput'] | null; // TrophyWhereInput
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: string | null; // ID
+    pseudo?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
+  CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "from_ASC" | "from_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  DebateOrderByInput: "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  DebateType: "DUO" | "STANDARD"
+  Gender: "FEMALE" | "MALE" | "NO_INDICATION"
+  InteractionOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  InteractionType: "BLUE_VOTE" | "COMMENT" | "DISLIKE" | "LIKE" | "NEGATIVE_VOTE" | "POSITIVE_VOTE" | "RED_VOTE"
+  Language: "EN" | "FR"
+  MessageOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "sendDate_ASC" | "sendDate_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  ReportOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "reason_ASC" | "reason_DESC" | "reasonText_ASC" | "reasonText_DESC" | "treated_ASC" | "treated_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  ReportReason: "INSULT" | "PORNOGRAPHY" | "RACISM" | "SEXISM" | "VIOLENCE"
+  ReportType: "COMMENT" | "DEBATE"
+  Role: "ADMIN" | "MODERATOR" | "MUDDLE" | "STANDARD"
+  TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
+  TrophyType: "DUO" | "TOP_COMMENT"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "pseudo_ASC" | "pseudo_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
+  Comment: { // root type
+    content: string; // String!
+    createdAt: any; // DateTime!
+    from: string; // String!
+    id: string; // ID!
+    updatedAt: any; // DateTime!
+  }
+  Conversation: { // root type
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    updatedAt: any; // DateTime!
+  }
+  Debate: { // root type
+    closed: boolean; // Boolean!
+    content: string; // String!
+    createdAt: any; // DateTime!
+    crowned: boolean; // Boolean!
+    id: string; // ID!
+    timelimit?: any | null; // DateTime
+    type: NexusGenEnums['DebateType']; // DebateType!
+    updatedAt: any; // DateTime!
+  }
+  Interaction: { // root type
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    type: NexusGenEnums['InteractionType']; // InteractionType!
+    updatedAt: any; // DateTime!
+  }
+  Message: { // root type
+    content: string; // String!
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    sendDate: any; // DateTime!
+    updatedAt: any; // DateTime!
+  }
   Mutation: {};
   Query: {};
+  Report: { // root type
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    reason: NexusGenEnums['ReportReason']; // ReportReason!
+    reasonText?: string | null; // String
+    treated: boolean; // Boolean!
+    type: NexusGenEnums['ReportType']; // ReportType!
+    updatedAt: any; // DateTime!
+  }
   Token: { // root type
     token: string; // String!
   }
-  User: { // root type
-    email: string; // String!
+  Trophy: { // root type
+    createdAt: any; // DateTime!
     id: string; // ID!
-    password: string; // String!
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    updatedAt: any; // DateTime!
+    won: boolean; // Boolean!
+  }
+  User: { // root type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    certified: boolean; // Boolean!
+    coverPicture?: string | null; // String
+    createdAt: any; // DateTime!
+    crowned: boolean; // Boolean!
+    email: string; // String!
+    gender: NexusGenEnums['Gender']; // Gender!
+    id: string; // ID!
+    language: NexusGenEnums['Language']; // Language!
+    lastConnected?: any | null; // DateTime
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role: NexusGenEnums['Role']; // Role!
+    updatedAt: any; // DateTime!
   }
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
+  DateTime: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  CommentWhereInput: NexusGenInputs['CommentWhereInput'];
+  ConversationWhereInput: NexusGenInputs['ConversationWhereInput'];
+  DebateWhereInput: NexusGenInputs['DebateWhereInput'];
+  InteractionWhereInput: NexusGenInputs['InteractionWhereInput'];
+  MessageWhereInput: NexusGenInputs['MessageWhereInput'];
+  ReportWhereInput: NexusGenInputs['ReportWhereInput'];
+  TrophyWhereInput: NexusGenInputs['TrophyWhereInput'];
+  UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  CommentOrderByInput: NexusGenEnums['CommentOrderByInput'];
+  ConversationOrderByInput: NexusGenEnums['ConversationOrderByInput'];
+  DebateOrderByInput: NexusGenEnums['DebateOrderByInput'];
+  DebateType: NexusGenEnums['DebateType'];
+  Gender: NexusGenEnums['Gender'];
+  InteractionOrderByInput: NexusGenEnums['InteractionOrderByInput'];
+  InteractionType: NexusGenEnums['InteractionType'];
+  Language: NexusGenEnums['Language'];
+  MessageOrderByInput: NexusGenEnums['MessageOrderByInput'];
+  ReportOrderByInput: NexusGenEnums['ReportOrderByInput'];
+  ReportReason: NexusGenEnums['ReportReason'];
+  ReportType: NexusGenEnums['ReportType'];
+  Role: NexusGenEnums['Role'];
+  TrophyOrderByInput: NexusGenEnums['TrophyOrderByInput'];
+  TrophyType: NexusGenEnums['TrophyType'];
+  UserOrderByInput: NexusGenEnums['UserOrderByInput'];
 }
 
 export interface NexusGenFieldTypes {
+  Comment: { // field return type
+    content: string; // String!
+    createdAt: any; // DateTime!
+    debate: NexusGenRootTypes['Debate']; // Debate!
+    dislikes: NexusGenRootTypes['User'][] | null; // [User!]
+    from: string; // String!
+    id: string; // ID!
+    likes: NexusGenRootTypes['User'][] | null; // [User!]
+    reports: NexusGenRootTypes['Report'][] | null; // [Report!]
+    updatedAt: any; // DateTime!
+  }
+  Conversation: { // field return type
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    messages: NexusGenRootTypes['Message'][] | null; // [Message!]
+    speakers: NexusGenRootTypes['User'][] | null; // [User!]
+    updatedAt: any; // DateTime!
+  }
+  Debate: { // field return type
+    blueVotes: NexusGenRootTypes['User'][] | null; // [User!]
+    closed: boolean; // Boolean!
+    comments: NexusGenRootTypes['Comment'][] | null; // [Comment!]
+    content: string; // String!
+    createdAt: any; // DateTime!
+    crowned: boolean; // Boolean!
+    id: string; // ID!
+    interactions: NexusGenRootTypes['Interaction'][] | null; // [Interaction!]
+    loser: NexusGenRootTypes['User'] | null; // User
+    negatives: NexusGenRootTypes['User'][] | null; // [User!]
+    owner: NexusGenRootTypes['User'] | null; // User
+    ownerBlue: NexusGenRootTypes['User'] | null; // User
+    ownerRed: NexusGenRootTypes['User'] | null; // User
+    positives: NexusGenRootTypes['User'][] | null; // [User!]
+    redVotes: NexusGenRootTypes['User'][] | null; // [User!]
+    reports: NexusGenRootTypes['Report'][] | null; // [Report!]
+    timelimit: any | null; // DateTime
+    topComment: NexusGenRootTypes['Comment'] | null; // Comment
+    type: NexusGenEnums['DebateType']; // DebateType!
+    updatedAt: any; // DateTime!
+    winner: NexusGenRootTypes['User'] | null; // User
+  }
+  Interaction: { // field return type
+    comment: NexusGenRootTypes['Comment'] | null; // Comment
+    createdAt: any; // DateTime!
+    debate: NexusGenRootTypes['Debate'] | null; // Debate
+    id: string; // ID!
+    type: NexusGenEnums['InteractionType']; // InteractionType!
+    updatedAt: any; // DateTime!
+    who: NexusGenRootTypes['User']; // User!
+  }
+  Message: { // field return type
+    content: string; // String!
+    createdAt: any; // DateTime!
+    from: NexusGenRootTypes['User']; // User!
+    id: string; // ID!
+    sendDate: any; // DateTime!
+    to: NexusGenRootTypes['User']; // User!
+    updatedAt: any; // DateTime!
+  }
   Mutation: { // field return type
     signUp: NexusGenRootTypes['Token']; // Token!
   }
@@ -52,17 +737,176 @@ export interface NexusGenFieldTypes {
     signIn: NexusGenRootTypes['Token']; // Token!
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Report: { // field return type
+    comment: NexusGenRootTypes['Comment'] | null; // Comment
+    createdAt: any; // DateTime!
+    debate: NexusGenRootTypes['Debate'] | null; // Debate
+    from: NexusGenRootTypes['User'] | null; // User
+    id: string; // ID!
+    reason: NexusGenEnums['ReportReason']; // ReportReason!
+    reasonText: string | null; // String
+    to: NexusGenRootTypes['User'] | null; // User
+    treated: boolean; // Boolean!
+    type: NexusGenEnums['ReportType']; // ReportType!
+    updatedAt: any; // DateTime!
+  }
   Token: { // field return type
     token: string; // String!
   }
-  User: { // field return type
-    email: string; // String!
+  Trophy: { // field return type
+    comment: NexusGenRootTypes['Comment'] | null; // Comment
+    createdAt: any; // DateTime!
+    debate: NexusGenRootTypes['Debate'] | null; // Debate
     id: string; // ID!
-    password: string; // String!
+    type: NexusGenEnums['TrophyType'] | null; // TrophyType
+    updatedAt: any; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    won: boolean; // Boolean!
+  }
+  User: { // field return type
+    bio: string | null; // String
+    birthdate: any; // DateTime!
+    blocked: NexusGenRootTypes['User'][] | null; // [User!]
+    blocking: NexusGenRootTypes['User'][] | null; // [User!]
+    certified: boolean; // Boolean!
+    conversations: NexusGenRootTypes['Conversation'][] | null; // [Conversation!]
+    coverPicture: string | null; // String
+    createdAt: any; // DateTime!
+    crowned: boolean; // Boolean!
+    debates: NexusGenRootTypes['Debate'][] | null; // [Debate!]
+    debatesBlue: NexusGenRootTypes['Debate'][] | null; // [Debate!]
+    debatesRed: NexusGenRootTypes['Debate'][] | null; // [Debate!]
+    email: string; // String!
+    followers: NexusGenRootTypes['User'][] | null; // [User!]
+    following: NexusGenRootTypes['User'][] | null; // [User!]
+    gender: NexusGenEnums['Gender']; // Gender!
+    id: string; // ID!
+    interactions: NexusGenRootTypes['Interaction'][] | null; // [Interaction!]
+    language: NexusGenEnums['Language']; // Language!
+    lastConnected: any | null; // DateTime
+    profilePicture: string | null; // String
+    pseudo: string; // String!
+    role: NexusGenEnums['Role']; // Role!
+    trophies: NexusGenRootTypes['Trophy'][] | null; // [Trophy!]
+    updatedAt: any; // DateTime!
   }
 }
 
 export interface NexusGenArgTypes {
+  Comment: {
+    dislikes: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    likes: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    reports: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ReportOrderByInput'] | null; // ReportOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
+    }
+  }
+  Conversation: {
+    messages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+    speakers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+  }
+  Debate: {
+    blueVotes: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    comments: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['CommentOrderByInput'] | null; // CommentOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+    interactions: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['InteractionOrderByInput'] | null; // InteractionOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
+    }
+    negatives: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    positives: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    redVotes: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    reports: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ReportOrderByInput'] | null; // ReportOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
+    }
+  }
   Mutation: {
     signUp: { // args
       email?: string | null; // String
@@ -84,6 +928,98 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
+  User: {
+    blocked: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    blocking: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    conversations: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ConversationOrderByInput'] | null; // ConversationOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ConversationWhereInput'] | null; // ConversationWhereInput
+    }
+    debates: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['DebateOrderByInput'] | null; // DebateOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    }
+    debatesBlue: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['DebateOrderByInput'] | null; // DebateOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    }
+    debatesRed: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['DebateOrderByInput'] | null; // DebateOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
+    }
+    followers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    following: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    interactions: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['InteractionOrderByInput'] | null; // InteractionOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
+    }
+    trophies: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TrophyOrderByInput'] | null; // TrophyOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TrophyWhereInput'] | null; // TrophyWhereInput
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -91,15 +1027,15 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "Token" | "User";
+export type NexusGenObjectNames = "Comment" | "Conversation" | "Debate" | "Interaction" | "Message" | "Mutation" | "Query" | "Report" | "Token" | "Trophy" | "User";
 
-export type NexusGenInputNames = "UserWhereUniqueInput";
+export type NexusGenInputNames = "CommentWhereInput" | "ConversationWhereInput" | "DebateWhereInput" | "InteractionWhereInput" | "MessageWhereInput" | "ReportWhereInput" | "TrophyWhereInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

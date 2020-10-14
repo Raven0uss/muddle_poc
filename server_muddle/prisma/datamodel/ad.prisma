@@ -1,0 +1,10 @@
+type Ad {
+  id: ID! @id
+  name: String! @unique
+  content: String!
+  targets: [AdTarget] @relation(link: INLINE)
+  active: Boolean! @default(value: true)
+  ratio: Int! @default(value: 1)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

@@ -1,0 +1,26 @@
+enum ReportType {
+  DEBATE
+  COMMENT
+}
+
+enum ReportReason {
+  INSULT
+  RACISM
+  SEXISM
+  VIOLENCE
+  PORNOGRAPHY
+}
+
+type Report {
+  id: ID! @id
+  from: User @relation(link: INLINE, name: "ReportFrom")
+  to: User @relation(link: INLINE, name: "ReportTo")
+  type: ReportType!
+  reason: ReportReason!
+  reasonText: String
+  debate: Debate @relation(link: INLINE)
+  comment: Comment @relation(link: INLINE)
+  treated: Boolean! @default(value: false)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

@@ -1,0 +1,9 @@
+type Message {
+  id: ID! @id
+  content: String!
+  to: User! @relation(link: INLINE, name: "MessageTo")
+  from: User! @relation(link: INLINE, name: "MessageFrom")
+  sendDate: DateTime! @createdAt
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
