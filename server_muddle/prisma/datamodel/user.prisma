@@ -20,6 +20,7 @@ type User {
   id: ID! @id
   pseudo: String! @unique
   email: String! @unique
+  password: String!
   birthdate: DateTime!
   role: Role! @default(value: STANDARD)
   certified: Boolean! @default(value: false)

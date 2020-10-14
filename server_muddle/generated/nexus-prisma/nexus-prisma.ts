@@ -1723,6 +1723,7 @@ type UserObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'pseudo', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'birthdate', args?: [] | false, alias?: string  } 
   | { name: 'role', args?: [] | false, alias?: string  } 
   | { name: 'certified', args?: [] | false, alias?: string  } 
@@ -1750,6 +1751,7 @@ type UserFields =
   | 'id'
   | 'pseudo'
   | 'email'
+  | 'password'
   | 'birthdate'
   | 'role'
   | 'certified'
@@ -1874,6 +1876,14 @@ export interface UserFieldDetails {
     resolve: undefined
   }
   email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
     type: 'String'
     args: {}
     description: string
@@ -6682,6 +6692,7 @@ type UserPreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'pseudo', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'birthdate', args?: [] | false, alias?: string  } 
   | { name: 'role', args?: [] | false, alias?: string  } 
   | { name: 'certified', args?: [] | false, alias?: string  } 
@@ -6699,6 +6710,7 @@ type UserPreviousValuesFields =
   | 'id'
   | 'pseudo'
   | 'email'
+  | 'password'
   | 'birthdate'
   | 'role'
   | 'certified'
@@ -6734,6 +6746,14 @@ export interface UserPreviousValuesFieldDetails {
     resolve: undefined
   }
   email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
     type: 'String'
     args: {}
     description: string
@@ -7204,6 +7224,20 @@ export interface UserWhereInput {
   email_not_starts_with?: string | null
   email_ends_with?: string | null
   email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
   birthdate?: string | null
   birthdate_not?: string | null
   birthdate_in?: string[]
@@ -7350,6 +7384,20 @@ export type UserWhereInputInputObject =
   | { name: 'email_not_starts_with', alias?: string  } 
   | { name: 'email_ends_with', alias?: string  } 
   | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'birthdate_not', alias?: string  } 
   | { name: 'birthdate_in', alias?: string  } 
@@ -8608,6 +8656,7 @@ export interface UserCreateInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8634,6 +8683,7 @@ export type UserCreateInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -8668,6 +8718,7 @@ export interface UserCreateWithoutFollowingInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8693,6 +8744,7 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -8726,6 +8778,7 @@ export interface UserCreateWithoutBlockingInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8751,6 +8804,7 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -8784,6 +8838,7 @@ export interface UserCreateWithoutFollowersInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8809,6 +8864,7 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -8842,6 +8898,7 @@ export interface UserCreateWithoutBlockedInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8867,6 +8924,7 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -8950,6 +9008,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -8975,6 +9034,7 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9058,6 +9118,7 @@ export interface UserCreateWithoutDebatesInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9083,6 +9144,7 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9166,6 +9228,7 @@ export interface UserCreateWithoutDebatesRedInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9191,6 +9254,7 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9446,6 +9510,7 @@ export interface UserCreateWithoutInteractionsInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9471,6 +9536,7 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9761,6 +9827,7 @@ export type UserUpdateWithWhereUniqueNestedInputInputObject =
 export interface UserUpdateDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9786,6 +9853,7 @@ export type UserUpdateDataInputInputObject =
   | Extract<keyof UserUpdateDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9842,6 +9910,7 @@ export type UserUpdateWithWhereUniqueWithoutFollowingInputInputObject =
 export interface UserUpdateWithoutFollowingDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9866,6 +9935,7 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowingDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -9921,6 +9991,7 @@ export type UserUpdateWithWhereUniqueWithoutBlockingInputInputObject =
 export interface UserUpdateWithoutBlockingDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -9945,6 +10016,7 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockingDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -10000,6 +10072,7 @@ export type UserUpdateWithWhereUniqueWithoutFollowersInputInputObject =
 export interface UserUpdateWithoutFollowersDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -10024,6 +10097,7 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowersDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -10079,6 +10153,7 @@ export type UserUpdateWithWhereUniqueWithoutBlockedInputInputObject =
 export interface UserUpdateWithoutBlockedDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -10103,6 +10178,7 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockedDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -10214,6 +10290,7 @@ export type UserUpdateOneWithoutDebatesBlueInputInputObject =
 export interface UserUpdateWithoutDebatesBlueDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -10238,6 +10315,7 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesBlueDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -10349,6 +10427,7 @@ export type UserUpdateOneWithoutDebatesInputInputObject =
 export interface UserUpdateWithoutDebatesDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -10373,6 +10452,7 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -10484,6 +10564,7 @@ export type UserUpdateOneWithoutDebatesRedInputInputObject =
 export interface UserUpdateWithoutDebatesRedDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -10508,6 +10589,7 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesRedDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -11200,6 +11282,7 @@ export type UserUpdateOneRequiredWithoutInteractionsInputInputObject =
 export interface UserUpdateWithoutInteractionsDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -11224,6 +11307,7 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutInteractionsDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -12379,6 +12463,20 @@ export interface UserScalarWhereInput {
   email_not_starts_with?: string | null
   email_ends_with?: string | null
   email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
   birthdate?: string | null
   birthdate_not?: string | null
   birthdate_in?: string[]
@@ -12517,6 +12615,20 @@ export type UserScalarWhereInputInputObject =
   | { name: 'email_not_starts_with', alias?: string  } 
   | { name: 'email_ends_with', alias?: string  } 
   | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'birthdate_not', alias?: string  } 
   | { name: 'birthdate_in', alias?: string  } 
@@ -12623,6 +12735,7 @@ export type UserUpdateManyWithWhereNestedInputInputObject =
 export interface UserUpdateManyDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -12638,6 +12751,7 @@ export type UserUpdateManyDataInputInputObject =
   | Extract<keyof UserUpdateManyDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -12726,6 +12840,7 @@ export interface UserCreateWithoutConversationsInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -12751,6 +12866,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -12815,6 +12931,7 @@ export type UserUpdateWithWhereUniqueWithoutConversationsInputInputObject =
 export interface UserUpdateWithoutConversationsDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -12839,6 +12956,7 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutConversationsDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -13066,6 +13184,7 @@ export interface UserCreateWithoutTrophiesInput {
   id?: string | null
   pseudo?: string
   email?: string
+  password?: string
   birthdate?: string
   role?: prisma.Role | null
   certified?: boolean | null
@@ -13091,6 +13210,7 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -13142,6 +13262,7 @@ export type UserUpdateOneRequiredWithoutTrophiesInputInputObject =
 export interface UserUpdateWithoutTrophiesDataInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -13166,6 +13287,7 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutTrophiesDataInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -13207,6 +13329,7 @@ export type TrophyUpdateManyMutationInputInputObject =
 export interface UserUpdateInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -13232,6 +13355,7 @@ export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -13256,6 +13380,7 @@ export type UserUpdateInputInputObject =
 export interface UserUpdateManyMutationInput {
   pseudo?: string | null
   email?: string | null
+  password?: string | null
   birthdate?: string | null
   role?: prisma.Role | null
   certified?: boolean | null
@@ -13271,6 +13396,7 @@ export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
   | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
   | { name: 'role', alias?: string  } 
   | { name: 'certified', alias?: string  } 
@@ -13540,6 +13666,8 @@ export type UserOrderByInputValues =
   | 'pseudo_DESC'
   | 'email_ASC'
   | 'email_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
   | 'birthdate_ASC'
   | 'birthdate_DESC'
   | 'role_ASC'

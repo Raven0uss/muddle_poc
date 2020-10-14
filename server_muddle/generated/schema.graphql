@@ -2,6 +2,361 @@
 ### Do not make changes to this file directly
 
 
+type Ad {
+  active: Boolean!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  ratio: Int!
+  targets(after: String, before: String, first: Int, last: Int, orderBy: AdTargetOrderByInput, skip: Int, where: AdTargetWhereInput): [AdTarget!]
+  updatedAt: DateTime!
+}
+
+input AdCreateInput {
+  active: Boolean
+  content: String!
+  id: ID
+  name: String!
+  ratio: Int
+  targets: AdTargetCreateManyInput
+}
+
+enum AdOrderByInput {
+  active_ASC
+  active_DESC
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  ratio_ASC
+  ratio_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type AdTarget {
+  birthdateMax: DateTime!
+  birthdateMin: DateTime!
+  createdAt: DateTime!
+  gender: GenderFilter!
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input AdTargetCreateInput {
+  birthdateMax: DateTime!
+  birthdateMin: DateTime!
+  gender: GenderFilter
+  id: ID
+  name: String!
+}
+
+input AdTargetCreateManyInput {
+  connect: [AdTargetWhereUniqueInput!]
+  create: [AdTargetCreateInput!]
+}
+
+enum AdTargetOrderByInput {
+  birthdateMax_ASC
+  birthdateMax_DESC
+  birthdateMin_ASC
+  birthdateMin_DESC
+  createdAt_ASC
+  createdAt_DESC
+  gender_ASC
+  gender_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input AdTargetScalarWhereInput {
+  AND: [AdTargetScalarWhereInput!]
+  birthdateMax: DateTime
+  birthdateMax_gt: DateTime
+  birthdateMax_gte: DateTime
+  birthdateMax_in: [DateTime!]
+  birthdateMax_lt: DateTime
+  birthdateMax_lte: DateTime
+  birthdateMax_not: DateTime
+  birthdateMax_not_in: [DateTime!]
+  birthdateMin: DateTime
+  birthdateMin_gt: DateTime
+  birthdateMin_gte: DateTime
+  birthdateMin_in: [DateTime!]
+  birthdateMin_lt: DateTime
+  birthdateMin_lte: DateTime
+  birthdateMin_not: DateTime
+  birthdateMin_not_in: [DateTime!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  gender: GenderFilter
+  gender_in: [GenderFilter!]
+  gender_not: GenderFilter
+  gender_not_in: [GenderFilter!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  name: String
+  name_contains: String
+  name_ends_with: String
+  name_gt: String
+  name_gte: String
+  name_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_not: String
+  name_not_contains: String
+  name_not_ends_with: String
+  name_not_in: [String!]
+  name_not_starts_with: String
+  name_starts_with: String
+  NOT: [AdTargetScalarWhereInput!]
+  OR: [AdTargetScalarWhereInput!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input AdTargetUpdateDataInput {
+  birthdateMax: DateTime
+  birthdateMin: DateTime
+  gender: GenderFilter
+  name: String
+}
+
+input AdTargetUpdateInput {
+  birthdateMax: DateTime
+  birthdateMin: DateTime
+  gender: GenderFilter
+  name: String
+}
+
+input AdTargetUpdateManyDataInput {
+  birthdateMax: DateTime
+  birthdateMin: DateTime
+  gender: GenderFilter
+  name: String
+}
+
+input AdTargetUpdateManyInput {
+  connect: [AdTargetWhereUniqueInput!]
+  create: [AdTargetCreateInput!]
+  delete: [AdTargetWhereUniqueInput!]
+  deleteMany: [AdTargetScalarWhereInput!]
+  disconnect: [AdTargetWhereUniqueInput!]
+  set: [AdTargetWhereUniqueInput!]
+  update: [AdTargetUpdateWithWhereUniqueNestedInput!]
+  updateMany: [AdTargetUpdateManyWithWhereNestedInput!]
+  upsert: [AdTargetUpsertWithWhereUniqueNestedInput!]
+}
+
+input AdTargetUpdateManyWithWhereNestedInput {
+  data: AdTargetUpdateManyDataInput!
+  where: AdTargetScalarWhereInput!
+}
+
+input AdTargetUpdateWithWhereUniqueNestedInput {
+  data: AdTargetUpdateDataInput!
+  where: AdTargetWhereUniqueInput!
+}
+
+input AdTargetUpsertWithWhereUniqueNestedInput {
+  create: AdTargetCreateInput!
+  update: AdTargetUpdateDataInput!
+  where: AdTargetWhereUniqueInput!
+}
+
+input AdTargetWhereInput {
+  AND: [AdTargetWhereInput!]
+  birthdateMax: DateTime
+  birthdateMax_gt: DateTime
+  birthdateMax_gte: DateTime
+  birthdateMax_in: [DateTime!]
+  birthdateMax_lt: DateTime
+  birthdateMax_lte: DateTime
+  birthdateMax_not: DateTime
+  birthdateMax_not_in: [DateTime!]
+  birthdateMin: DateTime
+  birthdateMin_gt: DateTime
+  birthdateMin_gte: DateTime
+  birthdateMin_in: [DateTime!]
+  birthdateMin_lt: DateTime
+  birthdateMin_lte: DateTime
+  birthdateMin_not: DateTime
+  birthdateMin_not_in: [DateTime!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  gender: GenderFilter
+  gender_in: [GenderFilter!]
+  gender_not: GenderFilter
+  gender_not_in: [GenderFilter!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  name: String
+  name_contains: String
+  name_ends_with: String
+  name_gt: String
+  name_gte: String
+  name_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_not: String
+  name_not_contains: String
+  name_not_ends_with: String
+  name_not_in: [String!]
+  name_not_starts_with: String
+  name_starts_with: String
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input AdTargetWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+input AdUpdateInput {
+  active: Boolean
+  content: String
+  name: String
+  ratio: Int
+  targets: AdTargetUpdateManyInput
+}
+
+input AdWhereInput {
+  active: Boolean
+  active_not: Boolean
+  AND: [AdWhereInput!]
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  name: String
+  name_contains: String
+  name_ends_with: String
+  name_gt: String
+  name_gte: String
+  name_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_not: String
+  name_not_contains: String
+  name_not_ends_with: String
+  name_not_in: [String!]
+  name_not_starts_with: String
+  name_starts_with: String
+  ratio: Int
+  ratio_gt: Int
+  ratio_gte: Int
+  ratio_in: [Int!]
+  ratio_lt: Int
+  ratio_lte: Int
+  ratio_not: Int
+  ratio_not_in: [Int!]
+  targets_some: AdTargetWhereInput
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input AdWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 type Comment {
   content: String!
   createdAt: DateTime!
@@ -12,6 +367,49 @@ type Comment {
   likes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
   updatedAt: DateTime!
+}
+
+input CommentCreateInput {
+  content: String!
+  debate: DebateCreateOneWithoutCommentsInput!
+  dislikes: UserCreateManyInput
+  from: String!
+  id: ID
+  likes: UserCreateManyInput
+  reports: ReportCreateManyWithoutCommentInput
+}
+
+input CommentCreateManyWithoutDebateInput {
+  connect: [CommentWhereUniqueInput!]
+  create: [CommentCreateWithoutDebateInput!]
+}
+
+input CommentCreateOneInput {
+  connect: CommentWhereUniqueInput
+  create: CommentCreateInput
+}
+
+input CommentCreateOneWithoutReportsInput {
+  connect: CommentWhereUniqueInput
+  create: CommentCreateWithoutReportsInput
+}
+
+input CommentCreateWithoutDebateInput {
+  content: String!
+  dislikes: UserCreateManyInput
+  from: String!
+  id: ID
+  likes: UserCreateManyInput
+  reports: ReportCreateManyWithoutCommentInput
+}
+
+input CommentCreateWithoutReportsInput {
+  content: String!
+  debate: DebateCreateOneWithoutCommentsInput!
+  dislikes: UserCreateManyInput
+  from: String!
+  id: ID
+  likes: UserCreateManyInput
 }
 
 enum CommentOrderByInput {
@@ -25,6 +423,165 @@ enum CommentOrderByInput {
   id_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input CommentScalarWhereInput {
+  AND: [CommentScalarWhereInput!]
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  from: String
+  from_contains: String
+  from_ends_with: String
+  from_gt: String
+  from_gte: String
+  from_in: [String!]
+  from_lt: String
+  from_lte: String
+  from_not: String
+  from_not_contains: String
+  from_not_ends_with: String
+  from_not_in: [String!]
+  from_not_starts_with: String
+  from_starts_with: String
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input CommentUpdateDataInput {
+  content: String
+  debate: DebateUpdateOneRequiredWithoutCommentsInput
+  dislikes: UserUpdateManyInput
+  from: String
+  likes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutCommentInput
+}
+
+input CommentUpdateInput {
+  content: String
+  debate: DebateUpdateOneRequiredWithoutCommentsInput
+  dislikes: UserUpdateManyInput
+  from: String
+  likes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutCommentInput
+}
+
+input CommentUpdateManyDataInput {
+  content: String
+  from: String
+}
+
+input CommentUpdateManyWithoutDebateInput {
+  connect: [CommentWhereUniqueInput!]
+  create: [CommentCreateWithoutDebateInput!]
+  delete: [CommentWhereUniqueInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutDebateInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutDebateInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  data: CommentUpdateManyDataInput!
+  where: CommentScalarWhereInput!
+}
+
+input CommentUpdateOneInput {
+  connect: CommentWhereUniqueInput
+  create: CommentCreateInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CommentUpdateDataInput
+  upsert: CommentUpsertNestedInput
+}
+
+input CommentUpdateOneWithoutReportsInput {
+  connect: CommentWhereUniqueInput
+  create: CommentCreateWithoutReportsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CommentUpdateWithoutReportsDataInput
+  upsert: CommentUpsertWithoutReportsInput
+}
+
+input CommentUpdateWithoutDebateDataInput {
+  content: String
+  dislikes: UserUpdateManyInput
+  from: String
+  likes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutCommentInput
+}
+
+input CommentUpdateWithoutReportsDataInput {
+  content: String
+  debate: DebateUpdateOneRequiredWithoutCommentsInput
+  dislikes: UserUpdateManyInput
+  from: String
+  likes: UserUpdateManyInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutDebateInput {
+  data: CommentUpdateWithoutDebateDataInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpsertNestedInput {
+  create: CommentCreateInput!
+  update: CommentUpdateDataInput!
+}
+
+input CommentUpsertWithoutReportsInput {
+  create: CommentCreateWithoutReportsInput!
+  update: CommentUpdateWithoutReportsDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutDebateInput {
+  create: CommentCreateWithoutDebateInput!
+  update: CommentUpdateWithoutDebateDataInput!
+  where: CommentWhereUniqueInput!
 }
 
 input CommentWhereInput {
@@ -93,12 +650,32 @@ input CommentWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+input CommentWhereUniqueInput {
+  id: ID
+}
+
 type Conversation {
   createdAt: DateTime!
   id: ID!
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]
   speakers(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   updatedAt: DateTime!
+}
+
+input ConversationCreateInput {
+  id: ID
+  messages: MessageCreateManyInput
+  speakers: UserCreateManyWithoutConversationsInput
+}
+
+input ConversationCreateManyWithoutSpeakersInput {
+  connect: [ConversationWhereUniqueInput!]
+  create: [ConversationCreateWithoutSpeakersInput!]
+}
+
+input ConversationCreateWithoutSpeakersInput {
+  id: ID
+  messages: MessageCreateManyInput
 }
 
 enum ConversationOrderByInput {
@@ -108,6 +685,73 @@ enum ConversationOrderByInput {
   id_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input ConversationScalarWhereInput {
+  AND: [ConversationScalarWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [ConversationScalarWhereInput!]
+  OR: [ConversationScalarWhereInput!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input ConversationUpdateInput {
+  messages: MessageUpdateManyInput
+  speakers: UserUpdateManyWithoutConversationsInput
+}
+
+input ConversationUpdateManyWithoutSpeakersInput {
+  connect: [ConversationWhereUniqueInput!]
+  create: [ConversationCreateWithoutSpeakersInput!]
+  delete: [ConversationWhereUniqueInput!]
+  deleteMany: [ConversationScalarWhereInput!]
+  disconnect: [ConversationWhereUniqueInput!]
+  set: [ConversationWhereUniqueInput!]
+  update: [ConversationUpdateWithWhereUniqueWithoutSpeakersInput!]
+  upsert: [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
+}
+
+input ConversationUpdateWithoutSpeakersDataInput {
+  messages: MessageUpdateManyInput
+}
+
+input ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
+  data: ConversationUpdateWithoutSpeakersDataInput!
+  where: ConversationWhereUniqueInput!
+}
+
+input ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
+  create: ConversationCreateWithoutSpeakersInput!
+  update: ConversationUpdateWithoutSpeakersDataInput!
+  where: ConversationWhereUniqueInput!
 }
 
 input ConversationWhereInput {
@@ -146,6 +790,11 @@ input ConversationWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+input ConversationWhereUniqueInput {
+  id: ID
+}
+
+"""Date custom scalar type"""
 scalar DateTime
 
 type Debate {
@@ -172,6 +821,189 @@ type Debate {
   winner: User
 }
 
+input DebateCreateInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateManyWithoutOwnerBlueInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerBlueInput!]
+}
+
+input DebateCreateManyWithoutOwnerInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerInput!]
+}
+
+input DebateCreateManyWithoutOwnerRedInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerRedInput!]
+}
+
+input DebateCreateOneInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateInput
+}
+
+input DebateCreateOneWithoutCommentsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutCommentsInput
+}
+
+input DebateCreateOneWithoutInteractionsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutInteractionsInput
+}
+
+input DebateCreateOneWithoutReportsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutReportsInput
+}
+
+input DebateCreateWithoutCommentsInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateWithoutInteractionsInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateWithoutOwnerBlueInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateWithoutOwnerInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateWithoutOwnerRedInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  reports: ReportCreateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
+input DebateCreateWithoutReportsInput {
+  blueVotes: UserCreateManyInput
+  closed: Boolean
+  comments: CommentCreateManyWithoutDebateInput
+  content: String!
+  crowned: Boolean
+  id: ID
+  interactions: InteractionCreateManyWithoutDebateInput
+  loser: UserCreateOneInput
+  negatives: UserCreateManyInput
+  owner: UserCreateOneWithoutDebatesInput
+  ownerBlue: UserCreateOneWithoutDebatesBlueInput
+  ownerRed: UserCreateOneWithoutDebatesRedInput
+  positives: UserCreateManyInput
+  redVotes: UserCreateManyInput
+  timelimit: DateTime
+  topComment: CommentCreateOneInput
+  type: DebateType!
+  winner: UserCreateOneInput
+}
+
 enum DebateOrderByInput {
   closed_ASC
   closed_DESC
@@ -191,9 +1023,352 @@ enum DebateOrderByInput {
   updatedAt_DESC
 }
 
+input DebateScalarWhereInput {
+  AND: [DebateScalarWhereInput!]
+  closed: Boolean
+  closed_not: Boolean
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  crowned: Boolean
+  crowned_not: Boolean
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [DebateScalarWhereInput!]
+  OR: [DebateScalarWhereInput!]
+  timelimit: DateTime
+  timelimit_gt: DateTime
+  timelimit_gte: DateTime
+  timelimit_in: [DateTime!]
+  timelimit_lt: DateTime
+  timelimit_lte: DateTime
+  timelimit_not: DateTime
+  timelimit_not_in: [DateTime!]
+  type: DebateType
+  type_in: [DebateType!]
+  type_not: DebateType
+  type_not_in: [DebateType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
 enum DebateType {
   DUO
   STANDARD
+}
+
+input DebateUpdateDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateManyDataInput {
+  closed: Boolean
+  content: String
+  crowned: Boolean
+  timelimit: DateTime
+  type: DebateType
+}
+
+input DebateUpdateManyWithoutOwnerBlueInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerBlueInput!]
+  delete: [DebateWhereUniqueInput!]
+  deleteMany: [DebateScalarWhereInput!]
+  disconnect: [DebateWhereUniqueInput!]
+  set: [DebateWhereUniqueInput!]
+  update: [DebateUpdateWithWhereUniqueWithoutOwnerBlueInput!]
+  updateMany: [DebateUpdateManyWithWhereNestedInput!]
+  upsert: [DebateUpsertWithWhereUniqueWithoutOwnerBlueInput!]
+}
+
+input DebateUpdateManyWithoutOwnerInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerInput!]
+  delete: [DebateWhereUniqueInput!]
+  deleteMany: [DebateScalarWhereInput!]
+  disconnect: [DebateWhereUniqueInput!]
+  set: [DebateWhereUniqueInput!]
+  update: [DebateUpdateWithWhereUniqueWithoutOwnerInput!]
+  updateMany: [DebateUpdateManyWithWhereNestedInput!]
+  upsert: [DebateUpsertWithWhereUniqueWithoutOwnerInput!]
+}
+
+input DebateUpdateManyWithoutOwnerRedInput {
+  connect: [DebateWhereUniqueInput!]
+  create: [DebateCreateWithoutOwnerRedInput!]
+  delete: [DebateWhereUniqueInput!]
+  deleteMany: [DebateScalarWhereInput!]
+  disconnect: [DebateWhereUniqueInput!]
+  set: [DebateWhereUniqueInput!]
+  update: [DebateUpdateWithWhereUniqueWithoutOwnerRedInput!]
+  updateMany: [DebateUpdateManyWithWhereNestedInput!]
+  upsert: [DebateUpsertWithWhereUniqueWithoutOwnerRedInput!]
+}
+
+input DebateUpdateManyWithWhereNestedInput {
+  data: DebateUpdateManyDataInput!
+  where: DebateScalarWhereInput!
+}
+
+input DebateUpdateOneInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DebateUpdateDataInput
+  upsert: DebateUpsertNestedInput
+}
+
+input DebateUpdateOneRequiredWithoutCommentsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutCommentsInput
+  update: DebateUpdateWithoutCommentsDataInput
+  upsert: DebateUpsertWithoutCommentsInput
+}
+
+input DebateUpdateOneWithoutInteractionsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutInteractionsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DebateUpdateWithoutInteractionsDataInput
+  upsert: DebateUpsertWithoutInteractionsInput
+}
+
+input DebateUpdateOneWithoutReportsInput {
+  connect: DebateWhereUniqueInput
+  create: DebateCreateWithoutReportsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: DebateUpdateWithoutReportsDataInput
+  upsert: DebateUpsertWithoutReportsInput
+}
+
+input DebateUpdateWithoutCommentsDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithoutInteractionsDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithoutOwnerBlueDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithoutOwnerDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithoutOwnerRedDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithoutReportsDataInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
+input DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
+  data: DebateUpdateWithoutOwnerBlueDataInput!
+  where: DebateWhereUniqueInput!
+}
+
+input DebateUpdateWithWhereUniqueWithoutOwnerInput {
+  data: DebateUpdateWithoutOwnerDataInput!
+  where: DebateWhereUniqueInput!
+}
+
+input DebateUpdateWithWhereUniqueWithoutOwnerRedInput {
+  data: DebateUpdateWithoutOwnerRedDataInput!
+  where: DebateWhereUniqueInput!
+}
+
+input DebateUpsertNestedInput {
+  create: DebateCreateInput!
+  update: DebateUpdateDataInput!
+}
+
+input DebateUpsertWithoutCommentsInput {
+  create: DebateCreateWithoutCommentsInput!
+  update: DebateUpdateWithoutCommentsDataInput!
+}
+
+input DebateUpsertWithoutInteractionsInput {
+  create: DebateCreateWithoutInteractionsInput!
+  update: DebateUpdateWithoutInteractionsDataInput!
+}
+
+input DebateUpsertWithoutReportsInput {
+  create: DebateCreateWithoutReportsInput!
+  update: DebateUpdateWithoutReportsDataInput!
+}
+
+input DebateUpsertWithWhereUniqueWithoutOwnerBlueInput {
+  create: DebateCreateWithoutOwnerBlueInput!
+  update: DebateUpdateWithoutOwnerBlueDataInput!
+  where: DebateWhereUniqueInput!
+}
+
+input DebateUpsertWithWhereUniqueWithoutOwnerInput {
+  create: DebateCreateWithoutOwnerInput!
+  update: DebateUpdateWithoutOwnerDataInput!
+  where: DebateWhereUniqueInput!
+}
+
+input DebateUpsertWithWhereUniqueWithoutOwnerRedInput {
+  create: DebateCreateWithoutOwnerRedInput!
+  update: DebateUpdateWithoutOwnerRedDataInput!
+  where: DebateWhereUniqueInput!
 }
 
 input DebateWhereInput {
@@ -273,10 +1448,20 @@ input DebateWhereInput {
   winner: UserWhereInput
 }
 
+input DebateWhereUniqueInput {
+  id: ID
+}
+
 enum Gender {
   FEMALE
   MALE
   NO_INDICATION
+}
+
+enum GenderFilter {
+  ALL
+  FEMALE
+  MALE
 }
 
 type Interaction {
@@ -287,6 +1472,38 @@ type Interaction {
   type: InteractionType!
   updatedAt: DateTime!
   who: User!
+}
+
+input InteractionCreateInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneWithoutInteractionsInput
+  id: ID
+  type: InteractionType!
+  who: UserCreateOneWithoutInteractionsInput!
+}
+
+input InteractionCreateManyWithoutDebateInput {
+  connect: [InteractionWhereUniqueInput!]
+  create: [InteractionCreateWithoutDebateInput!]
+}
+
+input InteractionCreateManyWithoutWhoInput {
+  connect: [InteractionWhereUniqueInput!]
+  create: [InteractionCreateWithoutWhoInput!]
+}
+
+input InteractionCreateWithoutDebateInput {
+  comment: CommentCreateOneInput
+  id: ID
+  type: InteractionType!
+  who: UserCreateOneWithoutInteractionsInput!
+}
+
+input InteractionCreateWithoutWhoInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneWithoutInteractionsInput
+  id: ID
+  type: InteractionType!
 }
 
 enum InteractionOrderByInput {
@@ -300,6 +1517,46 @@ enum InteractionOrderByInput {
   updatedAt_DESC
 }
 
+input InteractionScalarWhereInput {
+  AND: [InteractionScalarWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [InteractionScalarWhereInput!]
+  OR: [InteractionScalarWhereInput!]
+  type: InteractionType
+  type_in: [InteractionType!]
+  type_not: InteractionType
+  type_not_in: [InteractionType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
 enum InteractionType {
   BLUE_VOTE
   COMMENT
@@ -308,6 +1565,80 @@ enum InteractionType {
   NEGATIVE_VOTE
   POSITIVE_VOTE
   RED_VOTE
+}
+
+input InteractionUpdateInput {
+  comment: CommentUpdateOneInput
+  debate: DebateUpdateOneWithoutInteractionsInput
+  type: InteractionType
+  who: UserUpdateOneRequiredWithoutInteractionsInput
+}
+
+input InteractionUpdateManyDataInput {
+  type: InteractionType
+}
+
+input InteractionUpdateManyWithoutDebateInput {
+  connect: [InteractionWhereUniqueInput!]
+  create: [InteractionCreateWithoutDebateInput!]
+  delete: [InteractionWhereUniqueInput!]
+  deleteMany: [InteractionScalarWhereInput!]
+  disconnect: [InteractionWhereUniqueInput!]
+  set: [InteractionWhereUniqueInput!]
+  update: [InteractionUpdateWithWhereUniqueWithoutDebateInput!]
+  updateMany: [InteractionUpdateManyWithWhereNestedInput!]
+  upsert: [InteractionUpsertWithWhereUniqueWithoutDebateInput!]
+}
+
+input InteractionUpdateManyWithoutWhoInput {
+  connect: [InteractionWhereUniqueInput!]
+  create: [InteractionCreateWithoutWhoInput!]
+  delete: [InteractionWhereUniqueInput!]
+  deleteMany: [InteractionScalarWhereInput!]
+  disconnect: [InteractionWhereUniqueInput!]
+  set: [InteractionWhereUniqueInput!]
+  update: [InteractionUpdateWithWhereUniqueWithoutWhoInput!]
+  updateMany: [InteractionUpdateManyWithWhereNestedInput!]
+  upsert: [InteractionUpsertWithWhereUniqueWithoutWhoInput!]
+}
+
+input InteractionUpdateManyWithWhereNestedInput {
+  data: InteractionUpdateManyDataInput!
+  where: InteractionScalarWhereInput!
+}
+
+input InteractionUpdateWithoutDebateDataInput {
+  comment: CommentUpdateOneInput
+  type: InteractionType
+  who: UserUpdateOneRequiredWithoutInteractionsInput
+}
+
+input InteractionUpdateWithoutWhoDataInput {
+  comment: CommentUpdateOneInput
+  debate: DebateUpdateOneWithoutInteractionsInput
+  type: InteractionType
+}
+
+input InteractionUpdateWithWhereUniqueWithoutDebateInput {
+  data: InteractionUpdateWithoutDebateDataInput!
+  where: InteractionWhereUniqueInput!
+}
+
+input InteractionUpdateWithWhereUniqueWithoutWhoInput {
+  data: InteractionUpdateWithoutWhoDataInput!
+  where: InteractionWhereUniqueInput!
+}
+
+input InteractionUpsertWithWhereUniqueWithoutDebateInput {
+  create: InteractionCreateWithoutDebateInput!
+  update: InteractionUpdateWithoutDebateDataInput!
+  where: InteractionWhereUniqueInput!
+}
+
+input InteractionUpsertWithWhereUniqueWithoutWhoInput {
+  create: InteractionCreateWithoutWhoInput!
+  update: InteractionUpdateWithoutWhoDataInput!
+  where: InteractionWhereUniqueInput!
 }
 
 input InteractionWhereInput {
@@ -351,6 +1682,10 @@ input InteractionWhereInput {
   who: UserWhereInput
 }
 
+input InteractionWhereUniqueInput {
+  id: ID
+}
+
 enum Language {
   EN
   FR
@@ -366,6 +1701,18 @@ type Message {
   updatedAt: DateTime!
 }
 
+input MessageCreateInput {
+  content: String!
+  from: UserCreateOneInput!
+  id: ID
+  to: UserCreateOneInput!
+}
+
+input MessageCreateManyInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateInput!]
+}
+
 enum MessageOrderByInput {
   content_ASC
   content_DESC
@@ -377,6 +1724,108 @@ enum MessageOrderByInput {
   sendDate_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input MessageScalarWhereInput {
+  AND: [MessageScalarWhereInput!]
+  content: String
+  content_contains: String
+  content_ends_with: String
+  content_gt: String
+  content_gte: String
+  content_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_not: String
+  content_not_contains: String
+  content_not_ends_with: String
+  content_not_in: [String!]
+  content_not_starts_with: String
+  content_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  sendDate: DateTime
+  sendDate_gt: DateTime
+  sendDate_gte: DateTime
+  sendDate_in: [DateTime!]
+  sendDate_lt: DateTime
+  sendDate_lte: DateTime
+  sendDate_not: DateTime
+  sendDate_not_in: [DateTime!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input MessageUpdateDataInput {
+  content: String
+  from: UserUpdateOneRequiredInput
+  to: UserUpdateOneRequiredInput
+}
+
+input MessageUpdateInput {
+  content: String
+  from: UserUpdateOneRequiredInput
+  to: UserUpdateOneRequiredInput
+}
+
+input MessageUpdateManyDataInput {
+  content: String
+}
+
+input MessageUpdateManyInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateInput!]
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueNestedInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
+  upsert: [MessageUpsertWithWhereUniqueNestedInput!]
+}
+
+input MessageUpdateManyWithWhereNestedInput {
+  data: MessageUpdateManyDataInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateWithWhereUniqueNestedInput {
+  data: MessageUpdateDataInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpsertWithWhereUniqueNestedInput {
+  create: MessageCreateInput!
+  update: MessageUpdateDataInput!
+  where: MessageWhereUniqueInput!
 }
 
 input MessageWhereInput {
@@ -437,15 +1886,51 @@ input MessageWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+input MessageWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
-  signUp(email: String, password: String): Token!
+  createAd(data: AdCreateInput!): Ad!
+  createAdTarget(data: AdTargetCreateInput!): AdTarget!
+  createComment(data: CommentCreateInput!): Comment!
+  createConversation(data: ConversationCreateInput!): Conversation!
+  createInteraction(data: InteractionCreateInput!): Interaction!
+  createMessage(data: MessageCreateInput!): Message!
+  createReport(data: ReportCreateInput!): Report!
+  createTrophy(data: TrophyCreateInput!): Trophy!
+  signUp(birthdate: DateTime, email: String, password: String, pseudo: String): Token!
+  updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
+  updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
+  updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
+  updateTrophy(data: TrophyUpdateInput!, where: TrophyWhereUniqueInput!): Trophy
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
 type Query {
-  getUser(id: ID): User!
-  me(id: ID): User!
+  ad(where: AdWhereUniqueInput!): Ad
+  ads(after: String, before: String, first: Int, last: Int, orderBy: AdOrderByInput, skip: Int, where: AdWhereInput): [Ad!]!
+  adTarget(where: AdTargetWhereUniqueInput!): AdTarget
+  adTargets(after: String, before: String, first: Int, last: Int, orderBy: AdTargetOrderByInput, skip: Int, where: AdTargetWhereInput): [AdTarget!]!
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]!
+  conversation(where: ConversationWhereUniqueInput!): Conversation
+  conversations(after: String, before: String, first: Int, last: Int, orderBy: ConversationOrderByInput, skip: Int, where: ConversationWhereInput): [Conversation!]!
+  currentUser(id: ID): User!
+  interaction(where: InteractionWhereUniqueInput!): Interaction
+  interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
+  message(where: MessageWhereUniqueInput!): Message
+  messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
+  report(where: ReportWhereUniqueInput!): Report
+  reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]!
   signIn(email: String, password: String): Token!
-  user(where: UserWhereUniqueInput!): User
+  trophies: [Trophy!]!
+  trophy(where: TrophyWhereUniqueInput!): Trophy
+  users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
 
 type Report {
@@ -460,6 +1945,50 @@ type Report {
   treated: Boolean!
   type: ReportType!
   updatedAt: DateTime!
+}
+
+input ReportCreateInput {
+  comment: CommentCreateOneWithoutReportsInput
+  debate: DebateCreateOneWithoutReportsInput
+  from: UserCreateOneInput
+  id: ID
+  reason: ReportReason!
+  reasonText: String
+  to: UserCreateOneInput
+  treated: Boolean
+  type: ReportType!
+}
+
+input ReportCreateManyWithoutCommentInput {
+  connect: [ReportWhereUniqueInput!]
+  create: [ReportCreateWithoutCommentInput!]
+}
+
+input ReportCreateManyWithoutDebateInput {
+  connect: [ReportWhereUniqueInput!]
+  create: [ReportCreateWithoutDebateInput!]
+}
+
+input ReportCreateWithoutCommentInput {
+  debate: DebateCreateOneWithoutReportsInput
+  from: UserCreateOneInput
+  id: ID
+  reason: ReportReason!
+  reasonText: String
+  to: UserCreateOneInput
+  treated: Boolean
+  type: ReportType!
+}
+
+input ReportCreateWithoutDebateInput {
+  comment: CommentCreateOneWithoutReportsInput
+  from: UserCreateOneInput
+  id: ID
+  reason: ReportReason!
+  reasonText: String
+  to: UserCreateOneInput
+  treated: Boolean
+  type: ReportType!
 }
 
 enum ReportOrderByInput {
@@ -487,9 +2016,158 @@ enum ReportReason {
   VIOLENCE
 }
 
+input ReportScalarWhereInput {
+  AND: [ReportScalarWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [ReportScalarWhereInput!]
+  OR: [ReportScalarWhereInput!]
+  reason: ReportReason
+  reason_in: [ReportReason!]
+  reason_not: ReportReason
+  reason_not_in: [ReportReason!]
+  reasonText: String
+  reasonText_contains: String
+  reasonText_ends_with: String
+  reasonText_gt: String
+  reasonText_gte: String
+  reasonText_in: [String!]
+  reasonText_lt: String
+  reasonText_lte: String
+  reasonText_not: String
+  reasonText_not_contains: String
+  reasonText_not_ends_with: String
+  reasonText_not_in: [String!]
+  reasonText_not_starts_with: String
+  reasonText_starts_with: String
+  treated: Boolean
+  treated_not: Boolean
+  type: ReportType
+  type_in: [ReportType!]
+  type_not: ReportType
+  type_not_in: [ReportType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
 enum ReportType {
   COMMENT
   DEBATE
+}
+
+input ReportUpdateInput {
+  comment: CommentUpdateOneWithoutReportsInput
+  debate: DebateUpdateOneWithoutReportsInput
+  from: UserUpdateOneInput
+  reason: ReportReason
+  reasonText: String
+  to: UserUpdateOneInput
+  treated: Boolean
+  type: ReportType
+}
+
+input ReportUpdateManyDataInput {
+  reason: ReportReason
+  reasonText: String
+  treated: Boolean
+  type: ReportType
+}
+
+input ReportUpdateManyWithoutCommentInput {
+  connect: [ReportWhereUniqueInput!]
+  create: [ReportCreateWithoutCommentInput!]
+  delete: [ReportWhereUniqueInput!]
+  deleteMany: [ReportScalarWhereInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  set: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutCommentInput!]
+  updateMany: [ReportUpdateManyWithWhereNestedInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutCommentInput!]
+}
+
+input ReportUpdateManyWithoutDebateInput {
+  connect: [ReportWhereUniqueInput!]
+  create: [ReportCreateWithoutDebateInput!]
+  delete: [ReportWhereUniqueInput!]
+  deleteMany: [ReportScalarWhereInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  set: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutDebateInput!]
+  updateMany: [ReportUpdateManyWithWhereNestedInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutDebateInput!]
+}
+
+input ReportUpdateManyWithWhereNestedInput {
+  data: ReportUpdateManyDataInput!
+  where: ReportScalarWhereInput!
+}
+
+input ReportUpdateWithoutCommentDataInput {
+  debate: DebateUpdateOneWithoutReportsInput
+  from: UserUpdateOneInput
+  reason: ReportReason
+  reasonText: String
+  to: UserUpdateOneInput
+  treated: Boolean
+  type: ReportType
+}
+
+input ReportUpdateWithoutDebateDataInput {
+  comment: CommentUpdateOneWithoutReportsInput
+  from: UserUpdateOneInput
+  reason: ReportReason
+  reasonText: String
+  to: UserUpdateOneInput
+  treated: Boolean
+  type: ReportType
+}
+
+input ReportUpdateWithWhereUniqueWithoutCommentInput {
+  data: ReportUpdateWithoutCommentDataInput!
+  where: ReportWhereUniqueInput!
+}
+
+input ReportUpdateWithWhereUniqueWithoutDebateInput {
+  data: ReportUpdateWithoutDebateDataInput!
+  where: ReportWhereUniqueInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutCommentInput {
+  create: ReportCreateWithoutCommentInput!
+  update: ReportUpdateWithoutCommentDataInput!
+  where: ReportWhereUniqueInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutDebateInput {
+  create: ReportCreateWithoutDebateInput!
+  update: ReportUpdateWithoutDebateDataInput!
+  where: ReportWhereUniqueInput!
 }
 
 input ReportWhereInput {
@@ -554,6 +2232,10 @@ input ReportWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+input ReportWhereUniqueInput {
+  id: ID
+}
+
 enum Role {
   ADMIN
   MODERATOR
@@ -576,6 +2258,28 @@ type Trophy {
   won: Boolean!
 }
 
+input TrophyCreateInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneInput
+  id: ID
+  type: TrophyType
+  user: UserCreateOneWithoutTrophiesInput!
+  won: Boolean!
+}
+
+input TrophyCreateManyWithoutUserInput {
+  connect: [TrophyWhereUniqueInput!]
+  create: [TrophyCreateWithoutUserInput!]
+}
+
+input TrophyCreateWithoutUserInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneInput
+  id: ID
+  type: TrophyType
+  won: Boolean!
+}
+
 enum TrophyOrderByInput {
   createdAt_ASC
   createdAt_DESC
@@ -589,9 +2293,99 @@ enum TrophyOrderByInput {
   won_DESC
 }
 
+input TrophyScalarWhereInput {
+  AND: [TrophyScalarWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [TrophyScalarWhereInput!]
+  OR: [TrophyScalarWhereInput!]
+  type: TrophyType
+  type_in: [TrophyType!]
+  type_not: TrophyType
+  type_not_in: [TrophyType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+  won: Boolean
+  won_not: Boolean
+}
+
 enum TrophyType {
   DUO
   TOP_COMMENT
+}
+
+input TrophyUpdateInput {
+  comment: CommentUpdateOneInput
+  debate: DebateUpdateOneInput
+  type: TrophyType
+  user: UserUpdateOneRequiredWithoutTrophiesInput
+  won: Boolean
+}
+
+input TrophyUpdateManyDataInput {
+  type: TrophyType
+  won: Boolean
+}
+
+input TrophyUpdateManyWithoutUserInput {
+  connect: [TrophyWhereUniqueInput!]
+  create: [TrophyCreateWithoutUserInput!]
+  delete: [TrophyWhereUniqueInput!]
+  deleteMany: [TrophyScalarWhereInput!]
+  disconnect: [TrophyWhereUniqueInput!]
+  set: [TrophyWhereUniqueInput!]
+  update: [TrophyUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TrophyUpdateManyWithWhereNestedInput!]
+  upsert: [TrophyUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TrophyUpdateManyWithWhereNestedInput {
+  data: TrophyUpdateManyDataInput!
+  where: TrophyScalarWhereInput!
+}
+
+input TrophyUpdateWithoutUserDataInput {
+  comment: CommentUpdateOneInput
+  debate: DebateUpdateOneInput
+  type: TrophyType
+  won: Boolean
+}
+
+input TrophyUpdateWithWhereUniqueWithoutUserInput {
+  data: TrophyUpdateWithoutUserDataInput!
+  where: TrophyWhereUniqueInput!
+}
+
+input TrophyUpsertWithWhereUniqueWithoutUserInput {
+  create: TrophyCreateWithoutUserInput!
+  update: TrophyUpdateWithoutUserDataInput!
+  where: TrophyWhereUniqueInput!
 }
 
 input TrophyWhereInput {
@@ -637,6 +2431,10 @@ input TrophyWhereInput {
   won_not: Boolean
 }
 
+input TrophyWhereUniqueInput {
+  id: ID
+}
+
 type User {
   bio: String
   birthdate: DateTime!
@@ -658,11 +2456,359 @@ type User {
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]
   language: Language!
   lastConnected: DateTime
+  password: String!
   profilePicture: String
   pseudo: String!
   role: Role!
   trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]
   updatedAt: DateTime!
+}
+
+input UserCreateInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateManyInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateInput!]
+}
+
+input UserCreateManyWithoutBlockedInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutBlockedInput!]
+}
+
+input UserCreateManyWithoutBlockingInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutBlockingInput!]
+}
+
+input UserCreateManyWithoutConversationsInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutConversationsInput!]
+}
+
+input UserCreateManyWithoutFollowersInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutFollowersInput!]
+}
+
+input UserCreateManyWithoutFollowingInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutFollowingInput!]
+}
+
+input UserCreateOneInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateInput
+}
+
+input UserCreateOneWithoutDebatesBlueInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesBlueInput
+}
+
+input UserCreateOneWithoutDebatesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesInput
+}
+
+input UserCreateOneWithoutDebatesRedInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesRedInput
+}
+
+input UserCreateOneWithoutInteractionsInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutInteractionsInput
+}
+
+input UserCreateOneWithoutTrophiesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutTrophiesInput
+}
+
+input UserCreateWithoutBlockedInput {
+  bio: String
+  birthdate: DateTime!
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutBlockingInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutConversationsInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutDebatesBlueInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutDebatesInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutDebatesRedInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutFollowersInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutFollowingInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutInteractionsInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutTrophiesInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String!
+  profilePicture: String
+  pseudo: String!
+  role: Role
 }
 
 enum UserOrderByInput {
@@ -688,6 +2834,8 @@ enum UserOrderByInput {
   language_DESC
   lastConnected_ASC
   lastConnected_DESC
+  password_ASC
+  password_DESC
   profilePicture_ASC
   profilePicture_DESC
   pseudo_ASC
@@ -696,6 +2844,706 @@ enum UserOrderByInput {
   role_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  bio: String
+  bio_contains: String
+  bio_ends_with: String
+  bio_gt: String
+  bio_gte: String
+  bio_in: [String!]
+  bio_lt: String
+  bio_lte: String
+  bio_not: String
+  bio_not_contains: String
+  bio_not_ends_with: String
+  bio_not_in: [String!]
+  bio_not_starts_with: String
+  bio_starts_with: String
+  birthdate: DateTime
+  birthdate_gt: DateTime
+  birthdate_gte: DateTime
+  birthdate_in: [DateTime!]
+  birthdate_lt: DateTime
+  birthdate_lte: DateTime
+  birthdate_not: DateTime
+  birthdate_not_in: [DateTime!]
+  certified: Boolean
+  certified_not: Boolean
+  coverPicture: String
+  coverPicture_contains: String
+  coverPicture_ends_with: String
+  coverPicture_gt: String
+  coverPicture_gte: String
+  coverPicture_in: [String!]
+  coverPicture_lt: String
+  coverPicture_lte: String
+  coverPicture_not: String
+  coverPicture_not_contains: String
+  coverPicture_not_ends_with: String
+  coverPicture_not_in: [String!]
+  coverPicture_not_starts_with: String
+  coverPicture_starts_with: String
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  crowned: Boolean
+  crowned_not: Boolean
+  email: String
+  email_contains: String
+  email_ends_with: String
+  email_gt: String
+  email_gte: String
+  email_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_not: String
+  email_not_contains: String
+  email_not_ends_with: String
+  email_not_in: [String!]
+  email_not_starts_with: String
+  email_starts_with: String
+  gender: Gender
+  gender_in: [Gender!]
+  gender_not: Gender
+  gender_not_in: [Gender!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  language: Language
+  language_in: [Language!]
+  language_not: Language
+  language_not_in: [Language!]
+  lastConnected: DateTime
+  lastConnected_gt: DateTime
+  lastConnected_gte: DateTime
+  lastConnected_in: [DateTime!]
+  lastConnected_lt: DateTime
+  lastConnected_lte: DateTime
+  lastConnected_not: DateTime
+  lastConnected_not_in: [DateTime!]
+  NOT: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  password: String
+  password_contains: String
+  password_ends_with: String
+  password_gt: String
+  password_gte: String
+  password_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_not: String
+  password_not_contains: String
+  password_not_ends_with: String
+  password_not_in: [String!]
+  password_not_starts_with: String
+  password_starts_with: String
+  profilePicture: String
+  profilePicture_contains: String
+  profilePicture_ends_with: String
+  profilePicture_gt: String
+  profilePicture_gte: String
+  profilePicture_in: [String!]
+  profilePicture_lt: String
+  profilePicture_lte: String
+  profilePicture_not: String
+  profilePicture_not_contains: String
+  profilePicture_not_ends_with: String
+  profilePicture_not_in: [String!]
+  profilePicture_not_starts_with: String
+  profilePicture_starts_with: String
+  pseudo: String
+  pseudo_contains: String
+  pseudo_ends_with: String
+  pseudo_gt: String
+  pseudo_gte: String
+  pseudo_in: [String!]
+  pseudo_lt: String
+  pseudo_lte: String
+  pseudo_not: String
+  pseudo_not_contains: String
+  pseudo_not_ends_with: String
+  pseudo_not_in: [String!]
+  pseudo_not_starts_with: String
+  pseudo_starts_with: String
+  role: Role
+  role_in: [Role!]
+  role_not: Role
+  role_not_in: [Role!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input UserUpdateDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyDataInput {
+  bio: String
+  birthdate: DateTime
+  certified: Boolean
+  coverPicture: String
+  crowned: Boolean
+  email: String
+  gender: Gender
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+}
+
+input UserUpdateManyInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+}
+
+input UserUpdateManyWithoutBlockedInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutBlockedInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutBlockedInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutBlockedInput!]
+}
+
+input UserUpdateManyWithoutBlockingInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutBlockingInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutBlockingInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutBlockingInput!]
+}
+
+input UserUpdateManyWithoutConversationsInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutConversationsInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutConversationsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutConversationsInput!]
+}
+
+input UserUpdateManyWithoutFollowersInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutFollowersInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFollowersInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFollowersInput!]
+}
+
+input UserUpdateManyWithoutFollowingInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutFollowingInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFollowingInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFollowingInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  data: UserUpdateManyDataInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateOneInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneRequiredInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneRequiredWithoutInteractionsInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutInteractionsInput
+  update: UserUpdateWithoutInteractionsDataInput
+  upsert: UserUpsertWithoutInteractionsInput
+}
+
+input UserUpdateOneRequiredWithoutTrophiesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutTrophiesInput
+  update: UserUpdateWithoutTrophiesDataInput
+  upsert: UserUpsertWithoutTrophiesInput
+}
+
+input UserUpdateOneWithoutDebatesBlueInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesBlueInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutDebatesBlueDataInput
+  upsert: UserUpsertWithoutDebatesBlueInput
+}
+
+input UserUpdateOneWithoutDebatesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutDebatesDataInput
+  upsert: UserUpsertWithoutDebatesInput
+}
+
+input UserUpdateOneWithoutDebatesRedInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutDebatesRedInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutDebatesRedDataInput
+  upsert: UserUpsertWithoutDebatesRedInput
+}
+
+input UserUpdateWithoutBlockedDataInput {
+  bio: String
+  birthdate: DateTime
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutBlockingDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutConversationsDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutDebatesBlueDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutDebatesDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutDebatesRedDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutFollowersDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutFollowingDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutInteractionsDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+  trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutTrophiesDataInput {
+  bio: String
+  birthdate: DateTime
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  email: String
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  gender: Gender
+  interactions: InteractionUpdateManyWithoutWhoInput
+  language: Language
+  lastConnected: DateTime
+  password: String
+  profilePicture: String
+  pseudo: String
+  role: Role
+}
+
+input UserUpdateWithWhereUniqueNestedInput {
+  data: UserUpdateDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutBlockedInput {
+  data: UserUpdateWithoutBlockedDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutBlockingInput {
+  data: UserUpdateWithoutBlockingDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutConversationsInput {
+  data: UserUpdateWithoutConversationsDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutFollowersInput {
+  data: UserUpdateWithoutFollowersDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutFollowingInput {
+  data: UserUpdateWithoutFollowingDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertNestedInput {
+  create: UserCreateInput!
+  update: UserUpdateDataInput!
+}
+
+input UserUpsertWithoutDebatesBlueInput {
+  create: UserCreateWithoutDebatesBlueInput!
+  update: UserUpdateWithoutDebatesBlueDataInput!
+}
+
+input UserUpsertWithoutDebatesInput {
+  create: UserCreateWithoutDebatesInput!
+  update: UserUpdateWithoutDebatesDataInput!
+}
+
+input UserUpsertWithoutDebatesRedInput {
+  create: UserCreateWithoutDebatesRedInput!
+  update: UserUpdateWithoutDebatesRedDataInput!
+}
+
+input UserUpsertWithoutInteractionsInput {
+  create: UserCreateWithoutInteractionsInput!
+  update: UserUpdateWithoutInteractionsDataInput!
+}
+
+input UserUpsertWithoutTrophiesInput {
+  create: UserCreateWithoutTrophiesInput!
+  update: UserUpdateWithoutTrophiesDataInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  create: UserCreateInput!
+  update: UserUpdateDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutBlockedInput {
+  create: UserCreateWithoutBlockedInput!
+  update: UserUpdateWithoutBlockedDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutBlockingInput {
+  create: UserCreateWithoutBlockingInput!
+  update: UserUpdateWithoutBlockingDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutConversationsInput {
+  create: UserCreateWithoutConversationsInput!
+  update: UserUpdateWithoutConversationsDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFollowersInput {
+  create: UserCreateWithoutFollowersInput!
+  update: UserUpdateWithoutFollowersDataInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFollowingInput {
+  create: UserCreateWithoutFollowingInput!
+  update: UserUpdateWithoutFollowingDataInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserWhereInput {
@@ -801,6 +3649,20 @@ input UserWhereInput {
   lastConnected_lte: DateTime
   lastConnected_not: DateTime
   lastConnected_not_in: [DateTime!]
+  password: String
+  password_contains: String
+  password_ends_with: String
+  password_gt: String
+  password_gte: String
+  password_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_not: String
+  password_not_contains: String
+  password_not_ends_with: String
+  password_not_in: [String!]
+  password_not_starts_with: String
+  password_starts_with: String
   profilePicture: String
   profilePicture_contains: String
   profilePicture_ends_with: String

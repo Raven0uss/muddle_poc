@@ -511,6 +511,8 @@ export type UserOrderByInput =
   | "pseudo_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "password_ASC"
+  | "password_DESC"
   | "birthdate_ASC"
   | "birthdate_DESC"
   | "role_ASC"
@@ -643,6 +645,7 @@ export type TrophyOrderByInput =
 export interface UserUpdateWithoutFollowersDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1200,6 +1203,7 @@ export interface UserUpdateWithWhereUniqueNestedInput {
 export interface UserUpdateInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1225,6 +1229,7 @@ export interface UserUpdateInput {
 export interface UserUpdateDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1297,6 +1302,7 @@ export interface TrophyUpdateInput {
 export interface UserUpdateWithoutFollowingDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1364,6 +1370,7 @@ export type ConversationWhereUniqueInput = AtLeastOne<{
 export interface UserUpdateWithoutBlockingDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1470,6 +1477,20 @@ export interface UserScalarWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   birthdate_not?: Maybe<DateTimeInput>;
   birthdate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1624,6 +1645,7 @@ export type MessageWhereUniqueInput = AtLeastOne<{
 export interface UserUpdateWithoutBlockedDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1686,6 +1708,7 @@ export interface UserCreateWithoutConversationsInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1748,6 +1771,7 @@ export interface CommentUpdateManyMutationInput {
 export interface UserUpdateWithoutDebatesBlueDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -1857,6 +1881,20 @@ export interface UserWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   birthdate_not?: Maybe<DateTimeInput>;
   birthdate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1985,6 +2023,7 @@ export interface AdTargetUpdateWithWhereUniqueNestedInput {
 export interface UserUpdateWithoutDebatesDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2096,6 +2135,7 @@ export interface AdTargetUpdateManyMutationInput {
 export interface UserUpdateWithoutDebatesRedDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2597,6 +2637,7 @@ export interface ReportUpsertWithWhereUniqueWithoutDebateInput {
 export interface UserUpdateManyMutationInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2672,6 +2713,7 @@ export interface ReportScalarWhereInput {
 export interface UserUpdateWithoutTrophiesDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2702,6 +2744,7 @@ export interface UserCreateWithoutTrophiesInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2831,6 +2874,7 @@ export interface UserUpdateManyWithoutConversationsInput {
 export interface UserUpdateWithoutInteractionsDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -2978,6 +3022,7 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3010,6 +3055,7 @@ export interface UserCreateWithoutBlockingInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3093,6 +3139,7 @@ export interface UserCreateWithoutBlockedInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3123,6 +3170,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3152,6 +3200,7 @@ export interface UserCreateWithoutDebatesInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3183,6 +3232,7 @@ export interface UserCreateWithoutDebatesRedInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3333,6 +3383,7 @@ export interface UserCreateWithoutInteractionsInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3538,6 +3589,7 @@ export interface CommentUpsertWithWhereUniqueWithoutDebateInput {
 export interface UserUpdateWithoutConversationsDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -3743,6 +3795,7 @@ export interface UserCreateWithoutFollowersInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -4023,6 +4076,7 @@ export interface DebateUpsertWithoutInteractionsInput {
 export interface UserUpdateManyDataInput {
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
+  password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -4257,6 +4311,7 @@ export interface UserCreateWithoutFollowingInput {
   id?: Maybe<ID_Input>;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeInput;
   role?: Maybe<Role>;
   certified?: Maybe<Boolean>;
@@ -4302,6 +4357,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeOutput;
   role: Role;
   certified: Boolean;
@@ -4322,6 +4378,7 @@ export interface UserPreviousValuesPromise
   id: () => Promise<ID_Output>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
   role: () => Promise<Role>;
   certified: () => Promise<Boolean>;
@@ -4342,6 +4399,7 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   pseudo: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
   birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
   role: () => Promise<AsyncIterator<Role>>;
   certified: () => Promise<AsyncIterator<Boolean>>;
@@ -5285,6 +5343,7 @@ export interface User {
   id: ID_Output;
   pseudo: String;
   email: String;
+  password: String;
   birthdate: DateTimeOutput;
   role: Role;
   certified: Boolean;
@@ -5303,6 +5362,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
   role: () => Promise<Role>;
   certified: () => Promise<Boolean>;
@@ -5413,6 +5473,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   pseudo: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
   birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
   role: () => Promise<AsyncIterator<Role>>;
   certified: () => Promise<AsyncIterator<Boolean>>;
@@ -5523,6 +5584,7 @@ export interface UserNullablePromise
   id: () => Promise<ID_Output>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
   role: () => Promise<Role>;
   certified: () => Promise<Boolean>;

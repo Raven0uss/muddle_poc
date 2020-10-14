@@ -4,13 +4,484 @@
  */
 
 
-
+import { core } from "nexus"
+declare global {
+  interface NexusGenCustomDefinitionMethods<TypeName extends string> {
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
+  AdCreateInput: { // input type
+    active?: boolean | null; // Boolean
+    content: string; // String!
+    id?: string | null; // ID
+    name: string; // String!
+    ratio?: number | null; // Int
+    targets?: NexusGenInputs['AdTargetCreateManyInput'] | null; // AdTargetCreateManyInput
+  }
+  AdTargetCreateInput: { // input type
+    birthdateMax: any; // DateTime!
+    birthdateMin: any; // DateTime!
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    id?: string | null; // ID
+    name: string; // String!
+  }
+  AdTargetCreateManyInput: { // input type
+    connect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
+    create?: NexusGenInputs['AdTargetCreateInput'][] | null; // [AdTargetCreateInput!]
+  }
+  AdTargetScalarWhereInput: { // input type
+    AND?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
+    birthdateMax?: any | null; // DateTime
+    birthdateMax_gt?: any | null; // DateTime
+    birthdateMax_gte?: any | null; // DateTime
+    birthdateMax_in?: any[] | null; // [DateTime!]
+    birthdateMax_lt?: any | null; // DateTime
+    birthdateMax_lte?: any | null; // DateTime
+    birthdateMax_not?: any | null; // DateTime
+    birthdateMax_not_in?: any[] | null; // [DateTime!]
+    birthdateMin?: any | null; // DateTime
+    birthdateMin_gt?: any | null; // DateTime
+    birthdateMin_gte?: any | null; // DateTime
+    birthdateMin_in?: any[] | null; // [DateTime!]
+    birthdateMin_lt?: any | null; // DateTime
+    birthdateMin_lte?: any | null; // DateTime
+    birthdateMin_not?: any | null; // DateTime
+    birthdateMin_not_in?: any[] | null; // [DateTime!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    gender_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
+    gender_not?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    gender_not_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    name?: string | null; // String
+    name_contains?: string | null; // String
+    name_ends_with?: string | null; // String
+    name_gt?: string | null; // String
+    name_gte?: string | null; // String
+    name_in?: string[] | null; // [String!]
+    name_lt?: string | null; // String
+    name_lte?: string | null; // String
+    name_not?: string | null; // String
+    name_not_contains?: string | null; // String
+    name_not_ends_with?: string | null; // String
+    name_not_in?: string[] | null; // [String!]
+    name_not_starts_with?: string | null; // String
+    name_starts_with?: string | null; // String
+    NOT?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
+    OR?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  AdTargetUpdateDataInput: { // input type
+    birthdateMax?: any | null; // DateTime
+    birthdateMin?: any | null; // DateTime
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    name?: string | null; // String
+  }
+  AdTargetUpdateInput: { // input type
+    birthdateMax?: any | null; // DateTime
+    birthdateMin?: any | null; // DateTime
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    name?: string | null; // String
+  }
+  AdTargetUpdateManyDataInput: { // input type
+    birthdateMax?: any | null; // DateTime
+    birthdateMin?: any | null; // DateTime
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    name?: string | null; // String
+  }
+  AdTargetUpdateManyInput: { // input type
+    connect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
+    create?: NexusGenInputs['AdTargetCreateInput'][] | null; // [AdTargetCreateInput!]
+    delete?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
+    disconnect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
+    set?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
+    update?: NexusGenInputs['AdTargetUpdateWithWhereUniqueNestedInput'][] | null; // [AdTargetUpdateWithWhereUniqueNestedInput!]
+    updateMany?: NexusGenInputs['AdTargetUpdateManyWithWhereNestedInput'][] | null; // [AdTargetUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['AdTargetUpsertWithWhereUniqueNestedInput'][] | null; // [AdTargetUpsertWithWhereUniqueNestedInput!]
+  }
+  AdTargetUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['AdTargetUpdateManyDataInput']; // AdTargetUpdateManyDataInput!
+    where: NexusGenInputs['AdTargetScalarWhereInput']; // AdTargetScalarWhereInput!
+  }
+  AdTargetUpdateWithWhereUniqueNestedInput: { // input type
+    data: NexusGenInputs['AdTargetUpdateDataInput']; // AdTargetUpdateDataInput!
+    where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
+  }
+  AdTargetUpsertWithWhereUniqueNestedInput: { // input type
+    create: NexusGenInputs['AdTargetCreateInput']; // AdTargetCreateInput!
+    update: NexusGenInputs['AdTargetUpdateDataInput']; // AdTargetUpdateDataInput!
+    where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
+  }
+  AdTargetWhereInput: { // input type
+    AND?: NexusGenInputs['AdTargetWhereInput'][] | null; // [AdTargetWhereInput!]
+    birthdateMax?: any | null; // DateTime
+    birthdateMax_gt?: any | null; // DateTime
+    birthdateMax_gte?: any | null; // DateTime
+    birthdateMax_in?: any[] | null; // [DateTime!]
+    birthdateMax_lt?: any | null; // DateTime
+    birthdateMax_lte?: any | null; // DateTime
+    birthdateMax_not?: any | null; // DateTime
+    birthdateMax_not_in?: any[] | null; // [DateTime!]
+    birthdateMin?: any | null; // DateTime
+    birthdateMin_gt?: any | null; // DateTime
+    birthdateMin_gte?: any | null; // DateTime
+    birthdateMin_in?: any[] | null; // [DateTime!]
+    birthdateMin_lt?: any | null; // DateTime
+    birthdateMin_lte?: any | null; // DateTime
+    birthdateMin_not?: any | null; // DateTime
+    birthdateMin_not_in?: any[] | null; // [DateTime!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    gender_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
+    gender_not?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
+    gender_not_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    name?: string | null; // String
+    name_contains?: string | null; // String
+    name_ends_with?: string | null; // String
+    name_gt?: string | null; // String
+    name_gte?: string | null; // String
+    name_in?: string[] | null; // [String!]
+    name_lt?: string | null; // String
+    name_lte?: string | null; // String
+    name_not?: string | null; // String
+    name_not_contains?: string | null; // String
+    name_not_ends_with?: string | null; // String
+    name_not_in?: string[] | null; // [String!]
+    name_not_starts_with?: string | null; // String
+    name_starts_with?: string | null; // String
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  AdTargetWhereUniqueInput: { // input type
+    id?: string | null; // ID
+    name?: string | null; // String
+  }
+  AdUpdateInput: { // input type
+    active?: boolean | null; // Boolean
+    content?: string | null; // String
+    name?: string | null; // String
+    ratio?: number | null; // Int
+    targets?: NexusGenInputs['AdTargetUpdateManyInput'] | null; // AdTargetUpdateManyInput
+  }
+  AdWhereInput: { // input type
+    active?: boolean | null; // Boolean
+    active_not?: boolean | null; // Boolean
+    AND?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    name?: string | null; // String
+    name_contains?: string | null; // String
+    name_ends_with?: string | null; // String
+    name_gt?: string | null; // String
+    name_gte?: string | null; // String
+    name_in?: string[] | null; // [String!]
+    name_lt?: string | null; // String
+    name_lte?: string | null; // String
+    name_not?: string | null; // String
+    name_not_contains?: string | null; // String
+    name_not_ends_with?: string | null; // String
+    name_not_in?: string[] | null; // [String!]
+    name_not_starts_with?: string | null; // String
+    name_starts_with?: string | null; // String
+    ratio?: number | null; // Int
+    ratio_gt?: number | null; // Int
+    ratio_gte?: number | null; // Int
+    ratio_in?: number[] | null; // [Int!]
+    ratio_lt?: number | null; // Int
+    ratio_lte?: number | null; // Int
+    ratio_not?: number | null; // Int
+    ratio_not_in?: number[] | null; // [Int!]
+    targets_some?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  AdWhereUniqueInput: { // input type
+    id?: string | null; // ID
+    name?: string | null; // String
+  }
+  CommentCreateInput: { // input type
+    content: string; // String!
+    debate: NexusGenInputs['DebateCreateOneWithoutCommentsInput']; // DebateCreateOneWithoutCommentsInput!
+    dislikes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    from: string; // String!
+    id?: string | null; // ID
+    likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutCommentInput'] | null; // ReportCreateManyWithoutCommentInput
+  }
+  CommentCreateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
+    create?: NexusGenInputs['CommentCreateWithoutDebateInput'][] | null; // [CommentCreateWithoutDebateInput!]
+  }
+  CommentCreateOneInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+    create?: NexusGenInputs['CommentCreateInput'] | null; // CommentCreateInput
+  }
+  CommentCreateOneWithoutReportsInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+    create?: NexusGenInputs['CommentCreateWithoutReportsInput'] | null; // CommentCreateWithoutReportsInput
+  }
+  CommentCreateWithoutDebateInput: { // input type
+    content: string; // String!
+    dislikes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    from: string; // String!
+    id?: string | null; // ID
+    likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutCommentInput'] | null; // ReportCreateManyWithoutCommentInput
+  }
+  CommentCreateWithoutReportsInput: { // input type
+    content: string; // String!
+    debate: NexusGenInputs['DebateCreateOneWithoutCommentsInput']; // DebateCreateOneWithoutCommentsInput!
+    dislikes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    from: string; // String!
+    id?: string | null; // ID
+    likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+  }
+  CommentScalarWhereInput: { // input type
+    AND?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    from?: string | null; // String
+    from_contains?: string | null; // String
+    from_ends_with?: string | null; // String
+    from_gt?: string | null; // String
+    from_gte?: string | null; // String
+    from_in?: string[] | null; // [String!]
+    from_lt?: string | null; // String
+    from_lte?: string | null; // String
+    from_not?: string | null; // String
+    from_not_contains?: string | null; // String
+    from_not_ends_with?: string | null; // String
+    from_not_in?: string[] | null; // [String!]
+    from_not_starts_with?: string | null; // String
+    from_starts_with?: string | null; // String
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
+    OR?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  CommentUpdateDataInput: { // input type
+    content?: string | null; // String
+    debate?: NexusGenInputs['DebateUpdateOneRequiredWithoutCommentsInput'] | null; // DebateUpdateOneRequiredWithoutCommentsInput
+    dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    from?: string | null; // String
+    likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
+  }
+  CommentUpdateInput: { // input type
+    content?: string | null; // String
+    debate?: NexusGenInputs['DebateUpdateOneRequiredWithoutCommentsInput'] | null; // DebateUpdateOneRequiredWithoutCommentsInput
+    dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    from?: string | null; // String
+    likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
+  }
+  CommentUpdateManyDataInput: { // input type
+    content?: string | null; // String
+    from?: string | null; // String
+  }
+  CommentUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['CommentUpdateManyDataInput']; // CommentUpdateManyDataInput!
+    where: NexusGenInputs['CommentScalarWhereInput']; // CommentScalarWhereInput!
+  }
+  CommentUpdateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
+    create?: NexusGenInputs['CommentCreateWithoutDebateInput'][] | null; // [CommentCreateWithoutDebateInput!]
+    delete?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
+    disconnect?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
+    set?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
+    update?: NexusGenInputs['CommentUpdateWithWhereUniqueWithoutDebateInput'][] | null; // [CommentUpdateWithWhereUniqueWithoutDebateInput!]
+    updateMany?: NexusGenInputs['CommentUpdateManyWithWhereNestedInput'][] | null; // [CommentUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['CommentUpsertWithWhereUniqueWithoutDebateInput'][] | null; // [CommentUpsertWithWhereUniqueWithoutDebateInput!]
+  }
+  CommentUpdateOneInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+    create?: NexusGenInputs['CommentCreateInput'] | null; // CommentCreateInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['CommentUpdateDataInput'] | null; // CommentUpdateDataInput
+    upsert?: NexusGenInputs['CommentUpsertNestedInput'] | null; // CommentUpsertNestedInput
+  }
+  CommentUpdateOneWithoutReportsInput: { // input type
+    connect?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+    create?: NexusGenInputs['CommentCreateWithoutReportsInput'] | null; // CommentCreateWithoutReportsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['CommentUpdateWithoutReportsDataInput'] | null; // CommentUpdateWithoutReportsDataInput
+    upsert?: NexusGenInputs['CommentUpsertWithoutReportsInput'] | null; // CommentUpsertWithoutReportsInput
+  }
+  CommentUpdateWithWhereUniqueWithoutDebateInput: { // input type
+    data: NexusGenInputs['CommentUpdateWithoutDebateDataInput']; // CommentUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+  }
+  CommentUpdateWithoutDebateDataInput: { // input type
+    content?: string | null; // String
+    dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    from?: string | null; // String
+    likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
+  }
+  CommentUpdateWithoutReportsDataInput: { // input type
+    content?: string | null; // String
+    debate?: NexusGenInputs['DebateUpdateOneRequiredWithoutCommentsInput'] | null; // DebateUpdateOneRequiredWithoutCommentsInput
+    dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    from?: string | null; // String
+    likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+  }
+  CommentUpsertNestedInput: { // input type
+    create: NexusGenInputs['CommentCreateInput']; // CommentCreateInput!
+    update: NexusGenInputs['CommentUpdateDataInput']; // CommentUpdateDataInput!
+  }
+  CommentUpsertWithWhereUniqueWithoutDebateInput: { // input type
+    create: NexusGenInputs['CommentCreateWithoutDebateInput']; // CommentCreateWithoutDebateInput!
+    update: NexusGenInputs['CommentUpdateWithoutDebateDataInput']; // CommentUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+  }
+  CommentUpsertWithoutReportsInput: { // input type
+    create: NexusGenInputs['CommentCreateWithoutReportsInput']; // CommentCreateWithoutReportsInput!
+    update: NexusGenInputs['CommentUpdateWithoutReportsDataInput']; // CommentUpdateWithoutReportsDataInput!
+  }
   CommentWhereInput: { // input type
     AND?: NexusGenInputs['CommentWhereInput'][] | null; // [CommentWhereInput!]
     content?: string | null; // String
@@ -76,6 +547,83 @@ export interface NexusGenInputs {
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
   }
+  CommentWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  ConversationCreateInput: { // input type
+    id?: string | null; // ID
+    messages?: NexusGenInputs['MessageCreateManyInput'] | null; // MessageCreateManyInput
+    speakers?: NexusGenInputs['UserCreateManyWithoutConversationsInput'] | null; // UserCreateManyWithoutConversationsInput
+  }
+  ConversationCreateManyWithoutSpeakersInput: { // input type
+    connect?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
+    create?: NexusGenInputs['ConversationCreateWithoutSpeakersInput'][] | null; // [ConversationCreateWithoutSpeakersInput!]
+  }
+  ConversationCreateWithoutSpeakersInput: { // input type
+    id?: string | null; // ID
+    messages?: NexusGenInputs['MessageCreateManyInput'] | null; // MessageCreateManyInput
+  }
+  ConversationScalarWhereInput: { // input type
+    AND?: NexusGenInputs['ConversationScalarWhereInput'][] | null; // [ConversationScalarWhereInput!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['ConversationScalarWhereInput'][] | null; // [ConversationScalarWhereInput!]
+    OR?: NexusGenInputs['ConversationScalarWhereInput'][] | null; // [ConversationScalarWhereInput!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  ConversationUpdateInput: { // input type
+    messages?: NexusGenInputs['MessageUpdateManyInput'] | null; // MessageUpdateManyInput
+    speakers?: NexusGenInputs['UserUpdateManyWithoutConversationsInput'] | null; // UserUpdateManyWithoutConversationsInput
+  }
+  ConversationUpdateManyWithoutSpeakersInput: { // input type
+    connect?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
+    create?: NexusGenInputs['ConversationCreateWithoutSpeakersInput'][] | null; // [ConversationCreateWithoutSpeakersInput!]
+    delete?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['ConversationScalarWhereInput'][] | null; // [ConversationScalarWhereInput!]
+    disconnect?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
+    set?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
+    update?: NexusGenInputs['ConversationUpdateWithWhereUniqueWithoutSpeakersInput'][] | null; // [ConversationUpdateWithWhereUniqueWithoutSpeakersInput!]
+    upsert?: NexusGenInputs['ConversationUpsertWithWhereUniqueWithoutSpeakersInput'][] | null; // [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
+  }
+  ConversationUpdateWithWhereUniqueWithoutSpeakersInput: { // input type
+    data: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput']; // ConversationUpdateWithoutSpeakersDataInput!
+    where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
+  }
+  ConversationUpdateWithoutSpeakersDataInput: { // input type
+    messages?: NexusGenInputs['MessageUpdateManyInput'] | null; // MessageUpdateManyInput
+  }
+  ConversationUpsertWithWhereUniqueWithoutSpeakersInput: { // input type
+    create: NexusGenInputs['ConversationCreateWithoutSpeakersInput']; // ConversationCreateWithoutSpeakersInput!
+    update: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput']; // ConversationUpdateWithoutSpeakersDataInput!
+    where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
+  }
   ConversationWhereInput: { // input type
     AND?: NexusGenInputs['ConversationWhereInput'][] | null; // [ConversationWhereInput!]
     createdAt?: any | null; // DateTime
@@ -110,6 +658,494 @@ export interface NexusGenInputs {
     updatedAt_lte?: any | null; // DateTime
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  ConversationWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  DebateCreateInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateManyWithoutOwnerBlueInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerBlueInput'][] | null; // [DebateCreateWithoutOwnerBlueInput!]
+  }
+  DebateCreateManyWithoutOwnerInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerInput'][] | null; // [DebateCreateWithoutOwnerInput!]
+  }
+  DebateCreateManyWithoutOwnerRedInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerRedInput'][] | null; // [DebateCreateWithoutOwnerRedInput!]
+  }
+  DebateCreateOneInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateInput'] | null; // DebateCreateInput
+  }
+  DebateCreateOneWithoutCommentsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutCommentsInput'] | null; // DebateCreateWithoutCommentsInput
+  }
+  DebateCreateOneWithoutInteractionsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutInteractionsInput'] | null; // DebateCreateWithoutInteractionsInput
+  }
+  DebateCreateOneWithoutReportsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutReportsInput'] | null; // DebateCreateWithoutReportsInput
+  }
+  DebateCreateWithoutCommentsInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateWithoutInteractionsInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateWithoutOwnerBlueInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateWithoutOwnerInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateWithoutOwnerRedInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateCreateWithoutReportsInput: { // input type
+    blueVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentCreateManyWithoutDebateInput'] | null; // CommentCreateManyWithoutDebateInput
+    content: string; // String!
+    crowned?: boolean | null; // Boolean
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    type: NexusGenEnums['DebateType']; // DebateType!
+    winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+  }
+  DebateScalarWhereInput: { // input type
+    AND?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    closed?: boolean | null; // Boolean
+    closed_not?: boolean | null; // Boolean
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    crowned?: boolean | null; // Boolean
+    crowned_not?: boolean | null; // Boolean
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    OR?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    timelimit?: any | null; // DateTime
+    timelimit_gt?: any | null; // DateTime
+    timelimit_gte?: any | null; // DateTime
+    timelimit_in?: any[] | null; // [DateTime!]
+    timelimit_lt?: any | null; // DateTime
+    timelimit_lte?: any | null; // DateTime
+    timelimit_not?: any | null; // DateTime
+    timelimit_not_in?: any[] | null; // [DateTime!]
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    type_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
+    type_not?: NexusGenEnums['DebateType'] | null; // DebateType
+    type_not_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  DebateUpdateDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateManyDataInput: { // input type
+    closed?: boolean | null; // Boolean
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    timelimit?: any | null; // DateTime
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+  }
+  DebateUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['DebateUpdateManyDataInput']; // DebateUpdateManyDataInput!
+    where: NexusGenInputs['DebateScalarWhereInput']; // DebateScalarWhereInput!
+  }
+  DebateUpdateManyWithoutOwnerBlueInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerBlueInput'][] | null; // [DebateCreateWithoutOwnerBlueInput!]
+    delete?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    disconnect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    set?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    update?: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerBlueInput'][] | null; // [DebateUpdateWithWhereUniqueWithoutOwnerBlueInput!]
+    updateMany?: NexusGenInputs['DebateUpdateManyWithWhereNestedInput'][] | null; // [DebateUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerBlueInput'][] | null; // [DebateUpsertWithWhereUniqueWithoutOwnerBlueInput!]
+  }
+  DebateUpdateManyWithoutOwnerInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerInput'][] | null; // [DebateCreateWithoutOwnerInput!]
+    delete?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    disconnect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    set?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    update?: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerInput'][] | null; // [DebateUpdateWithWhereUniqueWithoutOwnerInput!]
+    updateMany?: NexusGenInputs['DebateUpdateManyWithWhereNestedInput'][] | null; // [DebateUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerInput'][] | null; // [DebateUpsertWithWhereUniqueWithoutOwnerInput!]
+  }
+  DebateUpdateManyWithoutOwnerRedInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    create?: NexusGenInputs['DebateCreateWithoutOwnerRedInput'][] | null; // [DebateCreateWithoutOwnerRedInput!]
+    delete?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    disconnect?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    set?: NexusGenInputs['DebateWhereUniqueInput'][] | null; // [DebateWhereUniqueInput!]
+    update?: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerRedInput'][] | null; // [DebateUpdateWithWhereUniqueWithoutOwnerRedInput!]
+    updateMany?: NexusGenInputs['DebateUpdateManyWithWhereNestedInput'][] | null; // [DebateUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerRedInput'][] | null; // [DebateUpsertWithWhereUniqueWithoutOwnerRedInput!]
+  }
+  DebateUpdateOneInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateInput'] | null; // DebateCreateInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['DebateUpdateDataInput'] | null; // DebateUpdateDataInput
+    upsert?: NexusGenInputs['DebateUpsertNestedInput'] | null; // DebateUpsertNestedInput
+  }
+  DebateUpdateOneRequiredWithoutCommentsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutCommentsInput'] | null; // DebateCreateWithoutCommentsInput
+    update?: NexusGenInputs['DebateUpdateWithoutCommentsDataInput'] | null; // DebateUpdateWithoutCommentsDataInput
+    upsert?: NexusGenInputs['DebateUpsertWithoutCommentsInput'] | null; // DebateUpsertWithoutCommentsInput
+  }
+  DebateUpdateOneWithoutInteractionsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutInteractionsInput'] | null; // DebateCreateWithoutInteractionsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['DebateUpdateWithoutInteractionsDataInput'] | null; // DebateUpdateWithoutInteractionsDataInput
+    upsert?: NexusGenInputs['DebateUpsertWithoutInteractionsInput'] | null; // DebateUpsertWithoutInteractionsInput
+  }
+  DebateUpdateOneWithoutReportsInput: { // input type
+    connect?: NexusGenInputs['DebateWhereUniqueInput'] | null; // DebateWhereUniqueInput
+    create?: NexusGenInputs['DebateCreateWithoutReportsInput'] | null; // DebateCreateWithoutReportsInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['DebateUpdateWithoutReportsDataInput'] | null; // DebateUpdateWithoutReportsDataInput
+    upsert?: NexusGenInputs['DebateUpsertWithoutReportsInput'] | null; // DebateUpsertWithoutReportsInput
+  }
+  DebateUpdateWithWhereUniqueWithoutOwnerBlueInput: { // input type
+    data: NexusGenInputs['DebateUpdateWithoutOwnerBlueDataInput']; // DebateUpdateWithoutOwnerBlueDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpdateWithWhereUniqueWithoutOwnerInput: { // input type
+    data: NexusGenInputs['DebateUpdateWithoutOwnerDataInput']; // DebateUpdateWithoutOwnerDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpdateWithWhereUniqueWithoutOwnerRedInput: { // input type
+    data: NexusGenInputs['DebateUpdateWithoutOwnerRedDataInput']; // DebateUpdateWithoutOwnerRedDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpdateWithoutCommentsDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateWithoutInteractionsDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateWithoutOwnerBlueDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateWithoutOwnerDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateWithoutOwnerRedDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpdateWithoutReportsDataInput: { // input type
+    blueVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    closed?: boolean | null; // Boolean
+    comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
+    content?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
+    loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
+    ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
+    ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
+    positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    timelimit?: any | null; // DateTime
+    topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['DebateType'] | null; // DebateType
+    winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+  }
+  DebateUpsertNestedInput: { // input type
+    create: NexusGenInputs['DebateCreateInput']; // DebateCreateInput!
+    update: NexusGenInputs['DebateUpdateDataInput']; // DebateUpdateDataInput!
+  }
+  DebateUpsertWithWhereUniqueWithoutOwnerBlueInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutOwnerBlueInput']; // DebateCreateWithoutOwnerBlueInput!
+    update: NexusGenInputs['DebateUpdateWithoutOwnerBlueDataInput']; // DebateUpdateWithoutOwnerBlueDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpsertWithWhereUniqueWithoutOwnerInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutOwnerInput']; // DebateCreateWithoutOwnerInput!
+    update: NexusGenInputs['DebateUpdateWithoutOwnerDataInput']; // DebateUpdateWithoutOwnerDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpsertWithWhereUniqueWithoutOwnerRedInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutOwnerRedInput']; // DebateCreateWithoutOwnerRedInput!
+    update: NexusGenInputs['DebateUpdateWithoutOwnerRedDataInput']; // DebateUpdateWithoutOwnerRedDataInput!
+    where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+  }
+  DebateUpsertWithoutCommentsInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutCommentsInput']; // DebateCreateWithoutCommentsInput!
+    update: NexusGenInputs['DebateUpdateWithoutCommentsDataInput']; // DebateUpdateWithoutCommentsDataInput!
+  }
+  DebateUpsertWithoutInteractionsInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutInteractionsInput']; // DebateCreateWithoutInteractionsInput!
+    update: NexusGenInputs['DebateUpdateWithoutInteractionsDataInput']; // DebateUpdateWithoutInteractionsDataInput!
+  }
+  DebateUpsertWithoutReportsInput: { // input type
+    create: NexusGenInputs['DebateCreateWithoutReportsInput']; // DebateCreateWithoutReportsInput!
+    update: NexusGenInputs['DebateUpdateWithoutReportsDataInput']; // DebateUpdateWithoutReportsDataInput!
   }
   DebateWhereInput: { // input type
     AND?: NexusGenInputs['DebateWhereInput'][] | null; // [DebateWhereInput!]
@@ -187,6 +1223,138 @@ export interface NexusGenInputs {
     updatedAt_not_in?: any[] | null; // [DateTime!]
     winner?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
+  DebateWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  InteractionCreateInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    debate?: NexusGenInputs['DebateCreateOneWithoutInteractionsInput'] | null; // DebateCreateOneWithoutInteractionsInput
+    id?: string | null; // ID
+    type: NexusGenEnums['InteractionType']; // InteractionType!
+    who: NexusGenInputs['UserCreateOneWithoutInteractionsInput']; // UserCreateOneWithoutInteractionsInput!
+  }
+  InteractionCreateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    create?: NexusGenInputs['InteractionCreateWithoutDebateInput'][] | null; // [InteractionCreateWithoutDebateInput!]
+  }
+  InteractionCreateManyWithoutWhoInput: { // input type
+    connect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    create?: NexusGenInputs['InteractionCreateWithoutWhoInput'][] | null; // [InteractionCreateWithoutWhoInput!]
+  }
+  InteractionCreateWithoutDebateInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    id?: string | null; // ID
+    type: NexusGenEnums['InteractionType']; // InteractionType!
+    who: NexusGenInputs['UserCreateOneWithoutInteractionsInput']; // UserCreateOneWithoutInteractionsInput!
+  }
+  InteractionCreateWithoutWhoInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    debate?: NexusGenInputs['DebateCreateOneWithoutInteractionsInput'] | null; // DebateCreateOneWithoutInteractionsInput
+    id?: string | null; // ID
+    type: NexusGenEnums['InteractionType']; // InteractionType!
+  }
+  InteractionScalarWhereInput: { // input type
+    AND?: NexusGenInputs['InteractionScalarWhereInput'][] | null; // [InteractionScalarWhereInput!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['InteractionScalarWhereInput'][] | null; // [InteractionScalarWhereInput!]
+    OR?: NexusGenInputs['InteractionScalarWhereInput'][] | null; // [InteractionScalarWhereInput!]
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    type_in?: NexusGenEnums['InteractionType'][] | null; // [InteractionType!]
+    type_not?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    type_not_in?: NexusGenEnums['InteractionType'][] | null; // [InteractionType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  InteractionUpdateInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    debate?: NexusGenInputs['DebateUpdateOneWithoutInteractionsInput'] | null; // DebateUpdateOneWithoutInteractionsInput
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    who?: NexusGenInputs['UserUpdateOneRequiredWithoutInteractionsInput'] | null; // UserUpdateOneRequiredWithoutInteractionsInput
+  }
+  InteractionUpdateManyDataInput: { // input type
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+  }
+  InteractionUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['InteractionUpdateManyDataInput']; // InteractionUpdateManyDataInput!
+    where: NexusGenInputs['InteractionScalarWhereInput']; // InteractionScalarWhereInput!
+  }
+  InteractionUpdateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    create?: NexusGenInputs['InteractionCreateWithoutDebateInput'][] | null; // [InteractionCreateWithoutDebateInput!]
+    delete?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['InteractionScalarWhereInput'][] | null; // [InteractionScalarWhereInput!]
+    disconnect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    set?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    update?: NexusGenInputs['InteractionUpdateWithWhereUniqueWithoutDebateInput'][] | null; // [InteractionUpdateWithWhereUniqueWithoutDebateInput!]
+    updateMany?: NexusGenInputs['InteractionUpdateManyWithWhereNestedInput'][] | null; // [InteractionUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['InteractionUpsertWithWhereUniqueWithoutDebateInput'][] | null; // [InteractionUpsertWithWhereUniqueWithoutDebateInput!]
+  }
+  InteractionUpdateManyWithoutWhoInput: { // input type
+    connect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    create?: NexusGenInputs['InteractionCreateWithoutWhoInput'][] | null; // [InteractionCreateWithoutWhoInput!]
+    delete?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['InteractionScalarWhereInput'][] | null; // [InteractionScalarWhereInput!]
+    disconnect?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    set?: NexusGenInputs['InteractionWhereUniqueInput'][] | null; // [InteractionWhereUniqueInput!]
+    update?: NexusGenInputs['InteractionUpdateWithWhereUniqueWithoutWhoInput'][] | null; // [InteractionUpdateWithWhereUniqueWithoutWhoInput!]
+    updateMany?: NexusGenInputs['InteractionUpdateManyWithWhereNestedInput'][] | null; // [InteractionUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['InteractionUpsertWithWhereUniqueWithoutWhoInput'][] | null; // [InteractionUpsertWithWhereUniqueWithoutWhoInput!]
+  }
+  InteractionUpdateWithWhereUniqueWithoutDebateInput: { // input type
+    data: NexusGenInputs['InteractionUpdateWithoutDebateDataInput']; // InteractionUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+  }
+  InteractionUpdateWithWhereUniqueWithoutWhoInput: { // input type
+    data: NexusGenInputs['InteractionUpdateWithoutWhoDataInput']; // InteractionUpdateWithoutWhoDataInput!
+    where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+  }
+  InteractionUpdateWithoutDebateDataInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+    who?: NexusGenInputs['UserUpdateOneRequiredWithoutInteractionsInput'] | null; // UserUpdateOneRequiredWithoutInteractionsInput
+  }
+  InteractionUpdateWithoutWhoDataInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    debate?: NexusGenInputs['DebateUpdateOneWithoutInteractionsInput'] | null; // DebateUpdateOneWithoutInteractionsInput
+    type?: NexusGenEnums['InteractionType'] | null; // InteractionType
+  }
+  InteractionUpsertWithWhereUniqueWithoutDebateInput: { // input type
+    create: NexusGenInputs['InteractionCreateWithoutDebateInput']; // InteractionCreateWithoutDebateInput!
+    update: NexusGenInputs['InteractionUpdateWithoutDebateDataInput']; // InteractionUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+  }
+  InteractionUpsertWithWhereUniqueWithoutWhoInput: { // input type
+    create: NexusGenInputs['InteractionCreateWithoutWhoInput']; // InteractionCreateWithoutWhoInput!
+    update: NexusGenInputs['InteractionUpdateWithoutWhoDataInput']; // InteractionUpdateWithoutWhoDataInput!
+    where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+  }
   InteractionWhereInput: { // input type
     AND?: NexusGenInputs['InteractionWhereInput'][] | null; // [InteractionWhereInput!]
     comment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
@@ -226,6 +1394,113 @@ export interface NexusGenInputs {
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
     who?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  InteractionWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  MessageCreateInput: { // input type
+    content: string; // String!
+    from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
+    id?: string | null; // ID
+    to: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
+  }
+  MessageCreateManyInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateInput'][] | null; // [MessageCreateInput!]
+  }
+  MessageScalarWhereInput: { // input type
+    AND?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    content?: string | null; // String
+    content_contains?: string | null; // String
+    content_ends_with?: string | null; // String
+    content_gt?: string | null; // String
+    content_gte?: string | null; // String
+    content_in?: string[] | null; // [String!]
+    content_lt?: string | null; // String
+    content_lte?: string | null; // String
+    content_not?: string | null; // String
+    content_not_contains?: string | null; // String
+    content_not_ends_with?: string | null; // String
+    content_not_in?: string[] | null; // [String!]
+    content_not_starts_with?: string | null; // String
+    content_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    OR?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    sendDate?: any | null; // DateTime
+    sendDate_gt?: any | null; // DateTime
+    sendDate_gte?: any | null; // DateTime
+    sendDate_in?: any[] | null; // [DateTime!]
+    sendDate_lt?: any | null; // DateTime
+    sendDate_lte?: any | null; // DateTime
+    sendDate_not?: any | null; // DateTime
+    sendDate_not_in?: any[] | null; // [DateTime!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  MessageUpdateDataInput: { // input type
+    content?: string | null; // String
+    from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+    to?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  MessageUpdateInput: { // input type
+    content?: string | null; // String
+    from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+    to?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  MessageUpdateManyDataInput: { // input type
+    content?: string | null; // String
+  }
+  MessageUpdateManyInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateInput'][] | null; // [MessageCreateInput!]
+    delete?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    disconnect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    set?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    update?: NexusGenInputs['MessageUpdateWithWhereUniqueNestedInput'][] | null; // [MessageUpdateWithWhereUniqueNestedInput!]
+    updateMany?: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'][] | null; // [MessageUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['MessageUpsertWithWhereUniqueNestedInput'][] | null; // [MessageUpsertWithWhereUniqueNestedInput!]
+  }
+  MessageUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['MessageUpdateManyDataInput']; // MessageUpdateManyDataInput!
+    where: NexusGenInputs['MessageScalarWhereInput']; // MessageScalarWhereInput!
+  }
+  MessageUpdateWithWhereUniqueNestedInput: { // input type
+    data: NexusGenInputs['MessageUpdateDataInput']; // MessageUpdateDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+  }
+  MessageUpsertWithWhereUniqueNestedInput: { // input type
+    create: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
+    update: NexusGenInputs['MessageUpdateDataInput']; // MessageUpdateDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
   }
   MessageWhereInput: { // input type
     AND?: NexusGenInputs['MessageWhereInput'][] | null; // [MessageWhereInput!]
@@ -283,6 +1558,185 @@ export interface NexusGenInputs {
     updatedAt_lte?: any | null; // DateTime
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  MessageWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  ReportCreateInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneWithoutReportsInput'] | null; // CommentCreateOneWithoutReportsInput
+    debate?: NexusGenInputs['DebateCreateOneWithoutReportsInput'] | null; // DebateCreateOneWithoutReportsInput
+    from?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    id?: string | null; // ID
+    reason: NexusGenEnums['ReportReason']; // ReportReason!
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    treated?: boolean | null; // Boolean
+    type: NexusGenEnums['ReportType']; // ReportType!
+  }
+  ReportCreateManyWithoutCommentInput: { // input type
+    connect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    create?: NexusGenInputs['ReportCreateWithoutCommentInput'][] | null; // [ReportCreateWithoutCommentInput!]
+  }
+  ReportCreateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    create?: NexusGenInputs['ReportCreateWithoutDebateInput'][] | null; // [ReportCreateWithoutDebateInput!]
+  }
+  ReportCreateWithoutCommentInput: { // input type
+    debate?: NexusGenInputs['DebateCreateOneWithoutReportsInput'] | null; // DebateCreateOneWithoutReportsInput
+    from?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    id?: string | null; // ID
+    reason: NexusGenEnums['ReportReason']; // ReportReason!
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    treated?: boolean | null; // Boolean
+    type: NexusGenEnums['ReportType']; // ReportType!
+  }
+  ReportCreateWithoutDebateInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneWithoutReportsInput'] | null; // CommentCreateOneWithoutReportsInput
+    from?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    id?: string | null; // ID
+    reason: NexusGenEnums['ReportReason']; // ReportReason!
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
+    treated?: boolean | null; // Boolean
+    type: NexusGenEnums['ReportType']; // ReportType!
+  }
+  ReportScalarWhereInput: { // input type
+    AND?: NexusGenInputs['ReportScalarWhereInput'][] | null; // [ReportScalarWhereInput!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['ReportScalarWhereInput'][] | null; // [ReportScalarWhereInput!]
+    OR?: NexusGenInputs['ReportScalarWhereInput'][] | null; // [ReportScalarWhereInput!]
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reason_in?: NexusGenEnums['ReportReason'][] | null; // [ReportReason!]
+    reason_not?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reason_not_in?: NexusGenEnums['ReportReason'][] | null; // [ReportReason!]
+    reasonText?: string | null; // String
+    reasonText_contains?: string | null; // String
+    reasonText_ends_with?: string | null; // String
+    reasonText_gt?: string | null; // String
+    reasonText_gte?: string | null; // String
+    reasonText_in?: string[] | null; // [String!]
+    reasonText_lt?: string | null; // String
+    reasonText_lte?: string | null; // String
+    reasonText_not?: string | null; // String
+    reasonText_not_contains?: string | null; // String
+    reasonText_not_ends_with?: string | null; // String
+    reasonText_not_in?: string[] | null; // [String!]
+    reasonText_not_starts_with?: string | null; // String
+    reasonText_starts_with?: string | null; // String
+    treated?: boolean | null; // Boolean
+    treated_not?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+    type_in?: NexusGenEnums['ReportType'][] | null; // [ReportType!]
+    type_not?: NexusGenEnums['ReportType'] | null; // ReportType
+    type_not_in?: NexusGenEnums['ReportType'][] | null; // [ReportType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  ReportUpdateInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneWithoutReportsInput'] | null; // CommentUpdateOneWithoutReportsInput
+    debate?: NexusGenInputs['DebateUpdateOneWithoutReportsInput'] | null; // DebateUpdateOneWithoutReportsInput
+    from?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    treated?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+  }
+  ReportUpdateManyDataInput: { // input type
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reasonText?: string | null; // String
+    treated?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+  }
+  ReportUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['ReportUpdateManyDataInput']; // ReportUpdateManyDataInput!
+    where: NexusGenInputs['ReportScalarWhereInput']; // ReportScalarWhereInput!
+  }
+  ReportUpdateManyWithoutCommentInput: { // input type
+    connect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    create?: NexusGenInputs['ReportCreateWithoutCommentInput'][] | null; // [ReportCreateWithoutCommentInput!]
+    delete?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['ReportScalarWhereInput'][] | null; // [ReportScalarWhereInput!]
+    disconnect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    set?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    update?: NexusGenInputs['ReportUpdateWithWhereUniqueWithoutCommentInput'][] | null; // [ReportUpdateWithWhereUniqueWithoutCommentInput!]
+    updateMany?: NexusGenInputs['ReportUpdateManyWithWhereNestedInput'][] | null; // [ReportUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['ReportUpsertWithWhereUniqueWithoutCommentInput'][] | null; // [ReportUpsertWithWhereUniqueWithoutCommentInput!]
+  }
+  ReportUpdateManyWithoutDebateInput: { // input type
+    connect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    create?: NexusGenInputs['ReportCreateWithoutDebateInput'][] | null; // [ReportCreateWithoutDebateInput!]
+    delete?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['ReportScalarWhereInput'][] | null; // [ReportScalarWhereInput!]
+    disconnect?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    set?: NexusGenInputs['ReportWhereUniqueInput'][] | null; // [ReportWhereUniqueInput!]
+    update?: NexusGenInputs['ReportUpdateWithWhereUniqueWithoutDebateInput'][] | null; // [ReportUpdateWithWhereUniqueWithoutDebateInput!]
+    updateMany?: NexusGenInputs['ReportUpdateManyWithWhereNestedInput'][] | null; // [ReportUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['ReportUpsertWithWhereUniqueWithoutDebateInput'][] | null; // [ReportUpsertWithWhereUniqueWithoutDebateInput!]
+  }
+  ReportUpdateWithWhereUniqueWithoutCommentInput: { // input type
+    data: NexusGenInputs['ReportUpdateWithoutCommentDataInput']; // ReportUpdateWithoutCommentDataInput!
+    where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+  }
+  ReportUpdateWithWhereUniqueWithoutDebateInput: { // input type
+    data: NexusGenInputs['ReportUpdateWithoutDebateDataInput']; // ReportUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+  }
+  ReportUpdateWithoutCommentDataInput: { // input type
+    debate?: NexusGenInputs['DebateUpdateOneWithoutReportsInput'] | null; // DebateUpdateOneWithoutReportsInput
+    from?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    treated?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+  }
+  ReportUpdateWithoutDebateDataInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneWithoutReportsInput'] | null; // CommentUpdateOneWithoutReportsInput
+    from?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    reason?: NexusGenEnums['ReportReason'] | null; // ReportReason
+    reasonText?: string | null; // String
+    to?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
+    treated?: boolean | null; // Boolean
+    type?: NexusGenEnums['ReportType'] | null; // ReportType
+  }
+  ReportUpsertWithWhereUniqueWithoutCommentInput: { // input type
+    create: NexusGenInputs['ReportCreateWithoutCommentInput']; // ReportCreateWithoutCommentInput!
+    update: NexusGenInputs['ReportUpdateWithoutCommentDataInput']; // ReportUpdateWithoutCommentDataInput!
+    where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+  }
+  ReportUpsertWithWhereUniqueWithoutDebateInput: { // input type
+    create: NexusGenInputs['ReportCreateWithoutDebateInput']; // ReportCreateWithoutDebateInput!
+    update: NexusGenInputs['ReportUpdateWithoutDebateDataInput']; // ReportUpdateWithoutDebateDataInput!
+    where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
   }
   ReportWhereInput: { // input type
     AND?: NexusGenInputs['ReportWhereInput'][] | null; // [ReportWhereInput!]
@@ -345,6 +1799,110 @@ export interface NexusGenInputs {
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
   }
+  ReportWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  TrophyCreateInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    debate?: NexusGenInputs['DebateCreateOneInput'] | null; // DebateCreateOneInput
+    id?: string | null; // ID
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    user: NexusGenInputs['UserCreateOneWithoutTrophiesInput']; // UserCreateOneWithoutTrophiesInput!
+    won: boolean; // Boolean!
+  }
+  TrophyCreateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['TrophyWhereUniqueInput'][] | null; // [TrophyWhereUniqueInput!]
+    create?: NexusGenInputs['TrophyCreateWithoutUserInput'][] | null; // [TrophyCreateWithoutUserInput!]
+  }
+  TrophyCreateWithoutUserInput: { // input type
+    comment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
+    debate?: NexusGenInputs['DebateCreateOneInput'] | null; // DebateCreateOneInput
+    id?: string | null; // ID
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    won: boolean; // Boolean!
+  }
+  TrophyScalarWhereInput: { // input type
+    AND?: NexusGenInputs['TrophyScalarWhereInput'][] | null; // [TrophyScalarWhereInput!]
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['TrophyScalarWhereInput'][] | null; // [TrophyScalarWhereInput!]
+    OR?: NexusGenInputs['TrophyScalarWhereInput'][] | null; // [TrophyScalarWhereInput!]
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    type_in?: NexusGenEnums['TrophyType'][] | null; // [TrophyType!]
+    type_not?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    type_not_in?: NexusGenEnums['TrophyType'][] | null; // [TrophyType!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+    won?: boolean | null; // Boolean
+    won_not?: boolean | null; // Boolean
+  }
+  TrophyUpdateInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    debate?: NexusGenInputs['DebateUpdateOneInput'] | null; // DebateUpdateOneInput
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTrophiesInput'] | null; // UserUpdateOneRequiredWithoutTrophiesInput
+    won?: boolean | null; // Boolean
+  }
+  TrophyUpdateManyDataInput: { // input type
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    won?: boolean | null; // Boolean
+  }
+  TrophyUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['TrophyUpdateManyDataInput']; // TrophyUpdateManyDataInput!
+    where: NexusGenInputs['TrophyScalarWhereInput']; // TrophyScalarWhereInput!
+  }
+  TrophyUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['TrophyWhereUniqueInput'][] | null; // [TrophyWhereUniqueInput!]
+    create?: NexusGenInputs['TrophyCreateWithoutUserInput'][] | null; // [TrophyCreateWithoutUserInput!]
+    delete?: NexusGenInputs['TrophyWhereUniqueInput'][] | null; // [TrophyWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['TrophyScalarWhereInput'][] | null; // [TrophyScalarWhereInput!]
+    disconnect?: NexusGenInputs['TrophyWhereUniqueInput'][] | null; // [TrophyWhereUniqueInput!]
+    set?: NexusGenInputs['TrophyWhereUniqueInput'][] | null; // [TrophyWhereUniqueInput!]
+    update?: NexusGenInputs['TrophyUpdateWithWhereUniqueWithoutUserInput'][] | null; // [TrophyUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['TrophyUpdateManyWithWhereNestedInput'][] | null; // [TrophyUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['TrophyUpsertWithWhereUniqueWithoutUserInput'][] | null; // [TrophyUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  TrophyUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['TrophyUpdateWithoutUserDataInput']; // TrophyUpdateWithoutUserDataInput!
+    where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
+  }
+  TrophyUpdateWithoutUserDataInput: { // input type
+    comment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
+    debate?: NexusGenInputs['DebateUpdateOneInput'] | null; // DebateUpdateOneInput
+    type?: NexusGenEnums['TrophyType'] | null; // TrophyType
+    won?: boolean | null; // Boolean
+  }
+  TrophyUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['TrophyCreateWithoutUserInput']; // TrophyCreateWithoutUserInput!
+    update: NexusGenInputs['TrophyUpdateWithoutUserDataInput']; // TrophyUpdateWithoutUserDataInput!
+    where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
+  }
   TrophyWhereInput: { // input type
     AND?: NexusGenInputs['TrophyWhereInput'][] | null; // [TrophyWhereInput!]
     comment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
@@ -386,6 +1944,987 @@ export interface NexusGenInputs {
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     won?: boolean | null; // Boolean
     won_not?: boolean | null; // Boolean
+  }
+  TrophyWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  UserCreateInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateManyInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateInput'][] | null; // [UserCreateInput!]
+  }
+  UserCreateManyWithoutBlockedInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutBlockedInput'][] | null; // [UserCreateWithoutBlockedInput!]
+  }
+  UserCreateManyWithoutBlockingInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutBlockingInput'][] | null; // [UserCreateWithoutBlockingInput!]
+  }
+  UserCreateManyWithoutConversationsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutConversationsInput'][] | null; // [UserCreateWithoutConversationsInput!]
+  }
+  UserCreateManyWithoutFollowersInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutFollowersInput'][] | null; // [UserCreateWithoutFollowersInput!]
+  }
+  UserCreateManyWithoutFollowingInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutFollowingInput'][] | null; // [UserCreateWithoutFollowingInput!]
+  }
+  UserCreateOneInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
+  }
+  UserCreateOneWithoutDebatesBlueInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesBlueInput'] | null; // UserCreateWithoutDebatesBlueInput
+  }
+  UserCreateOneWithoutDebatesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesInput'] | null; // UserCreateWithoutDebatesInput
+  }
+  UserCreateOneWithoutDebatesRedInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesRedInput'] | null; // UserCreateWithoutDebatesRedInput
+  }
+  UserCreateOneWithoutInteractionsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutInteractionsInput'] | null; // UserCreateWithoutInteractionsInput
+  }
+  UserCreateOneWithoutTrophiesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutTrophiesInput'] | null; // UserCreateWithoutTrophiesInput
+  }
+  UserCreateWithoutBlockedInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutBlockingInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutConversationsInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutDebatesBlueInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutDebatesInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutDebatesRedInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutFollowersInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutFollowingInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutInteractionsInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
+  }
+  UserCreateWithoutTrophiesInput: { // input type
+    bio?: string | null; // String
+    birthdate: any; // DateTime!
+    blocked?: NexusGenInputs['UserCreateManyWithoutBlockingInput'] | null; // UserCreateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserCreateManyWithoutBlockedInput'] | null; // UserCreateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
+    email: string; // String!
+    followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id?: string | null; // ID
+    interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password: string; // String!
+    profilePicture?: string | null; // String
+    pseudo: string; // String!
+    role?: NexusGenEnums['Role'] | null; // Role
+  }
+  UserScalarWhereInput: { // input type
+    AND?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    bio?: string | null; // String
+    bio_contains?: string | null; // String
+    bio_ends_with?: string | null; // String
+    bio_gt?: string | null; // String
+    bio_gte?: string | null; // String
+    bio_in?: string[] | null; // [String!]
+    bio_lt?: string | null; // String
+    bio_lte?: string | null; // String
+    bio_not?: string | null; // String
+    bio_not_contains?: string | null; // String
+    bio_not_ends_with?: string | null; // String
+    bio_not_in?: string[] | null; // [String!]
+    bio_not_starts_with?: string | null; // String
+    bio_starts_with?: string | null; // String
+    birthdate?: any | null; // DateTime
+    birthdate_gt?: any | null; // DateTime
+    birthdate_gte?: any | null; // DateTime
+    birthdate_in?: any[] | null; // [DateTime!]
+    birthdate_lt?: any | null; // DateTime
+    birthdate_lte?: any | null; // DateTime
+    birthdate_not?: any | null; // DateTime
+    birthdate_not_in?: any[] | null; // [DateTime!]
+    certified?: boolean | null; // Boolean
+    certified_not?: boolean | null; // Boolean
+    coverPicture?: string | null; // String
+    coverPicture_contains?: string | null; // String
+    coverPicture_ends_with?: string | null; // String
+    coverPicture_gt?: string | null; // String
+    coverPicture_gte?: string | null; // String
+    coverPicture_in?: string[] | null; // [String!]
+    coverPicture_lt?: string | null; // String
+    coverPicture_lte?: string | null; // String
+    coverPicture_not?: string | null; // String
+    coverPicture_not_contains?: string | null; // String
+    coverPicture_not_ends_with?: string | null; // String
+    coverPicture_not_in?: string[] | null; // [String!]
+    coverPicture_not_starts_with?: string | null; // String
+    coverPicture_starts_with?: string | null; // String
+    createdAt?: any | null; // DateTime
+    createdAt_gt?: any | null; // DateTime
+    createdAt_gte?: any | null; // DateTime
+    createdAt_in?: any[] | null; // [DateTime!]
+    createdAt_lt?: any | null; // DateTime
+    createdAt_lte?: any | null; // DateTime
+    createdAt_not?: any | null; // DateTime
+    createdAt_not_in?: any[] | null; // [DateTime!]
+    crowned?: boolean | null; // Boolean
+    crowned_not?: boolean | null; // Boolean
+    email?: string | null; // String
+    email_contains?: string | null; // String
+    email_ends_with?: string | null; // String
+    email_gt?: string | null; // String
+    email_gte?: string | null; // String
+    email_in?: string[] | null; // [String!]
+    email_lt?: string | null; // String
+    email_lte?: string | null; // String
+    email_not?: string | null; // String
+    email_not_contains?: string | null; // String
+    email_not_ends_with?: string | null; // String
+    email_not_in?: string[] | null; // [String!]
+    email_not_starts_with?: string | null; // String
+    email_starts_with?: string | null; // String
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    gender_in?: NexusGenEnums['Gender'][] | null; // [Gender!]
+    gender_not?: NexusGenEnums['Gender'] | null; // Gender
+    gender_not_in?: NexusGenEnums['Gender'][] | null; // [Gender!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    language?: NexusGenEnums['Language'] | null; // Language
+    language_in?: NexusGenEnums['Language'][] | null; // [Language!]
+    language_not?: NexusGenEnums['Language'] | null; // Language
+    language_not_in?: NexusGenEnums['Language'][] | null; // [Language!]
+    lastConnected?: any | null; // DateTime
+    lastConnected_gt?: any | null; // DateTime
+    lastConnected_gte?: any | null; // DateTime
+    lastConnected_in?: any[] | null; // [DateTime!]
+    lastConnected_lt?: any | null; // DateTime
+    lastConnected_lte?: any | null; // DateTime
+    lastConnected_not?: any | null; // DateTime
+    lastConnected_not_in?: any[] | null; // [DateTime!]
+    NOT?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    OR?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    password?: string | null; // String
+    password_contains?: string | null; // String
+    password_ends_with?: string | null; // String
+    password_gt?: string | null; // String
+    password_gte?: string | null; // String
+    password_in?: string[] | null; // [String!]
+    password_lt?: string | null; // String
+    password_lte?: string | null; // String
+    password_not?: string | null; // String
+    password_not_contains?: string | null; // String
+    password_not_ends_with?: string | null; // String
+    password_not_in?: string[] | null; // [String!]
+    password_not_starts_with?: string | null; // String
+    password_starts_with?: string | null; // String
+    profilePicture?: string | null; // String
+    profilePicture_contains?: string | null; // String
+    profilePicture_ends_with?: string | null; // String
+    profilePicture_gt?: string | null; // String
+    profilePicture_gte?: string | null; // String
+    profilePicture_in?: string[] | null; // [String!]
+    profilePicture_lt?: string | null; // String
+    profilePicture_lte?: string | null; // String
+    profilePicture_not?: string | null; // String
+    profilePicture_not_contains?: string | null; // String
+    profilePicture_not_ends_with?: string | null; // String
+    profilePicture_not_in?: string[] | null; // [String!]
+    profilePicture_not_starts_with?: string | null; // String
+    profilePicture_starts_with?: string | null; // String
+    pseudo?: string | null; // String
+    pseudo_contains?: string | null; // String
+    pseudo_ends_with?: string | null; // String
+    pseudo_gt?: string | null; // String
+    pseudo_gte?: string | null; // String
+    pseudo_in?: string[] | null; // [String!]
+    pseudo_lt?: string | null; // String
+    pseudo_lte?: string | null; // String
+    pseudo_not?: string | null; // String
+    pseudo_not_contains?: string | null; // String
+    pseudo_not_ends_with?: string | null; // String
+    pseudo_not_in?: string[] | null; // [String!]
+    pseudo_not_starts_with?: string | null; // String
+    pseudo_starts_with?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    role_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    role_not?: NexusGenEnums['Role'] | null; // Role
+    role_not_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    updatedAt?: any | null; // DateTime
+    updatedAt_gt?: any | null; // DateTime
+    updatedAt_gte?: any | null; // DateTime
+    updatedAt_in?: any[] | null; // [DateTime!]
+    updatedAt_lt?: any | null; // DateTime
+    updatedAt_lte?: any | null; // DateTime
+    updatedAt_not?: any | null; // DateTime
+    updatedAt_not_in?: any[] | null; // [DateTime!]
+  }
+  UserUpdateDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateManyDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    certified?: boolean | null; // Boolean
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    email?: string | null; // String
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+  }
+  UserUpdateManyInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateInput'][] | null; // [UserCreateInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueNestedInput'][] | null; // [UserUpdateWithWhereUniqueNestedInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueNestedInput'][] | null; // [UserUpsertWithWhereUniqueNestedInput!]
+  }
+  UserUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['UserUpdateManyDataInput']; // UserUpdateManyDataInput!
+    where: NexusGenInputs['UserScalarWhereInput']; // UserScalarWhereInput!
+  }
+  UserUpdateManyWithoutBlockedInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutBlockedInput'][] | null; // [UserCreateWithoutBlockedInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutBlockedInput'][] | null; // [UserUpdateWithWhereUniqueWithoutBlockedInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutBlockedInput'][] | null; // [UserUpsertWithWhereUniqueWithoutBlockedInput!]
+  }
+  UserUpdateManyWithoutBlockingInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutBlockingInput'][] | null; // [UserCreateWithoutBlockingInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutBlockingInput'][] | null; // [UserUpdateWithWhereUniqueWithoutBlockingInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutBlockingInput'][] | null; // [UserUpsertWithWhereUniqueWithoutBlockingInput!]
+  }
+  UserUpdateManyWithoutConversationsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutConversationsInput'][] | null; // [UserCreateWithoutConversationsInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutConversationsInput'][] | null; // [UserUpdateWithWhereUniqueWithoutConversationsInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutConversationsInput'][] | null; // [UserUpsertWithWhereUniqueWithoutConversationsInput!]
+  }
+  UserUpdateManyWithoutFollowersInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutFollowersInput'][] | null; // [UserCreateWithoutFollowersInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutFollowersInput'][] | null; // [UserUpdateWithWhereUniqueWithoutFollowersInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutFollowersInput'][] | null; // [UserUpsertWithWhereUniqueWithoutFollowersInput!]
+  }
+  UserUpdateManyWithoutFollowingInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    create?: NexusGenInputs['UserCreateWithoutFollowingInput'][] | null; // [UserCreateWithoutFollowingInput!]
+    delete?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
+    disconnect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    set?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
+    update?: NexusGenInputs['UserUpdateWithWhereUniqueWithoutFollowingInput'][] | null; // [UserUpdateWithWhereUniqueWithoutFollowingInput!]
+    updateMany?: NexusGenInputs['UserUpdateManyWithWhereNestedInput'][] | null; // [UserUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['UserUpsertWithWhereUniqueWithoutFollowingInput'][] | null; // [UserUpsertWithWhereUniqueWithoutFollowingInput!]
+  }
+  UserUpdateOneInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['UserUpdateDataInput'] | null; // UserUpdateDataInput
+    upsert?: NexusGenInputs['UserUpsertNestedInput'] | null; // UserUpsertNestedInput
+  }
+  UserUpdateOneRequiredInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
+    update?: NexusGenInputs['UserUpdateDataInput'] | null; // UserUpdateDataInput
+    upsert?: NexusGenInputs['UserUpsertNestedInput'] | null; // UserUpsertNestedInput
+  }
+  UserUpdateOneRequiredWithoutInteractionsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutInteractionsInput'] | null; // UserCreateWithoutInteractionsInput
+    update?: NexusGenInputs['UserUpdateWithoutInteractionsDataInput'] | null; // UserUpdateWithoutInteractionsDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutInteractionsInput'] | null; // UserUpsertWithoutInteractionsInput
+  }
+  UserUpdateOneRequiredWithoutTrophiesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutTrophiesInput'] | null; // UserCreateWithoutTrophiesInput
+    update?: NexusGenInputs['UserUpdateWithoutTrophiesDataInput'] | null; // UserUpdateWithoutTrophiesDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutTrophiesInput'] | null; // UserUpsertWithoutTrophiesInput
+  }
+  UserUpdateOneWithoutDebatesBlueInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesBlueInput'] | null; // UserCreateWithoutDebatesBlueInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['UserUpdateWithoutDebatesBlueDataInput'] | null; // UserUpdateWithoutDebatesBlueDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutDebatesBlueInput'] | null; // UserUpsertWithoutDebatesBlueInput
+  }
+  UserUpdateOneWithoutDebatesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesInput'] | null; // UserCreateWithoutDebatesInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['UserUpdateWithoutDebatesDataInput'] | null; // UserUpdateWithoutDebatesDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutDebatesInput'] | null; // UserUpsertWithoutDebatesInput
+  }
+  UserUpdateOneWithoutDebatesRedInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutDebatesRedInput'] | null; // UserCreateWithoutDebatesRedInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['UserUpdateWithoutDebatesRedDataInput'] | null; // UserUpdateWithoutDebatesRedDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutDebatesRedInput'] | null; // UserUpsertWithoutDebatesRedInput
+  }
+  UserUpdateWithWhereUniqueNestedInput: { // input type
+    data: NexusGenInputs['UserUpdateDataInput']; // UserUpdateDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithWhereUniqueWithoutBlockedInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutBlockedDataInput']; // UserUpdateWithoutBlockedDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithWhereUniqueWithoutBlockingInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutBlockingDataInput']; // UserUpdateWithoutBlockingDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithWhereUniqueWithoutConversationsInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutConversationsDataInput']; // UserUpdateWithoutConversationsDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithWhereUniqueWithoutFollowersInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutFollowersDataInput']; // UserUpdateWithoutFollowersDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithWhereUniqueWithoutFollowingInput: { // input type
+    data: NexusGenInputs['UserUpdateWithoutFollowingDataInput']; // UserUpdateWithoutFollowingDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpdateWithoutBlockedDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutBlockingDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutConversationsDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutDebatesBlueDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutDebatesDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutDebatesRedDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutFollowersDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutFollowingDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutInteractionsDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+    trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
+  }
+  UserUpdateWithoutTrophiesDataInput: { // input type
+    bio?: string | null; // String
+    birthdate?: any | null; // DateTime
+    blocked?: NexusGenInputs['UserUpdateManyWithoutBlockingInput'] | null; // UserUpdateManyWithoutBlockingInput
+    blocking?: NexusGenInputs['UserUpdateManyWithoutBlockedInput'] | null; // UserUpdateManyWithoutBlockedInput
+    certified?: boolean | null; // Boolean
+    conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
+    coverPicture?: string | null; // String
+    crowned?: boolean | null; // Boolean
+    debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
+    debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
+    debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
+    email?: string | null; // String
+    followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
+    following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
+    language?: NexusGenEnums['Language'] | null; // Language
+    lastConnected?: any | null; // DateTime
+    password?: string | null; // String
+    profilePicture?: string | null; // String
+    pseudo?: string | null; // String
+    role?: NexusGenEnums['Role'] | null; // Role
+  }
+  UserUpsertNestedInput: { // input type
+    create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    update: NexusGenInputs['UserUpdateDataInput']; // UserUpdateDataInput!
+  }
+  UserUpsertWithWhereUniqueNestedInput: { // input type
+    create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    update: NexusGenInputs['UserUpdateDataInput']; // UserUpdateDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithWhereUniqueWithoutBlockedInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutBlockedInput']; // UserCreateWithoutBlockedInput!
+    update: NexusGenInputs['UserUpdateWithoutBlockedDataInput']; // UserUpdateWithoutBlockedDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithWhereUniqueWithoutBlockingInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutBlockingInput']; // UserCreateWithoutBlockingInput!
+    update: NexusGenInputs['UserUpdateWithoutBlockingDataInput']; // UserUpdateWithoutBlockingDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithWhereUniqueWithoutConversationsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutConversationsInput']; // UserCreateWithoutConversationsInput!
+    update: NexusGenInputs['UserUpdateWithoutConversationsDataInput']; // UserUpdateWithoutConversationsDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithWhereUniqueWithoutFollowersInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutFollowersInput']; // UserCreateWithoutFollowersInput!
+    update: NexusGenInputs['UserUpdateWithoutFollowersDataInput']; // UserUpdateWithoutFollowersDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithWhereUniqueWithoutFollowingInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutFollowingInput']; // UserCreateWithoutFollowingInput!
+    update: NexusGenInputs['UserUpdateWithoutFollowingDataInput']; // UserUpdateWithoutFollowingDataInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserUpsertWithoutDebatesBlueInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutDebatesBlueInput']; // UserCreateWithoutDebatesBlueInput!
+    update: NexusGenInputs['UserUpdateWithoutDebatesBlueDataInput']; // UserUpdateWithoutDebatesBlueDataInput!
+  }
+  UserUpsertWithoutDebatesInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutDebatesInput']; // UserCreateWithoutDebatesInput!
+    update: NexusGenInputs['UserUpdateWithoutDebatesDataInput']; // UserUpdateWithoutDebatesDataInput!
+  }
+  UserUpsertWithoutDebatesRedInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutDebatesRedInput']; // UserCreateWithoutDebatesRedInput!
+    update: NexusGenInputs['UserUpdateWithoutDebatesRedDataInput']; // UserUpdateWithoutDebatesRedDataInput!
+  }
+  UserUpsertWithoutInteractionsInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutInteractionsInput']; // UserCreateWithoutInteractionsInput!
+    update: NexusGenInputs['UserUpdateWithoutInteractionsDataInput']; // UserUpdateWithoutInteractionsDataInput!
+  }
+  UserUpsertWithoutTrophiesInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutTrophiesInput']; // UserCreateWithoutTrophiesInput!
+    update: NexusGenInputs['UserUpdateWithoutTrophiesDataInput']; // UserUpdateWithoutTrophiesDataInput!
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -490,6 +3029,20 @@ export interface NexusGenInputs {
     lastConnected_lte?: any | null; // DateTime
     lastConnected_not?: any | null; // DateTime
     lastConnected_not_in?: any[] | null; // [DateTime!]
+    password?: string | null; // String
+    password_contains?: string | null; // String
+    password_ends_with?: string | null; // String
+    password_gt?: string | null; // String
+    password_gte?: string | null; // String
+    password_in?: string[] | null; // [String!]
+    password_lt?: string | null; // String
+    password_lte?: string | null; // String
+    password_not?: string | null; // String
+    password_not_contains?: string | null; // String
+    password_not_ends_with?: string | null; // String
+    password_not_in?: string[] | null; // [String!]
+    password_not_starts_with?: string | null; // String
+    password_starts_with?: string | null; // String
     profilePicture?: string | null; // String
     profilePicture_contains?: string | null; // String
     profilePicture_ends_with?: string | null; // String
@@ -540,11 +3093,14 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  AdOrderByInput: "active_ASC" | "active_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "ratio_ASC" | "ratio_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "from_ASC" | "from_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateOrderByInput: "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateType: "DUO" | "STANDARD"
   Gender: "FEMALE" | "MALE" | "NO_INDICATION"
+  GenderFilter: "ALL" | "FEMALE" | "MALE"
   InteractionOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   InteractionType: "BLUE_VOTE" | "COMMENT" | "DISLIKE" | "LIKE" | "NEGATIVE_VOTE" | "POSITIVE_VOTE" | "RED_VOTE"
   Language: "EN" | "FR"
@@ -555,10 +3111,28 @@ export interface NexusGenEnums {
   Role: "ADMIN" | "MODERATOR" | "MUDDLE" | "STANDARD"
   TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
   TrophyType: "DUO" | "TOP_COMMENT"
-  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "pseudo_ASC" | "pseudo_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "password_ASC" | "password_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "pseudo_ASC" | "pseudo_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
+  Ad: { // root type
+    active: boolean; // Boolean!
+    content: string; // String!
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    ratio: number; // Int!
+    updatedAt: any; // DateTime!
+  }
+  AdTarget: { // root type
+    birthdateMax: any; // DateTime!
+    birthdateMin: any; // DateTime!
+    createdAt: any; // DateTime!
+    gender: NexusGenEnums['GenderFilter']; // GenderFilter!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: any; // DateTime!
+  }
   Comment: { // root type
     content: string; // String!
     createdAt: any; // DateTime!
@@ -627,6 +3201,7 @@ export interface NexusGenRootTypes {
     id: string; // ID!
     language: NexusGenEnums['Language']; // Language!
     lastConnected?: any | null; // DateTime
+    password: string; // String!
     profilePicture?: string | null; // String
     pseudo: string; // String!
     role: NexusGenEnums['Role']; // Role!
@@ -641,20 +3216,240 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  AdCreateInput: NexusGenInputs['AdCreateInput'];
+  AdTargetCreateInput: NexusGenInputs['AdTargetCreateInput'];
+  AdTargetCreateManyInput: NexusGenInputs['AdTargetCreateManyInput'];
+  AdTargetScalarWhereInput: NexusGenInputs['AdTargetScalarWhereInput'];
+  AdTargetUpdateDataInput: NexusGenInputs['AdTargetUpdateDataInput'];
+  AdTargetUpdateInput: NexusGenInputs['AdTargetUpdateInput'];
+  AdTargetUpdateManyDataInput: NexusGenInputs['AdTargetUpdateManyDataInput'];
+  AdTargetUpdateManyInput: NexusGenInputs['AdTargetUpdateManyInput'];
+  AdTargetUpdateManyWithWhereNestedInput: NexusGenInputs['AdTargetUpdateManyWithWhereNestedInput'];
+  AdTargetUpdateWithWhereUniqueNestedInput: NexusGenInputs['AdTargetUpdateWithWhereUniqueNestedInput'];
+  AdTargetUpsertWithWhereUniqueNestedInput: NexusGenInputs['AdTargetUpsertWithWhereUniqueNestedInput'];
+  AdTargetWhereInput: NexusGenInputs['AdTargetWhereInput'];
+  AdTargetWhereUniqueInput: NexusGenInputs['AdTargetWhereUniqueInput'];
+  AdUpdateInput: NexusGenInputs['AdUpdateInput'];
+  AdWhereInput: NexusGenInputs['AdWhereInput'];
+  AdWhereUniqueInput: NexusGenInputs['AdWhereUniqueInput'];
+  CommentCreateInput: NexusGenInputs['CommentCreateInput'];
+  CommentCreateManyWithoutDebateInput: NexusGenInputs['CommentCreateManyWithoutDebateInput'];
+  CommentCreateOneInput: NexusGenInputs['CommentCreateOneInput'];
+  CommentCreateOneWithoutReportsInput: NexusGenInputs['CommentCreateOneWithoutReportsInput'];
+  CommentCreateWithoutDebateInput: NexusGenInputs['CommentCreateWithoutDebateInput'];
+  CommentCreateWithoutReportsInput: NexusGenInputs['CommentCreateWithoutReportsInput'];
+  CommentScalarWhereInput: NexusGenInputs['CommentScalarWhereInput'];
+  CommentUpdateDataInput: NexusGenInputs['CommentUpdateDataInput'];
+  CommentUpdateInput: NexusGenInputs['CommentUpdateInput'];
+  CommentUpdateManyDataInput: NexusGenInputs['CommentUpdateManyDataInput'];
+  CommentUpdateManyWithWhereNestedInput: NexusGenInputs['CommentUpdateManyWithWhereNestedInput'];
+  CommentUpdateManyWithoutDebateInput: NexusGenInputs['CommentUpdateManyWithoutDebateInput'];
+  CommentUpdateOneInput: NexusGenInputs['CommentUpdateOneInput'];
+  CommentUpdateOneWithoutReportsInput: NexusGenInputs['CommentUpdateOneWithoutReportsInput'];
+  CommentUpdateWithWhereUniqueWithoutDebateInput: NexusGenInputs['CommentUpdateWithWhereUniqueWithoutDebateInput'];
+  CommentUpdateWithoutDebateDataInput: NexusGenInputs['CommentUpdateWithoutDebateDataInput'];
+  CommentUpdateWithoutReportsDataInput: NexusGenInputs['CommentUpdateWithoutReportsDataInput'];
+  CommentUpsertNestedInput: NexusGenInputs['CommentUpsertNestedInput'];
+  CommentUpsertWithWhereUniqueWithoutDebateInput: NexusGenInputs['CommentUpsertWithWhereUniqueWithoutDebateInput'];
+  CommentUpsertWithoutReportsInput: NexusGenInputs['CommentUpsertWithoutReportsInput'];
   CommentWhereInput: NexusGenInputs['CommentWhereInput'];
+  CommentWhereUniqueInput: NexusGenInputs['CommentWhereUniqueInput'];
+  ConversationCreateInput: NexusGenInputs['ConversationCreateInput'];
+  ConversationCreateManyWithoutSpeakersInput: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'];
+  ConversationCreateWithoutSpeakersInput: NexusGenInputs['ConversationCreateWithoutSpeakersInput'];
+  ConversationScalarWhereInput: NexusGenInputs['ConversationScalarWhereInput'];
+  ConversationUpdateInput: NexusGenInputs['ConversationUpdateInput'];
+  ConversationUpdateManyWithoutSpeakersInput: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'];
+  ConversationUpdateWithWhereUniqueWithoutSpeakersInput: NexusGenInputs['ConversationUpdateWithWhereUniqueWithoutSpeakersInput'];
+  ConversationUpdateWithoutSpeakersDataInput: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput'];
+  ConversationUpsertWithWhereUniqueWithoutSpeakersInput: NexusGenInputs['ConversationUpsertWithWhereUniqueWithoutSpeakersInput'];
   ConversationWhereInput: NexusGenInputs['ConversationWhereInput'];
+  ConversationWhereUniqueInput: NexusGenInputs['ConversationWhereUniqueInput'];
+  DebateCreateInput: NexusGenInputs['DebateCreateInput'];
+  DebateCreateManyWithoutOwnerBlueInput: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'];
+  DebateCreateManyWithoutOwnerInput: NexusGenInputs['DebateCreateManyWithoutOwnerInput'];
+  DebateCreateManyWithoutOwnerRedInput: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'];
+  DebateCreateOneInput: NexusGenInputs['DebateCreateOneInput'];
+  DebateCreateOneWithoutCommentsInput: NexusGenInputs['DebateCreateOneWithoutCommentsInput'];
+  DebateCreateOneWithoutInteractionsInput: NexusGenInputs['DebateCreateOneWithoutInteractionsInput'];
+  DebateCreateOneWithoutReportsInput: NexusGenInputs['DebateCreateOneWithoutReportsInput'];
+  DebateCreateWithoutCommentsInput: NexusGenInputs['DebateCreateWithoutCommentsInput'];
+  DebateCreateWithoutInteractionsInput: NexusGenInputs['DebateCreateWithoutInteractionsInput'];
+  DebateCreateWithoutOwnerBlueInput: NexusGenInputs['DebateCreateWithoutOwnerBlueInput'];
+  DebateCreateWithoutOwnerInput: NexusGenInputs['DebateCreateWithoutOwnerInput'];
+  DebateCreateWithoutOwnerRedInput: NexusGenInputs['DebateCreateWithoutOwnerRedInput'];
+  DebateCreateWithoutReportsInput: NexusGenInputs['DebateCreateWithoutReportsInput'];
+  DebateScalarWhereInput: NexusGenInputs['DebateScalarWhereInput'];
+  DebateUpdateDataInput: NexusGenInputs['DebateUpdateDataInput'];
+  DebateUpdateManyDataInput: NexusGenInputs['DebateUpdateManyDataInput'];
+  DebateUpdateManyWithWhereNestedInput: NexusGenInputs['DebateUpdateManyWithWhereNestedInput'];
+  DebateUpdateManyWithoutOwnerBlueInput: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'];
+  DebateUpdateManyWithoutOwnerInput: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'];
+  DebateUpdateManyWithoutOwnerRedInput: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'];
+  DebateUpdateOneInput: NexusGenInputs['DebateUpdateOneInput'];
+  DebateUpdateOneRequiredWithoutCommentsInput: NexusGenInputs['DebateUpdateOneRequiredWithoutCommentsInput'];
+  DebateUpdateOneWithoutInteractionsInput: NexusGenInputs['DebateUpdateOneWithoutInteractionsInput'];
+  DebateUpdateOneWithoutReportsInput: NexusGenInputs['DebateUpdateOneWithoutReportsInput'];
+  DebateUpdateWithWhereUniqueWithoutOwnerBlueInput: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerBlueInput'];
+  DebateUpdateWithWhereUniqueWithoutOwnerInput: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerInput'];
+  DebateUpdateWithWhereUniqueWithoutOwnerRedInput: NexusGenInputs['DebateUpdateWithWhereUniqueWithoutOwnerRedInput'];
+  DebateUpdateWithoutCommentsDataInput: NexusGenInputs['DebateUpdateWithoutCommentsDataInput'];
+  DebateUpdateWithoutInteractionsDataInput: NexusGenInputs['DebateUpdateWithoutInteractionsDataInput'];
+  DebateUpdateWithoutOwnerBlueDataInput: NexusGenInputs['DebateUpdateWithoutOwnerBlueDataInput'];
+  DebateUpdateWithoutOwnerDataInput: NexusGenInputs['DebateUpdateWithoutOwnerDataInput'];
+  DebateUpdateWithoutOwnerRedDataInput: NexusGenInputs['DebateUpdateWithoutOwnerRedDataInput'];
+  DebateUpdateWithoutReportsDataInput: NexusGenInputs['DebateUpdateWithoutReportsDataInput'];
+  DebateUpsertNestedInput: NexusGenInputs['DebateUpsertNestedInput'];
+  DebateUpsertWithWhereUniqueWithoutOwnerBlueInput: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerBlueInput'];
+  DebateUpsertWithWhereUniqueWithoutOwnerInput: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerInput'];
+  DebateUpsertWithWhereUniqueWithoutOwnerRedInput: NexusGenInputs['DebateUpsertWithWhereUniqueWithoutOwnerRedInput'];
+  DebateUpsertWithoutCommentsInput: NexusGenInputs['DebateUpsertWithoutCommentsInput'];
+  DebateUpsertWithoutInteractionsInput: NexusGenInputs['DebateUpsertWithoutInteractionsInput'];
+  DebateUpsertWithoutReportsInput: NexusGenInputs['DebateUpsertWithoutReportsInput'];
   DebateWhereInput: NexusGenInputs['DebateWhereInput'];
+  DebateWhereUniqueInput: NexusGenInputs['DebateWhereUniqueInput'];
+  InteractionCreateInput: NexusGenInputs['InteractionCreateInput'];
+  InteractionCreateManyWithoutDebateInput: NexusGenInputs['InteractionCreateManyWithoutDebateInput'];
+  InteractionCreateManyWithoutWhoInput: NexusGenInputs['InteractionCreateManyWithoutWhoInput'];
+  InteractionCreateWithoutDebateInput: NexusGenInputs['InteractionCreateWithoutDebateInput'];
+  InteractionCreateWithoutWhoInput: NexusGenInputs['InteractionCreateWithoutWhoInput'];
+  InteractionScalarWhereInput: NexusGenInputs['InteractionScalarWhereInput'];
+  InteractionUpdateInput: NexusGenInputs['InteractionUpdateInput'];
+  InteractionUpdateManyDataInput: NexusGenInputs['InteractionUpdateManyDataInput'];
+  InteractionUpdateManyWithWhereNestedInput: NexusGenInputs['InteractionUpdateManyWithWhereNestedInput'];
+  InteractionUpdateManyWithoutDebateInput: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'];
+  InteractionUpdateManyWithoutWhoInput: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'];
+  InteractionUpdateWithWhereUniqueWithoutDebateInput: NexusGenInputs['InteractionUpdateWithWhereUniqueWithoutDebateInput'];
+  InteractionUpdateWithWhereUniqueWithoutWhoInput: NexusGenInputs['InteractionUpdateWithWhereUniqueWithoutWhoInput'];
+  InteractionUpdateWithoutDebateDataInput: NexusGenInputs['InteractionUpdateWithoutDebateDataInput'];
+  InteractionUpdateWithoutWhoDataInput: NexusGenInputs['InteractionUpdateWithoutWhoDataInput'];
+  InteractionUpsertWithWhereUniqueWithoutDebateInput: NexusGenInputs['InteractionUpsertWithWhereUniqueWithoutDebateInput'];
+  InteractionUpsertWithWhereUniqueWithoutWhoInput: NexusGenInputs['InteractionUpsertWithWhereUniqueWithoutWhoInput'];
   InteractionWhereInput: NexusGenInputs['InteractionWhereInput'];
+  InteractionWhereUniqueInput: NexusGenInputs['InteractionWhereUniqueInput'];
+  MessageCreateInput: NexusGenInputs['MessageCreateInput'];
+  MessageCreateManyInput: NexusGenInputs['MessageCreateManyInput'];
+  MessageScalarWhereInput: NexusGenInputs['MessageScalarWhereInput'];
+  MessageUpdateDataInput: NexusGenInputs['MessageUpdateDataInput'];
+  MessageUpdateInput: NexusGenInputs['MessageUpdateInput'];
+  MessageUpdateManyDataInput: NexusGenInputs['MessageUpdateManyDataInput'];
+  MessageUpdateManyInput: NexusGenInputs['MessageUpdateManyInput'];
+  MessageUpdateManyWithWhereNestedInput: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'];
+  MessageUpdateWithWhereUniqueNestedInput: NexusGenInputs['MessageUpdateWithWhereUniqueNestedInput'];
+  MessageUpsertWithWhereUniqueNestedInput: NexusGenInputs['MessageUpsertWithWhereUniqueNestedInput'];
   MessageWhereInput: NexusGenInputs['MessageWhereInput'];
+  MessageWhereUniqueInput: NexusGenInputs['MessageWhereUniqueInput'];
+  ReportCreateInput: NexusGenInputs['ReportCreateInput'];
+  ReportCreateManyWithoutCommentInput: NexusGenInputs['ReportCreateManyWithoutCommentInput'];
+  ReportCreateManyWithoutDebateInput: NexusGenInputs['ReportCreateManyWithoutDebateInput'];
+  ReportCreateWithoutCommentInput: NexusGenInputs['ReportCreateWithoutCommentInput'];
+  ReportCreateWithoutDebateInput: NexusGenInputs['ReportCreateWithoutDebateInput'];
+  ReportScalarWhereInput: NexusGenInputs['ReportScalarWhereInput'];
+  ReportUpdateInput: NexusGenInputs['ReportUpdateInput'];
+  ReportUpdateManyDataInput: NexusGenInputs['ReportUpdateManyDataInput'];
+  ReportUpdateManyWithWhereNestedInput: NexusGenInputs['ReportUpdateManyWithWhereNestedInput'];
+  ReportUpdateManyWithoutCommentInput: NexusGenInputs['ReportUpdateManyWithoutCommentInput'];
+  ReportUpdateManyWithoutDebateInput: NexusGenInputs['ReportUpdateManyWithoutDebateInput'];
+  ReportUpdateWithWhereUniqueWithoutCommentInput: NexusGenInputs['ReportUpdateWithWhereUniqueWithoutCommentInput'];
+  ReportUpdateWithWhereUniqueWithoutDebateInput: NexusGenInputs['ReportUpdateWithWhereUniqueWithoutDebateInput'];
+  ReportUpdateWithoutCommentDataInput: NexusGenInputs['ReportUpdateWithoutCommentDataInput'];
+  ReportUpdateWithoutDebateDataInput: NexusGenInputs['ReportUpdateWithoutDebateDataInput'];
+  ReportUpsertWithWhereUniqueWithoutCommentInput: NexusGenInputs['ReportUpsertWithWhereUniqueWithoutCommentInput'];
+  ReportUpsertWithWhereUniqueWithoutDebateInput: NexusGenInputs['ReportUpsertWithWhereUniqueWithoutDebateInput'];
   ReportWhereInput: NexusGenInputs['ReportWhereInput'];
+  ReportWhereUniqueInput: NexusGenInputs['ReportWhereUniqueInput'];
+  TrophyCreateInput: NexusGenInputs['TrophyCreateInput'];
+  TrophyCreateManyWithoutUserInput: NexusGenInputs['TrophyCreateManyWithoutUserInput'];
+  TrophyCreateWithoutUserInput: NexusGenInputs['TrophyCreateWithoutUserInput'];
+  TrophyScalarWhereInput: NexusGenInputs['TrophyScalarWhereInput'];
+  TrophyUpdateInput: NexusGenInputs['TrophyUpdateInput'];
+  TrophyUpdateManyDataInput: NexusGenInputs['TrophyUpdateManyDataInput'];
+  TrophyUpdateManyWithWhereNestedInput: NexusGenInputs['TrophyUpdateManyWithWhereNestedInput'];
+  TrophyUpdateManyWithoutUserInput: NexusGenInputs['TrophyUpdateManyWithoutUserInput'];
+  TrophyUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['TrophyUpdateWithWhereUniqueWithoutUserInput'];
+  TrophyUpdateWithoutUserDataInput: NexusGenInputs['TrophyUpdateWithoutUserDataInput'];
+  TrophyUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['TrophyUpsertWithWhereUniqueWithoutUserInput'];
   TrophyWhereInput: NexusGenInputs['TrophyWhereInput'];
+  TrophyWhereUniqueInput: NexusGenInputs['TrophyWhereUniqueInput'];
+  UserCreateInput: NexusGenInputs['UserCreateInput'];
+  UserCreateManyInput: NexusGenInputs['UserCreateManyInput'];
+  UserCreateManyWithoutBlockedInput: NexusGenInputs['UserCreateManyWithoutBlockedInput'];
+  UserCreateManyWithoutBlockingInput: NexusGenInputs['UserCreateManyWithoutBlockingInput'];
+  UserCreateManyWithoutConversationsInput: NexusGenInputs['UserCreateManyWithoutConversationsInput'];
+  UserCreateManyWithoutFollowersInput: NexusGenInputs['UserCreateManyWithoutFollowersInput'];
+  UserCreateManyWithoutFollowingInput: NexusGenInputs['UserCreateManyWithoutFollowingInput'];
+  UserCreateOneInput: NexusGenInputs['UserCreateOneInput'];
+  UserCreateOneWithoutDebatesBlueInput: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'];
+  UserCreateOneWithoutDebatesInput: NexusGenInputs['UserCreateOneWithoutDebatesInput'];
+  UserCreateOneWithoutDebatesRedInput: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'];
+  UserCreateOneWithoutInteractionsInput: NexusGenInputs['UserCreateOneWithoutInteractionsInput'];
+  UserCreateOneWithoutTrophiesInput: NexusGenInputs['UserCreateOneWithoutTrophiesInput'];
+  UserCreateWithoutBlockedInput: NexusGenInputs['UserCreateWithoutBlockedInput'];
+  UserCreateWithoutBlockingInput: NexusGenInputs['UserCreateWithoutBlockingInput'];
+  UserCreateWithoutConversationsInput: NexusGenInputs['UserCreateWithoutConversationsInput'];
+  UserCreateWithoutDebatesBlueInput: NexusGenInputs['UserCreateWithoutDebatesBlueInput'];
+  UserCreateWithoutDebatesInput: NexusGenInputs['UserCreateWithoutDebatesInput'];
+  UserCreateWithoutDebatesRedInput: NexusGenInputs['UserCreateWithoutDebatesRedInput'];
+  UserCreateWithoutFollowersInput: NexusGenInputs['UserCreateWithoutFollowersInput'];
+  UserCreateWithoutFollowingInput: NexusGenInputs['UserCreateWithoutFollowingInput'];
+  UserCreateWithoutInteractionsInput: NexusGenInputs['UserCreateWithoutInteractionsInput'];
+  UserCreateWithoutTrophiesInput: NexusGenInputs['UserCreateWithoutTrophiesInput'];
+  UserScalarWhereInput: NexusGenInputs['UserScalarWhereInput'];
+  UserUpdateDataInput: NexusGenInputs['UserUpdateDataInput'];
+  UserUpdateInput: NexusGenInputs['UserUpdateInput'];
+  UserUpdateManyDataInput: NexusGenInputs['UserUpdateManyDataInput'];
+  UserUpdateManyInput: NexusGenInputs['UserUpdateManyInput'];
+  UserUpdateManyWithWhereNestedInput: NexusGenInputs['UserUpdateManyWithWhereNestedInput'];
+  UserUpdateManyWithoutBlockedInput: NexusGenInputs['UserUpdateManyWithoutBlockedInput'];
+  UserUpdateManyWithoutBlockingInput: NexusGenInputs['UserUpdateManyWithoutBlockingInput'];
+  UserUpdateManyWithoutConversationsInput: NexusGenInputs['UserUpdateManyWithoutConversationsInput'];
+  UserUpdateManyWithoutFollowersInput: NexusGenInputs['UserUpdateManyWithoutFollowersInput'];
+  UserUpdateManyWithoutFollowingInput: NexusGenInputs['UserUpdateManyWithoutFollowingInput'];
+  UserUpdateOneInput: NexusGenInputs['UserUpdateOneInput'];
+  UserUpdateOneRequiredInput: NexusGenInputs['UserUpdateOneRequiredInput'];
+  UserUpdateOneRequiredWithoutInteractionsInput: NexusGenInputs['UserUpdateOneRequiredWithoutInteractionsInput'];
+  UserUpdateOneRequiredWithoutTrophiesInput: NexusGenInputs['UserUpdateOneRequiredWithoutTrophiesInput'];
+  UserUpdateOneWithoutDebatesBlueInput: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'];
+  UserUpdateOneWithoutDebatesInput: NexusGenInputs['UserUpdateOneWithoutDebatesInput'];
+  UserUpdateOneWithoutDebatesRedInput: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'];
+  UserUpdateWithWhereUniqueNestedInput: NexusGenInputs['UserUpdateWithWhereUniqueNestedInput'];
+  UserUpdateWithWhereUniqueWithoutBlockedInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutBlockedInput'];
+  UserUpdateWithWhereUniqueWithoutBlockingInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutBlockingInput'];
+  UserUpdateWithWhereUniqueWithoutConversationsInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutConversationsInput'];
+  UserUpdateWithWhereUniqueWithoutFollowersInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutFollowersInput'];
+  UserUpdateWithWhereUniqueWithoutFollowingInput: NexusGenInputs['UserUpdateWithWhereUniqueWithoutFollowingInput'];
+  UserUpdateWithoutBlockedDataInput: NexusGenInputs['UserUpdateWithoutBlockedDataInput'];
+  UserUpdateWithoutBlockingDataInput: NexusGenInputs['UserUpdateWithoutBlockingDataInput'];
+  UserUpdateWithoutConversationsDataInput: NexusGenInputs['UserUpdateWithoutConversationsDataInput'];
+  UserUpdateWithoutDebatesBlueDataInput: NexusGenInputs['UserUpdateWithoutDebatesBlueDataInput'];
+  UserUpdateWithoutDebatesDataInput: NexusGenInputs['UserUpdateWithoutDebatesDataInput'];
+  UserUpdateWithoutDebatesRedDataInput: NexusGenInputs['UserUpdateWithoutDebatesRedDataInput'];
+  UserUpdateWithoutFollowersDataInput: NexusGenInputs['UserUpdateWithoutFollowersDataInput'];
+  UserUpdateWithoutFollowingDataInput: NexusGenInputs['UserUpdateWithoutFollowingDataInput'];
+  UserUpdateWithoutInteractionsDataInput: NexusGenInputs['UserUpdateWithoutInteractionsDataInput'];
+  UserUpdateWithoutTrophiesDataInput: NexusGenInputs['UserUpdateWithoutTrophiesDataInput'];
+  UserUpsertNestedInput: NexusGenInputs['UserUpsertNestedInput'];
+  UserUpsertWithWhereUniqueNestedInput: NexusGenInputs['UserUpsertWithWhereUniqueNestedInput'];
+  UserUpsertWithWhereUniqueWithoutBlockedInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutBlockedInput'];
+  UserUpsertWithWhereUniqueWithoutBlockingInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutBlockingInput'];
+  UserUpsertWithWhereUniqueWithoutConversationsInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutConversationsInput'];
+  UserUpsertWithWhereUniqueWithoutFollowersInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutFollowersInput'];
+  UserUpsertWithWhereUniqueWithoutFollowingInput: NexusGenInputs['UserUpsertWithWhereUniqueWithoutFollowingInput'];
+  UserUpsertWithoutDebatesBlueInput: NexusGenInputs['UserUpsertWithoutDebatesBlueInput'];
+  UserUpsertWithoutDebatesInput: NexusGenInputs['UserUpsertWithoutDebatesInput'];
+  UserUpsertWithoutDebatesRedInput: NexusGenInputs['UserUpsertWithoutDebatesRedInput'];
+  UserUpsertWithoutInteractionsInput: NexusGenInputs['UserUpsertWithoutInteractionsInput'];
+  UserUpsertWithoutTrophiesInput: NexusGenInputs['UserUpsertWithoutTrophiesInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  AdOrderByInput: NexusGenEnums['AdOrderByInput'];
+  AdTargetOrderByInput: NexusGenEnums['AdTargetOrderByInput'];
   CommentOrderByInput: NexusGenEnums['CommentOrderByInput'];
   ConversationOrderByInput: NexusGenEnums['ConversationOrderByInput'];
   DebateOrderByInput: NexusGenEnums['DebateOrderByInput'];
   DebateType: NexusGenEnums['DebateType'];
   Gender: NexusGenEnums['Gender'];
+  GenderFilter: NexusGenEnums['GenderFilter'];
   InteractionOrderByInput: NexusGenEnums['InteractionOrderByInput'];
   InteractionType: NexusGenEnums['InteractionType'];
   Language: NexusGenEnums['Language'];
@@ -669,6 +3464,25 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Ad: { // field return type
+    active: boolean; // Boolean!
+    content: string; // String!
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    ratio: number; // Int!
+    targets: NexusGenRootTypes['AdTarget'][] | null; // [AdTarget!]
+    updatedAt: any; // DateTime!
+  }
+  AdTarget: { // field return type
+    birthdateMax: any; // DateTime!
+    birthdateMin: any; // DateTime!
+    createdAt: any; // DateTime!
+    gender: NexusGenEnums['GenderFilter']; // GenderFilter!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: any; // DateTime!
+  }
   Comment: { // field return type
     content: string; // String!
     createdAt: any; // DateTime!
@@ -729,13 +3543,45 @@ export interface NexusGenFieldTypes {
     updatedAt: any; // DateTime!
   }
   Mutation: { // field return type
+    createAd: NexusGenRootTypes['Ad']; // Ad!
+    createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
+    createComment: NexusGenRootTypes['Comment']; // Comment!
+    createConversation: NexusGenRootTypes['Conversation']; // Conversation!
+    createInteraction: NexusGenRootTypes['Interaction']; // Interaction!
+    createMessage: NexusGenRootTypes['Message']; // Message!
+    createReport: NexusGenRootTypes['Report']; // Report!
+    createTrophy: NexusGenRootTypes['Trophy']; // Trophy!
     signUp: NexusGenRootTypes['Token']; // Token!
+    updateAd: NexusGenRootTypes['Ad'] | null; // Ad
+    updateAdTarget: NexusGenRootTypes['AdTarget'] | null; // AdTarget
+    updateComment: NexusGenRootTypes['Comment'] | null; // Comment
+    updateConversation: NexusGenRootTypes['Conversation'] | null; // Conversation
+    updateInteraction: NexusGenRootTypes['Interaction'] | null; // Interaction
+    updateMessage: NexusGenRootTypes['Message'] | null; // Message
+    updateReport: NexusGenRootTypes['Report'] | null; // Report
+    updateTrophy: NexusGenRootTypes['Trophy'] | null; // Trophy
+    updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    getUser: NexusGenRootTypes['User']; // User!
-    me: NexusGenRootTypes['User']; // User!
+    ad: NexusGenRootTypes['Ad'] | null; // Ad
+    ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
+    adTarget: NexusGenRootTypes['AdTarget'] | null; // AdTarget
+    adTargets: NexusGenRootTypes['AdTarget'][]; // [AdTarget!]!
+    comment: NexusGenRootTypes['Comment'] | null; // Comment
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    conversation: NexusGenRootTypes['Conversation'] | null; // Conversation
+    conversations: NexusGenRootTypes['Conversation'][]; // [Conversation!]!
+    currentUser: NexusGenRootTypes['User']; // User!
+    interaction: NexusGenRootTypes['Interaction'] | null; // Interaction
+    interactions: NexusGenRootTypes['Interaction'][]; // [Interaction!]!
+    message: NexusGenRootTypes['Message'] | null; // Message
+    messages: NexusGenRootTypes['Message'][]; // [Message!]!
+    report: NexusGenRootTypes['Report'] | null; // Report
+    reports: NexusGenRootTypes['Report'][]; // [Report!]!
     signIn: NexusGenRootTypes['Token']; // Token!
-    user: NexusGenRootTypes['User'] | null; // User
+    trophies: NexusGenRootTypes['Trophy'][]; // [Trophy!]!
+    trophy: NexusGenRootTypes['Trophy'] | null; // Trophy
+    users: NexusGenRootTypes['User'][]; // [User!]!
   }
   Report: { // field return type
     comment: NexusGenRootTypes['Comment'] | null; // Comment
@@ -784,6 +3630,7 @@ export interface NexusGenFieldTypes {
     interactions: NexusGenRootTypes['Interaction'][] | null; // [Interaction!]
     language: NexusGenEnums['Language']; // Language!
     lastConnected: any | null; // DateTime
+    password: string; // String!
     profilePicture: string | null; // String
     pseudo: string; // String!
     role: NexusGenEnums['Role']; // Role!
@@ -793,6 +3640,17 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Ad: {
+    targets: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['AdTargetOrderByInput'] | null; // AdTargetOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
+    }
+  }
   Comment: {
     dislikes: { // args
       after?: string | null; // String
@@ -908,24 +3766,176 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    createAd: { // args
+      data: NexusGenInputs['AdCreateInput']; // AdCreateInput!
+    }
+    createAdTarget: { // args
+      data: NexusGenInputs['AdTargetCreateInput']; // AdTargetCreateInput!
+    }
+    createComment: { // args
+      data: NexusGenInputs['CommentCreateInput']; // CommentCreateInput!
+    }
+    createConversation: { // args
+      data: NexusGenInputs['ConversationCreateInput']; // ConversationCreateInput!
+    }
+    createInteraction: { // args
+      data: NexusGenInputs['InteractionCreateInput']; // InteractionCreateInput!
+    }
+    createMessage: { // args
+      data: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
+    }
+    createReport: { // args
+      data: NexusGenInputs['ReportCreateInput']; // ReportCreateInput!
+    }
+    createTrophy: { // args
+      data: NexusGenInputs['TrophyCreateInput']; // TrophyCreateInput!
+    }
     signUp: { // args
+      birthdate?: any | null; // DateTime
       email?: string | null; // String
       password?: string | null; // String
+      pseudo?: string | null; // String
+    }
+    updateAd: { // args
+      data: NexusGenInputs['AdUpdateInput']; // AdUpdateInput!
+      where: NexusGenInputs['AdWhereUniqueInput']; // AdWhereUniqueInput!
+    }
+    updateAdTarget: { // args
+      data: NexusGenInputs['AdTargetUpdateInput']; // AdTargetUpdateInput!
+      where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
+    }
+    updateComment: { // args
+      data: NexusGenInputs['CommentUpdateInput']; // CommentUpdateInput!
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+    }
+    updateConversation: { // args
+      data: NexusGenInputs['ConversationUpdateInput']; // ConversationUpdateInput!
+      where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
+    }
+    updateInteraction: { // args
+      data: NexusGenInputs['InteractionUpdateInput']; // InteractionUpdateInput!
+      where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+    }
+    updateMessage: { // args
+      data: NexusGenInputs['MessageUpdateInput']; // MessageUpdateInput!
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+    }
+    updateReport: { // args
+      data: NexusGenInputs['ReportUpdateInput']; // ReportUpdateInput!
+      where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+    }
+    updateTrophy: { // args
+      data: NexusGenInputs['TrophyUpdateInput']; // TrophyUpdateInput!
+      where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
+    }
+    updateUser: { // args
+      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
   Query: {
-    getUser: { // args
+    ad: { // args
+      where: NexusGenInputs['AdWhereUniqueInput']; // AdWhereUniqueInput!
+    }
+    ads: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['AdOrderByInput'] | null; // AdOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['AdWhereInput'] | null; // AdWhereInput
+    }
+    adTarget: { // args
+      where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
+    }
+    adTargets: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['AdTargetOrderByInput'] | null; // AdTargetOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
+    }
+    comment: { // args
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+    }
+    comments: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['CommentOrderByInput'] | null; // CommentOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+    conversation: { // args
+      where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
+    }
+    conversations: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ConversationOrderByInput'] | null; // ConversationOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ConversationWhereInput'] | null; // ConversationWhereInput
+    }
+    currentUser: { // args
       id?: string | null; // ID
     }
-    me: { // args
-      id?: string | null; // ID
+    interaction: { // args
+      where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
+    }
+    interactions: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['InteractionOrderByInput'] | null; // InteractionOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
+    }
+    message: { // args
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+    }
+    messages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+    report: { // args
+      where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+    }
+    reports: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ReportOrderByInput'] | null; // ReportOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
     }
     signIn: { // args
       email?: string | null; // String
       password?: string | null; // String
     }
-    user: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    trophy: { // args
+      where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
+    }
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
   User: {
@@ -1027,11 +4037,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Comment" | "Conversation" | "Debate" | "Interaction" | "Message" | "Mutation" | "Query" | "Report" | "Token" | "Trophy" | "User";
+export type NexusGenObjectNames = "Ad" | "AdTarget" | "Comment" | "Conversation" | "Debate" | "Interaction" | "Message" | "Mutation" | "Query" | "Report" | "Token" | "Trophy" | "User";
 
-export type NexusGenInputNames = "CommentWhereInput" | "ConversationWhereInput" | "DebateWhereInput" | "InteractionWhereInput" | "MessageWhereInput" | "ReportWhereInput" | "TrophyWhereInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetCreateManyInput" | "AdTargetScalarWhereInput" | "AdTargetUpdateDataInput" | "AdTargetUpdateInput" | "AdTargetUpdateManyDataInput" | "AdTargetUpdateManyInput" | "AdTargetUpdateManyWithWhereNestedInput" | "AdTargetUpdateWithWhereUniqueNestedInput" | "AdTargetUpsertWithWhereUniqueNestedInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyInput" | "MessageScalarWhereInput" | "MessageUpdateDataInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateWithWhereUniqueNestedInput" | "MessageUpsertWithWhereUniqueNestedInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
+export type NexusGenEnumNames = "AdOrderByInput" | "AdTargetOrderByInput" | "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "GenderFilter" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 

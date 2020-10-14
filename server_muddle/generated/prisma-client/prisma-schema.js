@@ -2953,6 +2953,7 @@ type User {
   id: ID!
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role!
   certified: Boolean!
@@ -2987,6 +2988,7 @@ input UserCreateInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3073,6 +3075,7 @@ input UserCreateWithoutBlockedInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3098,6 +3101,7 @@ input UserCreateWithoutBlockingInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3123,6 +3127,7 @@ input UserCreateWithoutConversationsInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3148,6 +3153,7 @@ input UserCreateWithoutDebatesBlueInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3173,6 +3179,7 @@ input UserCreateWithoutDebatesInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3198,6 +3205,7 @@ input UserCreateWithoutDebatesRedInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3223,6 +3231,7 @@ input UserCreateWithoutFollowersInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3248,6 +3257,7 @@ input UserCreateWithoutFollowingInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3273,6 +3283,7 @@ input UserCreateWithoutInteractionsInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3298,6 +3309,7 @@ input UserCreateWithoutTrophiesInput {
   id: ID
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role
   certified: Boolean
@@ -3331,6 +3343,8 @@ enum UserOrderByInput {
   pseudo_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
   birthdate_ASC
   birthdate_DESC
   role_ASC
@@ -3361,6 +3375,7 @@ type UserPreviousValues {
   id: ID!
   pseudo: String!
   email: String!
+  password: String!
   birthdate: DateTime!
   role: Role!
   certified: Boolean!
@@ -3418,6 +3433,20 @@ input UserScalarWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   birthdate: DateTime
   birthdate_not: DateTime
   birthdate_in: [DateTime!]
@@ -3532,6 +3561,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3557,6 +3587,7 @@ input UserUpdateDataInput {
 input UserUpdateInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3582,6 +3613,7 @@ input UserUpdateInput {
 input UserUpdateManyDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3609,6 +3641,7 @@ input UserUpdateManyInput {
 input UserUpdateManyMutationInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3746,6 +3779,7 @@ input UserUpdateOneWithoutDebatesRedInput {
 input UserUpdateWithoutBlockedDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3770,6 +3804,7 @@ input UserUpdateWithoutBlockedDataInput {
 input UserUpdateWithoutBlockingDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3794,6 +3829,7 @@ input UserUpdateWithoutBlockingDataInput {
 input UserUpdateWithoutConversationsDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3818,6 +3854,7 @@ input UserUpdateWithoutConversationsDataInput {
 input UserUpdateWithoutDebatesBlueDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3842,6 +3879,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
 input UserUpdateWithoutDebatesDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3866,6 +3904,7 @@ input UserUpdateWithoutDebatesDataInput {
 input UserUpdateWithoutDebatesRedDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3890,6 +3929,7 @@ input UserUpdateWithoutDebatesRedDataInput {
 input UserUpdateWithoutFollowersDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3914,6 +3954,7 @@ input UserUpdateWithoutFollowersDataInput {
 input UserUpdateWithoutFollowingDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3938,6 +3979,7 @@ input UserUpdateWithoutFollowingDataInput {
 input UserUpdateWithoutInteractionsDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -3962,6 +4004,7 @@ input UserUpdateWithoutInteractionsDataInput {
 input UserUpdateWithoutTrophiesDataInput {
   pseudo: String
   email: String
+  password: String
   birthdate: DateTime
   role: Role
   certified: Boolean
@@ -4122,6 +4165,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   birthdate: DateTime
   birthdate_not: DateTime
   birthdate_in: [DateTime!]
