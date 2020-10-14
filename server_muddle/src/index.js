@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 import { stringArg, idArg } from "nexus";
-import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
+import { makePrismaSchema } from "nexus-prisma";
 import { GraphQLServer } from "graphql-yoga";
 import { importSchema } from "graphql-import";
 
@@ -12,28 +12,8 @@ import resolvers from "./resolvers";
 import { prisma } from "../generated/prisma-client";
 import datamodelInfo from "../generated/nexus-prisma/datamodel-info";
 
-const typeDefs = importSchema("src/schemas/user.graphql");
-
-const Query = prismaObjectType({
-  name: "Query",
-  definition(t) {
-    t.prismaFields(["user"]);
-    // t.list.field("feed", {
-    //   type: "Post",
-    //   resolve: (_, args, ctx) =>
-    //     ctx.prisma.posts({ where: { published: true } }),
-    // });
-    // t.list.field("postsByUser", {
-    //   type: "Post",
-    //   args: { email: stringArg() },
-    //   resolve: (_, { email }, ctx) =>
-    //     ctx.prisma.posts({ where: { author: { email } } }),
-    // });
-  },
-});
-
 const schema = makePrismaSchema({
-  types: [Query],
+  types: resolvers,
 
   prisma: {
     datamodelInfo,
@@ -59,8 +39,6 @@ const getCurrentUser = async (request) => {
 
 const server = new GraphQLServer({
   schema,
-  typeDefs,
-  resolvers,
   context: async ({ request }) => {
     const me = await getCurrentUser(request);
 

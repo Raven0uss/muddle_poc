@@ -2,8 +2,19 @@
 ### Do not make changes to this file directly
 
 
+type Mutation {
+  signUp(email: String, password: String): Token!
+}
+
 type Query {
+  getUser(id: ID): User!
+  me(id: ID): User!
+  signIn(email: String, password: String): Token!
   user(where: UserWhereUniqueInput!): User
+}
+
+type Token {
+  token: String!
 }
 
 type User {
