@@ -58,7 +58,7 @@ const getCurrentUser = async (request) => {
 };
 
 const server = new GraphQLServer({
-//   schema,
+  schema,
   typeDefs,
   resolvers,
   context: async ({ request }) => {
