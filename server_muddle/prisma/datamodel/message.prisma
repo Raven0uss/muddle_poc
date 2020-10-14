@@ -3,7 +3,7 @@ type Message {
   content: String!
   to: User! @relation(link: INLINE, name: "MessageTo")
   from: User! @relation(link: INLINE, name: "MessageFrom")
-  sendDate: DateTime! @createdAt
+  conversation: Conversation! @relation(link: INLINE, name: "Conversation")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

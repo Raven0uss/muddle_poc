@@ -844,7 +844,7 @@ type ConversationConnection {
 input ConversationCreateInput {
   id: ID
   speakers: UserCreateManyWithoutConversationsInput
-  messages: MessageCreateManyInput
+  messages: MessageCreateManyWithoutConversationInput
 }
 
 input ConversationCreateManyWithoutSpeakersInput {
@@ -852,9 +852,19 @@ input ConversationCreateManyWithoutSpeakersInput {
   connect: [ConversationWhereUniqueInput!]
 }
 
+input ConversationCreateOneWithoutMessagesInput {
+  create: ConversationCreateWithoutMessagesInput
+  connect: ConversationWhereUniqueInput
+}
+
+input ConversationCreateWithoutMessagesInput {
+  id: ID
+  speakers: UserCreateManyWithoutConversationsInput
+}
+
 input ConversationCreateWithoutSpeakersInput {
   id: ID
-  messages: MessageCreateManyInput
+  messages: MessageCreateManyWithoutConversationInput
 }
 
 type ConversationEdge {
@@ -931,7 +941,7 @@ input ConversationSubscriptionWhereInput {
 
 input ConversationUpdateInput {
   speakers: UserUpdateManyWithoutConversationsInput
-  messages: MessageUpdateManyInput
+  messages: MessageUpdateManyWithoutConversationInput
 }
 
 input ConversationUpdateManyWithoutSpeakersInput {
@@ -945,13 +955,29 @@ input ConversationUpdateManyWithoutSpeakersInput {
   deleteMany: [ConversationScalarWhereInput!]
 }
 
+input ConversationUpdateOneRequiredWithoutMessagesInput {
+  create: ConversationCreateWithoutMessagesInput
+  update: ConversationUpdateWithoutMessagesDataInput
+  upsert: ConversationUpsertWithoutMessagesInput
+  connect: ConversationWhereUniqueInput
+}
+
+input ConversationUpdateWithoutMessagesDataInput {
+  speakers: UserUpdateManyWithoutConversationsInput
+}
+
 input ConversationUpdateWithoutSpeakersDataInput {
-  messages: MessageUpdateManyInput
+  messages: MessageUpdateManyWithoutConversationInput
 }
 
 input ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
   where: ConversationWhereUniqueInput!
   data: ConversationUpdateWithoutSpeakersDataInput!
+}
+
+input ConversationUpsertWithoutMessagesInput {
+  update: ConversationUpdateWithoutMessagesDataInput!
+  create: ConversationCreateWithoutMessagesInput!
 }
 
 input ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
@@ -2008,7 +2034,7 @@ type Message {
   content: String!
   to: User!
   from: User!
-  sendDate: DateTime!
+  conversation: Conversation!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2024,11 +2050,19 @@ input MessageCreateInput {
   content: String!
   to: UserCreateOneInput!
   from: UserCreateOneInput!
+  conversation: ConversationCreateOneWithoutMessagesInput!
 }
 
-input MessageCreateManyInput {
-  create: [MessageCreateInput!]
+input MessageCreateManyWithoutConversationInput {
+  create: [MessageCreateWithoutConversationInput!]
   connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateWithoutConversationInput {
+  id: ID
+  content: String!
+  to: UserCreateOneInput!
+  from: UserCreateOneInput!
 }
 
 type MessageEdge {
@@ -2041,8 +2075,6 @@ enum MessageOrderByInput {
   id_DESC
   content_ASC
   content_DESC
-  sendDate_ASC
-  sendDate_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2052,7 +2084,6 @@ enum MessageOrderByInput {
 type MessagePreviousValues {
   id: ID!
   content: String!
-  sendDate: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2086,14 +2117,6 @@ input MessageScalarWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
-  sendDate: DateTime
-  sendDate_not: DateTime
-  sendDate_in: [DateTime!]
-  sendDate_not_in: [DateTime!]
-  sendDate_lt: DateTime
-  sendDate_lte: DateTime
-  sendDate_gt: DateTime
-  sendDate_gte: DateTime
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2131,36 +2154,31 @@ input MessageSubscriptionWhereInput {
   AND: [MessageSubscriptionWhereInput!]
 }
 
-input MessageUpdateDataInput {
-  content: String
-  to: UserUpdateOneRequiredInput
-  from: UserUpdateOneRequiredInput
-}
-
 input MessageUpdateInput {
   content: String
   to: UserUpdateOneRequiredInput
   from: UserUpdateOneRequiredInput
+  conversation: ConversationUpdateOneRequiredWithoutMessagesInput
 }
 
 input MessageUpdateManyDataInput {
   content: String
 }
 
-input MessageUpdateManyInput {
-  create: [MessageCreateInput!]
-  update: [MessageUpdateWithWhereUniqueNestedInput!]
-  upsert: [MessageUpsertWithWhereUniqueNestedInput!]
+input MessageUpdateManyMutationInput {
+  content: String
+}
+
+input MessageUpdateManyWithoutConversationInput {
+  create: [MessageCreateWithoutConversationInput!]
   delete: [MessageWhereUniqueInput!]
   connect: [MessageWhereUniqueInput!]
   set: [MessageWhereUniqueInput!]
   disconnect: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutConversationInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutConversationInput!]
   deleteMany: [MessageScalarWhereInput!]
   updateMany: [MessageUpdateManyWithWhereNestedInput!]
-}
-
-input MessageUpdateManyMutationInput {
-  content: String
 }
 
 input MessageUpdateManyWithWhereNestedInput {
@@ -2168,15 +2186,21 @@ input MessageUpdateManyWithWhereNestedInput {
   data: MessageUpdateManyDataInput!
 }
 
-input MessageUpdateWithWhereUniqueNestedInput {
-  where: MessageWhereUniqueInput!
-  data: MessageUpdateDataInput!
+input MessageUpdateWithoutConversationDataInput {
+  content: String
+  to: UserUpdateOneRequiredInput
+  from: UserUpdateOneRequiredInput
 }
 
-input MessageUpsertWithWhereUniqueNestedInput {
+input MessageUpdateWithWhereUniqueWithoutConversationInput {
   where: MessageWhereUniqueInput!
-  update: MessageUpdateDataInput!
-  create: MessageCreateInput!
+  data: MessageUpdateWithoutConversationDataInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutConversationInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutConversationDataInput!
+  create: MessageCreateWithoutConversationInput!
 }
 
 input MessageWhereInput {
@@ -2210,14 +2234,7 @@ input MessageWhereInput {
   content_not_ends_with: String
   to: UserWhereInput
   from: UserWhereInput
-  sendDate: DateTime
-  sendDate_not: DateTime
-  sendDate_in: [DateTime!]
-  sendDate_not_in: [DateTime!]
-  sendDate_lt: DateTime
-  sendDate_lte: DateTime
-  sendDate_gt: DateTime
-  sendDate_gte: DateTime
+  conversation: ConversationWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

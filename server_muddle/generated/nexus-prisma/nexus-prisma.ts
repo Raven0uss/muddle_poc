@@ -225,8 +225,8 @@ export interface NexusPrismaTypes {
       UserCreateWithoutInteractionsInput: UserCreateWithoutInteractionsInputInputObject
       ConversationCreateManyWithoutSpeakersInput: ConversationCreateManyWithoutSpeakersInputInputObject
       ConversationCreateWithoutSpeakersInput: ConversationCreateWithoutSpeakersInputInputObject
-      MessageCreateManyInput: MessageCreateManyInputInputObject
-      MessageCreateInput: MessageCreateInputInputObject
+      MessageCreateManyWithoutConversationInput: MessageCreateManyWithoutConversationInputInputObject
+      MessageCreateWithoutConversationInput: MessageCreateWithoutConversationInputInputObject
       ReportCreateManyWithoutDebateInput: ReportCreateManyWithoutDebateInputInputObject
       ReportCreateWithoutDebateInput: ReportCreateWithoutDebateInputInputObject
       CommentCreateOneWithoutReportsInput: CommentCreateOneWithoutReportsInputInputObject
@@ -305,11 +305,11 @@ export interface NexusPrismaTypes {
       ConversationUpdateManyWithoutSpeakersInput: ConversationUpdateManyWithoutSpeakersInputInputObject
       ConversationUpdateWithWhereUniqueWithoutSpeakersInput: ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject
       ConversationUpdateWithoutSpeakersDataInput: ConversationUpdateWithoutSpeakersDataInputInputObject
-      MessageUpdateManyInput: MessageUpdateManyInputInputObject
-      MessageUpdateWithWhereUniqueNestedInput: MessageUpdateWithWhereUniqueNestedInputInputObject
-      MessageUpdateDataInput: MessageUpdateDataInputInputObject
+      MessageUpdateManyWithoutConversationInput: MessageUpdateManyWithoutConversationInputInputObject
+      MessageUpdateWithWhereUniqueWithoutConversationInput: MessageUpdateWithWhereUniqueWithoutConversationInputInputObject
+      MessageUpdateWithoutConversationDataInput: MessageUpdateWithoutConversationDataInputInputObject
       UserUpdateOneRequiredInput: UserUpdateOneRequiredInputInputObject
-      MessageUpsertWithWhereUniqueNestedInput: MessageUpsertWithWhereUniqueNestedInputInputObject
+      MessageUpsertWithWhereUniqueWithoutConversationInput: MessageUpsertWithWhereUniqueWithoutConversationInputInputObject
       MessageScalarWhereInput: MessageScalarWhereInputInputObject
       MessageUpdateManyWithWhereNestedInput: MessageUpdateManyWithWhereNestedInputInputObject
       MessageUpdateManyDataInput: MessageUpdateManyDataInputInputObject
@@ -371,7 +371,13 @@ export interface NexusPrismaTypes {
       InteractionCreateInput: InteractionCreateInputInputObject
       InteractionUpdateInput: InteractionUpdateInputInputObject
       InteractionUpdateManyMutationInput: InteractionUpdateManyMutationInputInputObject
+      MessageCreateInput: MessageCreateInputInputObject
+      ConversationCreateOneWithoutMessagesInput: ConversationCreateOneWithoutMessagesInputInputObject
+      ConversationCreateWithoutMessagesInput: ConversationCreateWithoutMessagesInputInputObject
       MessageUpdateInput: MessageUpdateInputInputObject
+      ConversationUpdateOneRequiredWithoutMessagesInput: ConversationUpdateOneRequiredWithoutMessagesInputInputObject
+      ConversationUpdateWithoutMessagesDataInput: ConversationUpdateWithoutMessagesDataInputInputObject
+      ConversationUpsertWithoutMessagesInput: ConversationUpsertWithoutMessagesInputInputObject
       MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
       ReportCreateInput: ReportCreateInputInputObject
       ReportUpdateInput: ReportUpdateInputInputObject
@@ -2958,7 +2964,7 @@ type MessageObject =
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'to', args?: [] | false, alias?: string  } 
   | { name: 'from', args?: [] | false, alias?: string  } 
-  | { name: 'sendDate', args?: [] | false, alias?: string  } 
+  | { name: 'conversation', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -2967,7 +2973,7 @@ type MessageFields =
   | 'content'
   | 'to'
   | 'from'
-  | 'sendDate'
+  | 'conversation'
   | 'createdAt'
   | 'updatedAt'
 
@@ -3018,13 +3024,18 @@ export interface MessageFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.User> | prisma.User
   }
-  sendDate: {
-    type: 'DateTime'
+  conversation: {
+    type: 'Conversation'
     args: {}
     description: string
     list: undefined
     nullable: false
-    resolve: undefined
+    resolve: (
+      root: core.RootValue<"Message">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Conversation> | prisma.Conversation
   }
   createdAt: {
     type: 'DateTime'
@@ -6251,14 +6262,12 @@ type MessagePreviousValuesObject =
   | MessagePreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
-  | { name: 'sendDate', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type MessagePreviousValuesFields =
   | 'id'
   | 'content'
-  | 'sendDate'
   | 'createdAt'
   | 'updatedAt'
 
@@ -6277,14 +6286,6 @@ export interface MessagePreviousValuesFieldDetails {
   }
   content: {
     type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  sendDate: {
-    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -8175,14 +8176,7 @@ export interface MessageWhereInput {
   content_not_ends_with?: string | null
   to?: UserWhereInput | null
   from?: UserWhereInput | null
-  sendDate?: string | null
-  sendDate_not?: string | null
-  sendDate_in?: string[]
-  sendDate_not_in?: string[]
-  sendDate_lt?: string | null
-  sendDate_lte?: string | null
-  sendDate_gt?: string | null
-  sendDate_gte?: string | null
+  conversation?: ConversationWhereInput | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -8233,14 +8227,7 @@ export type MessageWhereInputInputObject =
   | { name: 'content_not_ends_with', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
-  | { name: 'sendDate', alias?: string  } 
-  | { name: 'sendDate_not', alias?: string  } 
-  | { name: 'sendDate_in', alias?: string  } 
-  | { name: 'sendDate_not_in', alias?: string  } 
-  | { name: 'sendDate_lt', alias?: string  } 
-  | { name: 'sendDate_lte', alias?: string  } 
-  | { name: 'sendDate_gt', alias?: string  } 
-  | { name: 'sendDate_gte', alias?: string  } 
+  | { name: 'conversation', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -9568,30 +9555,30 @@ export type ConversationCreateManyWithoutSpeakersInputInputObject =
   
 export interface ConversationCreateWithoutSpeakersInput {
   id?: string | null
-  messages?: MessageCreateManyInput | null
+  messages?: MessageCreateManyWithoutConversationInput | null
 }
 export type ConversationCreateWithoutSpeakersInputInputObject =
   | Extract<keyof ConversationCreateWithoutSpeakersInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'messages', alias?: string  } 
   
-export interface MessageCreateManyInput {
-  create?: MessageCreateInput[]
+export interface MessageCreateManyWithoutConversationInput {
+  create?: MessageCreateWithoutConversationInput[]
   connect?: MessageWhereUniqueInput[]
 }
-export type MessageCreateManyInputInputObject =
-  | Extract<keyof MessageCreateManyInput, string>
+export type MessageCreateManyWithoutConversationInputInputObject =
+  | Extract<keyof MessageCreateManyWithoutConversationInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   
-export interface MessageCreateInput {
+export interface MessageCreateWithoutConversationInput {
   id?: string | null
   content?: string
   to?: UserCreateOneInput
   from?: UserCreateOneInput
 }
-export type MessageCreateInputInputObject =
-  | Extract<keyof MessageCreateInput, string>
+export type MessageCreateWithoutConversationInputInputObject =
+  | Extract<keyof MessageCreateWithoutConversationInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
@@ -11359,51 +11346,51 @@ export type ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface ConversationUpdateWithoutSpeakersDataInput {
-  messages?: MessageUpdateManyInput | null
+  messages?: MessageUpdateManyWithoutConversationInput | null
 }
 export type ConversationUpdateWithoutSpeakersDataInputInputObject =
   | Extract<keyof ConversationUpdateWithoutSpeakersDataInput, string>
   | { name: 'messages', alias?: string  } 
   
-export interface MessageUpdateManyInput {
-  create?: MessageCreateInput[]
-  update?: MessageUpdateWithWhereUniqueNestedInput[]
-  upsert?: MessageUpsertWithWhereUniqueNestedInput[]
+export interface MessageUpdateManyWithoutConversationInput {
+  create?: MessageCreateWithoutConversationInput[]
   delete?: MessageWhereUniqueInput[]
   connect?: MessageWhereUniqueInput[]
   set?: MessageWhereUniqueInput[]
   disconnect?: MessageWhereUniqueInput[]
+  update?: MessageUpdateWithWhereUniqueWithoutConversationInput[]
+  upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput[]
   deleteMany?: MessageScalarWhereInput[]
   updateMany?: MessageUpdateManyWithWhereNestedInput[]
 }
-export type MessageUpdateManyInputInputObject =
-  | Extract<keyof MessageUpdateManyInput, string>
+export type MessageUpdateManyWithoutConversationInputInputObject =
+  | Extract<keyof MessageUpdateManyWithoutConversationInput, string>
   | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
   | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   | { name: 'set', alias?: string  } 
   | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
   | { name: 'deleteMany', alias?: string  } 
   | { name: 'updateMany', alias?: string  } 
   
-export interface MessageUpdateWithWhereUniqueNestedInput {
+export interface MessageUpdateWithWhereUniqueWithoutConversationInput {
   where?: MessageWhereUniqueInput
-  data?: MessageUpdateDataInput
+  data?: MessageUpdateWithoutConversationDataInput
 }
-export type MessageUpdateWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof MessageUpdateWithWhereUniqueNestedInput, string>
+export type MessageUpdateWithWhereUniqueWithoutConversationInputInputObject =
+  | Extract<keyof MessageUpdateWithWhereUniqueWithoutConversationInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
   
-export interface MessageUpdateDataInput {
+export interface MessageUpdateWithoutConversationDataInput {
   content?: string | null
   to?: UserUpdateOneRequiredInput | null
   from?: UserUpdateOneRequiredInput | null
 }
-export type MessageUpdateDataInputInputObject =
-  | Extract<keyof MessageUpdateDataInput, string>
+export type MessageUpdateWithoutConversationDataInputInputObject =
+  | Extract<keyof MessageUpdateWithoutConversationDataInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
@@ -11421,13 +11408,13 @@ export type UserUpdateOneRequiredInputInputObject =
   | { name: 'upsert', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   
-export interface MessageUpsertWithWhereUniqueNestedInput {
+export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   where?: MessageWhereUniqueInput
-  update?: MessageUpdateDataInput
-  create?: MessageCreateInput
+  update?: MessageUpdateWithoutConversationDataInput
+  create?: MessageCreateWithoutConversationInput
 }
-export type MessageUpsertWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof MessageUpsertWithWhereUniqueNestedInput, string>
+export type MessageUpsertWithWhereUniqueWithoutConversationInputInputObject =
+  | Extract<keyof MessageUpsertWithWhereUniqueWithoutConversationInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
@@ -11461,14 +11448,6 @@ export interface MessageScalarWhereInput {
   content_not_starts_with?: string | null
   content_ends_with?: string | null
   content_not_ends_with?: string | null
-  sendDate?: string | null
-  sendDate_not?: string | null
-  sendDate_in?: string[]
-  sendDate_not_in?: string[]
-  sendDate_lt?: string | null
-  sendDate_lte?: string | null
-  sendDate_gt?: string | null
-  sendDate_gte?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -11519,14 +11498,6 @@ export type MessageScalarWhereInputInputObject =
   | { name: 'content_not_starts_with', alias?: string  } 
   | { name: 'content_ends_with', alias?: string  } 
   | { name: 'content_not_ends_with', alias?: string  } 
-  | { name: 'sendDate', alias?: string  } 
-  | { name: 'sendDate_not', alias?: string  } 
-  | { name: 'sendDate_in', alias?: string  } 
-  | { name: 'sendDate_not_in', alias?: string  } 
-  | { name: 'sendDate_lt', alias?: string  } 
-  | { name: 'sendDate_lte', alias?: string  } 
-  | { name: 'sendDate_gt', alias?: string  } 
-  | { name: 'sendDate_gte', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -12819,7 +12790,7 @@ export type CommentUpdateManyMutationInputInputObject =
 export interface ConversationCreateInput {
   id?: string | null
   speakers?: UserCreateManyWithoutConversationsInput | null
-  messages?: MessageCreateManyInput | null
+  messages?: MessageCreateManyWithoutConversationInput | null
 }
 export type ConversationCreateInputInputObject =
   | Extract<keyof ConversationCreateInput, string>
@@ -12889,7 +12860,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   
 export interface ConversationUpdateInput {
   speakers?: UserUpdateManyWithoutConversationsInput | null
-  messages?: MessageUpdateManyInput | null
+  messages?: MessageUpdateManyWithoutConversationInput | null
 }
 export type ConversationUpdateInputInputObject =
   | Extract<keyof ConversationUpdateInput, string>
@@ -13079,16 +13050,80 @@ export type InteractionUpdateManyMutationInputInputObject =
   | Extract<keyof InteractionUpdateManyMutationInput, string>
   | { name: 'type', alias?: string  } 
   
+export interface MessageCreateInput {
+  id?: string | null
+  content?: string
+  to?: UserCreateOneInput
+  from?: UserCreateOneInput
+  conversation?: ConversationCreateOneWithoutMessagesInput
+}
+export type MessageCreateInputInputObject =
+  | Extract<keyof MessageCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'to', alias?: string  } 
+  | { name: 'from', alias?: string  } 
+  | { name: 'conversation', alias?: string  } 
+  
+export interface ConversationCreateOneWithoutMessagesInput {
+  create?: ConversationCreateWithoutMessagesInput | null
+  connect?: ConversationWhereUniqueInput | null
+}
+export type ConversationCreateOneWithoutMessagesInputInputObject =
+  | Extract<keyof ConversationCreateOneWithoutMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ConversationCreateWithoutMessagesInput {
+  id?: string | null
+  speakers?: UserCreateManyWithoutConversationsInput | null
+}
+export type ConversationCreateWithoutMessagesInputInputObject =
+  | Extract<keyof ConversationCreateWithoutMessagesInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'speakers', alias?: string  } 
+  
 export interface MessageUpdateInput {
   content?: string | null
   to?: UserUpdateOneRequiredInput | null
   from?: UserUpdateOneRequiredInput | null
+  conversation?: ConversationUpdateOneRequiredWithoutMessagesInput | null
 }
 export type MessageUpdateInputInputObject =
   | Extract<keyof MessageUpdateInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'conversation', alias?: string  } 
+  
+export interface ConversationUpdateOneRequiredWithoutMessagesInput {
+  create?: ConversationCreateWithoutMessagesInput | null
+  update?: ConversationUpdateWithoutMessagesDataInput | null
+  upsert?: ConversationUpsertWithoutMessagesInput | null
+  connect?: ConversationWhereUniqueInput | null
+}
+export type ConversationUpdateOneRequiredWithoutMessagesInputInputObject =
+  | Extract<keyof ConversationUpdateOneRequiredWithoutMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ConversationUpdateWithoutMessagesDataInput {
+  speakers?: UserUpdateManyWithoutConversationsInput | null
+}
+export type ConversationUpdateWithoutMessagesDataInputInputObject =
+  | Extract<keyof ConversationUpdateWithoutMessagesDataInput, string>
+  | { name: 'speakers', alias?: string  } 
+  
+export interface ConversationUpsertWithoutMessagesInput {
+  update?: ConversationUpdateWithoutMessagesDataInput
+  create?: ConversationCreateWithoutMessagesInput
+}
+export type ConversationUpsertWithoutMessagesInputInputObject =
+  | Extract<keyof ConversationUpsertWithoutMessagesInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
   
 export interface MessageUpdateManyMutationInput {
   content?: string | null
@@ -13774,8 +13809,6 @@ export type MessageOrderByInputValues =
   | 'id_DESC'
   | 'content_ASC'
   | 'content_DESC'
-  | 'sendDate_ASC'
-  | 'sendDate_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

@@ -552,16 +552,24 @@ export interface NexusGenInputs {
   }
   ConversationCreateInput: { // input type
     id?: string | null; // ID
-    messages?: NexusGenInputs['MessageCreateManyInput'] | null; // MessageCreateManyInput
+    messages?: NexusGenInputs['MessageCreateManyWithoutConversationInput'] | null; // MessageCreateManyWithoutConversationInput
     speakers?: NexusGenInputs['UserCreateManyWithoutConversationsInput'] | null; // UserCreateManyWithoutConversationsInput
   }
   ConversationCreateManyWithoutSpeakersInput: { // input type
     connect?: NexusGenInputs['ConversationWhereUniqueInput'][] | null; // [ConversationWhereUniqueInput!]
     create?: NexusGenInputs['ConversationCreateWithoutSpeakersInput'][] | null; // [ConversationCreateWithoutSpeakersInput!]
   }
+  ConversationCreateOneWithoutMessagesInput: { // input type
+    connect?: NexusGenInputs['ConversationWhereUniqueInput'] | null; // ConversationWhereUniqueInput
+    create?: NexusGenInputs['ConversationCreateWithoutMessagesInput'] | null; // ConversationCreateWithoutMessagesInput
+  }
+  ConversationCreateWithoutMessagesInput: { // input type
+    id?: string | null; // ID
+    speakers?: NexusGenInputs['UserCreateManyWithoutConversationsInput'] | null; // UserCreateManyWithoutConversationsInput
+  }
   ConversationCreateWithoutSpeakersInput: { // input type
     id?: string | null; // ID
-    messages?: NexusGenInputs['MessageCreateManyInput'] | null; // MessageCreateManyInput
+    messages?: NexusGenInputs['MessageCreateManyWithoutConversationInput'] | null; // MessageCreateManyWithoutConversationInput
   }
   ConversationScalarWhereInput: { // input type
     AND?: NexusGenInputs['ConversationScalarWhereInput'][] | null; // [ConversationScalarWhereInput!]
@@ -599,7 +607,7 @@ export interface NexusGenInputs {
     updatedAt_not_in?: any[] | null; // [DateTime!]
   }
   ConversationUpdateInput: { // input type
-    messages?: NexusGenInputs['MessageUpdateManyInput'] | null; // MessageUpdateManyInput
+    messages?: NexusGenInputs['MessageUpdateManyWithoutConversationInput'] | null; // MessageUpdateManyWithoutConversationInput
     speakers?: NexusGenInputs['UserUpdateManyWithoutConversationsInput'] | null; // UserUpdateManyWithoutConversationsInput
   }
   ConversationUpdateManyWithoutSpeakersInput: { // input type
@@ -612,17 +620,30 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['ConversationUpdateWithWhereUniqueWithoutSpeakersInput'][] | null; // [ConversationUpdateWithWhereUniqueWithoutSpeakersInput!]
     upsert?: NexusGenInputs['ConversationUpsertWithWhereUniqueWithoutSpeakersInput'][] | null; // [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
   }
+  ConversationUpdateOneRequiredWithoutMessagesInput: { // input type
+    connect?: NexusGenInputs['ConversationWhereUniqueInput'] | null; // ConversationWhereUniqueInput
+    create?: NexusGenInputs['ConversationCreateWithoutMessagesInput'] | null; // ConversationCreateWithoutMessagesInput
+    update?: NexusGenInputs['ConversationUpdateWithoutMessagesDataInput'] | null; // ConversationUpdateWithoutMessagesDataInput
+    upsert?: NexusGenInputs['ConversationUpsertWithoutMessagesInput'] | null; // ConversationUpsertWithoutMessagesInput
+  }
   ConversationUpdateWithWhereUniqueWithoutSpeakersInput: { // input type
     data: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput']; // ConversationUpdateWithoutSpeakersDataInput!
     where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
   }
+  ConversationUpdateWithoutMessagesDataInput: { // input type
+    speakers?: NexusGenInputs['UserUpdateManyWithoutConversationsInput'] | null; // UserUpdateManyWithoutConversationsInput
+  }
   ConversationUpdateWithoutSpeakersDataInput: { // input type
-    messages?: NexusGenInputs['MessageUpdateManyInput'] | null; // MessageUpdateManyInput
+    messages?: NexusGenInputs['MessageUpdateManyWithoutConversationInput'] | null; // MessageUpdateManyWithoutConversationInput
   }
   ConversationUpsertWithWhereUniqueWithoutSpeakersInput: { // input type
     create: NexusGenInputs['ConversationCreateWithoutSpeakersInput']; // ConversationCreateWithoutSpeakersInput!
     update: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput']; // ConversationUpdateWithoutSpeakersDataInput!
     where: NexusGenInputs['ConversationWhereUniqueInput']; // ConversationWhereUniqueInput!
+  }
+  ConversationUpsertWithoutMessagesInput: { // input type
+    create: NexusGenInputs['ConversationCreateWithoutMessagesInput']; // ConversationCreateWithoutMessagesInput!
+    update: NexusGenInputs['ConversationUpdateWithoutMessagesDataInput']; // ConversationUpdateWithoutMessagesDataInput!
   }
   ConversationWhereInput: { // input type
     AND?: NexusGenInputs['ConversationWhereInput'][] | null; // [ConversationWhereInput!]
@@ -1400,13 +1421,20 @@ export interface NexusGenInputs {
   }
   MessageCreateInput: { // input type
     content: string; // String!
+    conversation: NexusGenInputs['ConversationCreateOneWithoutMessagesInput']; // ConversationCreateOneWithoutMessagesInput!
     from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
     id?: string | null; // ID
     to: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
   }
-  MessageCreateManyInput: { // input type
+  MessageCreateManyWithoutConversationInput: { // input type
     connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
-    create?: NexusGenInputs['MessageCreateInput'][] | null; // [MessageCreateInput!]
+    create?: NexusGenInputs['MessageCreateWithoutConversationInput'][] | null; // [MessageCreateWithoutConversationInput!]
+  }
+  MessageCreateWithoutConversationInput: { // input type
+    content: string; // String!
+    from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
+    id?: string | null; // ID
+    to: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
   }
   MessageScalarWhereInput: { // input type
     AND?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
@@ -1448,14 +1476,6 @@ export interface NexusGenInputs {
     id_starts_with?: string | null; // ID
     NOT?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
     OR?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
-    sendDate?: any | null; // DateTime
-    sendDate_gt?: any | null; // DateTime
-    sendDate_gte?: any | null; // DateTime
-    sendDate_in?: any[] | null; // [DateTime!]
-    sendDate_lt?: any | null; // DateTime
-    sendDate_lte?: any | null; // DateTime
-    sendDate_not?: any | null; // DateTime
-    sendDate_not_in?: any[] | null; // [DateTime!]
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
     updatedAt_gte?: any | null; // DateTime
@@ -1465,41 +1485,42 @@ export interface NexusGenInputs {
     updatedAt_not?: any | null; // DateTime
     updatedAt_not_in?: any[] | null; // [DateTime!]
   }
-  MessageUpdateDataInput: { // input type
-    content?: string | null; // String
-    from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
-    to?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
-  }
   MessageUpdateInput: { // input type
     content?: string | null; // String
+    conversation?: NexusGenInputs['ConversationUpdateOneRequiredWithoutMessagesInput'] | null; // ConversationUpdateOneRequiredWithoutMessagesInput
     from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
     to?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
   }
   MessageUpdateManyDataInput: { // input type
     content?: string | null; // String
   }
-  MessageUpdateManyInput: { // input type
-    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
-    create?: NexusGenInputs['MessageCreateInput'][] | null; // [MessageCreateInput!]
-    delete?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
-    disconnect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
-    set?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
-    update?: NexusGenInputs['MessageUpdateWithWhereUniqueNestedInput'][] | null; // [MessageUpdateWithWhereUniqueNestedInput!]
-    updateMany?: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'][] | null; // [MessageUpdateManyWithWhereNestedInput!]
-    upsert?: NexusGenInputs['MessageUpsertWithWhereUniqueNestedInput'][] | null; // [MessageUpsertWithWhereUniqueNestedInput!]
-  }
   MessageUpdateManyWithWhereNestedInput: { // input type
     data: NexusGenInputs['MessageUpdateManyDataInput']; // MessageUpdateManyDataInput!
     where: NexusGenInputs['MessageScalarWhereInput']; // MessageScalarWhereInput!
   }
-  MessageUpdateWithWhereUniqueNestedInput: { // input type
-    data: NexusGenInputs['MessageUpdateDataInput']; // MessageUpdateDataInput!
+  MessageUpdateManyWithoutConversationInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateWithoutConversationInput'][] | null; // [MessageCreateWithoutConversationInput!]
+    delete?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    disconnect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    set?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    update?: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutConversationInput'][] | null; // [MessageUpdateWithWhereUniqueWithoutConversationInput!]
+    updateMany?: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'][] | null; // [MessageUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutConversationInput'][] | null; // [MessageUpsertWithWhereUniqueWithoutConversationInput!]
+  }
+  MessageUpdateWithWhereUniqueWithoutConversationInput: { // input type
+    data: NexusGenInputs['MessageUpdateWithoutConversationDataInput']; // MessageUpdateWithoutConversationDataInput!
     where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
   }
-  MessageUpsertWithWhereUniqueNestedInput: { // input type
-    create: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
-    update: NexusGenInputs['MessageUpdateDataInput']; // MessageUpdateDataInput!
+  MessageUpdateWithoutConversationDataInput: { // input type
+    content?: string | null; // String
+    from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+    to?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  MessageUpsertWithWhereUniqueWithoutConversationInput: { // input type
+    create: NexusGenInputs['MessageCreateWithoutConversationInput']; // MessageCreateWithoutConversationInput!
+    update: NexusGenInputs['MessageUpdateWithoutConversationDataInput']; // MessageUpdateWithoutConversationDataInput!
     where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
   }
   MessageWhereInput: { // input type
@@ -1518,6 +1539,7 @@ export interface NexusGenInputs {
     content_not_in?: string[] | null; // [String!]
     content_not_starts_with?: string | null; // String
     content_starts_with?: string | null; // String
+    conversation?: NexusGenInputs['ConversationWhereInput'] | null; // ConversationWhereInput
     createdAt?: any | null; // DateTime
     createdAt_gt?: any | null; // DateTime
     createdAt_gte?: any | null; // DateTime
@@ -1541,14 +1563,6 @@ export interface NexusGenInputs {
     id_not_in?: string[] | null; // [ID!]
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
-    sendDate?: any | null; // DateTime
-    sendDate_gt?: any | null; // DateTime
-    sendDate_gte?: any | null; // DateTime
-    sendDate_in?: any[] | null; // [DateTime!]
-    sendDate_lt?: any | null; // DateTime
-    sendDate_lte?: any | null; // DateTime
-    sendDate_not?: any | null; // DateTime
-    sendDate_not_in?: any[] | null; // [DateTime!]
     to?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
@@ -3104,7 +3118,7 @@ export interface NexusGenEnums {
   InteractionOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   InteractionType: "BLUE_VOTE" | "COMMENT" | "DISLIKE" | "LIKE" | "NEGATIVE_VOTE" | "POSITIVE_VOTE" | "RED_VOTE"
   Language: "EN" | "FR"
-  MessageOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "sendDate_ASC" | "sendDate_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  MessageOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ReportOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "reason_ASC" | "reason_DESC" | "reasonText_ASC" | "reasonText_DESC" | "treated_ASC" | "treated_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ReportReason: "INSULT" | "PORNOGRAPHY" | "RACISM" | "SEXISM" | "VIOLENCE"
   ReportType: "COMMENT" | "DEBATE"
@@ -3165,7 +3179,6 @@ export interface NexusGenRootTypes {
     content: string; // String!
     createdAt: any; // DateTime!
     id: string; // ID!
-    sendDate: any; // DateTime!
     updatedAt: any; // DateTime!
   }
   Mutation: {};
@@ -3256,13 +3269,18 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   CommentWhereUniqueInput: NexusGenInputs['CommentWhereUniqueInput'];
   ConversationCreateInput: NexusGenInputs['ConversationCreateInput'];
   ConversationCreateManyWithoutSpeakersInput: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'];
+  ConversationCreateOneWithoutMessagesInput: NexusGenInputs['ConversationCreateOneWithoutMessagesInput'];
+  ConversationCreateWithoutMessagesInput: NexusGenInputs['ConversationCreateWithoutMessagesInput'];
   ConversationCreateWithoutSpeakersInput: NexusGenInputs['ConversationCreateWithoutSpeakersInput'];
   ConversationScalarWhereInput: NexusGenInputs['ConversationScalarWhereInput'];
   ConversationUpdateInput: NexusGenInputs['ConversationUpdateInput'];
   ConversationUpdateManyWithoutSpeakersInput: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'];
+  ConversationUpdateOneRequiredWithoutMessagesInput: NexusGenInputs['ConversationUpdateOneRequiredWithoutMessagesInput'];
   ConversationUpdateWithWhereUniqueWithoutSpeakersInput: NexusGenInputs['ConversationUpdateWithWhereUniqueWithoutSpeakersInput'];
+  ConversationUpdateWithoutMessagesDataInput: NexusGenInputs['ConversationUpdateWithoutMessagesDataInput'];
   ConversationUpdateWithoutSpeakersDataInput: NexusGenInputs['ConversationUpdateWithoutSpeakersDataInput'];
   ConversationUpsertWithWhereUniqueWithoutSpeakersInput: NexusGenInputs['ConversationUpsertWithWhereUniqueWithoutSpeakersInput'];
+  ConversationUpsertWithoutMessagesInput: NexusGenInputs['ConversationUpsertWithoutMessagesInput'];
   ConversationWhereInput: NexusGenInputs['ConversationWhereInput'];
   ConversationWhereUniqueInput: NexusGenInputs['ConversationWhereUniqueInput'];
   DebateCreateInput: NexusGenInputs['DebateCreateInput'];
@@ -3328,15 +3346,16 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   InteractionWhereInput: NexusGenInputs['InteractionWhereInput'];
   InteractionWhereUniqueInput: NexusGenInputs['InteractionWhereUniqueInput'];
   MessageCreateInput: NexusGenInputs['MessageCreateInput'];
-  MessageCreateManyInput: NexusGenInputs['MessageCreateManyInput'];
+  MessageCreateManyWithoutConversationInput: NexusGenInputs['MessageCreateManyWithoutConversationInput'];
+  MessageCreateWithoutConversationInput: NexusGenInputs['MessageCreateWithoutConversationInput'];
   MessageScalarWhereInput: NexusGenInputs['MessageScalarWhereInput'];
-  MessageUpdateDataInput: NexusGenInputs['MessageUpdateDataInput'];
   MessageUpdateInput: NexusGenInputs['MessageUpdateInput'];
   MessageUpdateManyDataInput: NexusGenInputs['MessageUpdateManyDataInput'];
-  MessageUpdateManyInput: NexusGenInputs['MessageUpdateManyInput'];
   MessageUpdateManyWithWhereNestedInput: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'];
-  MessageUpdateWithWhereUniqueNestedInput: NexusGenInputs['MessageUpdateWithWhereUniqueNestedInput'];
-  MessageUpsertWithWhereUniqueNestedInput: NexusGenInputs['MessageUpsertWithWhereUniqueNestedInput'];
+  MessageUpdateManyWithoutConversationInput: NexusGenInputs['MessageUpdateManyWithoutConversationInput'];
+  MessageUpdateWithWhereUniqueWithoutConversationInput: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutConversationInput'];
+  MessageUpdateWithoutConversationDataInput: NexusGenInputs['MessageUpdateWithoutConversationDataInput'];
+  MessageUpsertWithWhereUniqueWithoutConversationInput: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutConversationInput'];
   MessageWhereInput: NexusGenInputs['MessageWhereInput'];
   MessageWhereUniqueInput: NexusGenInputs['MessageWhereUniqueInput'];
   ReportCreateInput: NexusGenInputs['ReportCreateInput'];
@@ -3535,10 +3554,10 @@ export interface NexusGenFieldTypes {
   }
   Message: { // field return type
     content: string; // String!
+    conversation: NexusGenRootTypes['Conversation']; // Conversation!
     createdAt: any; // DateTime!
     from: NexusGenRootTypes['User']; // User!
     id: string; // ID!
-    sendDate: any; // DateTime!
     to: NexusGenRootTypes['User']; // User!
     updatedAt: any; // DateTime!
   }
@@ -4039,7 +4058,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Ad" | "AdTarget" | "Comment" | "Conversation" | "Debate" | "Interaction" | "Message" | "Mutation" | "Query" | "Report" | "Token" | "Trophy" | "User";
 
-export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetCreateManyInput" | "AdTargetScalarWhereInput" | "AdTargetUpdateDataInput" | "AdTargetUpdateInput" | "AdTargetUpdateManyDataInput" | "AdTargetUpdateManyInput" | "AdTargetUpdateManyWithWhereNestedInput" | "AdTargetUpdateWithWhereUniqueNestedInput" | "AdTargetUpsertWithWhereUniqueNestedInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyInput" | "MessageScalarWhereInput" | "MessageUpdateDataInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateWithWhereUniqueNestedInput" | "MessageUpsertWithWhereUniqueNestedInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetCreateManyInput" | "AdTargetScalarWhereInput" | "AdTargetUpdateDataInput" | "AdTargetUpdateInput" | "AdTargetUpdateManyDataInput" | "AdTargetUpdateManyInput" | "AdTargetUpdateManyWithWhereNestedInput" | "AdTargetUpdateWithWhereUniqueNestedInput" | "AdTargetUpsertWithWhereUniqueNestedInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateOneWithoutMessagesInput" | "ConversationCreateWithoutMessagesInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateOneRequiredWithoutMessagesInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutMessagesDataInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationUpsertWithoutMessagesInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyWithoutConversationInput" | "MessageCreateWithoutConversationInput" | "MessageScalarWhereInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateManyWithoutConversationInput" | "MessageUpdateWithWhereUniqueWithoutConversationInput" | "MessageUpdateWithoutConversationDataInput" | "MessageUpsertWithWhereUniqueWithoutConversationInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "AdOrderByInput" | "AdTargetOrderByInput" | "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "GenderFilter" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
 

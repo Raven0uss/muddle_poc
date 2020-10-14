@@ -11159,97 +11159,11 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "sendDate",
+            "name": "conversation",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_not",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_not_in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -14810,18 +14724,6 @@ module.exports = {
             "deprecationReason": null
           },
           {
-            "name": "sendDate_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sendDate_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt_ASC",
             "description": null,
             "isDeprecated": false,
@@ -14918,15 +14820,15 @@ module.exports = {
             "deprecationReason": null
           },
           {
-            "name": "sendDate",
+            "name": "conversation",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
+                "kind": "OBJECT",
+                "name": "Conversation",
                 "ofType": null
               }
             },
@@ -24735,7 +24637,7 @@ module.exports = {
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "MessageCreateManyInput",
+              "name": "MessageCreateManyWithoutConversationInput",
               "ofType": null
             },
             "defaultValue": null
@@ -24747,7 +24649,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageCreateManyInput",
+        "name": "MessageCreateManyWithoutConversationInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -24762,7 +24664,7 @@ module.exports = {
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "MessageCreateInput",
+                  "name": "MessageCreateWithoutConversationInput",
                   "ofType": null
                 }
               }
@@ -24794,7 +24696,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageCreateInput",
+        "name": "MessageCreateWithoutConversationInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -33933,7 +33835,7 @@ module.exports = {
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "MessageUpdateManyInput",
+              "name": "MessageUpdateManyWithoutConversationInput",
               "ofType": null
             },
             "defaultValue": null
@@ -33945,7 +33847,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageUpdateManyInput",
+        "name": "MessageUpdateManyWithoutConversationInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -33960,43 +33862,7 @@ module.exports = {
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "MessageCreateInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "MessageUpdateWithWhereUniqueNestedInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "upsert",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "MessageUpsertWithWhereUniqueNestedInput",
+                  "name": "MessageCreateWithoutConversationInput",
                   "ofType": null
                 }
               }
@@ -34076,6 +33942,42 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MessageUpdateWithWhereUniqueWithoutConversationInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "MessageUpsertWithWhereUniqueWithoutConversationInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
             "name": "deleteMany",
             "description": null,
             "type": {
@@ -34118,7 +34020,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageUpdateWithWhereUniqueNestedInput",
+        "name": "MessageUpdateWithWhereUniqueWithoutConversationInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -34144,7 +34046,7 @@ module.exports = {
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "MessageUpdateDataInput",
+                "name": "MessageUpdateWithoutConversationDataInput",
                 "ofType": null
               }
             },
@@ -34157,7 +34059,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageUpdateDataInput",
+        "name": "MessageUpdateWithoutConversationDataInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -34249,7 +34151,7 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "MessageUpsertWithWhereUniqueNestedInput",
+        "name": "MessageUpsertWithWhereUniqueWithoutConversationInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -34275,7 +34177,7 @@ module.exports = {
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "MessageUpdateDataInput",
+                "name": "MessageUpdateWithoutConversationDataInput",
                 "ofType": null
               }
             },
@@ -34289,7 +34191,7 @@ module.exports = {
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "MessageCreateInput",
+                "name": "MessageCreateWithoutConversationInput",
                 "ofType": null
               }
             },
@@ -34614,102 +34516,6 @@ module.exports = {
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_not",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_not_in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "sendDate_gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
               "ofType": null
             },
             "defaultValue": null
@@ -41771,7 +41577,7 @@ module.exports = {
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "MessageCreateManyInput",
+              "name": "MessageCreateManyWithoutConversationInput",
               "ofType": null
             },
             "defaultValue": null
@@ -42106,7 +41912,7 @@ module.exports = {
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "MessageUpdateManyInput",
+              "name": "MessageUpdateManyWithoutConversationInput",
               "ofType": null
             },
             "defaultValue": null
@@ -43007,6 +42813,145 @@ module.exports = {
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "MessageCreateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "to",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateOneInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "from",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateOneInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "conversation",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ConversationCreateOneWithoutMessagesInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConversationCreateOneWithoutMessagesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationCreateWithoutMessagesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConversationCreateWithoutMessagesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "speakers",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateManyWithoutConversationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "MessageUpdateInput",
         "description": null,
         "fields": null,
@@ -43038,6 +42983,127 @@ module.exports = {
               "kind": "INPUT_OBJECT",
               "name": "UserUpdateOneRequiredInput",
               "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "conversation",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationUpdateOneRequiredWithoutMessagesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConversationUpdateOneRequiredWithoutMessagesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationCreateWithoutMessagesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationUpdateWithoutMessagesDataInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationUpsertWithoutMessagesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ConversationWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConversationUpdateWithoutMessagesDataInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "speakers",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateManyWithoutConversationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConversationUpsertWithoutMessagesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ConversationUpdateWithoutMessagesDataInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ConversationCreateWithoutMessagesInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -46605,22 +46671,6 @@ module.exports = {
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sendDate",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
                 "ofType": null
               }
             },

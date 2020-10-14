@@ -1,7 +1,7 @@
 type Conversation {
   id: ID! @id
   speakers: [User!]! @relation(link: INLINE)
-  messages: [Message] @relation(link: INLINE)
+  messages: [Message] @relation(name: "Conversation")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

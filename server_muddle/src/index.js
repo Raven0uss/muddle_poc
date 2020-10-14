@@ -49,9 +49,9 @@ const permissions = shield({
   Query: {
     users: isAuthenticated,
   },
-  // Mutation: {
-  //   addFruitToBasket: isAuthenticated,
-  // },
+  Mutation: {
+    // addFruitToBasket: isAuthenticated,
+  },
 });
 
 const server = new GraphQLServer({

@@ -664,7 +664,7 @@ type Conversation {
 
 input ConversationCreateInput {
   id: ID
-  messages: MessageCreateManyInput
+  messages: MessageCreateManyWithoutConversationInput
   speakers: UserCreateManyWithoutConversationsInput
 }
 
@@ -673,9 +673,19 @@ input ConversationCreateManyWithoutSpeakersInput {
   create: [ConversationCreateWithoutSpeakersInput!]
 }
 
+input ConversationCreateOneWithoutMessagesInput {
+  connect: ConversationWhereUniqueInput
+  create: ConversationCreateWithoutMessagesInput
+}
+
+input ConversationCreateWithoutMessagesInput {
+  id: ID
+  speakers: UserCreateManyWithoutConversationsInput
+}
+
 input ConversationCreateWithoutSpeakersInput {
   id: ID
-  messages: MessageCreateManyInput
+  messages: MessageCreateManyWithoutConversationInput
 }
 
 enum ConversationOrderByInput {
@@ -724,7 +734,7 @@ input ConversationScalarWhereInput {
 }
 
 input ConversationUpdateInput {
-  messages: MessageUpdateManyInput
+  messages: MessageUpdateManyWithoutConversationInput
   speakers: UserUpdateManyWithoutConversationsInput
 }
 
@@ -739,13 +749,29 @@ input ConversationUpdateManyWithoutSpeakersInput {
   upsert: [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
 }
 
+input ConversationUpdateOneRequiredWithoutMessagesInput {
+  connect: ConversationWhereUniqueInput
+  create: ConversationCreateWithoutMessagesInput
+  update: ConversationUpdateWithoutMessagesDataInput
+  upsert: ConversationUpsertWithoutMessagesInput
+}
+
+input ConversationUpdateWithoutMessagesDataInput {
+  speakers: UserUpdateManyWithoutConversationsInput
+}
+
 input ConversationUpdateWithoutSpeakersDataInput {
-  messages: MessageUpdateManyInput
+  messages: MessageUpdateManyWithoutConversationInput
 }
 
 input ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
   data: ConversationUpdateWithoutSpeakersDataInput!
   where: ConversationWhereUniqueInput!
+}
+
+input ConversationUpsertWithoutMessagesInput {
+  create: ConversationCreateWithoutMessagesInput!
+  update: ConversationUpdateWithoutMessagesDataInput!
 }
 
 input ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
@@ -1693,24 +1719,32 @@ enum Language {
 
 type Message {
   content: String!
+  conversation: Conversation!
   createdAt: DateTime!
   from: User!
   id: ID!
-  sendDate: DateTime!
   to: User!
   updatedAt: DateTime!
 }
 
 input MessageCreateInput {
   content: String!
+  conversation: ConversationCreateOneWithoutMessagesInput!
   from: UserCreateOneInput!
   id: ID
   to: UserCreateOneInput!
 }
 
-input MessageCreateManyInput {
+input MessageCreateManyWithoutConversationInput {
   connect: [MessageWhereUniqueInput!]
-  create: [MessageCreateInput!]
+  create: [MessageCreateWithoutConversationInput!]
+}
+
+input MessageCreateWithoutConversationInput {
+  content: String!
+  from: UserCreateOneInput!
+  id: ID
+  to: UserCreateOneInput!
 }
 
 enum MessageOrderByInput {
@@ -1720,8 +1754,6 @@ enum MessageOrderByInput {
   createdAt_DESC
   id_ASC
   id_DESC
-  sendDate_ASC
-  sendDate_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -1766,14 +1798,6 @@ input MessageScalarWhereInput {
   id_starts_with: ID
   NOT: [MessageScalarWhereInput!]
   OR: [MessageScalarWhereInput!]
-  sendDate: DateTime
-  sendDate_gt: DateTime
-  sendDate_gte: DateTime
-  sendDate_in: [DateTime!]
-  sendDate_lt: DateTime
-  sendDate_lte: DateTime
-  sendDate_not: DateTime
-  sendDate_not_in: [DateTime!]
   updatedAt: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
@@ -1784,14 +1808,9 @@ input MessageScalarWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
-input MessageUpdateDataInput {
-  content: String
-  from: UserUpdateOneRequiredInput
-  to: UserUpdateOneRequiredInput
-}
-
 input MessageUpdateInput {
   content: String
+  conversation: ConversationUpdateOneRequiredWithoutMessagesInput
   from: UserUpdateOneRequiredInput
   to: UserUpdateOneRequiredInput
 }
@@ -1800,16 +1819,16 @@ input MessageUpdateManyDataInput {
   content: String
 }
 
-input MessageUpdateManyInput {
+input MessageUpdateManyWithoutConversationInput {
   connect: [MessageWhereUniqueInput!]
-  create: [MessageCreateInput!]
+  create: [MessageCreateWithoutConversationInput!]
   delete: [MessageWhereUniqueInput!]
   deleteMany: [MessageScalarWhereInput!]
   disconnect: [MessageWhereUniqueInput!]
   set: [MessageWhereUniqueInput!]
-  update: [MessageUpdateWithWhereUniqueNestedInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutConversationInput!]
   updateMany: [MessageUpdateManyWithWhereNestedInput!]
-  upsert: [MessageUpsertWithWhereUniqueNestedInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutConversationInput!]
 }
 
 input MessageUpdateManyWithWhereNestedInput {
@@ -1817,14 +1836,20 @@ input MessageUpdateManyWithWhereNestedInput {
   where: MessageScalarWhereInput!
 }
 
-input MessageUpdateWithWhereUniqueNestedInput {
-  data: MessageUpdateDataInput!
+input MessageUpdateWithoutConversationDataInput {
+  content: String
+  from: UserUpdateOneRequiredInput
+  to: UserUpdateOneRequiredInput
+}
+
+input MessageUpdateWithWhereUniqueWithoutConversationInput {
+  data: MessageUpdateWithoutConversationDataInput!
   where: MessageWhereUniqueInput!
 }
 
-input MessageUpsertWithWhereUniqueNestedInput {
-  create: MessageCreateInput!
-  update: MessageUpdateDataInput!
+input MessageUpsertWithWhereUniqueWithoutConversationInput {
+  create: MessageCreateWithoutConversationInput!
+  update: MessageUpdateWithoutConversationDataInput!
   where: MessageWhereUniqueInput!
 }
 
@@ -1844,6 +1869,7 @@ input MessageWhereInput {
   content_not_in: [String!]
   content_not_starts_with: String
   content_starts_with: String
+  conversation: ConversationWhereInput
   createdAt: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
@@ -1867,14 +1893,6 @@ input MessageWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
-  sendDate: DateTime
-  sendDate_gt: DateTime
-  sendDate_gte: DateTime
-  sendDate_in: [DateTime!]
-  sendDate_lt: DateTime
-  sendDate_lte: DateTime
-  sendDate_not: DateTime
-  sendDate_not_in: [DateTime!]
   to: UserWhereInput
   updatedAt: DateTime
   updatedAt_gt: DateTime
