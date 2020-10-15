@@ -29,14 +29,19 @@ const schema = makePrismaSchema({
 });
 
 const getCurrentUser = async (request) => {
-  if (!request.headers.token) {
+  try {
+    if (!request.headers.token) {
+      return null;
+    }
+    const user = await jwt.decode(
+      request.headers.token,
+      process.env.JWT_SECRET_KEY
+    );
+    return { ...user };
+  } catch (err) {
+    console.error(err);
     return null;
   }
-  const user = await jwt.decode(
-    request.headers.token,
-    process.env.JWT_SECRET_KEY
-  );
-  return { ...user };
 };
 
 const isAuthenticated = rule({ cache: "contextual" })(

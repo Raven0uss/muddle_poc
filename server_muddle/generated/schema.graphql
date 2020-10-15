@@ -1808,6 +1808,11 @@ input MessageScalarWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+type MessageSubPayload {
+  node: Message
+  updatedFields: [String!]
+}
+
 input MessageUpdateInput {
   content: String
   conversation: ConversationUpdateOneRequiredWithoutMessagesInput
@@ -2259,6 +2264,10 @@ enum Role {
   MODERATOR
   MUDDLE
   STANDARD
+}
+
+type Subscription {
+  message: MessageSubPayload!
 }
 
 type Token {

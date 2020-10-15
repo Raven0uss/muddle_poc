@@ -29,4 +29,15 @@ const Token = objectType({
   },
 });
 
-export default { Token, DateScalar };
+const MessageSubPayload = objectType({
+  name: "MessageSubPayload",
+  definition(t) {
+    t.field("node", {
+      type: "Message",
+      nullable: true,
+    });
+    t.list.string("updatedFields", { nullable: true });
+  },
+});
+
+export default { Token, DateScalar, MessageSubPayload };

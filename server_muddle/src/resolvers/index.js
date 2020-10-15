@@ -4,7 +4,13 @@ import { flattenDeep } from "lodash";
 
 import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
 import { combineResolvers, skip } from "graphql-resolvers";
-import { idArg, objectType, stringArg, arg } from "nexus/dist";
+import {
+  idArg,
+  objectType,
+  stringArg,
+  arg,
+  subscriptionField,
+} from "nexus/dist";
 
 import Types from "./Types";
 
@@ -140,10 +146,21 @@ const Mutation = prismaObjectType({
   },
 });
 
+const Subscription = {
+  messageSubscription: subscriptionField("message", {
+    type: "MessageSubPayload",
+    subscribe: (parent, args, { prisma }) => {
+      return prisma.$subscribe.message({ mutation_in: "CREATED" });
+    },
+    resolve: (payload) => payload,
+  }),
+};
+
 export default {
   resolvers: {
     Mutation,
     Query,
+    ...Subscription,
     ...Types,
   },
 };
