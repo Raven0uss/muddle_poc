@@ -40,4 +40,32 @@ const MessageSubPayload = objectType({
   },
 });
 
-export default { Token, DateScalar, MessageSubPayload };
+const CommentSubPayload = objectType({
+  name: "CommentSubPayload",
+  definition(t) {
+    t.field("node", {
+      type: "Comment",
+      nullable: true,
+    });
+    t.list.string("updatedFields", { nullable: true });
+  },
+});
+
+// const NotificationSubPayload = objectType({
+//   name: "NotificationSubPayload",
+//   definition(t) {
+//     t.field("node", {
+//       type: "Notification",
+//       nullable: true,
+//     });
+//     t.list.string("updatedFields", { nullable: true });
+//   },
+// });
+
+export default {
+  Token,
+  DateScalar,
+  MessageSubPayload,
+  // NotificationSubPayload,
+  CommentSubPayload,
+};

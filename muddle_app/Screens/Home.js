@@ -40,7 +40,6 @@ function HomeComponent(props) {
       </SafeAreaView>
     );
   }
-
   const { users } = data;
   return (
     <View style={styles.container}>
