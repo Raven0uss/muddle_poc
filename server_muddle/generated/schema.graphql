@@ -489,6 +489,11 @@ input CommentScalarWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+type CommentSubPayload {
+  node: Comment
+  updatedFields: [String!]
+}
+
 input CommentUpdateDataInput {
   content: String
   debate: DebateUpdateOneRequiredWithoutCommentsInput
@@ -2267,6 +2272,7 @@ enum Role {
 }
 
 type Subscription {
+  comment: CommentSubPayload!
   message: MessageSubPayload!
 }
 
