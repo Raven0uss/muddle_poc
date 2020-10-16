@@ -10,7 +10,7 @@ import {
 import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
 import Icon from "../Components/Icon";
-import { Trans } from "@lingui/react";
+import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 
 const GET_USERS = gql`

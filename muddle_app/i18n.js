@@ -12,7 +12,7 @@ const catalogs = {
 export const getDeviceLocale = () => {
   const defaultLanguage = "fr";
 
-  let locale;
+  let locale = "";
   try {
     switch (Platform.OS) {
       case "ios": {
