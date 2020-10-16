@@ -9,9 +9,9 @@ const catalogs = {
   fr: frMessages,
 };
 
-const defaultLanguage = "fr";
-
 export const getDeviceLocale = () => {
+  const defaultLanguage = "fr";
+
   let locale;
   try {
     switch (Platform.OS) {
