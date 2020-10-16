@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { I18nProvider } from "@lingui/react";
-import i18n from "./i18n";
+import i18n, { getDeviceLocale } from "./i18n";
 
 import HomeScreen from "./Screens/Home";
 
@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <I18nProvider i18n={i18n} language="fr">
+      <I18nProvider i18n={i18n} language={getDeviceLocale()}>
         <ApolloProvider client={apolloClient}>
           <PaperProvider>
             <Stack.Navigator initialRouteName="Home">
