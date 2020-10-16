@@ -2,6 +2,8 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.48",
     "@apollo/link-context": "^2.0.0-beta.3",
+    "@lingui/core": "^2.9.2",
+    "@lingui/react": "^2.9.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
@@ -19,14 +21,21 @@
     "react-native-web": "0.13.13"
   },
   "devDependencies": {
-    "@babel/core": "7.9.0"
+    "@babel/core": "^7.9.0",
+    "@lingui/cli": "^2.9.2",
+    "@lingui/macro": "^2.9.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-macros": "^2.8.0"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "add-locale": "lingui add-locale",
+    "extract": "lingui extract",
+    "compile": "lingui compile"
   },
   "private": true
 }

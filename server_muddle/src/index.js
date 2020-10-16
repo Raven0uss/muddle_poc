@@ -53,7 +53,7 @@ const isAuthenticated = rule({ cache: "contextual" })(
 const permissions = shield(
   {
     Query: {
-      users: isAuthenticated,
+      // users: isAuthenticated,
     },
     Mutation: {
       // createConversation: isAuthenticated,

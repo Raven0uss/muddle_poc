@@ -9,12 +9,14 @@ import {
 } from "react-native";
 import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
-import Icon from "../Components/Icon"
+import Icon from "../Components/Icon";
+import { Trans } from "@lingui/react";
+import i18n from "../i18n";
 
 const GET_USERS = gql`
   query {
     users {
-      name
+      pseudo
     }
   }
 `;
@@ -45,8 +47,10 @@ function HomeComponent(props) {
       <Card>
         <Card.Title title="Card Title" subtitle="Card Subtitle" />
         <Card.Content>
-          <Title>Card title</Title>
-          <Paragraph>Card content</Paragraph>
+          <Title>
+            <Trans>Test</Trans>
+          </Title>
+          <Paragraph>{i18n._("test2")}</Paragraph>
         </Card.Content>
         <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
         <Card.Actions>
@@ -54,12 +58,12 @@ function HomeComponent(props) {
           <Button>Ok</Button>
         </Card.Actions>
       </Card>
-      <Icon name="gavel" size={24} color={colors.primary}/>
+      <Icon name="gavel" size={24} color={colors.primary} />
       {users.map((user) => (
-        <View style={styles.profileContainer} key={user.name}>
+        <View style={styles.profileContainer} key={user.pseudo}>
           {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
           <View style={styles.details}>
-            <Text style={styles.name}>{user.name}</Text>
+            <Text style={styles.name}>{user.pseudo}</Text>
             {/* <Text style={styles.username}>{user.email}</Text> */}
           </View>
         </View>

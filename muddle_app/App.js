@@ -6,6 +6,9 @@ import { apolloClient } from "./apollo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { I18nProvider } from "@lingui/react";
+import i18n from "./i18n";
+
 import HomeScreen from "./Screens/Home";
 
 const Stack = createStackNavigator();
@@ -13,19 +16,21 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <ApolloProvider client={apolloClient}>
-        <PaperProvider>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
-        </PaperProvider>
-      </ApolloProvider>
+      <I18nProvider i18n={i18n} language="fr">
+        <ApolloProvider client={apolloClient}>
+          <PaperProvider>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Stack.Navigator>
+          </PaperProvider>
+        </ApolloProvider>
+      </I18nProvider>
     </NavigationContainer>
   );
 }
