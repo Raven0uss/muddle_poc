@@ -13,6 +13,8 @@ import Icon from "../Components/Icon";
 import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 
+import Header from "./../Components/Header";
+
 const GET_USERS = gql`
   query {
     users {
@@ -24,26 +26,32 @@ const GET_USERS = gql`
 
 function HomeComponent(props) {
   const { colors } = props.theme;
-  const { data, loading, error } = useQuery(GET_USERS);
+  // const { data, loading, error } = useQuery(GET_USERS);
 
-  if (error) {
-    console.error("error", error);
-    return (
-      <View style={styles.container}>
-        <Text style={styles.name}>Error</Text>
-      </View>
-    );
-  }
-  if (loading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
-  const { users } = data;
+  // if (error) {
+  //   console.error("error", error);
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.name}>Error</Text>
+  //     </View>
+  //   );
+  // }
+  // if (loading) {
+  //   return (
+  //     <SafeAreaView style={styles.loadingContainer}>
+  //       <ActivityIndicator />
+  //     </SafeAreaView>
+  //   );
+  // }
+  // const { users } = data;
   return (
     <View style={styles.container}>
+      <Header
+        // hidden
+        LeftComponent={<Icon name="gavel" size={24} color={colors.primary} />}
+        MiddleComponent={<Icon name="gavel" size={24} color={colors.primary} />}
+        RightComponent={<Icon name="gavel" size={24} color={colors.primary} />}
+      />
       <Card>
         <Card.Title title="Card Title" subtitle="Card Subtitle" />
         <Card.Content>
@@ -59,14 +67,14 @@ function HomeComponent(props) {
         </Card.Actions>
       </Card>
       <Icon name="gavel" size={24} color={colors.primary} />
-      {users.map((user) => (
+      {/* {users.map((user) => (
         <View style={styles.profileContainer} key={user.pseudo}>
           <View style={styles.details}>
             <Text style={styles.name}>{user.pseudo}</Text>
             <Text style={styles.username}>{user.email}</Text>
           </View>
         </View>
-      ))}
+      ))} */}
     </View>
   );
 }
@@ -79,8 +87,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 50,
+    // justifyContent: "center",
+    // paddingHorizontal: 50,
   },
   profileContainer: {
     flexDirection: "row",
