@@ -474,6 +474,10 @@ type AggregateMessage {
   count: Int!
 }
 
+type AggregateNotification {
+  count: Int!
+}
+
 type AggregateReport {
   count: Int!
 }
@@ -2300,6 +2304,9 @@ type Mutation {
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  createNotification(data: NotificationCreateInput!): Notification!
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
   createReport(data: ReportCreateInput!): Report!
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
   updateManyReports(data: ReportUpdateManyMutationInput!, where: ReportWhereInput): BatchPayload!
@@ -2328,6 +2335,72 @@ enum MutationType {
 
 interface Node {
   id: ID!
+}
+
+type Notification {
+  id: ID!
+}
+
+type NotificationConnection {
+  pageInfo: PageInfo!
+  edges: [NotificationEdge]!
+  aggregate: AggregateNotification!
+}
+
+input NotificationCreateInput {
+  id: ID
+}
+
+type NotificationEdge {
+  node: Notification!
+  cursor: String!
+}
+
+enum NotificationOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type NotificationPreviousValues {
+  id: ID!
+}
+
+type NotificationSubscriptionPayload {
+  mutation: MutationType!
+  node: Notification
+  updatedFields: [String!]
+  previousValues: NotificationPreviousValues
+}
+
+input NotificationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: NotificationWhereInput
+  AND: [NotificationSubscriptionWhereInput!]
+}
+
+input NotificationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  AND: [NotificationWhereInput!]
+}
+
+input NotificationWhereUniqueInput {
+  id: ID
 }
 
 type PageInfo {
@@ -2359,6 +2432,9 @@ type Query {
   message(where: MessageWhereUniqueInput!): Message
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  notification(where: NotificationWhereUniqueInput!): Notification
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
+  notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
   report(where: ReportWhereUniqueInput!): Report
   reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
   reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
@@ -2733,6 +2809,7 @@ type Subscription {
   debate(where: DebateSubscriptionWhereInput): DebateSubscriptionPayload
   interaction(where: InteractionSubscriptionWhereInput): InteractionSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
   report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
   trophy(where: TrophySubscriptionWhereInput): TrophySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

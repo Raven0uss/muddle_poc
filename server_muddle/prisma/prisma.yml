@@ -7,6 +7,7 @@ datamodel:
   - ./datamodel/debate.prisma
   - ./datamodel/interaction.prisma
   - ./datamodel/message.prisma
+  - ./datamodel/notification.prisma
   - ./datamodel/report.prisma
   - ./datamodel/trophy.prisma
   - ./datamodel/user.prisma

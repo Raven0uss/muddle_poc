@@ -47,6 +47,10 @@ export interface NexusPrismaTypes {
       MessageConnection: MessageConnectionObject
       MessageEdge: MessageEdgeObject
       AggregateMessage: AggregateMessageObject
+      Notification: NotificationObject
+      NotificationConnection: NotificationConnectionObject
+      NotificationEdge: NotificationEdgeObject
+      AggregateNotification: AggregateNotificationObject
       ReportConnection: ReportConnectionObject
       ReportEdge: ReportEdgeObject
       AggregateReport: AggregateReportObject
@@ -73,6 +77,8 @@ export interface NexusPrismaTypes {
       InteractionPreviousValues: InteractionPreviousValuesObject
       MessageSubscriptionPayload: MessageSubscriptionPayloadObject
       MessagePreviousValues: MessagePreviousValuesObject
+      NotificationSubscriptionPayload: NotificationSubscriptionPayloadObject
+      NotificationPreviousValues: NotificationPreviousValuesObject
       ReportSubscriptionPayload: ReportSubscriptionPayloadObject
       ReportPreviousValues: ReportPreviousValuesObject
       TrophySubscriptionPayload: TrophySubscriptionPayloadObject
@@ -114,6 +120,10 @@ export interface NexusPrismaTypes {
       MessageConnection: MessageConnectionFieldDetails
       MessageEdge: MessageEdgeFieldDetails
       AggregateMessage: AggregateMessageFieldDetails
+      Notification: NotificationFieldDetails
+      NotificationConnection: NotificationConnectionFieldDetails
+      NotificationEdge: NotificationEdgeFieldDetails
+      AggregateNotification: AggregateNotificationFieldDetails
       ReportConnection: ReportConnectionFieldDetails
       ReportEdge: ReportEdgeFieldDetails
       AggregateReport: AggregateReportFieldDetails
@@ -140,6 +150,8 @@ export interface NexusPrismaTypes {
       InteractionPreviousValues: InteractionPreviousValuesFieldDetails
       MessageSubscriptionPayload: MessageSubscriptionPayloadFieldDetails
       MessagePreviousValues: MessagePreviousValuesFieldDetails
+      NotificationSubscriptionPayload: NotificationSubscriptionPayloadFieldDetails
+      NotificationPreviousValues: NotificationPreviousValuesFieldDetails
       ReportSubscriptionPayload: ReportSubscriptionPayloadFieldDetails
       ReportPreviousValues: ReportPreviousValuesFieldDetails
       TrophySubscriptionPayload: TrophySubscriptionPayloadFieldDetails
@@ -167,6 +179,8 @@ export interface NexusPrismaTypes {
       DebateWhereUniqueInput: DebateWhereUniqueInputInputObject
       InteractionWhereUniqueInput: InteractionWhereUniqueInputInputObject
       MessageWhereUniqueInput: MessageWhereUniqueInputInputObject
+      NotificationWhereUniqueInput: NotificationWhereUniqueInputInputObject
+      NotificationWhereInput: NotificationWhereInputInputObject
       ReportWhereUniqueInput: ReportWhereUniqueInputInputObject
       TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
@@ -379,6 +393,7 @@ export interface NexusPrismaTypes {
       ConversationUpdateWithoutMessagesDataInput: ConversationUpdateWithoutMessagesDataInputInputObject
       ConversationUpsertWithoutMessagesInput: ConversationUpsertWithoutMessagesInputInputObject
       MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
+      NotificationCreateInput: NotificationCreateInputInputObject
       ReportCreateInput: ReportCreateInputInputObject
       ReportUpdateInput: ReportUpdateInputInputObject
       ReportUpdateManyMutationInput: ReportUpdateManyMutationInputInputObject
@@ -399,6 +414,7 @@ export interface NexusPrismaTypes {
       DebateSubscriptionWhereInput: DebateSubscriptionWhereInputInputObject
       InteractionSubscriptionWhereInput: InteractionSubscriptionWhereInputInputObject
       MessageSubscriptionWhereInput: MessageSubscriptionWhereInputInputObject
+      NotificationSubscriptionWhereInput: NotificationSubscriptionWhereInputInputObject
       ReportSubscriptionWhereInput: ReportSubscriptionWhereInputInputObject
       TrophySubscriptionWhereInput: TrophySubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
@@ -424,6 +440,7 @@ export interface NexusPrismaTypes {
     TrophyOrderByInput: TrophyOrderByInputValues,
     ConversationOrderByInput: ConversationOrderByInputValues,
     MessageOrderByInput: MessageOrderByInputValues,
+    NotificationOrderByInput: NotificationOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -453,6 +470,9 @@ type QueryObject =
   | { name: 'message', args?: QueryMessageArgs[] | false, alias?: string  } 
   | { name: 'messages', args?: QueryMessagesArgs[] | false, alias?: string  } 
   | { name: 'messagesConnection', args?: QueryMessagesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'notification', args?: QueryNotificationArgs[] | false, alias?: string  } 
+  | { name: 'notifications', args?: QueryNotificationsArgs[] | false, alias?: string  } 
+  | { name: 'notificationsConnection', args?: QueryNotificationsConnectionArgs[] | false, alias?: string  } 
   | { name: 'report', args?: QueryReportArgs[] | false, alias?: string  } 
   | { name: 'reports', args?: QueryReportsArgs[] | false, alias?: string  } 
   | { name: 'reportsConnection', args?: QueryReportsConnectionArgs[] | false, alias?: string  } 
@@ -485,6 +505,9 @@ type QueryFields =
   | 'message'
   | 'messages'
   | 'messagesConnection'
+  | 'notification'
+  | 'notifications'
+  | 'notificationsConnection'
   | 'report'
   | 'reports'
   | 'reportsConnection'
@@ -615,6 +638,24 @@ type QueryMessagesArgs =
   | 'first'
   | 'last'
 type QueryMessagesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryNotificationArgs =
+  | 'where'
+type QueryNotificationsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryNotificationsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -951,6 +992,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.MessageConnection> | prisma.MessageConnection
+  }
+  notification: {
+    type: 'Notification'
+    args: Record<QueryNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: NotificationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification | null> | prisma.Notification | null
+  }
+  notifications: {
+    type: 'Notification'
+    args: Record<QueryNotificationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: NotificationWhereInput | null, orderBy?: prisma.NotificationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification[]> | prisma.Notification[]
+  }
+  notificationsConnection: {
+    type: 'NotificationConnection'
+    args: Record<QueryNotificationsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: NotificationWhereInput | null, orderBy?: prisma.NotificationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationConnection> | prisma.NotificationConnection
   }
   report: {
     type: 'Report'
@@ -3681,6 +3761,156 @@ export interface AggregateMessageFieldDetails {
 }
   
 
+// Types for Notification
+
+type NotificationObject =
+  | NotificationFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+
+type NotificationFields =
+  | 'id'
+
+
+
+  
+
+export interface NotificationFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for NotificationConnection
+
+type NotificationConnectionObject =
+  | NotificationConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type NotificationConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface NotificationConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'NotificationEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationEdge[]> | prisma.NotificationEdge[]
+  }
+  aggregate: {
+    type: 'AggregateNotification'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateNotification> | prisma.AggregateNotification
+  }
+}
+  
+
+// Types for NotificationEdge
+
+type NotificationEdgeObject =
+  | NotificationEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type NotificationEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface NotificationEdgeFieldDetails {
+  node: {
+    type: 'Notification'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification> | prisma.Notification
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateNotification
+
+type AggregateNotificationObject =
+  | AggregateNotificationFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateNotificationFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateNotificationFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for ReportConnection
 
 type ReportConnectionObject =
@@ -4101,6 +4331,9 @@ type MutationObject =
   | { name: 'upsertMessage', args?: MutationUpsertMessageArgs[] | false, alias?: string  } 
   | { name: 'deleteMessage', args?: MutationDeleteMessageArgs[] | false, alias?: string  } 
   | { name: 'deleteManyMessages', args?: MutationDeleteManyMessagesArgs[] | false, alias?: string  } 
+  | { name: 'createNotification', args?: MutationCreateNotificationArgs[] | false, alias?: string  } 
+  | { name: 'deleteNotification', args?: MutationDeleteNotificationArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyNotifications', args?: MutationDeleteManyNotificationsArgs[] | false, alias?: string  } 
   | { name: 'createReport', args?: MutationCreateReportArgs[] | false, alias?: string  } 
   | { name: 'updateReport', args?: MutationUpdateReportArgs[] | false, alias?: string  } 
   | { name: 'updateManyReports', args?: MutationUpdateManyReportsArgs[] | false, alias?: string  } 
@@ -4162,6 +4395,9 @@ type MutationFields =
   | 'upsertMessage'
   | 'deleteMessage'
   | 'deleteManyMessages'
+  | 'createNotification'
+  | 'deleteNotification'
+  | 'deleteManyNotifications'
   | 'createReport'
   | 'updateReport'
   | 'updateManyReports'
@@ -4290,6 +4526,12 @@ type MutationUpsertMessageArgs =
 type MutationDeleteMessageArgs =
   | 'where'
 type MutationDeleteManyMessagesArgs =
+  | 'where'
+type MutationCreateNotificationArgs =
+  | 'data'
+type MutationDeleteNotificationArgs =
+  | 'where'
+type MutationDeleteManyNotificationsArgs =
   | 'where'
 type MutationCreateReportArgs =
   | 'data'
@@ -4875,6 +5117,45 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createNotification: {
+    type: 'Notification'
+    args: Record<MutationCreateNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: NotificationCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification> | prisma.Notification
+  }
+  deleteNotification: {
+    type: 'Notification'
+    args: Record<MutationDeleteNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: NotificationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification | null> | prisma.Notification | null
+  }
+  deleteManyNotifications: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyNotificationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: NotificationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createReport: {
     type: 'Report'
     args: Record<MutationCreateReportArgs, core.NexusArgDef<string>>
@@ -5148,6 +5429,7 @@ type SubscriptionObject =
   | { name: 'debate', args?: SubscriptionDebateArgs[] | false, alias?: string  } 
   | { name: 'interaction', args?: SubscriptionInteractionArgs[] | false, alias?: string  } 
   | { name: 'message', args?: SubscriptionMessageArgs[] | false, alias?: string  } 
+  | { name: 'notification', args?: SubscriptionNotificationArgs[] | false, alias?: string  } 
   | { name: 'report', args?: SubscriptionReportArgs[] | false, alias?: string  } 
   | { name: 'trophy', args?: SubscriptionTrophyArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
@@ -5160,6 +5442,7 @@ type SubscriptionFields =
   | 'debate'
   | 'interaction'
   | 'message'
+  | 'notification'
   | 'report'
   | 'trophy'
   | 'user'
@@ -5178,6 +5461,8 @@ type SubscriptionDebateArgs =
 type SubscriptionInteractionArgs =
   | 'where'
 type SubscriptionMessageArgs =
+  | 'where'
+type SubscriptionNotificationArgs =
   | 'where'
 type SubscriptionReportArgs =
   | 'where'
@@ -5278,6 +5563,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.MessageSubscriptionPayload | null> | prisma.MessageSubscriptionPayload | null
+  }
+  notification: {
+    type: 'NotificationSubscriptionPayload'
+    args: Record<SubscriptionNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: NotificationSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationSubscriptionPayload | null> | prisma.NotificationSubscriptionPayload | null
   }
   report: {
     type: 'ReportSubscriptionPayload'
@@ -6302,6 +6600,101 @@ export interface MessagePreviousValuesFieldDetails {
   }
   updatedAt: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for NotificationSubscriptionPayload
+
+type NotificationSubscriptionPayloadObject =
+  | NotificationSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type NotificationSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface NotificationSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Notification'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"NotificationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification | null> | prisma.Notification | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'NotificationPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"NotificationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationPreviousValues | null> | prisma.NotificationPreviousValues | null
+  }
+}
+  
+
+// Types for NotificationPreviousValues
+
+type NotificationPreviousValuesObject =
+  | NotificationPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+
+type NotificationPreviousValuesFields =
+  | 'id'
+
+
+
+  
+
+export interface NotificationPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
     args: {}
     description: string
     list: undefined
@@ -8273,6 +8666,48 @@ export interface MessageWhereUniqueInput {
 export type MessageWhereUniqueInputInputObject =
   | Extract<keyof MessageWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  
+export interface NotificationWhereUniqueInput {
+  id?: string | null
+}
+export type NotificationWhereUniqueInputInputObject =
+  | Extract<keyof NotificationWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface NotificationWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  AND?: NotificationWhereInput[]
+}
+export type NotificationWhereInputInputObject =
+  | Extract<keyof NotificationWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
   
 export interface ReportWhereUniqueInput {
   id?: string | null
@@ -13132,6 +13567,13 @@ export type MessageUpdateManyMutationInputInputObject =
   | Extract<keyof MessageUpdateManyMutationInput, string>
   | { name: 'content', alias?: string  } 
   
+export interface NotificationCreateInput {
+  id?: string | null
+}
+export type NotificationCreateInputInputObject =
+  | Extract<keyof NotificationCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  
 export interface ReportCreateInput {
   id?: string | null
   from?: UserCreateOneInput | null
@@ -13562,6 +14004,23 @@ export type MessageSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface NotificationSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: NotificationWhereInput | null
+  AND?: NotificationSubscriptionWhereInput[]
+}
+export type NotificationSubscriptionWhereInputInputObject =
+  | Extract<keyof NotificationSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface ReportSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -13813,6 +14272,10 @@ export type MessageOrderByInputValues =
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
+  
+export type NotificationOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

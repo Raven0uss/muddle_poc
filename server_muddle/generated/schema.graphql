@@ -1925,6 +1925,7 @@ type Mutation {
   createConversation(data: ConversationCreateInput!): Conversation!
   createInteraction(data: InteractionCreateInput!): Interaction!
   createMessage(data: MessageCreateInput!): Message!
+  createNotification(data: NotificationCreateInput!): Notification!
   createReport(data: ReportCreateInput!): Report!
   createTrophy(data: TrophyCreateInput!): Trophy!
   signUp(birthdate: DateTime, email: String, password: String, pseudo: String): Token!
@@ -1937,6 +1938,46 @@ type Mutation {
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
   updateTrophy(data: TrophyUpdateInput!, where: TrophyWhereUniqueInput!): Trophy
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+}
+
+type Notification {
+  id: ID!
+}
+
+input NotificationCreateInput {
+  id: ID
+}
+
+enum NotificationOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type NotificationSubPayload {
+  node: Notification
+  updatedFields: [String!]
+}
+
+input NotificationWhereInput {
+  AND: [NotificationWhereInput!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+}
+
+input NotificationWhereUniqueInput {
+  id: ID
 }
 
 type Query {
@@ -1953,6 +1994,8 @@ type Query {
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
   message(where: MessageWhereUniqueInput!): Message
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
+  notification(where: NotificationWhereUniqueInput!): Notification
+  notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]!
   report(where: ReportWhereUniqueInput!): Report
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]!
   signIn(email: String, password: String): Token!
@@ -2274,6 +2317,7 @@ enum Role {
 type Subscription {
   comment: CommentSubPayload!
   message: MessageSubPayload!
+  notification: NotificationSubPayload!
 }
 
 type Token {

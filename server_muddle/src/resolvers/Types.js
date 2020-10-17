@@ -1,5 +1,8 @@
-import { objectType, scalarType } from "nexus/dist";
+import { objectType, scalarType, arg } from "nexus/dist";
+
 import moment from "moment";
+
+const dateArg = (options) => arg({ type: "DateTime", ...options });
 
 const DateScalar = scalarType({
   name: "DateTime",
@@ -51,21 +54,23 @@ const CommentSubPayload = objectType({
   },
 });
 
-// const NotificationSubPayload = objectType({
-//   name: "NotificationSubPayload",
-//   definition(t) {
-//     t.field("node", {
-//       type: "Notification",
-//       nullable: true,
-//     });
-//     t.list.string("updatedFields", { nullable: true });
-//   },
-// });
+const NotificationSubPayload = objectType({
+  name: "NotificationSubPayload",
+  definition(t) {
+    t.field("node", {
+      type: "Notification",
+      nullable: true,
+    });
+    t.list.string("updatedFields", { nullable: true });
+  },
+});
+
+export { dateArg };
 
 export default {
   Token,
   DateScalar,
   MessageSubPayload,
-  // NotificationSubPayload,
+  NotificationSubPayload,
   CommentSubPayload,
 };
