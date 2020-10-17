@@ -17,6 +17,7 @@ const GET_USERS = gql`
   query {
     users {
       pseudo
+      email
     }
   }
 `;
@@ -60,16 +61,12 @@ function HomeComponent(props) {
       <Icon name="gavel" size={24} color={colors.primary} />
       {users.map((user) => (
         <View style={styles.profileContainer} key={user.pseudo}>
-          {/* <Image source={{ uri: user.profile_image_url }} style={styles.image} />  */}
           <View style={styles.details}>
             <Text style={styles.name}>{user.pseudo}</Text>
-            {/* <Text style={styles.username}>{user.email}</Text> */}
+            <Text style={styles.username}>{user.email}</Text>
           </View>
         </View>
       ))}
-      {/* <View style={styles.tweetContainer}>
-        <Text style={styles.tweet}>{tweet.text}</Text>
-      </View> */}
     </View>
   );
 }
@@ -89,11 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  image: {
-    height: 50,
-    width: 50,
-    borderRadius: 100,
-  },
   details: {
     marginLeft: 5,
   },
@@ -103,12 +95,6 @@ const styles = StyleSheet.create({
   },
   username: {
     color: "gray",
-  },
-  tweetContainer: {
-    marginTop: 10,
-  },
-  tweet: {
-    fontSize: 16,
   },
 });
 
