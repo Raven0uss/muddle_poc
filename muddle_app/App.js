@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { I18nProvider } from "@lingui/react";
-import i18n, { getDeviceLocale } from "./i18n";
+import i18n from "./i18n";
 
 import HomeScreen from "./Screens/Home";
 
