@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <I18nProvider i18n={i18n} language={getDeviceLocale()}>
+      <I18nProvider i18n={i18n}>
         <ApolloProvider client={apolloClient}>
           <PaperProvider>
             <Stack.Navigator initialRouteName="Home">
