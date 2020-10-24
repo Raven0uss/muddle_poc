@@ -14,6 +14,7 @@ const exposedQueries = {
   commentQueries: ["comment", "comments"],
   conversationQueries: ["conversation", "conversations"],
   interactionQueries: ["interaction", "interactions"],
+  debateQueries: ["debate", "debates"],
   messageQueries: ["message", "messages"],
   notificationQueries: ["notification", "notifications"],
   reportQueries: ["report", "reports"],

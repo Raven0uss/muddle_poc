@@ -13,6 +13,7 @@ const exposedMutations = {
   adTargetMutations: ["createAdTarget", "updateAdTarget"],
   commentMutations: ["createComment", "updateComment"],
   conversationMutations: ["createConversation", "updateConversation"],
+  debateMutations: ["createDebate", "updateDebate"],
   interactionMutations: ["createInteraction", "updateInteraction"],
   messageMutations: ["createMessage", "updateMessage"],
   notificationMutations: ["createNotification"],

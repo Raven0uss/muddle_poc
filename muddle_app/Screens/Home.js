@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   StyleSheet,
+  TouchableHighlight,
 } from "react-native";
 import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import { useQuery, gql } from "@apollo/client";
@@ -25,6 +26,7 @@ const GET_USERS = gql`
 `;
 
 function HomeComponent(props) {
+  const { navigation } = props;
   const { colors } = props.theme;
   // const { data, loading, error } = useQuery(GET_USERS);
 
@@ -48,7 +50,15 @@ function HomeComponent(props) {
     <View style={styles.container}>
       <Header
         // hidden
-        LeftComponent={<Icon name="gavel" size={24} color={colors.primary} />}
+        LeftComponent={
+          <TouchableHighlight
+            onPress={() => {
+              navigation.push("Test");
+            }}
+          >
+            <Icon name="gavel" size={24} color={colors.primary} />
+          </TouchableHighlight>
+        }
         MiddleComponent={<Icon name="gavel" size={24} color={colors.primary} />}
         RightComponent={<Icon name="gavel" size={24} color={colors.primary} />}
       />
@@ -63,7 +73,13 @@ function HomeComponent(props) {
         <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
         <Card.Actions>
           <Button>Cancel</Button>
-          <Button>Ok</Button>
+          <Button
+            onPress={() => {
+              navigation.push("Test");
+            }}
+          >
+            Ok
+          </Button>
         </Card.Actions>
       </Card>
       <Icon name="gavel" size={24} color={colors.primary} />

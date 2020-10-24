@@ -1146,6 +1146,27 @@ input DebateUpdateDataInput {
   winner: UserUpdateOneInput
 }
 
+input DebateUpdateInput {
+  blueVotes: UserUpdateManyInput
+  closed: Boolean
+  comments: CommentUpdateManyWithoutDebateInput
+  content: String
+  crowned: Boolean
+  interactions: InteractionUpdateManyWithoutDebateInput
+  loser: UserUpdateOneInput
+  negatives: UserUpdateManyInput
+  owner: UserUpdateOneWithoutDebatesInput
+  ownerBlue: UserUpdateOneWithoutDebatesBlueInput
+  ownerRed: UserUpdateOneWithoutDebatesRedInput
+  positives: UserUpdateManyInput
+  redVotes: UserUpdateManyInput
+  reports: ReportUpdateManyWithoutDebateInput
+  timelimit: DateTime
+  topComment: CommentUpdateOneInput
+  type: DebateType
+  winner: UserUpdateOneInput
+}
+
 input DebateUpdateManyDataInput {
   closed: Boolean
   content: String
@@ -1923,6 +1944,7 @@ type Mutation {
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
   createComment(data: CommentCreateInput!): Comment!
   createConversation(data: ConversationCreateInput!): Conversation!
+  createDebate(data: DebateCreateInput!): Debate!
   createInteraction(data: InteractionCreateInput!): Interaction!
   createMessage(data: MessageCreateInput!): Message!
   createNotification(data: NotificationCreateInput!): Notification!
@@ -1933,6 +1955,7 @@ type Mutation {
   updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
+  updateDebate(data: DebateUpdateInput!, where: DebateWhereUniqueInput!): Debate
   updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
@@ -1990,6 +2013,8 @@ type Query {
   conversation(where: ConversationWhereUniqueInput!): Conversation
   conversations(after: String, before: String, first: Int, last: Int, orderBy: ConversationOrderByInput, skip: Int, where: ConversationWhereInput): [Conversation!]!
   currentUser: User!
+  debate(where: DebateWhereUniqueInput!): Debate
+  debates(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
   message(where: MessageWhereUniqueInput!): Message

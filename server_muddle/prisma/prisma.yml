@@ -17,6 +17,9 @@ generate:
   - generator: javascript-client
     output: ../generated/prisma-client/
 
+seed:
+  run: node ./seed.js
+
 hooks:
   post-deploy:
     - prisma generate

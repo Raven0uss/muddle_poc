@@ -10,6 +10,7 @@ import { I18nProvider } from "@lingui/react";
 import i18n from "./i18n";
 
 import HomeScreen from "./Screens/Home";
+import TestScreen from "./Screens/Test";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,13 @@ export default function App() {
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Test"
+                component={TestScreen}
                 options={{
                   headerShown: false,
                 }}
