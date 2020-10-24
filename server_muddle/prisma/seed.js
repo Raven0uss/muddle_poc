@@ -2,6 +2,24 @@ const faker = require("faker");
 const bcrypt = require("bcrypt");
 const { prisma } = require("../generated/prisma-client");
 
+function shuffleArray(originArray) {
+  const array = [...originArray];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+const randomUserList = ({ rejectList = [], users }) => {
+  const end = faker.random.number(29);
+  const start = faker.random.number(end);
+
+  return shuffleArray(users)
+    .slice(start, end)
+    .map((u) => ({ id: u.id }));
+};
+
 async function main() {
   // Create random users
   for (let index = 0; index < 30; index++) {
@@ -18,12 +36,16 @@ async function main() {
   //   Create random debates
   // Standard Debate
   for (let index = 0; index < 120; index++) {
+    const owner = users[faker.random.number(29)];
     await prisma.createDebate({
-      owner: { connect: { id: users[faker.random.number(29)].id } },
+      owner: { connect: { id: owner.id } },
       content: faker.lorem.paragraph(),
       type: "STANDARD",
+      positives: { connect: randomUserList({ users }) },
+      negatives: { connect: randomUserList({ users }) },
     });
   }
+
   // Duo Debate
   for (let index = 0; index < 25; index++) {
     const fakeIndex = faker.random.number(28);
@@ -32,8 +54,24 @@ async function main() {
       ownerRed: { connect: { id: users[fakeIndex + 1].id } },
       content: faker.lorem.paragraph(),
       type: "DUO",
+      blueVotes: { connect: randomUserList({ users }) },
+      redVotes: { connect: randomUserList({ users }) },
     });
   }
+
+  //   const standardDebates = await prisma.debates({ where: { type: "STANDARD" } });
+  //   const duoDebates = await prisma.debates({ where: { type: "DUO" } });
+
+  //   for (let index = 0; index < standardDebates.length; index++) {
+  //     const dice = faker.random.number(9) % 3 === 0;
+  //     const debate = standardDebates[index];
+  //     if (dice) {
+  //       await prisma.updateDebate({
+  //         where: { id: debate.id },
+  //         data: {},
+  //       });
+  //     }
+  //   }
 
   // Create muddle account
   const M = await prisma.createUser({
