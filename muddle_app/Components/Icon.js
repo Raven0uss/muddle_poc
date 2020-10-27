@@ -33,7 +33,7 @@ CustomIcon.propTypes = {
 
 CustomIcon.defaultProps = {
   size: 24,
-  bcolor: "unset",
+  bcolor: "transparent",
   color: "#000",
   pLeft: 0,
   padding: 0,

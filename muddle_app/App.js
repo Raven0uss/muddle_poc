@@ -11,6 +11,7 @@ import i18n from "./i18n";
 
 import HomeScreen from "./Screens/Home";
 import TestScreen from "./Screens/Test";
+import theme from "./CustomProperties/Theme";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export default function App() {
     <NavigationContainer>
       <I18nProvider i18n={i18n}>
         <ApolloProvider client={apolloClient}>
-          <PaperProvider>
+          <PaperProvider theme={theme}>
             <Stack.Navigator initialRouteName="Home">
               <Stack.Screen
                 name="Home"

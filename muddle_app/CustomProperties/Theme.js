@@ -7,12 +7,13 @@ const theme = {
   roundness: 30,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#4169E1",
+    primary: "#000000",
+    secondary: "#F47658",
     accent: "#f1c40f",
     favorite: "#BADA55",
     cancelButton: "#a4c639",
     iconColor: "#808080",
-  }
+  },
 };
 
 export default theme;
