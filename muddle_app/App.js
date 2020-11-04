@@ -9,11 +9,28 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { I18nProvider } from "@lingui/react";
 import i18n from "./i18n";
 
-import HomeScreen from "./Screens/Home";
-import TestScreen from "./Screens/Test";
+import LoginScreen from "./Screens/Login";
+import SignUpScreen from "./Screens/SignUp";
+
+import TestScreen from "./Screens/Test"
+
 import theme from "./CustomProperties/Theme";
 
 const Stack = createStackNavigator();
+
+const mode = "COMPONENTS";
+// const mode = "APP";
+
+const setInitialRoute = () => {
+  switch (mode) {
+    case "COMPONENTS":
+      return "Test";
+    case "APP":
+      return "Login";
+    default:
+      return "Login";
+  }
+};
 
 export default function App() {
   return (
@@ -21,17 +38,24 @@ export default function App() {
       <I18nProvider i18n={i18n}>
         <ApolloProvider client={apolloClient}>
           <PaperProvider theme={theme}>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName={setInitialRoute()}>
               <Stack.Screen
-                name="Home"
-                component={HomeScreen}
+                name="Test"
+                component={TestScreen}
                 options={{
                   headerShown: false,
                 }}
               />
               <Stack.Screen
-                name="Test"
-                component={TestScreen}
+                name="Login"
+                component={LoginScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUpScreen}
                 options={{
                   headerShown: false,
                 }}

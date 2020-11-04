@@ -4,24 +4,21 @@ import { withTheme, Button, Card, Title, Paragraph } from "react-native-paper";
 import Icon from "../Components/Icon";
 
 import Header from "../Components/Header";
+import Switch from "../Components/Switch";
+import DatePicker from "../Components/DatePicker";
 
 const TestComponent = (props) => {
+  const [sw, setSw] = React.useState(true);
+  const [date, setDate] = React.useState(new Date());
+
   const { navigation } = props;
   const { colors } = props.theme;
 
   return (
     <View>
-      <Header
-        RightComponent={
-          <TouchableHighlight
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Icon name="gavel" size={24} color={colors.primary} />
-          </TouchableHighlight>
-        }
-      />
+      <Header hidden />
+      {/* <Switch value={sw} onValueChange={() => setSw((s) => !s)} /> */}
+      <DatePicker date={date} onDateChange={setDate} />
     </View>
   );
 };

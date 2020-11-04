@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Button,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Platform,
 } from "react-native";
 import { withTheme } from "react-native-paper";
@@ -18,7 +19,7 @@ import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 import Header from "../Components/Header";
 
-function HomeComponent(props) {
+function LoginComponent(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visibility, setVisibility] = React.useState(false);
@@ -74,7 +75,7 @@ function HomeComponent(props) {
           <TouchableOpacity
             onPress={() => {
               console.log("Connection");
-              navigation.push("Test");
+              // navigation.push("Test");
             }}
             style={styles.connectionButton}
           >
@@ -85,10 +86,12 @@ function HomeComponent(props) {
         </View>
       </KeyboardAvoidingView>
       <View style={styles.noAccountBloc}>
-        <Text style={styles.noAccountText}>
-          Pas de compte ?{" "}
-          <Text style={styles.subscriptionLink}>S'inscrire</Text>
-        </Text>
+        <TouchableWithoutFeedback onPress={() => navigation.push("SignUp")}>
+          <Text style={styles.noAccountText}>
+            Pas de compte ?{" "}
+            <Text style={styles.subscriptionLink}>S'inscrire</Text>
+          </Text>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );
@@ -177,4 +180,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(HomeComponent);
+export default withTheme(LoginComponent);
