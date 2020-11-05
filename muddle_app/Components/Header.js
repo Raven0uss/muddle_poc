@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
 
 Header.propTypes = {
   hidden: PropTypes.bool,
-  LeftComponent: PropTypes.element,
-  MiddleComponent: PropTypes.element,
-  RightComponent: PropTypes.element,
+  LeftComponent: PropTypes.func,
+  MiddleComponent: PropTypes.func,
+  RightComponent: PropTypes.func,
 };
 
 Header.defaultProps = {

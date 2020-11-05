@@ -9,48 +9,32 @@ import {
   TextInput,
   Text,
   Modal,
-  StyleSheet,
   Dimensions,
+  StyleSheet,
 } from "react-native";
 import PropTypes from "prop-types";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import moment from "moment";
-import "moment/locale/en-gb";
-import "moment/locale/fr";
-import i18n from "../i18n";
 
 const { width, height } = Dimensions.get("window");
 
-const DatePicker = (props) => {
-  const [show, setShow] = React.useState(false);
-  const { date, onDateChange, placeholder } = props;
-  const locale = i18n.language;
-
-  moment.locale(locale);
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios"); // To keep open the DatePicker on iOS
-    onDateChange(currentDate);
-  };
+const Select = (props) => {
+  const [visible, setVisible] = React.useState(false);
+  const { list, selected, placeholder } = props;
 
   return (
     <View style={{ width: "100%" }}>
       <TouchableWithoutFeedback
         onPress={() => {
-          setShow((bool) => !bool);
+          setVisible((v) => !v);
         }}
       >
         <View style={styles.input}>
-          <Text>
-            {date === null ? placeholder : moment(date).format("DD MMMM YYYY")}
-          </Text>
+          <Text>{selected === null ? placeholder : selected.label}</Text>
         </View>
       </TouchableWithoutFeedback>
-      {Platform.OS === "ios" && show && (
-        <Modal animationType="fade" transparent visible={show}>
+      {visible && (
+        <Modal animationType="fade" transparent visible={visible}>
           <TouchableHighlight
-            onPress={() => setShow(false)}
+            onPress={() => setVisible(false)}
             style={[styles.mask]}
             underlayColor="transparent"
           >
@@ -66,17 +50,9 @@ const DatePicker = (props) => {
                 margin: 10,
               }}
             >
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date || new Date()}
-                mode="date"
-                locale={locale}
-                display="default"
-                onChange={onChange}
-              />
               <TouchableOpacity
                 onPress={() => {
-                  setShow(false);
+                  setVisible(false);
                 }}
                 style={styles.validationButton}
               >
@@ -88,30 +64,28 @@ const DatePicker = (props) => {
           </View>
         </Modal>
       )}
-      {Platform.OS === "android" && show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date || new Date()}
-          mode={"date"}
-          locale={locale}
-          display="default"
-          onChange={onChange}
-        />
-      )}
     </View>
   );
 };
 
-// date null have to solve proptypes
-
-DatePicker.propTypes = {
-  onDateChange: PropTypes.func.isRequired,
-  date: PropTypes.oneOf([PropTypes.instanceOf(Date).isRequired, null])
-    .isRequired,
+Select.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }).isRequired
+  ).isRequired,
+  selected: PropTypes.oneOf([
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }).isRequired,
+    null,
+  ]).isRequired,
   placeholder: PropTypes.string,
 };
 
-DatePicker.defaultProps = {
+Select.defaultProps = {
   placeholder: "",
 };
 
@@ -129,6 +103,21 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   validationButton: {
     backgroundColor: "#000",
@@ -151,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DatePicker;
+export default Select;

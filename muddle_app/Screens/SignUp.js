@@ -19,6 +19,8 @@ import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 import Header from "../Components/Header";
 import Switch from "../Components/Switch";
+import DatePicker from "../Components/DatePicker";
+import Select from "../Components/Select";
 
 function SignUpComponent(props) {
   const [form, setForm] = React.useState({
@@ -26,7 +28,7 @@ function SignUpComponent(props) {
     email: "",
     password: "",
     confirmPassword: "",
-    birthdate: new Date(),
+    birthdate: null,
     gender: "",
     cgu: false,
   });
@@ -116,6 +118,26 @@ function SignUpComponent(props) {
             keyboardType="default"
             placeholderTextColor="#222"
             secureTextEntry={!visibility}
+          />
+          <DatePicker
+            placeholder="Date de naissance"
+            date={form.birthdate}
+            onDateChange={(birthdate) => {
+              setForm((previousState) => ({
+                ...previousState,
+                birthdate,
+              }));
+            }}
+          />
+          <Select
+            list={[
+              {
+                label: "Test",
+                value: "test",
+              },
+            ]}
+            selected={null}
+            placeholder="Sexe"
           />
           <View style={styles.cguBloc}>
             <Switch

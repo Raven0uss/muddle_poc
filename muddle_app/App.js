@@ -18,8 +18,8 @@ import theme from "./CustomProperties/Theme";
 
 const Stack = createStackNavigator();
 
-const mode = "COMPONENTS";
-// const mode = "APP";
+// const mode = "COMPONENTS";
+const mode = "APP";
 
 const setInitialRoute = () => {
   switch (mode) {
