@@ -18,6 +18,7 @@ import Icon from "../Components/Icon";
 import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 import Header from "../Components/Header";
+import LangSelect from "../Components/LangMiniature";
 
 function LoginComponent(props) {
   const [email, setEmail] = React.useState("");
@@ -35,7 +36,9 @@ function LoginComponent(props) {
   return (
     <View style={containerStyle}>
       <Header hidden />
-      <Text style={styles.languageBloc}>Francais</Text>
+      <View style={styles.languageBloc}>
+        <LangSelect />
+      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.connectionContainer}
@@ -184,7 +187,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: "10%",
     alignSelf: "flex-end",
-    marginRight: "10%",
+    marginRight: "7%",
   },
 });
 

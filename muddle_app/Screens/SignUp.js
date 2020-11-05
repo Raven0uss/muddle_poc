@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
+  ScrollView
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
@@ -21,6 +22,7 @@ import Header from "../Components/Header";
 import Switch from "../Components/Switch";
 import DatePicker from "../Components/DatePicker";
 import Select from "../Components/Select";
+import LangSelect from "../Components/LangMiniature";
 
 function SignUpComponent(props) {
   const [form, setForm] = React.useState({
@@ -43,9 +45,11 @@ function SignUpComponent(props) {
   ]);
 
   return (
-    <View style={containerStyle}>
+    <ScrollView style={containerStyle}>
       <Header hidden />
-      <Text style={styles.languageBloc}>Francais</Text>
+      <View style={styles.languageBloc}>
+        <LangSelect />
+      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.connectionContainer}
@@ -188,19 +192,20 @@ function SignUpComponent(props) {
           </Text>
         </TouchableWithoutFeedback>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
   },
   connectionContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    marginBottom: 30
   },
   appName: {
     fontSize: 36,
@@ -270,7 +275,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: "10%",
     alignSelf: "flex-end",
-    marginRight: "10%",
+    marginRight: "7%",
   },
   cguBloc: {
     flexDirection: "row",

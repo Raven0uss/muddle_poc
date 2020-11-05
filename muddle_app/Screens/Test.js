@@ -6,6 +6,7 @@ import Icon from "../Components/Icon";
 import Header from "../Components/Header";
 import Switch from "../Components/Switch";
 import DatePicker from "../Components/DatePicker";
+import LangSelect from "../Components/LangMiniature";
 
 const TestComponent = (props) => {
   const [sw, setSw] = React.useState(true);
@@ -18,7 +19,9 @@ const TestComponent = (props) => {
     <View>
       <Header hidden />
       {/* <Switch value={sw} onValueChange={() => setSw((s) => !s)} /> */}
-      <DatePicker date={date} onDateChange={setDate} />
+      {/* <DatePicker date={date} onDateChange={setDate} />
+       */}
+      <LangSelect />
     </View>
   );
 };
