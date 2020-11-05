@@ -19,6 +19,7 @@ import { Trans } from "@lingui/macro";
 import i18n from "../i18n";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
+import { muddle } from "../CustomProperties/IconsBase64";
 
 function LoginComponent(props) {
   const [email, setEmail] = React.useState("");
@@ -43,7 +44,13 @@ function LoginComponent(props) {
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.connectionContainer}
       >
-        <Icon name="polymer" size={100} color={colors.primary} />
+        {/* <Icon name="polymer" size={100} color={colors.primary} /> */}
+        <Image
+          style={styles.logo}
+          source={{
+            uri: muddle.nb_with_name,
+          }}
+        />
         {/* <Text style={styles.appName}>Muddles</Text> */}
         <View style={styles.formConnexion}>
           <TextInput
@@ -135,8 +142,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "#000",
     marginBottom: 18,
+    height: 40,
   },
-
   passwordBloc: {
     flexDirection: "row",
     width: "100%",
@@ -158,6 +165,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "80%",
     color: "#000",
+    height: 40,
   },
 
   connectionButton: {
@@ -188,6 +196,10 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     alignSelf: "flex-end",
     marginRight: "7%",
+  },
+  logo: {
+    width: 148,
+    height: 120,
   },
 });
 

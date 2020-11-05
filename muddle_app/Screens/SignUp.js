@@ -12,7 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
@@ -23,6 +23,7 @@ import Switch from "../Components/Switch";
 import DatePicker from "../Components/DatePicker";
 import Select from "../Components/Select";
 import LangSelect from "../Components/LangMiniature";
+import { muddle } from "../CustomProperties/IconsBase64";
 
 function SignUpComponent(props) {
   const [form, setForm] = React.useState({
@@ -50,11 +51,17 @@ function SignUpComponent(props) {
       <View style={styles.languageBloc}>
         <LangSelect />
       </View>
-      <KeyboardAvoidingView
+      <View
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.connectionContainer}
       >
-        <Icon name="polymer" size={100} color={colors.primary} />
+        {/* <Icon name="polymer" size={100} color={colors.primary} /> */}
+        <Image
+          style={styles.logo}
+          source={{
+            uri: muddle.nb_with_name,
+          }}
+        />
         {/* <Text style={styles.appName}>Muddles</Text> */}
         <View style={styles.formConnexion}>
           <TextInput
@@ -183,7 +190,7 @@ function SignUpComponent(props) {
             </Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </View>
       <View style={styles.noAccountBloc}>
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
           <Text style={styles.noAccountText}>
@@ -205,7 +212,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    marginBottom: 30
+    marginBottom: 30,
+    marginTop: 30,
   },
   appName: {
     fontSize: 36,
@@ -225,6 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "#000",
     marginBottom: 18,
+    height: 40,
   },
   passwordBloc: {
     flexDirection: "row",
@@ -247,6 +256,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "80%",
     color: "#000",
+    height: 40,
   },
 
   connectionButton: {
@@ -285,6 +295,10 @@ const styles = StyleSheet.create({
   },
   cguText: {
     padding: 9,
+  },
+  logo: {
+    width: 111,
+    height: 90,
   },
 });
 

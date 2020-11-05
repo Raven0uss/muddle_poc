@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "#000",
     marginBottom: 18,
+    height: 40,
   },
   centeredView: {
     flex: 1,
