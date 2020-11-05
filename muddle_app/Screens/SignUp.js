@@ -29,7 +29,7 @@ function SignUpComponent(props) {
     password: "",
     confirmPassword: "",
     birthdate: null,
-    gender: "",
+    gender: null,
     cgu: false,
   });
   const [visibility, setVisibility] = React.useState(false);
@@ -132,12 +132,26 @@ function SignUpComponent(props) {
           <Select
             list={[
               {
-                label: "Test",
-                value: "test",
+                label: "Femme",
+                value: "F",
+              },
+              {
+                label: "Homme",
+                value: "M",
+              },
+              {
+                label: "Non defini",
+                value: "ND",
               },
             ]}
-            selected={null}
+            selected={form.gender}
             placeholder="Sexe"
+            onSelect={(gender) =>
+              setForm({
+                ...form,
+                gender,
+              })
+            }
           />
           <View style={styles.cguBloc}>
             <Switch
@@ -195,7 +209,7 @@ const styles = StyleSheet.create({
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 20,
   },
   input: {
     backgroundColor: "#fff",

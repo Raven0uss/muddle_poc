@@ -11,6 +11,7 @@ import {
   Modal,
   Dimensions,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import PropTypes from "prop-types";
 
@@ -18,7 +19,7 @@ const { width, height } = Dimensions.get("window");
 
 const Select = (props) => {
   const [visible, setVisible] = React.useState(false);
-  const { list, selected, placeholder } = props;
+  const { list, selected, placeholder, onSelect } = props;
 
   return (
     <View style={{ width: "100%" }}>
@@ -50,6 +51,25 @@ const Select = (props) => {
                 margin: 10,
               }}
             >
+              <ScrollView style={{ marginBottom: 10 }}>
+                {list.map((element) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      onSelect(element);
+                      setVisible(false);
+                    }}
+                  >
+                    <Text
+                      style={{
+                        padding: 10,
+                        fontSize: 18,
+                      }}
+                    >
+                      {element.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
               <TouchableOpacity
                 onPress={() => {
                   setVisible(false);
@@ -57,7 +77,7 @@ const Select = (props) => {
                 style={styles.validationButton}
               >
                 <Text style={{ color: "#FFF", fontWeight: "bold" }}>
-                  Valider
+                  Fermer
                 </Text>
               </TouchableOpacity>
             </View>
@@ -83,6 +103,7 @@ Select.propTypes = {
     null,
   ]).isRequired,
   placeholder: PropTypes.string,
+  onSelect: PropTypes.func.isRequired,
 };
 
 Select.defaultProps = {

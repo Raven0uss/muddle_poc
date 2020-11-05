@@ -72,6 +72,13 @@ function LoginComponent(props) {
               </TouchableOpacity>
             </View>
           </View>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.push("ForgotPassword")}
+          >
+            <Text style={styles.noAccountText}>
+              <Text style={styles.subscriptionLink}>Mot de passe oublie ?</Text>
+            </Text>
+          </TouchableWithoutFeedback>
           <TouchableOpacity
             onPress={() => {
               console.log("Connection");
@@ -157,6 +164,7 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 30,
+    marginTop: 15,
   },
   noAccountBloc: {
     width: "100%",
