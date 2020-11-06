@@ -11,7 +11,6 @@ import {
   Platform,
 } from "react-native";
 import { withTheme } from "react-native-paper";
-import Icon from "../Components/Icon";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
