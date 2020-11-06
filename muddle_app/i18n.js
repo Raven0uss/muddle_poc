@@ -9,7 +9,7 @@ const catalogs = {
   fr: frMessages,
 };
 
-const getDeviceLocale = () => {
+export const getDeviceLocale = () => {
   const defaultLanguage = "fr";
 
   let locale = "";

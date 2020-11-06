@@ -26,7 +26,7 @@ function LoginComponent(props) {
   const [password, setPassword] = React.useState("");
   const [visibility, setVisibility] = React.useState(false);
 
-  const { navigation } = props;
+  const { navigation, route } = props;
   const { colors } = props.theme;
 
   const containerStyle = StyleSheet.flatten([
@@ -38,7 +38,7 @@ function LoginComponent(props) {
     <View style={containerStyle}>
       <Header hidden />
       <View style={styles.languageBloc}>
-        <LangSelect />
+        <LangSelect changeLanguage={route.params.changeLanguage} />
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -193,9 +193,12 @@ const styles = StyleSheet.create({
   },
   languageBloc: {
     position: "absolute",
+    // flex: 1,
+    // flexDirection: "column",
     marginTop: "10%",
     alignSelf: "flex-end",
     marginRight: "7%",
+    zIndex: 2,
   },
   logo: {
     width: 148,
