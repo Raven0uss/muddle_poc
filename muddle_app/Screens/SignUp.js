@@ -3,21 +3,14 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
-  ActivityIndicator,
   Image,
   StyleSheet,
   TouchableOpacity,
-  Button,
-  KeyboardAvoidingView,
-  Platform,
   TouchableWithoutFeedback,
   ScrollView,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
-import { Trans } from "@lingui/macro";
-import i18n from "../i18n";
 import Header from "../Components/Header";
 import Switch from "../Components/Switch";
 import DatePicker from "../Components/DatePicker";
@@ -212,9 +205,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 30,
   },
-  appName: {
-    fontSize: 36,
-  },
   formConnexion: {
     width: "80%",
     justifyContent: "center",
@@ -255,7 +245,6 @@ const styles = StyleSheet.create({
     color: "#000",
     height: 40,
   },
-
   connectionButton: {
     alignSelf: "flex-end",
     backgroundColor: "#000",

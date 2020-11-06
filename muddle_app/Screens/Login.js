@@ -3,20 +3,16 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
-  ActivityIndicator,
+  // SafeAreaView,
   Image,
   StyleSheet,
   TouchableOpacity,
-  Button,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
-import { Trans } from "@lingui/macro";
-import i18n from "../i18n";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
@@ -44,14 +40,12 @@ function LoginComponent(props) {
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.connectionContainer}
       >
-        {/* <Icon name="polymer" size={100} color={colors.primary} /> */}
         <Image
           style={styles.logo}
           source={{
             uri: muddle.nb_with_name,
           }}
         />
-        {/* <Text style={styles.appName}>Muddles</Text> */}
         <View style={styles.formConnexion}>
           <TextInput
             placeholder="Nom d'utilisateur ou adresse mail"
@@ -124,9 +118,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
-  appName: {
-    fontSize: 36,
-  },
   formConnexion: {
     width: "80%",
     justifyContent: "center",
@@ -167,7 +158,6 @@ const styles = StyleSheet.create({
     color: "#000",
     height: 40,
   },
-
   connectionButton: {
     alignSelf: "flex-end",
     backgroundColor: "#000",
@@ -193,8 +183,6 @@ const styles = StyleSheet.create({
   },
   languageBloc: {
     position: "absolute",
-    // flex: 1,
-    // flexDirection: "column",
     marginTop: "10%",
     alignSelf: "flex-end",
     marginRight: "7%",

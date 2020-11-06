@@ -3,20 +3,15 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
-  ActivityIndicator,
   Image,
   StyleSheet,
   TouchableOpacity,
-  Button,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
-import { Trans } from "@lingui/macro";
-import i18n from "../i18n";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
@@ -83,16 +78,13 @@ function ForgotPasswordComponent(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
   },
   connectionContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-  },
-  appName: {
-    fontSize: 36,
   },
   formConnexion: {
     width: "80%",
@@ -111,30 +103,6 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     height: 40,
   },
-  passwordBloc: {
-    flexDirection: "row",
-    width: "100%",
-    marginBottom: 18,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-  },
-  passwordIcon: {
-    flexDirection: "row",
-    width: "20%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  passwordInput: {
-    backgroundColor: "#fff",
-    padding: 12,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderRadius: 10,
-    width: "80%",
-    color: "#000",
-    height: 40,
-  },
-
   connectionButton: {
     alignSelf: "flex-end",
     backgroundColor: "#000",
