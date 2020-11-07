@@ -54,7 +54,11 @@ function ForgotPasswordComponent(props) {
           <TouchableOpacity
             onPress={() => {
               console.log("Connection");
-              navigation.goBack();
+              navigation.navigate("Login", {
+                snackType: "success",
+                snackMessage: "Un mail vous a ete envoye afin de recuperer votre compte.",
+                snack: true,
+              });
             }}
             style={styles.connectionButton}
           >

@@ -3,6 +3,7 @@ import {
   Text,
   TextInput,
   View,
+  Keyboard,
   // SafeAreaView,
   Image,
   StyleSheet,
@@ -16,14 +17,31 @@ import Icon from "../Components/Icon";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { Snackbar } from "react-native-paper";
 
 function LoginComponent(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visibility, setVisibility] = React.useState(false);
 
+  const [snack, setSnack] = React.useState({
+    visible: false,
+    type: "success",
+    message: "",
+  });
+
   const { navigation, route } = props;
   const { colors } = props.theme;
+
+  React.useEffect(() => {
+    const params = props.route.params;
+    console.log(params);
+    setSnack({
+      visible: params.snack,
+      type: params.snackType,
+      message: params.snackMessage,
+    });
+  }, [props.route.params]);
 
   const containerStyle = StyleSheet.flatten([
     styles.container,
@@ -86,9 +104,20 @@ function LoginComponent(props) {
           <TouchableOpacity
             onPress={() => {
               console.log("Connection");
-              // navigation.push("Test");
+              Keyboard.dismiss();
+              // setSnack({
+              //   visible: true,
+              //   message: "L'identifiant ou le mot de passe est incorrect.",
+              //   type: "error",
+              // });
+              navigation.navigate("Home", {
+                user: {
+                  name: "test",
+                },
+              });
             }}
             style={styles.connectionButton}
+            // disabled
           >
             <Text style={{ color: colors.secondary, fontWeight: "bold" }}>
               Se connecter
@@ -104,6 +133,23 @@ function LoginComponent(props) {
           </Text>
         </TouchableWithoutFeedback>
       </View>
+      <Snackbar
+        visible={snack.visible}
+        onDismiss={() =>
+          setSnack({
+            visible: false,
+            message: snack.message,
+            type: snack.type,
+          })
+        }
+        duration={2500}
+        style={{
+          backgroundColor: snack.type === "success" ? "#4BB543" : "#DB0F13",
+          borderRadius: 10,
+        }}
+      >
+        {snack.message}
+      </Snackbar>
     </View>
   );
 }

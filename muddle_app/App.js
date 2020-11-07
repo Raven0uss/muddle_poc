@@ -16,17 +16,21 @@ import ForgotPasswordScreen from "./Screens/ForgotPassword";
 import TestScreen from "./Screens/Test";
 
 import theme from "./CustomProperties/Theme";
+import HomeScreen from "./Screens/Home";
 
 const Stack = createStackNavigator();
 
 // const mode = "COMPONENTS";
 const mode = "APP";
+// const mode = "LOGIN";
 
 const setInitialRoute = () => {
   switch (mode) {
     case "COMPONENTS":
       return "Test";
     case "APP":
+      return "Home";
+    case "LOGIN":
       return "Login";
     default:
       return "Login";
@@ -80,6 +84,21 @@ export default function App() {
                 component={ForgotPasswordScreen}
                 initialParams={{
                   changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                initialParams={{
+                  changeLanguage,
+                  user: {
+                    //Test
+                    name: "test",
+                  },
                 }}
                 options={{
                   headerShown: false,

@@ -4,10 +4,10 @@ import { StyleSheet, View, SafeAreaView, Platform } from "react-native";
 import getStatusBarHeight from "../Library/getStatusBarHeight";
 
 const safeStatusHeight = {
-  marginTop: Platform.OS === "android" ? getStatusBarHeight() : 0,
+  marginTop: Platform.OS === "android" ? getStatusBarHeight() + 30 : 30,
 };
 
-// Issue of gap if there is only 2 headerComponent, including middle and 
+// Issue of gap if there is only 2 headerComponent, including middle and
 // one of the left or the right.
 
 const Header = (props) => {
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     ...safeStatusHeight,
     flexDirection: "row",
     justifyContent: "space-between",
+    // paddingTop: 20,
+    marginBottom: 5,
   },
   headerLeftComponent: {
     marginLeft: blankspaceCorner,
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
 
 Header.propTypes = {
   hidden: PropTypes.bool,
-  LeftComponent: PropTypes.func,
+  LeftComponent: PropTypes.any,
   MiddleComponent: PropTypes.func,
   RightComponent: PropTypes.func,
 };
