@@ -35,11 +35,11 @@ async function main() {
 
   //   Create random debates
   // Standard Debate
-  for (let index = 0; index < 120; index++) {
+  for (let index = 0; index < 500; index++) {
     const owner = users[faker.random.number(29)];
     await prisma.createDebate({
       owner: { connect: { id: owner.id } },
-      content: faker.lorem.paragraph(),
+      content: `${index} - ${faker.lorem.paragraph()}`,
       type: "STANDARD",
       positives: { connect: randomUserList({ users }) },
       negatives: { connect: randomUserList({ users }) },
@@ -47,17 +47,17 @@ async function main() {
   }
 
   // Duo Debate
-  for (let index = 0; index < 25; index++) {
-    const fakeIndex = faker.random.number(28);
-    await prisma.createDebate({
-      ownerBlue: { connect: { id: users[fakeIndex].id } },
-      ownerRed: { connect: { id: users[fakeIndex + 1].id } },
-      content: faker.lorem.paragraph(),
-      type: "DUO",
-      blueVotes: { connect: randomUserList({ users }) },
-      redVotes: { connect: randomUserList({ users }) },
-    });
-  }
+  // for (let index = 0; index < 25; index++) {
+  //   const fakeIndex = faker.random.number(28);
+  //   await prisma.createDebate({
+  //     ownerBlue: { connect: { id: users[fakeIndex].id } },
+  //     ownerRed: { connect: { id: users[fakeIndex + 1].id } },
+  //     content: faker.lorem.paragraph(),
+  //     type: "DUO",
+  //     blueVotes: { connect: randomUserList({ users }) },
+  //     redVotes: { connect: randomUserList({ users }) },
+  //   });
+  // }
 
   //   const standardDebates = await prisma.debates({ where: { type: "STANDARD" } });
   //   const duoDebates = await prisma.debates({ where: { type: "DUO" } });

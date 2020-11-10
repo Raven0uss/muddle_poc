@@ -6,8 +6,12 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  FlatList,
   ActivityIndicator,
   SafeAreaView,
+  Platform,
+  SectionList,
+  VirtualizedList,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
@@ -15,14 +19,16 @@ import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
 import DebateBox from "../Components/DebateBox";
 import { useQuery, gql } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
+import { set } from "react-native-reanimated";
+import { flatten, last } from "lodash";
 
 const user = {
   profilePicture: defaultProfile,
 };
 
 const GET_DEBATES = gql`
-  query {
-    debates(first: 20) {
+  query($first: Int!, $skip: Int) {
+    debates(first: $first, skip: $skip) {
       id
       content
       type
@@ -43,27 +49,49 @@ const GET_DEBATES = gql`
   }
 `;
 
-const Home = () => {
-  const { data, loading, error } = useQuery(GET_DEBATES);
+const frequency = 20;
+let nbDebates = frequency;
 
-  if (error) {
-    console.error("error", error);
-    return (
-      <View style={styles.container}>
-        <Text style={styles.name}>Error</Text>
-      </View>
-    );
-  }
-  if (loading) {
+const renderItem = ({ item }) => {
+  return <DebateBox debate={item} />;
+};
+
+const Home = () => {
+  const [debates, setDebates] = React.useState([]);
+  const { data, loading, error, fetchMore, networkStatus } = useQuery(
+    GET_DEBATES,
+    {
+      variables: {
+        first: nbDebates,
+      },
+      onCompleted: (response) => {
+        const { debates: queryResult } = response;
+        setDebates(queryResult);
+      },
+      // notifyOnNetworkStatusChange: true,
+    }
+  );
+
+  console.log(debates.length);
+
+  // if (error) {
+  //   console.error("error", error);
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.name}>Error</Text>
+  //     </View>
+  //   );
+  // }
+  if (debates.length === 0 && loading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
+        <Text>wesh</Text>
         <ActivityIndicator />
       </SafeAreaView>
     );
   }
-  const { debates } = data;
 
-  console.log(debates);
+  // console.log(networkStatus);
   return (
     <View style={styles.container}>
       <Header
@@ -75,25 +103,42 @@ const Home = () => {
             />
           </TouchableOpacity>
         }
-        MiddleComponent={
-          <Image source={{ uri: muddle.nb }} style={styles.logo} />
-        }
+        // MiddleComponent={
+        //   <Image source={{ uri: muddle.nb }} style={styles.logo} />
+        // }
       />
-      <ScrollView
-        contentInset={{
-          bottom: 60,
-        }}
-        style={styles.seedContainer}
-        onScroll={(event) => {
-          console.log(event.nativeEvent);
-        }}
-        scrollEventThrottle={1}
-      >
-        {debates.map((debate) => (
-          <DebateBox debate={debate} />
-        ))}
-      </ScrollView>
       <AssistiveMenu />
+      <FlatList
+        data={debates}
+        style={styles.seedContainer}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web") return;
+          // return ;
+          nbDebates += frequency;
+          await fetchMore({
+            variables: { first: frequency, skip: nbDebates - frequency },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { debates: moreDebates } = fetchMoreResult;
+              setDebates((previousState) =>
+                [...previousState, ...moreDebates].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => (
+          <ActivityIndicator style={{ marginBottom: 70 }} />
+        )}
+      />
     </View>
   );
 };
@@ -116,7 +161,7 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingLeft: 15,
     paddingRight: 15,
-    // paddingBottom: 130,
+    // paddingBottom: 60,
   },
   profilePicture: {
     width: 45,
