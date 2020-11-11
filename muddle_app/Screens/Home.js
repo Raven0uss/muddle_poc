@@ -58,19 +58,19 @@ const renderItem = ({ item }) => {
 
 const Home = () => {
   const [debates, setDebates] = React.useState([]);
-  const { data, loading, error, fetchMore, networkStatus } = useQuery(
-    GET_DEBATES,
-    {
-      variables: {
-        first: nbDebates,
-      },
-      onCompleted: (response) => {
-        const { debates: queryResult } = response;
-        setDebates(queryResult);
-      },
-      // notifyOnNetworkStatusChange: true,
-    }
-  );
+  // const { data, loading, error, fetchMore, networkStatus } = useQuery(
+  //   GET_DEBATES,
+  //   {
+  //     variables: {
+  //       first: nbDebates,
+  //     },
+  //     onCompleted: (response) => {
+  //       const { debates: queryResult } = response;
+  //       setDebates(queryResult);
+  //     },
+  //     // notifyOnNetworkStatusChange: true,
+  //   }
+  // );
 
   console.log(debates.length);
 
@@ -82,14 +82,14 @@ const Home = () => {
   //     </View>
   //   );
   // }
-  if (debates.length === 0 && loading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <Text>wesh</Text>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
+  // if (debates.length === 0 && loading) {
+  //   return (
+  //     <SafeAreaView style={styles.loadingContainer}>
+  //       <Text>wesh</Text>
+  //       <ActivityIndicator />
+  //     </SafeAreaView>
+  //   );
+  // }
 
   // console.log(networkStatus);
   return (
@@ -107,7 +107,6 @@ const Home = () => {
         //   <Image source={{ uri: muddle.nb }} style={styles.logo} />
         // }
       />
-      <AssistiveMenu />
       <FlatList
         data={debates}
         style={styles.seedContainer}
@@ -139,6 +138,7 @@ const Home = () => {
           <ActivityIndicator style={{ marginBottom: 70 }} />
         )}
       />
+      <AssistiveMenu />
     </View>
   );
 };
@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F47658",
+    // backgroundColor: "white",
     // marginBottom: 20
   },
   seedContainer: {
