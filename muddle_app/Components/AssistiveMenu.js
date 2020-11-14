@@ -9,6 +9,7 @@ import {
   Text,
 } from "react-native";
 import { Easing } from "react-native-reanimated";
+import Icon from "./Icon";
 
 const properties = {
   borderRadius: {
@@ -20,7 +21,7 @@ const properties = {
     undeployed: 50,
   },
   borderWidth: {
-    deployed: 4,
+    deployed: 5,
     undeployed: 19,
   },
   width: {
@@ -28,7 +29,7 @@ const properties = {
     undeployed: 66,
   },
   height: {
-    deployed: 106,
+    deployed: 86,
     undeployed: 66,
   },
 };
@@ -40,18 +41,34 @@ properties.left = {
 };
 
 const AssistiveMenu = (props) => {
-  const [borderTopRadiusButton] = React.useState(new Animated.Value(50));
-  const [borderRadiusButton] = React.useState(new Animated.Value(50));
-  const [widthButton] = React.useState(new Animated.Value(66));
-  const [heightButton] = React.useState(new Animated.Value(66));
-  const [borderWidthButton] = React.useState(new Animated.Value(19));
-  const [leftButton] = React.useState(
+  const [deploy, setDeploy] = React.useState(false);
+
+  const [borderTopRadiusButton] = React.useState(
     new Animated.Value(
-      (Dimensions.get("screen").width - (deploy ? 126 : 66)) / 2
+      properties.borderTopRadius[deploy ? "deployed" : "undeployed"]
     )
   );
+  const [borderRadiusButton] = React.useState(
+    new Animated.Value(
+      properties.borderRadius[deploy ? "deployed" : "undeployed"]
+    )
+  );
+  const [widthButton] = React.useState(
+    new Animated.Value(properties.width[deploy ? "deployed" : "undeployed"])
+  );
+  const [heightButton] = React.useState(
+    new Animated.Value(properties.height[deploy ? "deployed" : "undeployed"])
+  );
+  const [borderWidthButton] = React.useState(
+    new Animated.Value(
+      properties.borderWidth[deploy ? "deployed" : "undeployed"]
+    )
+  );
+  const [leftButton] = React.useState(
+    new Animated.Value(properties.left[deploy ? "deployed" : "undeployed"])
+  );
 
-  const [deploy, setDeploy] = React.useState(false);
+  const { navigation, route } = props;
 
   const deployButtonAnimation = (duration) => {
     Animated.timing(borderTopRadiusButton, {
@@ -131,13 +148,16 @@ const AssistiveMenu = (props) => {
     }).start();
   };
 
+  const onDeploy = (duration) => {
+    if (!deploy) deployButtonAnimation(duration);
+    else undeployButtonAnimation(duration);
+    setDeploy((previousState) => !previousState);
+  };
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        const duration = 200;
-        if (!deploy) deployButtonAnimation(duration);
-        else undeployButtonAnimation(duration);
-        setDeploy((previousState) => !previousState);
+        onDeploy(200);
       }}
     >
       <Animated.View
@@ -156,8 +176,110 @@ const AssistiveMenu = (props) => {
       >
         {deploy && (
           <>
-            <TouchableOpacity>
-              <Text>Test</Text>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                borderRadius: 50,
+                backgroundColor: "#F47658",
+                width: 44,
+                height: 44,
+                justifyContent: "center",
+                alignItems: "center",
+                bottom: 0,
+                marginLeft: -30,
+                marginBottom: 15,
+              }}
+              onPress={() => {
+                onDeploy(200);
+                if (route.name !== "Home") navigation.push("Home");
+              }}
+            >
+              <Icon name="home" size={32} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                borderRadius: 50,
+                backgroundColor: "#F47658",
+                width: 44,
+                height: 44,
+                justifyContent: "center",
+                alignItems: "center",
+                // bottom: 0,
+                marginLeft: 10,
+                marginTop: -25,
+              }}
+              onPress={() => {
+                onDeploy(200);
+                if (route.name !== "Search") navigation.push("Search");
+              }}
+            >
+              <Icon name="search" size={32} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                borderRadius: 50,
+                backgroundColor: "#F47658",
+                width: 44,
+                height: 44,
+                justifyContent: "center",
+                alignItems: "center",
+                bottom: 0,
+                right: 0,
+                marginRight: -30,
+                marginBottom: 15,
+              }}
+              onPress={() => {
+                onDeploy(200);
+                if (route.name !== "Chat") navigation.push("Chat");
+              }}
+            >
+              <Icon name="chat" size={28} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                borderRadius: 50,
+                backgroundColor: "#F47658",
+                width: 44,
+                height: 44,
+                justifyContent: "center",
+                alignItems: "center",
+                // bottom: 0,
+                right: 0,
+                marginRight: 10,
+                marginTop: -25,
+              }}
+              onPress={() => {
+                onDeploy(200);
+                if (route.name !== "Notifications")
+                  navigation.push("Notifications");
+              }}
+            >
+              <Icon name="notifications" size={32} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                borderRadius: 50,
+                backgroundColor: "#F47658",
+                width: 44,
+                height: 44,
+                justifyContent: "center",
+                alignItems: "center",
+                alignSelf: "center",
+                bottom: 5,
+                // right: 30,
+                marginRight: 10,
+                marginTop: -25,
+              }}
+              onPress={() => {
+                onDeploy(200);
+                if (route.name !== "Menu") navigation.push("Menu");
+              }}
+            >
+              <Icon name="menu" size={32} />
             </TouchableOpacity>
           </>
         )}

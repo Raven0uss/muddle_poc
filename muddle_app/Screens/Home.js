@@ -56,7 +56,7 @@ const renderItem = ({ item }) => {
   return <DebateBox debate={item} />;
 };
 
-const Home = () => {
+const Home = (props) => {
   const [debates, setDebates] = React.useState([]);
   // const { data, loading, error, fetchMore, networkStatus } = useQuery(
   //   GET_DEBATES,
@@ -71,6 +71,8 @@ const Home = () => {
   //     // notifyOnNetworkStatusChange: true,
   //   }
   // );
+
+  const { navigation, route } = props;
 
   console.log(debates.length);
 
@@ -138,7 +140,7 @@ const Home = () => {
           <ActivityIndicator style={{ marginBottom: 70 }} />
         )}
       />
-      <AssistiveMenu />
+      <AssistiveMenu navigation={navigation} route={route} />
     </View>
   );
 };
