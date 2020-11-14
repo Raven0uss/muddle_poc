@@ -106,9 +106,17 @@ const Home = (props) => {
             />
           </TouchableOpacity>
         }
-        // MiddleComponent={
-        //   <Image source={{ uri: muddle.nb }} style={styles.logo} />
-        // }
+        MiddleComponent={
+          <Image
+            source={{ uri: muddle.nb }}
+            style={{
+              width: 50,
+              height: 28,
+              marginTop: 8,
+              marginLeft: -38,
+            }}
+          />
+        }
       />
       <FlatList
         data={debates}
@@ -175,7 +183,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 50,
-    height: 50,
+    height: 28,
+    marginTop: 8,
+    marginLeft: -38,
   },
   boxDebate: {
     height: 248,

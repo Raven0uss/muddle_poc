@@ -1,9 +1,10 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
+import { muddle } from "../CustomProperties/IconsBase64";
 
 const Chat = (props) => {
   const { navigation, route } = props;
@@ -11,8 +12,30 @@ const Chat = (props) => {
     <View style={styles.container}>
       <Header
         LeftComponent={
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{ marginTop: 3 }}
+          >
             <CustomIcon name={"chevron-left"} size={38} />
+          </TouchableOpacity>
+        }
+        MiddleComponent={
+          <Image
+            source={{ uri: muddle.nb }}
+            style={{
+              width: 50,
+              height: 28,
+              marginTop: 8,
+              marginBottom: 10,
+            }}
+          />
+        }
+        RightComponent={
+          <TouchableOpacity
+            style={{ marginTop: 5 }}
+            onPress={() => navigation.push("NewConversation")}
+          >
+            <CustomIcon name="add" size={32} />
           </TouchableOpacity>
         }
       />
