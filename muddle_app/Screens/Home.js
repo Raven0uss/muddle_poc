@@ -63,18 +63,15 @@ const renderItem = ({ item }) => {
 
 const Home = (props) => {
   const [debates, setDebates] = React.useState([]);
-  // const { data, loading, error, fetchMore } = useQuery(
-  //   GET_DEBATES,
-  //   {
-  //     variables: {
-  //       first: nbDebates,
-  //     },
-  //     onCompleted: (response) => {
-  //       const { debates: queryResult } = response;
-  //       setDebates(queryResult);
-  //     },
-  //   }
-  // );
+  const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
+    variables: {
+      first: nbDebates,
+    },
+    onCompleted: (response) => {
+      const { debates: queryResult } = response;
+      setDebates(queryResult);
+    },
+  });
 
   const { navigation, route } = props;
 
@@ -88,19 +85,19 @@ const Home = (props) => {
   //     </View>
   //   );
   // }
-  // if (debates.length === 0 && loading) {
-  //   return (
-  //     <SafeAreaView style={styles.loadingContainer}>
-  //       <ActivityIndicator />
-  //     </SafeAreaView>
-  //   );
-  // }
+  if (debates.length === 0 && loading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Header
         LeftComponent={
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push("Profile")}>
             <Image
               source={{ uri: user.profilePicture }}
               style={styles.profilePicture}
