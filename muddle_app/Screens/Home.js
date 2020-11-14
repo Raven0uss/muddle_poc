@@ -15,7 +15,11 @@ import {
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
-import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
+import {
+  debates_logo,
+  defaultProfile,
+  muddle,
+} from "../CustomProperties/IconsBase64";
 import DebateBox from "../Components/DebateBox";
 import { useQuery, gql } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
@@ -59,7 +63,7 @@ const renderItem = ({ item }) => {
 
 const Home = (props) => {
   const [debates, setDebates] = React.useState([]);
-  // const { data, loading, error, fetchMore, networkStatus } = useQuery(
+  // const { data, loading, error, fetchMore } = useQuery(
   //   GET_DEBATES,
   //   {
   //     variables: {
@@ -69,7 +73,6 @@ const Home = (props) => {
   //       const { debates: queryResult } = response;
   //       setDebates(queryResult);
   //     },
-  //     // notifyOnNetworkStatusChange: true,
   //   }
   // );
 
@@ -88,13 +91,11 @@ const Home = (props) => {
   // if (debates.length === 0 && loading) {
   //   return (
   //     <SafeAreaView style={styles.loadingContainer}>
-  //       <Text>wesh</Text>
   //       <ActivityIndicator />
   //     </SafeAreaView>
   //   );
   // }
 
-  // console.log(networkStatus);
   return (
     <View style={styles.container}>
       <Header
@@ -113,9 +114,21 @@ const Home = (props) => {
               width: 50,
               height: 28,
               marginTop: 8,
-              marginLeft: -38,
+              marginLeft: -10,
             }}
           />
+        }
+        RightComponent={
+          <TouchableOpacity onPress={() => navigation.push("DebatesFiltered")}>
+            <Image
+              source={{ uri: debates_logo }}
+              style={{
+                width: 32,
+                height: 32,
+                marginTop: 6,
+              }}
+            />
+          </TouchableOpacity>
         }
       />
       <FlatList

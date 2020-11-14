@@ -27,6 +27,7 @@ const Chat = (props) => {
               height: 28,
               marginTop: 8,
               marginBottom: 10,
+            //   marginLeft: -10,
             }}
           />
         }

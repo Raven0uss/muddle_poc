@@ -26,7 +26,7 @@ const Menu = (props) => {
               width: 50,
               height: 28,
               marginTop: 8,
-              marginLeft: -38,
+              marginLeft: -32,
               marginBottom: 10,
             }}
           />

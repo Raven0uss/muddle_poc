@@ -23,6 +23,8 @@ import SearchScreen from "./Screens/Search";
 import ChatScreen from "./Screens/Chat";
 import NotificationsScreen from "./Screens/Notifications";
 import CreateDebateScreen from "./Screens/CreateDebate";
+import FollowScreen from "./Screens/Follow";
+import DebatesFilteredScreen from "./Screens/DebatesFiltered";
 
 const Stack = createStackNavigator();
 
@@ -156,6 +158,26 @@ export default function App() {
               <Stack.Screen
                 name="CreateDebate"
                 component={CreateDebateScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Follow"
+                component={FollowScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="DebatesFiltered"
+                component={DebatesFilteredScreen}
                 initialParams={{
                   changeLanguage,
                 }}
