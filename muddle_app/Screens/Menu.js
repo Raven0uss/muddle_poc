@@ -5,7 +5,7 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 
-const Chat = (props) => {
+const Menu = (props) => {
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Chat);
+export default withTheme(Menu);

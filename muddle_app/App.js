@@ -9,14 +9,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { I18nProvider } from "@lingui/react";
 import i18n, { getDeviceLocale } from "./i18n";
 
+import theme from "./CustomProperties/Theme";
+
+import TestScreen from "./Screens/Test";
+
 import LoginScreen from "./Screens/Login";
 import SignUpScreen from "./Screens/SignUp";
 import ForgotPasswordScreen from "./Screens/ForgotPassword";
 
-import TestScreen from "./Screens/Test";
-
-import theme from "./CustomProperties/Theme";
 import HomeScreen from "./Screens/Home";
+import MenuScreen from "./Screens/Menu";
+import SearchScreen from "./Screens/Search";
+import ChatScreen from "./Screens/Chat";
+import NotificationsScreen from "./Screens/Notifications";
+import CreateDebateScreen from "./Screens/CreateDebate";
 
 const Stack = createStackNavigator();
 
@@ -59,6 +65,8 @@ export default function App() {
                   headerShown: false,
                 }}
               />
+
+              {/* Login Part */}
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}
@@ -90,6 +98,7 @@ export default function App() {
                 }}
               />
 
+              {/* Main */}
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -99,6 +108,56 @@ export default function App() {
                     //Test
                     name: "test",
                   },
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Menu"
+                component={MenuScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Search"
+                component={SearchScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Chat"
+                component={ChatScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Notifications"
+                component={NotificationsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="CreateDebate"
+                component={CreateDebateScreen}
+                initialParams={{
+                  changeLanguage,
                 }}
                 options={{
                   headerShown: false,

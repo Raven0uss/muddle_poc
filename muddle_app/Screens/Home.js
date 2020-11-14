@@ -21,6 +21,7 @@ import { useQuery, gql } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import { set } from "react-native-reanimated";
 import { flatten, last } from "lodash";
+import CreateDebateButton from "../Components/CreateDebateButton";
 
 const user = {
   profilePicture: defaultProfile,
@@ -141,6 +142,7 @@ const Home = (props) => {
         )}
       />
       <AssistiveMenu navigation={navigation} route={route} />
+      <CreateDebateButton navigation={navigation} />
     </View>
   );
 };
