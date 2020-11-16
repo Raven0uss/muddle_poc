@@ -13,7 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 
-const Menu = (props) => {
+const Settings = (props) => {
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -40,47 +40,17 @@ const Menu = (props) => {
         }
       />
       <ScrollView style={styles.seedContainer}>
-        <TouchableOpacity
-          style={styles.menuElement}
-          onPress={() => navigation.push("Settings")}
-        >
-          <CustomIcon name="settings" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Parametres</Text>
+        <TouchableOpacity style={styles.menuElement}>
+          <CustomIcon name="language" size={28} color="#F47658" />
+          <Text style={styles.menuText}>Changer la langue</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuElement}
-          onPress={() => navigation.push("Legal")}
-        >
-          <CustomIcon name="lock" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>
-            Mentions legales & Confidentialite
-          </Text>
+        <TouchableOpacity style={styles.menuElement}>
+          <CustomIcon name="flare" size={28} color="#F47658" />
+          <Text style={styles.menuText}>Passer en mode sombre</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuElement}
-          onPress={() => navigation.push("Cgu")}
-        >
-          <CustomIcon name="description" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>
-            Conditions generales d'utilisation
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuElement}
-          onPress={() => navigation.push("ContactUs")}
-        >
-          <CustomIcon name="chat" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Nous contacter</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuElement}
-          onPress={() => {
-            console.log("Log out");
-            // navigation.push("Settings");
-          }}
-        >
-          <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Se deconnecter</Text>
+        <TouchableOpacity style={styles.menuElement}>
+          <CustomIcon name="vpn-key" size={28} color="#F47658" />
+          <Text style={styles.menuText}>Confidentialite des votes</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -116,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Menu);
+export default withTheme(Settings);
