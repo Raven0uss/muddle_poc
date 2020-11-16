@@ -19,7 +19,7 @@ const exposedQueries = {
   notificationQueries: ["notification", "notifications"],
   reportQueries: ["report", "reports"],
   trophyQueries: ["trophy"],
-  userQueries: ["users"],
+  userQueries: ["users", "user"],
 };
 
 const Query = prismaObjectType({

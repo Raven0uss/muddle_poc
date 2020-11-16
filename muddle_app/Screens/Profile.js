@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Text,
+  TextInput,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
@@ -20,8 +21,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import { muddle } from "../CustomProperties/IconsBase64";
+import UserContext from "../CustomProperties/UserContext";
 
 const Profile = (props) => {
+  const [search, setSearch] = React.useState("");
+
   const { navigation, route } = props;
   return (
     <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
@@ -84,7 +88,8 @@ const Profile = (props) => {
           marginTop: 110,
           marginLeft: "auto",
           marginRight: "auto",
-          marginBottom: 30,
+          marginBottom: 20,
+          flexDirection: "row",
         }}
       >
         <TouchableOpacity
@@ -136,7 +141,7 @@ const Profile = (props) => {
             width: 90,
             height: 90,
             borderRadius: 30,
-            borderWidth: 1,
+            // borderWidth: 1,
             marginTop: "auto",
             marginBottom: "auto",
             padding: 5,
@@ -144,16 +149,110 @@ const Profile = (props) => {
           }}
           resizeMode="center"
         />
+
+        <View
+          style={{
+            marginLeft: 20,
+            marginTop: 13,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              width: 150,
+              height: 40,
+
+              // borderWidth: 1,
+            }}
+            numberOfLines={2}
+          >
+            Sid-Ahmed Fahem
+          </Text>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: 145,
+              justifyContent: "space-between",
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "bold",
+                }}
+              >
+                650
+              </Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "#A3A3A3",
+                }}
+              >
+                abonnes
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "bold",
+                }}
+              >
+                434
+              </Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "#A3A3A3",
+                }}
+              >
+                abonnements
+              </Text>
+            </View>
+          </View>
+        </View>
+        <TouchableOpacity
+          style={{
+            marginTop: 12,
+            marginLeft: 10,
+          }}
+        >
+          <CustomIcon name={"more-horiz"} size={22} />
+        </TouchableOpacity>
       </View>
 
       {/* Historique des interactions */}
       <ScrollView>
+        <TextInput
+          placeholder="Rechercher dans le profil"
+          value={search}
+          style={{
+            width: Dimensions.get("screen").width / 1.15,
+            height: 40,
+            borderRadius: 10,
+            backgroundColor: "#fff",
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: 10,
+            paddingLeft: 20,
+            paddingRight: 20,
+            marginBottom: 14,
+          }}
+          keyboardType="default"
+          onChangeText={(s) => setSearch(s)}
+          // placeholderTextColor="#222"
+        />
         <View
           style={{
-            width: Dimensions.get("screen").width / 1.2,
+            width: Dimensions.get("screen").width / 1.1,
             height: 100,
-            borderRadius: 5,
+            borderRadius: 10,
             backgroundColor: "#fff",
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         ></View>
       </ScrollView>

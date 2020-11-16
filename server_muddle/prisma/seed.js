@@ -12,7 +12,7 @@ function shuffleArray(originArray) {
 }
 
 const randomUserList = ({ rejectList = [], users }) => {
-  const end = faker.random.number(29);
+  const end = faker.random.number(9);
   const start = faker.random.number(end);
 
   return shuffleArray(users)
@@ -22,7 +22,7 @@ const randomUserList = ({ rejectList = [], users }) => {
 
 async function main() {
   // Create random users
-  for (let index = 0; index < 30; index++) {
+  for (let index = 0; index < 10; index++) {
     await prisma.createUser({
       email: faker.internet.email(),
       password: bcrypt.hashSync("test", 12),
@@ -35,8 +35,8 @@ async function main() {
 
   //   Create random debates
   // Standard Debate
-  for (let index = 0; index < 500; index++) {
-    const owner = users[faker.random.number(29)];
+  for (let index = 0; index < 50; index++) {
+    const owner = users[faker.random.number(9)];
     await prisma.createDebate({
       owner: { connect: { id: owner.id } },
       content: `${index} - ${faker.lorem.paragraph()}`,

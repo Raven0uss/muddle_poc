@@ -3687,6 +3687,7 @@ export interface NexusGenFieldTypes {
     signIn: NexusGenRootTypes['Token']; // Token!
     trophies: NexusGenRootTypes['Trophy'][]; // [Trophy!]!
     trophy: NexusGenRootTypes['Trophy'] | null; // Trophy
+    user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   Report: { // field return type
@@ -4069,6 +4070,9 @@ export interface NexusGenArgTypes {
     }
     trophy: { // args
       where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
+    }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     users: { // args
       after?: string | null; // String

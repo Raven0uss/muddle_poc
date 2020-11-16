@@ -2026,6 +2026,7 @@ type Query {
   signIn(email: String, password: String): Token!
   trophies: [Trophy!]!
   trophy(where: TrophyWhereUniqueInput!): Trophy
+  user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
 
