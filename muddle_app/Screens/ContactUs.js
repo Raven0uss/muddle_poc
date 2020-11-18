@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 
-const Cgu = (props) => {
+const ContactUs = (props) => {
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -42,16 +42,22 @@ const Cgu = (props) => {
       />
       <ScrollView style={styles.seedContainer}>
         <View style={{ justifyContent: "center", marginTop: 30 }}>
-          <Text
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-              fontSize: 16,
-              fontWeight: "bold",
-            }}
-          >
-            Conditions Generales d'Utilisation
+          <Text style={{ textAlign: "center" }}>
+            Pour tout question relative a Muddles, veuillez nous contacter a
+            l'adresse suivante :
           </Text>
+          <TouchableOpacity>
+            <Text
+              style={{
+                textAlign: "center",
+                marginTop: 20,
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              contact@muddles.fr
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -72,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Cgu);
+export default withTheme(ContactUs);

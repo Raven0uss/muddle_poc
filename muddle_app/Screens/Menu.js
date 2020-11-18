@@ -49,7 +49,7 @@ const Menu = (props) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
-          onPress={() => navigation.push("Legal")}
+          onPress={() => navigation.push("LegaleMentions")}
         >
           <CustomIcon name="lock" size={28} color="#A3A3A3" />
           <Text style={styles.menuText}>

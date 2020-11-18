@@ -28,6 +28,11 @@ import FollowScreen from "./Screens/Follow";
 import DebatesFilteredScreen from "./Screens/DebatesFiltered";
 import ProfileScreen from "./Screens/Profile";
 import SettingsScreen from "./Screens/Settings";
+import LanguageSettingsScreen from "./Screens/LanguageSettings";
+import ContactUsScreen from "./Screens/ContactUs";
+import CguScreen from "./Screens/Cgu";
+import LegaleMentionsScreen from "./Screens/LegaleMentions";
+import VotesPrivacyScreen from "./Screens/VotesPrivacy";
 
 const Stack = createStackNavigator();
 
@@ -120,26 +125,6 @@ export default function App() {
                 }}
               />
               <Stack.Screen
-                name="Menu"
-                component={MenuScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Settings"
-                component={SettingsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
                 name="Search"
                 component={SearchScreen}
                 initialParams={{
@@ -202,6 +187,78 @@ export default function App() {
               <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+
+              {/* Menu */}
+              <Stack.Screen
+                name="Menu"
+                component={MenuScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Settings"
+                component={SettingsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="LanguageSettings"
+                component={LanguageSettingsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="ContactUs"
+                component={ContactUsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Cgu"
+                component={CguScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="LegaleMentions"
+                component={LegaleMentionsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="VotesPrivacy"
+                component={VotesPrivacyScreen}
                 initialParams={{
                   changeLanguage,
                 }}

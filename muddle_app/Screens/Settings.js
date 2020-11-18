@@ -14,6 +14,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 
 const Settings = (props) => {
+  const [theme, setTheme] = React.useState("light");
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -40,15 +41,32 @@ const Settings = (props) => {
         }
       />
       <ScrollView style={styles.seedContainer}>
-        <TouchableOpacity style={styles.menuElement}>
+        <TouchableOpacity
+          style={styles.menuElement}
+          onPress={() => navigation.push("LanguageSettings")}
+        >
           <CustomIcon name="language" size={28} color="#F47658" />
           <Text style={styles.menuText}>Changer la langue</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuElement}>
+        <TouchableOpacity
+          style={styles.menuElement}
+          onPress={() =>
+            setTheme((currentTheme) =>
+              currentTheme === "light" ? "dark" : "light"
+            )
+          }
+        >
           <CustomIcon name="flare" size={28} color="#F47658" />
-          <Text style={styles.menuText}>Passer en mode sombre</Text>
+          <Text style={styles.menuText}>
+            {theme === "light"
+              ? "Passer en mode sombre"
+              : "Passer en mode clair"}
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuElement}>
+        <TouchableOpacity
+          style={styles.menuElement}
+          onPress={() => navigation.push("VotesPrivacy")}
+        >
           <CustomIcon name="vpn-key" size={28} color="#F47658" />
           <Text style={styles.menuText}>Confidentialite des votes</Text>
         </TouchableOpacity>

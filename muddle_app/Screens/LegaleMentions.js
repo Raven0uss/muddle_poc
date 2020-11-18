@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 
-const Cgu = (props) => {
+const LegaleMentions = (props) => {
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -50,7 +50,7 @@ const Cgu = (props) => {
               fontWeight: "bold",
             }}
           >
-            Conditions Generales d'Utilisation
+            Mentions Legales & Confidentialite
           </Text>
         </View>
       </ScrollView>
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Cgu);
+export default withTheme(LegaleMentions);

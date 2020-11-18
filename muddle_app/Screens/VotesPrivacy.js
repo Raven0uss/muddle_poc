@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 
-const Cgu = (props) => {
+const VotesPrivacy = (props) => {
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -40,20 +40,7 @@ const Cgu = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}>
-        <View style={{ justifyContent: "center", marginTop: 30 }}>
-          <Text
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-              fontSize: 16,
-              fontWeight: "bold",
-            }}
-          >
-            Conditions Generales d'Utilisation
-          </Text>
-        </View>
-      </ScrollView>
+      <ScrollView style={styles.seedContainer}></ScrollView>
     </View>
   );
 };
@@ -72,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Cgu);
+export default withTheme(VotesPrivacy);
