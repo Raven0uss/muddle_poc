@@ -9,6 +9,7 @@ import {
   Text,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
@@ -19,11 +20,15 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 const Debate = (props) => {
   const [comment, setComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
+  // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
-      () => setKeyboardIsOpen(true)
+      (e) => {
+        // setKeyboardHeight(e.endCoordinates.height);
+        setKeyboardIsOpen(true);
+      }
     );
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
@@ -158,8 +163,15 @@ const Debate = (props) => {
         ></View>
       </ScrollView>
       <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        // style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : ""}
+        style={
+          Platform.OS === "android" &&
+          keyboardIsOpen && {
+            bottom: 0,
+            elevation: 10,
+            position: "absolute",
+          }
+        }
       >
         <View
           style={{
