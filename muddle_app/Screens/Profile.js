@@ -92,7 +92,7 @@ const Profile = (props) => {
           flexDirection: "row",
         }}
       >
-        <View
+        <TouchableOpacity
           style={{
             position: "absolute",
             width: 50,
@@ -110,38 +110,32 @@ const Profile = (props) => {
             marginBottom: -10,
             justifyContent: "center",
             alignItems: "center",
-            elevation: 10,
+            elevation: 20,
+            zIndex: 20,
           }}
+          onPress={() => console.log("trophies")}
         >
-          <TouchableOpacity
+          <Text
             style={{
-              backgroundColor: "#FFFFFF",
-              justifyContent: "center",
-              alignItems: "center",
+              fontSize: 10,
+              marginTop: -3,
+              marginBottom: 3,
+              fontWeight: "bold",
             }}
           >
-            <Text
-              style={{
-                fontSize: 10,
-                marginTop: -3,
-                marginBottom: 3,
-                fontWeight: "bold",
-              }}
-            >
-              126
-            </Text>
-            <Image
-              source={{
-                uri: muddle.trophies_light, // Have to be dynamic par rapport au theme
-              }}
-              style={{
-                width: 30,
-                height: 22,
-              }}
-            />
-            {/* Nombre des trophees */}
-          </TouchableOpacity>
-        </View>
+            126
+          </Text>
+          <Image
+            source={{
+              uri: muddle.trophies_light, // Have to be dynamic par rapport au theme
+            }}
+            style={{
+              width: 30,
+              height: 22,
+            }}
+          />
+          {/* Nombre des trophees */}
+        </TouchableOpacity>
         <Image
           source={{
             uri: defaultProfile,
