@@ -110,6 +110,7 @@ const Profile = (props) => {
             marginBottom: -10,
             justifyContent: "center",
             alignItems: "center",
+            elevation: 10,
           }}
         >
           <TouchableOpacity

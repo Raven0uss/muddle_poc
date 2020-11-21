@@ -78,7 +78,14 @@ const DebateBox = (props) => {
             Je suis contre
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.commentButton}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Debate", {
+              debate,
+            });
+          }}
+          style={styles.commentButton}
+        >
           <CustomIcon name="more-horiz" size={28} />
         </TouchableOpacity>
       </View>
