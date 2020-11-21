@@ -5,7 +5,7 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 
 const DebateBox = (props) => {
-  const { debate } = props;
+  const { debate, navigation } = props;
 
   const votes = debate.negatives.length + debate.positives.length;
   const comments = debate.comments.length;
@@ -24,7 +24,13 @@ const DebateBox = (props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Debate", {
+            debate,
+          });
+        }}
+      >
         <Text numberOfLines={8} style={styles.debateText}>
           {debate.content}
         </Text>

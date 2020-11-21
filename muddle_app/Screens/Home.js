@@ -57,8 +57,8 @@ const GET_DEBATES = gql`
 const frequency = 20;
 let nbDebates = frequency;
 
-const renderItem = ({ item }) => {
-  return <DebateBox debate={item} />;
+const renderItem = ({ item }, navigation) => {
+  return <DebateBox debate={item} navigation={navigation} />;
 };
 
 const Home = (props) => {
@@ -131,7 +131,7 @@ const Home = (props) => {
       <FlatList
         data={debates}
         style={styles.seedContainer}
-        renderItem={renderItem}
+        renderItem={(param) => renderItem(param, navigation)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {

@@ -33,6 +33,7 @@ import ContactUsScreen from "./Screens/ContactUs";
 import CguScreen from "./Screens/Cgu";
 import LegaleMentionsScreen from "./Screens/LegaleMentions";
 import VotesPrivacyScreen from "./Screens/VotesPrivacy";
+import DebateScreen from "./Screens/Debate";
 
 const Stack = createStackNavigator();
 
@@ -187,6 +188,16 @@ export default function App() {
               <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Debate"
+                component={DebateScreen}
                 initialParams={{
                   changeLanguage,
                 }}
