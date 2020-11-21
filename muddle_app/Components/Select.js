@@ -12,6 +12,7 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  ActionSheetIOS,
 } from "react-native";
 import PropTypes from "prop-types";
 
@@ -21,18 +22,36 @@ const Select = (props) => {
   const [visible, setVisible] = React.useState(false);
   const { list, selected, placeholder, onSelect } = props;
 
+  const onPress = () => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: [...["Cancel"], ...list.map((l) => l.label)],
+        cancelButtonIndex: 0,
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+          setVisible((v) => !v);
+        } else {
+          setVisible((v) => !v);
+          onSelect(list[buttonIndex - 1]);
+        }
+      }
+    );
+  };
+
   return (
     <View style={{ width: "100%" }}>
       <TouchableWithoutFeedback
         onPress={() => {
           setVisible((v) => !v);
+          if (Platform.OS === "ios") onPress();
         }}
       >
         <View style={styles.input}>
           <Text>{selected === null ? placeholder : selected.label}</Text>
         </View>
       </TouchableWithoutFeedback>
-      {visible && (
+      {visible && Platform.OS !== "ios" && (
         <Modal animationType="fade" transparent visible={visible}>
           <TouchableHighlight
             onPress={() => setVisible(false)}
@@ -119,7 +138,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     color: "#000",
-    marginBottom: 18,
+    marginBottom: 10,
     height: 40,
   },
   centeredView: {

@@ -1,12 +1,39 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  Dimensions,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
-import { muddle } from "../CustomProperties/IconsBase64";
+import Select from "../Components/Select";
+import DatePicker from "../Components/DatePicker";
+import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
+import moment from "moment";
 
 const CreateDebate = (props) => {
+  const [debateType, setDebateType] = React.useState({
+    label: "Debat public",
+    value: "PUBLIC",
+  });
+  const [duo, setDuo] = React.useState(null);
+  const [duration, setDuration] = React.useState(
+    new Date(moment().add(1, "days"))
+  ); // minutes
+  const [content, setContent] = React.useState("");
+  const [optionOne, setOptionOne] = React.useState(
+    debateType.value === "PUBLIC" ? "Reponse 1" : "Votre opinion"
+  );
+  const [optionTwo, setOptionTwo] = React.useState("Reponse 2");
+
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -32,7 +59,125 @@ const CreateDebate = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}></ScrollView>
+      <KeyboardAvoidingView behavior="padding" style={styles.seedContainer}>
+        <ScrollView>
+          <View style={{ marginTop: 52 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                marginLeft: 15,
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={{ uri: defaultProfile }}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 50,
+                }}
+              />
+              <Text
+                style={{ fontWeight: "bold", marginLeft: 10, fontSize: 12 }}
+              >
+                Sid-Ahmed Fahem
+              </Text>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <Select
+                list={[
+                  {
+                    label: "Debat publique",
+                    value: "PUBLIC",
+                  },
+                  {
+                    label: "Debat en duo",
+                    value: "DUO",
+                  },
+                ]}
+                selected={debateType}
+                placeholder=""
+                onSelect={(type) => setDebateType(type)}
+              />
+            </View>
+            {
+              debateType.value === "DUO" && (
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    // setShow((bool) => !bool);
+                  }}
+                >
+                  <View style={styles.inputInvite}>
+                    <Text>Inviter une personne</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              ) // Here to launch screen to invite new person for debate
+            }
+            <View style={{ marginTop: 0 }}>
+              <DatePicker
+                placeholder="Duree du debat"
+                date={duration}
+                onDateChange={(newDate) => {
+                  setDuration(newDate);
+                }}
+              />
+            </View>
+            <View
+              style={{
+                height: 1,
+                backgroundColor: "#DBDBDB",
+                width: "90%",
+                alignSelf: "center",
+              }}
+            />
+            <View style={{ marginTop: 10 }}>
+              <TextInput
+                placeholder="Decrivez votre debat"
+                value={content}
+                onChangeText={(c) => setContent(c)}
+                style={styles.input}
+                keyboardType="default"
+                placeholderTextColor="#222"
+                multiline
+                textAlignVertical="top"
+              />
+            </View>
+            <View
+              style={{
+                marginTop: 10,
+                borderRadius: 20,
+                backgroundColor: "#fff",
+                height: 100,
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
+              <TextInput
+                placeholder=""
+                value={optionOne}
+                onChangeText={(oOne) => setOptionOne(oOne)}
+                style={styles.optionOne}
+                keyboardType="default"
+                placeholderTextColor="#222"
+              />
+              {debateType.value === "PUBLIC" && (
+                <TextInput
+                  placeholder=""
+                  value={optionTwo}
+                  onChangeText={(oTwo) => setOptionTwo(oTwo)}
+                  style={styles.optionTwo}
+                  keyboardType="default"
+                  placeholderTextColor="#222"
+                />
+              )}
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => {}} style={styles.connectionButton}>
+            <Text style={{ color: "#000", fontWeight: "bold" }}>Publier</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -48,6 +193,65 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7F7F7",
     paddingLeft: 15,
     paddingRight: 15,
+    height: Dimensions.get("screen").height,
+  },
+  input: {
+    backgroundColor: "#fff",
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    width: "100%",
+    borderRadius: 10,
+    color: "#000",
+    // marginBottom: 18,
+    height: 120,
+    // maxHeight: 1200,
+    overflow: "scroll",
+  },
+  optionOne: {
+    backgroundColor: "#fff",
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    // width: "100%",
+    borderRadius: 10,
+    color: "#000",
+    borderColor: "#F47658",
+    borderWidth: 2,
+  },
+  optionTwo: {
+    backgroundColor: "#fff",
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    // width: "100%",
+    borderRadius: 10,
+    color: "#000",
+    borderColor: "#000",
+    borderWidth: 2,
+  },
+  connectionButton: {
+    alignSelf: "flex-end",
+    backgroundColor: "#F47658",
+    padding: 12,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 30,
+    marginTop: 20,
+  },
+  inputInvite: {
+    backgroundColor: "#fff",
+    padding: 12,
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: "100%",
+    borderRadius: 10,
+    color: "#000",
+    marginBottom: 10,
+    height: 40,
   },
 });
 

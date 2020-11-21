@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   iconButton: {
     width: 48,
     height: 22,
+    marginLeft: 10,
   },
 });
 

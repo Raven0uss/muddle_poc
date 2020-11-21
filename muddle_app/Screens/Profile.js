@@ -84,7 +84,7 @@ const Profile = (props) => {
           width: Dimensions.get("screen").width / 1.2,
           height: 100,
           borderRadius: 30,
-          backgroundColor: "#fff",
+          backgroundColor: "#FFFFFF",
           marginTop: 110,
           marginLeft: "auto",
           marginRight: "auto",
@@ -92,12 +92,12 @@ const Profile = (props) => {
           flexDirection: "row",
         }}
       >
-        <TouchableOpacity
+        <View
           style={{
             position: "absolute",
             width: 50,
             height: 52,
-            backgroundColor: "#fff",
+            backgroundColor: "#FFFFFF",
             borderRadius: 20,
             borderColor: "#F47658",
             borderStyle: "solid",
@@ -112,27 +112,35 @@ const Profile = (props) => {
             alignItems: "center",
           }}
         >
-          {/* Nombre des trophees */}
-          <Text
+          <TouchableOpacity
             style={{
-              fontSize: 10,
-              marginTop: -3,
-              marginBottom: 3,
-              fontWeight: "bold",
+              backgroundColor: "#FFFFFF",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            126
-          </Text>
-          <Image
-            source={{
-              uri: muddle.trophies_light, // Have to be dynamic par rapport au theme
-            }}
-            style={{
-              width: 30,
-              height: 22,
-            }}
-          />
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 10,
+                marginTop: -3,
+                marginBottom: 3,
+                fontWeight: "bold",
+              }}
+            >
+              126
+            </Text>
+            <Image
+              source={{
+                uri: muddle.trophies_light, // Have to be dynamic par rapport au theme
+              }}
+              style={{
+                width: 30,
+                height: 22,
+              }}
+            />
+            {/* Nombre des trophees */}
+          </TouchableOpacity>
+        </View>
         <Image
           source={{
             uri: defaultProfile,
