@@ -46,7 +46,6 @@ const Debate = (props) => {
   const votes = debate.negatives.length + debate.positives.length;
   const comments = debate.comments.length;
 
-  console.log(keyboardIsOpen);
   return (
     <View style={styles.container}>
       <Header hidden />
@@ -95,6 +94,14 @@ const Debate = (props) => {
         >
           <Text style={styles.debateText}>{debate.content}</Text>
         </TouchableOpacity>
+        <View
+          style={{
+            height: 1,
+            backgroundColor: "#DBDBDB",
+            width: "100%",
+            alignSelf: "center",
+          }}
+        />
         <View style={styles.debateFooter}>
           <Text style={styles.footerText}>{`${votes} vote${
             votes > 1 ? "s" : ""
@@ -158,7 +165,7 @@ const Debate = (props) => {
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 13,
-            // marginBottom: 10,
+            marginBottom: 10, // android
           }}
         ></View>
       </ScrollView>
@@ -268,8 +275,6 @@ const styles = StyleSheet.create({
   debateText: {
     fontSize: 12,
     paddingBottom: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: "#DBDBDB",
   },
   debateFooter: {
     flexDirection: "row",

@@ -35,6 +35,14 @@ const DebateBox = (props) => {
           {debate.content}
         </Text>
       </TouchableOpacity>
+      <View
+        style={{
+          height: 1,
+          backgroundColor: "#DBDBDB",
+          width: "100%",
+          alignSelf: "center",
+        }}
+      />
       <View style={styles.debateFooter}>
         <Text style={styles.footerText}>{`${votes} vote${
           votes > 1 ? "s" : ""
@@ -99,8 +107,6 @@ const styles = StyleSheet.create({
   debateText: {
     fontSize: 12,
     paddingBottom: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: "#DBDBDB",
   },
   debateFooter: {
     flexDirection: "row",
