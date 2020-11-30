@@ -20,7 +20,7 @@ const { width, height } = Dimensions.get("window");
 
 const Select = (props) => {
   const [visible, setVisible] = React.useState(false);
-  const { list, selected, placeholder, onSelect } = props;
+  const { list, selected, placeholder, onSelect, renderComponent } = props;
 
   const onPress = () => {
     ActionSheetIOS.showActionSheetWithOptions(
@@ -41,16 +41,27 @@ const Select = (props) => {
 
   return (
     <View style={{ width: "100%" }}>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setVisible((v) => !v);
-          if (Platform.OS === "ios") onPress();
-        }}
-      >
-        <View style={styles.input}>
-          <Text>{selected === null ? placeholder : selected.label}</Text>
-        </View>
-      </TouchableWithoutFeedback>
+      {renderComponent === undefined ? (
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setVisible((v) => !v);
+            if (Platform.OS === "ios") onPress();
+          }}
+        >
+          <View style={styles.input}>
+            <Text>{selected === null ? placeholder : selected.label}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      ) : (
+        <TouchableOpacity
+          onPress={() => {
+            setVisible((v) => !v);
+            if (Platform.OS === "ios") onPress();
+          }}
+        >
+          {props.renderComponent}
+        </TouchableOpacity>
+      )}
       {visible && Platform.OS !== "ios" && (
         <Modal animationType="fade" transparent visible={visible}>
           <TouchableHighlight
@@ -123,10 +134,12 @@ Select.propTypes = {
   ]).isRequired,
   placeholder: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
+  renderComponent: PropTypes.any,
 };
 
 Select.defaultProps = {
   placeholder: "",
+  renderComponent: undefined,
 };
 
 const styles = StyleSheet.create({

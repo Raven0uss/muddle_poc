@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
 Header.propTypes = {
   hidden: PropTypes.bool,
   LeftComponent: PropTypes.any,
-  MiddleComponent: PropTypes.func,
-  RightComponent: PropTypes.func,
+  MiddleComponent: PropTypes.any,
+  RightComponent: PropTypes.any,
 };
 
 Header.defaultProps = {

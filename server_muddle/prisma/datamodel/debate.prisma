@@ -1,6 +1,7 @@
 enum DebateType {
   STANDARD
   DUO
+  MUDDLE
 }
 
 type Debate {

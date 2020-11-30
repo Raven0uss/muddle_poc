@@ -20,6 +20,17 @@ const randomUserList = ({ rejectList = [], users }) => {
     .map((u) => ({ id: u.id }));
 };
 
+const getRandomComments = (nb, { users }) => {
+  const comments = [];
+  for (let index = 0; index < nb; index++) {
+    comments.push({
+      from: { connect: { id: users[faker.random.number(9)].id } },
+      content: faker.lorem.sentence(faker.random.number(300)),
+    });
+  }
+  return comments;
+};
+
 async function main() {
   // Create random users
   for (let index = 0; index < 10; index++) {
@@ -35,7 +46,7 @@ async function main() {
 
   //   Create random debates
   // Standard Debate
-  for (let index = 0; index < 50; index++) {
+  for (let index = 0; index < 10; index++) {
     const owner = users[faker.random.number(9)];
     await prisma.createDebate({
       owner: { connect: { id: owner.id } },
@@ -47,31 +58,36 @@ async function main() {
   }
 
   // Duo Debate
-  // for (let index = 0; index < 25; index++) {
-  //   const fakeIndex = faker.random.number(28);
-  //   await prisma.createDebate({
-  //     ownerBlue: { connect: { id: users[fakeIndex].id } },
-  //     ownerRed: { connect: { id: users[fakeIndex + 1].id } },
-  //     content: faker.lorem.paragraph(),
-  //     type: "DUO",
-  //     blueVotes: { connect: randomUserList({ users }) },
-  //     redVotes: { connect: randomUserList({ users }) },
-  //   });
-  // }
+  for (let index = 0; index < 5; index++) {
+    const fakeIndex = faker.random.number(8);
+    await prisma.createDebate({
+      ownerBlue: { connect: { id: users[fakeIndex].id } },
+      ownerRed: { connect: { id: users[fakeIndex + 1].id } },
+      content: faker.lorem.paragraph(),
+      type: "DUO",
+      blueVotes: { connect: randomUserList({ users }) },
+      redVotes: { connect: randomUserList({ users }) },
+    });
+  }
 
-  //   const standardDebates = await prisma.debates({ where: { type: "STANDARD" } });
-  //   const duoDebates = await prisma.debates({ where: { type: "DUO" } });
+  const standardDebates = await prisma.debates({ where: { type: "STANDARD" } });
+  const duoDebates = await prisma.debates({ where: { type: "DUO" } });
 
-  //   for (let index = 0; index < standardDebates.length; index++) {
-  //     const dice = faker.random.number(9) % 3 === 0;
-  //     const debate = standardDebates[index];
-  //     if (dice) {
-  //       await prisma.updateDebate({
-  //         where: { id: debate.id },
-  //         data: {},
-  //       });
-  //     }
-  //   }
+  for (let index = 0; index < standardDebates.length; index++) {
+    // const dice = faker.random.number(9) % 3 === 0;
+    const fakeIndex = faker.random.number(9);
+    const debate = standardDebates[index];
+    // if (dice) {
+    await prisma.updateDebate({
+      where: { id: debate.id },
+      data: {
+        comments: {
+          create: getRandomComments(faker.random.number(5), { users }),
+        },
+      },
+    });
+    // }
+  }
 
   // Create muddle account
   const M = await prisma.createUser({
@@ -87,7 +103,7 @@ async function main() {
     await prisma.createDebate({
       owner: { connect: { pseudo: "Muddle" } },
       content: faker.lorem.paragraph(),
-      type: "STANDARD",
+      type: "MUDDLE",
     });
   }
 

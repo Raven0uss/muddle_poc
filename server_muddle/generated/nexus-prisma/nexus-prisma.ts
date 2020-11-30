@@ -199,7 +199,7 @@ export interface NexusPrismaTypes {
       AdTargetUpdateInput: AdTargetUpdateInputInputObject
       AdTargetUpdateManyMutationInput: AdTargetUpdateManyMutationInputInputObject
       CommentCreateInput: CommentCreateInputInputObject
-      UserCreateManyInput: UserCreateManyInputInputObject
+      UserCreateOneInput: UserCreateOneInputInputObject
       UserCreateInput: UserCreateInputInputObject
       UserCreateManyWithoutFollowingInput: UserCreateManyWithoutFollowingInputInputObject
       UserCreateWithoutFollowingInput: UserCreateWithoutFollowingInputInputObject
@@ -227,9 +227,9 @@ export interface NexusPrismaTypes {
       DebateCreateInput: DebateCreateInputInputObject
       CommentCreateManyWithoutDebateInput: CommentCreateManyWithoutDebateInputInputObject
       CommentCreateWithoutDebateInput: CommentCreateWithoutDebateInputInputObject
+      UserCreateManyInput: UserCreateManyInputInputObject
       ReportCreateManyWithoutCommentInput: ReportCreateManyWithoutCommentInputInputObject
       ReportCreateWithoutCommentInput: ReportCreateWithoutCommentInputInputObject
-      UserCreateOneInput: UserCreateOneInputInputObject
       DebateCreateOneWithoutReportsInput: DebateCreateOneWithoutReportsInputInputObject
       DebateCreateWithoutReportsInput: DebateCreateWithoutReportsInputInputObject
       CommentCreateOneInput: CommentCreateOneInputInputObject
@@ -252,8 +252,7 @@ export interface NexusPrismaTypes {
       DebateCreateOneWithoutInteractionsInput: DebateCreateOneWithoutInteractionsInputInputObject
       DebateCreateWithoutInteractionsInput: DebateCreateWithoutInteractionsInputInputObject
       CommentUpdateInput: CommentUpdateInputInputObject
-      UserUpdateManyInput: UserUpdateManyInputInputObject
-      UserUpdateWithWhereUniqueNestedInput: UserUpdateWithWhereUniqueNestedInputInputObject
+      UserUpdateOneRequiredInput: UserUpdateOneRequiredInputInputObject
       UserUpdateDataInput: UserUpdateDataInputInputObject
       UserUpdateManyWithoutFollowingInput: UserUpdateManyWithoutFollowingInputInputObject
       UserUpdateWithWhereUniqueWithoutFollowingInput: UserUpdateWithWhereUniqueWithoutFollowingInputInputObject
@@ -290,6 +289,12 @@ export interface NexusPrismaTypes {
       CommentUpdateManyWithoutDebateInput: CommentUpdateManyWithoutDebateInputInputObject
       CommentUpdateWithWhereUniqueWithoutDebateInput: CommentUpdateWithWhereUniqueWithoutDebateInputInputObject
       CommentUpdateWithoutDebateDataInput: CommentUpdateWithoutDebateDataInputInputObject
+      UserUpdateManyInput: UserUpdateManyInputInputObject
+      UserUpdateWithWhereUniqueNestedInput: UserUpdateWithWhereUniqueNestedInputInputObject
+      UserUpsertWithWhereUniqueNestedInput: UserUpsertWithWhereUniqueNestedInputInputObject
+      UserScalarWhereInput: UserScalarWhereInputInputObject
+      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
+      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
       ReportUpdateManyWithoutCommentInput: ReportUpdateManyWithoutCommentInputInputObject
       ReportUpdateWithWhereUniqueWithoutCommentInput: ReportUpdateWithWhereUniqueWithoutCommentInputInputObject
       ReportUpdateWithoutCommentDataInput: ReportUpdateWithoutCommentDataInputInputObject
@@ -322,7 +327,6 @@ export interface NexusPrismaTypes {
       MessageUpdateManyWithoutConversationInput: MessageUpdateManyWithoutConversationInputInputObject
       MessageUpdateWithWhereUniqueWithoutConversationInput: MessageUpdateWithWhereUniqueWithoutConversationInputInputObject
       MessageUpdateWithoutConversationDataInput: MessageUpdateWithoutConversationDataInputInputObject
-      UserUpdateOneRequiredInput: UserUpdateOneRequiredInputInputObject
       MessageUpsertWithWhereUniqueWithoutConversationInput: MessageUpsertWithWhereUniqueWithoutConversationInputInputObject
       MessageScalarWhereInput: MessageScalarWhereInputInputObject
       MessageUpdateManyWithWhereNestedInput: MessageUpdateManyWithWhereNestedInputInputObject
@@ -364,13 +368,9 @@ export interface NexusPrismaTypes {
       UserUpsertWithoutDebatesBlueInput: UserUpsertWithoutDebatesBlueInputInputObject
       DebateUpsertWithWhereUniqueWithoutOwnerInput: DebateUpsertWithWhereUniqueWithoutOwnerInputInputObject
       UserUpsertWithWhereUniqueWithoutBlockedInput: UserUpsertWithWhereUniqueWithoutBlockedInputInputObject
-      UserScalarWhereInput: UserScalarWhereInputInputObject
-      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
-      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
       UserUpsertWithWhereUniqueWithoutFollowersInput: UserUpsertWithWhereUniqueWithoutFollowersInputInputObject
       UserUpsertWithWhereUniqueWithoutBlockingInput: UserUpsertWithWhereUniqueWithoutBlockingInputInputObject
       UserUpsertWithWhereUniqueWithoutFollowingInput: UserUpsertWithWhereUniqueWithoutFollowingInputInputObject
-      UserUpsertWithWhereUniqueNestedInput: UserUpsertWithWhereUniqueNestedInputInputObject
       CommentUpdateManyMutationInput: CommentUpdateManyMutationInputInputObject
       ConversationCreateInput: ConversationCreateInputInputObject
       UserCreateManyWithoutConversationsInput: UserCreateManyWithoutConversationsInputInputObject
@@ -1716,12 +1716,17 @@ export interface CommentFieldDetails {
     resolve: undefined
   }
   from: {
-    type: 'String'
+    type: 'User'
     args: {}
     description: string
     list: undefined
     nullable: false
-    resolve: undefined
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
   }
   content: {
     type: 'String'
@@ -6009,14 +6014,12 @@ export interface CommentSubscriptionPayloadFieldDetails {
 type CommentPreviousValuesObject =
   | CommentPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'from', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type CommentPreviousValuesFields =
   | 'id'
-  | 'from'
   | 'content'
   | 'createdAt'
   | 'updatedAt'
@@ -6028,14 +6031,6 @@ type CommentPreviousValuesFields =
 export interface CommentPreviousValuesFieldDetails {
   id: {
     type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  from: {
-    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -8062,20 +8057,7 @@ export interface CommentWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  from?: string | null
-  from_not?: string | null
-  from_in?: string[]
-  from_not_in?: string[]
-  from_lt?: string | null
-  from_lte?: string | null
-  from_gt?: string | null
-  from_gte?: string | null
-  from_contains?: string | null
-  from_not_contains?: string | null
-  from_starts_with?: string | null
-  from_not_starts_with?: string | null
-  from_ends_with?: string | null
-  from_not_ends_with?: string | null
+  from?: UserWhereInput | null
   content?: string | null
   content_not?: string | null
   content_in?: string[]
@@ -8129,19 +8111,6 @@ export type CommentWhereInputInputObject =
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
   | { name: 'from', alias?: string  } 
-  | { name: 'from_not', alias?: string  } 
-  | { name: 'from_in', alias?: string  } 
-  | { name: 'from_not_in', alias?: string  } 
-  | { name: 'from_lt', alias?: string  } 
-  | { name: 'from_lte', alias?: string  } 
-  | { name: 'from_gt', alias?: string  } 
-  | { name: 'from_gte', alias?: string  } 
-  | { name: 'from_contains', alias?: string  } 
-  | { name: 'from_not_contains', alias?: string  } 
-  | { name: 'from_starts_with', alias?: string  } 
-  | { name: 'from_not_starts_with', alias?: string  } 
-  | { name: 'from_ends_with', alias?: string  } 
-  | { name: 'from_not_ends_with', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'content_not', alias?: string  } 
   | { name: 'content_in', alias?: string  } 
@@ -9048,7 +9017,7 @@ export type AdTargetUpdateManyMutationInputInputObject =
   
 export interface CommentCreateInput {
   id?: string | null
-  from?: string
+  from?: UserCreateOneInput
   content?: string
   likes?: UserCreateManyInput | null
   dislikes?: UserCreateManyInput | null
@@ -9065,12 +9034,12 @@ export type CommentCreateInputInputObject =
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   
-export interface UserCreateManyInput {
-  create?: UserCreateInput[]
-  connect?: UserWhereUniqueInput[]
+export interface UserCreateOneInput {
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
 }
-export type UserCreateManyInputInputObject =
-  | Extract<keyof UserCreateManyInput, string>
+export type UserCreateOneInputInputObject =
+  | Extract<keyof UserCreateOneInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   
@@ -9784,7 +9753,7 @@ export type CommentCreateManyWithoutDebateInputInputObject =
   
 export interface CommentCreateWithoutDebateInput {
   id?: string | null
-  from?: string
+  from?: UserCreateOneInput
   content?: string
   likes?: UserCreateManyInput | null
   dislikes?: UserCreateManyInput | null
@@ -9798,6 +9767,15 @@ export type CommentCreateWithoutDebateInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
+  
+export interface UserCreateManyInput {
+  create?: UserCreateInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyInputInputObject =
+  | Extract<keyof UserCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
   
 export interface ReportCreateManyWithoutCommentInput {
   create?: ReportCreateWithoutCommentInput[]
@@ -9828,15 +9806,6 @@ export type ReportCreateWithoutCommentInputInputObject =
   | { name: 'reasonText', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'treated', alias?: string  } 
-  
-export interface UserCreateOneInput {
-  create?: UserCreateInput | null
-  connect?: UserWhereUniqueInput | null
-}
-export type UserCreateOneInputInputObject =
-  | Extract<keyof UserCreateOneInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
   
 export interface DebateCreateOneWithoutReportsInput {
   create?: DebateCreateWithoutReportsInput | null
@@ -10060,7 +10029,7 @@ export type CommentCreateOneWithoutReportsInputInputObject =
   
 export interface CommentCreateWithoutReportsInput {
   id?: string | null
-  from?: string
+  from?: UserCreateOneInput
   content?: string
   likes?: UserCreateManyInput | null
   dislikes?: UserCreateManyInput | null
@@ -10198,7 +10167,7 @@ export type DebateCreateWithoutInteractionsInputInputObject =
   | { name: 'crowned', alias?: string  } 
   
 export interface CommentUpdateInput {
-  from?: string | null
+  from?: UserUpdateOneRequiredInput | null
   content?: string | null
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
@@ -10214,37 +10183,18 @@ export type CommentUpdateInputInputObject =
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[]
-  update?: UserUpdateWithWhereUniqueNestedInput[]
-  upsert?: UserUpsertWithWhereUniqueNestedInput[]
-  delete?: UserWhereUniqueInput[]
-  connect?: UserWhereUniqueInput[]
-  set?: UserWhereUniqueInput[]
-  disconnect?: UserWhereUniqueInput[]
-  deleteMany?: UserScalarWhereInput[]
-  updateMany?: UserUpdateManyWithWhereNestedInput[]
+export interface UserUpdateOneRequiredInput {
+  create?: UserCreateInput | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
+  connect?: UserWhereUniqueInput | null
 }
-export type UserUpdateManyInputInputObject =
-  | Extract<keyof UserUpdateManyInput, string>
+export type UserUpdateOneRequiredInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'update', alias?: string  } 
   | { name: 'upsert', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
-  | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
-  
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where?: UserWhereUniqueInput
-  data?: UserUpdateDataInput
-}
-export type UserUpdateWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof UserUpdateWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
   
 export interface UserUpdateDataInput {
   pseudo?: string | null
@@ -11168,7 +11118,7 @@ export type CommentUpdateWithWhereUniqueWithoutDebateInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface CommentUpdateWithoutDebateDataInput {
-  from?: string | null
+  from?: UserUpdateOneRequiredInput | null
   content?: string | null
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
@@ -11181,6 +11131,392 @@ export type CommentUpdateWithoutDebateDataInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
+  
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[]
+  update?: UserUpdateWithWhereUniqueNestedInput[]
+  upsert?: UserUpsertWithWhereUniqueNestedInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyInputInputObject =
+  | Extract<keyof UserUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateDataInput
+}
+export type UserUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateDataInput
+  create?: UserCreateInput
+}
+export type UserUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  pseudo?: string | null
+  pseudo_not?: string | null
+  pseudo_in?: string[]
+  pseudo_not_in?: string[]
+  pseudo_lt?: string | null
+  pseudo_lte?: string | null
+  pseudo_gt?: string | null
+  pseudo_gte?: string | null
+  pseudo_contains?: string | null
+  pseudo_not_contains?: string | null
+  pseudo_starts_with?: string | null
+  pseudo_not_starts_with?: string | null
+  pseudo_ends_with?: string | null
+  pseudo_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
+  birthdate?: string | null
+  birthdate_not?: string | null
+  birthdate_in?: string[]
+  birthdate_not_in?: string[]
+  birthdate_lt?: string | null
+  birthdate_lte?: string | null
+  birthdate_gt?: string | null
+  birthdate_gte?: string | null
+  role?: prisma.Role | null
+  role_not?: prisma.Role | null
+  role_in?: prisma.Role[]
+  role_not_in?: prisma.Role[]
+  certified?: boolean | null
+  certified_not?: boolean | null
+  gender?: prisma.Gender | null
+  gender_not?: prisma.Gender | null
+  gender_in?: prisma.Gender[]
+  gender_not_in?: prisma.Gender[]
+  profilePicture?: string | null
+  profilePicture_not?: string | null
+  profilePicture_in?: string[]
+  profilePicture_not_in?: string[]
+  profilePicture_lt?: string | null
+  profilePicture_lte?: string | null
+  profilePicture_gt?: string | null
+  profilePicture_gte?: string | null
+  profilePicture_contains?: string | null
+  profilePicture_not_contains?: string | null
+  profilePicture_starts_with?: string | null
+  profilePicture_not_starts_with?: string | null
+  profilePicture_ends_with?: string | null
+  profilePicture_not_ends_with?: string | null
+  coverPicture?: string | null
+  coverPicture_not?: string | null
+  coverPicture_in?: string[]
+  coverPicture_not_in?: string[]
+  coverPicture_lt?: string | null
+  coverPicture_lte?: string | null
+  coverPicture_gt?: string | null
+  coverPicture_gte?: string | null
+  coverPicture_contains?: string | null
+  coverPicture_not_contains?: string | null
+  coverPicture_starts_with?: string | null
+  coverPicture_not_starts_with?: string | null
+  coverPicture_ends_with?: string | null
+  coverPicture_not_ends_with?: string | null
+  bio?: string | null
+  bio_not?: string | null
+  bio_in?: string[]
+  bio_not_in?: string[]
+  bio_lt?: string | null
+  bio_lte?: string | null
+  bio_gt?: string | null
+  bio_gte?: string | null
+  bio_contains?: string | null
+  bio_not_contains?: string | null
+  bio_starts_with?: string | null
+  bio_not_starts_with?: string | null
+  bio_ends_with?: string | null
+  bio_not_ends_with?: string | null
+  language?: prisma.Language | null
+  language_not?: prisma.Language | null
+  language_in?: prisma.Language[]
+  language_not_in?: prisma.Language[]
+  crowned?: boolean | null
+  crowned_not?: boolean | null
+  lastConnected?: string | null
+  lastConnected_not?: string | null
+  lastConnected_in?: string[]
+  lastConnected_not_in?: string[]
+  lastConnected_lt?: string | null
+  lastConnected_lte?: string | null
+  lastConnected_gt?: string | null
+  lastConnected_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: UserScalarWhereInput[]
+  OR?: UserScalarWhereInput[]
+  NOT?: UserScalarWhereInput[]
+}
+export type UserScalarWhereInputInputObject =
+  | Extract<keyof UserScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'pseudo_not', alias?: string  } 
+  | { name: 'pseudo_in', alias?: string  } 
+  | { name: 'pseudo_not_in', alias?: string  } 
+  | { name: 'pseudo_lt', alias?: string  } 
+  | { name: 'pseudo_lte', alias?: string  } 
+  | { name: 'pseudo_gt', alias?: string  } 
+  | { name: 'pseudo_gte', alias?: string  } 
+  | { name: 'pseudo_contains', alias?: string  } 
+  | { name: 'pseudo_not_contains', alias?: string  } 
+  | { name: 'pseudo_starts_with', alias?: string  } 
+  | { name: 'pseudo_not_starts_with', alias?: string  } 
+  | { name: 'pseudo_ends_with', alias?: string  } 
+  | { name: 'pseudo_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'birthdate_not', alias?: string  } 
+  | { name: 'birthdate_in', alias?: string  } 
+  | { name: 'birthdate_not_in', alias?: string  } 
+  | { name: 'birthdate_lt', alias?: string  } 
+  | { name: 'birthdate_lte', alias?: string  } 
+  | { name: 'birthdate_gt', alias?: string  } 
+  | { name: 'birthdate_gte', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'role_not', alias?: string  } 
+  | { name: 'role_in', alias?: string  } 
+  | { name: 'role_not_in', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'certified_not', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'profilePicture_not', alias?: string  } 
+  | { name: 'profilePicture_in', alias?: string  } 
+  | { name: 'profilePicture_not_in', alias?: string  } 
+  | { name: 'profilePicture_lt', alias?: string  } 
+  | { name: 'profilePicture_lte', alias?: string  } 
+  | { name: 'profilePicture_gt', alias?: string  } 
+  | { name: 'profilePicture_gte', alias?: string  } 
+  | { name: 'profilePicture_contains', alias?: string  } 
+  | { name: 'profilePicture_not_contains', alias?: string  } 
+  | { name: 'profilePicture_starts_with', alias?: string  } 
+  | { name: 'profilePicture_not_starts_with', alias?: string  } 
+  | { name: 'profilePicture_ends_with', alias?: string  } 
+  | { name: 'profilePicture_not_ends_with', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'coverPicture_not', alias?: string  } 
+  | { name: 'coverPicture_in', alias?: string  } 
+  | { name: 'coverPicture_not_in', alias?: string  } 
+  | { name: 'coverPicture_lt', alias?: string  } 
+  | { name: 'coverPicture_lte', alias?: string  } 
+  | { name: 'coverPicture_gt', alias?: string  } 
+  | { name: 'coverPicture_gte', alias?: string  } 
+  | { name: 'coverPicture_contains', alias?: string  } 
+  | { name: 'coverPicture_not_contains', alias?: string  } 
+  | { name: 'coverPicture_starts_with', alias?: string  } 
+  | { name: 'coverPicture_not_starts_with', alias?: string  } 
+  | { name: 'coverPicture_ends_with', alias?: string  } 
+  | { name: 'coverPicture_not_ends_with', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'bio_not', alias?: string  } 
+  | { name: 'bio_in', alias?: string  } 
+  | { name: 'bio_not_in', alias?: string  } 
+  | { name: 'bio_lt', alias?: string  } 
+  | { name: 'bio_lte', alias?: string  } 
+  | { name: 'bio_gt', alias?: string  } 
+  | { name: 'bio_gte', alias?: string  } 
+  | { name: 'bio_contains', alias?: string  } 
+  | { name: 'bio_not_contains', alias?: string  } 
+  | { name: 'bio_starts_with', alias?: string  } 
+  | { name: 'bio_not_starts_with', alias?: string  } 
+  | { name: 'bio_ends_with', alias?: string  } 
+  | { name: 'bio_not_ends_with', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'language_not', alias?: string  } 
+  | { name: 'language_in', alias?: string  } 
+  | { name: 'language_not_in', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'crowned_not', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'lastConnected_not', alias?: string  } 
+  | { name: 'lastConnected_in', alias?: string  } 
+  | { name: 'lastConnected_not_in', alias?: string  } 
+  | { name: 'lastConnected_lt', alias?: string  } 
+  | { name: 'lastConnected_lte', alias?: string  } 
+  | { name: 'lastConnected_gt', alias?: string  } 
+  | { name: 'lastConnected_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserUpdateManyWithWhereNestedInput {
+  where?: UserScalarWhereInput
+  data?: UserUpdateManyDataInput
+}
+export type UserUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateManyDataInput {
+  pseudo?: string | null
+  email?: string | null
+  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  lastConnected?: string | null
+}
+export type UserUpdateManyDataInputInputObject =
+  | Extract<keyof UserUpdateManyDataInput, string>
+  | { name: 'pseudo', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
   
 export interface ReportUpdateManyWithoutCommentInput {
   create?: ReportCreateWithoutCommentInput[]
@@ -11333,7 +11669,7 @@ export type CommentUpdateOneInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface CommentUpdateDataInput {
-  from?: string | null
+  from?: UserUpdateOneRequiredInput | null
   content?: string | null
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
@@ -11470,7 +11806,7 @@ export type CommentUpdateOneWithoutReportsInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface CommentUpdateWithoutReportsDataInput {
-  from?: string | null
+  from?: UserUpdateOneRequiredInput | null
   content?: string | null
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
@@ -11829,19 +12165,6 @@ export type MessageUpdateWithoutConversationDataInputInputObject =
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
-  
-export interface UserUpdateOneRequiredInput {
-  create?: UserCreateInput | null
-  update?: UserUpdateDataInput | null
-  upsert?: UserUpsertNestedInput | null
-  connect?: UserWhereUniqueInput | null
-}
-export type UserUpdateOneRequiredInputInputObject =
-  | Extract<keyof UserUpdateOneRequiredInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
   
 export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   where?: MessageWhereUniqueInput
@@ -12230,20 +12553,6 @@ export interface CommentScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  from?: string | null
-  from_not?: string | null
-  from_in?: string[]
-  from_not_in?: string[]
-  from_lt?: string | null
-  from_lte?: string | null
-  from_gt?: string | null
-  from_gte?: string | null
-  from_contains?: string | null
-  from_not_contains?: string | null
-  from_starts_with?: string | null
-  from_not_starts_with?: string | null
-  from_ends_with?: string | null
-  from_not_ends_with?: string | null
   content?: string | null
   content_not?: string | null
   content_in?: string[]
@@ -12294,20 +12603,6 @@ export type CommentScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'from', alias?: string  } 
-  | { name: 'from_not', alias?: string  } 
-  | { name: 'from_in', alias?: string  } 
-  | { name: 'from_not_in', alias?: string  } 
-  | { name: 'from_lt', alias?: string  } 
-  | { name: 'from_lte', alias?: string  } 
-  | { name: 'from_gt', alias?: string  } 
-  | { name: 'from_gte', alias?: string  } 
-  | { name: 'from_contains', alias?: string  } 
-  | { name: 'from_not_contains', alias?: string  } 
-  | { name: 'from_starts_with', alias?: string  } 
-  | { name: 'from_not_starts_with', alias?: string  } 
-  | { name: 'from_ends_with', alias?: string  } 
-  | { name: 'from_not_ends_with', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'content_not', alias?: string  } 
   | { name: 'content_in', alias?: string  } 
@@ -12352,12 +12647,10 @@ export type CommentUpdateManyWithWhereNestedInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface CommentUpdateManyDataInput {
-  from?: string | null
   content?: string | null
 }
 export type CommentUpdateManyDataInputInputObject =
   | Extract<keyof CommentUpdateManyDataInput, string>
-  | { name: 'from', alias?: string  } 
   | { name: 'content', alias?: string  } 
   
 export interface DebateUpsertNestedInput {
@@ -12826,349 +13119,6 @@ export type UserUpsertWithWhereUniqueWithoutBlockedInputInputObject =
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface UserScalarWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  pseudo?: string | null
-  pseudo_not?: string | null
-  pseudo_in?: string[]
-  pseudo_not_in?: string[]
-  pseudo_lt?: string | null
-  pseudo_lte?: string | null
-  pseudo_gt?: string | null
-  pseudo_gte?: string | null
-  pseudo_contains?: string | null
-  pseudo_not_contains?: string | null
-  pseudo_starts_with?: string | null
-  pseudo_not_starts_with?: string | null
-  pseudo_ends_with?: string | null
-  pseudo_not_ends_with?: string | null
-  email?: string | null
-  email_not?: string | null
-  email_in?: string[]
-  email_not_in?: string[]
-  email_lt?: string | null
-  email_lte?: string | null
-  email_gt?: string | null
-  email_gte?: string | null
-  email_contains?: string | null
-  email_not_contains?: string | null
-  email_starts_with?: string | null
-  email_not_starts_with?: string | null
-  email_ends_with?: string | null
-  email_not_ends_with?: string | null
-  password?: string | null
-  password_not?: string | null
-  password_in?: string[]
-  password_not_in?: string[]
-  password_lt?: string | null
-  password_lte?: string | null
-  password_gt?: string | null
-  password_gte?: string | null
-  password_contains?: string | null
-  password_not_contains?: string | null
-  password_starts_with?: string | null
-  password_not_starts_with?: string | null
-  password_ends_with?: string | null
-  password_not_ends_with?: string | null
-  birthdate?: string | null
-  birthdate_not?: string | null
-  birthdate_in?: string[]
-  birthdate_not_in?: string[]
-  birthdate_lt?: string | null
-  birthdate_lte?: string | null
-  birthdate_gt?: string | null
-  birthdate_gte?: string | null
-  role?: prisma.Role | null
-  role_not?: prisma.Role | null
-  role_in?: prisma.Role[]
-  role_not_in?: prisma.Role[]
-  certified?: boolean | null
-  certified_not?: boolean | null
-  gender?: prisma.Gender | null
-  gender_not?: prisma.Gender | null
-  gender_in?: prisma.Gender[]
-  gender_not_in?: prisma.Gender[]
-  profilePicture?: string | null
-  profilePicture_not?: string | null
-  profilePicture_in?: string[]
-  profilePicture_not_in?: string[]
-  profilePicture_lt?: string | null
-  profilePicture_lte?: string | null
-  profilePicture_gt?: string | null
-  profilePicture_gte?: string | null
-  profilePicture_contains?: string | null
-  profilePicture_not_contains?: string | null
-  profilePicture_starts_with?: string | null
-  profilePicture_not_starts_with?: string | null
-  profilePicture_ends_with?: string | null
-  profilePicture_not_ends_with?: string | null
-  coverPicture?: string | null
-  coverPicture_not?: string | null
-  coverPicture_in?: string[]
-  coverPicture_not_in?: string[]
-  coverPicture_lt?: string | null
-  coverPicture_lte?: string | null
-  coverPicture_gt?: string | null
-  coverPicture_gte?: string | null
-  coverPicture_contains?: string | null
-  coverPicture_not_contains?: string | null
-  coverPicture_starts_with?: string | null
-  coverPicture_not_starts_with?: string | null
-  coverPicture_ends_with?: string | null
-  coverPicture_not_ends_with?: string | null
-  bio?: string | null
-  bio_not?: string | null
-  bio_in?: string[]
-  bio_not_in?: string[]
-  bio_lt?: string | null
-  bio_lte?: string | null
-  bio_gt?: string | null
-  bio_gte?: string | null
-  bio_contains?: string | null
-  bio_not_contains?: string | null
-  bio_starts_with?: string | null
-  bio_not_starts_with?: string | null
-  bio_ends_with?: string | null
-  bio_not_ends_with?: string | null
-  language?: prisma.Language | null
-  language_not?: prisma.Language | null
-  language_in?: prisma.Language[]
-  language_not_in?: prisma.Language[]
-  crowned?: boolean | null
-  crowned_not?: boolean | null
-  lastConnected?: string | null
-  lastConnected_not?: string | null
-  lastConnected_in?: string[]
-  lastConnected_not_in?: string[]
-  lastConnected_lt?: string | null
-  lastConnected_lte?: string | null
-  lastConnected_gt?: string | null
-  lastConnected_gte?: string | null
-  createdAt?: string | null
-  createdAt_not?: string | null
-  createdAt_in?: string[]
-  createdAt_not_in?: string[]
-  createdAt_lt?: string | null
-  createdAt_lte?: string | null
-  createdAt_gt?: string | null
-  createdAt_gte?: string | null
-  updatedAt?: string | null
-  updatedAt_not?: string | null
-  updatedAt_in?: string[]
-  updatedAt_not_in?: string[]
-  updatedAt_lt?: string | null
-  updatedAt_lte?: string | null
-  updatedAt_gt?: string | null
-  updatedAt_gte?: string | null
-  AND?: UserScalarWhereInput[]
-  OR?: UserScalarWhereInput[]
-  NOT?: UserScalarWhereInput[]
-}
-export type UserScalarWhereInputInputObject =
-  | Extract<keyof UserScalarWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
-  | { name: 'pseudo_not', alias?: string  } 
-  | { name: 'pseudo_in', alias?: string  } 
-  | { name: 'pseudo_not_in', alias?: string  } 
-  | { name: 'pseudo_lt', alias?: string  } 
-  | { name: 'pseudo_lte', alias?: string  } 
-  | { name: 'pseudo_gt', alias?: string  } 
-  | { name: 'pseudo_gte', alias?: string  } 
-  | { name: 'pseudo_contains', alias?: string  } 
-  | { name: 'pseudo_not_contains', alias?: string  } 
-  | { name: 'pseudo_starts_with', alias?: string  } 
-  | { name: 'pseudo_not_starts_with', alias?: string  } 
-  | { name: 'pseudo_ends_with', alias?: string  } 
-  | { name: 'pseudo_not_ends_with', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'email_not', alias?: string  } 
-  | { name: 'email_in', alias?: string  } 
-  | { name: 'email_not_in', alias?: string  } 
-  | { name: 'email_lt', alias?: string  } 
-  | { name: 'email_lte', alias?: string  } 
-  | { name: 'email_gt', alias?: string  } 
-  | { name: 'email_gte', alias?: string  } 
-  | { name: 'email_contains', alias?: string  } 
-  | { name: 'email_not_contains', alias?: string  } 
-  | { name: 'email_starts_with', alias?: string  } 
-  | { name: 'email_not_starts_with', alias?: string  } 
-  | { name: 'email_ends_with', alias?: string  } 
-  | { name: 'email_not_ends_with', alias?: string  } 
-  | { name: 'password', alias?: string  } 
-  | { name: 'password_not', alias?: string  } 
-  | { name: 'password_in', alias?: string  } 
-  | { name: 'password_not_in', alias?: string  } 
-  | { name: 'password_lt', alias?: string  } 
-  | { name: 'password_lte', alias?: string  } 
-  | { name: 'password_gt', alias?: string  } 
-  | { name: 'password_gte', alias?: string  } 
-  | { name: 'password_contains', alias?: string  } 
-  | { name: 'password_not_contains', alias?: string  } 
-  | { name: 'password_starts_with', alias?: string  } 
-  | { name: 'password_not_starts_with', alias?: string  } 
-  | { name: 'password_ends_with', alias?: string  } 
-  | { name: 'password_not_ends_with', alias?: string  } 
-  | { name: 'birthdate', alias?: string  } 
-  | { name: 'birthdate_not', alias?: string  } 
-  | { name: 'birthdate_in', alias?: string  } 
-  | { name: 'birthdate_not_in', alias?: string  } 
-  | { name: 'birthdate_lt', alias?: string  } 
-  | { name: 'birthdate_lte', alias?: string  } 
-  | { name: 'birthdate_gt', alias?: string  } 
-  | { name: 'birthdate_gte', alias?: string  } 
-  | { name: 'role', alias?: string  } 
-  | { name: 'role_not', alias?: string  } 
-  | { name: 'role_in', alias?: string  } 
-  | { name: 'role_not_in', alias?: string  } 
-  | { name: 'certified', alias?: string  } 
-  | { name: 'certified_not', alias?: string  } 
-  | { name: 'gender', alias?: string  } 
-  | { name: 'gender_not', alias?: string  } 
-  | { name: 'gender_in', alias?: string  } 
-  | { name: 'gender_not_in', alias?: string  } 
-  | { name: 'profilePicture', alias?: string  } 
-  | { name: 'profilePicture_not', alias?: string  } 
-  | { name: 'profilePicture_in', alias?: string  } 
-  | { name: 'profilePicture_not_in', alias?: string  } 
-  | { name: 'profilePicture_lt', alias?: string  } 
-  | { name: 'profilePicture_lte', alias?: string  } 
-  | { name: 'profilePicture_gt', alias?: string  } 
-  | { name: 'profilePicture_gte', alias?: string  } 
-  | { name: 'profilePicture_contains', alias?: string  } 
-  | { name: 'profilePicture_not_contains', alias?: string  } 
-  | { name: 'profilePicture_starts_with', alias?: string  } 
-  | { name: 'profilePicture_not_starts_with', alias?: string  } 
-  | { name: 'profilePicture_ends_with', alias?: string  } 
-  | { name: 'profilePicture_not_ends_with', alias?: string  } 
-  | { name: 'coverPicture', alias?: string  } 
-  | { name: 'coverPicture_not', alias?: string  } 
-  | { name: 'coverPicture_in', alias?: string  } 
-  | { name: 'coverPicture_not_in', alias?: string  } 
-  | { name: 'coverPicture_lt', alias?: string  } 
-  | { name: 'coverPicture_lte', alias?: string  } 
-  | { name: 'coverPicture_gt', alias?: string  } 
-  | { name: 'coverPicture_gte', alias?: string  } 
-  | { name: 'coverPicture_contains', alias?: string  } 
-  | { name: 'coverPicture_not_contains', alias?: string  } 
-  | { name: 'coverPicture_starts_with', alias?: string  } 
-  | { name: 'coverPicture_not_starts_with', alias?: string  } 
-  | { name: 'coverPicture_ends_with', alias?: string  } 
-  | { name: 'coverPicture_not_ends_with', alias?: string  } 
-  | { name: 'bio', alias?: string  } 
-  | { name: 'bio_not', alias?: string  } 
-  | { name: 'bio_in', alias?: string  } 
-  | { name: 'bio_not_in', alias?: string  } 
-  | { name: 'bio_lt', alias?: string  } 
-  | { name: 'bio_lte', alias?: string  } 
-  | { name: 'bio_gt', alias?: string  } 
-  | { name: 'bio_gte', alias?: string  } 
-  | { name: 'bio_contains', alias?: string  } 
-  | { name: 'bio_not_contains', alias?: string  } 
-  | { name: 'bio_starts_with', alias?: string  } 
-  | { name: 'bio_not_starts_with', alias?: string  } 
-  | { name: 'bio_ends_with', alias?: string  } 
-  | { name: 'bio_not_ends_with', alias?: string  } 
-  | { name: 'language', alias?: string  } 
-  | { name: 'language_not', alias?: string  } 
-  | { name: 'language_in', alias?: string  } 
-  | { name: 'language_not_in', alias?: string  } 
-  | { name: 'crowned', alias?: string  } 
-  | { name: 'crowned_not', alias?: string  } 
-  | { name: 'lastConnected', alias?: string  } 
-  | { name: 'lastConnected_not', alias?: string  } 
-  | { name: 'lastConnected_in', alias?: string  } 
-  | { name: 'lastConnected_not_in', alias?: string  } 
-  | { name: 'lastConnected_lt', alias?: string  } 
-  | { name: 'lastConnected_lte', alias?: string  } 
-  | { name: 'lastConnected_gt', alias?: string  } 
-  | { name: 'lastConnected_gte', alias?: string  } 
-  | { name: 'createdAt', alias?: string  } 
-  | { name: 'createdAt_not', alias?: string  } 
-  | { name: 'createdAt_in', alias?: string  } 
-  | { name: 'createdAt_not_in', alias?: string  } 
-  | { name: 'createdAt_lt', alias?: string  } 
-  | { name: 'createdAt_lte', alias?: string  } 
-  | { name: 'createdAt_gt', alias?: string  } 
-  | { name: 'createdAt_gte', alias?: string  } 
-  | { name: 'updatedAt', alias?: string  } 
-  | { name: 'updatedAt_not', alias?: string  } 
-  | { name: 'updatedAt_in', alias?: string  } 
-  | { name: 'updatedAt_not_in', alias?: string  } 
-  | { name: 'updatedAt_lt', alias?: string  } 
-  | { name: 'updatedAt_lte', alias?: string  } 
-  | { name: 'updatedAt_gt', alias?: string  } 
-  | { name: 'updatedAt_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface UserUpdateManyWithWhereNestedInput {
-  where?: UserScalarWhereInput
-  data?: UserUpdateManyDataInput
-}
-export type UserUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface UserUpdateManyDataInput {
-  pseudo?: string | null
-  email?: string | null
-  password?: string | null
-  birthdate?: string | null
-  role?: prisma.Role | null
-  certified?: boolean | null
-  gender?: prisma.Gender | null
-  profilePicture?: string | null
-  coverPicture?: string | null
-  bio?: string | null
-  language?: prisma.Language | null
-  crowned?: boolean | null
-  lastConnected?: string | null
-}
-export type UserUpdateManyDataInputInputObject =
-  | Extract<keyof UserUpdateManyDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'password', alias?: string  } 
-  | { name: 'birthdate', alias?: string  } 
-  | { name: 'role', alias?: string  } 
-  | { name: 'certified', alias?: string  } 
-  | { name: 'gender', alias?: string  } 
-  | { name: 'profilePicture', alias?: string  } 
-  | { name: 'coverPicture', alias?: string  } 
-  | { name: 'bio', alias?: string  } 
-  | { name: 'language', alias?: string  } 
-  | { name: 'crowned', alias?: string  } 
-  | { name: 'lastConnected', alias?: string  } 
-  
 export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
   where?: UserWhereUniqueInput
   update?: UserUpdateWithoutFollowersDataInput
@@ -13202,24 +13152,11 @@ export type UserUpsertWithWhereUniqueWithoutFollowingInputInputObject =
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where?: UserWhereUniqueInput
-  update?: UserUpdateDataInput
-  create?: UserCreateInput
-}
-export type UserUpsertWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof UserUpsertWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
-  
 export interface CommentUpdateManyMutationInput {
-  from?: string | null
   content?: string | null
 }
 export type CommentUpdateManyMutationInputInputObject =
   | Extract<keyof CommentUpdateManyMutationInput, string>
-  | { name: 'from', alias?: string  } 
   | { name: 'content', alias?: string  } 
   
 export interface ConversationCreateInput {
@@ -14128,6 +14065,7 @@ export type LanguageValues =
 export type DebateTypeValues =
   | 'STANDARD'
   | 'DUO'
+  | 'MUDDLE'
   
 export type ReportTypeValues =
   | 'DEBATE'
@@ -14208,8 +14146,6 @@ export type DebateOrderByInputValues =
 export type CommentOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'from_ASC'
-  | 'from_DESC'
   | 'content_ASC'
   | 'content_DESC'
   | 'createdAt_ASC'

@@ -6,16 +6,108 @@ import {
   Image,
   Text,
   Dimensions,
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
 import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useQuery, gql } from "@apollo/client";
+import DebateBox from "../Components/DebateBox";
+
+const GET_DEBATES = gql`
+  query($first: Int!, $skip: Int, $filter: DebateType) {
+    debates(first: $first, skip: $skip, where: { type: $filter }) {
+      id
+      content
+      type
+      owner {
+        id
+        pseudo
+      }
+      ownerBlue {
+        id
+        pseudo
+      }
+      ownerRed {
+        id
+        pseudo
+      }
+      positives {
+        id
+      }
+      negatives {
+        id
+      }
+      redVotes {
+        id
+      }
+      blueVotes {
+        id
+      }
+      comments {
+        id
+        from {
+          pseudo
+        }
+        content
+        likes {
+          id
+        }
+        dislikes {
+          id
+        }
+      }
+    }
+  }
+`;
+
+const frequency = 20;
+let nbDebates = frequency;
+
+const renderItem = ({ item }, navigation) => {
+  return <DebateBox debate={item} navigation={navigation} />;
+};
+
+const applyFilter = ({ debates, debateType }) => {
+  if (debateType === "DUO")
+    return debates.filter((debate) => debate.type === "DUO");
+  if (debateType === "MUDDLE")
+    return debates.filter((debate) => debate.type === "MUDDLE");
+  if (debateType === "BEST_DEBATES")
+    return debates.filter((debate) => debate.type === "STANDARD");
+  return debates;
+};
 
 const DebatesFiltered = (props) => {
-  const [debateType, setDebateType] = React.useState("DUO_DEBATES");
+  const [debates, setDebates] = React.useState([]);
+  const [debateType, setDebateType] = React.useState("DUO");
+
+  const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
+    variables: {
+      first: nbDebates,
+      ...(debateType === "BEST_DEBATES"
+        ? { filter: "STANDARD" }
+        : { filter: debateType }),
+    },
+    onCompleted: (response) => {
+      const { debates: queryResult } = response;
+      setDebates(queryResult);
+    },
+  });
+
   const { navigation, route } = props;
+
+  if (debates.length === 0 && loading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
   return (
     <View style={styles.container}>
       <Header
@@ -69,21 +161,25 @@ const DebatesFiltered = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={
-              debateType === "DUO_DEBATES"
+              debateType === "DUO"
                 ? styles.buttonActivate
                 : styles.buttonDefaultState
             }
-            onPress={() => setDebateType("DUO_DEBATES")}
+            onPress={() => {
+              setDebateType("DUO");
+            }}
           >
             <Text style={styles.buttonTextDefaultState}>Les debats en duo</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={
-              debateType === "GENERATED_DEBATES"
+              debateType === "MUDDLE"
                 ? styles.buttonActivate
                 : styles.buttonDefaultState
             }
-            onPress={() => setDebateType("GENERATED_DEBATES")}
+            onPress={() => {
+              setDebateType("MUDDLE");
+            }}
           >
             <Text style={styles.buttonTextDefaultState}>
               Les debats generes
@@ -92,18 +188,37 @@ const DebatesFiltered = (props) => {
         </ScrollView>
       </View>
 
-      <ScrollView style={styles.seedContainer}>
-        <View
-          style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 100,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        ></View>
-      </ScrollView>
+      <FlatList
+        data={applyFilter({ debates, debateType })}
+        style={styles.seedContainer}
+        renderItem={(param) => renderItem(param, navigation)}
+        keyExtractor={(item) => item.id}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web") return;
+          // return ;
+          nbDebates += frequency;
+          await fetchMore({
+            variables: { first: frequency, skip: nbDebates - frequency },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { debates: moreDebates } = fetchMoreResult;
+              setDebates((previousState) =>
+                [...previousState, ...moreDebates].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => (
+          <ActivityIndicator style={{ marginBottom: 70 }} />
+        )}
+      />
     </View>
   );
 };

@@ -41,14 +41,38 @@ const GET_DEBATES = gql`
         id
         pseudo
       }
+      ownerBlue {
+        id
+        pseudo
+      }
+      ownerRed {
+        id
+        pseudo
+      }
       positives {
         id
       }
       negatives {
         id
       }
+      redVotes {
+        id
+      }
+      blueVotes {
+        id
+      }
       comments {
         id
+        from {
+          pseudo
+        }
+        content
+        likes {
+          id
+        }
+        dislikes {
+          id
+        }
       }
     }
   }

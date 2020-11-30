@@ -496,7 +496,7 @@ type BatchPayload {
 
 type Comment {
   id: ID!
-  from: String!
+  from: User!
   content: String!
   likes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   dislikes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -514,7 +514,7 @@ type CommentConnection {
 
 input CommentCreateInput {
   id: ID
-  from: String!
+  from: UserCreateOneInput!
   content: String!
   likes: UserCreateManyInput
   dislikes: UserCreateManyInput
@@ -539,7 +539,7 @@ input CommentCreateOneWithoutReportsInput {
 
 input CommentCreateWithoutDebateInput {
   id: ID
-  from: String!
+  from: UserCreateOneInput!
   content: String!
   likes: UserCreateManyInput
   dislikes: UserCreateManyInput
@@ -548,7 +548,7 @@ input CommentCreateWithoutDebateInput {
 
 input CommentCreateWithoutReportsInput {
   id: ID
-  from: String!
+  from: UserCreateOneInput!
   content: String!
   likes: UserCreateManyInput
   dislikes: UserCreateManyInput
@@ -563,8 +563,6 @@ type CommentEdge {
 enum CommentOrderByInput {
   id_ASC
   id_DESC
-  from_ASC
-  from_DESC
   content_ASC
   content_DESC
   createdAt_ASC
@@ -575,7 +573,6 @@ enum CommentOrderByInput {
 
 type CommentPreviousValues {
   id: ID!
-  from: String!
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -596,20 +593,6 @@ input CommentScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  from: String
-  from_not: String
-  from_in: [String!]
-  from_not_in: [String!]
-  from_lt: String
-  from_lte: String
-  from_gt: String
-  from_gte: String
-  from_contains: String
-  from_not_contains: String
-  from_starts_with: String
-  from_not_starts_with: String
-  from_ends_with: String
-  from_not_ends_with: String
   content: String
   content_not: String
   content_in: [String!]
@@ -662,7 +645,7 @@ input CommentSubscriptionWhereInput {
 }
 
 input CommentUpdateDataInput {
-  from: String
+  from: UserUpdateOneRequiredInput
   content: String
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
@@ -671,7 +654,7 @@ input CommentUpdateDataInput {
 }
 
 input CommentUpdateInput {
-  from: String
+  from: UserUpdateOneRequiredInput
   content: String
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
@@ -680,12 +663,10 @@ input CommentUpdateInput {
 }
 
 input CommentUpdateManyDataInput {
-  from: String
   content: String
 }
 
 input CommentUpdateManyMutationInput {
-  from: String
   content: String
 }
 
@@ -725,7 +706,7 @@ input CommentUpdateOneWithoutReportsInput {
 }
 
 input CommentUpdateWithoutDebateDataInput {
-  from: String
+  from: UserUpdateOneRequiredInput
   content: String
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
@@ -733,7 +714,7 @@ input CommentUpdateWithoutDebateDataInput {
 }
 
 input CommentUpdateWithoutReportsDataInput {
-  from: String
+  from: UserUpdateOneRequiredInput
   content: String
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
@@ -776,20 +757,7 @@ input CommentWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  from: String
-  from_not: String
-  from_in: [String!]
-  from_not_in: [String!]
-  from_lt: String
-  from_lte: String
-  from_gt: String
-  from_gte: String
-  from_contains: String
-  from_not_contains: String
-  from_starts_with: String
-  from_not_starts_with: String
-  from_ends_with: String
-  from_not_ends_with: String
+  from: UserWhereInput
   content: String
   content_not: String
   content_in: [String!]
@@ -1365,6 +1333,7 @@ input DebateSubscriptionWhereInput {
 enum DebateType {
   STANDARD
   DUO
+  MUDDLE
 }
 
 input DebateUpdateDataInput {

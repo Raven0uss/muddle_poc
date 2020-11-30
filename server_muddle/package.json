@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/index.js"
+    "dev": "nodemon --exec babel-node ./src/index.js",
+    "reseed": "cd prisma ; prisma reset --force ; prisma seed ; cd -"
   },
   "keywords": [],
   "author": "",

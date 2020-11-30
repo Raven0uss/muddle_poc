@@ -362,7 +362,7 @@ type Comment {
   createdAt: DateTime!
   debate: Debate!
   dislikes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
-  from: String!
+  from: User!
   id: ID!
   likes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
@@ -373,7 +373,7 @@ input CommentCreateInput {
   content: String!
   debate: DebateCreateOneWithoutCommentsInput!
   dislikes: UserCreateManyInput
-  from: String!
+  from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
   reports: ReportCreateManyWithoutCommentInput
@@ -397,7 +397,7 @@ input CommentCreateOneWithoutReportsInput {
 input CommentCreateWithoutDebateInput {
   content: String!
   dislikes: UserCreateManyInput
-  from: String!
+  from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
   reports: ReportCreateManyWithoutCommentInput
@@ -407,7 +407,7 @@ input CommentCreateWithoutReportsInput {
   content: String!
   debate: DebateCreateOneWithoutCommentsInput!
   dislikes: UserCreateManyInput
-  from: String!
+  from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
 }
@@ -417,8 +417,6 @@ enum CommentOrderByInput {
   content_DESC
   createdAt_ASC
   createdAt_DESC
-  from_ASC
-  from_DESC
   id_ASC
   id_DESC
   updatedAt_ASC
@@ -449,20 +447,6 @@ input CommentScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_not: DateTime
   createdAt_not_in: [DateTime!]
-  from: String
-  from_contains: String
-  from_ends_with: String
-  from_gt: String
-  from_gte: String
-  from_in: [String!]
-  from_lt: String
-  from_lte: String
-  from_not: String
-  from_not_contains: String
-  from_not_ends_with: String
-  from_not_in: [String!]
-  from_not_starts_with: String
-  from_starts_with: String
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -498,7 +482,7 @@ input CommentUpdateDataInput {
   content: String
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   dislikes: UserUpdateManyInput
-  from: String
+  from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
 }
@@ -507,14 +491,13 @@ input CommentUpdateInput {
   content: String
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   dislikes: UserUpdateManyInput
-  from: String
+  from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
 }
 
 input CommentUpdateManyDataInput {
   content: String
-  from: String
 }
 
 input CommentUpdateManyWithoutDebateInput {
@@ -555,7 +538,7 @@ input CommentUpdateOneWithoutReportsInput {
 input CommentUpdateWithoutDebateDataInput {
   content: String
   dislikes: UserUpdateManyInput
-  from: String
+  from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
 }
@@ -564,7 +547,7 @@ input CommentUpdateWithoutReportsDataInput {
   content: String
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   dislikes: UserUpdateManyInput
-  from: String
+  from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
 }
 
@@ -615,20 +598,7 @@ input CommentWhereInput {
   createdAt_not_in: [DateTime!]
   debate: DebateWhereInput
   dislikes_some: UserWhereInput
-  from: String
-  from_contains: String
-  from_ends_with: String
-  from_gt: String
-  from_gte: String
-  from_in: [String!]
-  from_lt: String
-  from_lte: String
-  from_not: String
-  from_not_contains: String
-  from_not_ends_with: String
-  from_not_in: [String!]
-  from_not_starts_with: String
-  from_starts_with: String
+  from: UserWhereInput
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -1122,6 +1092,7 @@ input DebateScalarWhereInput {
 
 enum DebateType {
   DUO
+  MUDDLE
   STANDARD
 }
 

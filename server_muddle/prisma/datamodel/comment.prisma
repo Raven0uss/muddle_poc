@@ -1,6 +1,6 @@
 type Comment {
   id: ID! @id
-  from: String!
+  from: User! @relation(link: INLINE, name: "From")
   content: String!
   likes: [User] @relation(link: INLINE, name: "Likes")
   dislikes: [User] @relation(link: INLINE, name: "Dislikes")

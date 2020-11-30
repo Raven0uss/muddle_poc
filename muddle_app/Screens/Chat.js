@@ -6,16 +6,117 @@ import {
   Image,
   TextInput,
   Dimensions,
+  ActivityIndicator,
+  FlatList,
+  Text,
+  SafeAreaView,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useQuery, gql } from "@apollo/client";
+import { defaultProfile } from "../CustomProperties/IconsBase64";
+
+const GET_CONVERSATIONS = gql`
+  query($first: Int!, $skip: Int) {
+    conversations(first: $first, skip: $skip) {
+      id
+      speakers {
+        id
+        pseudo
+      }
+      messages {
+        id
+        content
+        from {
+          id
+          pseudo
+        }
+        to {
+          id
+          pseudo
+        }
+      }
+    }
+  }
+`;
+
+const frequency = 20;
+let nbConversations = frequency;
+
+const renderItem = ({ item }, navigation) => {
+  console.log(item);
+  const lastMessage = item.messages[item.messages.length - 1];
+  return (
+    <TouchableOpacity>
+      <View
+        style={{
+          width: Dimensions.get("screen").width / 1.15,
+          height: 72,
+          borderRadius: 10,
+          backgroundColor: "#f7f7f7",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: 20,
+          marginBottom: 5,
+        }}
+      >
+        <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+        <View style={{ marginLeft: 40, marginTop: 10 }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+              {lastMessage.from.pseudo}
+            </Text>
+            <Text
+              style={{
+                fontSize: 10,
+                color: "#A3A3A3",
+                marginLeft: 5,
+                fontStyle: "italic",
+              }}
+            >
+              10h23
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            style={{ fontSize: 12, fontWeight: "400", marginTop: 17 }}
+          >
+            {lastMessage.content}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const Chat = (props) => {
+  const [conversations, setConversations] = React.useState([]);
   const [search, setSearch] = React.useState("");
+
+  const { data, loading, error, fetchMore } = useQuery(GET_CONVERSATIONS, {
+    variables: {
+      first: nbConversations,
+    },
+    onCompleted: (response) => {
+      const { conversations: queryResult } = response;
+      setConversations(queryResult);
+    },
+  });
+
   const { navigation, route } = props;
+
+  if (conversations.length === 0 && loading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
+
+  // console.log(conversations);
   return (
     <View style={styles.container}>
       <Header
@@ -52,7 +153,7 @@ const Chat = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#F7F7F7",
+          backgroundColor: "#FFF",
         }}
       >
         <TextInput
@@ -62,7 +163,7 @@ const Chat = (props) => {
             width: Dimensions.get("screen").width / 1.15,
             height: 40,
             borderRadius: 10,
-            backgroundColor: "#fff",
+            backgroundColor: "#f7f7f7",
             marginLeft: "auto",
             marginRight: "auto",
             padding: 10,
@@ -70,24 +171,43 @@ const Chat = (props) => {
             paddingRight: 20,
             marginBottom: 14,
             marginTop: 33,
-            marginBottom: 35
+            marginBottom: 35,
           }}
           keyboardType="default"
           onChangeText={(s) => setSearch(s)}
         />
       </View>
-      <ScrollView style={styles.seedContainer}>
-        <View
-          style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 100,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        ></View>
-      </ScrollView>
+      <FlatList
+        data={conversations}
+        style={styles.seedContainer}
+        renderItem={(param) => renderItem(param, navigation)}
+        keyExtractor={(item) => item.id}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web") return;
+          // return ;
+          nbConversations += frequency;
+          await fetchMore({
+            variables: { first: frequency, skip: nbConversations - frequency },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { conversations: moreDebates } = fetchMoreResult;
+              setConversations((previousState) =>
+                [...previousState, ...moreDebates].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => (
+          <ActivityIndicator style={{ marginBottom: 70 }} />
+        )}
+      />
     </View>
   );
 };
@@ -98,9 +218,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#F47658",
   },
   seedContainer: {
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#FFF",
     paddingLeft: 15,
     paddingRight: 15,
+  },
+  userPicture: {
+    width: 40,
+    height: 40,
+    borderRadius: 30,
+    position: "absolute",
+    zIndex: 10,
+    // marginTop: -10,
+    marginLeft: -15,
+    borderColor: "black",
+    borderWidth: 1,
   },
 });
 
