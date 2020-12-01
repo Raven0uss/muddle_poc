@@ -1,3 +1,4 @@
 type Notification {
   id: ID! @id
+  
 }

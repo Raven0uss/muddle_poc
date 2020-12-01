@@ -4,119 +4,128 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  TextInput,
   Dimensions,
-  ActivityIndicator,
-  FlatList,
   Text,
-  SafeAreaView,
+  ScrollView,
+  FlatList,
+  KeyboardAvoidingView,
+  Keyboard,
+  TextInput,
+  Platform,
 } from "react-native";
-import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
-import { muddle } from "../CustomProperties/IconsBase64";
-import { useQuery, gql } from "@apollo/client";
-import { defaultProfile } from "../CustomProperties/IconsBase64";
+import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 
-const GET_CONVERSATIONS = gql`
-  query($first: Int!, $skip: Int) {
-    conversations(first: $first, skip: $skip) {
-      id
-      speakers {
-        id
-        pseudo
-      }
-      messages {
-        id
-        content
-        from {
-          id
-          pseudo
-        }
-        to {
-          id
-          pseudo
-        }
-      }
-    }
-  }
-`;
-
-const frequency = 20;
-let nbConversations = frequency;
-
-const renderItem = ({ item }, navigation) => {
-  console.log(item);
-  const lastMessage = item.messages[item.messages.length - 1];
-  return (
-    <TouchableOpacity>
+const renderItem = ({ item }, navigation, me) => {
+  const paddingMessages = 15;
+  if (item.from.id === me.id)
+    return (
       <View
         style={{
-          width: Dimensions.get("screen").width / 1.15,
-          height: 72,
-          borderRadius: 10,
-          backgroundColor: "#f7f7f7",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: 20,
-          marginBottom: 5,
+          backgroundColor: "#F47658",
+          padding: paddingMessages,
+          paddingLeft: paddingMessages * 2,
+          paddingRight: paddingMessages * 2,
+          marginTop: 7,
+          marginBottom: 7,
+          maxWidth: Dimensions.get("screen").width / 1.5,
+          alignSelf: "flex-end",
+          borderRadius: 12,
+          borderTopRightRadius: 0,
         }}
       >
-        <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
-        <View style={{ marginLeft: 40, marginTop: 10 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontSize: 14, fontWeight: "bold" }}>
-              {lastMessage.from.pseudo}
-            </Text>
-            <Text
-              style={{
-                fontSize: 10,
-                color: "#A3A3A3",
-                marginLeft: 5,
-                fontStyle: "italic",
-              }}
-            >
-              10h23
-            </Text>
-          </View>
-          <Text
-            numberOfLines={1}
-            style={{ fontSize: 12, fontWeight: "400", marginTop: 17 }}
-          >
-            {lastMessage.content}
-          </Text>
-        </View>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 12,
+          }}
+        >
+          {item.content}
+        </Text>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 10,
+            alignSelf: "flex-end",
+            marginTop: 6,
+          }}
+        >
+          10:26
+        </Text>
       </View>
-    </TouchableOpacity>
+    );
+  return (
+    <View
+      style={{
+        backgroundColor: "#F7F7F7",
+        color: "#000",
+        padding: paddingMessages,
+        paddingLeft: paddingMessages * 2,
+        paddingRight: paddingMessages * 2,
+        marginTop: 7,
+        marginBottom: 7,
+        maxWidth: Dimensions.get("screen").width / 1.5,
+        alignSelf: "flex-start",
+        borderRadius: 12,
+        borderTopLeftRadius: 0,
+      }}
+    >
+      <Text
+        style={{
+          color: "#000",
+          fontSize: 12,
+        }}
+      >
+        {item.content}
+      </Text>
+      <Text
+        style={{
+          color: "#A3A3A3",
+          fontSize: 10,
+          alignSelf: "flex-end",
+          marginTop: 6,
+        }}
+      >
+        10:26
+      </Text>
+    </View>
   );
 };
 
 const Chat = (props) => {
-  const [conversations, setConversations] = React.useState([]);
-  const [search, setSearch] = React.useState("");
+  const [newMessage, setNewMessage] = React.useState("");
+  const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
+  // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
-  const { data, loading, error, fetchMore } = useQuery(GET_CONVERSATIONS, {
-    variables: {
-      first: nbConversations,
-    },
-    onCompleted: (response) => {
-      const { conversations: queryResult } = response;
-      setConversations(queryResult);
-    },
-  });
+  React.useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      (e) => {
+        // setKeyboardHeight(e.endCoordinates.height);
+        setKeyboardIsOpen(true);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setKeyboardIsOpen(false)
+    );
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const { navigation, route } = props;
+  const { conversation } = route.params;
 
-  if (conversations.length === 0 && loading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
+  // console.log(conversation);
 
-  // console.log(conversations);
+  // DATA TEST
+  const me = conversation.speakers[0];
+  const partner = conversation.speakers[1];
+  
   return (
     <View style={styles.container}>
       <Header
@@ -135,79 +144,136 @@ const Chat = (props) => {
               width: 50,
               height: 28,
               marginTop: 8,
+              marginLeft: -32,
               marginBottom: 10,
-              //   marginLeft: -10,
             }}
           />
         }
-        RightComponent={
-          <TouchableOpacity
-            style={{ marginTop: 5 }}
-            onPress={() => navigation.push("NewConversation")}
-          >
-            <CustomIcon name="add" size={32} />
-          </TouchableOpacity>
-        }
       />
+      {/* Header of flatlist with profile view */}
       <View
         style={{
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          backgroundColor: "#FFF",
+          backgroundColor: "#fff",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.23,
+          shadowRadius: 2.62,
+          elevation: 4,
+          alignItems: "center",
         }}
       >
-        <TextInput
-          placeholder="Rechercher une conversation"
-          value={search}
+        <View
           style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 40,
-            borderRadius: 10,
-            backgroundColor: "#f7f7f7",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginBottom: 14,
+            backgroundColor: "#F7F7F7",
+            height: 44,
+            width: 185,
             marginTop: 33,
-            marginBottom: 35,
+            marginBottom: 10,
+            borderRadius: 12,
           }}
-          keyboardType="default"
-          onChangeText={(s) => setSearch(s)}
-        />
+        >
+          <Image
+            source={{ uri: defaultProfile }}
+            style={{
+              width: 38,
+              height: 38,
+              position: "absolute",
+              marginTop: -19,
+              // borderWidth: 1,
+              borderRadius: 50,
+              alignSelf: "center",
+            }}
+          />
+          <Text
+            style={{
+              marginTop: 25,
+              alignSelf: "center",
+              fontSize: 12,
+            }}
+          >
+            {partner.pseudo}
+          </Text>
+        </View>
       </View>
+
       <FlatList
-        data={conversations}
+        data={conversation.messages}
         style={styles.seedContainer}
-        renderItem={(param) => renderItem(param, navigation)}
+        renderItem={(param) => renderItem(param, navigation, me)}
         keyExtractor={(item) => item.id}
-        onEndReachedThreshold={0.5}
-        onEndReached={async () => {
-          if (Platform.OS === "web") return;
-          // return ;
-          nbConversations += frequency;
-          await fetchMore({
-            variables: { first: frequency, skip: nbConversations - frequency },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { conversations: moreDebates } = fetchMoreResult;
-              setConversations((previousState) =>
-                [...previousState, ...moreDebates].reduce((acc, current) => {
-                  const x = acc.find((item) => item.id === current.id);
-                  if (!x) {
-                    return acc.concat([current]);
-                  } else {
-                    return acc;
-                  }
-                }, [])
-              );
-            },
-          });
-        }}
-        ListFooterComponent={() => (
-          <ActivityIndicator style={{ marginBottom: 70 }} />
-        )}
+        inverted={true}
       />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : ""}
+        style={
+          Platform.OS === "android" &&
+          keyboardIsOpen && {
+            bottom: 0,
+            elevation: 10,
+            position: "absolute",
+          }
+        }
+      >
+        <View
+          style={{
+            minHeight: 60,
+            maxHeight: 200,
+            width: "100%",
+            backgroundColor: "#FFFFFF",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom: 10,
+            flexDirection: "row",
+          }}
+        >
+          <TextInput
+            multiline
+            placeholder="Votre message"
+            value={newMessage}
+            style={{
+              width:
+                Dimensions.get("screen").width - 55 - (keyboardIsOpen ? 45 : 0),
+              minHeight: 40,
+              maxHeight: 60,
+              borderRadius: 10,
+              backgroundColor: "#f7f7f7",
+              marginLeft: "auto",
+              // marginRight: "auto",
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              // alignItems: "center",
+              // marginBottom: 14,
+              marginTop: 10,
+              // marginBottom: 20,
+            }}
+            keyboardType="default"
+            onChangeText={(nm) => setNewMessage(nm)}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              width: 45 + (keyboardIsOpen ? 45 : 0),
+              marginTop: 10,
+            }}
+          >
+            {keyboardIsOpen && (
+              <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+                <CustomIcon name="keyboard-hide" size={26} />
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+              <CustomIcon name="send" size={26} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -218,20 +284,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#F47658",
   },
   seedContainer: {
+    // borderBottomLeftRadius: 15,
+    // borderBottomRightRadius: 15,
     backgroundColor: "#FFF",
     paddingLeft: 15,
     paddingRight: 15,
-  },
-  userPicture: {
-    width: 40,
-    height: 40,
-    borderRadius: 30,
-    position: "absolute",
-    zIndex: 10,
-    // marginTop: -10,
-    marginLeft: -15,
-    borderColor: "black",
-    borderWidth: 1,
+    // paddingTop: 20,
   },
 });
 

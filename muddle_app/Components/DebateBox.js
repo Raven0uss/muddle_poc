@@ -8,8 +8,6 @@ import Select from "../Components/Select";
 const DebateBox = (props) => {
   const { debate, navigation } = props;
 
-  console.log(debate.type);
-
   const votes =
     debate.type === "STANDARD" || debate.type === "MUDDLE"
       ? debate.negatives.length + debate.positives.length

@@ -21,7 +21,7 @@ import ForgotPasswordScreen from "./Screens/ForgotPassword";
 import HomeScreen from "./Screens/Home";
 import MenuScreen from "./Screens/Menu";
 import SearchScreen from "./Screens/Search";
-import ChatScreen from "./Screens/Chat";
+import ConversationsScreen from "./Screens/Conversations";
 import NotificationsScreen from "./Screens/Notifications";
 import CreateDebateScreen from "./Screens/CreateDebate";
 import FollowScreen from "./Screens/Follow";
@@ -34,6 +34,7 @@ import CguScreen from "./Screens/Cgu";
 import LegaleMentionsScreen from "./Screens/LegaleMentions";
 import VotesPrivacyScreen from "./Screens/VotesPrivacy";
 import DebateScreen from "./Screens/Debate";
+import ChatScreen from "./Screens/Chat";
 
 const Stack = createStackNavigator();
 
@@ -128,6 +129,16 @@ export default function App() {
               <Stack.Screen
                 name="Search"
                 component={SearchScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Conversations"
+                component={ConversationsScreen}
                 initialParams={{
                   changeLanguage,
                 }}

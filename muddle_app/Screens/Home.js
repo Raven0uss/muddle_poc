@@ -99,7 +99,7 @@ const Home = (props) => {
 
   const { navigation, route } = props;
 
-  console.log(debates.length);
+  // console.log(debates.length);
 
   // if (error) {
   //   console.error("error", error);

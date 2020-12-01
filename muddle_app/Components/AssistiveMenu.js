@@ -232,7 +232,7 @@ const AssistiveMenu = (props) => {
               }}
               onPress={() => {
                 onDeploy(200);
-                if (route.name !== "Chat") navigation.push("Chat");
+                if (route.name !== "Conversations") navigation.push("Conversations");
               }}
             >
               <Icon name="chat" size={28} />
