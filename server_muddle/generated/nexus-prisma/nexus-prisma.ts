@@ -394,6 +394,8 @@ export interface NexusPrismaTypes {
       ConversationUpsertWithoutMessagesInput: ConversationUpsertWithoutMessagesInputInputObject
       MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
       NotificationCreateInput: NotificationCreateInputInputObject
+      NotificationUpdateInput: NotificationUpdateInputInputObject
+      NotificationUpdateManyMutationInput: NotificationUpdateManyMutationInputInputObject
       ReportCreateInput: ReportCreateInputInputObject
       ReportUpdateInput: ReportUpdateInputInputObject
       ReportUpdateManyMutationInput: ReportUpdateManyMutationInputInputObject
@@ -440,6 +442,8 @@ export interface NexusPrismaTypes {
     TrophyOrderByInput: TrophyOrderByInputValues,
     ConversationOrderByInput: ConversationOrderByInputValues,
     MessageOrderByInput: MessageOrderByInputValues,
+    NotificationType: NotificationTypeValues,
+    NotificationStatus: NotificationStatusValues,
     NotificationOrderByInput: NotificationOrderByInputValues,
     MutationType: MutationTypeValues,
   }
@@ -3771,12 +3775,31 @@ export interface AggregateMessageFieldDetails {
 type NotificationObject =
   | NotificationFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'who', args?: NotificationWhoArgs[] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'new', args?: [] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'comment', args?: [] | false, alias?: string  } 
 
 type NotificationFields =
   | 'id'
+  | 'who'
+  | 'type'
+  | 'status'
+  | 'new'
+  | 'debate'
+  | 'comment'
 
 
-
+type NotificationWhoArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
   
 
 export interface NotificationFieldDetails {
@@ -3787,6 +3810,79 @@ export interface NotificationFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
+  }
+  who: {
+    type: 'User'
+    args: Record<NotificationWhoArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  type: {
+    type: 'NotificationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationType> | prisma.NotificationType
+  }
+  status: {
+    type: 'NotificationStatus'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationStatus> | prisma.NotificationStatus
+  }
+  new: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  comment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
   }
 }
   
@@ -4337,6 +4433,9 @@ type MutationObject =
   | { name: 'deleteMessage', args?: MutationDeleteMessageArgs[] | false, alias?: string  } 
   | { name: 'deleteManyMessages', args?: MutationDeleteManyMessagesArgs[] | false, alias?: string  } 
   | { name: 'createNotification', args?: MutationCreateNotificationArgs[] | false, alias?: string  } 
+  | { name: 'updateNotification', args?: MutationUpdateNotificationArgs[] | false, alias?: string  } 
+  | { name: 'updateManyNotifications', args?: MutationUpdateManyNotificationsArgs[] | false, alias?: string  } 
+  | { name: 'upsertNotification', args?: MutationUpsertNotificationArgs[] | false, alias?: string  } 
   | { name: 'deleteNotification', args?: MutationDeleteNotificationArgs[] | false, alias?: string  } 
   | { name: 'deleteManyNotifications', args?: MutationDeleteManyNotificationsArgs[] | false, alias?: string  } 
   | { name: 'createReport', args?: MutationCreateReportArgs[] | false, alias?: string  } 
@@ -4401,6 +4500,9 @@ type MutationFields =
   | 'deleteMessage'
   | 'deleteManyMessages'
   | 'createNotification'
+  | 'updateNotification'
+  | 'updateManyNotifications'
+  | 'upsertNotification'
   | 'deleteNotification'
   | 'deleteManyNotifications'
   | 'createReport'
@@ -4534,6 +4636,16 @@ type MutationDeleteManyMessagesArgs =
   | 'where'
 type MutationCreateNotificationArgs =
   | 'data'
+type MutationUpdateNotificationArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyNotificationsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertNotificationArgs =
+  | 'where'
+  | 'create'
+  | 'update'
 type MutationDeleteNotificationArgs =
   | 'where'
 type MutationDeleteManyNotificationsArgs =
@@ -5131,6 +5243,45 @@ export interface MutationFieldDetails {
     resolve: (
       root: core.RootValue<"Mutation">,
       args: { data: NotificationCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification> | prisma.Notification
+  }
+  updateNotification: {
+    type: 'Notification'
+    args: Record<MutationUpdateNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: NotificationUpdateInput, where: NotificationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification | null> | prisma.Notification | null
+  }
+  updateManyNotifications: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyNotificationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: NotificationUpdateManyMutationInput, where?: NotificationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertNotification: {
+    type: 'Notification'
+    args: Record<MutationUpsertNotificationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: NotificationWhereUniqueInput, create: NotificationCreateInput, update: NotificationUpdateInput }  ,
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Notification> | prisma.Notification
@@ -6679,9 +6830,15 @@ export interface NotificationSubscriptionPayloadFieldDetails {
 type NotificationPreviousValuesObject =
   | NotificationPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'new', args?: [] | false, alias?: string  } 
 
 type NotificationPreviousValuesFields =
   | 'id'
+  | 'type'
+  | 'status'
+  | 'new'
 
 
 
@@ -6690,6 +6847,40 @@ type NotificationPreviousValuesFields =
 export interface NotificationPreviousValuesFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'NotificationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationType> | prisma.NotificationType
+  }
+  status: {
+    type: 'NotificationStatus'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"NotificationPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationStatus> | prisma.NotificationStatus
+  }
+  new: {
+    type: 'Boolean'
     args: {}
     description: string
     list: undefined
@@ -8658,6 +8849,19 @@ export interface NotificationWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  who_some?: UserWhereInput | null
+  type?: prisma.NotificationType | null
+  type_not?: prisma.NotificationType | null
+  type_in?: prisma.NotificationType[]
+  type_not_in?: prisma.NotificationType[]
+  status?: prisma.NotificationStatus | null
+  status_not?: prisma.NotificationStatus | null
+  status_in?: prisma.NotificationStatus[]
+  status_not_in?: prisma.NotificationStatus[]
+  new?: boolean | null
+  new_not?: boolean | null
+  debate?: DebateWhereInput | null
+  comment?: CommentWhereInput | null
   AND?: NotificationWhereInput[]
 }
 export type NotificationWhereInputInputObject =
@@ -8676,6 +8880,19 @@ export type NotificationWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'who_some', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'new', alias?: string  } 
+  | { name: 'new_not', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface ReportWhereUniqueInput {
@@ -13506,10 +13723,50 @@ export type MessageUpdateManyMutationInputInputObject =
   
 export interface NotificationCreateInput {
   id?: string | null
+  who?: UserCreateManyInput | null
+  type?: prisma.NotificationType
+  status?: prisma.NotificationStatus
+  new?: boolean
+  debate?: DebateCreateOneInput | null
+  comment?: CommentCreateOneInput | null
 }
 export type NotificationCreateInputInputObject =
   | Extract<keyof NotificationCreateInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'who', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface NotificationUpdateInput {
+  who?: UserUpdateManyInput | null
+  type?: prisma.NotificationType | null
+  status?: prisma.NotificationStatus | null
+  new?: boolean | null
+  debate?: DebateUpdateOneInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type NotificationUpdateInputInputObject =
+  | Extract<keyof NotificationUpdateInput, string>
+  | { name: 'who', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface NotificationUpdateManyMutationInput {
+  type?: prisma.NotificationType | null
+  status?: prisma.NotificationStatus | null
+  new?: boolean | null
+}
+export type NotificationUpdateManyMutationInputInputObject =
+  | Extract<keyof NotificationUpdateManyMutationInput, string>
+  | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
   
 export interface ReportCreateInput {
   id?: string | null
@@ -14209,9 +14466,33 @@ export type MessageOrderByInputValues =
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
   
+export type NotificationTypeValues =
+  | 'VOTE'
+  | 'INVITATION_DUO'
+  | 'ACCEPT_DUO'
+  | 'REJECT_DUO'
+  | 'CLOSE_DEBATE'
+  | 'ACCEPT_CLOSE_DEBATE'
+  | 'REJECT_CLOSE_DEBATE'
+  | 'COMMENT'
+  | 'LIKE'
+  | 'DISLIKE'
+  
+export type NotificationStatusValues =
+  | 'ACCEPTED'
+  | 'DECLINED'
+  | 'PENDING'
+  | 'INFORMATION'
+  
 export type NotificationOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'status_ASC'
+  | 'status_DESC'
+  | 'new_ASC'
+  | 'new_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

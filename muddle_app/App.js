@@ -35,6 +35,7 @@ import LegaleMentionsScreen from "./Screens/LegaleMentions";
 import VotesPrivacyScreen from "./Screens/VotesPrivacy";
 import DebateScreen from "./Screens/Debate";
 import ChatScreen from "./Screens/Chat";
+import NewConversationScreen from "./Screens/NewConversation";
 
 const Stack = createStackNavigator();
 
@@ -139,6 +140,16 @@ export default function App() {
               <Stack.Screen
                 name="Conversations"
                 component={ConversationsScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="NewConversation"
+                component={NewConversationScreen}
                 initialParams={{
                   changeLanguage,
                 }}

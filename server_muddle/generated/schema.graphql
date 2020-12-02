@@ -1935,16 +1935,41 @@ type Mutation {
 }
 
 type Notification {
+  comment: Comment
+  debate: Debate
   id: ID!
+  new: Boolean!
+  status: NotificationStatus!
+  type: NotificationType!
+  who(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
 }
 
 input NotificationCreateInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneInput
   id: ID
+  new: Boolean!
+  status: NotificationStatus!
+  type: NotificationType!
+  who: UserCreateManyInput
 }
 
 enum NotificationOrderByInput {
   id_ASC
   id_DESC
+  new_ASC
+  new_DESC
+  status_ASC
+  status_DESC
+  type_ASC
+  type_DESC
+}
+
+enum NotificationStatus {
+  ACCEPTED
+  DECLINED
+  INFORMATION
+  PENDING
 }
 
 type NotificationSubPayload {
@@ -1952,8 +1977,23 @@ type NotificationSubPayload {
   updatedFields: [String!]
 }
 
+enum NotificationType {
+  ACCEPT_CLOSE_DEBATE
+  ACCEPT_DUO
+  CLOSE_DEBATE
+  COMMENT
+  DISLIKE
+  INVITATION_DUO
+  LIKE
+  REJECT_CLOSE_DEBATE
+  REJECT_DUO
+  VOTE
+}
+
 input NotificationWhereInput {
   AND: [NotificationWhereInput!]
+  comment: CommentWhereInput
+  debate: DebateWhereInput
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -1968,6 +2008,17 @@ input NotificationWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  new: Boolean
+  new_not: Boolean
+  status: NotificationStatus
+  status_in: [NotificationStatus!]
+  status_not: NotificationStatus
+  status_not_in: [NotificationStatus!]
+  type: NotificationType
+  type_in: [NotificationType!]
+  type_not: NotificationType
+  type_not_in: [NotificationType!]
+  who_some: UserWhereInput
 }
 
 input NotificationWhereUniqueInput {

@@ -2274,6 +2274,9 @@ type Mutation {
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
   createNotification(data: NotificationCreateInput!): Notification!
+  updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
+  upsertNotification(where: NotificationWhereUniqueInput!, create: NotificationCreateInput!, update: NotificationUpdateInput!): Notification!
   deleteNotification(where: NotificationWhereUniqueInput!): Notification
   deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
   createReport(data: ReportCreateInput!): Report!
@@ -2308,6 +2311,12 @@ interface Node {
 
 type Notification {
   id: ID!
+  who(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  type: NotificationType!
+  status: NotificationStatus!
+  new: Boolean!
+  debate: Debate
+  comment: Comment
 }
 
 type NotificationConnection {
@@ -2318,6 +2327,12 @@ type NotificationConnection {
 
 input NotificationCreateInput {
   id: ID
+  who: UserCreateManyInput
+  type: NotificationType!
+  status: NotificationStatus!
+  new: Boolean!
+  debate: DebateCreateOneInput
+  comment: CommentCreateOneInput
 }
 
 type NotificationEdge {
@@ -2328,10 +2343,26 @@ type NotificationEdge {
 enum NotificationOrderByInput {
   id_ASC
   id_DESC
+  type_ASC
+  type_DESC
+  status_ASC
+  status_DESC
+  new_ASC
+  new_DESC
 }
 
 type NotificationPreviousValues {
   id: ID!
+  type: NotificationType!
+  status: NotificationStatus!
+  new: Boolean!
+}
+
+enum NotificationStatus {
+  ACCEPTED
+  DECLINED
+  PENDING
+  INFORMATION
 }
 
 type NotificationSubscriptionPayload {
@@ -2350,6 +2381,34 @@ input NotificationSubscriptionWhereInput {
   AND: [NotificationSubscriptionWhereInput!]
 }
 
+enum NotificationType {
+  VOTE
+  INVITATION_DUO
+  ACCEPT_DUO
+  REJECT_DUO
+  CLOSE_DEBATE
+  ACCEPT_CLOSE_DEBATE
+  REJECT_CLOSE_DEBATE
+  COMMENT
+  LIKE
+  DISLIKE
+}
+
+input NotificationUpdateInput {
+  who: UserUpdateManyInput
+  type: NotificationType
+  status: NotificationStatus
+  new: Boolean
+  debate: DebateUpdateOneInput
+  comment: CommentUpdateOneInput
+}
+
+input NotificationUpdateManyMutationInput {
+  type: NotificationType
+  status: NotificationStatus
+  new: Boolean
+}
+
 input NotificationWhereInput {
   id: ID
   id_not: ID
@@ -2365,6 +2424,19 @@ input NotificationWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  who_some: UserWhereInput
+  type: NotificationType
+  type_not: NotificationType
+  type_in: [NotificationType!]
+  type_not_in: [NotificationType!]
+  status: NotificationStatus
+  status_not: NotificationStatus
+  status_in: [NotificationStatus!]
+  status_not_in: [NotificationStatus!]
+  new: Boolean
+  new_not: Boolean
+  debate: DebateWhereInput
+  comment: CommentWhereInput
   AND: [NotificationWhereInput!]
 }
 

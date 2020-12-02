@@ -1,4 +1,29 @@
+enum NotificationType {
+  VOTE
+  INVITATION_DUO
+  ACCEPT_DUO
+  REJECT_DUO
+  CLOSE_DEBATE
+  ACCEPT_CLOSE_DEBATE
+  REJECT_CLOSE_DEBATE
+  COMMENT
+  LIKE
+  DISLIKE
+}
+
+enum NotificationStatus {
+  ACCEPTED
+  DECLINED
+  PENDING
+  INFORMATION
+}
+
 type Notification {
   id: ID! @id
-  
+  who: [User!]! @relation(link: INLINE)
+  type: NotificationType!
+  status: NotificationStatus!
+  new: Boolean!
+  debate: Debate @relation(link: INLINE)
+  comment: Comment @relation(link: INLINE)
 }

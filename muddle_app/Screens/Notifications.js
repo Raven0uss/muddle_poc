@@ -6,15 +6,60 @@ import {
   Image,
   TextInput,
   Dimensions,
+  FlatList,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useQuery, gql } from "@apollo/client";
+import { defaultProfile } from "../CustomProperties/IconsBase64";
+import NotificationBox from "../Components/NotificationBox";
+
+const GET_NOTIFICATIONS = gql`
+  query($first: Int!, $skip: Int) {
+    notifications(first: $first, skip: $skip) {
+      id
+      who {
+        id
+        pseudo
+      }
+      type
+      status
+      new
+      debate {
+        id
+        content
+      }
+      comment {
+        id
+        content
+      }
+    }
+  }
+`;
+
+const frequency = 10;
+let nbNotifications = frequency;
+
+const renderItem = ({ item }, navigation) => {
+  return <NotificationBox notification={item} />;
+};
 
 const Notifications = (props) => {
+  const [notifications, setNotifications] = React.useState([]);
   const [search, setSearch] = React.useState("");
+
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTIFICATIONS, {
+    variables: {
+      first: nbNotifications,
+    },
+    onCompleted: (response) => {
+      const { notifications: queryResult } = response;
+      setNotifications(queryResult);
+    },
+  });
 
   const { navigation, route } = props;
   return (
@@ -45,7 +90,7 @@ const Notifications = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#F7F7F7",
+          backgroundColor: "#FFF",
         }}
       >
         <TextInput
@@ -55,7 +100,7 @@ const Notifications = (props) => {
             width: Dimensions.get("screen").width / 1.15,
             height: 40,
             borderRadius: 10,
-            backgroundColor: "#fff",
+            backgroundColor: "#f7f7f7",
             marginLeft: "auto",
             marginRight: "auto",
             padding: 10,
@@ -69,18 +114,37 @@ const Notifications = (props) => {
           onChangeText={(s) => setSearch(s)}
         />
       </View>
-      <ScrollView style={styles.seedContainer}>
-        <View
-          style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 100,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        ></View>
-      </ScrollView>
+      <FlatList
+        data={notifications}
+        style={styles.seedContainer}
+        renderItem={(param) => renderItem(param, navigation)}
+        keyExtractor={(item) => item.id}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web") return;
+          // return ;
+          nbNotifications += frequency;
+          await fetchMore({
+            variables: { first: frequency, skip: nbNotifications - frequency },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { notifications: moreDebates } = fetchMoreResult;
+              setNotifications((previousState) =>
+                [...previousState, ...moreDebates].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => (
+          <ActivityIndicator style={{ marginBottom: 70 }} />
+        )}
+      />
     </View>
   );
 };
@@ -91,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F47658",
   },
   seedContainer: {
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#FFF",
     paddingLeft: 15,
     paddingRight: 15,
   },

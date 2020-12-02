@@ -45,6 +45,14 @@ var models = [
     embedded: false
   },
   {
+    name: "NotificationType",
+    embedded: false
+  },
+  {
+    name: "NotificationStatus",
+    embedded: false
+  },
+  {
     name: "Notification",
     embedded: false
   },

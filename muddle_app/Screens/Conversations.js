@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";

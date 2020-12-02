@@ -25,7 +25,7 @@ const getRandomComments = (nb, { users }) => {
   for (let index = 0; index < nb; index++) {
     comments.push({
       from: { connect: { id: users[faker.random.number(9)].id } },
-      content: faker.lorem.sentence(faker.random.number(300)),
+      content: faker.lorem.sentence(faker.random.number(3)),
     });
   }
   return comments;
@@ -82,12 +82,14 @@ async function main() {
       where: { id: debate.id },
       data: {
         comments: {
-          create: getRandomComments(faker.random.number(5), { users }),
+          create: getRandomComments(faker.random.number(5) + 1, { users }),
         },
       },
     });
     // }
   }
+
+  const comments = await prisma.comments();
 
   // Create muddle account
   const M = await prisma.createUser({
@@ -137,6 +139,86 @@ async function main() {
       conversation: { connect: { id: conversation.id } },
     });
   }
+
+  // Create all type of notifications
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "VOTE",
+    status: "INFORMATION",
+    new: true,
+    debate: { connect: { id: standardDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "INVITATION_DUO",
+    status: "PENDING",
+    new: true,
+    debate: { connect: { id: duoDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }, { pseudo: "userB" }] },
+    type: "COMMENT",
+    status: "INFORMATION",
+    new: false,
+    debate: { connect: { id: standardDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "CLOSE_DEBATE",
+    status: "PENDING",
+    new: false,
+    debate: { connect: { id: standardDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "LIKE",
+    status: "INFORMATION",
+    new: false,
+    comment: { connect: { id: comments[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }, { pseudo: "userB" }] },
+    type: "DISLIKE",
+    status: "INFORMATION",
+    new: false,
+    comment: { connect: { id: comments[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "REJECT_DUO",
+    status: "INFORMATION",
+    new: false,
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "ACCEPT_DUO",
+    status: "INFORMATION",
+    new: false,
+    debate: { connect: { id: duoDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "ACCEPT_CLOSE_DEBATE",
+    status: "INFORMATION",
+    new: false,
+    debate: { connect: { id: standardDebates[0].id } },
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ pseudo: "userA" }] },
+    type: "REJECT_CLOSE_DEBATE",
+    status: "INFORMATION",
+    new: false,
+    debate: { connect: { id: standardDebates[0].id } },
+  });
 }
 
 main().catch(console.error);
