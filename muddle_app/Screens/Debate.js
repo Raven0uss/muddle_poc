@@ -98,13 +98,25 @@ const Debate = (props) => {
       {(debate.type === "STANDARD" || debate.type === "MUDDLE") && (
         <View style={styles.boxDebate}>
           <View style={styles.headDebate}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Profile", {
+                  userId: debate.owner.pseudo,
+                });
+              }}
+            >
               <Image
                 source={{ uri: defaultProfile }}
                 style={styles.userPicture}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Profile", {
+                  userId: debate.owner.pseudo,
+                });
+              }}
+            >
               <Text style={styles.pseudo}>{debate.owner.pseudo}</Text>
             </TouchableOpacity>
           </View>
@@ -174,25 +186,49 @@ const Debate = (props) => {
         <View style={styles.boxDebate}>
           <View style={styles.headDebateDuo}>
             <View style={{ alignItems: "flex-start" }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
                 <Image
                   source={{ uri: defaultProfile }}
                   style={styles.userPictureBlue}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
                 <Text style={styles.pseudoDuo}>{debate.ownerBlue.pseudo}</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{ alignItems: "flex-end" }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
                 <Image
                   source={{ uri: defaultProfile }}
                   style={styles.userPictureRed}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
                 <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
               </TouchableOpacity>
             </View>
@@ -267,7 +303,7 @@ const Debate = (props) => {
       )}
       <ScrollView style={styles.seedContainer}>
         {debate.comments.map((comment) => (
-          <CommentBox comment={comment} />
+          <CommentBox comment={comment} navigation={navigation} />
         ))}
       </ScrollView>
       <KeyboardAvoidingView

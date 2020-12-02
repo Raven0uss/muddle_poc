@@ -125,7 +125,7 @@ const Chat = (props) => {
   // DATA TEST
   const me = conversation.speakers[0];
   const partner = conversation.speakers[1];
-  
+
   return (
     <View style={styles.container}>
       <Header
@@ -165,38 +165,46 @@ const Chat = (props) => {
           alignItems: "center",
         }}
       >
-        <View
-          style={{
-            backgroundColor: "#F7F7F7",
-            height: 44,
-            width: 185,
-            marginTop: 33,
-            marginBottom: 10,
-            borderRadius: 12,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Profile", {
+              userId: partner.pseudo,
+            });
           }}
         >
-          <Image
-            source={{ uri: defaultProfile }}
+          <View
             style={{
-              width: 38,
-              height: 38,
-              position: "absolute",
-              marginTop: -19,
-              // borderWidth: 1,
-              borderRadius: 50,
-              alignSelf: "center",
-            }}
-          />
-          <Text
-            style={{
-              marginTop: 25,
-              alignSelf: "center",
-              fontSize: 12,
+              backgroundColor: "#F7F7F7",
+              height: 44,
+              width: 185,
+              marginTop: 33,
+              marginBottom: 10,
+              borderRadius: 12,
             }}
           >
-            {partner.pseudo}
-          </Text>
-        </View>
+            <Image
+              source={{ uri: defaultProfile }}
+              style={{
+                width: 38,
+                height: 38,
+                position: "absolute",
+                marginTop: -19,
+                // borderWidth: 1,
+                borderRadius: 50,
+                alignSelf: "center",
+              }}
+            />
+            <Text
+              style={{
+                marginTop: 25,
+                alignSelf: "center",
+                fontSize: 12,
+              }}
+            >
+              {partner.pseudo}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
 
       <FlatList

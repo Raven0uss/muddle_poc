@@ -17,13 +17,25 @@ const DebateBox = (props) => {
     return (
       <View style={styles.boxDebate}>
         <View style={styles.headDebate}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Profile", {
+                userId: debate.owner.pseudo,
+              });
+            }}
+          >
             <Image
               source={{ uri: defaultProfile }}
               style={styles.userPicture}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Profile", {
+                userId: debate.owner.pseudo,
+              });
+            }}
+          >
             <Text style={styles.pseudo}>{debate.owner.pseudo}</Text>
           </TouchableOpacity>
           <View style={{ marginLeft: "auto" }}>
@@ -129,25 +141,49 @@ const DebateBox = (props) => {
         <View style={styles.boxDebate}>
           <View style={styles.headDebateDuo}>
             <View style={{ alignItems: "flex-start" }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
                 <Image
                   source={{ uri: defaultProfile }}
                   style={styles.userPictureBlue}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
                 <Text style={styles.pseudoDuo}>{debate.ownerBlue.pseudo}</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{ alignItems: "flex-end" }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
                 <Image
                   source={{ uri: defaultProfile }}
                   style={styles.userPictureRed}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
                 <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
               </TouchableOpacity>
             </View>

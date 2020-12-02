@@ -5,7 +5,7 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 
 const CommentBox = (props) => {
-  const { comment } = props;
+  const { comment, navigation } = props;
 
   return (
     <View
@@ -21,10 +21,22 @@ const CommentBox = (props) => {
       }}
     >
       <View style={styles.headDebate}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Profile", {
+              userId: comment.from.pseudo,
+            });
+          }}
+        >
           <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Profile", {
+              userId: comment.from.pseudo,
+            });
+          }}
+        >
           <Text style={styles.pseudo}>{comment.from.pseudo}</Text>
         </TouchableOpacity>
         <View style={{ marginLeft: "auto" }}>

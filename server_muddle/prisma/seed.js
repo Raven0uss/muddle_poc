@@ -219,6 +219,70 @@ async function main() {
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
   });
+
+  // Trophies
+
+  for (let index = 0; index < 7; index++) {
+    if (index % 2 === 0)
+      await prisma.createTrophy({
+        user: { connect: { pseudo: "userA" } },
+        won: true,
+        type: "DUO",
+        debate: { connect: { id: duoDebates[0].id } },
+      });
+    else {
+      await prisma.createTrophy({
+        user: { connect: { pseudo: "userA" } },
+        won: true,
+        type: "TOP_COMMENT",
+        // debate: { connect: { id: comments[0].debate.id } },
+        comment: { connect: { id: comments[0].id } },
+      });
+    }
+  }
+
+  // Interactions
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "LIKE",
+    comment: { connect: { id: comments[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "DISLIKE",
+    comment: { connect: { id: comments[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "COMMENT",
+    comment: { connect: { id: comments[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "BLUE_VOTE",
+    debate: { connect: { id: duoDebates[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "RED_VOTE",
+    debate: { connect: { id: duoDebates[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "POSITIVE_VOTE",
+    debate: { connect: { id: standardDebates[0].id } },
+  });
+
+  await prisma.createInteraction({
+    who: { connect: { pseudo: "userA" } },
+    type: "NEGATIVE_VOTE",
+    debate: { connect: { id: standardDebates[0].id } },
+  });
 }
 
 main().catch(console.error);

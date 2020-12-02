@@ -121,7 +121,13 @@ const Home = (props) => {
     <View style={styles.container}>
       <Header
         LeftComponent={
-          <TouchableOpacity onPress={() => navigation.push("Profile")}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Profile", {
+                userId: "userA", // Personne connectee
+              });
+            }}
+          >
             <Image
               source={{ uri: user.profilePicture }}
               style={styles.profilePicture}

@@ -36,6 +36,7 @@ import VotesPrivacyScreen from "./Screens/VotesPrivacy";
 import DebateScreen from "./Screens/Debate";
 import ChatScreen from "./Screens/Chat";
 import NewConversationScreen from "./Screens/NewConversation";
+import TrophiesScreen from "./Screens/Trophies";
 
 const Stack = createStackNavigator();
 
@@ -210,6 +211,16 @@ export default function App() {
               <Stack.Screen
                 name="Profile"
                 component={ProfileScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Trophies"
+                component={TrophiesScreen}
                 initialParams={{
                   changeLanguage,
                 }}

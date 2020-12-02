@@ -7,6 +7,8 @@ import {
   Dimensions,
   Text,
   TextInput,
+  SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
@@ -22,11 +24,99 @@ import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import { muddle } from "../CustomProperties/IconsBase64";
 import UserContext from "../CustomProperties/UserContext";
+import { useQuery, gql } from "@apollo/client";
+import { get, isEmpty } from "lodash";
+
+const GET_USER = gql`
+  query($userId: String!) {
+    user(where: { pseudo: $userId }) {
+      id
+      pseudo
+      trophies {
+        id
+      }
+      followers {
+        id
+      }
+      following {
+        id
+      }
+      interactions {
+        id
+        type
+        debate {
+          id
+          type
+          content
+          owner {
+            id
+            pseudo
+          }
+          ownerBlue {
+            id
+            pseudo
+          }
+          ownerRed {
+            id
+            pseudo
+          }
+          positives {
+            id
+          }
+          negatives {
+            id
+          }
+          redVotes {
+            id
+          }
+          blueVotes {
+            id
+          }
+        }
+        comment {
+          id
+          debate {
+            id
+          }
+          from {
+            pseudo
+          }
+          content
+          likes {
+            id
+          }
+          dislikes {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
 
 const Profile = (props) => {
+  const [user, setUser] = React.useState(null);
   const [search, setSearch] = React.useState("");
+  const { data, loading, error, fetchMore } = useQuery(GET_USER, {
+    variables: {
+      userId: get(props, "route.params.userId", "userA"),
+    },
+    onCompleted: (response) => {
+      const { user: queryResult } = response;
+      setUser(queryResult);
+    },
+  });
 
   const { navigation, route } = props;
+
+  if (user === null || loading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
       <Image
@@ -113,7 +203,7 @@ const Profile = (props) => {
             elevation: 20,
             zIndex: 20,
           }}
-          onPress={() => console.log("trophies")}
+          onPress={() => navigation.push("Trophies")}
         >
           <Text
             style={{
@@ -123,7 +213,7 @@ const Profile = (props) => {
               fontWeight: "bold",
             }}
           >
-            126
+            {user.trophies.length}
           </Text>
           <Image
             source={{
@@ -169,7 +259,7 @@ const Profile = (props) => {
             }}
             numberOfLines={2}
           >
-            Sid-Ahmed Fahem
+            {user.pseudo}
           </Text>
 
           <View
@@ -186,7 +276,7 @@ const Profile = (props) => {
                   fontWeight: "bold",
                 }}
               >
-                650
+                {user.followers.length}
               </Text>
               <Text
                 style={{
@@ -204,7 +294,7 @@ const Profile = (props) => {
                   fontWeight: "bold",
                 }}
               >
-                434
+                {user.following.length}
               </Text>
               <Text
                 style={{
@@ -264,5 +354,13 @@ const Profile = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default withTheme(Profile);
