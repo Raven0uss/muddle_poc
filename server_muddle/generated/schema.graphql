@@ -2046,7 +2046,7 @@ type Query {
   report(where: ReportWhereUniqueInput!): Report
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]!
   signIn(email: String, password: String): Token!
-  trophies: [Trophy!]!
+  trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]!
   trophy(where: TrophyWhereUniqueInput!): Trophy
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!

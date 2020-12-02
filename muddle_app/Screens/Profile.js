@@ -9,6 +9,7 @@ import {
   TextInput,
   SafeAreaView,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
@@ -22,6 +23,7 @@ import CustomIcon from "../Components/Icon";
 import { ScrollView } from "react-native-gesture-handler";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
+import InteractionBox from "../Components/InteractionBox";
 import { muddle } from "../CustomProperties/IconsBase64";
 import UserContext from "../CustomProperties/UserContext";
 import { useQuery, gql } from "@apollo/client";
@@ -34,6 +36,7 @@ const GET_USER = gql`
       pseudo
       trophies {
         id
+        type
       }
       followers {
         id
@@ -41,58 +44,134 @@ const GET_USER = gql`
       following {
         id
       }
-      interactions {
+    }
+  }
+`;
+
+const GET_INTERACTIONS = gql`
+  query($first: Int!, $skip: Int, $userId: String!) {
+    interactions(
+      where: { who: { pseudo: $userId } }
+      first: $first
+      skip: $skip
+    ) {
+      id
+      type
+      debate {
         id
         type
+        content
+        owner {
+          id
+          pseudo
+        }
+        ownerBlue {
+          id
+          pseudo
+        }
+        ownerRed {
+          id
+          pseudo
+        }
+        positives {
+          id
+        }
+        negatives {
+          id
+        }
+        redVotes {
+          id
+        }
+        blueVotes {
+          id
+        }
+      }
+      comment {
+        id
         debate {
           id
-          type
-          content
-          owner {
-            id
-            pseudo
-          }
-          ownerBlue {
-            id
-            pseudo
-          }
-          ownerRed {
-            id
-            pseudo
-          }
-          positives {
-            id
-          }
-          negatives {
-            id
-          }
-          redVotes {
-            id
-          }
-          blueVotes {
-            id
-          }
         }
-        comment {
+        from {
+          pseudo
+        }
+        content
+        likes {
           id
-          debate {
-            id
-          }
-          from {
-            pseudo
-          }
-          content
-          likes {
-            id
-          }
-          dislikes {
-            id
-          }
+        }
+        dislikes {
+          id
         }
       }
     }
   }
 `;
+
+const frequency = 10;
+let nbInteractions = frequency;
+
+const renderItem = ({ item }, navigation, user) => {
+  return (
+    <InteractionBox interaction={item} navigation={navigation} user={user} />
+  );
+};
+
+const Interactions = (props) => {
+  const [interactions, setInteractions] = React.useState([]);
+  const { data, loading, error, fetchMore } = useQuery(GET_INTERACTIONS, {
+    variables: {
+      first: nbInteractions,
+      userId: props.userId,
+    },
+    onCompleted: (response) => {
+      const { interactions: queryResult } = response;
+      setInteractions(queryResult);
+    },
+  });
+
+  const { navigation, userId } = props;
+
+  if (interactions.length === 0 && loading) {
+    return <ActivityIndicator />;
+  }
+
+  return (
+    <FlatList
+      data={interactions}
+      style={styles.seedContainer}
+      renderItem={(param) => renderItem(param, navigation, userId)}
+      keyExtractor={(item) => item.id}
+      onEndReachedThreshold={0.5}
+      onEndReached={async () => {
+        if (Platform.OS === "web") return;
+        // return ;
+        nbInteractions += frequency;
+        await fetchMore({
+          variables: {
+            first: frequency,
+            skip: nbInteractions - frequency,
+            userId,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const { interactions: moreInteractions } = fetchMoreResult;
+            setInteractions((previousState) =>
+              [...previousState, ...moreInteractions].reduce((acc, current) => {
+                const x = acc.find((item) => item.id === current.id);
+                if (!x) {
+                  return acc.concat([current]);
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          },
+        });
+      }}
+      ListFooterComponent={() => (
+        <ActivityIndicator style={{ marginBottom: 70 }} />
+      )}
+    />
+  );
+};
 
 const Profile = (props) => {
   const [user, setUser] = React.useState(null);
@@ -203,7 +282,16 @@ const Profile = (props) => {
             elevation: 20,
             zIndex: 20,
           }}
-          onPress={() => navigation.push("Trophies")}
+          onPress={() =>
+            navigation.navigate("Trophies", {
+              userId: user.pseudo,
+              nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
+                .length,
+              nbTopComment: user.trophies.filter(
+                (t) => t.type === "TOP_COMMENT"
+              ).length,
+            })
+          }
         >
           <Text
             style={{
@@ -318,37 +406,26 @@ const Profile = (props) => {
       </View>
 
       {/* Historique des interactions */}
-      <ScrollView>
-        <TextInput
-          placeholder="Rechercher dans le profil"
-          value={search}
-          style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 40,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginBottom: 14,
-          }}
-          keyboardType="default"
-          onChangeText={(s) => setSearch(s)}
-          // placeholderTextColor="#222"
-        />
-        <View
-          style={{
-            width: Dimensions.get("screen").width / 1.1,
-            height: 100,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        ></View>
-      </ScrollView>
+      <TextInput
+        placeholder="Rechercher dans le profil"
+        value={search}
+        style={{
+          width: Dimensions.get("screen").width / 1.15,
+          height: 40,
+          borderRadius: 10,
+          backgroundColor: "#fff",
+          marginLeft: "auto",
+          marginRight: "auto",
+          padding: 10,
+          paddingLeft: 20,
+          paddingRight: 20,
+          marginBottom: 14,
+        }}
+        keyboardType="default"
+        onChangeText={(s) => setSearch(s)}
+        // placeholderTextColor="#222"
+      />
+      <Interactions userId={user.pseudo} navigation={navigation} />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />
     </View>

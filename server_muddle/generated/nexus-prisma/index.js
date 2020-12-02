@@ -4082,6 +4082,15 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       password?: string | null; // String
     }
+    trophies: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TrophyOrderByInput'] | null; // TrophyOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TrophyWhereInput'] | null; // TrophyWhereInput
+    }
     trophy: { // args
       where: NexusGenInputs['TrophyWhereUniqueInput']; // TrophyWhereUniqueInput!
     }

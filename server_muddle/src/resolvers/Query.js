@@ -18,7 +18,7 @@ const exposedQueries = {
   messageQueries: ["message", "messages"],
   notificationQueries: ["notification", "notifications"],
   reportQueries: ["report", "reports"],
-  trophyQueries: ["trophy"],
+  trophyQueries: ["trophy", "trophies"],
   userQueries: ["users", "user"],
 };
 
@@ -70,14 +70,14 @@ const Query = prismaObjectType({
     });
 
     // trophies
-    t.list.field("trophies", {
-      type: "Trophy",
-      args: {},
-      resolve: async (parent, args, { prisma }) => {
-        const trophies = await prisma.trophys();
-        return trophies;
-      },
-    });
+    // t.list.field("trophies", {
+    //   type: "Trophy",
+    //   args: {},
+    //   resolve: async (parent, args, { prisma }) => {
+    //     const trophies = await prisma.trophys();
+    //     return trophies;
+    //   },
+    // });
   },
 });
 
