@@ -57,6 +57,10 @@ const GET_INTERACTIONS = gql`
     ) {
       id
       type
+      who {
+        id
+        pseudo
+      }
       debate {
         id
         type
@@ -85,11 +89,44 @@ const GET_INTERACTIONS = gql`
         blueVotes {
           id
         }
+        comments {
+          id
+        }
       }
       comment {
         id
         debate {
           id
+          id
+          type
+          content
+          owner {
+            id
+            pseudo
+          }
+          ownerBlue {
+            id
+            pseudo
+          }
+          ownerRed {
+            id
+            pseudo
+          }
+          positives {
+            id
+          }
+          negatives {
+            id
+          }
+          redVotes {
+            id
+          }
+          blueVotes {
+            id
+          }
+          comments {
+            id
+          }
         }
         from {
           pseudo
