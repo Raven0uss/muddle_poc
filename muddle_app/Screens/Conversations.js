@@ -17,6 +17,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
+import { isEmpty } from "lodash";
 
 const GET_CONVERSATIONS = gql`
   query($first: Int!, $skip: Int) {
@@ -98,6 +99,7 @@ const renderItem = ({ item }, navigation) => {
 
 const Conversations = (props) => {
   const [conversations, setConversations] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
   const { data, loading, error, fetchMore } = useQuery(GET_CONVERSATIONS, {
@@ -188,29 +190,34 @@ const Conversations = (props) => {
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
-          if (Platform.OS === "web") return;
+          if (Platform.OS === "web" || noMoreData) return;
           // return ;
           nbConversations += frequency;
           await fetchMore({
             variables: { first: frequency, skip: nbConversations - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { conversations: moreDebates } = fetchMoreResult;
+              const { conversations: moreConversations } = fetchMoreResult;
+              if (isEmpty(moreConversations)) setNoMoreData(true);
               setConversations((previousState) =>
-                [...previousState, ...moreDebates].reduce((acc, current) => {
-                  const x = acc.find((item) => item.id === current.id);
-                  if (!x) {
-                    return acc.concat([current]);
-                  } else {
-                    return acc;
-                  }
-                }, [])
+                [...previousState, ...moreConversations].reduce(
+                  (acc, current) => {
+                    const x = acc.find((item) => item.id === current.id);
+                    if (!x) {
+                      return acc.concat([current]);
+                    } else {
+                      return acc;
+                    }
+                  },
+                  []
+                )
               );
             },
           });
         }}
-        ListFooterComponent={() => (
-          <ActivityIndicator style={{ marginBottom: 70 }} />
-        )}
+        ListFooterComponent={() => {
+          if (noMoreData) return null;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
       />
     </View>
   );

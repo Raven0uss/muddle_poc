@@ -106,6 +106,7 @@ const renderItem = ({ item }, navigation) => {
 
 const Trophies = (props) => {
   const [trophies, setTrophies] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
   const { data, loading, error, fetchMore } = useQuery(GET_TROPHIES, {
@@ -214,7 +215,7 @@ const Trophies = (props) => {
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
-          if (Platform.OS === "web") return;
+          if (Platform.OS === "web" || noMoreData) return;
           // return ;
           nbInteractions += frequency;
           await fetchMore({
@@ -225,6 +226,7 @@ const Trophies = (props) => {
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { trophies: moreTrophies } = fetchMoreResult;
+              if (isEmpty(moreTrophies)) setNoMoreData(true);
               setInteractions((previousState) =>
                 [...previousState, ...moreTrophies].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);
@@ -238,9 +240,10 @@ const Trophies = (props) => {
             },
           });
         }}
-        ListFooterComponent={() => (
-          <ActivityIndicator style={{ marginBottom: 70 }} />
-        )}
+        ListFooterComponent={() => {
+          if (noMoreData) return null;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
       />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />

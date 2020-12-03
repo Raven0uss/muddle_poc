@@ -17,6 +17,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import DebateBox from "../Components/DebateBox";
+import { isEmpty } from "lodash";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int, $filter: DebateType) {
@@ -84,6 +85,7 @@ const applyFilter = ({ debates, debateType }) => {
 
 const DebatesFiltered = (props) => {
   const [debates, setDebates] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const [debateType, setDebateType] = React.useState("DUO");
 
   const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
@@ -153,7 +155,10 @@ const DebatesFiltered = (props) => {
                 ? styles.buttonActivate
                 : styles.buttonDefaultState
             }
-            onPress={() => setDebateType("BEST_DEBATES")}
+            onPress={() => {
+              setDebateType("BEST_DEBATES");
+              setNoMoreData(false);
+            }}
           >
             <Text style={styles.buttonTextDefaultState}>
               Les meilleurs debats
@@ -167,6 +172,7 @@ const DebatesFiltered = (props) => {
             }
             onPress={() => {
               setDebateType("DUO");
+              setNoMoreData(false);
             }}
           >
             <Text style={styles.buttonTextDefaultState}>Les debats en duo</Text>
@@ -179,6 +185,7 @@ const DebatesFiltered = (props) => {
             }
             onPress={() => {
               setDebateType("MUDDLE");
+              setNoMoreData(false);
             }}
           >
             <Text style={styles.buttonTextDefaultState}>
@@ -195,13 +202,14 @@ const DebatesFiltered = (props) => {
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
-          if (Platform.OS === "web") return;
+          if (Platform.OS === "web" || noMoreData) return;
           // return ;
           nbDebates += frequency;
           await fetchMore({
             variables: { first: frequency, skip: nbDebates - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { debates: moreDebates } = fetchMoreResult;
+              if (isEmpty(moreDebates)) setNoMoreData(true);
               setDebates((previousState) =>
                 [...previousState, ...moreDebates].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);
@@ -215,9 +223,10 @@ const DebatesFiltered = (props) => {
             },
           });
         }}
-        ListFooterComponent={() => (
-          <ActivityIndicator style={{ marginBottom: 70 }} />
-        )}
+        ListFooterComponent={() => {
+          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
       />
     </View>
   );

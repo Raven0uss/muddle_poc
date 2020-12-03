@@ -24,7 +24,7 @@ import DebateBox from "../Components/DebateBox";
 import { useQuery, gql } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import { set } from "react-native-reanimated";
-import { flatten, last } from "lodash";
+import { flatten, isEmpty, last } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
 
 const user = {
@@ -87,6 +87,7 @@ const renderItem = ({ item }, navigation) => {
 
 const Home = (props) => {
   const [debates, setDebates] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
     variables: {
       first: nbDebates,
@@ -165,13 +166,14 @@ const Home = (props) => {
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
-          if (Platform.OS === "web") return;
+          if (Platform.OS === "web" || noMoreData) return;
           // return ;
           nbDebates += frequency;
           await fetchMore({
             variables: { first: frequency, skip: nbDebates - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { debates: moreDebates } = fetchMoreResult;
+              if (isEmpty(moreDebates)) setNoMoreData(true);
               setDebates((previousState) =>
                 [...previousState, ...moreDebates].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);
@@ -185,9 +187,10 @@ const Home = (props) => {
             },
           });
         }}
-        ListFooterComponent={() => (
-          <ActivityIndicator style={{ marginBottom: 70 }} />
-        )}
+        ListFooterComponent={() => {
+          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
       />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />

@@ -117,6 +117,7 @@ const renderItem = ({ item }, navigation, user) => {
 
 const Interactions = (props) => {
   const [interactions, setInteractions] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_INTERACTIONS, {
     variables: {
       first: nbInteractions,
@@ -142,7 +143,7 @@ const Interactions = (props) => {
       keyExtractor={(item) => item.id}
       onEndReachedThreshold={0.5}
       onEndReached={async () => {
-        if (Platform.OS === "web") return;
+        if (Platform.OS === "web" || noMoreData) return;
         // return ;
         nbInteractions += frequency;
         await fetchMore({
@@ -153,6 +154,7 @@ const Interactions = (props) => {
           },
           updateQuery: (previousResult, { fetchMoreResult }) => {
             const { interactions: moreInteractions } = fetchMoreResult;
+            if (isEmpty(moreInteractions)) setNoMoreData(true);
             setInteractions((previousState) =>
               [...previousState, ...moreInteractions].reduce((acc, current) => {
                 const x = acc.find((item) => item.id === current.id);
@@ -166,9 +168,10 @@ const Interactions = (props) => {
           },
         });
       }}
-      ListFooterComponent={() => (
-        <ActivityIndicator style={{ marginBottom: 70 }} />
-      )}
+      ListFooterComponent={() => {
+        if (noMoreData) return null;
+        return <ActivityIndicator style={{ marginBottom: 70 }} />;
+      }}
     />
   );
 };
