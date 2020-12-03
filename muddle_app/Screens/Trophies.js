@@ -57,8 +57,20 @@ const GET_TROPHIES = gql`
           pseudo
         }
         debate {
-          id
+          type
           content
+          owner {
+            id
+            pseudo
+          }
+          ownerBlue {
+            id
+            pseudo
+          }
+          ownerRed {
+            id
+            pseudo
+          }
           positives {
             id
           }
@@ -70,6 +82,14 @@ const GET_TROPHIES = gql`
           }
           blueVotes {
             id
+          }
+          comments {
+            id
+            content
+            from {
+              id
+              pseudo
+            }
           }
         }
       }
