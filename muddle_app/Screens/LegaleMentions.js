@@ -47,7 +47,7 @@ const LegaleMentions = (props) => {
               textAlign: "center",
               marginTop: 20,
               fontSize: 16,
-              fontWeight: "bold",
+              fontFamily: "Montserrat_700Bold",
             }}
           >
             Mentions Legales & Confidentialite

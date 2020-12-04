@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
   buttonTextDefaultState: {
     fontSize: 14,
     fontWeight: "bold",
+    fontFamily: "Montserrat_700Bold",
   },
 });
 

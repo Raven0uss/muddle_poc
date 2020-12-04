@@ -42,7 +42,11 @@ const DatePicker = (props) => {
         }}
       >
         <View style={styles.input}>
-          <Text>
+          <Text
+            style={{
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
             {date === null ? placeholder : moment(date).format("DD MMMM YYYY")}
           </Text>
         </View>
@@ -80,7 +84,9 @@ const DatePicker = (props) => {
                 }}
                 style={styles.validationButton}
               >
-                <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                <Text
+                  style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
+                >
                   Valider
                 </Text>
               </TouchableOpacity>
@@ -126,6 +132,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 18,
     height: 40,
+    fontFamily: "Montserrat_500Medium",
   },
   centeredView: {
     flex: 1,

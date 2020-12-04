@@ -75,8 +75,8 @@ const Menu = (props) => {
         <TouchableOpacity
           style={styles.menuElement}
           onPress={() => {
-            console.log("Log out");
-            // navigation.push("Settings");
+            // console.log("Log out");
+            navigation.navigate("Login");
           }}
         >
           <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   menuText: {
     marginLeft: 10,
     fontSize: 14,
-    fontWeight: "400",
+    fontFamily: "Montserrat_500Medium",
   },
 });
 

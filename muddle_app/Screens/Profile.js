@@ -91,6 +91,16 @@ const GET_INTERACTIONS = gql`
         }
         comments {
           id
+          from {
+            pseudo
+          }
+          content
+          likes {
+            id
+          }
+          dislikes {
+            id
+          }
         }
       }
       comment {
@@ -126,6 +136,16 @@ const GET_INTERACTIONS = gql`
           }
           comments {
             id
+            from {
+              pseudo
+            }
+            content
+            likes {
+              id
+            }
+            dislikes {
+              id
+            }
           }
         }
         from {
@@ -339,6 +359,7 @@ const Profile = (props) => {
               marginTop: -3,
               marginBottom: 3,
               fontWeight: "bold",
+              fontFamily: "Montserrat_600SemiBold",
             }}
           >
             {user.trophies.length}
@@ -379,10 +400,9 @@ const Profile = (props) => {
         >
           <Text
             style={{
-              fontWeight: "bold",
               width: 150,
               height: 40,
-
+              fontFamily: "Montserrat_700Bold",
               // borderWidth: 1,
             }}
             numberOfLines={2}
@@ -401,7 +421,7 @@ const Profile = (props) => {
               <Text
                 style={{
                   fontSize: 10,
-                  fontWeight: "bold",
+                  fontFamily: "Montserrat_600SemiBold",
                 }}
               >
                 {user.followers.length}
@@ -410,6 +430,7 @@ const Profile = (props) => {
                 style={{
                   fontSize: 10,
                   color: "#A3A3A3",
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 abonnes
@@ -419,7 +440,7 @@ const Profile = (props) => {
               <Text
                 style={{
                   fontSize: 10,
-                  fontWeight: "bold",
+                  fontFamily: "Montserrat_600SemiBold",
                 }}
               >
                 {user.following.length}
@@ -428,6 +449,7 @@ const Profile = (props) => {
                 style={{
                   fontSize: 10,
                   color: "#A3A3A3",
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 abonnements
@@ -446,7 +468,7 @@ const Profile = (props) => {
       </View>
 
       {/* Historique des interactions */}
-      <TextInput
+      {/* <TextInput
         placeholder="Rechercher dans le profil"
         value={search}
         style={{
@@ -464,7 +486,7 @@ const Profile = (props) => {
         keyboardType="default"
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
-      />
+      /> */}
       <Interactions userId={user.pseudo} navigation={navigation} />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />

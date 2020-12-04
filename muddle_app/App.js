@@ -1,10 +1,34 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
-import { Provider as PaperProvider } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Provider as PaperProvider,
+} from "react-native-paper";
 import { apolloClient } from "./apollo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import {
+  useFonts,
+  Montserrat_100Thin,
+  Montserrat_100Thin_Italic,
+  Montserrat_200ExtraLight,
+  Montserrat_200ExtraLight_Italic,
+  Montserrat_300Light,
+  Montserrat_300Light_Italic,
+  Montserrat_400Regular,
+  Montserrat_400Regular_Italic,
+  Montserrat_500Medium,
+  Montserrat_500Medium_Italic,
+  Montserrat_600SemiBold,
+  Montserrat_600SemiBold_Italic,
+  Montserrat_700Bold,
+  Montserrat_700Bold_Italic,
+  Montserrat_800ExtraBold,
+  Montserrat_800ExtraBold_Italic,
+  Montserrat_900Black,
+  Montserrat_900Black_Italic,
+} from "@expo-google-fonts/montserrat";
 
 import { I18nProvider } from "@lingui/react";
 import i18n, { getDeviceLocale } from "./i18n";
@@ -41,8 +65,8 @@ import TrophiesScreen from "./Screens/Trophies";
 const Stack = createStackNavigator();
 
 // const mode = "COMPONENTS";
-const mode = "APP";
-// const mode = "LOGIN";
+// const mode = "APP";
+const mode = "LOGIN";
 
 const setInitialRoute = () => {
   switch (mode) {
@@ -59,12 +83,36 @@ const setInitialRoute = () => {
 
 export default function App() {
   const [language, setLanguage] = React.useState(getDeviceLocale());
+  let [fontsLoaded] = useFonts({
+    Montserrat_100Thin,
+    Montserrat_100Thin_Italic,
+    Montserrat_200ExtraLight,
+    Montserrat_200ExtraLight_Italic,
+    Montserrat_300Light,
+    Montserrat_300Light_Italic,
+    Montserrat_400Regular,
+    Montserrat_400Regular_Italic,
+    Montserrat_500Medium,
+    Montserrat_500Medium_Italic,
+    Montserrat_600SemiBold,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold,
+    Montserrat_700Bold_Italic,
+    Montserrat_800ExtraBold,
+    Montserrat_800ExtraBold_Italic,
+    Montserrat_900Black,
+    Montserrat_900Black_Italic,
+  });
 
   const changeLanguage = (lang) => {
     console.log(lang);
     i18n.activate(lang);
     setLanguage(lang);
   };
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <NavigationContainer>

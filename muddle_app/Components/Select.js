@@ -49,7 +49,13 @@ const Select = (props) => {
           }}
         >
           <View style={styles.input}>
-            <Text>{selected === null ? placeholder : selected.label}</Text>
+            <Text
+              style={{
+                fontFamily: "Montserrat_500Medium",
+              }}
+            >
+              {selected === null ? placeholder : selected.label}
+            </Text>
           </View>
         </TouchableWithoutFeedback>
       ) : (
@@ -93,6 +99,7 @@ const Select = (props) => {
                       style={{
                         padding: 10,
                         fontSize: 18,
+                        fontFamily: "Montserrat_500Medium",
                       }}
                     >
                       {element.label}
@@ -106,7 +113,9 @@ const Select = (props) => {
                 }}
                 style={styles.validationButton}
               >
-                <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                <Text
+                  style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
+                >
                   Fermer
                 </Text>
               </TouchableOpacity>

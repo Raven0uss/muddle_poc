@@ -54,7 +54,14 @@ const CommentBox = (props) => {
           />
         </View>
       </View>
-      <Text style={{ fontSize: 12 }}>{comment.content}</Text>
+      <Text
+        style={{
+          fontSize: 12,
+          fontFamily: "Montserrat_500Medium",
+        }}
+      >
+        {comment.content}
+      </Text>
       <View
         style={{
           height: 1,
@@ -90,7 +97,14 @@ const CommentBox = (props) => {
             borderRadius: 12,
           }}
         >
-          <Text>Repondre</Text>
+          <Text
+            style={{
+              fontFamily: "Montserrat_500Medium",
+              fontSize: 12,
+            }}
+          >
+            Repondre
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -107,6 +121,7 @@ const styles = StyleSheet.create({
     marginLeft: 9,
     fontWeight: "bold",
     fontSize: 14,
+    fontFamily: "Montserrat_500Medium",
     // paddingTop: 6,
   },
   headDebate: {

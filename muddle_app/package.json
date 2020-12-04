@@ -2,6 +2,7 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.48",
     "@apollo/link-context": "^2.0.0-beta.3",
+    "@expo-google-fonts/montserrat": "^0.1.0",
     "@lingui/core": "^2.9.2",
     "@lingui/react": "^2.9.2",
     "@react-native-community/datetimepicker": "3.0.0",

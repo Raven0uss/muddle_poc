@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   menuText: {
     marginLeft: 10,
     fontSize: 14,
-    fontWeight: "400",
+    fontFamily: "Montserrat_500Medium",
   },
 });
 

@@ -42,7 +42,9 @@ const ContactUs = (props) => {
       />
       <ScrollView style={styles.seedContainer}>
         <View style={{ justifyContent: "center", marginTop: 30 }}>
-          <Text style={{ textAlign: "center" }}>
+          <Text
+            style={{ textAlign: "center", fontFamily: "Montserrat_500Medium" }}
+          >
             Pour tout question relative a Muddles, veuillez nous contacter a
             l'adresse suivante :
           </Text>
@@ -52,7 +54,7 @@ const ContactUs = (props) => {
                 textAlign: "center",
                 marginTop: 20,
                 fontSize: 16,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_700Bold",
               }}
             >
               contact@muddles.fr

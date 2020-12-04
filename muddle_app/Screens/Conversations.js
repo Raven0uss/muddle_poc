@@ -58,7 +58,7 @@ const renderItem = ({ item }, navigation) => {
     >
       <View
         style={{
-          width: Dimensions.get("screen").width / 1.25,
+          width: Dimensions.get("screen").width / 1.2,
           height: 72,
           borderRadius: 10,
           backgroundColor: "#f7f7f7",
@@ -66,12 +66,15 @@ const renderItem = ({ item }, navigation) => {
           marginRight: "auto",
           marginTop: 20,
           marginBottom: 5,
+          paddingRight: 5,
         }}
       >
         <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
         <View style={{ marginLeft: 40, marginTop: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+            <Text
+              style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
+            >
               {lastMessage.from.pseudo}
             </Text>
             <Text
@@ -79,7 +82,7 @@ const renderItem = ({ item }, navigation) => {
                 fontSize: 10,
                 color: "#A3A3A3",
                 marginLeft: 5,
-                fontStyle: "italic",
+                fontFamily: "Montserrat_300Light_Italic",
               }}
             >
               10h23
@@ -87,7 +90,11 @@ const renderItem = ({ item }, navigation) => {
           </View>
           <Text
             numberOfLines={1}
-            style={{ fontSize: 12, fontWeight: "400", marginTop: 17 }}
+            style={{
+              fontSize: 12,
+              marginTop: 17,
+              fontFamily: "Montserrat_500Medium",
+            }}
           >
             {lastMessage.content}
           </Text>
@@ -178,6 +185,7 @@ const Conversations = (props) => {
             marginBottom: 14,
             marginTop: 33,
             marginBottom: 35,
+            fontFamily: "Montserrat_500Medium",
           }}
           keyboardType="default"
           onChangeText={(s) => setSearch(s)}

@@ -78,7 +78,11 @@ const CreateDebate = (props) => {
                 }}
               />
               <Text
-                style={{ fontWeight: "bold", marginLeft: 10, fontSize: 12 }}
+                style={{
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginLeft: 10,
+                  fontSize: 12,
+                }}
               >
                 Sid-Ahmed Fahem
               </Text>
@@ -108,7 +112,13 @@ const CreateDebate = (props) => {
                   }}
                 >
                   <View style={styles.inputInvite}>
-                    <Text>Inviter une personne</Text>
+                    <Text
+                      style={{
+                        fontFamily: "Montserrat_500Medium",
+                      }}
+                    >
+                      Inviter une personne
+                    </Text>
                   </View>
                 </TouchableWithoutFeedback>
               ) // Here to launch screen to invite new person for debate
@@ -174,7 +184,9 @@ const CreateDebate = (props) => {
             </View>
           </View>
           <TouchableOpacity onPress={() => {}} style={styles.connectionButton}>
-            <Text style={{ color: "#000", fontWeight: "bold" }}>Publier</Text>
+            <Text style={{ color: "#000", fontFamily: "Montserrat_700Bold" }}>
+              Publier
+            </Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -208,6 +220,7 @@ const styles = StyleSheet.create({
     height: 120,
     // maxHeight: 1200,
     overflow: "scroll",
+    fontFamily: "Montserrat_500Medium",
   },
   optionOne: {
     backgroundColor: "#fff",
@@ -220,6 +233,7 @@ const styles = StyleSheet.create({
     color: "#000",
     borderColor: "#F47658",
     borderWidth: 2,
+    fontFamily: "Montserrat_500Medium",
   },
   optionTwo: {
     backgroundColor: "#fff",
@@ -232,6 +246,7 @@ const styles = StyleSheet.create({
     color: "#000",
     borderColor: "#000",
     borderWidth: 2,
+    fontFamily: "Montserrat_500Medium",
   },
   connectionButton: {
     alignSelf: "flex-end",
@@ -252,6 +267,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 10,
     height: 40,
+    fontFamily: "Montserrat_500Medium",
   },
 });
 

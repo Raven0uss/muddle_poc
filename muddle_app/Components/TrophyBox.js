@@ -111,6 +111,7 @@ const TrophyBox = (props) => {
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis pour
@@ -128,6 +129,7 @@ const TrophyBox = (props) => {
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis contre
@@ -184,6 +186,7 @@ const TrophyBox = (props) => {
               style={{
                 fontSize: 12,
                 margin: 2,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {trophy.comment.content}
@@ -218,7 +221,7 @@ const TrophyBox = (props) => {
 const styles = StyleSheet.create({
   pseudo: {
     marginLeft: 9,
-    fontWeight: "bold",
+    fontFamily: "Montserrat_600SemiBold",
     fontSize: 14,
     // paddingTop: 6,
   },
@@ -243,6 +246,7 @@ const styles = StyleSheet.create({
   debateText: {
     fontSize: 12,
     paddingBottom: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateFooter: {
     flexDirection: "row",
@@ -251,6 +255,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateActions: {
     flexDirection: "row",
@@ -260,13 +265,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 30,
-  },
-
-  pseudo: {
-    marginLeft: 9,
-    fontWeight: "bold",
-    fontSize: 14,
-    // paddingTop: 6,
   },
 
   votePourButton: {
@@ -282,7 +280,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   voteContreButton: {
@@ -298,7 +296,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     marginLeft: 5,
   },
   commentButton: {
@@ -374,7 +372,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   voteRedButton: {
@@ -390,7 +388,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   commentDuoButton: {

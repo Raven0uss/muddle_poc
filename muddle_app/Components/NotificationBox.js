@@ -55,7 +55,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -69,14 +69,16 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 a vote sur votre debat{" "}
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 il y a 2 heures
@@ -123,7 +125,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -137,7 +139,8 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 vous invite pour un debat duo{" "}
@@ -161,7 +164,13 @@ const NotificationBox = (props) => {
                 }}
                 disabled={status === "DECLINED"}
               >
-                <Text>Accepter</Text>
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  Accepter
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -181,6 +190,7 @@ const NotificationBox = (props) => {
                 <Text
                   style={{
                     color: status === "DECLINED" ? "#fff" : "#000",
+                    fontFamily: "Montserrat_500Medium",
                   }}
                 >
                   Refuser
@@ -228,7 +238,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -250,7 +260,8 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {`${
@@ -261,7 +272,8 @@ const NotificationBox = (props) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {" il y a 2 jours"}
@@ -272,6 +284,7 @@ const NotificationBox = (props) => {
               style={{
                 fontSize: 12,
                 marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {notification.debate.content}
@@ -317,7 +330,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -331,14 +344,16 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 a demande a clore ce debat{" "}
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {" il y a 3 jours"}
@@ -349,6 +364,7 @@ const NotificationBox = (props) => {
               style={{
                 fontSize: 12,
                 marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {notification.debate.content}
@@ -371,7 +387,13 @@ const NotificationBox = (props) => {
                 }}
                 disabled={status === "DECLINED"}
               >
-                <Text>Accepter</Text>
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  Accepter
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -391,6 +413,7 @@ const NotificationBox = (props) => {
                 <Text
                   style={{
                     color: status === "DECLINED" ? "#fff" : "#000",
+                    fontFamily: "Montserrat_500Medium",
                   }}
                 >
                   Refuser
@@ -438,7 +461,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -460,7 +483,8 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {`${
@@ -471,7 +495,8 @@ const NotificationBox = (props) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {" il y a 3 jours"}
@@ -482,6 +507,7 @@ const NotificationBox = (props) => {
               style={{
                 fontSize: 12,
                 marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {notification.comment.content}
@@ -527,7 +553,7 @@ const NotificationBox = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
               }}
             >
@@ -549,7 +575,8 @@ const NotificationBox = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {`${
@@ -560,7 +587,8 @@ const NotificationBox = (props) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 {" il y a 3 jours"}
@@ -571,6 +599,7 @@ const NotificationBox = (props) => {
               style={{
                 fontSize: 12,
                 marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {notification.comment.content}

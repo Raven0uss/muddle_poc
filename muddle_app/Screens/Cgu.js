@@ -47,7 +47,7 @@ const Cgu = (props) => {
               textAlign: "center",
               marginTop: 20,
               fontSize: 16,
-              fontWeight: "bold",
+              fontFamily: "Montserrat_700Bold",
             }}
           >
             Conditions Generales d'Utilisation

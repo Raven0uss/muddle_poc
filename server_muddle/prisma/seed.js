@@ -25,7 +25,7 @@ const getRandomComments = (nb, { users }) => {
   for (let index = 0; index < nb; index++) {
     comments.push({
       from: { connect: { id: users[faker.random.number(9)].id } },
-      content: faker.lorem.sentence(faker.random.number(3)),
+      content: faker.lorem.sentence(faker.random.number(50)),
     });
   }
   return comments;

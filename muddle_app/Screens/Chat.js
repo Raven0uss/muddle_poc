@@ -40,6 +40,7 @@ const renderItem = ({ item }, navigation, me) => {
           style={{
             color: "#fff",
             fontSize: 12,
+            fontFamily: "Montserrat_500Medium",
           }}
         >
           {item.content}
@@ -50,6 +51,7 @@ const renderItem = ({ item }, navigation, me) => {
             fontSize: 10,
             alignSelf: "flex-end",
             marginTop: 6,
+            fontFamily: "Montserrat_500Medium",
           }}
         >
           10:26
@@ -76,6 +78,7 @@ const renderItem = ({ item }, navigation, me) => {
         style={{
           color: "#000",
           fontSize: 12,
+          fontFamily: "Montserrat_500Medium",
         }}
       >
         {item.content}
@@ -86,6 +89,7 @@ const renderItem = ({ item }, navigation, me) => {
           fontSize: 10,
           alignSelf: "flex-end",
           marginTop: 6,
+          fontFamily: "Montserrat_500Medium",
         }}
       >
         10:26
@@ -199,6 +203,7 @@ const Chat = (props) => {
                 marginTop: 25,
                 alignSelf: "center",
                 fontSize: 12,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               {partner.pseudo}
@@ -258,6 +263,7 @@ const Chat = (props) => {
               // marginBottom: 14,
               marginTop: 10,
               // marginBottom: 20,
+              fontFamily: "Montserrat_500Medium",
             }}
             keyboardType="default"
             onChangeText={(nm) => setNewMessage(nm)}

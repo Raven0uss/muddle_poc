@@ -56,13 +56,19 @@ function ForgotPasswordComponent(props) {
               console.log("Connection");
               navigation.navigate("Login", {
                 snackType: "success",
-                snackMessage: "Un mail vous a ete envoye afin de recuperer votre compte.",
+                snackMessage:
+                  "Un mail vous a ete envoye afin de recuperer votre compte.",
                 snack: true,
               });
             }}
             style={styles.connectionButton}
           >
-            <Text style={{ color: colors.secondary, fontWeight: "bold" }}>
+            <Text
+              style={{
+                color: colors.secondary,
+                fontFamily: "Montserrat_700Bold",
+              }}
+            >
               Mot de passe oublie
             </Text>
           </TouchableOpacity>
@@ -105,6 +111,7 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 18,
     height: 40,
+    fontFamily: "Montserrat_500Medium",
   },
   connectionButton: {
     alignSelf: "flex-end",
@@ -124,10 +131,12 @@ const styles = StyleSheet.create({
   noAccountText: {
     color: "#000",
     fontSize: 14,
+    fontFamily: "Montserrat_500Medium",
   },
   subscriptionLink: {
     textDecorationLine: "underline",
     textDecorationColor: "#000",
+    fontFamily: "Montserrat_500Medium",
   },
   languageBloc: {
     position: "absolute",
@@ -137,7 +146,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   logo: {
-    width: 148,
+    width: 170,
     height: 120,
   },
 });

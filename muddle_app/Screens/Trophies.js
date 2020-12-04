@@ -186,9 +186,15 @@ const Trophies = (props) => {
               width: Dimensions.get("screen").width / 2,
             }}
           >
-            <Text style={{ fontSize: 12 }}>Debat en duo remporte</Text>
+            <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
+              Debat en duo remporte
+            </Text>
             <Text
-              style={{ fontSize: 14, color: "#6AE686", fontWeight: "bold" }}
+              style={{
+                fontSize: 14,
+                color: "#6AE686",
+                fontFamily: "Montserrat_700Bold",
+              }}
             >
               {nbDuoTrophies}
             </Text>
@@ -199,9 +205,15 @@ const Trophies = (props) => {
               width: Dimensions.get("screen").width / 2,
             }}
           >
-            <Text style={{ fontSize: 12 }}>Commentaires remportes</Text>
+            <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
+              Commentaires remportes
+            </Text>
             <Text
-              style={{ fontSize: 14, color: "#F5D65A", fontWeight: "bold" }}
+              style={{
+                fontSize: 14,
+                color: "#F5D65A",
+                fontFamily: "Montserrat_700Bold",
+              }}
             >
               {nbTopComment}
             </Text>

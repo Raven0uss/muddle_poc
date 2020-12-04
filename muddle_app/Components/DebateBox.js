@@ -89,6 +89,7 @@ const DebateBox = (props) => {
                 fontSize: 12,
                 paddingLeft: 12,
                 paddingRight: 12,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               Je suis pour
@@ -102,6 +103,7 @@ const DebateBox = (props) => {
                 fontSize: 12,
                 paddingLeft: 6,
                 paddingRight: 6,
+                fontFamily: "Montserrat_500Medium",
               }}
             >
               Je suis contre
@@ -208,6 +210,7 @@ const DebateBox = (props) => {
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis pour
@@ -231,6 +234,7 @@ const DebateBox = (props) => {
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis contre
@@ -282,6 +286,7 @@ const styles = StyleSheet.create({
   debateText: {
     fontSize: 12,
     paddingBottom: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateFooter: {
     flexDirection: "row",
@@ -290,6 +295,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateActions: {
     flexDirection: "row",
@@ -303,8 +309,8 @@ const styles = StyleSheet.create({
 
   pseudo: {
     marginLeft: 9,
-    fontWeight: "bold",
     fontSize: 14,
+    fontFamily: "Montserrat_500Medium",
     // paddingTop: 6,
   },
 
@@ -321,7 +327,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   voteContreButton: {
@@ -337,7 +343,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     marginLeft: 5,
   },
   commentButton: {
@@ -376,10 +382,10 @@ const styles = StyleSheet.create({
   },
   pseudoDuo: {
     // marginLeft: 9,
-    fontWeight: "500",
     fontSize: 12,
     // paddingTop: 6,
     marginTop: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   headDebateDuo: {
     flexDirection: "row",
@@ -391,6 +397,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingBottom: 10,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    marginTop: 10,
     // marginLeft: "auto",
     // marginRight: "auto",
     // alignSelf: "center",
@@ -413,7 +421,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   voteRedButton: {
@@ -429,7 +437,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
+    width: 108,
     // marginLeft: 5,
   },
   commentDuoButton: {

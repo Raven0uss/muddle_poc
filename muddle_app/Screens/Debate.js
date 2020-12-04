@@ -154,6 +154,7 @@ const Debate = (props) => {
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis pour
@@ -170,6 +171,7 @@ const Debate = (props) => {
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis contre
@@ -253,6 +255,7 @@ const Debate = (props) => {
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis pour
@@ -276,6 +279,7 @@ const Debate = (props) => {
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
+                  fontFamily: "Montserrat_500Medium",
                 }}
               >
                 Je suis contre
@@ -349,6 +353,7 @@ const Debate = (props) => {
               // alignItems: "center",
               // marginBottom: 14,
               marginTop: 10,
+              fontFamily: "Montserrat_500Medium",
               // marginBottom: 20,
             }}
             keyboardType="default"
@@ -412,6 +417,7 @@ const styles = StyleSheet.create({
   debateText: {
     fontSize: 12,
     paddingBottom: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateFooter: {
     flexDirection: "row",
@@ -420,6 +426,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 10,
+    fontFamily: "Montserrat_500Medium",
   },
   debateActions: {
     flexDirection: "row",
@@ -432,8 +439,8 @@ const styles = StyleSheet.create({
   },
   pseudo: {
     marginLeft: 9,
-    fontWeight: "bold",
     fontSize: 14,
+    fontFamily: "Montserrat_500Medium",
     // paddingTop: 6,
   },
   votePourButton: {
@@ -508,6 +515,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     // paddingTop: 6,
     marginTop: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   headDebateDuo: {
     flexDirection: "row",
@@ -519,6 +527,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingBottom: 10,
     textAlign: "center",
+    marginTop: 10,
+    fontFamily: "Montserrat_500Medium",
     // marginLeft: "auto",
     // marginRight: "auto",
     // alignSelf: "center",
