@@ -364,7 +364,7 @@ const Profile = (props) => {
             zIndex: 20,
           }}
           onPress={() =>
-            navigation.navigate("Trophies", {
+            navigation.push("Trophies", {
               userId: user.pseudo,
               nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
                 .length,
@@ -441,7 +441,7 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Follow", {
+                  navigation.push("Follow", {
                     follow: {
                       following: user.following,
                       followers: user.followers,
@@ -472,7 +472,7 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Follow", {
+                  navigation.push("Follow", {
                     follow: {
                       following: user.following,
                       followers: user.followers,

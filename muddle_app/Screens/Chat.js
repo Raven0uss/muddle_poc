@@ -171,7 +171,7 @@ const Chat = (props) => {
       >
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Profile", {
+            navigation.push("Profile", {
               userId: partner.pseudo,
             });
           }}

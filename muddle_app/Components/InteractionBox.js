@@ -34,7 +34,7 @@ const InteractionBox = (props) => {
           />
           {/* <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate: comment.debate,
               })
             }
@@ -64,7 +64,7 @@ const InteractionBox = (props) => {
           />
           {/* <TouchableOpacity
             onPress={() =>
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate: comment.debate,
               })
             }

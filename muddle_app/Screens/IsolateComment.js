@@ -146,7 +146,7 @@ const IsolateComment = (props) => {
         <View style={styles.headDebate}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Profile", {
+              navigation.push("Profile", {
                 userId: comment.from.pseudo,
               });
             }}
@@ -158,7 +158,7 @@ const IsolateComment = (props) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Profile", {
+              navigation.push("Profile", {
                 userId: comment.from.pseudo,
               });
             }}

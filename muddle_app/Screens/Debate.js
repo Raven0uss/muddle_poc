@@ -100,7 +100,7 @@ const Debate = (props) => {
           <View style={styles.headDebate}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Profile", {
+                navigation.push("Profile", {
                   userId: debate.owner.pseudo,
                 });
               }}
@@ -112,7 +112,7 @@ const Debate = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Profile", {
+                navigation.push("Profile", {
                   userId: debate.owner.pseudo,
                 });
               }}
@@ -122,7 +122,7 @@ const Debate = (props) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate,
               });
             }}
@@ -190,7 +190,7 @@ const Debate = (props) => {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerBlue.pseudo,
                   });
                 }}
@@ -202,7 +202,7 @@ const Debate = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerBlue.pseudo,
                   });
                 }}
@@ -214,7 +214,7 @@ const Debate = (props) => {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerRed.pseudo,
                   });
                 }}
@@ -226,7 +226,7 @@ const Debate = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerRed.pseudo,
                   });
                 }}
@@ -237,7 +237,7 @@ const Debate = (props) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate,
               });
             }}
@@ -263,7 +263,7 @@ const Debate = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Debate", {
+                navigation.push("Debate", {
                   debate,
                 });
               }}

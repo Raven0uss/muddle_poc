@@ -36,7 +36,7 @@ const TrophyBox = (props) => {
           <View style={styles.headDebate}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Profile", {
+                navigation.push("Profile", {
                   userId: trophy.comment.debate.owner.pseudo,
                 });
               }}
@@ -48,7 +48,7 @@ const TrophyBox = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Profile", {
+                navigation.push("Profile", {
                   userId: trophy.comment.debate.owner.pseudo,
                 });
               }}
@@ -74,7 +74,7 @@ const TrophyBox = (props) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate: trophy.comment.debate,
               });
             }}
@@ -138,7 +138,7 @@ const TrophyBox = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Debate", {
+                navigation.push("Debate", {
                   debate: trophy.comment.debate,
                 });
               }}
@@ -162,7 +162,7 @@ const TrophyBox = (props) => {
             <View style={styles.headDebate}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: trophy.comment.from.pseudo,
                   });
                 }}
@@ -174,7 +174,7 @@ const TrophyBox = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: trophy.comment.from.pseudo,
                   });
                 }}
@@ -223,7 +223,7 @@ const TrophyBox = (props) => {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerBlue.pseudo,
                   });
                 }}
@@ -235,7 +235,7 @@ const TrophyBox = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerBlue.pseudo,
                   });
                 }}
@@ -247,7 +247,7 @@ const TrophyBox = (props) => {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerRed.pseudo,
                   });
                 }}
@@ -259,7 +259,7 @@ const TrophyBox = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Profile", {
+                  navigation.push("Profile", {
                     userId: debate.ownerRed.pseudo,
                   });
                 }}
@@ -291,7 +291,7 @@ const TrophyBox = (props) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Debate", {
+              navigation.push("Debate", {
                 debate,
               });
             }}
@@ -317,7 +317,7 @@ const TrophyBox = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Debate", {
+                navigation.push("Debate", {
                   debate,
                 });
               }}

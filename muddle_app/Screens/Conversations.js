@@ -51,7 +51,7 @@ const renderItem = ({ item }, navigation) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("Chat", {
+        navigation.push("Chat", {
           conversation: item,
         });
       }}

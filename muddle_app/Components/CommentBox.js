@@ -23,7 +23,7 @@ const CommentBox = (props) => {
       <View style={styles.headDebate}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Profile", {
+            navigation.push("Profile", {
               userId: comment.from.pseudo,
             });
           }}
@@ -32,7 +32,7 @@ const CommentBox = (props) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Profile", {
+            navigation.push("Profile", {
               userId: comment.from.pseudo,
             });
           }}
@@ -56,7 +56,7 @@ const CommentBox = (props) => {
       </View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("IsolateComment", {
+          navigation.push("IsolateComment", {
             comment,
           });
         }}
@@ -95,7 +95,7 @@ const CommentBox = (props) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("IsolateComment", {
+            navigation.push("IsolateComment", {
               comment,
             });
           }}
@@ -122,7 +122,7 @@ const CommentBox = (props) => {
       {comment.comments.length > 0 && (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("IsolateComment", {
+            navigation.push("IsolateComment", {
               comment,
             });
           }}
