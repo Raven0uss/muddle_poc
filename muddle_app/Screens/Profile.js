@@ -91,6 +91,7 @@ const GET_INTERACTIONS = gql`
         }
         comments {
           id
+          nested
           from {
             pseudo
           }
@@ -101,12 +102,15 @@ const GET_INTERACTIONS = gql`
           dislikes {
             id
           }
+          comments {
+            id
+          }
         }
       }
       comment {
         id
+        nested
         debate {
-          id
           id
           type
           content
@@ -136,6 +140,7 @@ const GET_INTERACTIONS = gql`
           }
           comments {
             id
+            nested
             from {
               pseudo
             }
@@ -144,6 +149,9 @@ const GET_INTERACTIONS = gql`
               id
             }
             dislikes {
+              id
+            }
+            comments {
               id
             }
           }
@@ -156,6 +164,9 @@ const GET_INTERACTIONS = gql`
           id
         }
         dislikes {
+          id
+        }
+        comments {
           id
         }
       }

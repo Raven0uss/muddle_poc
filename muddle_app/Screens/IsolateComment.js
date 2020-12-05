@@ -12,7 +12,7 @@ import {
   Platform,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
+import { ActivityIndicator, withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
@@ -57,6 +57,7 @@ const Comments = (props) => {
   });
 
   const { comment, navigation } = props;
+  if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
     <>
       {comments.map((c) => (
@@ -125,7 +126,7 @@ const IsolateComment = (props) => {
           <Select
             list={[
               {
-                label: "Signaler le debat",
+                label: "Signaler le commentaire",
                 value: "REPORT",
               },
             ]}
@@ -139,7 +140,7 @@ const IsolateComment = (props) => {
       <View
         style={{
           backgroundColor: "#fff",
-          padding: 10,
+          padding: 20,
         }}
       >
         <View style={styles.headDebate}>

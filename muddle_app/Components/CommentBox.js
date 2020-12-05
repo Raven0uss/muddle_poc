@@ -54,14 +54,22 @@ const CommentBox = (props) => {
           />
         </View>
       </View>
-      <Text
-        style={{
-          fontSize: 12,
-          fontFamily: "Montserrat_500Medium",
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("IsolateComment", {
+            comment,
+          });
         }}
       >
-        {comment.content}
-      </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            fontFamily: "Montserrat_500Medium",
+          }}
+        >
+          {comment.content}
+        </Text>
+      </TouchableOpacity>
       <View
         style={{
           height: 1,

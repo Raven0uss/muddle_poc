@@ -48,6 +48,15 @@ const GET_TROPHIES = gql`
         }
         comments {
           id
+          nested
+          content
+          comments {
+            id
+          }
+          from {
+            id
+            pseudo
+          }
         }
         positives {
           id
@@ -64,7 +73,20 @@ const GET_TROPHIES = gql`
       }
       comment {
         id
+        nested
         content
+        comments {
+          id
+          nested
+          content
+          comments {
+            id
+          }
+          from {
+            id
+            pseudo
+          }
+        }
         from {
           id
           pseudo
@@ -98,10 +120,14 @@ const GET_TROPHIES = gql`
           }
           comments {
             id
+            nested
             content
             from {
               id
               pseudo
+            }
+            comments {
+              id
             }
           }
         }

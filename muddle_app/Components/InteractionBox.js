@@ -32,15 +32,15 @@ const InteractionBox = (props) => {
               // marginBottom: 10,
             }}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate("Debate", {
                 debate: comment.debate,
               })
             }
-          >
-            <CommentBox comment={comment} navigation={navigation} />
-          </TouchableOpacity>
+          > */}
+          <CommentBox comment={comment} navigation={navigation} />
+          {/* </TouchableOpacity> */}
         </View>
       );
     case "DISLIKE":
@@ -62,15 +62,15 @@ const InteractionBox = (props) => {
               marginTop: 5,
             }}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate("Debate", {
                 debate: comment.debate,
               })
             }
-          >
-            <CommentBox comment={comment} navigation={navigation} />
-          </TouchableOpacity>
+          > */}
+          <CommentBox comment={comment} navigation={navigation} />
+          {/* </TouchableOpacity> */}
         </View>
       );
     case "COMMENT":
