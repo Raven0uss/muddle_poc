@@ -20,14 +20,24 @@ const randomUserList = ({ rejectList = [], users }) => {
     .map((u) => ({ id: u.id }));
 };
 
-const getRandomComments = (nb, { users }) => {
+const getRandomComments = (nb, { users, debate, subComment = false }) => {
   const comments = [];
-  for (let index = 0; index < nb; index++) {
-    comments.push({
-      from: { connect: { id: users[faker.random.number(9)].id } },
-      content: faker.lorem.sentence(faker.random.number(50)),
-    });
-  }
+  if (subComment)
+    for (let index = 0; index < nb; index++) {
+      comments.push({
+        from: { connect: { id: users[faker.random.number(9)].id } },
+        content: faker.lorem.sentence(faker.random.number(50)),
+        debate: { connect: { id: debate.id } },
+        nested: true,
+      });
+    }
+  else
+    for (let index = 0; index < nb; index++) {
+      comments.push({
+        from: { connect: { id: users[faker.random.number(9)].id } },
+        content: faker.lorem.sentence(faker.random.number(50)),
+      });
+    }
   return comments;
 };
 
@@ -94,6 +104,19 @@ async function main() {
   }
 
   const comments = await prisma.comments();
+  // Creare sub comment
+  await prisma.updateComment({
+    where: { id: comments[0].id },
+    data: {
+      comments: {
+        create: getRandomComments(faker.random.number(5) + 1, {
+          users,
+          debate: standardDebates[0],
+          subComment: true,
+        }),
+      },
+    },
+  });
 
   // Create muddle account
   const M = await prisma.createUser({

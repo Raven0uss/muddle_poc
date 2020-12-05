@@ -9,4 +9,5 @@ type Comment {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   comments: [Comment] @relation(link: INLINE)
+  nested: Boolean! @default(value: false)
 }

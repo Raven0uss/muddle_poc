@@ -308,6 +308,7 @@ export interface NexusGenInputs {
     from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
     id?: string | null; // ID
     likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    nested?: boolean | null; // Boolean
     reports?: NexusGenInputs['ReportCreateManyWithoutCommentInput'] | null; // ReportCreateManyWithoutCommentInput
   }
   CommentCreateManyInput: { // input type
@@ -333,6 +334,7 @@ export interface NexusGenInputs {
     from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
     id?: string | null; // ID
     likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    nested?: boolean | null; // Boolean
     reports?: NexusGenInputs['ReportCreateManyWithoutCommentInput'] | null; // ReportCreateManyWithoutCommentInput
   }
   CommentCreateWithoutReportsInput: { // input type
@@ -343,6 +345,7 @@ export interface NexusGenInputs {
     from: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
     id?: string | null; // ID
     likes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    nested?: boolean | null; // Boolean
   }
   CommentScalarWhereInput: { // input type
     AND?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
@@ -382,6 +385,8 @@ export interface NexusGenInputs {
     id_not_in?: string[] | null; // [ID!]
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
+    nested?: boolean | null; // Boolean
+    nested_not?: boolean | null; // Boolean
     NOT?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
     OR?: NexusGenInputs['CommentScalarWhereInput'][] | null; // [CommentScalarWhereInput!]
     updatedAt?: any | null; // DateTime
@@ -400,6 +405,7 @@ export interface NexusGenInputs {
     dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
     likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    nested?: boolean | null; // Boolean
     reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
   }
   CommentUpdateInput: { // input type
@@ -409,10 +415,12 @@ export interface NexusGenInputs {
     dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
     likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    nested?: boolean | null; // Boolean
     reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
   }
   CommentUpdateManyDataInput: { // input type
     content?: string | null; // String
+    nested?: boolean | null; // Boolean
   }
   CommentUpdateManyInput: { // input type
     connect?: NexusGenInputs['CommentWhereUniqueInput'][] | null; // [CommentWhereUniqueInput!]
@@ -470,6 +478,7 @@ export interface NexusGenInputs {
     dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
     likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    nested?: boolean | null; // Boolean
     reports?: NexusGenInputs['ReportUpdateManyWithoutCommentInput'] | null; // ReportUpdateManyWithoutCommentInput
   }
   CommentUpdateWithoutReportsDataInput: { // input type
@@ -479,6 +488,7 @@ export interface NexusGenInputs {
     dislikes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     from?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
     likes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    nested?: boolean | null; // Boolean
   }
   CommentUpsertNestedInput: { // input type
     create: NexusGenInputs['CommentCreateInput']; // CommentCreateInput!
@@ -541,6 +551,8 @@ export interface NexusGenInputs {
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
     likes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    nested?: boolean | null; // Boolean
+    nested_not?: boolean | null; // Boolean
     reports_some?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
@@ -3263,7 +3275,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   AdOrderByInput: "active_ASC" | "active_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "ratio_ASC" | "ratio_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "nested_ASC" | "nested_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateType: "DUO" | "MUDDLE" | "STANDARD"
@@ -3308,6 +3320,7 @@ export interface NexusGenRootTypes {
     content: string; // String!
     createdAt: any; // DateTime!
     id: string; // ID!
+    nested: boolean; // Boolean!
     updatedAt: any; // DateTime!
   }
   CommentSubPayload: { // root type
@@ -3699,6 +3712,7 @@ export interface NexusGenFieldTypes {
     from: NexusGenRootTypes['User']; // User!
     id: string; // ID!
     likes: NexusGenRootTypes['User'][] | null; // [User!]
+    nested: boolean; // Boolean!
     reports: NexusGenRootTypes['Report'][] | null; // [Report!]
     updatedAt: any; // DateTime!
   }

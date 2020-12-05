@@ -63,6 +63,7 @@ const GET_DEBATES = gql`
       }
       comments {
         id
+        nested
         from {
           pseudo
         }
@@ -71,6 +72,9 @@ const GET_DEBATES = gql`
           id
         }
         dislikes {
+          id
+        }
+        comments {
           id
         }
       }

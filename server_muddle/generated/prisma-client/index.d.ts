@@ -527,7 +527,9 @@ export type CommentOrderByInput =
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "updatedAt_DESC"
+  | "nested_ASC"
+  | "nested_DESC";
 
 export type NotificationOrderByInput =
   | "id_ASC"
@@ -795,6 +797,7 @@ export interface CommentCreateWithoutReportsInput {
   dislikes?: Maybe<UserCreateManyInput>;
   debate: DebateCreateOneWithoutCommentsInput;
   comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface DebateWhereInput {
@@ -958,6 +961,8 @@ export interface CommentWhereInput {
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
   comments_some?: Maybe<CommentWhereInput>;
+  nested?: Maybe<Boolean>;
+  nested_not?: Maybe<Boolean>;
   AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
 }
 
@@ -1174,6 +1179,7 @@ export interface CommentUpdateInput {
   reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
   debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
   comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface InteractionSubscriptionWhereInput {
@@ -1634,6 +1640,7 @@ export interface ConversationUpsertWithoutMessagesInput {
 
 export interface CommentUpdateManyMutationInput {
   content?: Maybe<String>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface ConversationUpdateOneRequiredWithoutMessagesInput {
@@ -2162,6 +2169,7 @@ export interface CommentUpdateWithoutDebateDataInput {
   dislikes?: Maybe<UserUpdateManyInput>;
   reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
   comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface UserCreateManyWithoutFollowersInput {
@@ -2581,6 +2589,7 @@ export interface CommentUpdateDataInput {
   reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
   debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
   comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface UserCreateOneWithoutInteractionsInput {
@@ -2925,6 +2934,7 @@ export interface CommentUpdateWithoutReportsDataInput {
   dislikes?: Maybe<UserUpdateManyInput>;
   debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
   comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface MessageWhereInput {
@@ -3080,6 +3090,8 @@ export interface CommentScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
+  nested?: Maybe<Boolean>;
+  nested_not?: Maybe<Boolean>;
   AND?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
   OR?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
   NOT?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
@@ -3109,6 +3121,7 @@ export interface TrophyCreateInput {
 
 export interface CommentUpdateManyDataInput {
   content?: Maybe<String>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface ReportCreateInput {
@@ -3486,6 +3499,7 @@ export interface CommentCreateInput {
   reports?: Maybe<ReportCreateManyWithoutCommentInput>;
   debate: DebateCreateOneWithoutCommentsInput;
   comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface ConversationUpdateWithoutSpeakersDataInput {
@@ -3725,6 +3739,7 @@ export interface CommentCreateWithoutDebateInput {
   dislikes?: Maybe<UserCreateManyInput>;
   reports?: Maybe<ReportCreateManyWithoutCommentInput>;
   comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface MessageUpdateManyDataInput {
@@ -5173,6 +5188,7 @@ export interface Comment {
   content: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
+  nested: Boolean;
 }
 
 export interface CommentPromise extends Promise<Comment>, Fragmentable {
@@ -5218,6 +5234,7 @@ export interface CommentPromise extends Promise<Comment>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  nested: () => Promise<Boolean>;
 }
 
 export interface CommentSubscription
@@ -5265,6 +5282,7 @@ export interface CommentSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  nested: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface CommentNullablePromise
@@ -5312,6 +5330,7 @@ export interface CommentNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  nested: () => Promise<Boolean>;
 }
 
 export interface Trophy {
@@ -5906,6 +5925,7 @@ export interface CommentPreviousValues {
   content: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
+  nested: Boolean;
 }
 
 export interface CommentPreviousValuesPromise
@@ -5915,6 +5935,7 @@ export interface CommentPreviousValuesPromise
   content: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  nested: () => Promise<Boolean>;
 }
 
 export interface CommentPreviousValuesSubscription
@@ -5924,6 +5945,7 @@ export interface CommentPreviousValuesSubscription
   content: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nested: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface DebateConnection {

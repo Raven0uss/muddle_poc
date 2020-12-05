@@ -86,7 +86,11 @@ const CommentBox = (props) => {
           <CustomIcon color="#000" name="sentiment-dissatisfied" size={20} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("IsolateComment", {
+              comment,
+            });
+          }}
           style={{
             marginLeft: 22,
             backgroundColor: "#F9F9F9",
@@ -107,6 +111,25 @@ const CommentBox = (props) => {
           </Text>
         </TouchableOpacity>
       </View>
+      {comment.comments.length > 0 && (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("IsolateComment", {
+              comment,
+            });
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: "Montserrat_400Regular",
+              fontSize: 12,
+              marginTop: 7,
+            }}
+          >
+            Voir les {comment.comments.length} autres reponses
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

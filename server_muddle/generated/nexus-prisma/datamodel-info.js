@@ -5417,6 +5417,22 @@ module.exports = {
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -10252,6 +10268,26 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nested_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "AND",
             "description": null,
             "type": {
@@ -14279,6 +14315,18 @@ module.exports = {
           },
           {
             "name": "updatedAt_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nested_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nested_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -21730,6 +21778,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -25414,6 +25472,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -26787,6 +26855,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -27467,6 +27545,16 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CommentUpdateManyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -32507,6 +32595,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -35528,6 +35626,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -36212,6 +36320,16 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CommentUpdateManyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -36997,6 +37115,26 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nested_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "AND",
             "description": null,
             "type": {
@@ -37106,6 +37244,16 @@ module.exports = {
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -43957,6 +44105,16 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -48332,6 +48490,22 @@ module.exports = {
               "ofType": {
                 "kind": "SCALAR",
                 "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nested",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },

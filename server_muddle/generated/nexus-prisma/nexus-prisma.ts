@@ -1676,6 +1676,7 @@ type CommentObject =
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
   | { name: 'comments', args?: CommentCommentsArgs[] | false, alias?: string  } 
+  | { name: 'nested', args?: [] | false, alias?: string  } 
 
 type CommentFields =
   | 'id'
@@ -1688,6 +1689,7 @@ type CommentFields =
   | 'createdAt'
   | 'updatedAt'
   | 'comments'
+  | 'nested'
 
 
 type CommentLikesArgs =
@@ -1834,6 +1836,14 @@ export interface CommentFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Comment[]> | prisma.Comment[]
+  }
+  nested: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -6215,12 +6225,14 @@ type CommentPreviousValuesObject =
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+  | { name: 'nested', args?: [] | false, alias?: string  } 
 
 type CommentPreviousValuesFields =
   | 'id'
   | 'content'
   | 'createdAt'
   | 'updatedAt'
+  | 'nested'
 
 
 
@@ -6253,6 +6265,14 @@ export interface CommentPreviousValuesFieldDetails {
   }
   updatedAt: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  nested: {
+    type: 'Boolean'
     args: {}
     description: string
     list: undefined
@@ -8407,6 +8427,8 @@ export interface CommentWhereInput {
   updatedAt_gt?: string | null
   updatedAt_gte?: string | null
   comments_some?: CommentWhereInput | null
+  nested?: boolean | null
+  nested_not?: boolean | null
   AND?: CommentWhereInput[]
 }
 export type CommentWhereInputInputObject =
@@ -8461,6 +8483,8 @@ export type CommentWhereInputInputObject =
   | { name: 'updatedAt_gt', alias?: string  } 
   | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'comments_some', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
+  | { name: 'nested_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface ReportWhereInput {
@@ -9366,6 +9390,7 @@ export interface CommentCreateInput {
   reports?: ReportCreateManyWithoutCommentInput | null
   debate?: DebateCreateOneWithoutCommentsInput
   comments?: CommentCreateManyInput | null
+  nested?: boolean | null
 }
 export type CommentCreateInputInputObject =
   | Extract<keyof CommentCreateInput, string>
@@ -9377,6 +9402,7 @@ export type CommentCreateInputInputObject =
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface UserCreateOneInput {
   create?: UserCreateInput | null
@@ -10119,6 +10145,7 @@ export interface CommentCreateWithoutDebateInput {
   dislikes?: UserCreateManyInput | null
   reports?: ReportCreateManyWithoutCommentInput | null
   comments?: CommentCreateManyInput | null
+  nested?: boolean | null
 }
 export type CommentCreateWithoutDebateInputInputObject =
   | Extract<keyof CommentCreateWithoutDebateInput, string>
@@ -10129,6 +10156,7 @@ export type CommentCreateWithoutDebateInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface UserCreateManyInput {
   create?: UserCreateInput[]
@@ -10410,6 +10438,7 @@ export interface CommentCreateWithoutReportsInput {
   dislikes?: UserCreateManyInput | null
   debate?: DebateCreateOneWithoutCommentsInput
   comments?: CommentCreateManyInput | null
+  nested?: boolean | null
 }
 export type CommentCreateWithoutReportsInputInputObject =
   | Extract<keyof CommentCreateWithoutReportsInput, string>
@@ -10420,6 +10449,7 @@ export type CommentCreateWithoutReportsInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface DebateCreateOneWithoutCommentsInput {
   create?: DebateCreateWithoutCommentsInput | null
@@ -10559,6 +10589,7 @@ export interface CommentUpdateInput {
   reports?: ReportUpdateManyWithoutCommentInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
   comments?: CommentUpdateManyInput | null
+  nested?: boolean | null
 }
 export type CommentUpdateInputInputObject =
   | Extract<keyof CommentUpdateInput, string>
@@ -10569,6 +10600,7 @@ export type CommentUpdateInputInputObject =
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface UserUpdateOneRequiredInput {
   create?: UserCreateInput | null
@@ -11527,6 +11559,7 @@ export interface CommentUpdateWithoutDebateDataInput {
   dislikes?: UserUpdateManyInput | null
   reports?: ReportUpdateManyWithoutCommentInput | null
   comments?: CommentUpdateManyInput | null
+  nested?: boolean | null
 }
 export type CommentUpdateWithoutDebateDataInputInputObject =
   | Extract<keyof CommentUpdateWithoutDebateDataInput, string>
@@ -11536,6 +11569,7 @@ export type CommentUpdateWithoutDebateDataInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface UserUpdateManyInput {
   create?: UserCreateInput[]
@@ -12085,6 +12119,7 @@ export interface CommentUpdateDataInput {
   reports?: ReportUpdateManyWithoutCommentInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
   comments?: CommentUpdateManyInput | null
+  nested?: boolean | null
 }
 export type CommentUpdateDataInputInputObject =
   | Extract<keyof CommentUpdateDataInput, string>
@@ -12095,6 +12130,7 @@ export type CommentUpdateDataInputInputObject =
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface DebateUpdateOneRequiredWithoutCommentsInput {
   create?: DebateCreateWithoutCommentsInput | null
@@ -12227,6 +12263,7 @@ export interface CommentUpdateWithoutReportsDataInput {
   dislikes?: UserUpdateManyInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
   comments?: CommentUpdateManyInput | null
+  nested?: boolean | null
 }
 export type CommentUpdateWithoutReportsDataInputInputObject =
   | Extract<keyof CommentUpdateWithoutReportsDataInput, string>
@@ -12236,6 +12273,7 @@ export type CommentUpdateWithoutReportsDataInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comments', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface CommentUpdateManyInput {
   create?: CommentCreateInput[]
@@ -12325,6 +12363,8 @@ export interface CommentScalarWhereInput {
   updatedAt_lte?: string | null
   updatedAt_gt?: string | null
   updatedAt_gte?: string | null
+  nested?: boolean | null
+  nested_not?: boolean | null
   AND?: CommentScalarWhereInput[]
   OR?: CommentScalarWhereInput[]
   NOT?: CommentScalarWhereInput[]
@@ -12375,6 +12415,8 @@ export type CommentScalarWhereInputInputObject =
   | { name: 'updatedAt_lte', alias?: string  } 
   | { name: 'updatedAt_gt', alias?: string  } 
   | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
+  | { name: 'nested_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -12390,10 +12432,12 @@ export type CommentUpdateManyWithWhereNestedInputInputObject =
   
 export interface CommentUpdateManyDataInput {
   content?: string | null
+  nested?: boolean | null
 }
 export type CommentUpdateManyDataInputInputObject =
   | Extract<keyof CommentUpdateManyDataInput, string>
   | { name: 'content', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface CommentUpsertWithoutReportsInput {
   update?: CommentUpdateWithoutReportsDataInput
@@ -13678,10 +13722,12 @@ export type UserUpsertWithWhereUniqueWithoutFollowingInputInputObject =
   
 export interface CommentUpdateManyMutationInput {
   content?: string | null
+  nested?: boolean | null
 }
 export type CommentUpdateManyMutationInputInputObject =
   | Extract<keyof CommentUpdateManyMutationInput, string>
   | { name: 'content', alias?: string  } 
+  | { name: 'nested', alias?: string  } 
   
 export interface ConversationCreateInput {
   id?: string | null
@@ -14728,6 +14774,8 @@ export type CommentOrderByInputValues =
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
+  | 'nested_ASC'
+  | 'nested_DESC'
   
 export type ReportOrderByInputValues =
   | 'id_ASC'

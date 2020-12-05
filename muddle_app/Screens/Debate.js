@@ -306,9 +306,11 @@ const Debate = (props) => {
         </View>
       )}
       <ScrollView style={styles.seedContainer}>
-        {debate.comments.map((comment) => (
-          <CommentBox comment={comment} navigation={navigation} />
-        ))}
+        {debate.comments
+          .filter((comment) => comment.nested === false)
+          .map((comment) => (
+            <CommentBox comment={comment} navigation={navigation} />
+          ))}
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}

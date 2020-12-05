@@ -366,6 +366,7 @@ type Comment {
   from: User!
   id: ID!
   likes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  nested: Boolean!
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
   updatedAt: DateTime!
 }
@@ -378,6 +379,7 @@ input CommentCreateInput {
   from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
+  nested: Boolean
   reports: ReportCreateManyWithoutCommentInput
 }
 
@@ -408,6 +410,7 @@ input CommentCreateWithoutDebateInput {
   from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
+  nested: Boolean
   reports: ReportCreateManyWithoutCommentInput
 }
 
@@ -419,6 +422,7 @@ input CommentCreateWithoutReportsInput {
   from: UserCreateOneInput!
   id: ID
   likes: UserCreateManyInput
+  nested: Boolean
 }
 
 enum CommentOrderByInput {
@@ -428,6 +432,8 @@ enum CommentOrderByInput {
   createdAt_DESC
   id_ASC
   id_DESC
+  nested_ASC
+  nested_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -470,6 +476,8 @@ input CommentScalarWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  nested: Boolean
+  nested_not: Boolean
   NOT: [CommentScalarWhereInput!]
   OR: [CommentScalarWhereInput!]
   updatedAt: DateTime
@@ -494,6 +502,7 @@ input CommentUpdateDataInput {
   dislikes: UserUpdateManyInput
   from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
+  nested: Boolean
   reports: ReportUpdateManyWithoutCommentInput
 }
 
@@ -504,11 +513,13 @@ input CommentUpdateInput {
   dislikes: UserUpdateManyInput
   from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
+  nested: Boolean
   reports: ReportUpdateManyWithoutCommentInput
 }
 
 input CommentUpdateManyDataInput {
   content: String
+  nested: Boolean
 }
 
 input CommentUpdateManyInput {
@@ -564,6 +575,7 @@ input CommentUpdateWithoutDebateDataInput {
   dislikes: UserUpdateManyInput
   from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
+  nested: Boolean
   reports: ReportUpdateManyWithoutCommentInput
 }
 
@@ -574,6 +586,7 @@ input CommentUpdateWithoutReportsDataInput {
   dislikes: UserUpdateManyInput
   from: UserUpdateOneRequiredInput
   likes: UserUpdateManyInput
+  nested: Boolean
 }
 
 input CommentUpdateWithWhereUniqueNestedInput {
@@ -651,6 +664,8 @@ input CommentWhereInput {
   id_not_starts_with: ID
   id_starts_with: ID
   likes_some: UserWhereInput
+  nested: Boolean
+  nested_not: Boolean
   reports_some: ReportWhereInput
   updatedAt: DateTime
   updatedAt_gt: DateTime

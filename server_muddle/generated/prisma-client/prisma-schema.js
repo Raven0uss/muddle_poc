@@ -505,6 +505,7 @@ type Comment {
   createdAt: DateTime!
   updatedAt: DateTime!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  nested: Boolean!
 }
 
 type CommentConnection {
@@ -522,6 +523,7 @@ input CommentCreateInput {
   reports: ReportCreateManyWithoutCommentInput
   debate: DebateCreateOneWithoutCommentsInput!
   comments: CommentCreateManyInput
+  nested: Boolean
 }
 
 input CommentCreateManyInput {
@@ -552,6 +554,7 @@ input CommentCreateWithoutDebateInput {
   dislikes: UserCreateManyInput
   reports: ReportCreateManyWithoutCommentInput
   comments: CommentCreateManyInput
+  nested: Boolean
 }
 
 input CommentCreateWithoutReportsInput {
@@ -562,6 +565,7 @@ input CommentCreateWithoutReportsInput {
   dislikes: UserCreateManyInput
   debate: DebateCreateOneWithoutCommentsInput!
   comments: CommentCreateManyInput
+  nested: Boolean
 }
 
 type CommentEdge {
@@ -578,6 +582,8 @@ enum CommentOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  nested_ASC
+  nested_DESC
 }
 
 type CommentPreviousValues {
@@ -585,6 +591,7 @@ type CommentPreviousValues {
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  nested: Boolean!
 }
 
 input CommentScalarWhereInput {
@@ -632,6 +639,8 @@ input CommentScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  nested: Boolean
+  nested_not: Boolean
   AND: [CommentScalarWhereInput!]
   OR: [CommentScalarWhereInput!]
   NOT: [CommentScalarWhereInput!]
@@ -661,6 +670,7 @@ input CommentUpdateDataInput {
   reports: ReportUpdateManyWithoutCommentInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   comments: CommentUpdateManyInput
+  nested: Boolean
 }
 
 input CommentUpdateInput {
@@ -671,10 +681,12 @@ input CommentUpdateInput {
   reports: ReportUpdateManyWithoutCommentInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   comments: CommentUpdateManyInput
+  nested: Boolean
 }
 
 input CommentUpdateManyDataInput {
   content: String
+  nested: Boolean
 }
 
 input CommentUpdateManyInput {
@@ -691,6 +703,7 @@ input CommentUpdateManyInput {
 
 input CommentUpdateManyMutationInput {
   content: String
+  nested: Boolean
 }
 
 input CommentUpdateManyWithoutDebateInput {
@@ -735,6 +748,7 @@ input CommentUpdateWithoutDebateDataInput {
   dislikes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
   comments: CommentUpdateManyInput
+  nested: Boolean
 }
 
 input CommentUpdateWithoutReportsDataInput {
@@ -744,6 +758,7 @@ input CommentUpdateWithoutReportsDataInput {
   dislikes: UserUpdateManyInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
   comments: CommentUpdateManyInput
+  nested: Boolean
 }
 
 input CommentUpdateWithWhereUniqueNestedInput {
@@ -829,6 +844,8 @@ input CommentWhereInput {
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
   comments_some: CommentWhereInput
+  nested: Boolean
+  nested_not: Boolean
   AND: [CommentWhereInput!]
 }
 

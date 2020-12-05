@@ -61,12 +61,13 @@ import DebateScreen from "./Screens/Debate";
 import ChatScreen from "./Screens/Chat";
 import NewConversationScreen from "./Screens/NewConversation";
 import TrophiesScreen from "./Screens/Trophies";
+import IsolateCommentScreen from "./Screens/IsolateComment";
 
 const Stack = createStackNavigator();
 
 // const mode = "COMPONENTS";
-// const mode = "APP";
-const mode = "LOGIN";
+const mode = "APP";
+// const mode = "LOGIN";
 
 const setInitialRoute = () => {
   switch (mode) {
@@ -279,6 +280,16 @@ export default function App() {
               <Stack.Screen
                 name="Debate"
                 component={DebateScreen}
+                initialParams={{
+                  changeLanguage,
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="IsolateComment"
+                component={IsolateCommentScreen}
                 initialParams={{
                   changeLanguage,
                 }}
