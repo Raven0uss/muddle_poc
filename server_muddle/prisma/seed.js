@@ -11,9 +11,9 @@ function shuffleArray(originArray) {
   return array;
 }
 
-const randomUserList = ({ rejectList = [], users }) => {
-  const end = faker.random.number(9);
-  const start = faker.random.number(end);
+const randomUserList = ({ rejectList = [], users, minimum = 0 }) => {
+  const end = minimum + faker.random.number(9 - minimum);
+  const start = faker.random.number(0);
 
   return shuffleArray(users)
     .slice(start, end)
@@ -145,6 +145,8 @@ async function main() {
     password: bcrypt.hashSync("test", 12),
     pseudo: "userA",
     birthdate: faker.date.past(),
+    followers: { connect: randomUserList({ users }) },
+    following: { connect: randomUserList({ users }) },
   });
 
   const B = await prisma.createUser({
@@ -152,6 +154,8 @@ async function main() {
     password: bcrypt.hashSync("test", 12),
     pseudo: "userB",
     birthdate: faker.date.past(),
+    followers: { connect: randomUserList({ users }) },
+    following: { connect: randomUserList({ users }) },
   });
 
   const conversation = await prisma.createConversation({

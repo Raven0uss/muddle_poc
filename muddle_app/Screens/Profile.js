@@ -40,9 +40,19 @@ const GET_USER = gql`
       }
       followers {
         id
+        pseudo
+        trophies {
+          id
+          type
+        }
       }
       following {
         id
+        pseudo
+        trophies {
+          id
+          type
+        }
       }
     }
   }
@@ -429,42 +439,66 @@ const Profile = (props) => {
             }}
           >
             <View>
-              <Text
-                style={{
-                  fontSize: 10,
-                  fontFamily: "Montserrat_600SemiBold",
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Follow", {
+                    follow: {
+                      following: user.following,
+                      followers: user.followers,
+                    },
+                    selected: "followers",
+                  });
                 }}
               >
-                {user.followers.length}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 10,
-                  color: "#A3A3A3",
-                  fontFamily: "Montserrat_500Medium",
-                }}
-              >
-                abonnes
-              </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    fontFamily: "Montserrat_600SemiBold",
+                  }}
+                >
+                  {user.followers.length}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "#A3A3A3",
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  abonnes
+                </Text>
+              </TouchableOpacity>
             </View>
             <View>
-              <Text
-                style={{
-                  fontSize: 10,
-                  fontFamily: "Montserrat_600SemiBold",
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Follow", {
+                    follow: {
+                      following: user.following,
+                      followers: user.followers,
+                    },
+                    selected: "following",
+                  });
                 }}
               >
-                {user.following.length}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 10,
-                  color: "#A3A3A3",
-                  fontFamily: "Montserrat_500Medium",
-                }}
-              >
-                abonnements
-              </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    fontFamily: "Montserrat_600SemiBold",
+                  }}
+                >
+                  {user.following.length}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "#A3A3A3",
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  abonnements
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
