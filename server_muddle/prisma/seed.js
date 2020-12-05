@@ -54,6 +54,8 @@ async function main() {
       type: "STANDARD",
       positives: { connect: randomUserList({ users }) },
       negatives: { connect: randomUserList({ users }) },
+      answerOne: "Je suis pour",
+      answerTwo: "Je suis contre",
     });
   }
 
@@ -67,6 +69,8 @@ async function main() {
       type: "DUO",
       blueVotes: { connect: randomUserList({ users }) },
       redVotes: { connect: randomUserList({ users }) },
+      answerOne: "Je suis pour",
+      answerTwo: "Je suis contre",
     });
   }
 
@@ -106,6 +110,8 @@ async function main() {
       owner: { connect: { pseudo: "Muddle" } },
       content: faker.lorem.paragraph(),
       type: "MUDDLE",
+      answerOne: "Je suis pour",
+      answerTwo: "Je suis contre",
     });
   }
 

@@ -126,23 +126,9 @@ const DebateBox = (props) => {
   if (debate.type === "DUO")
     return (
       <View>
-        <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
-          <Select
-            list={[
-              {
-                label: "Signaler le debat",
-                value: "REPORT",
-              },
-            ]}
-            selected={null}
-            placeholder=""
-            onSelect={(action) => console.log(action)}
-            renderComponent={<CustomIcon name="more-vert" size={22} />}
-          />
-        </View>
         <View style={styles.boxDebate}>
           <View style={styles.headDebateDuo}>
-            <View style={{ alignItems: "flex-start" }}>
+            <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate("Profile", {
@@ -166,7 +152,7 @@ const DebateBox = (props) => {
               </TouchableOpacity>
             </View>
 
-            <View style={{ alignItems: "flex-end" }}>
+            <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate("Profile", {
@@ -188,6 +174,27 @@ const DebateBox = (props) => {
               >
                 <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
               </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                position: "absolute",
+                right: 0,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Select
+                list={[
+                  {
+                    label: "Signaler le debat",
+                    value: "REPORT",
+                  },
+                ]}
+                selected={null}
+                placeholder=""
+                onSelect={(action) => console.log(action)}
+                renderComponent={<CustomIcon name="more-vert" size={22} />}
+              />
             </View>
           </View>
           <TouchableOpacity
@@ -370,15 +377,15 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 30,
-    borderWidth: 6,
-    borderColor: "#6194EC80",
+    // borderWidth: 6,
+    // borderColor: "#6194EC80",
   },
   userPictureRed: {
     width: 52,
     height: 52,
     borderRadius: 30,
-    borderWidth: 6,
-    borderColor: "#F6577780",
+    // borderWidth: 6,
+    // borderColor: "#F6577780",
   },
   pseudoDuo: {
     // marginLeft: 9,
@@ -391,7 +398,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 10,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   debateTextDuo: {
     fontSize: 12,

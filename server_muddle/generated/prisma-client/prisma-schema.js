@@ -504,6 +504,7 @@ type Comment {
   debate: Debate!
   createdAt: DateTime!
   updatedAt: DateTime!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
 type CommentConnection {
@@ -520,6 +521,12 @@ input CommentCreateInput {
   dislikes: UserCreateManyInput
   reports: ReportCreateManyWithoutCommentInput
   debate: DebateCreateOneWithoutCommentsInput!
+  comments: CommentCreateManyInput
+}
+
+input CommentCreateManyInput {
+  create: [CommentCreateInput!]
+  connect: [CommentWhereUniqueInput!]
 }
 
 input CommentCreateManyWithoutDebateInput {
@@ -544,6 +551,7 @@ input CommentCreateWithoutDebateInput {
   likes: UserCreateManyInput
   dislikes: UserCreateManyInput
   reports: ReportCreateManyWithoutCommentInput
+  comments: CommentCreateManyInput
 }
 
 input CommentCreateWithoutReportsInput {
@@ -553,6 +561,7 @@ input CommentCreateWithoutReportsInput {
   likes: UserCreateManyInput
   dislikes: UserCreateManyInput
   debate: DebateCreateOneWithoutCommentsInput!
+  comments: CommentCreateManyInput
 }
 
 type CommentEdge {
@@ -651,6 +660,7 @@ input CommentUpdateDataInput {
   dislikes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
+  comments: CommentUpdateManyInput
 }
 
 input CommentUpdateInput {
@@ -660,10 +670,23 @@ input CommentUpdateInput {
   dislikes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
+  comments: CommentUpdateManyInput
 }
 
 input CommentUpdateManyDataInput {
   content: String
+}
+
+input CommentUpdateManyInput {
+  create: [CommentCreateInput!]
+  update: [CommentUpdateWithWhereUniqueNestedInput!]
+  upsert: [CommentUpsertWithWhereUniqueNestedInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
 }
 
 input CommentUpdateManyMutationInput {
@@ -711,6 +734,7 @@ input CommentUpdateWithoutDebateDataInput {
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutCommentInput
+  comments: CommentUpdateManyInput
 }
 
 input CommentUpdateWithoutReportsDataInput {
@@ -719,6 +743,12 @@ input CommentUpdateWithoutReportsDataInput {
   likes: UserUpdateManyInput
   dislikes: UserUpdateManyInput
   debate: DebateUpdateOneRequiredWithoutCommentsInput
+  comments: CommentUpdateManyInput
+}
+
+input CommentUpdateWithWhereUniqueNestedInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateDataInput!
 }
 
 input CommentUpdateWithWhereUniqueWithoutDebateInput {
@@ -734,6 +764,12 @@ input CommentUpsertNestedInput {
 input CommentUpsertWithoutReportsInput {
   update: CommentUpdateWithoutReportsDataInput!
   create: CommentCreateWithoutReportsInput!
+}
+
+input CommentUpsertWithWhereUniqueNestedInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateDataInput!
+  create: CommentCreateInput!
 }
 
 input CommentUpsertWithWhereUniqueWithoutDebateInput {
@@ -792,6 +828,7 @@ input CommentWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  comments_some: CommentWhereInput
   AND: [CommentWhereInput!]
 }
 
@@ -1020,6 +1057,8 @@ type Debate {
   closed: Boolean!
   crowned: Boolean!
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
+  answerOne: String
+  answerTwo: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1050,6 +1089,8 @@ input DebateCreateInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateManyWithoutOwnerBlueInput {
@@ -1106,6 +1147,8 @@ input DebateCreateWithoutCommentsInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateWithoutInteractionsInput {
@@ -1127,6 +1170,8 @@ input DebateCreateWithoutInteractionsInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateWithoutOwnerBlueInput {
@@ -1148,6 +1193,8 @@ input DebateCreateWithoutOwnerBlueInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateWithoutOwnerInput {
@@ -1169,6 +1216,8 @@ input DebateCreateWithoutOwnerInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateWithoutOwnerRedInput {
@@ -1190,6 +1239,8 @@ input DebateCreateWithoutOwnerRedInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateCreateWithoutReportsInput {
@@ -1211,6 +1262,8 @@ input DebateCreateWithoutReportsInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 type DebateEdge {
@@ -1231,6 +1284,10 @@ enum DebateOrderByInput {
   closed_DESC
   crowned_ASC
   crowned_DESC
+  answerOne_ASC
+  answerOne_DESC
+  answerTwo_ASC
+  answerTwo_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1244,6 +1301,8 @@ type DebatePreviousValues {
   type: DebateType!
   closed: Boolean!
   crowned: Boolean!
+  answerOne: String
+  answerTwo: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1293,6 +1352,34 @@ input DebateScalarWhereInput {
   closed_not: Boolean
   crowned: Boolean
   crowned_not: Boolean
+  answerOne: String
+  answerOne_not: String
+  answerOne_in: [String!]
+  answerOne_not_in: [String!]
+  answerOne_lt: String
+  answerOne_lte: String
+  answerOne_gt: String
+  answerOne_gte: String
+  answerOne_contains: String
+  answerOne_not_contains: String
+  answerOne_starts_with: String
+  answerOne_not_starts_with: String
+  answerOne_ends_with: String
+  answerOne_not_ends_with: String
+  answerTwo: String
+  answerTwo_not: String
+  answerTwo_in: [String!]
+  answerTwo_not_in: [String!]
+  answerTwo_lt: String
+  answerTwo_lte: String
+  answerTwo_gt: String
+  answerTwo_gte: String
+  answerTwo_contains: String
+  answerTwo_not_contains: String
+  answerTwo_starts_with: String
+  answerTwo_not_starts_with: String
+  answerTwo_ends_with: String
+  answerTwo_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1355,6 +1442,8 @@ input DebateUpdateDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateInput {
@@ -1376,6 +1465,8 @@ input DebateUpdateInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateManyDataInput {
@@ -1384,6 +1475,8 @@ input DebateUpdateManyDataInput {
   type: DebateType
   closed: Boolean
   crowned: Boolean
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateManyMutationInput {
@@ -1392,6 +1485,8 @@ input DebateUpdateManyMutationInput {
   type: DebateType
   closed: Boolean
   crowned: Boolean
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateManyWithoutOwnerBlueInput {
@@ -1487,6 +1582,8 @@ input DebateUpdateWithoutCommentsDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithoutInteractionsDataInput {
@@ -1507,6 +1604,8 @@ input DebateUpdateWithoutInteractionsDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithoutOwnerBlueDataInput {
@@ -1527,6 +1626,8 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithoutOwnerDataInput {
@@ -1547,6 +1648,8 @@ input DebateUpdateWithoutOwnerDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithoutOwnerRedDataInput {
@@ -1567,6 +1670,8 @@ input DebateUpdateWithoutOwnerRedDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithoutReportsDataInput {
@@ -1587,6 +1692,8 @@ input DebateUpdateWithoutReportsDataInput {
   closed: Boolean
   crowned: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
+  answerOne: String
+  answerTwo: String
 }
 
 input DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
@@ -1700,6 +1807,34 @@ input DebateWhereInput {
   crowned: Boolean
   crowned_not: Boolean
   interactions_some: InteractionWhereInput
+  answerOne: String
+  answerOne_not: String
+  answerOne_in: [String!]
+  answerOne_not_in: [String!]
+  answerOne_lt: String
+  answerOne_lte: String
+  answerOne_gt: String
+  answerOne_gte: String
+  answerOne_contains: String
+  answerOne_not_contains: String
+  answerOne_starts_with: String
+  answerOne_not_starts_with: String
+  answerOne_ends_with: String
+  answerOne_not_ends_with: String
+  answerTwo: String
+  answerTwo_not: String
+  answerTwo_in: [String!]
+  answerTwo_not_in: [String!]
+  answerTwo_lt: String
+  answerTwo_lte: String
+  answerTwo_gt: String
+  answerTwo_gte: String
+  answerTwo_contains: String
+  answerTwo_not_contains: String
+  answerTwo_starts_with: String
+  answerTwo_not_starts_with: String
+  answerTwo_ends_with: String
+  answerTwo_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

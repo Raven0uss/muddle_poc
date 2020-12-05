@@ -32,7 +32,20 @@ const GET_TROPHIES = gql`
       type
       debate {
         id
+        type
         content
+        owner {
+          id
+          pseudo
+        }
+        ownerBlue {
+          id
+          pseudo
+        }
+        ownerRed {
+          id
+          pseudo
+        }
         comments {
           id
         }
@@ -151,33 +164,16 @@ const Trophies = (props) => {
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           backgroundColor: "#FFF",
+          // height: 15,
         }}
       >
-        <TextInput
-          placeholder="Rechercher"
-          value={search}
-          style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 40,
-            borderRadius: 10,
-            backgroundColor: "#f7f7f7",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginBottom: 14,
-            marginTop: 33,
-            marginBottom: 35,
-          }}
-          keyboardType="default"
-          onChangeText={(s) => setSearch(s)}
-        />
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-around",
             alignItems: "center",
+            marginTop: 40,
+            marginBottom: 20,
           }}
         >
           <View

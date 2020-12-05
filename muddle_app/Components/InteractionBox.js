@@ -32,30 +32,14 @@ const InteractionBox = (props) => {
               // marginBottom: 10,
             }}
           />
-          <CommentBox comment={comment} navigation={navigation} />
           <TouchableOpacity
-            style={{
-              backgroundColor: "#F7f7f7",
-              width: 100,
-              height: 26,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 12,
-            }}
             onPress={() =>
               navigation.navigate("Debate", {
                 debate: comment.debate,
               })
             }
           >
-            <Text
-              style={{
-                fontFamily: "Montserrat_500Medium",
-                fontSize: 12,
-              }}
-            >
-              Voir le debat
-            </Text>
+            <CommentBox comment={comment} navigation={navigation} />
           </TouchableOpacity>
         </View>
       );
@@ -78,30 +62,14 @@ const InteractionBox = (props) => {
               marginTop: 5,
             }}
           />
-          <CommentBox comment={comment} navigation={navigation} />
           <TouchableOpacity
-            style={{
-              backgroundColor: "#F7f7f7",
-              width: 100,
-              height: 26,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 12,
-            }}
             onPress={() =>
               navigation.navigate("Debate", {
                 debate: comment.debate,
               })
             }
           >
-            <Text
-              style={{
-                fontFamily: "Montserrat_500Medium",
-                fontSize: 12,
-              }}
-            >
-              Voir le debat
-            </Text>
+            <CommentBox comment={comment} navigation={navigation} />
           </TouchableOpacity>
         </View>
       );

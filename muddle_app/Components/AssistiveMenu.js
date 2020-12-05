@@ -68,7 +68,7 @@ const AssistiveMenu = (props) => {
     new Animated.Value(properties.left[deploy ? "deployed" : "undeployed"])
   );
 
-  const { navigation, route } = props;
+  const { navigation, route, scrollViewRef } = props;
 
   const deployButtonAnimation = (duration) => {
     Animated.timing(borderTopRadiusButton, {
@@ -192,6 +192,14 @@ const AssistiveMenu = (props) => {
               onPress={() => {
                 onDeploy(200);
                 if (route.name !== "Home") navigation.push("Home");
+                else {
+                  if (scrollViewRef.current) {
+                    scrollViewRef.current.scrollToIndex({
+                      animated: true,
+                      index: 0,
+                    });
+                  }
+                }
               }}
             >
               <Icon name="home" size={32} />
@@ -232,7 +240,8 @@ const AssistiveMenu = (props) => {
               }}
               onPress={() => {
                 onDeploy(200);
-                if (route.name !== "Conversations") navigation.push("Conversations");
+                if (route.name !== "Conversations")
+                  navigation.push("Conversations");
               }}
             >
               <Icon name="chat" size={28} />

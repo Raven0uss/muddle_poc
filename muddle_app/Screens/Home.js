@@ -97,6 +97,7 @@ const Home = (props) => {
       setDebates(queryResult);
     },
   });
+  const scrollViewRef = React.useRef(null);
 
   const { navigation, route } = props;
 
@@ -161,6 +162,7 @@ const Home = (props) => {
         }
       />
       <FlatList
+        ref={scrollViewRef}
         data={debates}
         style={styles.seedContainer}
         renderItem={(param) => renderItem(param, navigation)}
@@ -193,7 +195,11 @@ const Home = (props) => {
           return <ActivityIndicator style={{ marginBottom: 70 }} />;
         }}
       />
-      <AssistiveMenu navigation={navigation} route={route} />
+      <AssistiveMenu
+        navigation={navigation}
+        route={route}
+        scrollViewRef={scrollViewRef}
+      />
       <CreateDebateButton navigation={navigation} />
     </View>
   );

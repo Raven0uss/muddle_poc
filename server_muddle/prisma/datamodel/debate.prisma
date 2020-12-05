@@ -24,6 +24,8 @@ type Debate {
   closed: Boolean! @default(value: false)
   crowned: Boolean! @default(value: false)
   interactions: [Interaction]
+  answerOne: String
+  answerTwo: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

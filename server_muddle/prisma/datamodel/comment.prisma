@@ -8,4 +8,5 @@ type Comment {
   debate: Debate! @relation(link: INLINE, name: "Comments")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  comments: [Comment] @relation(link: INLINE)
 }

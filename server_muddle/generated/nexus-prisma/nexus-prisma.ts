@@ -241,6 +241,7 @@ export interface NexusPrismaTypes {
       ConversationCreateWithoutSpeakersInput: ConversationCreateWithoutSpeakersInputInputObject
       MessageCreateManyWithoutConversationInput: MessageCreateManyWithoutConversationInputInputObject
       MessageCreateWithoutConversationInput: MessageCreateWithoutConversationInputInputObject
+      CommentCreateManyInput: CommentCreateManyInputInputObject
       ReportCreateManyWithoutDebateInput: ReportCreateManyWithoutDebateInputInputObject
       ReportCreateWithoutDebateInput: ReportCreateWithoutDebateInputInputObject
       CommentCreateOneWithoutReportsInput: CommentCreateOneWithoutReportsInputInputObject
@@ -311,6 +312,12 @@ export interface NexusPrismaTypes {
       ReportUpdateWithoutDebateDataInput: ReportUpdateWithoutDebateDataInputInputObject
       CommentUpdateOneWithoutReportsInput: CommentUpdateOneWithoutReportsInputInputObject
       CommentUpdateWithoutReportsDataInput: CommentUpdateWithoutReportsDataInputInputObject
+      CommentUpdateManyInput: CommentUpdateManyInputInputObject
+      CommentUpdateWithWhereUniqueNestedInput: CommentUpdateWithWhereUniqueNestedInputInputObject
+      CommentUpsertWithWhereUniqueNestedInput: CommentUpsertWithWhereUniqueNestedInputInputObject
+      CommentScalarWhereInput: CommentScalarWhereInputInputObject
+      CommentUpdateManyWithWhereNestedInput: CommentUpdateManyWithWhereNestedInputInputObject
+      CommentUpdateManyDataInput: CommentUpdateManyDataInputInputObject
       CommentUpsertWithoutReportsInput: CommentUpsertWithoutReportsInputInputObject
       ReportUpsertWithWhereUniqueWithoutDebateInput: ReportUpsertWithWhereUniqueWithoutDebateInputInputObject
       ReportScalarWhereInput: ReportScalarWhereInputInputObject
@@ -343,9 +350,6 @@ export interface NexusPrismaTypes {
       DebateUpsertWithoutReportsInput: DebateUpsertWithoutReportsInputInputObject
       ReportUpsertWithWhereUniqueWithoutCommentInput: ReportUpsertWithWhereUniqueWithoutCommentInputInputObject
       CommentUpsertWithWhereUniqueWithoutDebateInput: CommentUpsertWithWhereUniqueWithoutDebateInputInputObject
-      CommentScalarWhereInput: CommentScalarWhereInputInputObject
-      CommentUpdateManyWithWhereNestedInput: CommentUpdateManyWithWhereNestedInputInputObject
-      CommentUpdateManyDataInput: CommentUpdateManyDataInputInputObject
       DebateUpsertNestedInput: DebateUpsertNestedInputInputObject
       TrophyUpsertWithWhereUniqueWithoutUserInput: TrophyUpsertWithWhereUniqueWithoutUserInputInputObject
       TrophyScalarWhereInput: TrophyScalarWhereInputInputObject
@@ -1671,6 +1675,7 @@ type CommentObject =
   | { name: 'debate', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+  | { name: 'comments', args?: CommentCommentsArgs[] | false, alias?: string  } 
 
 type CommentFields =
   | 'id'
@@ -1682,6 +1687,7 @@ type CommentFields =
   | 'debate'
   | 'createdAt'
   | 'updatedAt'
+  | 'comments'
 
 
 type CommentLikesArgs =
@@ -1701,6 +1707,14 @@ type CommentDislikesArgs =
   | 'first'
   | 'last'
 type CommentReportsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type CommentCommentsArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -1807,6 +1821,19 @@ export interface CommentFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
+  }
+  comments: {
+    type: 'Comment'
+    args: Record<CommentCommentsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Comment">,
+      args: { where?: CommentWhereInput | null, orderBy?: prisma.CommentOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment[]> | prisma.Comment[]
   }
 }
   
@@ -2253,6 +2280,8 @@ type DebateObject =
   | { name: 'closed', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
   | { name: 'interactions', args?: DebateInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'answerOne', args?: [] | false, alias?: string  } 
+  | { name: 'answerTwo', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -2276,6 +2305,8 @@ type DebateFields =
   | 'closed'
   | 'crowned'
   | 'interactions'
+  | 'answerOne'
+  | 'answerTwo'
   | 'createdAt'
   | 'updatedAt'
 
@@ -2560,6 +2591,22 @@ export interface DebateFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Interaction[]> | prisma.Interaction[]
+  }
+  answerOne: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  answerTwo: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
   }
   createdAt: {
     type: 'DateTime'
@@ -6410,6 +6457,8 @@ type DebatePreviousValuesObject =
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'closed', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'answerOne', args?: [] | false, alias?: string  } 
+  | { name: 'answerTwo', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -6420,6 +6469,8 @@ type DebatePreviousValuesFields =
   | 'type'
   | 'closed'
   | 'crowned'
+  | 'answerOne'
+  | 'answerTwo'
   | 'createdAt'
   | 'updatedAt'
 
@@ -6479,6 +6530,22 @@ export interface DebatePreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  answerOne: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  answerTwo: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
   createdAt: {
@@ -8138,6 +8205,34 @@ export interface DebateWhereInput {
   crowned?: boolean | null
   crowned_not?: boolean | null
   interactions_some?: InteractionWhereInput | null
+  answerOne?: string | null
+  answerOne_not?: string | null
+  answerOne_in?: string[]
+  answerOne_not_in?: string[]
+  answerOne_lt?: string | null
+  answerOne_lte?: string | null
+  answerOne_gt?: string | null
+  answerOne_gte?: string | null
+  answerOne_contains?: string | null
+  answerOne_not_contains?: string | null
+  answerOne_starts_with?: string | null
+  answerOne_not_starts_with?: string | null
+  answerOne_ends_with?: string | null
+  answerOne_not_ends_with?: string | null
+  answerTwo?: string | null
+  answerTwo_not?: string | null
+  answerTwo_in?: string[]
+  answerTwo_not_in?: string[]
+  answerTwo_lt?: string | null
+  answerTwo_lte?: string | null
+  answerTwo_gt?: string | null
+  answerTwo_gte?: string | null
+  answerTwo_contains?: string | null
+  answerTwo_not_contains?: string | null
+  answerTwo_starts_with?: string | null
+  answerTwo_not_starts_with?: string | null
+  answerTwo_ends_with?: string | null
+  answerTwo_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -8215,6 +8310,34 @@ export type DebateWhereInputInputObject =
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
   | { name: 'interactions_some', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerOne_not', alias?: string  } 
+  | { name: 'answerOne_in', alias?: string  } 
+  | { name: 'answerOne_not_in', alias?: string  } 
+  | { name: 'answerOne_lt', alias?: string  } 
+  | { name: 'answerOne_lte', alias?: string  } 
+  | { name: 'answerOne_gt', alias?: string  } 
+  | { name: 'answerOne_gte', alias?: string  } 
+  | { name: 'answerOne_contains', alias?: string  } 
+  | { name: 'answerOne_not_contains', alias?: string  } 
+  | { name: 'answerOne_starts_with', alias?: string  } 
+  | { name: 'answerOne_not_starts_with', alias?: string  } 
+  | { name: 'answerOne_ends_with', alias?: string  } 
+  | { name: 'answerOne_not_ends_with', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
+  | { name: 'answerTwo_not', alias?: string  } 
+  | { name: 'answerTwo_in', alias?: string  } 
+  | { name: 'answerTwo_not_in', alias?: string  } 
+  | { name: 'answerTwo_lt', alias?: string  } 
+  | { name: 'answerTwo_lte', alias?: string  } 
+  | { name: 'answerTwo_gt', alias?: string  } 
+  | { name: 'answerTwo_gte', alias?: string  } 
+  | { name: 'answerTwo_contains', alias?: string  } 
+  | { name: 'answerTwo_not_contains', alias?: string  } 
+  | { name: 'answerTwo_starts_with', alias?: string  } 
+  | { name: 'answerTwo_not_starts_with', alias?: string  } 
+  | { name: 'answerTwo_ends_with', alias?: string  } 
+  | { name: 'answerTwo_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -8283,6 +8406,7 @@ export interface CommentWhereInput {
   updatedAt_lte?: string | null
   updatedAt_gt?: string | null
   updatedAt_gte?: string | null
+  comments_some?: CommentWhereInput | null
   AND?: CommentWhereInput[]
 }
 export type CommentWhereInputInputObject =
@@ -8336,6 +8460,7 @@ export type CommentWhereInputInputObject =
   | { name: 'updatedAt_lte', alias?: string  } 
   | { name: 'updatedAt_gt', alias?: string  } 
   | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'comments_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface ReportWhereInput {
@@ -9240,6 +9365,7 @@ export interface CommentCreateInput {
   dislikes?: UserCreateManyInput | null
   reports?: ReportCreateManyWithoutCommentInput | null
   debate?: DebateCreateOneWithoutCommentsInput
+  comments?: CommentCreateManyInput | null
 }
 export type CommentCreateInputInputObject =
   | Extract<keyof CommentCreateInput, string>
@@ -9250,6 +9376,7 @@ export type CommentCreateInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface UserCreateOneInput {
   create?: UserCreateInput | null
@@ -9581,6 +9708,8 @@ export interface DebateCreateWithoutOwnerInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutOwnerInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerInput, string>
@@ -9602,6 +9731,8 @@ export type DebateCreateWithoutOwnerInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesBlueInput {
   create?: UserCreateWithoutDebatesBlueInput | null
@@ -9691,6 +9822,8 @@ export interface DebateCreateWithoutOwnerRedInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutOwnerRedInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerRedInput, string>
@@ -9712,6 +9845,8 @@ export type DebateCreateWithoutOwnerRedInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesInput {
   create?: UserCreateWithoutDebatesInput | null
@@ -9801,6 +9936,8 @@ export interface DebateCreateWithoutOwnerBlueInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutOwnerBlueInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerBlueInput, string>
@@ -9822,6 +9959,8 @@ export type DebateCreateWithoutOwnerBlueInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesRedInput {
   create?: UserCreateWithoutDebatesRedInput | null
@@ -9936,6 +10075,8 @@ export interface DebateCreateInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateInputInputObject =
   | Extract<keyof DebateCreateInput, string>
@@ -9958,6 +10099,8 @@ export type DebateCreateInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface CommentCreateManyWithoutDebateInput {
   create?: CommentCreateWithoutDebateInput[]
@@ -9975,6 +10118,7 @@ export interface CommentCreateWithoutDebateInput {
   likes?: UserCreateManyInput | null
   dislikes?: UserCreateManyInput | null
   reports?: ReportCreateManyWithoutCommentInput | null
+  comments?: CommentCreateManyInput | null
 }
 export type CommentCreateWithoutDebateInputInputObject =
   | Extract<keyof CommentCreateWithoutDebateInput, string>
@@ -9984,6 +10128,7 @@ export type CommentCreateWithoutDebateInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface UserCreateManyInput {
   create?: UserCreateInput[]
@@ -10052,6 +10197,8 @@ export interface DebateCreateWithoutReportsInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutReportsInputInputObject =
   | Extract<keyof DebateCreateWithoutReportsInput, string>
@@ -10073,6 +10220,8 @@ export type DebateCreateWithoutReportsInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface CommentCreateOneInput {
   create?: CommentCreateInput | null
@@ -10205,6 +10354,15 @@ export type MessageCreateWithoutConversationInputInputObject =
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
   
+export interface CommentCreateManyInput {
+  create?: CommentCreateInput[]
+  connect?: CommentWhereUniqueInput[]
+}
+export type CommentCreateManyInputInputObject =
+  | Extract<keyof CommentCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
 export interface ReportCreateManyWithoutDebateInput {
   create?: ReportCreateWithoutDebateInput[]
   connect?: ReportWhereUniqueInput[]
@@ -10251,6 +10409,7 @@ export interface CommentCreateWithoutReportsInput {
   likes?: UserCreateManyInput | null
   dislikes?: UserCreateManyInput | null
   debate?: DebateCreateOneWithoutCommentsInput
+  comments?: CommentCreateManyInput | null
 }
 export type CommentCreateWithoutReportsInputInputObject =
   | Extract<keyof CommentCreateWithoutReportsInput, string>
@@ -10260,6 +10419,7 @@ export type CommentCreateWithoutReportsInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'debate', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface DebateCreateOneWithoutCommentsInput {
   create?: DebateCreateWithoutCommentsInput | null
@@ -10289,6 +10449,8 @@ export interface DebateCreateWithoutCommentsInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutCommentsInputInputObject =
   | Extract<keyof DebateCreateWithoutCommentsInput, string>
@@ -10310,6 +10472,8 @@ export type DebateCreateWithoutCommentsInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface InteractionCreateManyWithoutWhoInput {
   create?: InteractionCreateWithoutWhoInput[]
@@ -10361,6 +10525,8 @@ export interface DebateCreateWithoutInteractionsInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateCreateWithoutInteractionsInputInputObject =
   | Extract<keyof DebateCreateWithoutInteractionsInput, string>
@@ -10382,6 +10548,8 @@ export type DebateCreateWithoutInteractionsInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface CommentUpdateInput {
   from?: UserUpdateOneRequiredInput | null
@@ -10390,6 +10558,7 @@ export interface CommentUpdateInput {
   dislikes?: UserUpdateManyInput | null
   reports?: ReportUpdateManyWithoutCommentInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+  comments?: CommentUpdateManyInput | null
 }
 export type CommentUpdateInputInputObject =
   | Extract<keyof CommentUpdateInput, string>
@@ -10399,6 +10568,7 @@ export type CommentUpdateInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface UserUpdateOneRequiredInput {
   create?: UserCreateInput | null
@@ -10838,6 +11008,8 @@ export interface DebateUpdateWithoutOwnerDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutOwnerDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerDataInput, string>
@@ -10858,6 +11030,8 @@ export type DebateUpdateWithoutOwnerDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesBlueInput {
   create?: UserCreateWithoutDebatesBlueInput | null
@@ -10975,6 +11149,8 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerRedDataInput, string>
@@ -10995,6 +11171,8 @@ export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesInput {
   create?: UserCreateWithoutDebatesInput | null
@@ -11112,6 +11290,8 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerBlueDataInput, string>
@@ -11132,6 +11312,8 @@ export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesRedInput {
   create?: UserCreateWithoutDebatesRedInput | null
@@ -11280,6 +11462,8 @@ export interface DebateUpdateDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateDataInputInputObject =
   | Extract<keyof DebateUpdateDataInput, string>
@@ -11301,6 +11485,8 @@ export type DebateUpdateDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface CommentUpdateManyWithoutDebateInput {
   create?: CommentCreateWithoutDebateInput[]
@@ -11340,6 +11526,7 @@ export interface CommentUpdateWithoutDebateDataInput {
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
   reports?: ReportUpdateManyWithoutCommentInput | null
+  comments?: CommentUpdateManyInput | null
 }
 export type CommentUpdateWithoutDebateDataInputInputObject =
   | Extract<keyof CommentUpdateWithoutDebateDataInput, string>
@@ -11348,6 +11535,7 @@ export type CommentUpdateWithoutDebateDataInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface UserUpdateManyInput {
   create?: UserCreateInput[]
@@ -11847,6 +12035,8 @@ export interface DebateUpdateWithoutReportsDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutReportsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutReportsDataInput, string>
@@ -11867,6 +12057,8 @@ export type DebateUpdateWithoutReportsDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface CommentUpdateOneInput {
   create?: CommentCreateInput | null
@@ -11892,6 +12084,7 @@ export interface CommentUpdateDataInput {
   dislikes?: UserUpdateManyInput | null
   reports?: ReportUpdateManyWithoutCommentInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+  comments?: CommentUpdateManyInput | null
 }
 export type CommentUpdateDataInputInputObject =
   | Extract<keyof CommentUpdateDataInput, string>
@@ -11901,6 +12094,7 @@ export type CommentUpdateDataInputInputObject =
   | { name: 'dislikes', alias?: string  } 
   | { name: 'reports', alias?: string  } 
   | { name: 'debate', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
   
 export interface DebateUpdateOneRequiredWithoutCommentsInput {
   create?: DebateCreateWithoutCommentsInput | null
@@ -11933,6 +12127,8 @@ export interface DebateUpdateWithoutCommentsDataInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutCommentsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutCommentsDataInput, string>
@@ -11953,6 +12149,8 @@ export type DebateUpdateWithoutCommentsDataInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface ReportUpdateManyWithoutDebateInput {
   create?: ReportCreateWithoutDebateInput[]
@@ -12028,6 +12226,7 @@ export interface CommentUpdateWithoutReportsDataInput {
   likes?: UserUpdateManyInput | null
   dislikes?: UserUpdateManyInput | null
   debate?: DebateUpdateOneRequiredWithoutCommentsInput | null
+  comments?: CommentUpdateManyInput | null
 }
 export type CommentUpdateWithoutReportsDataInputInputObject =
   | Extract<keyof CommentUpdateWithoutReportsDataInput, string>
@@ -12036,6 +12235,165 @@ export type CommentUpdateWithoutReportsDataInputInputObject =
   | { name: 'likes', alias?: string  } 
   | { name: 'dislikes', alias?: string  } 
   | { name: 'debate', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  
+export interface CommentUpdateManyInput {
+  create?: CommentCreateInput[]
+  update?: CommentUpdateWithWhereUniqueNestedInput[]
+  upsert?: CommentUpsertWithWhereUniqueNestedInput[]
+  delete?: CommentWhereUniqueInput[]
+  connect?: CommentWhereUniqueInput[]
+  set?: CommentWhereUniqueInput[]
+  disconnect?: CommentWhereUniqueInput[]
+  deleteMany?: CommentScalarWhereInput[]
+  updateMany?: CommentUpdateManyWithWhereNestedInput[]
+}
+export type CommentUpdateManyInputInputObject =
+  | Extract<keyof CommentUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface CommentUpdateWithWhereUniqueNestedInput {
+  where?: CommentWhereUniqueInput
+  data?: CommentUpdateDataInput
+}
+export type CommentUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof CommentUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface CommentUpsertWithWhereUniqueNestedInput {
+  where?: CommentWhereUniqueInput
+  update?: CommentUpdateDataInput
+  create?: CommentCreateInput
+}
+export type CommentUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof CommentUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CommentScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: CommentScalarWhereInput[]
+  OR?: CommentScalarWhereInput[]
+  NOT?: CommentScalarWhereInput[]
+}
+export type CommentScalarWhereInputInputObject =
+  | Extract<keyof CommentScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface CommentUpdateManyWithWhereNestedInput {
+  where?: CommentScalarWhereInput
+  data?: CommentUpdateManyDataInput
+}
+export type CommentUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof CommentUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface CommentUpdateManyDataInput {
+  content?: string | null
+}
+export type CommentUpdateManyDataInputInputObject =
+  | Extract<keyof CommentUpdateManyDataInput, string>
+  | { name: 'content', alias?: string  } 
   
 export interface CommentUpsertWithoutReportsInput {
   update?: CommentUpdateWithoutReportsDataInput
@@ -12755,121 +13113,6 @@ export type CommentUpsertWithWhereUniqueWithoutDebateInputInputObject =
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface CommentScalarWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  content?: string | null
-  content_not?: string | null
-  content_in?: string[]
-  content_not_in?: string[]
-  content_lt?: string | null
-  content_lte?: string | null
-  content_gt?: string | null
-  content_gte?: string | null
-  content_contains?: string | null
-  content_not_contains?: string | null
-  content_starts_with?: string | null
-  content_not_starts_with?: string | null
-  content_ends_with?: string | null
-  content_not_ends_with?: string | null
-  createdAt?: string | null
-  createdAt_not?: string | null
-  createdAt_in?: string[]
-  createdAt_not_in?: string[]
-  createdAt_lt?: string | null
-  createdAt_lte?: string | null
-  createdAt_gt?: string | null
-  createdAt_gte?: string | null
-  updatedAt?: string | null
-  updatedAt_not?: string | null
-  updatedAt_in?: string[]
-  updatedAt_not_in?: string[]
-  updatedAt_lt?: string | null
-  updatedAt_lte?: string | null
-  updatedAt_gt?: string | null
-  updatedAt_gte?: string | null
-  AND?: CommentScalarWhereInput[]
-  OR?: CommentScalarWhereInput[]
-  NOT?: CommentScalarWhereInput[]
-}
-export type CommentScalarWhereInputInputObject =
-  | Extract<keyof CommentScalarWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'content', alias?: string  } 
-  | { name: 'content_not', alias?: string  } 
-  | { name: 'content_in', alias?: string  } 
-  | { name: 'content_not_in', alias?: string  } 
-  | { name: 'content_lt', alias?: string  } 
-  | { name: 'content_lte', alias?: string  } 
-  | { name: 'content_gt', alias?: string  } 
-  | { name: 'content_gte', alias?: string  } 
-  | { name: 'content_contains', alias?: string  } 
-  | { name: 'content_not_contains', alias?: string  } 
-  | { name: 'content_starts_with', alias?: string  } 
-  | { name: 'content_not_starts_with', alias?: string  } 
-  | { name: 'content_ends_with', alias?: string  } 
-  | { name: 'content_not_ends_with', alias?: string  } 
-  | { name: 'createdAt', alias?: string  } 
-  | { name: 'createdAt_not', alias?: string  } 
-  | { name: 'createdAt_in', alias?: string  } 
-  | { name: 'createdAt_not_in', alias?: string  } 
-  | { name: 'createdAt_lt', alias?: string  } 
-  | { name: 'createdAt_lte', alias?: string  } 
-  | { name: 'createdAt_gt', alias?: string  } 
-  | { name: 'createdAt_gte', alias?: string  } 
-  | { name: 'updatedAt', alias?: string  } 
-  | { name: 'updatedAt_not', alias?: string  } 
-  | { name: 'updatedAt_in', alias?: string  } 
-  | { name: 'updatedAt_not_in', alias?: string  } 
-  | { name: 'updatedAt_lt', alias?: string  } 
-  | { name: 'updatedAt_lte', alias?: string  } 
-  | { name: 'updatedAt_gt', alias?: string  } 
-  | { name: 'updatedAt_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface CommentUpdateManyWithWhereNestedInput {
-  where?: CommentScalarWhereInput
-  data?: CommentUpdateManyDataInput
-}
-export type CommentUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof CommentUpdateManyWithWhereNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface CommentUpdateManyDataInput {
-  content?: string | null
-}
-export type CommentUpdateManyDataInputInputObject =
-  | Extract<keyof CommentUpdateManyDataInput, string>
-  | { name: 'content', alias?: string  } 
-  
 export interface DebateUpsertNestedInput {
   update?: DebateUpdateDataInput
   create?: DebateCreateInput
@@ -13069,6 +13312,8 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutInteractionsDataInput, string>
@@ -13089,6 +13334,8 @@ export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface DebateUpsertWithoutInteractionsInput {
   update?: DebateUpdateWithoutInteractionsDataInput
@@ -13175,6 +13422,34 @@ export interface DebateScalarWhereInput {
   closed_not?: boolean | null
   crowned?: boolean | null
   crowned_not?: boolean | null
+  answerOne?: string | null
+  answerOne_not?: string | null
+  answerOne_in?: string[]
+  answerOne_not_in?: string[]
+  answerOne_lt?: string | null
+  answerOne_lte?: string | null
+  answerOne_gt?: string | null
+  answerOne_gte?: string | null
+  answerOne_contains?: string | null
+  answerOne_not_contains?: string | null
+  answerOne_starts_with?: string | null
+  answerOne_not_starts_with?: string | null
+  answerOne_ends_with?: string | null
+  answerOne_not_ends_with?: string | null
+  answerTwo?: string | null
+  answerTwo_not?: string | null
+  answerTwo_in?: string[]
+  answerTwo_not_in?: string[]
+  answerTwo_lt?: string | null
+  answerTwo_lte?: string | null
+  answerTwo_gt?: string | null
+  answerTwo_gte?: string | null
+  answerTwo_contains?: string | null
+  answerTwo_not_contains?: string | null
+  answerTwo_starts_with?: string | null
+  answerTwo_not_starts_with?: string | null
+  answerTwo_ends_with?: string | null
+  answerTwo_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -13241,6 +13516,34 @@ export type DebateScalarWhereInputInputObject =
   | { name: 'closed_not', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerOne_not', alias?: string  } 
+  | { name: 'answerOne_in', alias?: string  } 
+  | { name: 'answerOne_not_in', alias?: string  } 
+  | { name: 'answerOne_lt', alias?: string  } 
+  | { name: 'answerOne_lte', alias?: string  } 
+  | { name: 'answerOne_gt', alias?: string  } 
+  | { name: 'answerOne_gte', alias?: string  } 
+  | { name: 'answerOne_contains', alias?: string  } 
+  | { name: 'answerOne_not_contains', alias?: string  } 
+  | { name: 'answerOne_starts_with', alias?: string  } 
+  | { name: 'answerOne_not_starts_with', alias?: string  } 
+  | { name: 'answerOne_ends_with', alias?: string  } 
+  | { name: 'answerOne_not_ends_with', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
+  | { name: 'answerTwo_not', alias?: string  } 
+  | { name: 'answerTwo_in', alias?: string  } 
+  | { name: 'answerTwo_not_in', alias?: string  } 
+  | { name: 'answerTwo_lt', alias?: string  } 
+  | { name: 'answerTwo_lte', alias?: string  } 
+  | { name: 'answerTwo_gt', alias?: string  } 
+  | { name: 'answerTwo_gte', alias?: string  } 
+  | { name: 'answerTwo_contains', alias?: string  } 
+  | { name: 'answerTwo_not_contains', alias?: string  } 
+  | { name: 'answerTwo_starts_with', alias?: string  } 
+  | { name: 'answerTwo_not_starts_with', alias?: string  } 
+  | { name: 'answerTwo_ends_with', alias?: string  } 
+  | { name: 'answerTwo_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -13276,6 +13579,8 @@ export interface DebateUpdateManyDataInput {
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateManyDataInputInputObject =
   | Extract<keyof DebateUpdateManyDataInput, string>
@@ -13284,6 +13589,8 @@ export type DebateUpdateManyDataInputInputObject =
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface UserUpsertWithoutDebatesInput {
   update?: UserUpdateWithoutDebatesDataInput
@@ -13567,6 +13874,8 @@ export interface DebateUpdateInput {
   closed?: boolean | null
   crowned?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateInputInputObject =
   | Extract<keyof DebateUpdateInput, string>
@@ -13588,6 +13897,8 @@ export type DebateUpdateInputInputObject =
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface DebateUpdateManyMutationInput {
   content?: string | null
@@ -13595,6 +13906,8 @@ export interface DebateUpdateManyMutationInput {
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
+  answerOne?: string | null
+  answerTwo?: string | null
 }
 export type DebateUpdateManyMutationInputInputObject =
   | Extract<keyof DebateUpdateManyMutationInput, string>
@@ -13603,6 +13916,8 @@ export type DebateUpdateManyMutationInputInputObject =
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'answerOne', alias?: string  } 
+  | { name: 'answerTwo', alias?: string  } 
   
 export interface InteractionCreateInput {
   id?: string | null
@@ -14395,6 +14710,10 @@ export type DebateOrderByInputValues =
   | 'closed_DESC'
   | 'crowned_ASC'
   | 'crowned_DESC'
+  | 'answerOne_ASC'
+  | 'answerOne_DESC'
+  | 'answerTwo_ASC'
+  | 'answerTwo_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

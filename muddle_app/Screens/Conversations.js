@@ -167,9 +167,10 @@ const Conversations = (props) => {
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           backgroundColor: "#FFF",
+          height: 30,
         }}
       >
-        <TextInput
+        {/* <TextInput
           placeholder="Rechercher une conversation"
           value={search}
           style={{
@@ -189,7 +190,7 @@ const Conversations = (props) => {
           }}
           keyboardType="default"
           onChangeText={(s) => setSearch(s)}
-        />
+        /> */}
       </View>
       <FlatList
         data={conversations}

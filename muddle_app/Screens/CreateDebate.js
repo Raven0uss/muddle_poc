@@ -29,10 +29,8 @@ const CreateDebate = (props) => {
     new Date(moment().add(1, "days"))
   ); // minutes
   const [content, setContent] = React.useState("");
-  const [optionOne, setOptionOne] = React.useState(
-    debateType.value === "PUBLIC" ? "Reponse 1" : "Votre opinion"
-  );
-  const [optionTwo, setOptionTwo] = React.useState("Reponse 2");
+  const [optionOne, setOptionOne] = React.useState("");
+  const [optionTwo, setOptionTwo] = React.useState("");
 
   const { navigation, route } = props;
   return (
@@ -164,21 +162,37 @@ const CreateDebate = (props) => {
               }}
             >
               <TextInput
-                placeholder=""
+                placeholder={
+                  debateType.value === "PUBLIC"
+                    ? "Choix numero 1"
+                    : "Votre opinion"
+                }
                 value={optionOne}
-                onChangeText={(oOne) => setOptionOne(oOne)}
+                onChangeText={(oOne) => {
+                  if (oOne.length < 35)
+                    setOptionOne(oOne.replace(/\r?\n|\r/g, ""));
+                }}
                 style={styles.optionOne}
                 keyboardType="default"
-                placeholderTextColor="#222"
+                // placeholderTextColor="#222"
+                numberOfLines={3}
+                multiline={true}
+                scrollEnabled={false}
               />
               {debateType.value === "PUBLIC" && (
                 <TextInput
-                  placeholder=""
+                  placeholder="Choix numero 2"
                   value={optionTwo}
-                  onChangeText={(oTwo) => setOptionTwo(oTwo)}
+                  onChangeText={(oTwo) => {
+                    if (oTwo.length < 35)
+                      setOptionTwo(oTwo.replace(/\r?\n|\r/g, ""));
+                  }}
                   style={styles.optionTwo}
                   keyboardType="default"
-                  placeholderTextColor="#222"
+                  // placeholderTextColor="#222"
+                  numberOfLines={3}
+                  multiline={true}
+                  scrollEnabled={false}
                 />
               )}
             </View>
@@ -206,6 +220,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     height: Dimensions.get("screen").height,
+    // flex: 1,
   },
   input: {
     backgroundColor: "#fff",
@@ -234,6 +249,9 @@ const styles = StyleSheet.create({
     borderColor: "#F47658",
     borderWidth: 2,
     fontFamily: "Montserrat_500Medium",
+    maxWidth: 128,
+    fontSize: 12,
+    textAlign: "center",
   },
   optionTwo: {
     backgroundColor: "#fff",
@@ -247,6 +265,9 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderWidth: 2,
     fontFamily: "Montserrat_500Medium",
+    maxWidth: 128,
+    fontSize: 12,
+    textAlign: "center",
   },
   connectionButton: {
     alignSelf: "flex-end",

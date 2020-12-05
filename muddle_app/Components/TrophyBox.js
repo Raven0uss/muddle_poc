@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
+import DebateBox from "./DebateBox";
 
 const TrophyBox = (props) => {
   const { trophy, navigation } = props;
@@ -195,6 +196,14 @@ const TrophyBox = (props) => {
         </View>
       );
     case "DUO":
+      const { debate } = trophy;
+      const votesDuo =
+        debate.positives.length +
+        debate.negatives.length +
+        debate.redVotes.length +
+        debate.blueVotes.length;
+
+      const commentsDuo = debate.comments.length;
       return (
         <View
           style={{
@@ -210,7 +219,145 @@ const TrophyBox = (props) => {
             borderColor: "#78AE42",
           }}
         >
-          <Text>{trophy.type}</Text>
+          <View style={styles.headDebateDuo}>
+            <View style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
+                <Image
+                  source={{ uri: defaultProfile }}
+                  style={styles.userPictureBlue}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerBlue.pseudo,
+                  });
+                }}
+              >
+                <Text style={styles.pseudoDuo}>{debate.ownerBlue.pseudo}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
+                <Image
+                  source={{ uri: defaultProfile }}
+                  style={styles.userPictureRed}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Profile", {
+                    userId: debate.ownerRed.pseudo,
+                  });
+                }}
+              >
+                <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                position: "absolute",
+                right: 0,
+                alignSelf: "flex-start",
+              }}
+            >
+              <Select
+                list={[
+                  {
+                    label: "Signaler le debat",
+                    value: "REPORT",
+                  },
+                ]}
+                selected={null}
+                placeholder=""
+                onSelect={(action) => console.log(action)}
+                renderComponent={<CustomIcon name="more-vert" size={22} />}
+              />
+            </View>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Debate", {
+                debate,
+              });
+            }}
+          >
+            <Text numberOfLines={8} style={styles.debateTextDuo}>
+              {debate.content}
+            </Text>
+          </TouchableOpacity>
+          <View style={styles.debateActionsDuo}>
+            <TouchableOpacity onPress={() => {}} style={styles.voteBlueButton}>
+              <Text
+                numberOfLines={1}
+                style={{
+                  color: "#000",
+                  fontSize: 12,
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  fontFamily: "Montserrat_500Medium",
+                }}
+              >
+                Je suis pour
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Debate", {
+                  debate,
+                });
+              }}
+              style={styles.commentDuoButton}
+            >
+              <CustomIcon name="more-horiz" size={28} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}} style={styles.voteRedButton}>
+              <Text
+                numberOfLines={1}
+                style={{
+                  color: "#000",
+                  fontSize: 12,
+                  paddingLeft: 6,
+                  paddingRight: 6,
+                  fontFamily: "Montserrat_500Medium",
+                }}
+              >
+                Je suis contre
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              height: 1,
+              backgroundColor: "#DBDBDB",
+              width: "100%",
+              alignSelf: "center",
+              marginTop: 15,
+            }}
+          />
+          <View style={styles.debateFooter}>
+            <Text style={styles.footerText}>{`${votesDuo} vote${
+              votesDuo > 1 ? "s" : ""
+            }`}</Text>
+            <Text style={styles.footerText}>{`${commentsDuo} commentaire${
+              commentsDuo > 1 ? "s" : ""
+            }`}</Text>
+          </View>
+          {/* </View> */}
         </View>
       );
     default:
@@ -323,33 +470,35 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 30,
-    borderWidth: 6,
-    borderColor: "#6194EC80",
+    // borderWidth: 6,
+    // borderColor: "#6194EC80",
   },
   userPictureRed: {
     width: 52,
     height: 52,
     borderRadius: 30,
-    borderWidth: 6,
-    borderColor: "#F6577780",
+    // borderWidth: 6,
+    // borderColor: "#F6577780",
   },
   pseudoDuo: {
     // marginLeft: 9,
-    fontWeight: "500",
     fontSize: 12,
     // paddingTop: 6,
     marginTop: 3,
+    fontFamily: "Montserrat_500Medium",
   },
   headDebateDuo: {
     flexDirection: "row",
     marginBottom: 10,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   debateTextDuo: {
     fontSize: 12,
     paddingBottom: 10,
     textAlign: "center",
+    fontFamily: "Montserrat_500Medium",
+    marginTop: 10,
     // marginLeft: "auto",
     // marginRight: "auto",
     // alignSelf: "center",

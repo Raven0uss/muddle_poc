@@ -93,9 +93,10 @@ const Notifications = (props) => {
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           backgroundColor: "#FFF",
+          height: 30,
         }}
       >
-        <TextInput
+        {/* <TextInput
           placeholder="Rechercher une notification"
           value={search}
           style={{
@@ -114,7 +115,7 @@ const Notifications = (props) => {
           }}
           keyboardType="default"
           onChangeText={(s) => setSearch(s)}
-        />
+        /> */}
       </View>
       <FlatList
         data={notifications}
