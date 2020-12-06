@@ -228,7 +228,7 @@ const IsolateComment = (props) => {
           <TextInput
             multiline
             placeholder="Votre commentaire"
-            value={comment}
+            value={newComment}
             style={{
               width:
                 Dimensions.get("screen").width - 55 - (keyboardIsOpen ? 45 : 0),
@@ -249,7 +249,7 @@ const IsolateComment = (props) => {
               // marginBottom: 20,
             }}
             keyboardType="default"
-            onChangeText={(c) => setComment(c)}
+            onChangeText={(nc) => setNewComment(nc)}
           />
           <View
             style={{

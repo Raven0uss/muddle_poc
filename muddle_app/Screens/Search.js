@@ -6,15 +6,46 @@ import {
   Image,
   TextInput,
   Dimensions,
+  Text,
+  Keyboard,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
+import { ActivityIndicator, withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useQuery, gql } from "@apollo/client";
+import { defaultProfile } from "../CustomProperties/IconsBase64";
+
+const GET_USERS = gql`
+  query($pseudo: String!) {
+    users(where: { pseudo_contains: $pseudo, role_not: MUDDLE }) {
+      id
+      pseudo
+      certified
+      profilePicture
+      coverPicture
+      crowned
+    }
+  }
+`;
 
 const Search = (props) => {
+  const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
+  const [skipFetch, setSkipFetch] = React.useState(true);
+  const { loading, error } = useQuery(GET_USERS, {
+    variables: {
+      pseudo: search,
+    },
+    onCompleted: (response) => {
+      const { users: queryResult } = response;
+
+      setUsers(queryResult);
+      setSkipFetch(true);
+    },
+    skip: skipFetch,
+  });
 
   const { navigation, route } = props;
   return (
@@ -45,31 +76,105 @@ const Search = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#F7F7F7",
+          backgroundColor: "#FFFFFF",
         }}
       >
-        <TextInput
-          placeholder="Rechercher"
-          value={search}
+        <View
           style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 40,
-            borderRadius: 10,
-            backgroundColor: "#fff",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginBottom: 14,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: Dimensions.get("screen").width,
             marginTop: 33,
             marginBottom: 35,
           }}
-          keyboardType="default"
-          onChangeText={(s) => setSearch(s)}
-        />
+        >
+          <TextInput
+            placeholder="Rechercher un utilisateur"
+            value={search}
+            style={{
+              height: 40,
+              borderRadius: 10,
+              width: "60%",
+              backgroundColor: "#f7f7f7",
+              // marginLeft: "auto",
+              // marginRight: "auto",
+              padding: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              // marginBottom: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+            keyboardType="default"
+            onChangeText={(s) => setSearch(s)}
+          />
+          <TouchableOpacity
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#F47658",
+              marginLeft: 10,
+              padding: 10,
+              borderRadius: 10,
+            }}
+            onPress={() => {
+              Keyboard.dismiss();
+              setSkipFetch(false);
+            }}
+            disabled={search.length < 3}
+          >
+            <Text
+              style={{
+                fontFamily: "Montserrat_600SemiBold",
+                fontSize: 12,
+              }}
+            >
+              Rechercher
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <ScrollView style={styles.seedContainer}>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          users.map((u) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.push("Profile", {
+                  userId: u.pseudo,
+                })
+              }
+            >
+              <View
+                style={{
+                  backgroundColor: "#F7F7F7",
+                  padding: 10,
+                  flexDirection: "row",
+                  marginTop: 5,
+                  marginBottom: 10,
+                  alignItems: "center",
+                  borderRadius: 12,
+                }}
+              >
+                <Image
+                  source={{ uri: defaultProfile }}
+                  style={styles.userPicture}
+                />
+
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontFamily: "Montserrat_500Medium",
+                    marginLeft: 10,
+                  }}
+                >
+                  {u.pseudo}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))
+        )}
       </ScrollView>
     </View>
   );
@@ -81,9 +186,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#F47658",
   },
   seedContainer: {
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#FFFFFF",
     paddingLeft: 15,
     paddingRight: 15,
+  },
+  userPicture: {
+    width: 40,
+    height: 40,
+    borderRadius: 30,
   },
 });
 
