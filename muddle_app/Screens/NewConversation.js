@@ -80,7 +80,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
   }
 `;
 
-const Search = (props) => {
+const NewConversation = (props) => {
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const { loading, error } = useQuery(GET_FOLLOWERS_CONVERSATIONS, {
@@ -238,4 +238,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Search);
+export default withTheme(NewConversation);
