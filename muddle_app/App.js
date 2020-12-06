@@ -62,6 +62,7 @@ import ChatScreen from "./Screens/Chat";
 import NewConversationScreen from "./Screens/NewConversation";
 import TrophiesScreen from "./Screens/Trophies";
 import IsolateCommentScreen from "./Screens/IsolateComment";
+import ReportScreen from "./Screens/Report";
 
 const Stack = createStackNavigator();
 
@@ -166,6 +167,20 @@ export default function App() {
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
+                initialParams={{
+                  changeLanguage,
+                  user: {
+                    //Test
+                    name: "test",
+                  },
+                }}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="Report"
+                component={ReportScreen}
                 initialParams={{
                   changeLanguage,
                   user: {

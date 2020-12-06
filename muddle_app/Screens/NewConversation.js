@@ -16,6 +16,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
+import getUnique from "../Library/getUnique";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($pseudo: String!) {
@@ -89,7 +90,17 @@ const Search = (props) => {
     onCompleted: (response) => {
       const { user: queryResult } = response;
       const { followers, following } = queryResult;
-      setUsers([...followers, ...following]);
+
+      const userList = [...followers, ...following];
+      const lookup = userList.reduce((a, e) => {
+        a[e.id] = ++a[e.id] || 0;
+        return a;
+      }, {});
+      setUsers(
+        getUnique(userList, "id").sort((a, b) =>
+          a.pseudo.localeCompare(b.pseudo)
+        )
+      );
     },
   });
 
@@ -136,7 +147,7 @@ const Search = (props) => {
           }}
         >
           <TextInput
-            placeholder="Rechercher un utilisateur"
+            placeholder="Rechercher un contact"
             value={search}
             style={{
               height: 40,

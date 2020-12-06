@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 // import { setContext } from '@apollo/link-context';
 
-const GRAPHQL_API_URL = "http://3acff3e63426.ngrok.io/";
+const GRAPHQL_API_URL = "http://c78daa9b05e3.ngrok.io/";
 
 /*
 uncomment the code below in case you are using a GraphQL API that requires some form of

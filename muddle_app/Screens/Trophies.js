@@ -251,7 +251,7 @@ const Trophies = (props) => {
         onEndReached={async () => {
           if (Platform.OS === "web" || noMoreData) return;
           // return ;
-          nbInteractions += frequency;
+          nbTrophies += frequency;
           await fetchMore({
             variables: {
               first: frequency,
@@ -261,7 +261,7 @@ const Trophies = (props) => {
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { trophies: moreTrophies } = fetchMoreResult;
               if (isEmpty(moreTrophies)) setNoMoreData(true);
-              setInteractions((previousState) =>
+              setTrophies((previousState) =>
                 [...previousState, ...moreTrophies].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);
                   if (!x) {

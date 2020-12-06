@@ -48,7 +48,13 @@ const DebateBox = (props) => {
               ]}
               selected={null}
               placeholder=""
-              onSelect={(action) => console.log(action)}
+              onSelect={(action) => {
+                if (action.value === "REPORT")
+                  navigation.push("Report", {
+                    type: "DEBATE",
+                    content: debate,
+                  });
+              }}
               renderComponent={<CustomIcon name="more-vert" size={22} />}
             />
           </View>
@@ -192,7 +198,13 @@ const DebateBox = (props) => {
                 ]}
                 selected={null}
                 placeholder=""
-                onSelect={(action) => console.log(action)}
+                onSelect={(action) => {
+                  if (action.value === "REPORT")
+                    navigation.push("Report", {
+                      type: "DEBATE",
+                      content: debate,
+                    });
+                }}
                 renderComponent={<CustomIcon name="more-vert" size={22} />}
               />
             </View>
