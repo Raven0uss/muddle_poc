@@ -6,15 +6,92 @@ import {
   Image,
   TextInput,
   Dimensions,
-  ScrollView,
+  Text,
+  Keyboard,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
+import { ActivityIndicator, withTheme } from "react-native-paper";
+import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useQuery, gql } from "@apollo/client";
+import { defaultProfile } from "../CustomProperties/IconsBase64";
 
-const NewConversation = (props) => {
+const GET_FOLLOWERS_CONVERSATIONS = gql`
+  query($pseudo: String!) {
+    user(where: { pseudo: $pseudo }) {
+      id
+      followers {
+        id
+        pseudo
+        certified
+        profilePicture
+        coverPicture
+        crowned
+        conversations {
+          id
+          speakers {
+            id
+            pseudo
+          }
+          messages {
+            id
+            content
+            from {
+              id
+              pseudo
+            }
+            to {
+              id
+              pseudo
+            }
+          }
+        }
+      }
+      following {
+        id
+        pseudo
+        certified
+        profilePicture
+        coverPicture
+        crowned
+        conversations {
+          id
+          speakers {
+            id
+            pseudo
+          }
+          messages {
+            id
+            content
+            from {
+              id
+              pseudo
+            }
+            to {
+              id
+              pseudo
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const Search = (props) => {
+  const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
+  const { loading, error } = useQuery(GET_FOLLOWERS_CONVERSATIONS, {
+    variables: {
+      pseudo: props.route.params.userId,
+    },
+    onCompleted: (response) => {
+      const { user: queryResult } = response;
+      const { followers, following } = queryResult;
+      setUsers([...followers, ...following]);
+    },
+  });
 
   const { navigation, route } = props;
   return (
@@ -45,31 +122,88 @@ const NewConversation = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFF",
+          backgroundColor: "#FFFFFF",
         }}
       >
-        <TextInput
-          placeholder="A"
-          value={search}
+        <View
           style={{
-            width: Dimensions.get("screen").width / 1.15,
-            height: 40,
-            borderRadius: 10,
-            backgroundColor: "#f7f7f7",
-            marginLeft: "auto",
-            marginRight: "auto",
-            padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginBottom: 14,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: Dimensions.get("screen").width,
             marginTop: 33,
             marginBottom: 35,
           }}
-          keyboardType="default"
-          onChangeText={(s) => setSearch(s)}
-        />
+        >
+          <TextInput
+            placeholder="Rechercher un utilisateur"
+            value={search}
+            style={{
+              height: 40,
+              borderRadius: 10,
+              width: Dimensions.get("screen").width / 1.2,
+              backgroundColor: "#f7f7f7",
+              // marginLeft: "auto",
+              // marginRight: "auto",
+              padding: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              // marginBottom: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+            keyboardType="default"
+            onChangeText={(s) => setSearch(s)}
+          />
+        </View>
       </View>
-      <ScrollView style={styles.seedContainer}></ScrollView>
+      <ScrollView style={styles.seedContainer}>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          users
+            .filter((u) => {
+              if (search.length > 0) {
+                return u.toLowerCase().indexOf(search.toLowerCase());
+              }
+              return true;
+            }) // filter by search text
+            .map((u) => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Chat", {
+                    conversation: u.conversation,
+                  });
+                }}
+              >
+                <View
+                  style={{
+                    backgroundColor: "#F7F7F7",
+                    padding: 10,
+                    flexDirection: "row",
+                    marginTop: 5,
+                    marginBottom: 10,
+                    alignItems: "center",
+                    borderRadius: 12,
+                  }}
+                >
+                  <Image
+                    source={{ uri: defaultProfile }}
+                    style={styles.userPicture}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontFamily: "Montserrat_500Medium",
+                      marginLeft: 10,
+                    }}
+                  >
+                    {u.pseudo}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))
+        )}
+      </ScrollView>
     </View>
   );
 };
@@ -80,10 +214,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#F47658",
   },
   seedContainer: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFFFF",
     paddingLeft: 15,
     paddingRight: 15,
   },
+  userPicture: {
+    width: 40,
+    height: 40,
+    borderRadius: 30,
+  },
 });
 
-export default withTheme(NewConversation);
+export default withTheme(Search);

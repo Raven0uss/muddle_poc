@@ -156,7 +156,11 @@ const Conversations = (props) => {
         RightComponent={
           <TouchableOpacity
             style={{ marginTop: 5 }}
-            onPress={() => navigation.push("NewConversation")}
+            onPress={() =>
+              navigation.push("NewConversation", {
+                userId: "userA",
+              })
+            }
           >
             <CustomIcon name="add" size={32} />
           </TouchableOpacity>
