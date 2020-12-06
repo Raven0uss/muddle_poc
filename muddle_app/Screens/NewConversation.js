@@ -163,7 +163,9 @@ const Search = (props) => {
           users
             .filter((u) => {
               if (search.length > 0) {
-                return u.toLowerCase().indexOf(search.toLowerCase());
+                return (
+                  u.pseudo.toLowerCase().indexOf(search.toLowerCase()) !== -1
+                );
               }
               return true;
             }) // filter by search text
