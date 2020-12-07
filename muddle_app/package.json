@@ -25,7 +25,8 @@
     "react-native-screens": "~2.10.1",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "0.13.13",
-    "recyclerlistview": "^3.0.0"
+    "recyclerlistview": "^3.0.0",
+    "expo-screen-orientation": "~2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -63,6 +63,7 @@ import NewConversationScreen from "./Screens/NewConversation";
 import TrophiesScreen from "./Screens/Trophies";
 import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const Stack = createStackNavigator();
 
@@ -112,10 +113,17 @@ export default function App() {
     setLanguage(lang);
   };
 
+  async function changeScreenOrientation() {
+    await ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.PORTRAIT
+    );
+  }
+
   if (!fontsLoaded) {
     return <ActivityIndicator />;
   }
 
+  changeScreenOrientation();
   return (
     <NavigationContainer>
       <I18nProvider i18n={i18n} language={language}>
