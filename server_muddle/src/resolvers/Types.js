@@ -14,7 +14,7 @@ const DateScalar = scalarType({
   },
 
   serialize(value) {
-    return value.getTime();
+    return value;
   },
 
   parseLiteral(ast) {

@@ -36,6 +36,7 @@ const GET_DEBATES = gql`
     debates(first: $first, skip: $skip) {
       id
       content
+      createdAt
       type
       owner {
         id
