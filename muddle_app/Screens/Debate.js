@@ -84,7 +84,7 @@ const Debate = (props) => {
           <Select
             list={[
               {
-                label: "Signaler le debat",
+                label: i18n._("reportDebate"),
                 value: "REPORT",
               },
             ]}

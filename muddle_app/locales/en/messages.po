@@ -69,8 +69,8 @@ msgstr "Cancel"
 msgid "cgu"
 msgstr "General Conditions of Use"
 
-#: Screens/CreateDebate.js:545
-#: Screens/CreateDebate.js:562
+#: Screens/CreateDebate.js:546
+#: Screens/CreateDebate.js:563
 msgid "choice"
 msgstr "Choice"
 
@@ -133,7 +133,7 @@ msgstr "debate"
 msgid "debateDuration"
 msgstr "Debate duration"
 
-#: Screens/CreateDebate.js:509
+#: Screens/CreateDebate.js:510
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
@@ -142,7 +142,7 @@ msgstr "The duration maximum for a debate is 9 days and 23 hours."
 msgid "decline"
 msgstr "Decline"
 
-#: Screens/CreateDebate.js:521
+#: Screens/CreateDebate.js:522
 msgid "describeDebate"
 msgstr "Describe your debate"
 
@@ -161,6 +161,10 @@ msgstr "did not like your comment"
 #: Screens/Menu.js:89
 msgid "disconnect"
 msgstr "Log out"
+
+#: Screens/CreateDebate.js:292
+msgid "duoDebateSelect"
+msgstr "Duo debate"
 
 #: Screens/DebatesFiltered.js:173
 msgid "duoDebates"
@@ -292,7 +296,11 @@ msgstr "another person"
 msgid "password"
 msgstr "Password"
 
-#: Screens/CreateDebate.js:580
+#: Screens/CreateDebate.js:288
+msgid "publicDebateSelect"
+msgstr "Public debate"
+
+#: Screens/CreateDebate.js:581
 msgid "publish"
 msgstr "Publish"
 
@@ -303,6 +311,19 @@ msgstr "Report"
 #: Screens/Report.js:71
 msgid "reportA"
 msgstr "Report a"
+
+#: Components/CommentBox.js:47
+#: Screens/IsolateComment.js:130
+msgid "reportComment"
+msgstr "Report the comment"
+
+#: Components/DebateBox.js:46
+#: Components/DebateBox.js:196
+#: Components/TrophyBox.js:65
+#: Components/TrophyBox.js:288
+#: Screens/Debate.js:87
+msgid "reportDebate"
+msgstr "Report the debate"
 
 #: Screens/Report.js:109
 msgid "reportGiveMoreReason"
@@ -333,7 +354,6 @@ msgid "reportViolence"
 msgstr "Violence"
 
 #: Screens/CreateDebate.js:130
-#: Screens/InvitationDebate.js:133
 #: Screens/Search.js:133
 msgid "search"
 msgstr "Search"
@@ -343,7 +363,6 @@ msgid "searchContact"
 msgstr "Search a contact"
 
 #: Screens/CreateDebate.js:89
-#: Screens/InvitationDebate.js:94
 #: Screens/Search.js:94
 msgid "searchUser"
 msgstr "Search a user"
@@ -418,6 +437,6 @@ msgstr "Your comment"
 msgid "yourMessage"
 msgstr "Your message"
 
-#: Screens/CreateDebate.js:546
+#: Screens/CreateDebate.js:547
 msgid "yourOpinion"
 msgstr "Your opinion"

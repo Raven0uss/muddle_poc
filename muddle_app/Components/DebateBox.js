@@ -43,7 +43,7 @@ const DebateBox = (props) => {
             <Select
               list={[
                 {
-                  label: "Signaler le debat",
+                  label: i18n._("reportDebate"),
                   value: "REPORT",
                 },
               ]}
@@ -193,7 +193,7 @@ const DebateBox = (props) => {
               <Select
                 list={[
                   {
-                    label: "Signaler le debat",
+                    label: i18n._("reportDebate"),
                     value: "REPORT",
                   },
                 ]}

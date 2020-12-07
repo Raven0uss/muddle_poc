@@ -69,8 +69,8 @@ msgstr "Annuler"
 msgid "cgu"
 msgstr "Conditions Générales d'Utilisation"
 
-#: Screens/CreateDebate.js:545
-#: Screens/CreateDebate.js:562
+#: Screens/CreateDebate.js:546
+#: Screens/CreateDebate.js:563
 msgid "choice"
 msgstr "Choix numéro"
 
@@ -133,7 +133,7 @@ msgstr "débat"
 msgid "debateDuration"
 msgstr "Durée du débat"
 
-#: Screens/CreateDebate.js:509
+#: Screens/CreateDebate.js:510
 msgid "debateLimitationDurationMessage"
 msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 
@@ -142,7 +142,7 @@ msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 msgid "decline"
 msgstr "Refuser"
 
-#: Screens/CreateDebate.js:521
+#: Screens/CreateDebate.js:522
 msgid "describeDebate"
 msgstr "Décrivez votre débat"
 
@@ -161,6 +161,10 @@ msgstr "n'a pas aimé votre commentaire"
 #: Screens/Menu.js:89
 msgid "disconnect"
 msgstr "Se déconnecter"
+
+#: Screens/CreateDebate.js:292
+msgid "duoDebateSelect"
+msgstr "Débat duo"
 
 #: Screens/DebatesFiltered.js:173
 msgid "duoDebates"
@@ -292,7 +296,11 @@ msgstr "autre personne"
 msgid "password"
 msgstr "Mot de passe"
 
-#: Screens/CreateDebate.js:580
+#: Screens/CreateDebate.js:288
+msgid "publicDebateSelect"
+msgstr "Débat publique"
+
+#: Screens/CreateDebate.js:581
 msgid "publish"
 msgstr "Publier"
 
@@ -303,6 +311,19 @@ msgstr "Signaler"
 #: Screens/Report.js:71
 msgid "reportA"
 msgstr "Signaler un"
+
+#: Components/CommentBox.js:47
+#: Screens/IsolateComment.js:130
+msgid "reportComment"
+msgstr "Signaler le commentaire"
+
+#: Components/DebateBox.js:46
+#: Components/DebateBox.js:196
+#: Components/TrophyBox.js:65
+#: Components/TrophyBox.js:288
+#: Screens/Debate.js:87
+msgid "reportDebate"
+msgstr "Signaler le débat"
 
 #: Screens/Report.js:109
 msgid "reportGiveMoreReason"
@@ -333,7 +354,6 @@ msgid "reportViolence"
 msgstr "Contenu violent"
 
 #: Screens/CreateDebate.js:130
-#: Screens/InvitationDebate.js:133
 #: Screens/Search.js:133
 msgid "search"
 msgstr "Rechercher"
@@ -343,7 +363,6 @@ msgid "searchContact"
 msgstr "Rechercher un contact"
 
 #: Screens/CreateDebate.js:89
-#: Screens/InvitationDebate.js:94
 #: Screens/Search.js:94
 msgid "searchUser"
 msgstr "Rechercher un utilisateur"
@@ -418,6 +437,6 @@ msgstr "Votre commentaire"
 msgid "yourMessage"
 msgstr "Votre message"
 
-#: Screens/CreateDebate.js:546
+#: Screens/CreateDebate.js:547
 msgid "yourOpinion"
 msgstr "Votre opinion"

@@ -1,4 +1,16 @@
 {
+  "reportDebate": {
+    "origin": [
+      [
+        "Components/DebateBox.js",
+        46
+      ],
+      [
+        "Components/DebateBox.js",
+        196
+      ]
+    ]
+  },
   "comment": {
     "origin": [
       [

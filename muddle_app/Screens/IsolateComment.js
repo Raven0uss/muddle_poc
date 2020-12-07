@@ -127,7 +127,7 @@ const IsolateComment = (props) => {
           <Select
             list={[
               {
-                label: "Signaler le commentaire",
+                label: i18n._("reportComment"),
                 value: "REPORT",
               },
             ]}

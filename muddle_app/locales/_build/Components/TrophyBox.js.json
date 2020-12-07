@@ -1,4 +1,16 @@
 {
+  "reportDebate": {
+    "origin": [
+      [
+        "Components/TrophyBox.js",
+        65
+      ],
+      [
+        "Components/TrophyBox.js",
+        288
+      ]
+    ]
+  },
   "comment": {
     "origin": [
       [

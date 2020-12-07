@@ -23,6 +23,22 @@
       ]
     ]
   },
+  "publicDebateSelect": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        288
+      ]
+    ]
+  },
+  "duoDebateSelect": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        292
+      ]
+    ]
+  },
   "invitePeople": {
     "origin": [
       [
@@ -59,7 +75,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        509
+        510
       ]
     ]
   },
@@ -67,7 +83,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        521
+        522
       ]
     ]
   },
@@ -75,11 +91,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        545
+        546
       ],
       [
         "Screens/CreateDebate.js",
-        562
+        563
       ]
     ]
   },
@@ -87,7 +103,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        546
+        547
       ]
     ]
   },
@@ -95,7 +111,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        580
+        581
       ]
     ]
   }

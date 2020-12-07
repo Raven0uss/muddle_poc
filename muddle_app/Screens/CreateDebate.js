@@ -211,7 +211,7 @@ const InvitationDebate = (props) => {
 
 const CreateDebate = (props) => {
   const [debateType, setDebateType] = React.useState({
-    label: "Debat public",
+    label: i18n._("publicDebateSelect"),
     value: "PUBLIC",
   });
   const [duo, setDuo] = React.useState(null);
@@ -285,11 +285,11 @@ const CreateDebate = (props) => {
               <Select
                 list={[
                   {
-                    label: "Debat publique",
+                    label: i18n._("publicDebateSelect"),
                     value: "PUBLIC",
                   },
                   {
-                    label: "Debat en duo",
+                    label: i18n._("duoDebateSelect"),
                     value: "DUO",
                   },
                 ]}
