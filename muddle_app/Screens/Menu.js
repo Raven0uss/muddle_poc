@@ -12,6 +12,7 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const Menu = (props) => {
   const { navigation, route } = props;
@@ -45,32 +46,28 @@ const Menu = (props) => {
           onPress={() => navigation.push("Settings")}
         >
           <CustomIcon name="settings" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Parametres</Text>
+          <Text style={styles.menuText}>{i18n._("settings")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
           onPress={() => navigation.push("LegaleMentions")}
         >
           <CustomIcon name="lock" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>
-            Mentions legales & Confidentialite
-          </Text>
+          <Text style={styles.menuText}>{i18n._("legaleMention")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
           onPress={() => navigation.push("Cgu")}
         >
           <CustomIcon name="description" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>
-            Conditions generales d'utilisation
-          </Text>
+          <Text style={styles.menuText}>{i18n._("cgu")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
           onPress={() => navigation.push("ContactUs")}
         >
           <CustomIcon name="chat" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Nous contacter</Text>
+          <Text style={styles.menuText}>{i18n._("contactUs")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
@@ -80,7 +77,7 @@ const Menu = (props) => {
           }}
         >
           <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>Se deconnecter</Text>
+          <Text style={styles.menuText}>{i18n._("disconnect")}</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

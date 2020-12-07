@@ -17,6 +17,7 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import getUnique from "../Library/getUnique";
+import i18n from "../i18n";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($pseudo: String!) {
@@ -147,7 +148,7 @@ const NewConversation = (props) => {
           }}
         >
           <TextInput
-            placeholder="Rechercher un contact"
+            placeholder={i18n._("searchContact")}
             value={search}
             style={{
               height: 40,

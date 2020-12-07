@@ -15,6 +15,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 import Select from "../Components/Select";
+import i18n from "../i18n";
 
 const Report = (props) => {
   const [form, setForm] = React.useState({
@@ -67,33 +68,35 @@ const Report = (props) => {
             fontFamily: "Montserrat_700Bold",
           }}
         >
-          Signaler un {`${type === "DEBATE" ? "debat" : "commentaire"}`}
+          {`${i18n._("reportA")} ${
+            type === "DEBATE" ? i18n._("debate") : i18n._("comment")
+          }`}
         </Text>
         <Select
           list={[
             {
-              label: "Propos injurieux",
+              label: i18n._("reportInjury"),
               value: "INSULT",
             },
             {
-              label: "Propos racistes",
+              label: i18n._("reportRacism"),
               value: "RACISM",
             },
             {
-              label: "Propos sexistes",
+              label: i18n._("reportSexism"),
               value: "SEXISM",
             },
             {
-              label: "Contenu violent",
+              label: i18n._("reportViolence"),
               value: "VIOLENCE",
             },
             {
-              label: "Contenu pornographique",
+              label: i18n._("reportPorn"),
               value: "PORNOGRAPHY",
             },
           ]}
           selected={form.reason}
-          placeholder="Selectionner le motif"
+          placeholder={i18n._("reportSelectReason")}
           onSelect={(reason) =>
             setForm({
               ...form,
@@ -103,7 +106,7 @@ const Report = (props) => {
         />
         <KeyboardAvoidingView behavior="padding">
           <TextInput
-            placeholder="Donnez plus de details afin de traiter votre demande..."
+            placeholder={i18n._("reportGiveMoreReason")}
             value={form.reasonText}
             onChangeText={(reasonText) =>
               setForm({
@@ -136,7 +139,7 @@ const Report = (props) => {
               fontFamily: "Montserrat_700Bold",
             }}
           >
-            Signaler
+            {i18n._("report")}
           </Text>
         </TouchableOpacity>
       </View>

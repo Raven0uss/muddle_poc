@@ -1,3 +1,4 @@
+import i18n from "../i18n";
 import React from "react";
 import {
   Text,
@@ -44,7 +45,7 @@ function ForgotPasswordComponent(props) {
         />
         <View style={styles.formConnexion}>
           <TextInput
-            placeholder="Adresse mail"
+            placeholder={i18n._("mailAddress")}
             value={email}
             onChangeText={(e) => setEmail(e)}
             style={styles.input}
@@ -56,8 +57,7 @@ function ForgotPasswordComponent(props) {
               console.log("Connection");
               navigation.navigate("Login", {
                 snackType: "success",
-                snackMessage:
-                  "Un mail vous a ete envoye afin de recuperer votre compte.",
+                snackMessage: i18n._("successMessage_MailSendForgotPassword"),
                 snack: true,
               });
             }}
@@ -69,7 +69,7 @@ function ForgotPasswordComponent(props) {
                 fontFamily: "Montserrat_700Bold",
               }}
             >
-              Mot de passe oublie
+              {i18n._("forgotPassword")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -77,7 +77,7 @@ function ForgotPasswordComponent(props) {
       <View style={styles.noAccountBloc}>
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
           <Text style={styles.noAccountText}>
-            <Text style={styles.subscriptionLink}>S'identifier</Text>
+            <Text style={styles.subscriptionLink}>{i18n._("goToConnect")}</Text>
           </Text>
         </TouchableWithoutFeedback>
       </View>

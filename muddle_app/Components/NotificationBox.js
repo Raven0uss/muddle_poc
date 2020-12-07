@@ -4,6 +4,7 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import { not } from "react-native-reanimated";
+import i18n from "../i18n";
 
 const notificationText = {
   VOTE: "a vote sur votre debat",
@@ -73,15 +74,9 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                a vote sur votre debat{" "}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
-                }}
-              >
-                il y a 2 heures
+                {`${i18n._("voteOnYourDebate")} ${i18n._("ago", {
+                  time: "2h",
+                })}`}
               </Text>
             </View>
           </View>
@@ -143,7 +138,7 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                vous invite pour un debat duo{" "}
+                {`${i18n._("inviteYouDuoDebate")}`}
               </Text>
             </View>
             <View
@@ -169,7 +164,7 @@ const NotificationBox = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  Accepter
+                  {`${i18n._("accept")}`}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -193,7 +188,7 @@ const NotificationBox = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  Refuser
+                  {`${i18n._("decline")}`}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -244,10 +239,10 @@ const NotificationBox = (props) => {
             >
               {`${notification.who[0].pseudo}${
                 notification.who.length > 1
-                  ? ` et ${notification.who.length - 1} ${
+                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? "autres personnes"
-                        : "autre personne"
+                        ? i18n._("otherPeopleSingular")
+                        : i18n._("otherPeoplePlural")
                     }`
                   : ""
               }`}
@@ -266,8 +261,8 @@ const NotificationBox = (props) => {
               >
                 {`${
                   notification.who.length > 1
-                    ? "ont commente votre debat"
-                    : "a commente votre debat"
+                    ? i18n._("commentYourDebatePlural")
+                    : i18n._("commentYourDebateSingular")
                 }`}
               </Text>
               <Text
@@ -276,7 +271,9 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                {" il y a 2 jours"}
+                {` ${i18n._("ago", {
+                  time: "2h",
+                })}`}
               </Text>
             </View>
             <Text
@@ -348,15 +345,9 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                a demande a clore ce debat{" "}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
-                }}
-              >
-                {" il y a 3 jours"}
+                {` ${i18n._("askToCloseThisDebate")} ${i18n._("ago", {
+                  time: "2h",
+                })}`}
               </Text>
             </View>
             <Text
@@ -392,7 +383,7 @@ const NotificationBox = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  Accepter
+                  {`${i18n._("accept")}`}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -416,7 +407,7 @@ const NotificationBox = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  Refuser
+                  {`${i18n._("decline")}`}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -467,10 +458,10 @@ const NotificationBox = (props) => {
             >
               {`${notification.who[0].pseudo}${
                 notification.who.length > 1
-                  ? ` et ${notification.who.length - 1} ${
+                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? "autres personnes"
-                        : "autre personne"
+                        ? i18n._("otherPeopleSingular")
+                        : i18n._("otherPeoplePlural")
                     }`
                   : ""
               }`}
@@ -489,8 +480,8 @@ const NotificationBox = (props) => {
               >
                 {`${
                   notification.who.length > 1
-                    ? "ont aime votre commentaire"
-                    : "a aime votre commentaire"
+                    ? i18n._("likedCommentSingular")
+                    : i18n._("likedCommentPlural")
                 }`}
               </Text>
               <Text
@@ -559,10 +550,10 @@ const NotificationBox = (props) => {
             >
               {`${notification.who[0].pseudo}${
                 notification.who.length > 1
-                  ? ` et ${notification.who.length - 1} ${
+                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? "autres personnes"
-                        : "autre personne"
+                        ? i18n._("otherPeopleSingular")
+                        : i18n._("otherPeoplePlural")
                     }`
                   : ""
               }`}
@@ -581,8 +572,8 @@ const NotificationBox = (props) => {
               >
                 {`${
                   notification.who.length > 1
-                    ? "n'ont pas aime votre commentaire"
-                    : "n'a pas aime votre commentaire"
+                    ? i18n._("didntLikedCommentSingular")
+                    : i18n._("didntLikedCommentPlural")
                 }`}
               </Text>
               <Text
@@ -591,7 +582,9 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                {" il y a 3 jours"}
+                {` ${i18n._("ago", {
+                  time: "2h",
+                })}`}
               </Text>
             </View>
             <Text

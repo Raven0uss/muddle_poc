@@ -1,0 +1,166 @@
+{
+  "voteOnYourDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        77
+      ]
+    ]
+  },
+  "ago": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        77
+      ],
+      [
+        "Components/NotificationBox.js",
+        274
+      ],
+      [
+        "Components/NotificationBox.js",
+        348
+      ],
+      [
+        "Components/NotificationBox.js",
+        585
+      ]
+    ]
+  },
+  "inviteYouDuoDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        141
+      ]
+    ]
+  },
+  "accept": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        167
+      ],
+      [
+        "Components/NotificationBox.js",
+        386
+      ]
+    ]
+  },
+  "decline": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        191
+      ],
+      [
+        "Components/NotificationBox.js",
+        410
+      ]
+    ]
+  },
+  "and": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        242
+      ],
+      [
+        "Components/NotificationBox.js",
+        461
+      ],
+      [
+        "Components/NotificationBox.js",
+        553
+      ]
+    ]
+  },
+  "otherPeopleSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        244
+      ],
+      [
+        "Components/NotificationBox.js",
+        463
+      ],
+      [
+        "Components/NotificationBox.js",
+        555
+      ]
+    ]
+  },
+  "otherPeoplePlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        245
+      ],
+      [
+        "Components/NotificationBox.js",
+        464
+      ],
+      [
+        "Components/NotificationBox.js",
+        556
+      ]
+    ]
+  },
+  "commentYourDebatePlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        264
+      ]
+    ]
+  },
+  "commentYourDebateSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        265
+      ]
+    ]
+  },
+  "askToCloseThisDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        348
+      ]
+    ]
+  },
+  "likedCommentSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        483
+      ]
+    ]
+  },
+  "likedCommentPlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        484
+      ]
+    ]
+  },
+  "didntLikedCommentSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        575
+      ]
+    ]
+  },
+  "didntLikedCommentPlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        576
+      ]
+    ]
+  }
+}

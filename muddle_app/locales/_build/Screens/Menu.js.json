@@ -1,0 +1,42 @@
+{
+  "settings": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        49
+      ]
+    ]
+  },
+  "legaleMention": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        56
+      ]
+    ]
+  },
+  "cgu": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        63
+      ]
+    ]
+  },
+  "contactUs": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        70
+      ]
+    ]
+  },
+  "disconnect": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        80
+      ]
+    ]
+  }
+}

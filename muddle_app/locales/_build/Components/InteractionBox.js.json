@@ -1,0 +1,106 @@
+{
+  "youLiked": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        22
+      ]
+    ]
+  },
+  "liked": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        23
+      ]
+    ]
+  },
+  "that": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        24
+      ],
+      [
+        "Components/InteractionBox.js",
+        55
+      ]
+    ]
+  },
+  "ago": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        24
+      ],
+      [
+        "Components/InteractionBox.js",
+        55
+      ],
+      [
+        "Components/InteractionBox.js",
+        85
+      ],
+      [
+        "Components/InteractionBox.js",
+        111
+      ]
+    ]
+  },
+  "youDidntLiked": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        53
+      ]
+    ]
+  },
+  "didntLiked": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        54
+      ]
+    ]
+  },
+  "youCommented": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        83
+      ]
+    ]
+  },
+  "commented": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        84
+      ]
+    ]
+  },
+  "onThisDebate": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        85
+      ]
+    ]
+  },
+  "youVote": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        109
+      ]
+    ]
+  },
+  "hasVote": {
+    "origin": [
+      [
+        "Components/InteractionBox.js",
+        110
+      ]
+    ]
+  }
+}

@@ -17,6 +17,7 @@ import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const renderItem = ({ item }, navigation, me) => {
   const paddingMessages = 15;
@@ -244,7 +245,7 @@ const Chat = (props) => {
         >
           <TextInput
             multiline
-            placeholder="Votre message"
+            placeholder={i18n._("yourMessage")}
             value={newMessage}
             style={{
               width:

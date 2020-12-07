@@ -4,6 +4,7 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import DebateBox from "./DebateBox";
+import i18n from "../i18n";
 
 const TrophyBox = (props) => {
   const { trophy, navigation } = props;
@@ -101,7 +102,7 @@ const TrophyBox = (props) => {
             <Text style={styles.footerText}>{`${votes} vote${
               votes > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${comments} commentaire${
+            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>
@@ -365,9 +366,9 @@ const TrophyBox = (props) => {
             <Text style={styles.footerText}>{`${votesDuo} vote${
               votesDuo > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${commentsDuo} commentaire${
-              commentsDuo > 1 ? "s" : ""
-            }`}</Text>
+            <Text style={styles.footerText}>{`${commentsDuo} ${i18n._(
+              "comment"
+            )}${commentsDuo > 1 ? "s" : ""}`}</Text>
           </View>
           {/* </View> */}
         </View>

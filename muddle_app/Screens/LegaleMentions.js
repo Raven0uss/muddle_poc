@@ -13,6 +13,7 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const LegaleMentions = (props) => {
   const { navigation, route } = props;
@@ -50,7 +51,7 @@ const LegaleMentions = (props) => {
               fontFamily: "Montserrat_700Bold",
             }}
           >
-            Mentions Legales & Confidentialite
+            {i18n._("legaleMention")}
           </Text>
         </View>
       </ScrollView>

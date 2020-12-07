@@ -17,6 +17,7 @@ import DatePicker from "../Components/DatePicker";
 import Select from "../Components/Select";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 function SignUpComponent(props) {
   const [form, setForm] = React.useState({
@@ -67,7 +68,7 @@ function SignUpComponent(props) {
               placeholderTextColor="#222"
             />
             <TextInput
-              placeholder="Adresse mail"
+              placeholder={i18n._("mailAddress")}
               value={form.email}
               onChangeText={(email) =>
                 setForm((previousState) => ({
@@ -81,7 +82,7 @@ function SignUpComponent(props) {
             />
             <View style={styles.passwordBloc}>
               <TextInput
-                placeholder="Mot de passe"
+                placeholder={i18n._("password")}
                 value={form.password}
                 onChangeText={(password) =>
                   setForm((previousState) => ({
@@ -106,7 +107,7 @@ function SignUpComponent(props) {
               </View>
             </View>
             <TextInput
-              placeholder="Confirmer mot de passe"
+              placeholder={i18n._("confirmPassword")}
               value={form.confirmPassword}
               onChangeText={(confirmPassword) =>
                 setForm((previousState) => ({
@@ -120,7 +121,7 @@ function SignUpComponent(props) {
               secureTextEntry={!visibility}
             />
             <DatePicker
-              placeholder="Date de naissance"
+              placeholder={i18n._("birthdate")}
               date={form.birthdate}
               onDateChange={(birthdate) => {
                 setForm((previousState) => ({
@@ -132,20 +133,20 @@ function SignUpComponent(props) {
             <Select
               list={[
                 {
-                  label: "Femme",
+                  label: i18n._("gender_woman"),
                   value: "F",
                 },
                 {
-                  label: "Homme",
+                  label: i18n._("gender_man"),
                   value: "M",
                 },
                 {
-                  label: "Non defini",
+                  label: i18n._("gender_not_defined"),
                   value: "ND",
                 },
               ]}
               selected={form.gender}
-              placeholder="Sexe"
+              placeholder={i18n._("gender")}
               onSelect={(gender) =>
                 setForm({
                   ...form,
@@ -164,7 +165,10 @@ function SignUpComponent(props) {
                 value={form.cgu}
               />
               <Text style={styles.cguText}>
-                J'accepte les <Text style={styles.subscriptionLink}>CGU</Text>
+                {`${i18n._("iAcceptThe")} `}
+                <Text style={styles.subscriptionLink}>
+                  {i18n._("accronymCGU")}
+                </Text>
               </Text>
             </View>
             <TouchableOpacity
@@ -172,8 +176,7 @@ function SignUpComponent(props) {
                 console.log("SignUp");
                 navigation.navigate("Login", {
                   snackType: "success",
-                  snackMessage:
-                    "Un mail vous a ete envoye afin de valider votre inscription.",
+                  snackMessage: i18n._("succesMailSubscribe"),
                   snack: true,
                 });
               }}
@@ -185,7 +188,7 @@ function SignUpComponent(props) {
                   fontFamily: "Montserrat_700Bold",
                 }}
               >
-                S'inscrire
+                {i18n._("subscribe")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -194,8 +197,8 @@ function SignUpComponent(props) {
       <View style={styles.noAccountBloc}>
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
           <Text style={styles.noAccountText}>
-            Deja inscrit ?{" "}
-            <Text style={styles.subscriptionLink}>Se connecter</Text>
+            {`${i18n._("alreadyMember?")} `}
+            <Text style={styles.subscriptionLink}>{i18n._("connect")}</Text>
           </Text>
         </TouchableWithoutFeedback>
       </View>

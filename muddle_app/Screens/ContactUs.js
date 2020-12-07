@@ -13,6 +13,7 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const ContactUs = (props) => {
   const { navigation, route } = props;
@@ -45,8 +46,7 @@ const ContactUs = (props) => {
           <Text
             style={{ textAlign: "center", fontFamily: "Montserrat_500Medium" }}
           >
-            Pour tout question relative a Muddles, veuillez nous contacter a
-            l'adresse suivante :
+            {i18n._("forAllQuestionsContact")}
           </Text>
           <TouchableOpacity>
             <Text

@@ -1,0 +1,18 @@
+{
+  "followers": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        469
+      ]
+    ]
+  },
+  "following": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        500
+      ]
+    ]
+  }
+}

@@ -28,6 +28,7 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import UserContext from "../CustomProperties/UserContext";
 import { useQuery, gql } from "@apollo/client";
 import { get, isEmpty } from "lodash";
+import i18n from "../i18n";
 
 const GET_USER = gql`
   query($userId: String!) {
@@ -465,7 +466,7 @@ const Profile = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  abonnes
+                  {i18n._("followers").toLowerCase()}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -496,7 +497,7 @@ const Profile = (props) => {
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
-                  abonnements
+                  {i18n._("following").toLowerCase()}
                 </Text>
               </TouchableOpacity>
             </View>

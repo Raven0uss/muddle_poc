@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
+import i18n from "../i18n";
 
 const DebateBox = (props) => {
   const { debate, navigation } = props;
@@ -82,7 +83,7 @@ const DebateBox = (props) => {
           <Text style={styles.footerText}>{`${votes} vote${
             votes > 1 ? "s" : ""
           }`}</Text>
-          <Text style={styles.footerText}>{`${comments} commentaire${
+          <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
             comments > 1 ? "s" : ""
           }`}</Text>
         </View>
@@ -273,7 +274,7 @@ const DebateBox = (props) => {
             <Text style={styles.footerText}>{`${votes} vote${
               votes > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${comments} commentaire${
+            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>

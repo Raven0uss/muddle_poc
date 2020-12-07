@@ -1,0 +1,54 @@
+{
+  "invitePeople": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        119
+      ]
+    ]
+  },
+  "debateDuration": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        127
+      ]
+    ]
+  },
+  "describeDebate": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        144
+      ]
+    ]
+  },
+  "choice": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        168
+      ],
+      [
+        "Screens/CreateDebate.js",
+        185
+      ]
+    ]
+  },
+  "yourOpinion": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        169
+      ]
+    ]
+  },
+  "publish": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        203
+      ]
+    ]
+  }
+}

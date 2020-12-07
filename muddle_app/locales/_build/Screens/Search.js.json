@@ -1,0 +1,18 @@
+{
+  "searchUser": {
+    "origin": [
+      [
+        "Screens/Search.js",
+        94
+      ]
+    ]
+  },
+  "search": {
+    "origin": [
+      [
+        "Screens/Search.js",
+        133
+      ]
+    ]
+  }
+}

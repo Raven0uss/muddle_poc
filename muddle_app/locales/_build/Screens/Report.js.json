@@ -1,0 +1,90 @@
+{
+  "reportA": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        71
+      ]
+    ]
+  },
+  "debate": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        72
+      ]
+    ]
+  },
+  "comment": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        72
+      ]
+    ]
+  },
+  "reportInjury": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        79
+      ]
+    ]
+  },
+  "reportRacism": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        84
+      ]
+    ]
+  },
+  "reportSexism": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        89
+      ]
+    ]
+  },
+  "reportViolence": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        94
+      ]
+    ]
+  },
+  "reportPorn": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        99
+      ]
+    ]
+  },
+  "reportSelectReason": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        104
+      ]
+    ]
+  },
+  "reportGiveMoreReason": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        114
+      ]
+    ]
+  },
+  "report": {
+    "origin": [
+      [
+        "Screens/Report.js",
+        147
+      ]
+    ]
+  }
+}

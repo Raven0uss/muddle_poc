@@ -5,6 +5,7 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import DebateBox from "./DebateBox";
 import CommentBox from "./CommentBox";
+import i18n from "../i18n";
 
 const InteractionBox = (props) => {
   const { interaction, navigation } = props;
@@ -18,9 +19,9 @@ const InteractionBox = (props) => {
           <Text style={styles.notificationText}>
             {`${
               interaction.who.pseudo === "userA"
-                ? "Vous avez aime"
-                : `${interaction.who.pseudo} a aime`
-            } ceci il y a 2 heures`}
+                ? i18n._("youLiked")
+                : `${interaction.who.pseudo} ${i18n._("liked")}`
+            } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
             style={{
@@ -36,7 +37,7 @@ const InteractionBox = (props) => {
             onPress={() =>
               navigation.push("Debate", {
                 debate: comment.debate,
-              })
+              })ues
             }
           > */}
           <CommentBox comment={comment} navigation={navigation} />
@@ -49,9 +50,9 @@ const InteractionBox = (props) => {
           <Text style={styles.notificationText}>
             {`${
               interaction.who.pseudo === "userA"
-                ? "Vous n'avez pas aime"
-                : `${interaction.who.pseudo} n'a pas aime`
-            } ceci il y a 2 heures`}
+                ? i18n._("youDidntLiked")
+                : `${interaction.who.pseudo} ${i18n._("didntLiked")}`
+            } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
             style={{
@@ -79,9 +80,9 @@ const InteractionBox = (props) => {
           <Text style={styles.notificationText}>
             {`${
               interaction.who.pseudo === "userA"
-                ? "Vous avez commente"
-                : `${interaction.who.pseudo} a commente`
-            } sur ce debat il y a 2 heures`}
+                ? i18n._("youCommented")
+                : `${interaction.who.pseudo} ${i18n._("commented")}`
+            } ${i18n._("onThisDebate")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
             style={{
@@ -97,83 +98,17 @@ const InteractionBox = (props) => {
         </View>
       );
     case "BLUE_VOTE":
-      return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
-            {`${
-              interaction.who.pseudo === "userA"
-                ? "Vous avez vote du cote bleu"
-                : `${interaction.who.pseudo} a vote du cote bleu`
-            } il y a 2 heures`}
-          </Text>
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "#DBDBDB",
-              width: "100%",
-              alignSelf: "center",
-              marginTop: 5,
-              marginBottom: 10,
-            }}
-          />
-          <DebateBox debate={debate} navigation={navigation} />
-        </View>
-      );
     case "RED_VOTE":
-      return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
-            {`${
-              interaction.who.pseudo === "userA"
-                ? "Vous avez vote du cote rouge"
-                : `${interaction.who.pseudo} a vote du cote rouge`
-            } il y a 2 heures`}
-          </Text>
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "#DBDBDB",
-              width: "100%",
-              alignSelf: "center",
-              marginTop: 5,
-              marginBottom: 10,
-            }}
-          />
-          <DebateBox debate={debate} navigation={navigation} />
-        </View>
-      );
     case "POSITIVE_VOTE":
-      return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
-            {`${
-              interaction.who.pseudo === "userA"
-                ? "Vous avez vote"
-                : `${interaction.who.pseudo} a vote`
-            } favorablement sur ce debat il y a 2 heures`}
-          </Text>
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "#DBDBDB",
-              width: "100%",
-              alignSelf: "center",
-              marginBottom: 10,
-              marginTop: 5,
-            }}
-          />
-          <DebateBox debate={debate} navigation={navigation} />
-        </View>
-      );
     case "NEGATIVE_VOTE":
       return (
         <View style={styles.notificationBox}>
           <Text style={styles.notificationText}>
             {`${
               interaction.who.pseudo === "userA"
-                ? "Vous avez vote"
-                : `${interaction.who.pseudo} a vote`
-            } defavorablement sur ce debat il y a 2 heures`}
+                ? i18n._("youVote")
+                : `${interaction.who.pseudo} ${i18n._("hasVote")}`
+            } ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
             style={{
@@ -181,13 +116,84 @@ const InteractionBox = (props) => {
               backgroundColor: "#DBDBDB",
               width: "100%",
               alignSelf: "center",
-              marginBottom: 10,
               marginTop: 5,
+              marginBottom: 10,
             }}
           />
           <DebateBox debate={debate} navigation={navigation} />
         </View>
       );
+    // case "RED_VOTE":
+    //   return (
+    //     <View style={styles.notificationBox}>
+    //       <Text style={styles.notificationText}>
+    //         {`${
+    //           interaction.who.pseudo === "userA"
+    //             ? "Vous avez vote du cote rouge"
+    //             : `${interaction.who.pseudo} a vote du cote rouge`
+    //         } il y a 2 heures`}
+    //       </Text>
+    //       <View
+    //         style={{
+    //           height: 1,
+    //           backgroundColor: "#DBDBDB",
+    //           width: "100%",
+    //           alignSelf: "center",
+    //           marginTop: 5,
+    //           marginBottom: 10,
+    //         }}
+    //       />
+    //       <DebateBox debate={debate} navigation={navigation} />
+    //     </View>
+    //   );
+    // case "POSITIVE_VOTE":
+    //   return (
+    //     <View style={styles.notificationBox}>
+    //       <Text style={styles.notificationText}>
+    //         {`${
+    //           interaction.who.pseudo === "userA"
+    //             ? "Vous avez vote"
+    //             : `${interaction.who.pseudo} a vote`
+    //         } favorablement sur ce debat il y a 2 heures`}
+    //       </Text>
+    //       <View
+    //         style={{
+    //           height: 1,
+    //           backgroundColor: "#DBDBDB",
+    //           width: "100%",
+    //           alignSelf: "center",
+    //           marginBottom: 10,
+    //           marginTop: 5,
+    //         }}
+    //       />
+    //       <DebateBox debate={debate} navigation={navigation} />
+    //     </View>
+    //   );
+    // case "NEGATIVE_VOTE":
+    //   return (
+    //     <View style={styles.notificationBox}>
+    //       <Text style={styles.notificationText}>
+    //         {`${
+    //           interaction.who.pseudo === "userA"
+    //             ? "Vous avez vote"
+    //             : `${interaction.who.pseudo} a vote`
+    //         } defavorablement sur ce debat il y a 2 heures`}
+    //       </Text>
+    //       <View
+    //         style={{
+    //           height: 1,
+    //           backgroundColor: "#DBDBDB",
+    //           width: "100%",
+    //           alignSelf: "center",
+    //           marginBottom: 10,
+    //           marginTop: 5,
+    //         }}
+    //       />
+    //       <DebateBox debate={debate} navigation={navigation} />
+    //     </View>
+    //   );
+    default:
+      return null;
   }
 };
 

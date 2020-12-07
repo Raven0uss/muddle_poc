@@ -20,6 +20,7 @@ import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import TrophyBox from "../Components/TrophyBox";
 import { get, isEmpty } from "lodash";
+import i18n from "../i18n";
 
 const GET_TROPHIES = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
@@ -209,7 +210,7 @@ const Trophies = (props) => {
             }}
           >
             <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
-              Debat en duo remporte
+              {i18n._("duoDebatesWon")}
             </Text>
             <Text
               style={{
@@ -228,7 +229,7 @@ const Trophies = (props) => {
             }}
           >
             <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
-              Commentaires remportes
+              {i18n._("commentsWon")}
             </Text>
             <Text
               style={{

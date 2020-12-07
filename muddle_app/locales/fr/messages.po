@@ -13,10 +13,396 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: Screens/Home.js:51
-msgid "Test"
-msgstr "Francais"
+#: Components/NotificationBox.js:167
+#: Components/NotificationBox.js:386
+msgid "accept"
+msgstr "Accepter"
 
-#: Screens/Home.js:53
-msgid "test2"
-msgstr "Francais"
+#: Screens/SignUp.js:170
+msgid "accronymCGU"
+msgstr "CGU"
+
+#: Components/InteractionBox.js:24
+#: Components/InteractionBox.js:55
+#: Components/InteractionBox.js:85
+#: Components/InteractionBox.js:111
+#: Components/NotificationBox.js:77
+#: Components/NotificationBox.js:274
+#: Components/NotificationBox.js:348
+#: Components/NotificationBox.js:585
+msgid "ago"
+msgstr "il y a {time}"
+
+#: Screens/SignUp.js:200
+msgid "alreadyMember?"
+msgstr "Déjà inscrit ?"
+
+#: Components/NotificationBox.js:242
+#: Components/NotificationBox.js:461
+#: Components/NotificationBox.js:553
+msgid "and"
+msgstr "et"
+
+#: Components/CommentBox.js:125
+msgid "answer"
+msgstr "Répondre"
+
+#: Components/NotificationBox.js:348
+msgid "askToCloseThisDebate"
+msgstr "a demandé de clore ce débat"
+
+#: Screens/DebatesFiltered.js:165
+msgid "bestDebates"
+msgstr "Les meilleurs débats"
+
+#: Screens/SignUp.js:124
+msgid "birthdate"
+msgstr "Date de naissance"
+
+#: Components/Select.js:29
+msgid "cancel"
+msgstr "Annuler"
+
+#: Screens/Cgu.js:54
+#: Screens/Menu.js:63
+msgid "cgu"
+msgstr "Conditions Générales d'Utilisation"
+
+#: Screens/CreateDebate.js:168
+#: Screens/CreateDebate.js:185
+msgid "choice"
+msgstr "Choix numéro"
+
+#: Components/Select.js:120
+msgid "close"
+msgstr "Fermer"
+
+#: Components/DebateBox.js:86
+#: Components/DebateBox.js:277
+#: Components/TrophyBox.js:105
+#: Components/TrophyBox.js:369
+#: Screens/Debate.js:151
+#: Screens/Debate.js:309
+#: Screens/Report.js:72
+msgid "comment"
+msgstr "commentaire"
+
+#: Components/NotificationBox.js:264
+msgid "commentYourDebatePlural"
+msgstr "ont commenté votre débat"
+
+#: Components/NotificationBox.js:265
+msgid "commentYourDebateSingular"
+msgstr "a commenté votre débat"
+
+#: Components/InteractionBox.js:84
+msgid "commented"
+msgstr "a commenté"
+
+#: Screens/Trophies.js:232
+msgid "commentsWon"
+msgstr "Commentaires remportés"
+
+#: Components/DatePicker.js:90
+msgid "confirm"
+msgstr "Valider"
+
+#: Screens/SignUp.js:110
+msgid "confirmPassword"
+msgstr "Confirmation mot de passe"
+
+#: Screens/Login.js:135
+#: Screens/SignUp.js:201
+msgid "connect"
+msgstr "Se connecter"
+
+#: Screens/Menu.js:70
+msgid "contactUs"
+msgstr "Nous contacter"
+
+#: Screens/Report.js:72
+msgid "debate"
+msgstr "débat"
+
+#: Screens/CreateDebate.js:127
+msgid "debateDuration"
+msgstr "Durée du débat"
+
+#: Components/NotificationBox.js:191
+#: Components/NotificationBox.js:410
+msgid "decline"
+msgstr "Refuser"
+
+#: Screens/CreateDebate.js:144
+msgid "describeDebate"
+msgstr "Décrivez votre débat"
+
+#: Components/InteractionBox.js:54
+msgid "didntLiked"
+msgstr "n'a pas aimé"
+
+#: Components/NotificationBox.js:576
+msgid "didntLikedCommentPlural"
+msgstr "n'ont pas aimé votre commentaire"
+
+#: Components/NotificationBox.js:575
+msgid "didntLikedCommentSingular"
+msgstr "n'a pas aimé votre commentaire"
+
+#: Screens/Menu.js:80
+msgid "disconnect"
+msgstr "Se déconnecter"
+
+#: Screens/DebatesFiltered.js:180
+msgid "duoDebates"
+msgstr "Les débats en duo"
+
+#: Screens/Trophies.js:213
+msgid "duoDebatesWon"
+msgstr "Débats en duo remportés"
+
+#: Screens/Follow.js:87
+#: Screens/Profile.js:469
+msgid "followers"
+msgstr "Abonnés"
+
+#: Screens/Follow.js:108
+#: Screens/Profile.js:500
+msgid "following"
+msgstr "Abonnements"
+
+#: Screens/ContactUs.js:49
+msgid "forAllQuestionsContact"
+msgstr "Pour toutes questions relatives à Muddles, veuillez nous contacter à l'adresse suivante :"
+
+#: Screens/ForgotPassword.js:72
+msgid "forgotPassword"
+msgstr "Mot de passe oublié"
+
+#: Screens/Login.js:103
+msgid "forgotPassword?"
+msgstr "Mot de passe oublié ?"
+
+#: Screens/SignUp.js:149
+msgid "gender"
+msgstr "Genre"
+
+#: Screens/SignUp.js:140
+msgid "gender_man"
+msgstr "Homme"
+
+#: Screens/SignUp.js:144
+msgid "gender_not_defined"
+msgstr "Non défini"
+
+#: Screens/SignUp.js:136
+msgid "gender_woman"
+msgstr "Femme"
+
+#: Screens/DebatesFiltered.js:195
+msgid "generatedDebates"
+msgstr "Les débats générés"
+
+#: Screens/ForgotPassword.js:80
+msgid "goToConnect"
+msgstr "S'identifier"
+
+#: Screens/Login.js:145
+msgid "goToSubscribe"
+msgstr "S'inscrire"
+
+#: Components/InteractionBox.js:110
+msgid "hasVote"
+msgstr "a voté"
+
+#: Screens/SignUp.js:168
+msgid "iAcceptThe"
+msgstr "J'accepte les"
+
+#: Screens/CreateDebate.js:119
+msgid "invitePeople"
+msgstr "Inviter une personne"
+
+#: Components/NotificationBox.js:141
+msgid "inviteYouDuoDebate"
+msgstr "vous invite à un débat en duo"
+
+#: Screens/LegaleMentions.js:54
+#: Screens/Menu.js:56
+msgid "legaleMention"
+msgstr "Mentions Légales & Confidentialité"
+
+#: Components/InteractionBox.js:23
+msgid "liked"
+msgstr "a aimé"
+
+#: Components/NotificationBox.js:484
+msgid "likedCommentPlural"
+msgstr "ont aimé votre commentaire"
+
+#: Components/NotificationBox.js:483
+msgid "likedCommentSingular"
+msgstr "a aimé votre commentaire"
+
+#: Screens/ForgotPassword.js:48
+#: Screens/Login.js:70
+#: Screens/SignUp.js:71
+msgid "mailAddress"
+msgstr "Adresse e-mail"
+
+#: Screens/Login.js:143
+msgid "noAccount?"
+msgstr "Pas de compte ?"
+
+#: Components/InteractionBox.js:85
+msgid "onThisDebate"
+msgstr "sur ce débat"
+
+#: Components/CommentBox.js:144
+msgid "otherAnswers"
+msgstr "autre(s) réponse(s)"
+
+#: Components/NotificationBox.js:245
+#: Components/NotificationBox.js:464
+#: Components/NotificationBox.js:556
+msgid "otherPeoplePlural"
+msgstr "autres personnes"
+
+#: Components/NotificationBox.js:244
+#: Components/NotificationBox.js:463
+#: Components/NotificationBox.js:555
+msgid "otherPeopleSingular"
+msgstr "autre personne"
+
+#: Screens/Login.js:79
+#: Screens/SignUp.js:85
+msgid "password"
+msgstr "Mot de passe"
+
+#: Screens/CreateDebate.js:203
+msgid "publish"
+msgstr "Publier"
+
+#: Screens/Report.js:147
+msgid "report"
+msgstr "Signaler"
+
+#: Screens/Report.js:71
+msgid "reportA"
+msgstr "Signaler un"
+
+#: Screens/Report.js:114
+msgid "reportGiveMoreReason"
+msgstr "Donner plus de détails afin de traiter votre demande.."
+
+#: Screens/Report.js:79
+msgid "reportInjury"
+msgstr "Propos injurieux"
+
+#: Screens/Report.js:99
+msgid "reportPorn"
+msgstr "Contenu pornographique"
+
+#: Screens/Report.js:84
+msgid "reportRacism"
+msgstr "Propos racistes"
+
+#: Screens/Report.js:104
+msgid "reportSelectReason"
+msgstr "Sélectionner un motif"
+
+#: Screens/Report.js:89
+msgid "reportSexism"
+msgstr "Propos sexistes"
+
+#: Screens/Report.js:94
+msgid "reportViolence"
+msgstr "Contenu violent"
+
+#: Screens/InvitationDebate.js:133
+#: Screens/Search.js:133
+msgid "search"
+msgstr "Rechercher"
+
+#: Screens/NewConversation.js:151
+msgid "searchContact"
+msgstr "Rechercher un contact"
+
+#: Screens/InvitationDebate.js:94
+#: Screens/Search.js:94
+msgid "searchUser"
+msgstr "Rechercher un utilisateur"
+
+#: Components/CommentBox.js:144
+msgid "seeThe"
+msgstr "Voir"
+
+#: Screens/Settings.js:63
+msgid "selectDarkTheme"
+msgstr "Passer en mode sombre"
+
+#: Screens/Settings.js:64
+msgid "selectLightTheme"
+msgstr "Passer en mode clair"
+
+#: Screens/Menu.js:49
+msgid "settings"
+msgstr "Paramètres"
+
+#: Screens/SignUp.js:191
+msgid "subscribe"
+msgstr "S'inscrire"
+
+#: Screens/SignUp.js:179
+msgid "succesMailSubscribe"
+msgstr "Un mail vous a été envoyé afin de valider votre inscription."
+
+#: Screens/ForgotPassword.js:60
+msgid "successMessage_MailSendForgotPassword"
+msgstr "Un mail vous a été envoyé afin de recupérer votre compte."
+
+#: Screens/Settings.js:50
+msgid "switchLanguage"
+msgstr "Changer la langue"
+
+#: Components/InteractionBox.js:24
+#: Components/InteractionBox.js:55
+msgid "that"
+msgstr "ceci"
+
+#: Components/NotificationBox.js:77
+msgid "voteOnYourDebate"
+msgstr "a voté sur votre débat"
+
+#: Screens/Settings.js:72
+msgid "votePrivacy"
+msgstr "Confidentialité des votes"
+
+#: Components/InteractionBox.js:83
+msgid "youCommented"
+msgstr "Vous avez commenté"
+
+#: Components/InteractionBox.js:53
+msgid "youDidntLiked"
+msgstr "Vous n'avez pas aimé"
+
+#: Components/InteractionBox.js:22
+msgid "youLiked"
+msgstr "Vous avez aimé"
+
+#: Components/InteractionBox.js:109
+msgid "youVote"
+msgstr "Vous avez voté"
+
+#: Screens/Debate.js:347
+#: Screens/IsolateComment.js:237
+msgid "yourComment"
+msgstr "Votre commentaire"
+
+#: Screens/Chat.js:248
+msgid "yourMessage"
+msgstr "Votre message"
+
+#: Screens/CreateDebate.js:169
+msgid "yourOpinion"
+msgstr "Votre opinion"

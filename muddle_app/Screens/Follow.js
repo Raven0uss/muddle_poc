@@ -12,6 +12,7 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const Follow = (props) => {
   const [vision, setVision] = React.useState(props.route.params.selected);
@@ -83,7 +84,7 @@ const Follow = (props) => {
                 fontSize: 14,
               }}
             >
-              Abonnes
+              {i18n._("followers")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -104,7 +105,7 @@ const Follow = (props) => {
                 fontSize: 14,
               }}
             >
-              Abonnement
+              {i18n._("following")}
             </Text>
           </TouchableOpacity>
         </View>

@@ -1,0 +1,50 @@
+{
+  "mailAddress": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        70
+      ]
+    ]
+  },
+  "password": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        79
+      ]
+    ]
+  },
+  "forgotPassword?": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        103
+      ]
+    ]
+  },
+  "connect": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        135
+      ]
+    ]
+  },
+  "noAccount?": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        143
+      ]
+    ]
+  },
+  "goToSubscribe": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        145
+      ]
+    ]
+  }
+}

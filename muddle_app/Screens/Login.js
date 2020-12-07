@@ -18,6 +18,7 @@ import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { Snackbar } from "react-native-paper";
+import i18n from "../i18n";
 
 function LoginComponent(props) {
   const [email, setEmail] = React.useState("");
@@ -66,7 +67,7 @@ function LoginComponent(props) {
         />
         <View style={styles.formConnexion}>
           <TextInput
-            placeholder="Nom d'utilisateur ou adresse mail"
+            placeholder={i18n._("mailAddress")}
             value={email}
             onChangeText={(e) => setEmail(e)}
             style={styles.input}
@@ -75,7 +76,7 @@ function LoginComponent(props) {
           />
           <View style={styles.passwordBloc}>
             <TextInput
-              placeholder="Mot de passe"
+              placeholder={i18n._("password")}
               value={password}
               onChangeText={(p) => setPassword(p)}
               style={styles.passwordInput}
@@ -98,7 +99,9 @@ function LoginComponent(props) {
             onPress={() => navigation.push("ForgotPassword")}
           >
             <Text style={styles.noAccountText}>
-              <Text style={styles.subscriptionLink}>Mot de passe oublie ?</Text>
+              <Text style={styles.subscriptionLink}>
+                {i18n._("forgotPassword?")}
+              </Text>
             </Text>
           </TouchableWithoutFeedback>
           <TouchableOpacity
@@ -129,7 +132,7 @@ function LoginComponent(props) {
                 fontFamily: "Montserrat_700Bold",
               }}
             >
-              Se connecter
+              {i18n._("connect")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -137,8 +140,10 @@ function LoginComponent(props) {
       <View style={styles.noAccountBloc}>
         <TouchableWithoutFeedback onPress={() => navigation.push("SignUp")}>
           <Text style={styles.noAccountText}>
-            Pas de compte ?{" "}
-            <Text style={styles.subscriptionLink}>S'inscrire</Text>
+            {i18n._("noAccount?")}{" "}
+            <Text style={styles.subscriptionLink}>
+              {i18n._("goToSubscribe")}
+            </Text>
           </Text>
         </TouchableWithoutFeedback>
       </View>

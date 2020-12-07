@@ -31,7 +31,7 @@ const GET_USERS = gql`
   }
 `;
 
-const Search = (props) => {
+const InvitationDebate = (props) => {
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
@@ -198,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Search);
+export default withTheme(InvitationDebate);

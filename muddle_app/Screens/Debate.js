@@ -18,6 +18,7 @@ import CustomIcon from "../Components/Icon";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CommentBox from "../Components/CommentBox";
 import Select from "../Components/Select";
+import i18n from "../i18n";
 
 const Debate = (props) => {
   const [comment, setComment] = React.useState("");
@@ -147,7 +148,7 @@ const Debate = (props) => {
             <Text style={styles.footerText}>{`${votes} vote${
               votes > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${comments} commentaire${
+            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>
@@ -305,7 +306,7 @@ const Debate = (props) => {
             <Text style={styles.footerText}>{`${votes} vote${
               votes > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${comments} commentaire${
+            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>
@@ -343,7 +344,7 @@ const Debate = (props) => {
         >
           <TextInput
             multiline
-            placeholder="Votre commentaire"
+            placeholder={i18n._("yourComment")}
             value={comment}
             style={{
               width:

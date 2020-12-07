@@ -19,6 +19,7 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CommentBox from "../Components/CommentBox";
 import Select from "../Components/Select";
 import { useQuery, gql } from "@apollo/client";
+import i18n from "../i18n";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!) {
@@ -233,7 +234,7 @@ const IsolateComment = (props) => {
         >
           <TextInput
             multiline
-            placeholder="Votre commentaire"
+            placeholder={i18n._("yourComment")}
             value={newComment}
             style={{
               width:

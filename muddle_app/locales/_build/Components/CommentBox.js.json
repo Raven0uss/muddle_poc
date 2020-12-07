@@ -1,0 +1,26 @@
+{
+  "answer": {
+    "origin": [
+      [
+        "Components/CommentBox.js",
+        125
+      ]
+    ]
+  },
+  "seeThe": {
+    "origin": [
+      [
+        "Components/CommentBox.js",
+        144
+      ]
+    ]
+  },
+  "otherAnswers": {
+    "origin": [
+      [
+        "Components/CommentBox.js",
+        144
+      ]
+    ]
+  }
+}

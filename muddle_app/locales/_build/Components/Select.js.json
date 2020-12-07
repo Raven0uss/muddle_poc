@@ -1,0 +1,18 @@
+{
+  "cancel": {
+    "origin": [
+      [
+        "Components/Select.js",
+        29
+      ]
+    ]
+  },
+  "close": {
+    "origin": [
+      [
+        "Components/Select.js",
+        120
+      ]
+    ]
+  }
+}

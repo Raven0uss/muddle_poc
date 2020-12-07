@@ -3,10 +3,11 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
+import i18n from "../i18n";
+// import i18n from "../i18n";
 
 const CommentBox = (props) => {
   const { comment, navigation } = props;
-
   return (
     <View
       style={{
@@ -121,7 +122,7 @@ const CommentBox = (props) => {
               fontSize: 12,
             }}
           >
-            Repondre
+            {i18n._("answer")}
           </Text>
         </TouchableOpacity>
       </View>
@@ -140,7 +141,9 @@ const CommentBox = (props) => {
               marginTop: 7,
             }}
           >
-            Voir les {comment.comments.length} autres reponses
+            {`${i18n._("seeThe")} ${comment.comments.length} ${i18n._(
+              "otherAnswers"
+            )}`}
           </Text>
         </TouchableOpacity>
       )}

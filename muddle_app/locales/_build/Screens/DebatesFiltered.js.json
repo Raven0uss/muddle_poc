@@ -1,0 +1,26 @@
+{
+  "bestDebates": {
+    "origin": [
+      [
+        "Screens/DebatesFiltered.js",
+        165
+      ]
+    ]
+  },
+  "duoDebates": {
+    "origin": [
+      [
+        "Screens/DebatesFiltered.js",
+        180
+      ]
+    ]
+  },
+  "generatedDebates": {
+    "origin": [
+      [
+        "Screens/DebatesFiltered.js",
+        195
+      ]
+    ]
+  }
+}

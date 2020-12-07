@@ -1,0 +1,114 @@
+{
+  "mailAddress": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        71
+      ]
+    ]
+  },
+  "password": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        85
+      ]
+    ]
+  },
+  "confirmPassword": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        110
+      ]
+    ]
+  },
+  "birthdate": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        124
+      ]
+    ]
+  },
+  "gender_woman": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        136
+      ]
+    ]
+  },
+  "gender_man": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        140
+      ]
+    ]
+  },
+  "gender_not_defined": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        144
+      ]
+    ]
+  },
+  "gender": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        149
+      ]
+    ]
+  },
+  "iAcceptThe": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        168
+      ]
+    ]
+  },
+  "accronymCGU": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        170
+      ]
+    ]
+  },
+  "succesMailSubscribe": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        179
+      ]
+    ]
+  },
+  "subscribe": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        191
+      ]
+    ]
+  },
+  "alreadyMember?": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        200
+      ]
+    ]
+  },
+  "connect": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        201
+      ]
+    ]
+  }
+}

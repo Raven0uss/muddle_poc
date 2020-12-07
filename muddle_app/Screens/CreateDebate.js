@@ -18,6 +18,7 @@ import Select from "../Components/Select";
 import DatePicker from "../Components/DatePicker";
 import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
 import moment from "moment";
+import i18n from "../i18n";
 
 const CreateDebate = (props) => {
   const [debateType, setDebateType] = React.useState({
@@ -115,7 +116,7 @@ const CreateDebate = (props) => {
                         fontFamily: "Montserrat_500Medium",
                       }}
                     >
-                      Inviter une personne
+                      {i18n._("invitePeople")}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>
@@ -123,7 +124,7 @@ const CreateDebate = (props) => {
             }
             <View style={{ marginTop: 0 }}>
               <DatePicker
-                placeholder="Duree du debat"
+                placeholder={i18n._("debateDuration")}
                 date={duration}
                 onDateChange={(newDate) => {
                   setDuration(newDate);
@@ -140,7 +141,7 @@ const CreateDebate = (props) => {
             />
             <View style={{ marginTop: 10 }}>
               <TextInput
-                placeholder="Decrivez votre debat"
+                placeholder={i18n._("describeDebate")}
                 value={content}
                 onChangeText={(c) => setContent(c)}
                 style={styles.input}
@@ -164,8 +165,8 @@ const CreateDebate = (props) => {
               <TextInput
                 placeholder={
                   debateType.value === "PUBLIC"
-                    ? "Choix numero 1"
-                    : "Votre opinion"
+                    ? `${i18n._("choice")} 1`
+                    : i18n._("yourOpinion")
                 }
                 value={optionOne}
                 onChangeText={(oOne) => {
@@ -181,7 +182,7 @@ const CreateDebate = (props) => {
               />
               {debateType.value === "PUBLIC" && (
                 <TextInput
-                  placeholder="Choix numero 2"
+                  placeholder={`${i18n._("choice")} 2`}
                   value={optionTwo}
                   onChangeText={(oTwo) => {
                     if (oTwo.length < 35)
@@ -199,7 +200,7 @@ const CreateDebate = (props) => {
           </View>
           <TouchableOpacity onPress={() => {}} style={styles.connectionButton}>
             <Text style={{ color: "#000", fontFamily: "Montserrat_700Bold" }}>
-              Publier
+              {i18n._("publish")}
             </Text>
           </TouchableOpacity>
         </ScrollView>

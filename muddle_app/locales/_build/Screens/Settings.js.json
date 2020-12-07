@@ -1,0 +1,34 @@
+{
+  "switchLanguage": {
+    "origin": [
+      [
+        "Screens/Settings.js",
+        50
+      ]
+    ]
+  },
+  "selectDarkTheme": {
+    "origin": [
+      [
+        "Screens/Settings.js",
+        63
+      ]
+    ]
+  },
+  "selectLightTheme": {
+    "origin": [
+      [
+        "Screens/Settings.js",
+        64
+      ]
+    ]
+  },
+  "votePrivacy": {
+    "origin": [
+      [
+        "Screens/Settings.js",
+        72
+      ]
+    ]
+  }
+}

@@ -12,6 +12,7 @@ import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import i18n from "../i18n";
 
 const Settings = (props) => {
   const [theme, setTheme] = React.useState("light");
@@ -46,7 +47,7 @@ const Settings = (props) => {
           onPress={() => navigation.push("LanguageSettings")}
         >
           <CustomIcon name="language" size={28} color="#F47658" />
-          <Text style={styles.menuText}>Changer la langue</Text>
+          <Text style={styles.menuText}>{i18n._("switchLanguage")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
@@ -59,8 +60,8 @@ const Settings = (props) => {
           <CustomIcon name="flare" size={28} color="#F47658" />
           <Text style={styles.menuText}>
             {theme === "light"
-              ? "Passer en mode sombre"
-              : "Passer en mode clair"}
+              ? i18n._("selectDarkTheme")
+              : i18n._("selectLightTheme")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -68,7 +69,7 @@ const Settings = (props) => {
           onPress={() => navigation.push("VotesPrivacy")}
         >
           <CustomIcon name="vpn-key" size={28} color="#F47658" />
-          <Text style={styles.menuText}>Confidentialite des votes</Text>
+          <Text style={styles.menuText}>{i18n._("votePrivacy")}</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

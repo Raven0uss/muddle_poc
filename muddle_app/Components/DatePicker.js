@@ -87,7 +87,7 @@ const DatePicker = (props) => {
                 <Text
                   style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
                 >
-                  Valider
+                  {i18n._("confirm")}
                 </Text>
               </TouchableOpacity>
             </View>

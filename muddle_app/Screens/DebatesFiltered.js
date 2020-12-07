@@ -18,6 +18,7 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import DebateBox from "../Components/DebateBox";
 import { isEmpty } from "lodash";
+import i18n from "../i18n";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int, $filter: DebateType) {
@@ -161,7 +162,7 @@ const DebatesFiltered = (props) => {
             }}
           >
             <Text style={styles.buttonTextDefaultState}>
-              Les meilleurs debats
+              {i18n._("bestDebates")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -175,7 +176,9 @@ const DebatesFiltered = (props) => {
               setNoMoreData(false);
             }}
           >
-            <Text style={styles.buttonTextDefaultState}>Les debats en duo</Text>
+            <Text style={styles.buttonTextDefaultState}>
+              {i18n._("duoDebates")}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={
@@ -189,7 +192,7 @@ const DebatesFiltered = (props) => {
             }}
           >
             <Text style={styles.buttonTextDefaultState}>
-              Les debats generes
+              {i18n._("generatedDebates")}
             </Text>
           </TouchableOpacity>
         </ScrollView>

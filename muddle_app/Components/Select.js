@@ -15,6 +15,7 @@ import {
   ActionSheetIOS,
 } from "react-native";
 import PropTypes from "prop-types";
+import i18n from "../i18n";
 
 const { width, height } = Dimensions.get("window");
 
@@ -25,7 +26,7 @@ const Select = (props) => {
   const onPress = () => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: [...["Cancel"], ...list.map((l) => l.label)],
+        options: [...[i18n._("cancel")], ...list.map((l) => l.label)],
         cancelButtonIndex: 0,
       },
       (buttonIndex) => {
@@ -116,7 +117,7 @@ const Select = (props) => {
                 <Text
                   style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
                 >
-                  Fermer
+                  {i18n._("close")}
                 </Text>
               </TouchableOpacity>
             </View>
