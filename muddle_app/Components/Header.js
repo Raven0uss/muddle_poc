@@ -4,7 +4,7 @@ import { StyleSheet, View, SafeAreaView, Platform } from "react-native";
 import getStatusBarHeight from "../Library/getStatusBarHeight";
 
 const safeStatusHeight = {
-  marginTop: Platform.OS === "android" ? getStatusBarHeight() + 30 : 30,
+  marginTop: Platform.OS === "android" ? 10 : getStatusBarHeight() + 10,
 };
 
 // Issue of gap if there is only 2 headerComponent, including middle and
