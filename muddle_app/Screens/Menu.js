@@ -12,10 +12,19 @@ import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import { useIsFocused } from "@react-navigation/native";
 import i18n from "../i18n";
 
 const Menu = (props) => {
+  const [refresh, setRefresh] = React.useState(true);
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    setRefresh(true);
+  }, [isFocused]);
+
   const { navigation, route } = props;
+
   return (
     <View style={styles.container}>
       <Header
