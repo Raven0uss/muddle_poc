@@ -16,6 +16,13 @@ import i18n from "../i18n";
 
 const Settings = (props) => {
   const [theme, setTheme] = React.useState("light");
+  // const [refresh, setRefresh] = React.useState(true);
+
+  // React.useEffect(() => {
+  //   console.log("yay");
+  //   setRefresh(false);
+  // }, [props]);
+
   const { navigation, route } = props;
   return (
     <View style={styles.container}>

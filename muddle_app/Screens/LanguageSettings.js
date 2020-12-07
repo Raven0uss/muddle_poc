@@ -30,6 +30,7 @@ const LanguageSettings = (props) => {
         LeftComponent={
           <TouchableOpacity
             onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate("Home")}
             style={{ marginTop: 3 }}
           >
             <CustomIcon name={"chevron-left"} size={38} />
@@ -57,6 +58,7 @@ const LanguageSettings = (props) => {
             onPress={() => {
               route.params.changeLanguage(key);
               setLocale(key);
+              i18n.activate(key);
             }}
           >
             <Text style={styles.menuText}>{languages[key]}</Text>
