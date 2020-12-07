@@ -104,13 +104,6 @@ const DebatesFiltered = (props) => {
 
   const { navigation, route } = props;
 
-  if (debates.length === 0 && loading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
   return (
     <View style={styles.container}>
       <Header
@@ -197,40 +190,45 @@ const DebatesFiltered = (props) => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-
-      <FlatList
-        data={applyFilter({ debates, debateType })}
-        style={styles.seedContainer}
-        renderItem={(param) => renderItem(param, navigation)}
-        keyExtractor={(item) => item.id}
-        onEndReachedThreshold={0.5}
-        onEndReached={async () => {
-          if (Platform.OS === "web" || noMoreData) return;
-          // return ;
-          nbDebates += frequency;
-          await fetchMore({
-            variables: { first: frequency, skip: nbDebates - frequency },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { debates: moreDebates } = fetchMoreResult;
-              if (isEmpty(moreDebates)) setNoMoreData(true);
-              setDebates((previousState) =>
-                [...previousState, ...moreDebates].reduce((acc, current) => {
-                  const x = acc.find((item) => item.id === current.id);
-                  if (!x) {
-                    return acc.concat([current]);
-                  } else {
-                    return acc;
-                  }
-                }, [])
-              );
-            },
-          });
-        }}
-        ListFooterComponent={() => {
-          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
-          return <ActivityIndicator style={{ marginBottom: 70 }} />;
-        }}
-      />
+      {loading ? (
+        <SafeAreaView style={styles.loadingContainer}>
+          <ActivityIndicator />
+        </SafeAreaView>
+      ) : (
+        <FlatList
+          data={applyFilter({ debates, debateType })}
+          style={styles.seedContainer}
+          renderItem={(param) => renderItem(param, navigation)}
+          keyExtractor={(item) => item.id}
+          onEndReachedThreshold={0.5}
+          onEndReached={async () => {
+            if (Platform.OS === "web" || noMoreData) return;
+            // return ;
+            nbDebates += frequency;
+            await fetchMore({
+              variables: { first: frequency, skip: nbDebates - frequency },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                const { debates: moreDebates } = fetchMoreResult;
+                if (isEmpty(moreDebates)) setNoMoreData(true);
+                setDebates((previousState) =>
+                  [...previousState, ...moreDebates].reduce((acc, current) => {
+                    const x = acc.find((item) => item.id === current.id);
+                    if (!x) {
+                      return acc.concat([current]);
+                    } else {
+                      return acc;
+                    }
+                  }, [])
+                );
+              },
+            });
+          }}
+          ListFooterComponent={() => {
+            if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+            return <ActivityIndicator style={{ marginBottom: 70 }} />;
+          }}
+        />
+      )}
     </View>
   );
 };
@@ -239,6 +237,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F47658",
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#F7F7F7",
   },
   seedContainer: {
     // borderTopLeftRadius: 15,
