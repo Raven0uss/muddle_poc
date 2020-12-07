@@ -1,9 +1,33 @@
 {
+  "searchUser": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        89
+      ]
+    ]
+  },
+  "search": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        130
+      ]
+    ]
+  },
+  "cancel": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        155
+      ]
+    ]
+  },
   "invitePeople": {
     "origin": [
       [
         "Screens/CreateDebate.js",
-        119
+        325
       ]
     ]
   },
@@ -11,7 +35,31 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        127
+        351
+      ]
+    ]
+  },
+  "days": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        411
+      ]
+    ]
+  },
+  "hours": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        497
+      ]
+    ]
+  },
+  "debateLimitationDurationMessage": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        509
       ]
     ]
   },
@@ -19,7 +67,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        144
+        521
       ]
     ]
   },
@@ -27,11 +75,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        168
+        545
       ],
       [
         "Screens/CreateDebate.js",
-        185
+        562
       ]
     ]
   },
@@ -39,7 +87,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        169
+        546
       ]
     ]
   },
@@ -47,7 +95,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        203
+        580
       ]
     ]
   }

@@ -6,9 +6,11 @@ import {
   Image,
   Text,
   TextInput,
+  ActivityIndicator,
   KeyboardAvoidingView,
   Dimensions,
   TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Header from "../Components/Header";
 import { withTheme } from "react-native-paper";
@@ -16,9 +18,196 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import Select from "../Components/Select";
 import DatePicker from "../Components/DatePicker";
+import { useQuery, gql } from "@apollo/client";
 import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
 import moment from "moment";
 import i18n from "../i18n";
+
+const checkOnlyDigits = (str) => {
+  const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  for (let index = 0; index < str.length; index++) {
+    const char = str[index];
+
+    if (digits.indexOf(char) === -1) return false;
+  }
+  return true;
+};
+
+const GET_USERS = gql`
+  query($pseudo: String!) {
+    users(where: { pseudo_contains: $pseudo, role_not: MUDDLE }) {
+      id
+      pseudo
+      certified
+      profilePicture
+      coverPicture
+      crowned
+    }
+  }
+`;
+
+const InvitationDebate = (props) => {
+  const [users, setUsers] = React.useState([]);
+  const [search, setSearch] = React.useState("");
+  const [skipFetch, setSkipFetch] = React.useState(true);
+  const { loading, error } = useQuery(GET_USERS, {
+    variables: {
+      pseudo: search,
+    },
+    onCompleted: (response) => {
+      const { users: queryResult } = response;
+
+      setUsers(queryResult);
+      setSkipFetch(true);
+    },
+    skip: skipFetch,
+  });
+
+  const { setShow, setDuo } = props;
+  return (
+    <View style={styles.container}>
+      <Header hidden />
+      <View
+        style={{
+          backgroundColor: "#FFFFFF",
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: Dimensions.get("screen").width,
+            marginTop: 33,
+            marginBottom: 35,
+          }}
+        >
+          <TextInput
+            placeholder={i18n._("searchUser")}
+            value={search}
+            style={{
+              height: 40,
+              borderRadius: 10,
+              width: "60%",
+              backgroundColor: "#f7f7f7",
+              // marginLeft: "auto",
+              // marginRight: "auto",
+              padding: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              // marginBottom: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+            keyboardType="default"
+            onChangeText={(s) => setSearch(s)}
+          />
+          <View>
+            <TouchableOpacity
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#F47658",
+                marginLeft: 10,
+                padding: 10,
+                borderRadius: 10,
+                marginBottom: 3,
+              }}
+              onPress={() => {
+                Keyboard.dismiss();
+                setSkipFetch(false);
+              }}
+              disabled={search.length < 3}
+            >
+              <Text
+                style={{
+                  fontFamily: "Montserrat_600SemiBold",
+                  fontSize: 12,
+                }}
+              >
+                {i18n._("search")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#000",
+                marginLeft: 10,
+                padding: 10,
+                borderRadius: 10,
+                marginTop: 3,
+              }}
+              onPress={() => {
+                Keyboard.dismiss();
+                setShow(false);
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Montserrat_600SemiBold",
+                  fontSize: 12,
+                  color: "#fff",
+                }}
+              >
+                {i18n._("cancel")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      <ScrollView
+        style={{
+          backgroundColor: "#FFFFFF",
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+      >
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          users.map((u) => (
+            <TouchableOpacity
+              onPress={() => {
+                setDuo(u);
+                setShow(false);
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "#F7F7F7",
+                  padding: 10,
+                  flexDirection: "row",
+                  marginTop: 5,
+                  marginBottom: 10,
+                  alignItems: "center",
+                  borderRadius: 12,
+                }}
+              >
+                <Image
+                  source={{ uri: defaultProfile }}
+                  style={styles.userPicture}
+                />
+
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontFamily: "Montserrat_500Medium",
+                    marginLeft: 10,
+                  }}
+                >
+                  {u.pseudo}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
+};
 
 const CreateDebate = (props) => {
   const [debateType, setDebateType] = React.useState({
@@ -26,14 +215,20 @@ const CreateDebate = (props) => {
     value: "PUBLIC",
   });
   const [duo, setDuo] = React.useState(null);
-  const [duration, setDuration] = React.useState(
-    new Date(moment().add(1, "days"))
-  ); // minutes
+  const [show, setShow] = React.useState(false);
+  // const [duration, setDuration] = React.useState(
+  //   new Date(moment().add(1, "days"))
+  // ); // minutes
+  const [duration, setDuration] = React.useState({
+    hour: "00",
+    day: "0",
+  });
   const [content, setContent] = React.useState("");
   const [optionOne, setOptionOne] = React.useState("");
   const [optionTwo, setOptionTwo] = React.useState("");
 
   const { navigation, route } = props;
+  if (show) return <InvitationDebate setShow={setShow} setDuo={setDuo} />;
   return (
     <View style={styles.container}>
       <Header
@@ -101,13 +296,24 @@ const CreateDebate = (props) => {
                 selected={debateType}
                 placeholder=""
                 onSelect={(type) => setDebateType(type)}
+                renderComponent={
+                  <View style={styles.inputSelect}>
+                    <Text
+                      style={{
+                        fontFamily: "Montserrat_500Medium",
+                      }}
+                    >
+                      {debateType.label}
+                    </Text>
+                  </View>
+                }
               />
             </View>
             {
               debateType.value === "DUO" && (
                 <TouchableWithoutFeedback
                   onPress={() => {
-                    // setShow((bool) => !bool);
+                    setShow(true);
                   }}
                 >
                   <View style={styles.inputInvite}>
@@ -116,21 +322,193 @@ const CreateDebate = (props) => {
                         fontFamily: "Montserrat_500Medium",
                       }}
                     >
-                      {i18n._("invitePeople")}
+                      {duo === null ? i18n._("invitePeople") : duo.pseudo}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>
               ) // Here to launch screen to invite new person for debate
             }
             <View style={{ marginTop: 0 }}>
-              <DatePicker
-                placeholder={i18n._("debateDuration")}
-                date={duration}
-                onDateChange={(newDate) => {
-                  setDuration(newDate);
+              <View
+                style={{
+                  backgroundColor: "#f7f7f7",
+                  padding: 12,
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  width: "100%",
+                  borderRadius: 10,
+                  color: "#000",
+                  marginBottom: 3,
+                  height: 40,
+                  flexDirection: "row",
                 }}
-              />
+              >
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  {i18n._("debateDuration")}
+                </Text>
+                <TextInput
+                  value={duration.day}
+                  selection={{
+                    start: duration.day.length,
+                    end: duration.day.length,
+                  }}
+                  onBlur={() => {
+                    if (duration.day.length === 0)
+                      setDuration({
+                        ...duration,
+                        day: "0",
+                      });
+                  }}
+                  onChangeText={(day) => {
+                    if (duration.day.length !== 0) {
+                      const inputNumber = day[day.length - 1];
+                      if (
+                        [
+                          "0",
+                          "1",
+                          "2",
+                          "3",
+                          "4",
+                          "5",
+                          "6",
+                          "7",
+                          "8",
+                          "9",
+                        ].indexOf(inputNumber) !== -1
+                      )
+                        setDuration({
+                          ...duration,
+                          day: inputNumber,
+                        });
+                    }
+                  }}
+                  style={{
+                    backgroundColor: "#fff",
+                    width: 21,
+                    fontSize: 16,
+                    padding: 5,
+                    fontFamily: "Montserrat_600SemiBold",
+                    height: 30,
+                    marginTop: -7,
+                    textAlign: "center",
+                    marginLeft: "auto",
+                    borderRadius: 5,
+                  }}
+                  // caretHidden
+                  keyboardType="numeric"
+                />
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                    marginLeft: 5,
+                    fontSize: 12,
+                  }}
+                >
+                  {i18n._("days")}
+                </Text>
+                <TextInput
+                  value={duration.hour}
+                  selection={{
+                    start: duration.hour.length,
+                    end: duration.hour.length,
+                  }}
+                  onChangeText={(hour) => {
+                    if (hour.length < 3 && checkOnlyDigits(hour))
+                      setDuration({
+                        ...duration,
+                        hour,
+                      });
+                    if (
+                      hour.length === 3 &&
+                      checkOnlyDigits(hour) &&
+                      hour[0] === "0" &&
+                      hour[1] === "0"
+                    ) {
+                      setDuration({
+                        ...duration,
+                        hour: hour[2],
+                      });
+                    } else if (
+                      hour.length === 3 &&
+                      checkOnlyDigits(hour) &&
+                      hour[0] !== "0" &&
+                      hour[1] === "0"
+                    ) {
+                      setDuration({
+                        ...duration,
+                        hour: hour[0] + hour[2],
+                      });
+                    }
+                  }}
+                  onBlur={() => {
+                    if (duration.hour.length === 0)
+                      setDuration({
+                        ...duration,
+                        hour: "00",
+                      });
+                    if (duration.hour.length === 1)
+                      setDuration({
+                        ...duration,
+                        hour: "0" + duration.hour,
+                      });
+                    if (duration.hour.length === 2) {
+                      if (
+                        parseInt(duration.hour, 10) === 24 &&
+                        parseInt(duration.day, 10) < 9
+                      ) {
+                        setDuration({
+                          day: `${parseInt(duration.day, 10) + 1}`,
+                          hour: "00",
+                        });
+                      } else if (parseInt(duration.hour, 10) > 23) {
+                        setDuration({
+                          ...duration,
+                          hour: "23",
+                        });
+                      }
+                    }
+                  }}
+                  style={{
+                    backgroundColor: "#fff",
+                    width: 35,
+                    fontSize: 16,
+                    padding: 5,
+                    fontFamily: "Montserrat_600SemiBold",
+                    height: 30,
+                    marginTop: -7,
+                    textAlign: "center",
+                    marginLeft: 10,
+                    borderRadius: 5,
+                  }}
+                  keyboardType="numeric"
+                  // caretHidden
+                />
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                    marginLeft: 5,
+                    fontSize: 12,
+                  }}
+                >
+                  {i18n._("hours")}
+                </Text>
+              </View>
             </View>
+            <Text
+              style={{
+                fontFamily: "Montserrat_200ExtraLight",
+                marginLeft: 5,
+                fontSize: 10,
+                marginBottom: 7,
+                marginLeft: 10,
+              }}
+            >
+              {i18n._("debateLimitationDurationMessage")}
+            </Text>
             <View
               style={{
                 height: 1,
@@ -155,7 +533,7 @@ const CreateDebate = (props) => {
               style={{
                 marginTop: 10,
                 borderRadius: 20,
-                backgroundColor: "#fff",
+                backgroundColor: "#f7f7f7",
                 height: 100,
                 justifyContent: "space-around",
                 alignItems: "center",
@@ -217,14 +595,30 @@ const styles = StyleSheet.create({
   seedContainer: {
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#FFFFFF",
     paddingLeft: 15,
     paddingRight: 15,
     height: Dimensions.get("screen").height,
     // flex: 1,
   },
+  userPicture: {
+    width: 40,
+    height: 40,
+    borderRadius: 30,
+  },
+  inputSelect: {
+    backgroundColor: "#f7f7f7",
+    padding: 12,
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: "100%",
+    borderRadius: 10,
+    color: "#000",
+    marginBottom: 10,
+    height: 40,
+  },
   input: {
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7f7",
     paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
@@ -239,7 +633,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_500Medium",
   },
   optionOne: {
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7f7",
     paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
@@ -255,7 +649,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   optionTwo: {
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7f7",
     paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
@@ -280,7 +674,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   inputInvite: {
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7f7",
     padding: 12,
     paddingLeft: 20,
     paddingRight: 20,

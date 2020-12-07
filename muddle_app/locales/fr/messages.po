@@ -51,7 +51,7 @@ msgstr "Répondre"
 msgid "askToCloseThisDebate"
 msgstr "a demandé de clore ce débat"
 
-#: Screens/DebatesFiltered.js:165
+#: Screens/DebatesFiltered.js:158
 msgid "bestDebates"
 msgstr "Les meilleurs débats"
 
@@ -60,16 +60,17 @@ msgid "birthdate"
 msgstr "Date de naissance"
 
 #: Components/Select.js:29
+#: Screens/CreateDebate.js:155
 msgid "cancel"
 msgstr "Annuler"
 
 #: Screens/Cgu.js:54
-#: Screens/Menu.js:63
+#: Screens/Menu.js:72
 msgid "cgu"
 msgstr "Conditions Générales d'Utilisation"
 
-#: Screens/CreateDebate.js:168
-#: Screens/CreateDebate.js:185
+#: Screens/CreateDebate.js:545
+#: Screens/CreateDebate.js:562
 msgid "choice"
 msgstr "Choix numéro"
 
@@ -116,24 +117,32 @@ msgstr "Confirmation mot de passe"
 msgid "connect"
 msgstr "Se connecter"
 
-#: Screens/Menu.js:70
+#: Screens/Menu.js:79
 msgid "contactUs"
 msgstr "Nous contacter"
+
+#: Screens/CreateDebate.js:411
+msgid "days"
+msgstr "Jours"
 
 #: Screens/Report.js:72
 msgid "debate"
 msgstr "débat"
 
-#: Screens/CreateDebate.js:127
+#: Screens/CreateDebate.js:351
 msgid "debateDuration"
 msgstr "Durée du débat"
+
+#: Screens/CreateDebate.js:509
+msgid "debateLimitationDurationMessage"
+msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 
 #: Components/NotificationBox.js:191
 #: Components/NotificationBox.js:410
 msgid "decline"
 msgstr "Refuser"
 
-#: Screens/CreateDebate.js:144
+#: Screens/CreateDebate.js:521
 msgid "describeDebate"
 msgstr "Décrivez votre débat"
 
@@ -149,11 +158,11 @@ msgstr "n'ont pas aimé votre commentaire"
 msgid "didntLikedCommentSingular"
 msgstr "n'a pas aimé votre commentaire"
 
-#: Screens/Menu.js:80
+#: Screens/Menu.js:89
 msgid "disconnect"
 msgstr "Se déconnecter"
 
-#: Screens/DebatesFiltered.js:180
+#: Screens/DebatesFiltered.js:173
 msgid "duoDebates"
 msgstr "Les débats en duo"
 
@@ -199,7 +208,7 @@ msgstr "Non défini"
 msgid "gender_woman"
 msgstr "Femme"
 
-#: Screens/DebatesFiltered.js:195
+#: Screens/DebatesFiltered.js:188
 msgid "generatedDebates"
 msgstr "Les débats générés"
 
@@ -215,11 +224,15 @@ msgstr "S'inscrire"
 msgid "hasVote"
 msgstr "a voté"
 
+#: Screens/CreateDebate.js:497
+msgid "hours"
+msgstr "Heures"
+
 #: Screens/SignUp.js:168
 msgid "iAcceptThe"
 msgstr "J'accepte les"
 
-#: Screens/CreateDebate.js:119
+#: Screens/CreateDebate.js:325
 msgid "invitePeople"
 msgstr "Inviter une personne"
 
@@ -228,7 +241,7 @@ msgid "inviteYouDuoDebate"
 msgstr "vous invite à un débat en duo"
 
 #: Screens/LegaleMentions.js:54
-#: Screens/Menu.js:56
+#: Screens/Menu.js:65
 msgid "legaleMention"
 msgstr "Mentions Légales & Confidentialité"
 
@@ -279,11 +292,11 @@ msgstr "autre personne"
 msgid "password"
 msgstr "Mot de passe"
 
-#: Screens/CreateDebate.js:203
+#: Screens/CreateDebate.js:580
 msgid "publish"
 msgstr "Publier"
 
-#: Screens/Report.js:147
+#: Screens/Report.js:142
 msgid "report"
 msgstr "Signaler"
 
@@ -291,34 +304,35 @@ msgstr "Signaler"
 msgid "reportA"
 msgstr "Signaler un"
 
-#: Screens/Report.js:114
+#: Screens/Report.js:109
 msgid "reportGiveMoreReason"
 msgstr "Donner plus de détails afin de traiter votre demande.."
 
-#: Screens/Report.js:79
+#: Screens/Report.js:78
 msgid "reportInjury"
 msgstr "Propos injurieux"
 
-#: Screens/Report.js:99
+#: Screens/Report.js:94
 msgid "reportPorn"
 msgstr "Contenu pornographique"
 
-#: Screens/Report.js:84
+#: Screens/Report.js:82
 msgid "reportRacism"
 msgstr "Propos racistes"
 
-#: Screens/Report.js:104
+#: Screens/Report.js:99
 msgid "reportSelectReason"
 msgstr "Sélectionner un motif"
 
-#: Screens/Report.js:89
+#: Screens/Report.js:86
 msgid "reportSexism"
 msgstr "Propos sexistes"
 
-#: Screens/Report.js:94
+#: Screens/Report.js:90
 msgid "reportViolence"
 msgstr "Contenu violent"
 
+#: Screens/CreateDebate.js:130
 #: Screens/InvitationDebate.js:133
 #: Screens/Search.js:133
 msgid "search"
@@ -328,6 +342,7 @@ msgstr "Rechercher"
 msgid "searchContact"
 msgstr "Rechercher un contact"
 
+#: Screens/CreateDebate.js:89
 #: Screens/InvitationDebate.js:94
 #: Screens/Search.js:94
 msgid "searchUser"
@@ -337,15 +352,15 @@ msgstr "Rechercher un utilisateur"
 msgid "seeThe"
 msgstr "Voir"
 
-#: Screens/Settings.js:63
+#: Screens/Settings.js:71
 msgid "selectDarkTheme"
 msgstr "Passer en mode sombre"
 
-#: Screens/Settings.js:64
+#: Screens/Settings.js:72
 msgid "selectLightTheme"
 msgstr "Passer en mode clair"
 
-#: Screens/Menu.js:49
+#: Screens/Menu.js:58
 msgid "settings"
 msgstr "Paramètres"
 
@@ -361,7 +376,7 @@ msgstr "Un mail vous a été envoyé afin de valider votre inscription."
 msgid "successMessage_MailSendForgotPassword"
 msgstr "Un mail vous a été envoyé afin de recupérer votre compte."
 
-#: Screens/Settings.js:50
+#: Screens/Settings.js:58
 msgid "switchLanguage"
 msgstr "Changer la langue"
 
@@ -374,7 +389,7 @@ msgstr "ceci"
 msgid "voteOnYourDebate"
 msgstr "a voté sur votre débat"
 
-#: Screens/Settings.js:72
+#: Screens/Settings.js:80
 msgid "votePrivacy"
 msgstr "Confidentialité des votes"
 
@@ -403,6 +418,6 @@ msgstr "Votre commentaire"
 msgid "yourMessage"
 msgstr "Votre message"
 
-#: Screens/CreateDebate.js:169
+#: Screens/CreateDebate.js:546
 msgid "yourOpinion"
 msgstr "Votre opinion"

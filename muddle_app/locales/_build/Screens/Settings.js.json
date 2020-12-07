@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/Settings.js",
-        50
+        58
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/Settings.js",
-        63
+        71
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/Settings.js",
-        64
+        72
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/Settings.js",
-        72
+        80
       ]
     ]
   }
