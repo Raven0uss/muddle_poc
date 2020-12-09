@@ -25,7 +25,7 @@ import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import InteractionBox from "../Components/InteractionBox";
 import { muddle } from "../CustomProperties/IconsBase64";
-import UserContext from "../CustomProperties/UserContext";
+// import UserContext from "../CustomProperties/ThemeContext";
 import { useQuery, gql } from "@apollo/client";
 import { get, isEmpty } from "lodash";
 import i18n from "../i18n";

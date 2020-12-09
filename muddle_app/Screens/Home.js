@@ -26,6 +26,7 @@ import AssistiveMenu from "../Components/AssistiveMenu";
 import { set } from "react-native-reanimated";
 import { flatten, isEmpty, last } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
+import ThemeContext from "../CustomProperties/ThemeContext";
 
 const user = {
   profilePicture: defaultProfile,
@@ -103,6 +104,9 @@ const Home = (props) => {
     },
   });
   const scrollViewRef = React.useRef(null);
+  const theme = React.useContext(ThemeContext);
+
+  console.log(theme);
 
   const { navigation, route } = props;
 

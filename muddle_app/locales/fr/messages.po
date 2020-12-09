@@ -72,7 +72,7 @@ msgstr "Conditions Générales d'Utilisation"
 #: Screens/CreateDebate.js:546
 #: Screens/CreateDebate.js:563
 msgid "choice"
-msgstr "Choix numéro"
+msgstr "Choix"
 
 #: Components/Select.js:120
 msgid "close"

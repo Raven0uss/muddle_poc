@@ -16,6 +16,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
+import ThemeContext from "../CustomProperties/ThemeContext";
 import i18n from "../i18n";
 
 const GET_USERS = gql`
@@ -32,6 +33,7 @@ const GET_USERS = gql`
 `;
 
 const Search = (props) => {
+  const themeCtx = React.useContext(ThemeContext);
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
@@ -49,6 +51,9 @@ const Search = (props) => {
   });
 
   const { navigation, route } = props;
+  const { theme } = themeCtx;
+  console.log(theme);
+  console.log("OHHHHHHhh")
   return (
     <View style={styles.container}>
       <Header
@@ -77,7 +82,7 @@ const Search = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: theme === "light" ? "#FFFFFF" : "#000000",
         }}
       >
         <View

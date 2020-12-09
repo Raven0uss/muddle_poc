@@ -13,10 +13,12 @@ import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useIsFocused } from "@react-navigation/native";
+import ThemeContext from "../CustomProperties/ThemeContext";
 import i18n from "../i18n";
 
 const Settings = (props) => {
-  const [theme, setTheme] = React.useState("light");
+  // const [theme, setTheme] = React.useState("light");
+  const themeCtx = React.useContext(ThemeContext);
   const [refresh, setRefresh] = React.useState(true);
 
   const isFocused = useIsFocused();
@@ -25,6 +27,7 @@ const Settings = (props) => {
   }, [isFocused]);
 
   const { navigation, route } = props;
+  const { theme, toggleTheme } = themeCtx;
   return (
     <View style={styles.container}>
       <Header
@@ -59,11 +62,7 @@ const Settings = (props) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuElement}
-          onPress={() =>
-            setTheme((currentTheme) =>
-              currentTheme === "light" ? "dark" : "light"
-            )
-          }
+          onPress={() => toggleTheme()}
         >
           <CustomIcon name="flare" size={28} color="#F47658" />
           <Text style={styles.menuText}>
