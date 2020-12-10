@@ -16,10 +16,13 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const { width, height } = Dimensions.get("window");
 
 const Select = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [visible, setVisible] = React.useState(false);
   const { list, selected, placeholder, onSelect, renderComponent } = props;
 
@@ -49,10 +52,16 @@ const Select = (props) => {
             if (Platform.OS === "ios") onPress();
           }}
         >
-          <View style={styles.input}>
+          <View
+            style={{
+              ...styles.input,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+            }}
+          >
             <Text
               style={{
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {selected === null ? placeholder : selected.label}
@@ -81,7 +90,7 @@ const Select = (props) => {
           <View style={styles.centeredView}>
             <View
               style={{
-                backgroundColor: "#fff",
+                backgroundColor: themeSchema[theme].backgroundColor2,
                 padding: 10,
                 elevation: 5,
                 borderRadius: 5,
@@ -101,6 +110,7 @@ const Select = (props) => {
                         padding: 10,
                         fontSize: 18,
                         fontFamily: "Montserrat_500Medium",
+                        color: themeSchema[theme].colorText,
                       }}
                     >
                       {element.label}
@@ -115,7 +125,10 @@ const Select = (props) => {
                 style={styles.validationButton}
               >
                 <Text
-                  style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
+                  style={{
+                    color: themeSchema[theme].colorText,
+                    fontFamily: "Montserrat_700Bold",
+                  }}
                 >
                   {i18n._("close")}
                 </Text>

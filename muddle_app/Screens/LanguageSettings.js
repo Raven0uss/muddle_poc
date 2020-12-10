@@ -8,12 +8,13 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import { lang } from "moment";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const languages = {
   fr: "Francais",
@@ -21,6 +22,7 @@ const languages = {
 };
 
 const LanguageSettings = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [locale, setLocale] = React.useState(i18n.language);
 
   const { navigation, route } = props;
@@ -48,11 +50,24 @@ const LanguageSettings = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         {Object.keys(languages).map((key) => (
           <TouchableOpacity
             style={
-              key === locale ? styles.menuElementSelected : styles.menuElement
+              key === locale
+                ? {
+                    ...styles.menuElementSelected,
+                    backgroundColor: themeSchema[theme].backgroundColor1,
+                  }
+                : {
+                    ...styles.menuElement,
+                    backgroundColor: themeSchema[theme].backgroundColor1,
+                  }
             }
             onPress={() => {
               route.params.changeLanguage(key);
@@ -60,7 +75,14 @@ const LanguageSettings = (props) => {
               i18n.activate(key);
             }}
           >
-            <Text style={styles.menuText}>{languages[key]}</Text>
+            <Text
+              style={{
+                ...styles.menuText,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {languages[key]}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -108,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(LanguageSettings);
+export default LanguageSettings;

@@ -10,13 +10,14 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import NotificationBox from "../Components/NotificationBox";
 import { isEmpty } from "lodash";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_NOTIFICATIONS = gql`
   query($first: Int!, $skip: Int) {
@@ -44,11 +45,12 @@ const GET_NOTIFICATIONS = gql`
 const frequency = 10;
 let nbNotifications = frequency;
 
-const renderItem = ({ item }, navigation) => {
-  return <NotificationBox notification={item} />;
+const renderItem = ({ item }, navigation, theme) => {
+  return <NotificationBox theme={theme} notification={item} />;
 };
 
 const Notifications = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [notifications, setNotifications] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -92,7 +94,7 @@ const Notifications = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           height: 30,
         }}
       >
@@ -119,8 +121,11 @@ const Notifications = (props) => {
       </View>
       <FlatList
         data={notifications}
-        style={styles.seedContainer}
-        renderItem={(param) => renderItem(param, navigation)}
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+        renderItem={(param) => renderItem(param, navigation, theme)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
@@ -169,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Notifications);
+export default Notifications;

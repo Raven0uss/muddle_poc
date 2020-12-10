@@ -26,4 +26,4 @@ const TestComponent = (props) => {
   );
 };
 
-export default withTheme(TestComponent);
+export default TestComponent;

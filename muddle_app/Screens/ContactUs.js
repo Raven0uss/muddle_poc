@@ -9,13 +9,15 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const ContactUs = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const { navigation, route } = props;
   return (
     <View style={styles.container}>
@@ -41,10 +43,22 @@ const ContactUs = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+        }}
+      >
         <View style={{ justifyContent: "center", marginTop: 30 }}>
           <Text
-            style={{ textAlign: "center", fontFamily: "Montserrat_500Medium" }}
+            style={{
+              color: themeSchema[theme].colorText,
+              textAlign: "center",
+              fontFamily: "Montserrat_500Medium",
+            }}
           >
             {i18n._("forAllQuestionsContact")}
           </Text>
@@ -55,6 +69,7 @@ const ContactUs = (props) => {
                 marginTop: 20,
                 fontSize: 16,
                 fontFamily: "Montserrat_700Bold",
+                color: themeSchema[theme].colorText,
               }}
             >
               contact@muddles.fr
@@ -71,13 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F47658",
   },
-  seedContainer: {
-    backgroundColor: "#F7F7F7",
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
 });
 
-export default withTheme(ContactUs);
+export default ContactUs;

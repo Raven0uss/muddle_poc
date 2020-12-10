@@ -12,7 +12,6 @@ import {
   FlatList,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
@@ -21,6 +20,8 @@ import CreateDebateButton from "../Components/CreateDebateButton";
 import TrophyBox from "../Components/TrophyBox";
 import { get, isEmpty } from "lodash";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_TROPHIES = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
@@ -145,6 +146,7 @@ const renderItem = ({ item }, navigation) => {
 };
 
 const Trophies = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [trophies, setTrophies] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -190,7 +192,7 @@ const Trophies = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           // height: 15,
         }}
       >
@@ -209,7 +211,13 @@ const Trophies = (props) => {
               width: Dimensions.get("screen").width / 2,
             }}
           >
-            <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {i18n._("duoDebatesWon")}
             </Text>
             <Text
@@ -228,7 +236,13 @@ const Trophies = (props) => {
               width: Dimensions.get("screen").width / 2,
             }}
           >
-            <Text style={{ fontSize: 12, fontFamily: "Montserrat_500Medium" }}>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {i18n._("commentsWon")}
             </Text>
             <Text
@@ -245,7 +259,10 @@ const Trophies = (props) => {
       </View>
       <FlatList
         data={trophies}
-        style={styles.seedContainer}
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
         renderItem={(param) => renderItem(param, navigation)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
@@ -298,4 +315,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Trophies);
+export default Trophies;

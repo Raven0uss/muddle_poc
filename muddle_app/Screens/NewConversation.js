@@ -8,9 +8,9 @@ import {
   Dimensions,
   Text,
   Keyboard,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
-import { ActivityIndicator, withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
@@ -18,6 +18,8 @@ import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import getUnique from "../Library/getUnique";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($pseudo: String!) {
@@ -82,6 +84,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
 `;
 
 const NewConversation = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const { loading, error } = useQuery(GET_FOLLOWERS_CONVERSATIONS, {
@@ -134,7 +137,7 @@ const NewConversation = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
         }}
       >
         <View
@@ -154,7 +157,8 @@ const NewConversation = (props) => {
               height: 40,
               borderRadius: 10,
               width: Dimensions.get("screen").width / 1.2,
-              backgroundColor: "#f7f7f7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              color: themeSchema[theme].colorText,
               // marginLeft: "auto",
               // marginRight: "auto",
               padding: 10,
@@ -165,10 +169,16 @@ const NewConversation = (props) => {
             }}
             keyboardType="default"
             onChangeText={(s) => setSearch(s)}
+            placeholderTextColor={themeSchema[theme].colorText}
           />
         </View>
       </View>
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         {loading ? (
           <ActivityIndicator />
         ) : (
@@ -191,7 +201,7 @@ const NewConversation = (props) => {
               >
                 <View
                   style={{
-                    backgroundColor: "#F7F7F7",
+                    backgroundColor: themeSchema[theme].backgroundColor1,
                     padding: 10,
                     flexDirection: "row",
                     marginTop: 5,
@@ -209,6 +219,7 @@ const NewConversation = (props) => {
                       fontSize: 14,
                       fontFamily: "Montserrat_500Medium",
                       marginLeft: 10,
+                      color: themeSchema[theme].colorText,
                     }}
                   >
                     {u.pseudo}
@@ -239,4 +250,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(NewConversation);
+export default NewConversation;

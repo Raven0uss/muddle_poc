@@ -10,9 +10,9 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
-import { ActivityIndicator, withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
@@ -20,6 +20,8 @@ import CommentBox from "../Components/CommentBox";
 import Select from "../Components/Select";
 import { useQuery, gql } from "@apollo/client";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!) {
@@ -57,18 +59,19 @@ const Comments = (props) => {
     },
   });
 
-  const { comment, navigation } = props;
+  const { comment, navigation, theme } = props;
   if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
     <>
       {comments.map((c) => (
-        <CommentBox comment={c} navigation={navigation} />
+        <CommentBox theme={theme} comment={c} navigation={navigation} />
       ))}
     </>
   );
 };
 
 const IsolateComment = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [newComment, setNewComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -96,12 +99,14 @@ const IsolateComment = (props) => {
   //   const { comments } = comment;
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor2 }}
+    >
       <Header hidden />
       <View
         style={{
           height: 50,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           width: "100%",
           zIndex: 10,
           shadowOffset: { width: 1, height: 1 },
@@ -115,7 +120,11 @@ const IsolateComment = (props) => {
           onPress={() => navigation.goBack()}
           style={{ marginTop: 3 }}
         >
-          <CustomIcon name={"chevron-left"} size={38} />
+          <CustomIcon
+            name={"chevron-left"}
+            size={38}
+            color={themeSchema[theme].colorText}
+          />
         </TouchableOpacity>
         <View
           style={{
@@ -140,13 +149,19 @@ const IsolateComment = (props) => {
                   content: comment,
                 });
             }}
-            renderComponent={<CustomIcon name="more-vert" size={28} />}
+            renderComponent={
+              <CustomIcon
+                name="more-vert"
+                size={28}
+                color={themeSchema[theme].colorText}
+              />
+            }
           />
         </View>
       </View>
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           padding: 20,
         }}
       >
@@ -170,13 +185,18 @@ const IsolateComment = (props) => {
               });
             }}
           >
-            <Text style={styles.pseudo}>{comment.from.pseudo}</Text>
+            <Text
+              style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
+            >
+              {comment.from.pseudo}
+            </Text>
           </TouchableOpacity>
         </View>
         <Text
           style={{
             fontSize: 12,
             fontFamily: "Montserrat_500Medium",
+            color: themeSchema[theme].colorText,
           }}
         >
           {comment.content}
@@ -184,7 +204,7 @@ const IsolateComment = (props) => {
         <View
           style={{
             height: 1,
-            backgroundColor: "#DBDBDB",
+            backgroundColor: themeSchema[theme].hrLineColor,
             width: "100%",
             alignSelf: "center",
             marginTop: 10,
@@ -202,12 +222,21 @@ const IsolateComment = (props) => {
             <CustomIcon color="#F47658" name="sentiment-satisfied" size={20} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {}} style={{ marginLeft: 22 }}>
-            <CustomIcon color="#000" name="sentiment-dissatisfied" size={20} />
+            <CustomIcon
+              color={themeSchema[theme].colorText}
+              name="sentiment-dissatisfied"
+              size={20}
+            />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView style={styles.seedContainer}>
-        <Comments navigation={navigation} comment={comment} />
+      <ScrollView
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+      >
+        <Comments theme={theme} navigation={navigation} comment={comment} />
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
@@ -225,7 +254,7 @@ const IsolateComment = (props) => {
             minHeight: 60,
             maxHeight: 200,
             width: "100%",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: themeSchema[theme].backgroundColor2,
             justifyContent: "center",
             alignItems: "center",
             paddingBottom: 10,
@@ -242,7 +271,8 @@ const IsolateComment = (props) => {
               minHeight: 40,
               maxHeight: 60,
               borderRadius: 10,
-              backgroundColor: "#f7f7f7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              color: themeSchema[theme].colorText,
               marginLeft: "auto",
               // marginRight: "auto",
               paddingTop: 10,
@@ -257,6 +287,7 @@ const IsolateComment = (props) => {
             }}
             keyboardType="default"
             onChangeText={(nc) => setNewComment(nc)}
+            placeholderTextColor={themeSchema[theme].colorText}
           />
           <View
             style={{
@@ -269,11 +300,19 @@ const IsolateComment = (props) => {
           >
             {keyboardIsOpen && (
               <TouchableOpacity onPress={() => Keyboard.dismiss()}>
-                <CustomIcon name="keyboard-hide" size={26} />
+                <CustomIcon
+                  name="keyboard-hide"
+                  size={26}
+                  color={themeSchema[theme].colorText}
+                />
               </TouchableOpacity>
             )}
             <TouchableOpacity onPress={() => Keyboard.dismiss()}>
-              <CustomIcon name="send" size={26} />
+              <CustomIcon
+                name="send"
+                size={26}
+                color={themeSchema[theme].colorText}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -293,6 +332,12 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     // marginTop: 10,
+  },
+  pseudo: {
+    marginLeft: 9,
+    fontSize: 14,
+    fontFamily: "Montserrat_500Medium",
+    // paddingTop: 6,
   },
   userPicture: {
     width: 40,
@@ -325,4 +370,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(IsolateComment);
+export default IsolateComment;

@@ -13,13 +13,14 @@ import {
   TextInput,
   Platform,
 } from "react-native";
-import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
-const renderItem = ({ item }, navigation, me) => {
+const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
   if (item.from.id === me.id)
     return (
@@ -39,7 +40,7 @@ const renderItem = ({ item }, navigation, me) => {
       >
         <Text
           style={{
-            color: "#fff",
+            color: themeSchema[theme].colorText3,
             fontSize: 12,
             fontFamily: "Montserrat_500Medium",
           }}
@@ -48,7 +49,7 @@ const renderItem = ({ item }, navigation, me) => {
         </Text>
         <Text
           style={{
-            color: "#fff",
+            color: themeSchema[theme].colorText2,
             fontSize: 10,
             alignSelf: "flex-end",
             marginTop: 6,
@@ -62,8 +63,7 @@ const renderItem = ({ item }, navigation, me) => {
   return (
     <View
       style={{
-        backgroundColor: "#F7F7F7",
-        color: "#000",
+        backgroundColor: themeSchema[theme].backgroundColor1,
         padding: paddingMessages,
         paddingLeft: paddingMessages * 2,
         paddingRight: paddingMessages * 2,
@@ -77,7 +77,7 @@ const renderItem = ({ item }, navigation, me) => {
     >
       <Text
         style={{
-          color: "#000",
+          color: themeSchema[theme].colorText,
           fontSize: 12,
           fontFamily: "Montserrat_500Medium",
         }}
@@ -100,6 +100,7 @@ const renderItem = ({ item }, navigation, me) => {
 };
 
 const Chat = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [newMessage, setNewMessage] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -158,8 +159,8 @@ const Chat = (props) => {
       {/* Header of flatlist with profile view */}
       <View
         style={{
-          backgroundColor: "#fff",
-          shadowColor: "#000",
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          shadowColor: themeSchema[theme].colorText,
           shadowOffset: {
             width: 0,
             height: 2,
@@ -168,6 +169,8 @@ const Chat = (props) => {
           shadowRadius: 2.62,
           elevation: 4,
           alignItems: "center",
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
         }}
       >
         <TouchableOpacity
@@ -179,7 +182,7 @@ const Chat = (props) => {
         >
           <View
             style={{
-              backgroundColor: "#F7F7F7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               height: 44,
               width: 185,
               marginTop: 33,
@@ -205,6 +208,7 @@ const Chat = (props) => {
                 alignSelf: "center",
                 fontSize: 12,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {partner.pseudo}
@@ -215,8 +219,12 @@ const Chat = (props) => {
 
       <FlatList
         data={conversation.messages}
-        style={styles.seedContainer}
-        renderItem={(param) => renderItem(param, navigation, me)}
+        style={{
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+        renderItem={(param) => renderItem(param, navigation, me, theme)}
         keyExtractor={(item) => item.id}
         inverted={true}
       />
@@ -236,7 +244,7 @@ const Chat = (props) => {
             minHeight: 60,
             maxHeight: 200,
             width: "100%",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: themeSchema[theme].backgroundColor2,
             justifyContent: "center",
             alignItems: "center",
             paddingBottom: 10,
@@ -253,13 +261,14 @@ const Chat = (props) => {
               minHeight: 40,
               maxHeight: 60,
               borderRadius: 10,
-              backgroundColor: "#f7f7f7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               marginLeft: "auto",
               // marginRight: "auto",
               paddingTop: 10,
               paddingBottom: 10,
               paddingLeft: 20,
               paddingRight: 20,
+              color: themeSchema[theme].colorText,
               // alignItems: "center",
               // marginBottom: 14,
               marginTop: 10,
@@ -268,6 +277,8 @@ const Chat = (props) => {
             }}
             keyboardType="default"
             onChangeText={(nm) => setNewMessage(nm)}
+            placeholderTextColor={themeSchema[theme].colorText}
+            keyboardAppearance={theme}
           />
           <View
             style={{
@@ -280,11 +291,19 @@ const Chat = (props) => {
           >
             {keyboardIsOpen && (
               <TouchableOpacity onPress={() => Keyboard.dismiss()}>
-                <CustomIcon name="keyboard-hide" size={26} />
+                <CustomIcon
+                  name="keyboard-hide"
+                  size={26}
+                  color={themeSchema[theme].colorText}
+                />
               </TouchableOpacity>
             )}
             <TouchableOpacity onPress={() => Keyboard.dismiss()}>
-              <CustomIcon name="send" size={26} />
+              <CustomIcon
+                name="send"
+                size={26}
+                color={themeSchema[theme].colorText}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -298,14 +317,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F47658",
   },
-  seedContainer: {
-    // borderBottomLeftRadius: 15,
-    // borderBottomRightRadius: 15,
-    backgroundColor: "#FFF",
-    paddingLeft: 15,
-    paddingRight: 15,
-    // paddingTop: 20,
-  },
 });
 
-export default withTheme(Chat);
+export default Chat;

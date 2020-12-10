@@ -18,10 +18,13 @@ import moment from "moment";
 import "moment/locale/en-gb";
 import "moment/locale/fr";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const { width, height } = Dimensions.get("window");
 
 const DatePicker = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [show, setShow] = React.useState(false);
   const { date, onDateChange, placeholder } = props;
   const locale = i18n.language;
@@ -41,10 +44,16 @@ const DatePicker = (props) => {
           setShow((bool) => !bool);
         }}
       >
-        <View style={styles.input}>
+        <View
+          style={{
+            ...styles.input,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
           <Text
             style={{
               fontFamily: "Montserrat_500Medium",
+              color: themeSchema[theme].colorText,
             }}
           >
             {date === null ? placeholder : moment(date).format("DD MMMM YYYY")}
@@ -63,11 +72,12 @@ const DatePicker = (props) => {
           <View style={styles.centeredView}>
             <View
               style={{
-                backgroundColor: "#fff",
+                backgroundColor: themeSchema[theme].backgroundColor2,
                 padding: 10,
                 elevation: 5,
                 borderRadius: 5,
                 margin: 10,
+                // alignItems: "center",
               }}
             >
               <DateTimePicker
@@ -77,15 +87,26 @@ const DatePicker = (props) => {
                 locale={locale}
                 display="default"
                 onChange={onChange}
+                // textColor={themeSchema[theme].colorText}
+                style={{
+                  backgroundColor: themeSchema[theme].backgroundColor2,
+                  // alignSelf: "center",
+                }}
               />
               <TouchableOpacity
                 onPress={() => {
                   setShow(false);
                 }}
-                style={styles.validationButton}
+                style={{
+                  ...styles.validationButton,
+                  backgroundColor: themeSchema[theme].colorText,
+                }}
               >
                 <Text
-                  style={{ color: "#FFF", fontFamily: "Montserrat_700Bold" }}
+                  style={{
+                    color: themeSchema[theme].colorText3,
+                    fontFamily: "Montserrat_700Bold",
+                  }}
                 >
                   {i18n._("confirm")}
                 </Text>

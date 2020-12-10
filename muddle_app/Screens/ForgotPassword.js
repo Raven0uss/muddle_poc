@@ -11,20 +11,22 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 function ForgotPasswordComponent(props) {
+  const { theme } = React.useContext(ThemeContext);
   const [email, setEmail] = React.useState("");
 
   const { navigation, route } = props;
-  const { colors } = props.theme;
+  // const { colors } = props.theme;
 
   const containerStyle = StyleSheet.flatten([
     styles.container,
-    { backgroundColor: colors.secondary },
+    { backgroundColor: "#F47658" },
   ]);
 
   return (
@@ -48,9 +50,12 @@ function ForgotPasswordComponent(props) {
             placeholder={i18n._("mailAddress")}
             value={email}
             onChangeText={(e) => setEmail(e)}
-            style={styles.input}
+            style={{
+              ...styles.input,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+            }}
             keyboardType="default"
-            placeholderTextColor="#222"
+            placeholderTextColor={themeSchema[theme].colorText}
           />
           <TouchableOpacity
             onPress={() => {
@@ -65,7 +70,7 @@ function ForgotPasswordComponent(props) {
           >
             <Text
               style={{
-                color: colors.secondary,
+                color: "#F47658",
                 fontFamily: "Montserrat_700Bold",
               }}
             >
@@ -151,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ForgotPasswordComponent);
+export default ForgotPasswordComponent;

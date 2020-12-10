@@ -11,7 +11,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
@@ -19,6 +18,8 @@ import { useQuery, gql } from "@apollo/client";
 import DebateBox from "../Components/DebateBox";
 import { isEmpty } from "lodash";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int, $filter: DebateType) {
@@ -70,8 +71,8 @@ const GET_DEBATES = gql`
 const frequency = 20;
 let nbDebates = frequency;
 
-const renderItem = ({ item }, navigation) => {
-  return <DebateBox debate={item} navigation={navigation} />;
+const renderItem = ({ item }, navigation, theme) => {
+  return <DebateBox theme={theme} debate={item} navigation={navigation} />;
 };
 
 const applyFilter = ({ debates, debateType }) => {
@@ -85,6 +86,7 @@ const applyFilter = ({ debates, debateType }) => {
 };
 
 const DebatesFiltered = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [debates, setDebates] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [debateType, setDebateType] = React.useState("DUO");
@@ -130,7 +132,7 @@ const DebatesFiltered = (props) => {
       />
       <View
         style={{
-          backgroundColor: "#F7F7F7",
+          backgroundColor: themeSchema[theme].backgroundColor1,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           paddingTop: 33,
@@ -147,14 +149,23 @@ const DebatesFiltered = (props) => {
             style={
               debateType === "BEST_DEBATES"
                 ? styles.buttonActivate
-                : styles.buttonDefaultState
+                : {
+                    ...styles.buttonDefaultState,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
             }
             onPress={() => {
               setDebateType("BEST_DEBATES");
               setNoMoreData(false);
             }}
           >
-            <Text style={styles.buttonTextDefaultState}>
+            <Text
+              style={{
+                ...styles.buttonTextDefaultState,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {i18n._("bestDebates")}
             </Text>
           </TouchableOpacity>
@@ -162,14 +173,23 @@ const DebatesFiltered = (props) => {
             style={
               debateType === "DUO"
                 ? styles.buttonActivate
-                : styles.buttonDefaultState
+                : {
+                    ...styles.buttonDefaultState,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
             }
             onPress={() => {
               setDebateType("DUO");
               setNoMoreData(false);
             }}
           >
-            <Text style={styles.buttonTextDefaultState}>
+            <Text
+              style={{
+                ...styles.buttonTextDefaultState,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {i18n._("duoDebates")}
             </Text>
           </TouchableOpacity>
@@ -177,28 +197,45 @@ const DebatesFiltered = (props) => {
             style={
               debateType === "MUDDLE"
                 ? styles.buttonActivate
-                : styles.buttonDefaultState
+                : {
+                    ...styles.buttonDefaultState,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
             }
             onPress={() => {
               setDebateType("MUDDLE");
               setNoMoreData(false);
             }}
           >
-            <Text style={styles.buttonTextDefaultState}>
+            <Text
+              style={{
+                ...styles.buttonTextDefaultState,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {i18n._("generatedDebates")}
             </Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
       {loading ? (
-        <SafeAreaView style={styles.loadingContainer}>
+        <SafeAreaView
+          style={{
+            ...styles.loadingContainer,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+          }}
+        >
           <ActivityIndicator />
         </SafeAreaView>
       ) : (
         <FlatList
           data={applyFilter({ debates, debateType })}
-          style={styles.seedContainer}
-          renderItem={(param) => renderItem(param, navigation)}
+          style={{
+            ...styles.seedContainer,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+          }}
+          renderItem={(param) => renderItem(param, navigation, theme)}
           keyExtractor={(item) => item.id}
           onEndReachedThreshold={0.5}
           onEndReached={async () => {
@@ -280,4 +317,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DebatesFiltered);
+export default DebatesFiltered;

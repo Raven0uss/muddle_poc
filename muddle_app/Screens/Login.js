@@ -12,15 +12,17 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { withTheme } from "react-native-paper";
 import Icon from "../Components/Icon";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { Snackbar } from "react-native-paper";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 function LoginComponent(props) {
+  const { theme } = React.useContext(ThemeContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visibility, setVisibility] = React.useState(false);
@@ -32,7 +34,7 @@ function LoginComponent(props) {
   });
 
   const { navigation, route } = props;
-  const { colors } = props.theme;
+  // const { colors } = props.theme;
 
   React.useEffect(() => {
     const params = props.route.params;
@@ -46,7 +48,7 @@ function LoginComponent(props) {
 
   const containerStyle = StyleSheet.flatten([
     styles.container,
-    { backgroundColor: colors.secondary },
+    { backgroundColor: "#F47658" },
   ]);
 
   return (
@@ -70,18 +72,31 @@ function LoginComponent(props) {
             placeholder={i18n._("mailAddress")}
             value={email}
             onChangeText={(e) => setEmail(e)}
-            style={styles.input}
+            style={{
+              ...styles.input,
+              color: themeSchema[theme].colorText,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+            }}
             keyboardType="default"
-            placeholderTextColor="#222"
+            placeholderTextColor={themeSchema[theme].colorText}
           />
-          <View style={styles.passwordBloc}>
+          <View
+            style={{
+              ...styles.passwordBloc,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+            }}
+          >
             <TextInput
               placeholder={i18n._("password")}
               value={password}
               onChangeText={(p) => setPassword(p)}
-              style={styles.passwordInput}
+              style={{
+                ...styles.passwordInput,
+                color: themeSchema[theme].colorText,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
               keyboardType="default"
-              placeholderTextColor="#222"
+              placeholderTextColor={themeSchema[theme].colorText}
               secureTextEntry={!visibility}
             />
             <View style={styles.passwordIcon}>
@@ -89,7 +104,7 @@ function LoginComponent(props) {
                 <Icon
                   name={`visibility${visibility ? "" : "-off"}`}
                   size={32}
-                  color={colors.secondary}
+                  color={"#F47658"}
                   style={styles.passwordIcon}
                 />
               </TouchableOpacity>
@@ -128,7 +143,7 @@ function LoginComponent(props) {
           >
             <Text
               style={{
-                color: colors.secondary,
+                color: "#F47658",
                 fontFamily: "Montserrat_700Bold",
               }}
             >
@@ -258,4 +273,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(LoginComponent);
+export default LoginComponent;

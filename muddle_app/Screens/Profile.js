@@ -11,7 +11,6 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
-import { withTheme } from "react-native-paper";
 import Header from "../Components/Header";
 import {
   defaultCover,
@@ -29,6 +28,8 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { get, isEmpty } from "lodash";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_USER = gql`
   query($userId: String!) {
@@ -188,13 +189,19 @@ const GET_INTERACTIONS = gql`
 const frequency = 10;
 let nbInteractions = frequency;
 
-const renderItem = ({ item }, navigation, user) => {
+const renderItem = ({ item }, navigation, user, theme) => {
   return (
-    <InteractionBox interaction={item} navigation={navigation} user={user} />
+    <InteractionBox
+      theme={theme}
+      interaction={item}
+      navigation={navigation}
+      user={user}
+    />
   );
 };
 
 const Interactions = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [interactions, setInteractions] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_INTERACTIONS, {
@@ -217,8 +224,11 @@ const Interactions = (props) => {
   return (
     <FlatList
       data={interactions}
-      style={styles.seedContainer}
-      renderItem={(param) => renderItem(param, navigation, userId)}
+      style={{
+        ...styles.seedContainer,
+        backgroundColor: themeSchema[theme].backgroundColor1,
+      }}
+      renderItem={(param) => renderItem(param, navigation, userId, theme)}
       keyExtractor={(item) => item.id}
       onEndReachedThreshold={0.5}
       onEndReached={async () => {
@@ -256,6 +266,7 @@ const Interactions = (props) => {
 };
 
 const Profile = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [user, setUser] = React.useState(null);
   const [search, setSearch] = React.useState("");
   const { data, loading, error, fetchMore } = useQuery(GET_USER, {
@@ -272,14 +283,21 @@ const Profile = (props) => {
 
   if (user === null || loading) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
+      <SafeAreaView
+        style={{
+          ...styles.loadingContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+      >
         <ActivityIndicator />
       </SafeAreaView>
     );
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f7f7f7" }}>
+    <View
+      style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}
+    >
       <Image
         source={{
           uri: coverTest,
@@ -335,7 +353,7 @@ const Profile = (props) => {
           width: Dimensions.get("screen").width / 1.2,
           height: 100,
           borderRadius: 30,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           marginTop: 110,
           marginLeft: "auto",
           marginRight: "auto",
@@ -348,7 +366,7 @@ const Profile = (props) => {
             position: "absolute",
             width: 50,
             height: 52,
-            backgroundColor: "#FFFFFF",
+            backgroundColor: themeSchema[theme].backgroundColor2,
             borderRadius: 20,
             borderColor: "#F47658",
             borderStyle: "solid",
@@ -382,13 +400,17 @@ const Profile = (props) => {
               marginBottom: 3,
               fontWeight: "bold",
               fontFamily: "Montserrat_600SemiBold",
+              color: themeSchema[theme].colorText,
             }}
           >
             {user.trophies.length}
           </Text>
           <Image
             source={{
-              uri: muddle.trophies_light, // Have to be dynamic par rapport au theme
+              uri:
+                theme === "light"
+                  ? muddle.trophies_light
+                  : muddle.trophies_dark, // Have to be dynamic par rapport au theme
             }}
             style={{
               width: 30,
@@ -426,6 +448,7 @@ const Profile = (props) => {
               height: 40,
               fontFamily: "Montserrat_700Bold",
               // borderWidth: 1,
+              color: themeSchema[theme].colorText,
             }}
             numberOfLines={2}
           >
@@ -455,6 +478,7 @@ const Profile = (props) => {
                   style={{
                     fontSize: 10,
                     fontFamily: "Montserrat_600SemiBold",
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {user.followers.length}
@@ -486,6 +510,7 @@ const Profile = (props) => {
                   style={{
                     fontSize: 10,
                     fontFamily: "Montserrat_600SemiBold",
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {user.following.length}
@@ -509,7 +534,11 @@ const Profile = (props) => {
             marginLeft: 10,
           }}
         >
-          <CustomIcon name={"more-horiz"} size={22} />
+          <CustomIcon
+            name={"more-horiz"}
+            size={22}
+            color={themeSchema[theme].colorText}
+          />
         </TouchableOpacity>
       </View>
 
@@ -548,4 +577,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Profile);
+export default Profile;

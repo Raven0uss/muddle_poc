@@ -5,8 +5,11 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const DebateBox = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const { debate, navigation } = props;
 
   const votes =
@@ -16,7 +19,12 @@ const DebateBox = (props) => {
   const comments = debate.comments.length;
   if (debate.type === "STANDARD" || debate.type === "MUDDLE") {
     return (
-      <View style={styles.boxDebate}>
+      <View
+        style={{
+          ...styles.boxDebate,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         <View style={styles.headDebate}>
           <TouchableOpacity
             onPress={() => {
@@ -37,7 +45,11 @@ const DebateBox = (props) => {
               });
             }}
           >
-            <Text style={styles.pseudo}>{debate.owner.pseudo}</Text>
+            <Text
+              style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
+            >
+              {debate.owner.pseudo}
+            </Text>
           </TouchableOpacity>
           <View style={{ marginLeft: "auto" }}>
             <Select
@@ -56,7 +68,13 @@ const DebateBox = (props) => {
                     content: debate,
                   });
               }}
-              renderComponent={<CustomIcon name="more-vert" size={22} />}
+              renderComponent={
+                <CustomIcon
+                  name="more-vert"
+                  size={22}
+                  color={themeSchema[theme].colorText}
+                />
+              }
             />
           </View>
         </View>
@@ -67,32 +85,50 @@ const DebateBox = (props) => {
             });
           }}
         >
-          <Text numberOfLines={8} style={styles.debateText}>
+          <Text
+            numberOfLines={8}
+            style={{
+              ...styles.debateText,
+              color: themeSchema[theme].colorText,
+            }}
+          >
             {debate.content}
           </Text>
         </TouchableOpacity>
         <View
           style={{
             height: 1,
-            backgroundColor: "#DBDBDB",
+            backgroundColor: themeSchema[theme].hrLineColor,
             width: "100%",
             alignSelf: "center",
           }}
         />
         <View style={styles.debateFooter}>
-          <Text style={styles.footerText}>{`${votes} vote${
-            votes > 1 ? "s" : ""
-          }`}</Text>
-          <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
-            comments > 1 ? "s" : ""
-          }`}</Text>
+          <Text
+            style={{
+              ...styles.footerText,
+              color: themeSchema[theme].colorText,
+            }}
+          >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
+          <Text
+            style={{
+              ...styles.footerText,
+              color: themeSchema[theme].colorText,
+            }}
+          >{`${comments} ${i18n._("comment")}${comments > 1 ? "s" : ""}`}</Text>
         </View>
         <View style={styles.debateActions}>
-          <TouchableOpacity onPress={() => {}} style={styles.votePourButton}>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              ...styles.votePourButton,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+            }}
+          >
             <Text
               numberOfLines={1}
               style={{
-                color: "#000",
+                color: themeSchema[theme].colorText,
                 fontSize: 12,
                 paddingLeft: 12,
                 paddingRight: 12,
@@ -102,11 +138,18 @@ const DebateBox = (props) => {
               Je suis pour
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}} style={styles.voteContreButton}>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              ...styles.voteContreButton,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+              borderColor: themeSchema[theme].colorText,
+            }}
+          >
             <Text
               numberOfLines={1}
               style={{
-                color: "#000",
+                color: themeSchema[theme].colorText,
                 fontSize: 12,
                 paddingLeft: 6,
                 paddingRight: 6,
@@ -122,9 +165,17 @@ const DebateBox = (props) => {
                 debate,
               });
             }}
-            style={styles.commentButton}
+            style={{
+              ...styles.commentButton,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+              borderColor: themeSchema[theme].colorText,
+            }}
           >
-            <CustomIcon name="more-horiz" size={28} />
+            <CustomIcon
+              name="more-horiz"
+              size={28}
+              color={themeSchema[theme].colorText}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -133,7 +184,12 @@ const DebateBox = (props) => {
   if (debate.type === "DUO")
     return (
       <View>
-        <View style={styles.boxDebate}>
+        <View
+          style={{
+            ...styles.boxDebate,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
           <View style={styles.headDebateDuo}>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
@@ -155,7 +211,14 @@ const DebateBox = (props) => {
                   });
                 }}
               >
-                <Text style={styles.pseudoDuo}>{debate.ownerBlue.pseudo}</Text>
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {debate.ownerBlue.pseudo}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -179,7 +242,14 @@ const DebateBox = (props) => {
                   });
                 }}
               >
-                <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {debate.ownerRed.pseudo}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -206,7 +276,13 @@ const DebateBox = (props) => {
                       content: debate,
                     });
                 }}
-                renderComponent={<CustomIcon name="more-vert" size={22} />}
+                renderComponent={
+                  <CustomIcon
+                    name="more-vert"
+                    size={22}
+                    color={themeSchema[theme].colorText}
+                  />
+                }
               />
             </View>
           </View>
@@ -217,16 +293,28 @@ const DebateBox = (props) => {
               });
             }}
           >
-            <Text numberOfLines={8} style={styles.debateTextDuo}>
+            <Text
+              numberOfLines={8}
+              style={{
+                ...styles.debateTextDuo,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {debate.content}
             </Text>
           </TouchableOpacity>
           <View style={styles.debateActionsDuo}>
-            <TouchableOpacity onPress={() => {}} style={styles.voteBlueButton}>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                ...styles.voteBlueButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
+            >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
@@ -242,15 +330,30 @@ const DebateBox = (props) => {
                   debate,
                 });
               }}
-              style={styles.commentDuoButton}
+              style={{
+                ...styles.commentDuoButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                borderColor: themeSchema[theme].colorText,
+              }}
             >
-              <CustomIcon name="more-horiz" size={28} />
+              <CustomIcon
+                name="more-horiz"
+                size={28}
+                color={themeSchema[theme].colorText}
+              />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={styles.voteRedButton}>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                ...styles.voteRedButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                borderColor: themeSchema[theme].colorText,
+              }}
+            >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
@@ -264,17 +367,25 @@ const DebateBox = (props) => {
           <View
             style={{
               height: 1,
-              backgroundColor: "#DBDBDB",
+              backgroundColor: themeSchema[theme].hrLineColor,
               width: "100%",
               alignSelf: "center",
               marginTop: 15,
             }}
           />
           <View style={styles.debateFooter}>
-            <Text style={styles.footerText}>{`${votes} vote${
-              votes > 1 ? "s" : ""
-            }`}</Text>
-            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>
@@ -288,14 +399,14 @@ const styles = StyleSheet.create({
   boxDebate: {
     maxHeight: 300,
     backgroundColor: "white",
-    elevation: 10,
+    elevation: 4,
     borderRadius: 7,
     padding: 10,
     shadowOffset: { width: 3, height: 3 },
     shadowColor: "gray",
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   headDebate: {
     flexDirection: "row",

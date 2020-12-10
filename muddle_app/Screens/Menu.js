@@ -8,14 +8,16 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useIsFocused } from "@react-navigation/native";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const Menu = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [refresh, setRefresh] = React.useState(true);
 
   const isFocused = useIsFocused();
@@ -49,44 +51,138 @@ const Menu = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+          paddingTop: 20,
+        }}
+      >
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => navigation.push("Settings")}
         >
           <CustomIcon name="settings" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>{i18n._("settings")}</Text>
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("settings")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => navigation.push("LegaleMentions")}
         >
           <CustomIcon name="lock" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>{i18n._("legaleMention")}</Text>
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("legaleMention")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => navigation.push("Cgu")}
         >
           <CustomIcon name="description" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>{i18n._("cgu")}</Text>
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("cgu")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => navigation.push("ContactUs")}
         >
           <CustomIcon name="chat" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>{i18n._("contactUs")}</Text>
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("contactUs")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => {
             // console.log("Log out");
             navigation.navigate("Login");
           }}
         >
           <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />
-          <Text style={styles.menuText}>{i18n._("disconnect")}</Text>
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("disconnect")}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -106,15 +202,15 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 20,
   },
-  menuElement: {
-    backgroundColor: "#F7F7F7",
-    width: Dimensions.get("screen").width / 1.1,
-    marginTop: 8,
-    borderRadius: 12,
-    padding: 8,
-    flexDirection: "row",
-    alignItems: "center",
-  },
+  // menuElement: {
+  //   backgroundColor: themeSchema[theme].backgroundColor1,
+  //   width: Dimensions.get("screen").width / 1.1,
+  //   marginTop: 8,
+  //   borderRadius: 12,
+  //   padding: 8,
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  // },
   menuText: {
     marginLeft: 10,
     fontSize: 14,
@@ -122,4 +218,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Menu);
+export default Menu;

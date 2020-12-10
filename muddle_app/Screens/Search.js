@@ -8,15 +8,17 @@ import {
   Dimensions,
   Text,
   Keyboard,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
-import { ActivityIndicator, withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
+
 import i18n from "../i18n";
 
 const GET_USERS = gql`
@@ -33,7 +35,7 @@ const GET_USERS = gql`
 `;
 
 const Search = (props) => {
-  const themeCtx = React.useContext(ThemeContext);
+  const { theme } = React.useContext(ThemeContext);
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
@@ -51,9 +53,6 @@ const Search = (props) => {
   });
 
   const { navigation, route } = props;
-  const { theme } = themeCtx;
-  console.log(theme);
-  console.log("OHHHHHHhh")
   return (
     <View style={styles.container}>
       <Header
@@ -82,7 +81,7 @@ const Search = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: theme === "light" ? "#FFFFFF" : "#000000",
+          backgroundColor: themeSchema[theme].backgroundColor2,
         }}
       >
         <View
@@ -102,7 +101,7 @@ const Search = (props) => {
               height: 40,
               borderRadius: 10,
               width: "60%",
-              backgroundColor: "#f7f7f7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               // marginLeft: "auto",
               // marginRight: "auto",
               padding: 10,
@@ -110,8 +109,10 @@ const Search = (props) => {
               paddingRight: 20,
               // marginBottom: 14,
               fontFamily: "Montserrat_500Medium",
+              color: themeSchema[theme].colorText,
             }}
             keyboardType="default"
+            placeholderTextColor={themeSchema[theme].colorText}
             onChangeText={(s) => setSearch(s)}
           />
           <TouchableOpacity
@@ -133,6 +134,7 @@ const Search = (props) => {
               style={{
                 fontFamily: "Montserrat_600SemiBold",
                 fontSize: 12,
+                color: "#000",
               }}
             >
               {i18n._("search")}
@@ -140,7 +142,12 @@ const Search = (props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         {loading ? (
           <ActivityIndicator />
         ) : (
@@ -154,7 +161,7 @@ const Search = (props) => {
             >
               <View
                 style={{
-                  backgroundColor: "#F7F7F7",
+                  backgroundColor: themeSchema[theme].backgroundColor1,
                   padding: 10,
                   flexDirection: "row",
                   marginTop: 5,
@@ -173,6 +180,7 @@ const Search = (props) => {
                     fontSize: 14,
                     fontFamily: "Montserrat_500Medium",
                     marginLeft: 10,
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {u.pseudo}
@@ -203,4 +211,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Search);
+export default Search;

@@ -14,7 +14,6 @@ import {
   VirtualizedList,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import {
   debates_logo,
   defaultProfile,
@@ -27,6 +26,7 @@ import { set } from "react-native-reanimated";
 import { flatten, isEmpty, last } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const user = {
   profilePicture: defaultProfile,
@@ -84,7 +84,7 @@ const GET_DEBATES = gql`
   }
 `;
 
-const frequency = 20;
+const frequency = 20; //TESTESTEST
 let nbDebates = frequency;
 
 const renderItem = ({ item }, navigation) => {
@@ -92,6 +92,7 @@ const renderItem = ({ item }, navigation) => {
 };
 
 const Home = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [debates, setDebates] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
@@ -104,9 +105,8 @@ const Home = (props) => {
     },
   });
   const scrollViewRef = React.useRef(null);
-  const theme = React.useContext(ThemeContext);
-
-  console.log(theme);
+  
+  // themeSchema[theme]
 
   const { navigation, route } = props;
 
@@ -173,7 +173,14 @@ const Home = (props) => {
       <FlatList
         ref={scrollViewRef}
         data={debates}
-        style={styles.seedContainer}
+        style={{
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+          paddingTop: 60,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
         renderItem={(param) => renderItem(param, navigation)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
@@ -260,4 +267,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Home);
+export default Home;

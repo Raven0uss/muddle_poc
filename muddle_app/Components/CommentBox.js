@@ -4,20 +4,20 @@ import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import i18n from "../i18n";
-// import i18n from "../i18n";
+import themeSchema from "../CustomProperties/Theme";
 
 const CommentBox = (props) => {
-  const { comment, navigation } = props;
+  const { comment, navigation, theme } = props;
   return (
     <View
       style={{
         width: "100%",
         borderRadius: 10,
-        backgroundColor: "#fff",
+        backgroundColor: themeSchema[theme].backgroundColor2,
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: 13,
-        marginBottom: 10, // android
+        marginTop: 10,
+        marginBottom: 3, // android
         padding: 15,
       }}
     >
@@ -38,7 +38,11 @@ const CommentBox = (props) => {
             });
           }}
         >
-          <Text style={styles.pseudo}>{comment.from.pseudo}</Text>
+          <Text
+            style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
+          >
+            {comment.from.pseudo}
+          </Text>
         </TouchableOpacity>
         <View style={{ marginLeft: "auto" }}>
           <Select
@@ -57,7 +61,13 @@ const CommentBox = (props) => {
                   content: comment,
                 });
             }}
-            renderComponent={<CustomIcon name="more-vert" size={22} />}
+            renderComponent={
+              <CustomIcon
+                name="more-vert"
+                size={22}
+                color={themeSchema[theme].colorText}
+              />
+            }
           />
         </View>
       </View>
@@ -72,6 +82,7 @@ const CommentBox = (props) => {
           style={{
             fontSize: 12,
             fontFamily: "Montserrat_500Medium",
+            color: themeSchema[theme].colorText,
           }}
         >
           {comment.content}
@@ -98,7 +109,12 @@ const CommentBox = (props) => {
           <CustomIcon color="#F47658" name="sentiment-satisfied" size={20} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{ marginLeft: 22 }}>
-          <CustomIcon color="#000" name="sentiment-dissatisfied" size={20} />
+          <CustomIcon
+            color="#000"
+            name="sentiment-dissatisfied"
+            size={20}
+            color={themeSchema[theme].colorText}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -108,7 +124,7 @@ const CommentBox = (props) => {
           }}
           style={{
             marginLeft: 22,
-            backgroundColor: "#F9F9F9",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             height: 29,
             alignItems: "center",
             justifyContent: "center",
@@ -120,6 +136,7 @@ const CommentBox = (props) => {
             style={{
               fontFamily: "Montserrat_500Medium",
               fontSize: 12,
+              color: themeSchema[theme].colorText,
             }}
           >
             {i18n._("answer")}
@@ -139,6 +156,7 @@ const CommentBox = (props) => {
               fontFamily: "Montserrat_400Regular",
               fontSize: 12,
               marginTop: 7,
+              color: themeSchema[theme].colorText,
             }}
           >
             {`${i18n._("seeThe")} ${comment.comments.length} ${i18n._(

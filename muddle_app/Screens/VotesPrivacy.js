@@ -9,13 +9,16 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const VotesPrivacy = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const { navigation, route } = props;
+
   return (
     <View style={styles.container}>
       <Header
@@ -40,7 +43,15 @@ const VotesPrivacy = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}></ScrollView>
+      <ScrollView
+        style={{
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+        }}
+      ></ScrollView>
     </View>
   );
 };
@@ -50,13 +61,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F47658",
   },
-  seedContainer: {
-    backgroundColor: "#F7F7F7",
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
 });
 
-export default withTheme(VotesPrivacy);
+export default VotesPrivacy;

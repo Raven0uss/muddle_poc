@@ -5,15 +5,12 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import { not } from "react-native-reanimated";
 import i18n from "../i18n";
-
-const notificationText = {
-  VOTE: "a vote sur votre debat",
-  INVITATION_DUO: "vous invite a un debat duo",
-};
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
-  const { notification } = props;
+  const { notification, theme } = props;
 
   //   console.log(notification);
 
@@ -24,7 +21,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -58,6 +55,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.who[0].pseudo}
@@ -72,6 +70,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${i18n._("voteOnYourDebate")} ${i18n._("ago", {
@@ -88,7 +87,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -122,6 +121,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.who[0].pseudo}
@@ -130,12 +130,14 @@ const NotificationBox = (props) => {
               style={{
                 flexDirection: "row",
                 marginTop: 10,
+                color: themeSchema[theme].colorText,
               }}
             >
               <Text
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${i18n._("inviteYouDuoDebate")}`}
@@ -153,7 +155,7 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#fff",
+                  backgroundColor: themeSchema[theme].backgroundColor2,
                   width: 100,
                   borderRadius: 12,
                 }}
@@ -162,6 +164,7 @@ const NotificationBox = (props) => {
                 <Text
                   style={{
                     fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {`${i18n._("accept")}`}
@@ -172,7 +175,10 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: status === "DECLINED" ? "#000" : "#fff",
+                  backgroundColor:
+                    status === "DECLINED"
+                      ? themeSchema[theme].colorText
+                      : themeSchema[theme].colorText3,
                   width: 100,
                   borderRadius: 12,
                 }}
@@ -184,7 +190,10 @@ const NotificationBox = (props) => {
               >
                 <Text
                   style={{
-                    color: status === "DECLINED" ? "#fff" : "#000",
+                    color:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText3
+                        : themeSchema[theme].colorText,
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
@@ -201,7 +210,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -235,6 +244,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {`${notification.who[0].pseudo}${
@@ -251,12 +261,14 @@ const NotificationBox = (props) => {
               style={{
                 flexDirection: "row",
                 marginTop: 10,
+                color: themeSchema[theme].colorText,
               }}
             >
               <Text
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${
@@ -282,6 +294,7 @@ const NotificationBox = (props) => {
                 fontSize: 12,
                 marginTop: 5,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.debate.content}
@@ -295,7 +308,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -329,6 +342,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.who[0].pseudo}
@@ -343,6 +357,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {` ${i18n._("askToCloseThisDebate")} ${i18n._("ago", {
@@ -356,6 +371,7 @@ const NotificationBox = (props) => {
                 fontSize: 12,
                 marginTop: 5,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.debate.content}
@@ -372,7 +388,7 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#fff",
+                  backgroundColor: themeSchema[theme].backgroundColor2,
                   width: 100,
                   borderRadius: 12,
                 }}
@@ -381,6 +397,7 @@ const NotificationBox = (props) => {
                 <Text
                   style={{
                     fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {`${i18n._("accept")}`}
@@ -391,7 +408,10 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: status === "DECLINED" ? "#000" : "#fff",
+                  backgroundColor:
+                    status === "DECLINED"
+                      ? themeSchema[theme].colorText
+                      : themeSchema[theme].colorText3,
                   width: 100,
                   borderRadius: 12,
                 }}
@@ -403,7 +423,10 @@ const NotificationBox = (props) => {
               >
                 <Text
                   style={{
-                    color: status === "DECLINED" ? "#fff" : "#000",
+                    color:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText3
+                        : themeSchema[theme].colorText,
                     fontFamily: "Montserrat_500Medium",
                   }}
                 >
@@ -420,7 +443,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -454,6 +477,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {`${notification.who[0].pseudo}${
@@ -476,6 +500,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${
@@ -488,6 +513,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {" il y a 3 jours"}
@@ -499,6 +525,7 @@ const NotificationBox = (props) => {
                 fontSize: 12,
                 marginTop: 5,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.comment.content}
@@ -512,7 +539,7 @@ const NotificationBox = (props) => {
           style={{
             width: "90%",
             borderRadius: 10,
-            backgroundColor: "#f7f7f7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 5,
@@ -546,6 +573,7 @@ const NotificationBox = (props) => {
                 fontSize: 14,
                 fontFamily: "Montserrat_600SemiBold",
                 marginTop: -5,
+                color: themeSchema[theme].colorText,
               }}
             >
               {`${notification.who[0].pseudo}${
@@ -568,6 +596,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${
@@ -580,6 +609,7 @@ const NotificationBox = (props) => {
                 style={{
                   fontSize: 11,
                   fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {` ${i18n._("ago", {
@@ -593,6 +623,7 @@ const NotificationBox = (props) => {
                 fontSize: 12,
                 marginTop: 5,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {notification.comment.content}
@@ -619,8 +650,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
     // marginTop: -10,
     marginLeft: -15,
-    borderColor: "black",
-    borderWidth: 1,
+    // borderColor: "black",
+    // borderWidth: 1,
   },
 });
 

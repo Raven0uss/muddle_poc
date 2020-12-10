@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { withTheme } from "react-native-paper";
 import { muddle } from "../CustomProperties/IconsBase64";
 
 const CreateDebateButton = (props) => {
@@ -50,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CreateDebateButton);
+export default CreateDebateButton;

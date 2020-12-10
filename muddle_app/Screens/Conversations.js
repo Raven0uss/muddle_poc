@@ -12,12 +12,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import { isEmpty } from "lodash";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const GET_CONVERSATIONS = gql`
   query($first: Int!, $skip: Int) {
@@ -46,7 +47,7 @@ const GET_CONVERSATIONS = gql`
 const frequency = 20;
 let nbConversations = frequency;
 
-const renderItem = ({ item }, navigation) => {
+const renderItem = ({ item }, navigation, theme) => {
   const lastMessage = item.messages[item.messages.length - 1];
   return (
     <TouchableOpacity
@@ -61,7 +62,7 @@ const renderItem = ({ item }, navigation) => {
           width: Dimensions.get("screen").width / 1.2,
           height: 72,
           borderRadius: 10,
-          backgroundColor: "#f7f7f7",
+          backgroundColor: themeSchema[theme].backgroundColor1,
           marginLeft: "auto",
           marginRight: "auto",
           marginTop: 20,
@@ -73,7 +74,11 @@ const renderItem = ({ item }, navigation) => {
         <View style={{ marginLeft: 40, marginTop: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text
-              style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                color: themeSchema[theme].colorText,
+              }}
             >
               {lastMessage.from.pseudo}
             </Text>
@@ -94,6 +99,7 @@ const renderItem = ({ item }, navigation) => {
               fontSize: 12,
               marginTop: 17,
               fontFamily: "Montserrat_500Medium",
+              color: themeSchema[theme].colorText,
             }}
           >
             {lastMessage.content}
@@ -105,6 +111,7 @@ const renderItem = ({ item }, navigation) => {
 };
 
 const Conversations = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [conversations, setConversations] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -123,7 +130,12 @@ const Conversations = (props) => {
 
   if (conversations.length === 0 && loading) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
+      <SafeAreaView
+        style={{
+          ...styles.loadingContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         <ActivityIndicator />
       </SafeAreaView>
     );
@@ -170,7 +182,7 @@ const Conversations = (props) => {
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
-          backgroundColor: "#FFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           height: 30,
         }}
       >
@@ -198,8 +210,12 @@ const Conversations = (props) => {
       </View>
       <FlatList
         data={conversations}
-        style={styles.seedContainer}
-        renderItem={(param) => renderItem(param, navigation)}
+        style={{
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+        renderItem={(param) => renderItem(param, navigation, theme)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
@@ -241,11 +257,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F47658",
   },
-  seedContainer: {
-    backgroundColor: "#FFF",
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
   userPicture: {
     width: 40,
     height: 40,
@@ -254,9 +265,9 @@ const styles = StyleSheet.create({
     zIndex: 10,
     // marginTop: -10,
     marginLeft: -15,
-    borderColor: "black",
-    borderWidth: 1,
+    // borderColor: "black",
+    // borderWidth: 1,
   },
 });
 
-export default withTheme(Conversations);
+export default Conversations;

@@ -8,13 +8,15 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const Follow = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [vision, setVision] = React.useState(props.route.params.selected);
 
   const { navigation, route } = props;
@@ -47,7 +49,7 @@ const Follow = (props) => {
       />
       <View
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           paddingLeft: 15,
@@ -58,7 +60,7 @@ const Follow = (props) => {
         <View
           style={{
             width: Dimensions.get("screen").width / 1.2,
-            backgroundColor: "#F7F7F7",
+            backgroundColor: themeSchema[theme].backgroundColor1,
             height: 44,
             borderRadius: 40,
             marginTop: 33,
@@ -69,7 +71,10 @@ const Follow = (props) => {
           <TouchableOpacity
             style={{
               width: "50%",
-              backgroundColor: vision === "followers" ? "#F47658" : "#F7F7F7",
+              backgroundColor:
+                vision === "followers"
+                  ? "#F47658"
+                  : themeSchema[theme].backgroundColor1,
               borderRadius: 40,
               alignItems: "center",
               justifyContent: "center",
@@ -82,6 +87,7 @@ const Follow = (props) => {
               style={{
                 fontFamily: "Montserrat_700Bold",
                 fontSize: 14,
+                color: themeSchema[theme].colorText,
               }}
             >
               {i18n._("followers")}
@@ -92,7 +98,10 @@ const Follow = (props) => {
               width: "50%",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: vision === "following" ? "#F47658" : "#F7F7F7",
+              backgroundColor:
+                vision === "following"
+                  ? "#F47658"
+                  : themeSchema[theme].backgroundColor1,
               borderRadius: 40,
             }}
             onPress={() => {
@@ -103,6 +112,7 @@ const Follow = (props) => {
               style={{
                 fontFamily: "Montserrat_700Bold",
                 fontSize: 14,
+                color: themeSchema[theme].colorText,
               }}
             >
               {i18n._("following")}
@@ -110,7 +120,12 @@ const Follow = (props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         {follow[vision].map((contact) => (
           <TouchableOpacity
             key={contact.id}
@@ -122,7 +137,7 @@ const Follow = (props) => {
           >
             <View
               style={{
-                backgroundColor: "#F7F7F7",
+                backgroundColor: themeSchema[theme].backgroundColor1,
                 borderRadius: 12,
                 marginTop: 5,
                 marginBottom: 5,
@@ -140,6 +155,7 @@ const Follow = (props) => {
                   fontFamily: "Montserrat_500Medium",
                   marginLeft: 10,
                   fontSize: 14,
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {contact.pseudo}
@@ -169,4 +185,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Follow);
+export default Follow;

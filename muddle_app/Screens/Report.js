@@ -10,7 +10,6 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
@@ -174,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Report);
+export default Report;

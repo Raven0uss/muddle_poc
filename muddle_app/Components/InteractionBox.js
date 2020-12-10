@@ -6,17 +6,28 @@ import Select from "../Components/Select";
 import DebateBox from "./DebateBox";
 import CommentBox from "./CommentBox";
 import i18n from "../i18n";
+import themeSchema from "../CustomProperties/Theme";
 
 const InteractionBox = (props) => {
-  const { interaction, navigation } = props;
+  const { interaction, navigation, theme } = props;
   const { comment, debate } = interaction;
 
   console.log(debate);
   switch (interaction.type) {
     case "LIKE":
       return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
+        <View
+          style={{
+            ...styles.notificationBox,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <Text
+            style={{
+              ...styles.notificationText,
+              color: themeSchema[theme].colorText,
+            }}
+          >
             {`${
               interaction.who.pseudo === "userA"
                 ? i18n._("youLiked")
@@ -40,14 +51,24 @@ const InteractionBox = (props) => {
               })ues
             }
           > */}
-          <CommentBox comment={comment} navigation={navigation} />
+          <CommentBox theme={theme} comment={comment} navigation={navigation} />
           {/* </TouchableOpacity> */}
         </View>
       );
     case "DISLIKE":
       return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
+        <View
+          style={{
+            ...styles.notificationBox,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <Text
+            style={{
+              ...styles.notificationText,
+              color: themeSchema[theme].colorText,
+            }}
+          >
             {`${
               interaction.who.pseudo === "userA"
                 ? i18n._("youDidntLiked")
@@ -70,14 +91,24 @@ const InteractionBox = (props) => {
               })
             }
           > */}
-          <CommentBox comment={comment} navigation={navigation} />
+          <CommentBox theme={theme} comment={comment} navigation={navigation} />
           {/* </TouchableOpacity> */}
         </View>
       );
     case "COMMENT":
       return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
+        <View
+          style={{
+            ...styles.notificationBox,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <Text
+            style={{
+              ...styles.notificationText,
+              color: themeSchema[theme].colorText,
+            }}
+          >
             {`${
               interaction.who.pseudo === "userA"
                 ? i18n._("youCommented")
@@ -94,7 +125,11 @@ const InteractionBox = (props) => {
               marginBottom: 10,
             }}
           />
-          <DebateBox debate={comment.debate} navigation={navigation} />
+          <DebateBox
+            theme={theme}
+            debate={comment.debate}
+            navigation={navigation}
+          />
         </View>
       );
     case "BLUE_VOTE":
@@ -102,8 +137,18 @@ const InteractionBox = (props) => {
     case "POSITIVE_VOTE":
     case "NEGATIVE_VOTE":
       return (
-        <View style={styles.notificationBox}>
-          <Text style={styles.notificationText}>
+        <View
+          style={{
+            ...styles.notificationBox,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <Text
+            style={{
+              ...styles.notificationText,
+              color: themeSchema[theme].colorText,
+            }}
+          >
             {`${
               interaction.who.pseudo === "userA"
                 ? i18n._("youVote")
@@ -120,7 +165,7 @@ const InteractionBox = (props) => {
               marginBottom: 10,
             }}
           />
-          <DebateBox debate={debate} navigation={navigation} />
+          <DebateBox theme={theme} debate={debate} navigation={navigation} />
         </View>
       );
     // case "RED_VOTE":

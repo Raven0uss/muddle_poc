@@ -13,7 +13,6 @@ import {
   Keyboard,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import Select from "../Components/Select";
@@ -22,6 +21,8 @@ import { useQuery, gql } from "@apollo/client";
 import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
 import moment from "moment";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const checkOnlyDigits = (str) => {
   const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -48,6 +49,7 @@ const GET_USERS = gql`
 `;
 
 const InvitationDebate = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
@@ -70,7 +72,7 @@ const InvitationDebate = (props) => {
       <Header hidden />
       <View
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
         }}
@@ -92,7 +94,7 @@ const InvitationDebate = (props) => {
               height: 40,
               borderRadius: 10,
               width: "60%",
-              backgroundColor: "#f7f7f7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               // marginLeft: "auto",
               // marginRight: "auto",
               padding: 10,
@@ -100,8 +102,10 @@ const InvitationDebate = (props) => {
               paddingRight: 20,
               // marginBottom: 14,
               fontFamily: "Montserrat_500Medium",
+              color: themeSchema[theme].colorText,
             }}
             keyboardType="default"
+            placeholderTextColor={themeSchema[theme].colorText}
             onChangeText={(s) => setSearch(s)}
           />
           <View>
@@ -134,7 +138,7 @@ const InvitationDebate = (props) => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "#000",
+                backgroundColor: themeSchema[theme].colorText,
                 marginLeft: 10,
                 padding: 10,
                 borderRadius: 10,
@@ -149,7 +153,7 @@ const InvitationDebate = (props) => {
                 style={{
                   fontFamily: "Montserrat_600SemiBold",
                   fontSize: 12,
-                  color: "#fff",
+                  color: themeSchema[theme].colorText3,
                 }}
               >
                 {i18n._("cancel")}
@@ -160,7 +164,7 @@ const InvitationDebate = (props) => {
       </View>
       <ScrollView
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: themeSchema[theme].backgroundColor2,
           paddingLeft: 15,
           paddingRight: 15,
         }}
@@ -177,7 +181,7 @@ const InvitationDebate = (props) => {
             >
               <View
                 style={{
-                  backgroundColor: "#F7F7F7",
+                  backgroundColor: themeSchema[theme].backgroundColor1,
                   padding: 10,
                   flexDirection: "row",
                   marginTop: 5,
@@ -196,6 +200,7 @@ const InvitationDebate = (props) => {
                     fontSize: 14,
                     fontFamily: "Montserrat_500Medium",
                     marginLeft: 10,
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {u.pseudo}
@@ -210,6 +215,7 @@ const InvitationDebate = (props) => {
 };
 
 const CreateDebate = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const [debateType, setDebateType] = React.useState({
     label: i18n._("publicDebateSelect"),
     value: "PUBLIC",
@@ -253,7 +259,13 @@ const CreateDebate = (props) => {
           />
         }
       />
-      <KeyboardAvoidingView behavior="padding" style={styles.seedContainer}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+        }}
+      >
         <ScrollView>
           <View style={{ marginTop: 52 }}>
             <View
@@ -276,6 +288,7 @@ const CreateDebate = (props) => {
                   fontFamily: "Montserrat_600SemiBold",
                   marginLeft: 10,
                   fontSize: 12,
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 Sid-Ahmed Fahem
@@ -297,10 +310,16 @@ const CreateDebate = (props) => {
                 placeholder=""
                 onSelect={(type) => setDebateType(type)}
                 renderComponent={
-                  <View style={styles.inputSelect}>
+                  <View
+                    style={{
+                      ...styles.inputSelect,
+                      backgroundColor: themeSchema[theme].backgroundColor1,
+                    }}
+                  >
                     <Text
                       style={{
                         fontFamily: "Montserrat_500Medium",
+                        color: themeSchema[theme].colorText,
                       }}
                     >
                       {debateType.label}
@@ -316,10 +335,16 @@ const CreateDebate = (props) => {
                     setShow(true);
                   }}
                 >
-                  <View style={styles.inputInvite}>
+                  <View
+                    style={{
+                      ...styles.inputInvite,
+                      backgroundColor: themeSchema[theme].backgroundColor1,
+                    }}
+                  >
                     <Text
                       style={{
                         fontFamily: "Montserrat_500Medium",
+                        color: themeSchema[theme].colorText,
                       }}
                     >
                       {duo === null ? i18n._("invitePeople") : duo.pseudo}
@@ -331,7 +356,7 @@ const CreateDebate = (props) => {
             <View style={{ marginTop: 0 }}>
               <View
                 style={{
-                  backgroundColor: "#f7f7f7",
+                  backgroundColor: themeSchema[theme].backgroundColor1,
                   padding: 12,
                   paddingLeft: 20,
                   paddingRight: 20,
@@ -346,6 +371,8 @@ const CreateDebate = (props) => {
                 <Text
                   style={{
                     fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                    fontSize: 12,
                   }}
                 >
                   {i18n._("debateDuration")}
@@ -387,9 +414,10 @@ const CreateDebate = (props) => {
                     }
                   }}
                   style={{
-                    backgroundColor: "#fff",
-                    width: 21,
-                    fontSize: 16,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    color: themeSchema[theme].colorText,
+                    width: 20,
+                    fontSize: 14,
                     padding: 5,
                     fontFamily: "Montserrat_600SemiBold",
                     height: 30,
@@ -406,6 +434,7 @@ const CreateDebate = (props) => {
                     fontFamily: "Montserrat_500Medium",
                     marginLeft: 5,
                     fontSize: 12,
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {i18n._("days")}
@@ -473,15 +502,16 @@ const CreateDebate = (props) => {
                     }
                   }}
                   style={{
-                    backgroundColor: "#fff",
-                    width: 35,
-                    fontSize: 16,
-                    padding: 5,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    color: themeSchema[theme].colorText,
+                    width: 30,
+                    fontSize: 14,
+                    // padding: 0,
                     fontFamily: "Montserrat_600SemiBold",
                     height: 30,
                     marginTop: -7,
                     textAlign: "center",
-                    marginLeft: 10,
+                    marginLeft: 5,
                     borderRadius: 5,
                   }}
                   keyboardType="numeric"
@@ -492,6 +522,7 @@ const CreateDebate = (props) => {
                     fontFamily: "Montserrat_500Medium",
                     marginLeft: 5,
                     fontSize: 12,
+                    color: themeSchema[theme].colorText,
                   }}
                 >
                   {i18n._("hours")}
@@ -505,6 +536,7 @@ const CreateDebate = (props) => {
                 fontSize: 10,
                 marginBottom: 7,
                 marginLeft: 10,
+                color: themeSchema[theme].colorText,
               }}
             >
               {i18n._("debateLimitationDurationMessage")}
@@ -512,7 +544,7 @@ const CreateDebate = (props) => {
             <View
               style={{
                 height: 1,
-                backgroundColor: "#DBDBDB",
+                backgroundColor: themeSchema[theme].hrLineColor,
                 width: "90%",
                 alignSelf: "center",
               }}
@@ -522,9 +554,13 @@ const CreateDebate = (props) => {
                 placeholder={i18n._("describeDebate")}
                 value={content}
                 onChangeText={(c) => setContent(c)}
-                style={styles.input}
+                style={{
+                  ...styles.input,
+                  color: themeSchema[theme].colorText,
+                  backgroundColor: themeSchema[theme].backgroundColor1,
+                }}
                 keyboardType="default"
-                placeholderTextColor="#222"
+                placeholderTextColor={themeSchema[theme].colorText}
                 multiline
                 textAlignVertical="top"
               />
@@ -533,7 +569,7 @@ const CreateDebate = (props) => {
               style={{
                 marginTop: 10,
                 borderRadius: 20,
-                backgroundColor: "#f7f7f7",
+                backgroundColor: themeSchema[theme].backgroundColor1,
                 height: 100,
                 justifyContent: "space-around",
                 alignItems: "center",
@@ -551,7 +587,12 @@ const CreateDebate = (props) => {
                   if (oOne.length < 35)
                     setOptionOne(oOne.replace(/\r?\n|\r/g, ""));
                 }}
-                style={styles.optionOne}
+                style={{
+                  ...styles.optionOne,
+                  color: themeSchema[theme].colorText,
+                  backgroundColor: themeSchema[theme].backgroundColor1,
+                }}
+                placeholderTextColor={themeSchema[theme].colorText}
                 keyboardType="default"
                 // placeholderTextColor="#222"
                 numberOfLines={3}
@@ -566,7 +607,12 @@ const CreateDebate = (props) => {
                     if (oTwo.length < 35)
                       setOptionTwo(oTwo.replace(/\r?\n|\r/g, ""));
                   }}
-                  style={styles.optionTwo}
+                  style={{
+                    ...styles.optionTwo,
+                    color: themeSchema[theme].colorText,
+                    backgroundColor: themeSchema[theme].backgroundColor1,
+                  }}
+                  placeholderTextColor={themeSchema[theme].colorText}
                   keyboardType="default"
                   // placeholderTextColor="#222"
                   numberOfLines={3}
@@ -645,7 +691,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     fontFamily: "Montserrat_500Medium",
     maxWidth: 128,
-    fontSize: 12,
+    fontSize: 10,
     textAlign: "center",
   },
   optionTwo: {
@@ -661,7 +707,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     fontFamily: "Montserrat_500Medium",
     maxWidth: 128,
-    fontSize: 12,
+    fontSize: 10,
     textAlign: "center",
   },
   connectionButton: {
@@ -687,4 +733,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CreateDebate);
+export default CreateDebate;

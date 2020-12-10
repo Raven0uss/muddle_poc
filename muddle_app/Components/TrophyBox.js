@@ -5,8 +5,11 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import DebateBox from "./DebateBox";
 import i18n from "../i18n";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const TrophyBox = (props) => {
+  const { theme } = React.useContext(ThemeContext);
   const { trophy, navigation } = props;
 
   switch (trophy.type) {
@@ -24,7 +27,7 @@ const TrophyBox = (props) => {
           style={{
             width: "100%",
             borderRadius: 10,
-            backgroundColor: "#fff",
+            backgroundColor: themeSchema[theme].backgroundColor2,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 13,
@@ -54,7 +57,12 @@ const TrophyBox = (props) => {
                 });
               }}
             >
-              <Text style={styles.pseudo}>
+              <Text
+                style={{
+                  ...styles.pseudo,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
                 {trophy.comment.debate.owner.pseudo}
               </Text>
             </TouchableOpacity>
@@ -75,7 +83,13 @@ const TrophyBox = (props) => {
                       content: trophy.comment.debate,
                     });
                 }}
-                renderComponent={<CustomIcon name="more-vert" size={22} />}
+                renderComponent={
+                  <CustomIcon
+                    name="more-vert"
+                    size={22}
+                    color={themeSchema[theme].colorText}
+                  />
+                }
               />
             </View>
           </View>
@@ -86,7 +100,13 @@ const TrophyBox = (props) => {
               });
             }}
           >
-            <Text numberOfLines={8} style={styles.debateText}>
+            <Text
+              numberOfLines={8}
+              style={{
+                ...styles.debateText,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {trophy.comment.debate.content}
             </Text>
           </TouchableOpacity>
@@ -99,23 +119,34 @@ const TrophyBox = (props) => {
             }}
           />
           <View style={styles.debateFooter}>
-            <Text style={styles.footerText}>{`${votes} vote${
-              votes > 1 ? "s" : ""
-            }`}</Text>
-            <Text style={styles.footerText}>{`${comments} ${i18n._("comment")}${
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${comments} ${i18n._("comment")}${
               comments > 1 ? "s" : ""
             }`}</Text>
           </View>
           <View style={styles.debateActions}>
             <TouchableOpacity
               onPress={() => {}}
-              style={styles.votePourButton}
+              style={{
+                ...styles.votePourButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
               disabled
             >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
@@ -127,13 +158,17 @@ const TrophyBox = (props) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {}}
-              style={styles.voteContreButton}
+              style={{
+                ...styles.voteContreButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                borderColor: themeSchema[theme].colorText,
+              }}
               disabled
             >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
@@ -149,14 +184,22 @@ const TrophyBox = (props) => {
                   debate: trophy.comment.debate,
                 });
               }}
-              style={styles.commentButton}
+              style={{
+                ...styles.commentButton,
+                borderColor: themeSchema[theme].colorText,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
             >
-              <CustomIcon name="more-horiz" size={28} />
+              <CustomIcon
+                name="more-horiz"
+                size={28}
+                color={themeSchema[theme].colorText}
+              />
             </TouchableOpacity>
           </View>
           <View
             style={{
-              backgroundColor: "#F7F7F7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               borderRadius: 12,
               borderTopLeftRadius: 0,
               borderWidth: 1,
@@ -186,7 +229,14 @@ const TrophyBox = (props) => {
                   });
                 }}
               >
-                <Text style={styles.pseudo}>{trophy.comment.from.pseudo}</Text>
+                <Text
+                  style={{
+                    ...styles.pseudo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {trophy.comment.from.pseudo}
+                </Text>
               </TouchableOpacity>
             </View>
             <Text
@@ -195,6 +245,7 @@ const TrophyBox = (props) => {
                 fontSize: 12,
                 margin: 2,
                 fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
               }}
             >
               {trophy.comment.content}
@@ -216,7 +267,7 @@ const TrophyBox = (props) => {
           style={{
             width: "100%",
             borderRadius: 10,
-            backgroundColor: "#fff",
+            backgroundColor: themeSchema[theme].backgroundColor2,
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 13,
@@ -247,7 +298,14 @@ const TrophyBox = (props) => {
                   });
                 }}
               >
-                <Text style={styles.pseudoDuo}>{debate.ownerBlue.pseudo}</Text>
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {debate.ownerBlue.pseudo}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -271,7 +329,14 @@ const TrophyBox = (props) => {
                   });
                 }}
               >
-                <Text style={styles.pseudoDuo}>{debate.ownerRed.pseudo}</Text>
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {debate.ownerRed.pseudo}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -309,16 +374,28 @@ const TrophyBox = (props) => {
               });
             }}
           >
-            <Text numberOfLines={8} style={styles.debateTextDuo}>
+            <Text
+              numberOfLines={8}
+              style={{
+                ...styles.debateTextDuo,
+                color: themeSchema[theme].colorText,
+              }}
+            >
               {debate.content}
             </Text>
           </TouchableOpacity>
           <View style={styles.debateActionsDuo}>
-            <TouchableOpacity onPress={() => {}} style={styles.voteBlueButton}>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                ...styles.voteBlueButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
+            >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
@@ -334,15 +411,30 @@ const TrophyBox = (props) => {
                   debate,
                 });
               }}
-              style={styles.commentDuoButton}
+              style={{
+                ...styles.commentDuoButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                borderColor: themeSchema[theme].colorText,
+              }}
             >
-              <CustomIcon name="more-horiz" size={28} />
+              <CustomIcon
+                name="more-horiz"
+                size={28}
+                color={themeSchema[theme].colorText}
+              />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {}} style={styles.voteRedButton}>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                ...styles.voteRedButton,
+                borderColor: themeSchema[theme].colorText,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+              }}
+            >
               <Text
                 numberOfLines={1}
                 style={{
-                  color: "#000",
+                  color: themeSchema[theme].colorText,
                   fontSize: 12,
                   paddingLeft: 6,
                   paddingRight: 6,
@@ -363,12 +455,20 @@ const TrophyBox = (props) => {
             }}
           />
           <View style={styles.debateFooter}>
-            <Text style={styles.footerText}>{`${votesDuo} vote${
-              votesDuo > 1 ? "s" : ""
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${votesDuo} vote${votesDuo > 1 ? "s" : ""}`}</Text>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${commentsDuo} ${i18n._("comment")}${
+              commentsDuo > 1 ? "s" : ""
             }`}</Text>
-            <Text style={styles.footerText}>{`${commentsDuo} ${i18n._(
-              "comment"
-            )}${commentsDuo > 1 ? "s" : ""}`}</Text>
           </View>
           {/* </View> */}
         </View>
@@ -530,7 +630,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     borderStyle: "solid",
-    borderColor: "#6194EC",
+    borderColor: "#F47658",
     height: 36,
     alignItems: "center",
     justifyContent: "center",

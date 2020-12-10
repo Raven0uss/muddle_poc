@@ -9,16 +9,15 @@ import {
   ScrollView,
 } from "react-native";
 import Header from "../Components/Header";
-import { withTheme } from "react-native-paper";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useIsFocused } from "@react-navigation/native";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 import i18n from "../i18n";
 
 const Settings = (props) => {
-  // const [theme, setTheme] = React.useState("light");
-  const themeCtx = React.useContext(ThemeContext);
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
   const [refresh, setRefresh] = React.useState(true);
 
   const isFocused = useIsFocused();
@@ -27,7 +26,6 @@ const Settings = (props) => {
   }, [isFocused]);
 
   const { navigation, route } = props;
-  const { theme, toggleTheme } = themeCtx;
   return (
     <View style={styles.container}>
       <Header
@@ -52,31 +50,59 @@ const Settings = (props) => {
           />
         }
       />
-      <ScrollView style={styles.seedContainer}>
+      <ScrollView
+        style={{
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          backgroundColor: themeSchema[theme].backgroundColor2,
+          paddingLeft: 15,
+          paddingRight: 15,
+          paddingTop: 20,
+        }}
+      >
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            ...styles.menuElement,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+          }}
           onPress={() => navigation.push("LanguageSettings")}
         >
           <CustomIcon name="language" size={28} color="#F47658" />
-          <Text style={styles.menuText}>{i18n._("switchLanguage")}</Text>
+          <Text
+            style={{ ...styles.menuText, color: themeSchema[theme].colorText }}
+          >
+            {i18n._("switchLanguage")}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            ...styles.menuElement,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+          }}
           onPress={() => toggleTheme()}
         >
           <CustomIcon name="flare" size={28} color="#F47658" />
-          <Text style={styles.menuText}>
+          <Text
+            style={{ ...styles.menuText, color: themeSchema[theme].colorText }}
+          >
             {theme === "light"
               ? i18n._("selectDarkTheme")
               : i18n._("selectLightTheme")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.menuElement}
+          style={{
+            ...styles.menuElement,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+          }}
           onPress={() => navigation.push("VotesPrivacy")}
         >
           <CustomIcon name="vpn-key" size={28} color="#F47658" />
-          <Text style={styles.menuText}>{i18n._("votePrivacy")}</Text>
+          <Text
+            style={{ ...styles.menuText, color: themeSchema[theme].colorText }}
+          >
+            {i18n._("votePrivacy")}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -112,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Settings);
+export default Settings;
