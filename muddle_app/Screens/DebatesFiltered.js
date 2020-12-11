@@ -84,6 +84,10 @@ const applyFilter = ({ debates, debateType }) => {
     return debates.filter((debate) => debate.type === "MUDDLE");
   if (debateType === "BEST_DEBATES")
     return debates.filter((debate) => debate.type === "STANDARD");
+  if (debateType === "MY_DEBATES")
+    return debates.filter((debate) => {
+      return debate.type === "STANDARD";
+    });
   return debates;
 };
 
@@ -96,7 +100,7 @@ const DebatesFiltered = (props) => {
   const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
     variables: {
       first: nbDebates,
-      ...(debateType === "BEST_DEBATES"
+      ...(debateType === "BEST_DEBATES" || debateType === "MY_DEBATES"
         ? { filter: "STANDARD" }
         : { filter: debateType }),
     },
@@ -147,6 +151,30 @@ const DebatesFiltered = (props) => {
           persistentScrollbar={false}
           showsHorizontalScrollIndicator={false}
         >
+          <TouchableOpacity
+            style={
+              debateType === "MY_DEBATES"
+                ? styles.buttonActivate
+                : {
+                    ...styles.buttonDefaultState,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
+            }
+            onPress={() => {
+              setDebateType("MY_DEBATES");
+              setNoMoreData(false);
+            }}
+          >
+            <Text
+              style={{
+                ...styles.buttonTextDefaultState,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {i18n._("myDebates")}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={
               debateType === "BEST_DEBATES"

@@ -3,11 +3,11 @@
     "origin": [
       [
         "Components/TrophyBox.js",
-        65
+        73
       ],
       [
         "Components/TrophyBox.js",
-        288
+        353
       ]
     ]
   },
@@ -15,11 +15,11 @@
     "origin": [
       [
         "Components/TrophyBox.js",
-        105
+        133
       ],
       [
         "Components/TrophyBox.js",
-        369
+        469
       ]
     ]
   }

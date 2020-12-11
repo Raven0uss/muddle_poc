@@ -3,11 +3,11 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        46
+        58
       ],
       [
         "Components/DebateBox.js",
-        196
+        266
       ]
     ]
   },
@@ -15,11 +15,11 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        86
+        118
       ],
       [
         "Components/DebateBox.js",
-        277
+        388
       ]
     ]
   }

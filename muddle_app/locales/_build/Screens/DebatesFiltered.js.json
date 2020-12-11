@@ -1,9 +1,17 @@
 {
+  "myDebates": {
+    "origin": [
+      [
+        "Screens/DebatesFiltered.js",
+        175
+      ]
+    ]
+  },
   "bestDebates": {
     "origin": [
       [
         "Screens/DebatesFiltered.js",
-        158
+        199
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/DebatesFiltered.js",
-        173
+        223
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Screens/DebatesFiltered.js",
-        188
+        247
       ]
     ]
   }
