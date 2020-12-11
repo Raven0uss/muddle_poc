@@ -113,9 +113,9 @@ const Home = (props) => {
 
   const { navigation, route } = props;
 
-  console.log(route.params);
+  // console.log(route.params);
 
-  console.log(currentUser);
+  // console.log(currentUser);
   // console.log(debates.length);
 
   // if (error) {

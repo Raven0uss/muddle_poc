@@ -12,10 +12,10 @@ const server = new GraphQLServer({
   schema,
   middlewares: [permissions],
   context: async ({ request }) => {
-    console.log(request.headers.token);
+    // console.log(request.headers.token);
     const currentUser = await getCurrentUser(request);
 
-    console.log(currentUser);
+    // console.log(currentUser);
     return {
       currentUser,
       prisma,

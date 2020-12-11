@@ -111,7 +111,7 @@ export default function App() {
   React.useEffect(() => {
     const setStorage = async () => {
       const element = await getItem("currentUser");
-      console.log(element);
+      // console.log(element);
       if (element) {
         setCurrentUser(JSON.parse(element));
       }

@@ -95,7 +95,7 @@ function LoginComponent(props) {
     onCompleted: async (response) => {
       const { currentUser: queryResult } = response;
 
-      console.log("wesh");
+      // console.log("wesh");
       setCurrentUser(queryResult);
       await storeItem("user", JSON.stringify(queryResult));
       navigation.reset({
