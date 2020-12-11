@@ -135,7 +135,7 @@ const DebateBox = (props) => {
                 fontFamily: "Montserrat_500Medium",
               }}
             >
-              Je suis pour
+              {debate.answerOne}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -156,7 +156,7 @@ const DebateBox = (props) => {
                 fontFamily: "Montserrat_500Medium",
               }}
             >
-              Je suis contre
+              {debate.answerTwo}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -321,7 +321,7 @@ const DebateBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                Je suis pour
+                {debate.answerOne}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -360,7 +360,7 @@ const DebateBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                Je suis contre
+                {debate.answerTwo}
               </Text>
             </TouchableOpacity>
           </View>

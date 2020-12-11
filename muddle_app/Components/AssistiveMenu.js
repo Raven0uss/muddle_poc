@@ -40,6 +40,7 @@ properties.left = {
     (Dimensions.get("screen").width - properties.width.undeployed) / 2,
 };
 
+let timer = undefined;
 const AssistiveMenu = (props) => {
   const [deploy, setDeploy] = React.useState(false);
 
@@ -67,6 +68,21 @@ const AssistiveMenu = (props) => {
   const [leftButton] = React.useState(
     new Animated.Value(properties.left[deploy ? "deployed" : "undeployed"])
   );
+
+  React.useEffect(() => {
+    if (deploy === true) {
+      timer = setTimeout(() => {
+        if (deploy) onDeploy(200);
+      }, 5000);
+    } else {
+      if (timer !== undefined) clearTimeout(timer);
+    }
+
+    return () => {
+      if (timer !== undefined) clearTimeout(timer);
+      if (deploy) onDeploy;
+    };
+  }, [deploy]);
 
   const { navigation, route, scrollViewRef } = props;
 

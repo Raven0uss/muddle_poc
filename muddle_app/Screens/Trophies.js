@@ -36,6 +36,8 @@ const GET_TROPHIES = gql`
         id
         type
         content
+        answerOne
+        answerTwo
         owner {
           id
           pseudo
@@ -94,7 +96,10 @@ const GET_TROPHIES = gql`
           pseudo
         }
         debate {
+          id
           type
+          answerOne
+          answerTwo
           content
           owner {
             id

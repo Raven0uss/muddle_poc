@@ -23,6 +23,7 @@ type Debate {
   loser: User @relation(link: INLINE, name: "Loser")
   closed: Boolean! @default(value: false)
   crowned: Boolean! @default(value: false)
+  published: Boolean! @default(value: true)
   interactions: [Interaction]
   answerOne: String
   answerTwo: String

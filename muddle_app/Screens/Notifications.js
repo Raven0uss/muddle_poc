@@ -33,6 +33,8 @@ const GET_NOTIFICATIONS = gql`
       debate {
         id
         content
+        answerOne
+        answerTwo
       }
       comment {
         id

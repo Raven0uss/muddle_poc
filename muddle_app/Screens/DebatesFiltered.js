@@ -26,6 +26,8 @@ const GET_DEBATES = gql`
     debates(first: $first, skip: $skip, where: { type: $filter }) {
       id
       content
+      answerOne
+      answerTwo
       type
       owner {
         id

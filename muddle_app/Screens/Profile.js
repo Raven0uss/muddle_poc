@@ -76,6 +76,8 @@ const GET_INTERACTIONS = gql`
       debate {
         id
         type
+        answerOne
+        answerTwo
         content
         owner {
           id
@@ -126,6 +128,8 @@ const GET_INTERACTIONS = gql`
           id
           type
           content
+          answerOne
+          answerTwo
           owner {
             id
             pseudo

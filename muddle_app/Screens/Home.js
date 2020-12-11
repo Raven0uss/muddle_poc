@@ -38,6 +38,8 @@ const GET_DEBATES = gql`
       id
       content
       createdAt
+      answerOne
+      answerTwo
       type
       owner {
         id
@@ -105,7 +107,7 @@ const Home = (props) => {
     },
   });
   const scrollViewRef = React.useRef(null);
-  
+
   // themeSchema[theme]
 
   const { navigation, route } = props;
