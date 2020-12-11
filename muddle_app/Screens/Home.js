@@ -44,14 +44,17 @@ const GET_DEBATES = gql`
       owner {
         id
         pseudo
+        profilePicture
       }
       ownerBlue {
         id
         pseudo
+        profilePicture
       }
       ownerRed {
         id
         pseudo
+        profilePicture
       }
       positives {
         id
@@ -69,7 +72,9 @@ const GET_DEBATES = gql`
         id
         nested
         from {
+          id
           pseudo
+          profilePicture
         }
         content
         likes {
@@ -146,7 +151,7 @@ const Home = (props) => {
             }}
           >
             <Image
-              source={{ uri: user.profilePicture }}
+              source={{ uri: currentUser.profilePicture }}
               style={styles.profilePicture}
             />
           </TouchableOpacity>

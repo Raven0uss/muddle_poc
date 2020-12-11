@@ -26,6 +26,7 @@ const GET_NOTIFICATIONS = gql`
       who {
         id
         pseudo
+        profilePicture
       }
       type
       status

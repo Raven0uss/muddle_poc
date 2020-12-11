@@ -34,7 +34,7 @@ const DebateBox = (props) => {
             }}
           >
             <Image
-              source={{ uri: defaultProfile }}
+              source={{ uri: debate.owner.profilePicture }}
               style={styles.userPicture}
             />
           </TouchableOpacity>
@@ -200,7 +200,7 @@ const DebateBox = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: debate.ownerBlue.profilePicture }}
                   style={styles.userPictureBlue}
                 />
               </TouchableOpacity>
@@ -231,7 +231,7 @@ const DebateBox = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: debate.ownerRed.profilePicture }}
                   style={styles.userPictureRed}
                 />
               </TouchableOpacity>

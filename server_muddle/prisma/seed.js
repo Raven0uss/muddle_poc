@@ -1,6 +1,7 @@
 const faker = require("faker");
 const bcrypt = require("bcrypt");
 const { prisma } = require("../generated/prisma-client");
+const { defaultProfile, muddleProfile, userProfile } = require("./images");
 
 function shuffleArray(originArray) {
   const array = [...originArray];
@@ -49,6 +50,8 @@ async function main() {
       password: bcrypt.hashSync("test", 12),
       pseudo: faker.internet.userName(),
       birthdate: faker.date.past(),
+      profilePicture:
+        "https://cdn.image4.io/muddles/f_auto/06ec5294-5f6f-417b-8cb6-8ae2af2934b0.png",
     });
   }
 
@@ -125,6 +128,8 @@ async function main() {
     pseudo: "Muddle",
     birthdate: faker.date.past(),
     role: "MUDDLE",
+    profilePicture:
+      "https://cdn.image4.io/muddles/f_auto/541fcf81-ff63-407e-a39f-88f1cf7f1ddf.png",
   });
 
   // Create muddle debates
@@ -147,6 +152,8 @@ async function main() {
     birthdate: faker.date.past(),
     followers: { connect: randomUserList({ users }) },
     following: { connect: randomUserList({ users }) },
+    profilePicture:
+      "https://cdn.image4.io/muddles/f_auto/ed428672-8299-4011-b5cc-7512cde89f6c.jpg",
   });
 
   const B = await prisma.createUser({
@@ -156,6 +163,8 @@ async function main() {
     birthdate: faker.date.past(),
     followers: { connect: randomUserList({ users }) },
     following: { connect: randomUserList({ users }) },
+    profilePicture:
+      "https://cdn.image4.io/muddles/f_auto/ed428672-8299-4011-b5cc-7512cde89f6c.jpg",
   });
 
   const conversation = await prisma.createConversation({

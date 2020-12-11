@@ -34,10 +34,12 @@ const GET_CONVERSATIONS = gql`
         from {
           id
           pseudo
+          profilePicture
         }
         to {
           id
           pseudo
+          profilePicture
         }
       }
     }

@@ -36,6 +36,7 @@ const GET_USER = gql`
     user(where: { pseudo: $userId }) {
       id
       pseudo
+      profilePicture
       trophies {
         id
         type
@@ -43,6 +44,7 @@ const GET_USER = gql`
       followers {
         id
         pseudo
+        profilePicture
         trophies {
           id
           type
@@ -51,6 +53,7 @@ const GET_USER = gql`
       following {
         id
         pseudo
+        profilePicture
         trophies {
           id
           type
@@ -72,6 +75,7 @@ const GET_INTERACTIONS = gql`
       who {
         id
         pseudo
+        profilePicture
       }
       debate {
         id
@@ -82,14 +86,17 @@ const GET_INTERACTIONS = gql`
         owner {
           id
           pseudo
+          profilePicture
         }
         ownerBlue {
           id
           pseudo
+          profilePicture
         }
         ownerRed {
           id
           pseudo
+          profilePicture
         }
         positives {
           id
@@ -108,6 +115,7 @@ const GET_INTERACTIONS = gql`
           nested
           from {
             pseudo
+            profilePicture
           }
           content
           likes {
@@ -132,15 +140,18 @@ const GET_INTERACTIONS = gql`
           answerTwo
           owner {
             id
+            profilePicture
             pseudo
           }
           ownerBlue {
             id
             pseudo
+            profilePicture
           }
           ownerRed {
             id
             pseudo
+            profilePicture
           }
           positives {
             id
@@ -159,6 +170,7 @@ const GET_INTERACTIONS = gql`
             nested
             from {
               pseudo
+              profilePicture
             }
             content
             likes {
@@ -174,6 +186,7 @@ const GET_INTERACTIONS = gql`
         }
         from {
           pseudo
+          profilePicture
         }
         content
         likes {
@@ -425,7 +438,7 @@ const Profile = (props) => {
         </TouchableOpacity>
         <Image
           source={{
-            uri: defaultProfile,
+            uri: user.profilePicture,
           }}
           style={{
             width: 90,

@@ -30,6 +30,7 @@ const GET_TROPHIES = gql`
       user {
         id
         pseudo
+        profilePicture
       }
       type
       debate {
@@ -41,14 +42,17 @@ const GET_TROPHIES = gql`
         owner {
           id
           pseudo
+          profilePicture
         }
         ownerBlue {
           id
           pseudo
+          profilePicture
         }
         ownerRed {
           id
           pseudo
+          profilePicture
         }
         comments {
           id
@@ -60,6 +64,7 @@ const GET_TROPHIES = gql`
           from {
             id
             pseudo
+            profilePicture
           }
         }
         positives {
@@ -89,11 +94,13 @@ const GET_TROPHIES = gql`
           from {
             id
             pseudo
+            profilePicture
           }
         }
         from {
           id
           pseudo
+          profilePicture
         }
         debate {
           id
@@ -104,14 +111,17 @@ const GET_TROPHIES = gql`
           owner {
             id
             pseudo
+            profilePicture
           }
           ownerBlue {
             id
             pseudo
+            profilePicture
           }
           ownerRed {
             id
             pseudo
+            profilePicture
           }
           positives {
             id
@@ -132,6 +142,7 @@ const GET_TROPHIES = gql`
             from {
               id
               pseudo
+              profilePicture
             }
             comments {
               id

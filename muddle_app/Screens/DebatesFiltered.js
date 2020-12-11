@@ -32,14 +32,17 @@ const GET_DEBATES = gql`
       owner {
         id
         pseudo
+        profilePicture
       }
       ownerBlue {
         id
         pseudo
+        profilePicture
       }
       ownerRed {
         id
         pseudo
+        profilePicture
       }
       positives {
         id
@@ -57,6 +60,7 @@ const GET_DEBATES = gql`
         id
         from {
           pseudo
+          profilePicture
         }
         content
         likes {

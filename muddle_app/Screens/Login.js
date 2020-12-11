@@ -220,14 +220,13 @@ function LoginComponent(props) {
               {i18n._("connect")}
             </Text>
           </TouchableOpacity>
-
           {/* DEBUG TOKEN */}
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
               Keyboard.dismiss();
               removeItem("token");
               removeItem("currentUser");
-              setUser(null);
+              setCurrentUser(null);
             }}
             style={styles.connectionButton}
             // disabled
@@ -241,7 +240,6 @@ function LoginComponent(props) {
               DELETE TOKEN
             </Text>
           </TouchableOpacity>
-
           <TouchableOpacity
             onPress={async () => {
               Keyboard.dismiss();
@@ -260,7 +258,7 @@ function LoginComponent(props) {
             >
               LOG ITEMS
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
       <View style={styles.noAccountBloc}>

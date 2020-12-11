@@ -31,6 +31,7 @@ const GET_SUBCOMMENTS = gql`
         id
         from {
           pseudo
+          profilePicture
         }
         content
         likes {

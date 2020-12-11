@@ -37,6 +37,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
           speakers {
             id
             pseudo
+            profilePicture
           }
           messages {
             id
@@ -44,10 +45,12 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             from {
               id
               pseudo
+              profilePicture
             }
             to {
               id
               pseudo
+              profilePicture
             }
           }
         }
@@ -64,6 +67,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
           speakers {
             id
             pseudo
+            profilePicture
           }
           messages {
             id
@@ -71,10 +75,12 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             from {
               id
               pseudo
+              profilePicture
             }
             to {
               id
               pseudo
+              profilePicture
             }
           }
         }
