@@ -22,11 +22,11 @@ import {
 import DebateBox from "../Components/DebateBox";
 import { useQuery, gql } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
-import { set } from "react-native-reanimated";
 import { flatten, isEmpty, last } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const user = {
   profilePicture: defaultProfile,
@@ -95,6 +95,7 @@ const renderItem = ({ item }, navigation) => {
 
 const Home = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [debates, setDebates] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
@@ -113,6 +114,8 @@ const Home = (props) => {
   const { navigation, route } = props;
 
   console.log(route.params);
+
+  console.log(currentUser);
   // console.log(debates.length);
 
   // if (error) {

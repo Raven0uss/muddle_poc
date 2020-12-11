@@ -48,9 +48,7 @@ const Query = prismaObjectType({
             throw new Error("Invalid credentials");
           }
 
-          const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
-            expiresIn: 36000,
-          });
+          const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY);
 
           return { token };
         } catch (error) {

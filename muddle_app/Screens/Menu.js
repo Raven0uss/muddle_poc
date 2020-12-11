@@ -14,10 +14,13 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { useIsFocused } from "@react-navigation/native";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
+import { removeItem } from "../CustomProperties/storage";
 
 const Menu = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { setCurrentUser } = React.useContext(UserContext);
   const [refresh, setRefresh] = React.useState(true);
 
   const isFocused = useIsFocused();
@@ -168,7 +171,9 @@ const Menu = (props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            // console.log("Log out");
+            removeItem("token");
+            removeItem("currentUser");
+            setCurrentUser(null);
             navigation.navigate("Login");
           }}
         >

@@ -19,13 +19,97 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { Snackbar } from "react-native-paper";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
+import { storeItem, removeItem, getItem } from "../CustomProperties/storage";
+import { useQuery, gql } from "@apollo/client";
+import { set } from "lodash";
+
+const LOGIN = gql`
+  query($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+const GET_CURRENT_USER = gql`
+  query {
+    currentUser {
+      id
+      email
+      pseudo
+      language
+      profilePicture
+    }
+  }
+`;
 
 function LoginComponent(props) {
   const { theme } = React.useContext(ThemeContext);
+  const { setCurrentUser, currentUser } = React.useContext(UserContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visibility, setVisibility] = React.useState(false);
+  const [skipLogin, setSkipLogin] = React.useState(true);
+  const [skipGetUser, setSkipGetUser] = React.useState(true);
+
+  React.useEffect(() => {
+    const detectConnected = async () => {
+      const token = await getItem("token");
+
+      if (token !== null) {
+        setSkipGetUser(false);
+      }
+    };
+
+    detectConnected();
+  }, []);
+
+  const { loadingLogin, errorLogin } = useQuery(LOGIN, {
+    variables: {
+      email,
+      password,
+    },
+    onCompleted: async (response) => {
+      const { signIn: queryResult } = response;
+
+      await storeItem("token", queryResult.token);
+
+      setSkipLogin(true);
+      setSkipGetUser(false);
+    },
+    onError: (error) => {
+      // console.log(error);
+      setSnack({
+        visible: true,
+        message: "L'identifiant ou le mot de passe est incorrect.",
+        type: "error",
+      });
+      setSkipLogin(true);
+    },
+    skip: skipLogin,
+  });
+
+  const { loadingUser, errorUser } = useQuery(GET_CURRENT_USER, {
+    onCompleted: async (response) => {
+      const { currentUser: queryResult } = response;
+
+      console.log("wesh");
+      setCurrentUser(queryResult);
+      await storeItem("user", JSON.stringify(queryResult));
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+      setSkipGetUser(true);
+    },
+    onError: (error) => {
+      console.log(error);
+      setSkipLogin(true);
+    },
+    skip: skipGetUser,
+  });
 
   const [snack, setSnack] = React.useState({
     visible: false,
@@ -121,22 +205,8 @@ function LoginComponent(props) {
           </TouchableWithoutFeedback>
           <TouchableOpacity
             onPress={() => {
-              console.log("Connection");
               Keyboard.dismiss();
-              // setSnack({
-              //   visible: true,
-              //   message: "L'identifiant ou le mot de passe est incorrect.",
-              //   type: "error",
-              // });
-              // navigation.navigate("Home", {
-              //   user: {
-              //     name: "test",
-              //   },
-              // });
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Home", params: { user: "test" } }],
-              });
+              setSkipLogin(false);
             }}
             style={styles.connectionButton}
             // disabled
@@ -150,6 +220,47 @@ function LoginComponent(props) {
               {i18n._("connect")}
             </Text>
           </TouchableOpacity>
+
+          {/* DEBUG TOKEN */}
+          {/* <TouchableOpacity
+            onPress={() => {
+              Keyboard.dismiss();
+              removeItem("token");
+              removeItem("currentUser");
+              setUser(null);
+            }}
+            style={styles.connectionButton}
+            // disabled
+          >
+            <Text
+              style={{
+                color: "#F47658",
+                fontFamily: "Montserrat_700Bold",
+              }}
+            >
+              DELETE TOKEN
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={async () => {
+              Keyboard.dismiss();
+              console.log(await getItem("token"));
+              console.log(await getItem("currentUser"));
+              console.log(currentUser);
+            }}
+            style={styles.connectionButton}
+            // disabled
+          >
+            <Text
+              style={{
+                color: "#F47658",
+                fontFamily: "Montserrat_700Bold",
+              }}
+            >
+              LOG ITEMS
+            </Text>
+          </TouchableOpacity> */}
         </View>
       </KeyboardAvoidingView>
       <View style={styles.noAccountBloc}>

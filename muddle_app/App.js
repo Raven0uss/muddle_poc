@@ -31,6 +31,7 @@ import { I18nProvider } from "@lingui/react";
 import i18n, { getDeviceLocale } from "./i18n";
 
 import ThemeContext from "./CustomProperties/ThemeContext";
+import UserContext from "./CustomProperties/UserContext";
 
 import TestScreen from "./Screens/Test";
 
@@ -61,12 +62,13 @@ import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
+import { getItem } from "./CustomProperties/storage";
 
 const Stack = createStackNavigator();
 
 // const mode = "COMPONENTS";
-const mode = "APP";
-// const mode = "LOGIN";
+// const mode = "APP";
+const mode = "LOGIN";
 
 const setInitialRoute = () => {
   switch (mode) {
@@ -82,6 +84,7 @@ const setInitialRoute = () => {
 };
 
 export default function App() {
+  const [currentUser, setCurrentUser] = React.useState(null);
   const [language, setLanguage] = React.useState(getDeviceLocale());
   const [theme, setTheme] = React.useState("light");
   let [fontsLoaded] = useFonts({
@@ -104,6 +107,18 @@ export default function App() {
     Montserrat_900Black,
     Montserrat_900Black_Italic,
   });
+
+  React.useEffect(() => {
+    const setStorage = async () => {
+      const element = await getItem("currentUser");
+      console.log(element);
+      if (element) {
+        setCurrentUser(JSON.parse(element));
+      }
+    };
+
+    setStorage();
+  }, []);
 
   const changeLanguage = (lang) => {
     console.log(lang);
@@ -137,272 +152,277 @@ export default function App() {
               toggleTheme,
             }}
           >
-            {/* <UserContext.Provider> */}
-            <Stack.Navigator initialRouteName={setInitialRoute()}>
-              <Stack.Screen
-                name="Test"
-                component={TestScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
+            <UserContext.Provider
+              value={{
+                currentUser,
+                setCurrentUser,
+              }}
+            >
+              <Stack.Navigator initialRouteName={setInitialRoute()}>
+                <Stack.Screen
+                  name="Test"
+                  component={TestScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
 
-              {/* Login Part */}
-              <Stack.Screen
-                name="Login"
-                component={LoginScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="SignUp"
-                component={SignUpScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="ForgotPassword"
-                component={ForgotPasswordScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
+                {/* Login Part */}
+                <Stack.Screen
+                  name="Login"
+                  component={LoginScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="SignUp"
+                  component={SignUpScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="ForgotPassword"
+                  component={ForgotPasswordScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
 
-              {/* Main */}
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                initialParams={{
-                  changeLanguage,
-                  user: {
-                    //Test
-                    name: "test",
-                  },
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Report"
-                component={ReportScreen}
-                initialParams={{
-                  changeLanguage,
-                  user: {
-                    //Test
-                    name: "test",
-                  },
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Search"
-                component={SearchScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Conversations"
-                component={ConversationsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="NewConversation"
-                component={NewConversationScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Chat"
-                component={ChatScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Notifications"
-                component={NotificationsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="CreateDebate"
-                component={CreateDebateScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Follow"
-                component={FollowScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="DebatesFiltered"
-                component={DebatesFilteredScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Profile"
-                component={ProfileScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Trophies"
-                component={TrophiesScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Debate"
-                component={DebateScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="IsolateComment"
-                component={IsolateCommentScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
+                {/* Main */}
+                <Stack.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  initialParams={{
+                    changeLanguage,
+                    user: {
+                      //Test
+                      name: "test",
+                    },
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Report"
+                  component={ReportScreen}
+                  initialParams={{
+                    changeLanguage,
+                    user: {
+                      //Test
+                      name: "test",
+                    },
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Search"
+                  component={SearchScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Conversations"
+                  component={ConversationsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="NewConversation"
+                  component={NewConversationScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Chat"
+                  component={ChatScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Notifications"
+                  component={NotificationsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="CreateDebate"
+                  component={CreateDebateScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Follow"
+                  component={FollowScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="DebatesFiltered"
+                  component={DebatesFilteredScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Profile"
+                  component={ProfileScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Trophies"
+                  component={TrophiesScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Debate"
+                  component={DebateScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="IsolateComment"
+                  component={IsolateCommentScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
 
-              {/* Menu */}
-              <Stack.Screen
-                name="Menu"
-                component={MenuScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Settings"
-                component={SettingsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="LanguageSettings"
-                component={LanguageSettingsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="ContactUs"
-                component={ContactUsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Cgu"
-                component={CguScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="LegaleMentions"
-                component={LegaleMentionsScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="VotesPrivacy"
-                component={VotesPrivacyScreen}
-                initialParams={{
-                  changeLanguage,
-                }}
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Stack.Navigator>
+                {/* Menu */}
+                <Stack.Screen
+                  name="Menu"
+                  component={MenuScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Settings"
+                  component={SettingsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="LanguageSettings"
+                  component={LanguageSettingsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="ContactUs"
+                  component={ContactUsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Cgu"
+                  component={CguScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="LegaleMentions"
+                  component={LegaleMentionsScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="VotesPrivacy"
+                  component={VotesPrivacyScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              </Stack.Navigator>
+            </UserContext.Provider>
           </ThemeContext.Provider>
-          {/* </UserContext.Provider> */}
         </ApolloProvider>
       </I18nProvider>
     </NavigationContainer>
