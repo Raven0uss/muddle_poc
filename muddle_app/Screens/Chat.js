@@ -191,7 +191,7 @@ const Chat = (props) => {
             }}
           >
             <Image
-              source={{ uri: defaultProfile }}
+              source={{ uri: partner.profilePicture }}
               style={{
                 width: 38,
                 height: 38,

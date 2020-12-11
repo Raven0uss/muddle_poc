@@ -44,7 +44,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,
@@ -110,7 +113,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,
@@ -233,7 +239,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,
@@ -331,7 +340,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,
@@ -466,7 +478,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,
@@ -562,7 +577,10 @@ const NotificationBox = (props) => {
               }}
             />
           )}
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
           <View
             style={{
               marginLeft: 20,

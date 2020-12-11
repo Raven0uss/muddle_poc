@@ -427,7 +427,7 @@ const Profile = (props) => {
               uri:
                 theme === "light"
                   ? muddle.trophies_light
-                  : muddle.trophies_dark, // Have to be dynamic par rapport au theme
+                  : muddle.trophies_dark,
             }}
             style={{
               width: 30,
@@ -450,7 +450,7 @@ const Profile = (props) => {
             padding: 5,
             marginLeft: 5,
           }}
-          resizeMode="center"
+          // resizeMode="center"
         />
 
         <View

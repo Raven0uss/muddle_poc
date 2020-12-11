@@ -64,6 +64,10 @@ function LoginComponent(props) {
     };
 
     detectConnected();
+
+    return () => {
+      setSkipGetUser(true);
+    };
   }, []);
 
   const { loadingLogin, errorLogin } = useQuery(LOGIN, {
@@ -74,19 +78,28 @@ function LoginComponent(props) {
     onCompleted: async (response) => {
       const { signIn: queryResult } = response;
 
-      await storeItem("token", queryResult.token);
+      console.log("1");
+      console.log(response);
+      const result = await storeItem("token", queryResult.token);
+      console.log(result);
 
       setSkipLogin(true);
       setSkipGetUser(false);
     },
     onError: (error) => {
       // console.log(error);
+
+      console.log("2");
+      console.log(error);
+      console.log(email);
+      console.log(password);
+      setSkipLogin(true);
+      setSkipGetUser(true);
       setSnack({
         visible: true,
         message: "L'identifiant ou le mot de passe est incorrect.",
         type: "error",
       });
-      setSkipLogin(true);
     },
     skip: skipLogin,
   });
@@ -96,17 +109,22 @@ function LoginComponent(props) {
       const { currentUser: queryResult } = response;
 
       // console.log("wesh");
+      console.log("3");
       setCurrentUser(queryResult);
-      await storeItem("user", JSON.stringify(queryResult));
+      const token = await storeItem("user", JSON.stringify(queryResult));
       navigation.reset({
         index: 0,
         routes: [{ name: "Home" }],
       });
       setSkipGetUser(true);
+      setSkipLogin(true);
     },
     onError: (error) => {
+      console.log("4");
+
       console.log(error);
       setSkipLogin(true);
+      setSkipGetUser(true);
     },
     skip: skipGetUser,
   });
@@ -135,6 +153,8 @@ function LoginComponent(props) {
     { backgroundColor: "#F47658" },
   ]);
 
+  console.log(skipGetUser);
+  console.log(skipLogin);
   return (
     <View style={containerStyle}>
       <Header hidden />
@@ -207,6 +227,7 @@ function LoginComponent(props) {
             onPress={() => {
               Keyboard.dismiss();
               setSkipLogin(false);
+              console.log(skipLogin);
             }}
             style={styles.connectionButton}
             // disabled

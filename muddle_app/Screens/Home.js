@@ -27,10 +27,7 @@ import CreateDebateButton from "../Components/CreateDebateButton";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
-
-const user = {
-  profilePicture: defaultProfile,
-};
+import { get } from "lodash";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -146,12 +143,14 @@ const Home = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Profile", {
-                userId: "userA", // Personne connectee
+                userId: currentUser.pseudo, // Personne connectee
               });
             }}
           >
             <Image
-              source={{ uri: currentUser.profilePicture }}
+              source={{
+                uri: get(currentUser, "profilePicture", defaultProfile),
+              }}
               style={styles.profilePicture}
             />
           </TouchableOpacity>

@@ -29,7 +29,10 @@ const CommentBox = (props) => {
             });
           }}
         >
-          <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+          <Image
+            source={{ uri: comment.from.profilePicture }}
+            style={styles.userPicture}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

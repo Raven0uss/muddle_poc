@@ -217,7 +217,7 @@ const NewConversation = (props) => {
                   }}
                 >
                   <Image
-                    source={{ uri: defaultProfile }}
+                    source={{ uri: u.profilePicture }}
                     style={styles.userPicture}
                   />
                   <Text

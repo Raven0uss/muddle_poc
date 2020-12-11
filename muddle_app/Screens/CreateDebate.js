@@ -23,6 +23,7 @@ import moment from "moment";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const checkOnlyDigits = (str) => {
   const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -191,7 +192,7 @@ const InvitationDebate = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: currentUser.profilePicture }}
                   style={styles.userPicture}
                 />
 
@@ -216,6 +217,7 @@ const InvitationDebate = (props) => {
 
 const CreateDebate = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [debateType, setDebateType] = React.useState({
     label: i18n._("publicDebateSelect"),
     value: "PUBLIC",
@@ -276,7 +278,7 @@ const CreateDebate = (props) => {
               }}
             >
               <Image
-                source={{ uri: defaultProfile }}
+                source={{ uri: currentUser.profilePicture }}
                 style={{
                   width: 38,
                   height: 38,
@@ -291,7 +293,7 @@ const CreateDebate = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                Sid-Ahmed Fahem
+                {currentUser.pseudo}
               </Text>
             </View>
             <View style={{ marginTop: 10 }}>

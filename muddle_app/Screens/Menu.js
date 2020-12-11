@@ -174,7 +174,10 @@ const Menu = (props) => {
             removeItem("token");
             removeItem("currentUser");
             setCurrentUser(null);
-            navigation.navigate("Login");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Login" }],
+            });
           }}
         >
           <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />

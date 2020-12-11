@@ -1,7 +1,7 @@
 const faker = require("faker");
 const bcrypt = require("bcrypt");
 const { prisma } = require("../generated/prisma-client");
-const { defaultProfile, muddleProfile, userProfile } = require("./images");
+const { userProfile } = require("./images");
 
 function shuffleArray(originArray) {
   const array = [...originArray];
@@ -45,13 +45,13 @@ const getRandomComments = (nb, { users, debate, subComment = false }) => {
 async function main() {
   // Create random users
   for (let index = 0; index < 10; index++) {
+    const imageRandom = userProfile[faker.random.number(11)];
     await prisma.createUser({
       email: faker.internet.email(),
       password: bcrypt.hashSync("test", 12),
       pseudo: faker.internet.userName(),
       birthdate: faker.date.past(),
-      profilePicture:
-        "https://cdn.image4.io/muddles/f_auto/06ec5294-5f6f-417b-8cb6-8ae2af2934b0.png",
+      profilePicture: imageRandom,
     });
   }
 

@@ -175,7 +175,7 @@ const IsolateComment = (props) => {
             }}
           >
             <Image
-              source={{ uri: defaultProfile }}
+              source={{ uri: comment.from.profilePicture }}
               style={styles.userPicture}
             />
           </TouchableOpacity>

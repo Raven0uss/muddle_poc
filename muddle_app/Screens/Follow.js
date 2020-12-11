@@ -147,7 +147,7 @@ const Follow = (props) => {
               }}
             >
               <Image
-                source={{ uri: defaultProfile }}
+                source={{ uri: contact.profilePicture }}
                 style={styles.userPicture}
               />
               <Text

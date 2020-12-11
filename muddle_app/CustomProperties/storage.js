@@ -4,8 +4,8 @@ import { AsyncStorage } from "react-native";
 
 const storeItem = async (key, value) => {
   try {
-    await AsyncStorage.setItem(key, value);
-    return value;
+    const result = await AsyncStorage.setItem(key, value);
+    return result;
   } catch (error) {
     console.error("An issue occurred with storeItem : ", error);
     return null;
@@ -24,8 +24,8 @@ const getItem = async (key) => {
 
 const removeItem = async (key) => {
   try {
-    await AsyncStorage.removeItem(key);
-    return;
+    const result = await AsyncStorage.removeItem(key);
+    return result;
   } catch (error) {
     console.error("An issue occurred with getItem : ", error);
     return null;

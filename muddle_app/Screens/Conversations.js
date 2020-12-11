@@ -72,7 +72,10 @@ const renderItem = ({ item }, navigation, theme) => {
           paddingRight: 5,
         }}
       >
-        <Image source={{ uri: defaultProfile }} style={styles.userPicture} />
+        <Image
+          source={{ uri: lastMessage.from.profilePicture }}
+          style={styles.userPicture}
+        />
         <View style={{ marginLeft: 40, marginTop: 10 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text

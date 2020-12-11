@@ -46,7 +46,7 @@ const TrophyBox = (props) => {
               }}
             >
               <Image
-                source={{ uri: defaultProfile }}
+                source={{ uri: trophy.comment.debate.owner.profilePicture }}
                 style={styles.userPicture}
               />
             </TouchableOpacity>
@@ -218,7 +218,7 @@ const TrophyBox = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: trophy.comment.from.profilePicture }}
                   style={styles.userPicture}
                 />
               </TouchableOpacity>
@@ -287,7 +287,7 @@ const TrophyBox = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: debate.ownerBlue.profilePicture }}
                   style={styles.userPictureBlue}
                 />
               </TouchableOpacity>
@@ -318,7 +318,7 @@ const TrophyBox = (props) => {
                 }}
               >
                 <Image
-                  source={{ uri: defaultProfile }}
+                  source={{ uri: debate.ownerRed.profilePicture }}
                   style={styles.userPictureRed}
                 />
               </TouchableOpacity>

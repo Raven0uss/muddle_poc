@@ -41,9 +41,10 @@ const Query = prismaObjectType({
           if (!user) {
             throw new Error("Invalid credentials");
           }
-
+          console.log(user);
           const passwordMatch = bcrypt.compareSync(password, user.password);
 
+          console.log(password);
           if (!passwordMatch) {
             throw new Error("Invalid credentials");
           }
