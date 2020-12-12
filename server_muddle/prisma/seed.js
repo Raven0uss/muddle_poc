@@ -70,7 +70,7 @@ async function main() {
       type: "STANDARD",
       positives: { connect: randomUserList({ users }) },
       negatives: { connect: randomUserList({ users }) },
-      answerOne: "Je suis pour",
+      answerOne: "Je suis pour tester un bouton avec max",
       answerTwo: "Je suis contre",
     });
   }
@@ -86,7 +86,7 @@ async function main() {
       blueVotes: { connect: randomUserList({ users }) },
       redVotes: { connect: randomUserList({ users }) },
       answerOne: "Je suis pour",
-      answerTwo: "Je suis contre",
+      answerTwo: "Je suis contre hehe",
     });
   }
 

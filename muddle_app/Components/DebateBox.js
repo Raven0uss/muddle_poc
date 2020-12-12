@@ -8,8 +8,36 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 
-const displayPercent = ({ votes, totalVotes }) => {
-  return `${Math.round((votes / totalVotes) * 100)}%`;
+const displayPercent = ({ votes, totalVotes, answer }) => {
+  return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
+};
+
+const manageHeightButton = ({ answerOne, answerTwo }) => {
+  const oneLine = 38;
+  const twoLines = 55;
+  const threeLines = 80;
+
+  if (answerOne.length <= 14 && answerTwo.length <= 14) return oneLine;
+
+  if (answerOne.length > 14 && answerOne.length <= 28) {
+    if (answerTwo.length <= 28) {
+      return twoLines;
+    }
+    if (answerTwo.length > 28) {
+      return threeLines;
+    }
+  }
+  if (answerTwo.length > 14 && answerTwo.length <= 28) {
+    if (answerOne.length <= 28) {
+      return twoLines;
+    }
+    if (answerOne.length > 28) {
+      return threeLines;
+    }
+  }
+  if (answerOne.length > 28 || answerTwo.length > 28) {
+    return threeLines;
+  }
 };
 
 const DebateBox = (props) => {
@@ -142,6 +170,7 @@ const DebateBox = (props) => {
               voted
                 ? {
                     ...styles.votePourButton,
+                    height: manageHeightButton(debate),
                     backgroundColor:
                       voted === "pour"
                         ? "#F47658"
@@ -149,16 +178,18 @@ const DebateBox = (props) => {
                   }
                 : {
                     ...styles.votePourButton,
+                    height: manageHeightButton(debate),
                     backgroundColor: themeSchema[theme].backgroundColor2,
                   }
             }
             disabled={voted}
           >
             <Text
-              numberOfLines={1}
+              // numberOfLines={1}
               style={{
                 color: themeSchema[theme].colorText,
                 fontSize: 12,
+                textAlign: "center",
                 paddingLeft: 12,
                 paddingRight: 12,
                 fontFamily: voted
@@ -170,6 +201,7 @@ const DebateBox = (props) => {
                 ? displayPercent({
                     votes: pour,
                     totalVotes: votes,
+                    answer: debate.answerOne,
                   })
                 : debate.answerOne}
             </Text>
@@ -185,11 +217,13 @@ const DebateBox = (props) => {
                         ? themeSchema[theme].colorText
                         : themeSchema[theme].colorText3,
                     borderColor: themeSchema[theme].colorText,
+                    height: manageHeightButton(debate),
                   }
                 : {
                     ...styles.voteContreButton,
                     backgroundColor: themeSchema[theme].backgroundColor2,
                     borderColor: themeSchema[theme].colorText,
+                    height: manageHeightButton(debate),
                   }
             }
             onPress={() => {
@@ -199,7 +233,7 @@ const DebateBox = (props) => {
             disabled={voted}
           >
             <Text
-              numberOfLines={1}
+              // numberOfLines={1}
               style={
                 voted
                   ? {
@@ -211,6 +245,7 @@ const DebateBox = (props) => {
                       paddingLeft: 6,
                       paddingRight: 6,
                       fontFamily: "Montserrat_600SemiBold",
+                      textAlign: "center",
                     }
                   : {
                       color: themeSchema[theme].colorText,
@@ -218,6 +253,7 @@ const DebateBox = (props) => {
                       paddingLeft: 6,
                       paddingRight: 6,
                       fontFamily: "Montserrat_500Medium",
+                      textAlign: "center",
                     }
               }
             >
@@ -225,6 +261,7 @@ const DebateBox = (props) => {
                 ? displayPercent({
                     votes: contre,
                     totalVotes: votes,
+                    answer: debate.answerTwo,
                   })
                 : debate.answerTwo}
             </Text>
@@ -387,16 +424,18 @@ const DebateBox = (props) => {
                         voted === "pour"
                           ? "#F47658"
                           : themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
                     }
                   : {
                       ...styles.votePourButton,
                       backgroundColor: themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
                     }
               }
               disabled={voted}
             >
               <Text
-                numberOfLines={1}
+                // numberOfLines={1}
                 style={{
                   color: themeSchema[theme].colorText,
                   fontSize: 12,
@@ -406,12 +445,14 @@ const DebateBox = (props) => {
                     voted === "pour"
                       ? "Montserrat_600SemiBold"
                       : "Montserrat_500Medium",
+                  textAlign: "center",
                 }}
               >
                 {voted
                   ? displayPercent({
                       votes: pour,
                       totalVotes: votes,
+                      answer: debate.answerOne,
                     })
                   : debate.answerOne}
               </Text>
@@ -447,17 +488,19 @@ const DebateBox = (props) => {
                         ? themeSchema[theme].colorText
                         : themeSchema[theme].colorText3,
                       borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
                     }
                   : {
                       ...styles.voteRedButton,
                       backgroundColor: themeSchema[theme].backgroundColor2,
                       borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
                     }
               }
               disabled={voted}
             >
               <Text
-                numberOfLines={1}
+                // numberOfLines={1}
                 style={
                   voted
                     ? {
@@ -468,6 +511,7 @@ const DebateBox = (props) => {
                         paddingLeft: 6,
                         paddingRight: 6,
                         fontFamily: "Montserrat_600SemiBold",
+                        textAlign: "center",
                       }
                     : {
                         color: themeSchema[theme].colorText,
@@ -475,6 +519,7 @@ const DebateBox = (props) => {
                         paddingLeft: 6,
                         paddingRight: 6,
                         fontFamily: "Montserrat_500Medium",
+                        textAlign: "center",
                       }
                 }
               >
@@ -482,6 +527,7 @@ const DebateBox = (props) => {
                   ? displayPercent({
                       votes: contre,
                       totalVotes: votes,
+                      answer: debate.answerTwo,
                     })
                   : debate.answerTwo}
               </Text>
@@ -520,7 +566,7 @@ const DebateBox = (props) => {
 
 const styles = StyleSheet.create({
   boxDebate: {
-    maxHeight: 300,
+    maxHeight: 340,
     backgroundColor: "white",
     elevation: 4,
     borderRadius: 7,
@@ -569,7 +615,7 @@ const styles = StyleSheet.create({
   },
 
   votePourButton: {
-    flexDirection: "row",
+    // flexDirection: "row",
     backgroundColor: "#fff",
     paddingTop: 2,
     // paddingLeft: 30,
@@ -578,10 +624,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#F47658",
     borderStyle: "solid",
-    height: 36,
+    // height: 36,
     alignItems: "center",
+    // alignContent: "center",
     justifyContent: "center",
     width: 108,
+    // overflow: "visible",
     // marginLeft: 5,
   },
   voteContreButton: {
@@ -594,7 +642,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#000",
     borderStyle: "solid",
-    height: 36,
+    // height: 36,
     alignItems: "center",
     justifyContent: "center",
     width: 108,
