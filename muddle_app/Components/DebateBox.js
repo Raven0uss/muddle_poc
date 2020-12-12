@@ -276,6 +276,7 @@ const DebateBox = (props) => {
               ...styles.commentButton,
               backgroundColor: themeSchema[theme].backgroundColor2,
               borderColor: themeSchema[theme].colorText,
+              alignSelf: "center",
             }}
           >
             <CustomIcon
@@ -467,6 +468,7 @@ const DebateBox = (props) => {
                 ...styles.commentDuoButton,
                 backgroundColor: themeSchema[theme].backgroundColor2,
                 borderColor: themeSchema[theme].colorText,
+                alignSelf: "center",
               }}
             >
               <CustomIcon
