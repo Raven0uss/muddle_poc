@@ -18,11 +18,16 @@ import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import { isEmpty } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 
 const GET_CONVERSATIONS = gql`
-  query($first: Int!, $skip: Int) {
-    conversations(first: $first, skip: $skip) {
+  query($first: Int!, $skip: Int, $user: String!) {
+    conversations(
+      first: $first
+      skip: $skip
+      where: { speakers_some: { email: $user } }
+    ) {
       id
       speakers {
         id
@@ -123,6 +128,7 @@ const renderItem = ({ item }, navigation, theme) => {
 
 const Conversations = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [conversations, setConversations] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -130,10 +136,12 @@ const Conversations = (props) => {
   const { data, loading, error, fetchMore } = useQuery(GET_CONVERSATIONS, {
     variables: {
       first: nbConversations,
+      user: currentUser.email,
     },
     onCompleted: (response) => {
       const { conversations: queryResult } = response;
       setConversations(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
   });
 

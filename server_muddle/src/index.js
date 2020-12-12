@@ -14,7 +14,6 @@ const server = new GraphQLServer({
   context: async ({ request }) => {
     // console.log(request.headers.token);
     const currentUser = await getCurrentUser(request);
-
     // console.log(currentUser);
     return {
       currentUser,

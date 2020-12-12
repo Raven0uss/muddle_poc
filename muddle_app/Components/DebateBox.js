@@ -48,7 +48,9 @@ const DebateBox = (props) => {
             <Text
               style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
             >
-              {`${debate.owner.firstname} ${debate.owner.lastname}`}
+              {debate.type === "MUDDLE"
+                ? debate.owner.firstname
+                : `${debate.owner.firstname} ${debate.owner.lastname}`}
             </Text>
           </TouchableOpacity>
           <View style={{ marginLeft: "auto" }}>

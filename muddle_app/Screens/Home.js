@@ -115,6 +115,7 @@ const Home = (props) => {
     onCompleted: (response) => {
       const { debates: queryResult } = response;
       setDebates(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
   });
   const scrollViewRef = React.useRef(null);

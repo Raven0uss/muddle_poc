@@ -8,6 +8,7 @@ import themeSchema from "../CustomProperties/Theme";
 
 const CommentBox = (props) => {
   const { comment, navigation, theme } = props;
+  // console.log(comment.comments === undefined);
   return (
     <View
       style={{

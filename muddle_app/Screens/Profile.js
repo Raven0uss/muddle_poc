@@ -257,6 +257,7 @@ const Interactions = (props) => {
     onCompleted: (response) => {
       const { interactions: queryResult } = response;
       setInteractions(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
   });
 

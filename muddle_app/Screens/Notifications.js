@@ -67,6 +67,7 @@ const Notifications = (props) => {
     onCompleted: (response) => {
       const { notifications: queryResult } = response;
       setNotifications(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
   });
 

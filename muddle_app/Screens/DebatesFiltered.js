@@ -19,68 +19,9 @@ import DebateBox from "../Components/DebateBox";
 import { isEmpty } from "lodash";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
+import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
-
-const GET_DEBATES = gql`
-  query($first: Int!, $skip: Int, $filter: DebateType) {
-    debates(first: $first, skip: $skip, where: { type: $filter }) {
-      id
-      content
-      answerOne
-      answerTwo
-      type
-      owner {
-        id
-        firstname
-        lastname
-        email
-        profilePicture
-      }
-      ownerBlue {
-        id
-        firstname
-        lastname
-        email
-        profilePicture
-      }
-      ownerRed {
-        id
-        firstname
-        lastname
-        email
-        profilePicture
-      }
-      positives {
-        id
-      }
-      negatives {
-        id
-      }
-      redVotes {
-        id
-      }
-      blueVotes {
-        id
-      }
-      comments {
-        id
-        from {
-          firstname
-          lastname
-          email
-          profilePicture
-        }
-        content
-        likes {
-          id
-        }
-        dislikes {
-          id
-        }
-      }
-    }
-  }
-`;
+import GET_DEBATES from "../gql/getDebates";
 
 const frequency = 20;
 let nbDebates = frequency;
@@ -105,22 +46,32 @@ const applyFilter = ({ debates, debateType }) => {
 
 const DebatesFiltered = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [debates, setDebates] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [debateType, setDebateType] = React.useState("DUO");
 
-  const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
-    variables: {
-      first: nbDebates,
-      ...(debateType === "BEST_DEBATES" || debateType === "MY_DEBATES"
-        ? { filter: "STANDARD" }
-        : { filter: debateType }),
-    },
-    onCompleted: (response) => {
-      const { debates: queryResult } = response;
-      setDebates(queryResult);
-    },
-  });
+  const { data, loading, error, fetchMore } = useQuery(
+    GET_DEBATES(debateType),
+    {
+      variables: {
+        first: nbDebates,
+        ...(debateType === "BEST_DEBATES" || debateType === "MY_DEBATES"
+          ? { filter: "" }
+          : { filter: debateType }),
+        user: currentUser.email,
+      },
+      onCompleted: (response) => {
+        const { debates: queryResult } = response;
+        // console.log(response);
+        setDebates(queryResult);
+        if (queryResult.length === 0) setNoMoreData(true);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
 
   const { navigation, route } = props;
 
@@ -261,7 +212,7 @@ const DebatesFiltered = (props) => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-      {loading ? (
+      {loading && debates.length === 0 ? (
         <SafeAreaView
           style={{
             ...styles.loadingContainer,

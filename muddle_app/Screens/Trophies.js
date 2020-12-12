@@ -197,6 +197,7 @@ const Trophies = (props) => {
     onCompleted: (response) => {
       const { trophies: queryResult } = response;
       setTrophies(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
   });
 

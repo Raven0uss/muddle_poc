@@ -63,7 +63,9 @@ const TrophyBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${trophy.comment.debate.owner.firstname} ${trophy.comment.debate.owner.lastname}`}
+                {trophy.comment.debate.type === "MUDDLE"
+                  ? trophy.comment.debate.owner.firstname
+                  : `${trophy.comment.debate.owner.firstname} ${trophy.comment.debate.owner.lastname}`}
               </Text>
             </TouchableOpacity>
             <View style={{ marginLeft: "auto" }}>

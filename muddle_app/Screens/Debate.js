@@ -54,6 +54,8 @@ const Debate = (props) => {
       : debate.redVotes.length + debate.blueVotes.length;
   const comments = debate.comments.length;
 
+  console.log(debate.comments.comments === undefined);
+  // console.log(debate);
   return (
     <View
       style={{
@@ -152,7 +154,9 @@ const Debate = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${debate.owner.firstname} ${debate.owner.lastname}`}
+                {debate.type === "MUDDLE"
+                  ? debate.owner.firstname
+                  : `${debate.owner.firstname} ${debate.owner.lastname}`}
               </Text>
             </TouchableOpacity>
           </View>
