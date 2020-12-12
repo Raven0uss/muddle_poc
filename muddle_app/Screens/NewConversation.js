@@ -20,6 +20,7 @@ import getUnique from "../Library/getUnique";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import strUcFirst from "../Library/strUcFirst";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($email: String!) {
@@ -206,7 +207,8 @@ const NewConversation = (props) => {
             .filter((u) => {
               if (search.length > 0) {
                 return (
-                  u.firstname.toLowerCase().indexOf(search.toLowerCase()) !== -1 // FIRSTNAME
+                  u.firstname.indexOf(strUcFirst(search)) !== -1 ||
+                  u.lastname.indexOf(strUcFirst(search)) !== -1
                 );
               }
               return true;

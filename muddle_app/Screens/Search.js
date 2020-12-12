@@ -18,13 +18,19 @@ import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
-
+import strUcFirst from "../Library/strUcFirst";
 import i18n from "../i18n";
 
 // FIRSTNAME
 const GET_USERS = gql`
-  query($firstname: String!) {
-    users(where: { firstname_contains: $firstname, role_not: MUDDLE }) {
+  query($firstname: String!, $lastname: String!) {
+    users(
+      where: {
+        firstname_contains: $firstname
+        lastname_contains: $lastname
+        role_not: MUDDLE
+      }
+    ) {
       id
       firstname
       lastname
@@ -40,11 +46,13 @@ const GET_USERS = gql`
 const Search = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const [users, setUsers] = React.useState([]);
-  const [search, setSearch] = React.useState("");
+  const [firstname, setFirstname] = React.useState("");
+  const [lastname, setLastname] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
   const { loading, error } = useQuery(GET_USERS, {
     variables: {
-      firstname: search,
+      firstname: strUcFirst(firstname),
+      lastname: strUcFirst(lastname),
     },
     onCompleted: (response) => {
       const { users: queryResult } = response;
@@ -97,27 +105,59 @@ const Search = (props) => {
             marginBottom: 35,
           }}
         >
-          <TextInput
-            placeholder={i18n._("searchUser")}
-            value={search}
+          <View
             style={{
-              height: 40,
-              borderRadius: 10,
               width: "60%",
-              backgroundColor: themeSchema[theme].backgroundColor1,
-              // marginLeft: "auto",
-              // marginRight: "auto",
-              padding: 10,
-              paddingLeft: 20,
-              paddingRight: 20,
-              // marginBottom: 14,
-              fontFamily: "Montserrat_500Medium",
-              color: themeSchema[theme].colorText,
             }}
-            keyboardType="default"
-            placeholderTextColor={themeSchema[theme].colorText}
-            onChangeText={(s) => setSearch(s)}
-          />
+          >
+            <TextInput
+              placeholder={i18n._("firstname")}
+              value={firstname}
+              style={{
+                height: 40,
+                borderRadius: 10,
+                width: "100%",
+                backgroundColor: themeSchema[theme].backgroundColor1,
+                // marginLeft: "auto",
+                // marginRight: "auto",
+                padding: 10,
+                paddingLeft: 20,
+                paddingRight: 20,
+                fontSize: 14,
+                // marginBottom: 14,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+              keyboardType="default"
+              placeholderTextColor={themeSchema[theme].colorText}
+              onChangeText={(s) => setFirstname(s)}
+            />
+            <TextInput
+              placeholder={i18n._("lastname")}
+              value={lastname}
+              style={{
+                height: 40,
+                borderRadius: 10,
+                width: "100%",
+                // marginLeft: 10,
+                marginTop: 5,
+                backgroundColor: themeSchema[theme].backgroundColor1,
+                // marginLeft: "auto",
+                // marginRight: "auto",
+                padding: 10,
+                paddingLeft: 20,
+                paddingRight: 20,
+                fontSize: 14,
+                // marginBottom: 14,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+              keyboardType="default"
+              placeholderTextColor={themeSchema[theme].colorText}
+              onChangeText={(s) => setLastname(s)}
+            />
+          </View>
+
           <TouchableOpacity
             style={{
               alignItems: "center",
@@ -131,7 +171,7 @@ const Search = (props) => {
               Keyboard.dismiss();
               setSkipFetch(false);
             }}
-            disabled={search.length < 3}
+            disabled={firstname.length < 3 && lastname.length < 3}
           >
             <Text
               style={{
