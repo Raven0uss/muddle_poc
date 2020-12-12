@@ -715,6 +715,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -765,6 +766,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -787,6 +789,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -809,6 +812,7 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -831,6 +835,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -853,6 +858,7 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -876,6 +882,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserCreateOneWithoutDebatesBlueInput'] | null; // UserCreateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserCreateOneWithoutDebatesRedInput'] | null; // UserCreateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     timelimit?: any | null; // DateTime
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
@@ -954,6 +961,8 @@ export interface NexusGenInputs {
     id_starts_with?: string | null; // ID
     NOT?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
     OR?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
+    published?: boolean | null; // Boolean
+    published_not?: boolean | null; // Boolean
     timelimit?: any | null; // DateTime
     timelimit_gt?: any | null; // DateTime
     timelimit_gte?: any | null; // DateTime
@@ -990,6 +999,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1012,6 +1022,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1025,6 +1036,7 @@ export interface NexusGenInputs {
     closed?: boolean | null; // Boolean
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    published?: boolean | null; // Boolean
     timelimit?: any | null; // DateTime
     type?: NexusGenEnums['DebateType'] | null; // DebateType
   }
@@ -1121,6 +1133,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1142,6 +1155,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1163,6 +1177,7 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1184,6 +1199,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1205,6 +1221,7 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
@@ -1227,6 +1244,7 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserUpdateOneWithoutDebatesBlueInput'] | null; // UserUpdateOneWithoutDebatesBlueInput
     ownerRed?: NexusGenInputs['UserUpdateOneWithoutDebatesRedInput'] | null; // UserUpdateOneWithoutDebatesRedInput
     positives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
+    published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     timelimit?: any | null; // DateTime
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
@@ -1343,6 +1361,8 @@ export interface NexusGenInputs {
     ownerBlue?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     ownerRed?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     positives_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    published?: boolean | null; // Boolean
+    published_not?: boolean | null; // Boolean
     redVotes_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     reports_some?: NexusGenInputs['ReportWhereInput'] | null; // ReportWhereInput
     timelimit?: any | null; // DateTime
@@ -2141,6 +2161,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2148,9 +2169,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2214,6 +2236,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2221,9 +2244,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2239,6 +2263,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2246,9 +2271,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2264,6 +2290,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2271,9 +2298,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2289,6 +2317,7 @@ export interface NexusGenInputs {
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2296,9 +2325,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2314,6 +2344,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2321,9 +2352,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2339,6 +2371,7 @@ export interface NexusGenInputs {
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2346,9 +2379,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2365,15 +2399,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     id?: string | null; // ID
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2390,15 +2426,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     id?: string | null; // ID
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2415,15 +2453,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     id?: string | null; // ID
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
@@ -2440,6 +2480,7 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
+    firstname: string; // String!
     followers?: NexusGenInputs['UserCreateManyWithoutFollowingInput'] | null; // UserCreateManyWithoutFollowingInput
     following?: NexusGenInputs['UserCreateManyWithoutFollowersInput'] | null; // UserCreateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -2447,9 +2488,10 @@ export interface NexusGenInputs {
     interactions?: NexusGenInputs['InteractionCreateManyWithoutWhoInput'] | null; // InteractionCreateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role?: NexusGenEnums['Role'] | null; // Role
   }
   UserScalarWhereInput: { // input type
@@ -2516,6 +2558,20 @@ export interface NexusGenInputs {
     email_not_in?: string[] | null; // [String!]
     email_not_starts_with?: string | null; // String
     email_starts_with?: string | null; // String
+    firstname?: string | null; // String
+    firstname_contains?: string | null; // String
+    firstname_ends_with?: string | null; // String
+    firstname_gt?: string | null; // String
+    firstname_gte?: string | null; // String
+    firstname_in?: string[] | null; // [String!]
+    firstname_lt?: string | null; // String
+    firstname_lte?: string | null; // String
+    firstname_not?: string | null; // String
+    firstname_not_contains?: string | null; // String
+    firstname_not_ends_with?: string | null; // String
+    firstname_not_in?: string[] | null; // [String!]
+    firstname_not_starts_with?: string | null; // String
+    firstname_starts_with?: string | null; // String
     gender?: NexusGenEnums['Gender'] | null; // Gender
     gender_in?: NexusGenEnums['Gender'][] | null; // [Gender!]
     gender_not?: NexusGenEnums['Gender'] | null; // Gender
@@ -2546,6 +2602,20 @@ export interface NexusGenInputs {
     lastConnected_lte?: any | null; // DateTime
     lastConnected_not?: any | null; // DateTime
     lastConnected_not_in?: any[] | null; // [DateTime!]
+    lastname?: string | null; // String
+    lastname_contains?: string | null; // String
+    lastname_ends_with?: string | null; // String
+    lastname_gt?: string | null; // String
+    lastname_gte?: string | null; // String
+    lastname_in?: string[] | null; // [String!]
+    lastname_lt?: string | null; // String
+    lastname_lte?: string | null; // String
+    lastname_not?: string | null; // String
+    lastname_not_contains?: string | null; // String
+    lastname_not_ends_with?: string | null; // String
+    lastname_not_in?: string[] | null; // [String!]
+    lastname_not_starts_with?: string | null; // String
+    lastname_starts_with?: string | null; // String
     NOT?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
     OR?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
     password?: string | null; // String
@@ -2562,6 +2632,8 @@ export interface NexusGenInputs {
     password_not_in?: string[] | null; // [String!]
     password_not_starts_with?: string | null; // String
     password_starts_with?: string | null; // String
+    private?: boolean | null; // Boolean
+    private_not?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     profilePicture_contains?: string | null; // String
     profilePicture_ends_with?: string | null; // String
@@ -2576,20 +2648,6 @@ export interface NexusGenInputs {
     profilePicture_not_in?: string[] | null; // [String!]
     profilePicture_not_starts_with?: string | null; // String
     profilePicture_starts_with?: string | null; // String
-    pseudo?: string | null; // String
-    pseudo_contains?: string | null; // String
-    pseudo_ends_with?: string | null; // String
-    pseudo_gt?: string | null; // String
-    pseudo_gte?: string | null; // String
-    pseudo_in?: string[] | null; // [String!]
-    pseudo_lt?: string | null; // String
-    pseudo_lte?: string | null; // String
-    pseudo_not?: string | null; // String
-    pseudo_not_contains?: string | null; // String
-    pseudo_not_ends_with?: string | null; // String
-    pseudo_not_in?: string[] | null; // [String!]
-    pseudo_not_starts_with?: string | null; // String
-    pseudo_starts_with?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
@@ -2616,15 +2674,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2641,15 +2701,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2660,12 +2722,14 @@ export interface NexusGenInputs {
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
     email?: string | null; // String
+    firstname?: string | null; // String
     gender?: NexusGenEnums['Gender'] | null; // Gender
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
   }
   UserUpdateManyInput: { // input type
@@ -2824,15 +2888,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2848,15 +2914,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2872,15 +2940,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2896,15 +2966,17 @@ export interface NexusGenInputs {
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2920,15 +2992,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2944,15 +3018,17 @@ export interface NexusGenInputs {
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2969,14 +3045,16 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -2993,14 +3071,16 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -3017,14 +3097,16 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
@@ -3041,15 +3123,17 @@ export interface NexusGenInputs {
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
+    firstname?: string | null; // String
     followers?: NexusGenInputs['UserUpdateManyWithoutFollowingInput'] | null; // UserUpdateManyWithoutFollowingInput
     following?: NexusGenInputs['UserUpdateManyWithoutFollowersInput'] | null; // UserUpdateManyWithoutFollowersInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutWhoInput'] | null; // InteractionUpdateManyWithoutWhoInput
     language?: NexusGenEnums['Language'] | null; // Language
     lastConnected?: any | null; // DateTime
+    lastname?: string | null; // String
     password?: string | null; // String
+    private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
-    pseudo?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
   }
   UserUpsertNestedInput: { // input type
@@ -3176,6 +3260,20 @@ export interface NexusGenInputs {
     email_not_in?: string[] | null; // [String!]
     email_not_starts_with?: string | null; // String
     email_starts_with?: string | null; // String
+    firstname?: string | null; // String
+    firstname_contains?: string | null; // String
+    firstname_ends_with?: string | null; // String
+    firstname_gt?: string | null; // String
+    firstname_gte?: string | null; // String
+    firstname_in?: string[] | null; // [String!]
+    firstname_lt?: string | null; // String
+    firstname_lte?: string | null; // String
+    firstname_not?: string | null; // String
+    firstname_not_contains?: string | null; // String
+    firstname_not_ends_with?: string | null; // String
+    firstname_not_in?: string[] | null; // [String!]
+    firstname_not_starts_with?: string | null; // String
+    firstname_starts_with?: string | null; // String
     followers_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     following_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -3209,6 +3307,20 @@ export interface NexusGenInputs {
     lastConnected_lte?: any | null; // DateTime
     lastConnected_not?: any | null; // DateTime
     lastConnected_not_in?: any[] | null; // [DateTime!]
+    lastname?: string | null; // String
+    lastname_contains?: string | null; // String
+    lastname_ends_with?: string | null; // String
+    lastname_gt?: string | null; // String
+    lastname_gte?: string | null; // String
+    lastname_in?: string[] | null; // [String!]
+    lastname_lt?: string | null; // String
+    lastname_lte?: string | null; // String
+    lastname_not?: string | null; // String
+    lastname_not_contains?: string | null; // String
+    lastname_not_ends_with?: string | null; // String
+    lastname_not_in?: string[] | null; // [String!]
+    lastname_not_starts_with?: string | null; // String
+    lastname_starts_with?: string | null; // String
     password?: string | null; // String
     password_contains?: string | null; // String
     password_ends_with?: string | null; // String
@@ -3223,6 +3335,8 @@ export interface NexusGenInputs {
     password_not_in?: string[] | null; // [String!]
     password_not_starts_with?: string | null; // String
     password_starts_with?: string | null; // String
+    private?: boolean | null; // Boolean
+    private_not?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     profilePicture_contains?: string | null; // String
     profilePicture_ends_with?: string | null; // String
@@ -3237,20 +3351,6 @@ export interface NexusGenInputs {
     profilePicture_not_in?: string[] | null; // [String!]
     profilePicture_not_starts_with?: string | null; // String
     profilePicture_starts_with?: string | null; // String
-    pseudo?: string | null; // String
-    pseudo_contains?: string | null; // String
-    pseudo_ends_with?: string | null; // String
-    pseudo_gt?: string | null; // String
-    pseudo_gte?: string | null; // String
-    pseudo_in?: string[] | null; // [String!]
-    pseudo_lt?: string | null; // String
-    pseudo_lte?: string | null; // String
-    pseudo_not?: string | null; // String
-    pseudo_not_contains?: string | null; // String
-    pseudo_not_ends_with?: string | null; // String
-    pseudo_not_in?: string[] | null; // [String!]
-    pseudo_not_starts_with?: string | null; // String
-    pseudo_starts_with?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
@@ -3268,7 +3368,6 @@ export interface NexusGenInputs {
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: string | null; // ID
-    pseudo?: string | null; // String
   }
 }
 
@@ -3277,7 +3376,7 @@ export interface NexusGenEnums {
   AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "nested_ASC" | "nested_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "published_ASC" | "published_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateType: "DUO" | "MUDDLE" | "STANDARD"
   Gender: "FEMALE" | "MALE" | "NO_INDICATION"
   GenderFilter: "ALL" | "FEMALE" | "MALE"
@@ -3294,7 +3393,7 @@ export interface NexusGenEnums {
   Role: "ADMIN" | "MODERATOR" | "MUDDLE" | "STANDARD"
   TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
   TrophyType: "DUO" | "TOP_COMMENT"
-  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "password_ASC" | "password_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "pseudo_ASC" | "pseudo_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -3340,6 +3439,7 @@ export interface NexusGenRootTypes {
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
     id: string; // ID!
+    published: boolean; // Boolean!
     timelimit?: any | null; // DateTime
     type: NexusGenEnums['DebateType']; // DebateType!
     updatedAt: any; // DateTime!
@@ -3400,13 +3500,15 @@ export interface NexusGenRootTypes {
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
     email: string; // String!
+    firstname: string; // String!
     gender: NexusGenEnums['Gender']; // Gender!
     id: string; // ID!
     language: NexusGenEnums['Language']; // Language!
     lastConnected?: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private: boolean; // Boolean!
     profilePicture?: string | null; // String
-    pseudo: string; // String!
     role: NexusGenEnums['Role']; // Role!
     updatedAt: any; // DateTime!
   }
@@ -3744,6 +3846,7 @@ export interface NexusGenFieldTypes {
     ownerBlue: NexusGenRootTypes['User'] | null; // User
     ownerRed: NexusGenRootTypes['User'] | null; // User
     positives: NexusGenRootTypes['User'][] | null; // [User!]
+    published: boolean; // Boolean!
     redVotes: NexusGenRootTypes['User'][] | null; // [User!]
     reports: NexusGenRootTypes['Report'][] | null; // [Report!]
     timelimit: any | null; // DateTime
@@ -3881,6 +3984,7 @@ export interface NexusGenFieldTypes {
     debatesBlue: NexusGenRootTypes['Debate'][] | null; // [Debate!]
     debatesRed: NexusGenRootTypes['Debate'][] | null; // [Debate!]
     email: string; // String!
+    firstname: string; // String!
     followers: NexusGenRootTypes['User'][] | null; // [User!]
     following: NexusGenRootTypes['User'][] | null; // [User!]
     gender: NexusGenEnums['Gender']; // Gender!
@@ -3888,9 +3992,10 @@ export interface NexusGenFieldTypes {
     interactions: NexusGenRootTypes['Interaction'][] | null; // [Interaction!]
     language: NexusGenEnums['Language']; // Language!
     lastConnected: any | null; // DateTime
+    lastname: string; // String!
     password: string; // String!
+    private: boolean; // Boolean!
     profilePicture: string | null; // String
-    pseudo: string; // String!
     role: NexusGenEnums['Role']; // Role!
     trophies: NexusGenRootTypes['Trophy'][] | null; // [Trophy!]
     updatedAt: any; // DateTime!

@@ -18,7 +18,8 @@ enum Language {
 
 type User {
   id: ID! @id
-  pseudo: String! @unique
+  firstname: String!
+  lastname: String!
   email: String! @unique
   password: String!
   birthdate: DateTime!
@@ -30,6 +31,7 @@ type User {
   bio: String
   language: Language! @default(value: FR)
   crowned: Boolean! @default(value: false)
+  private: Boolean! @default(value: false)
   lastConnected: DateTime
   followers: [User] @relation(name: "FollowRelation")
   following: [User] @relation(link: INLINE, name: "FollowRelation")

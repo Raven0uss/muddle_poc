@@ -1073,6 +1073,7 @@ type Debate {
   loser: User
   closed: Boolean!
   crowned: Boolean!
+  published: Boolean!
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
   answerOne: String
   answerTwo: String
@@ -1105,6 +1106,7 @@ input DebateCreateInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1163,6 +1165,7 @@ input DebateCreateWithoutCommentsInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1187,6 +1190,7 @@ input DebateCreateWithoutInteractionsInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   answerOne: String
   answerTwo: String
 }
@@ -1209,6 +1213,7 @@ input DebateCreateWithoutOwnerBlueInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1232,6 +1237,7 @@ input DebateCreateWithoutOwnerInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1255,6 +1261,7 @@ input DebateCreateWithoutOwnerRedInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1278,6 +1285,7 @@ input DebateCreateWithoutReportsInput {
   loser: UserCreateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1301,6 +1309,8 @@ enum DebateOrderByInput {
   closed_DESC
   crowned_ASC
   crowned_DESC
+  published_ASC
+  published_DESC
   answerOne_ASC
   answerOne_DESC
   answerTwo_ASC
@@ -1318,6 +1328,7 @@ type DebatePreviousValues {
   type: DebateType!
   closed: Boolean!
   crowned: Boolean!
+  published: Boolean!
   answerOne: String
   answerTwo: String
   createdAt: DateTime!
@@ -1369,6 +1380,8 @@ input DebateScalarWhereInput {
   closed_not: Boolean
   crowned: Boolean
   crowned_not: Boolean
+  published: Boolean
+  published_not: Boolean
   answerOne: String
   answerOne_not: String
   answerOne_in: [String!]
@@ -1458,6 +1471,7 @@ input DebateUpdateDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1481,6 +1495,7 @@ input DebateUpdateInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1492,6 +1507,7 @@ input DebateUpdateManyDataInput {
   type: DebateType
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   answerOne: String
   answerTwo: String
 }
@@ -1502,6 +1518,7 @@ input DebateUpdateManyMutationInput {
   type: DebateType
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   answerOne: String
   answerTwo: String
 }
@@ -1598,6 +1615,7 @@ input DebateUpdateWithoutCommentsDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1621,6 +1639,7 @@ input DebateUpdateWithoutInteractionsDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   answerOne: String
   answerTwo: String
 }
@@ -1642,6 +1661,7 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1664,6 +1684,7 @@ input DebateUpdateWithoutOwnerDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1686,6 +1707,7 @@ input DebateUpdateWithoutOwnerRedDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1708,6 +1730,7 @@ input DebateUpdateWithoutReportsDataInput {
   loser: UserUpdateOneInput
   closed: Boolean
   crowned: Boolean
+  published: Boolean
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
@@ -1823,6 +1846,8 @@ input DebateWhereInput {
   closed_not: Boolean
   crowned: Boolean
   crowned_not: Boolean
+  published: Boolean
+  published_not: Boolean
   interactions_some: InteractionWhereInput
   answerOne: String
   answerOne_not: String
@@ -3238,7 +3263,8 @@ input TrophyWhereUniqueInput {
 
 type User {
   id: ID!
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3250,6 +3276,7 @@ type User {
   bio: String
   language: Language!
   crowned: Boolean!
+  private: Boolean!
   lastConnected: DateTime
   followers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   following(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -3273,7 +3300,8 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3285,6 +3313,7 @@ input UserCreateInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3360,7 +3389,8 @@ input UserCreateOneWithoutTrophiesInput {
 
 input UserCreateWithoutBlockedInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3372,6 +3402,7 @@ input UserCreateWithoutBlockedInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3386,7 +3417,8 @@ input UserCreateWithoutBlockedInput {
 
 input UserCreateWithoutBlockingInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3398,6 +3430,7 @@ input UserCreateWithoutBlockingInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3412,7 +3445,8 @@ input UserCreateWithoutBlockingInput {
 
 input UserCreateWithoutConversationsInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3424,6 +3458,7 @@ input UserCreateWithoutConversationsInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3438,7 +3473,8 @@ input UserCreateWithoutConversationsInput {
 
 input UserCreateWithoutDebatesBlueInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3450,6 +3486,7 @@ input UserCreateWithoutDebatesBlueInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3464,7 +3501,8 @@ input UserCreateWithoutDebatesBlueInput {
 
 input UserCreateWithoutDebatesInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3476,6 +3514,7 @@ input UserCreateWithoutDebatesInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3490,7 +3529,8 @@ input UserCreateWithoutDebatesInput {
 
 input UserCreateWithoutDebatesRedInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3502,6 +3542,7 @@ input UserCreateWithoutDebatesRedInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3516,7 +3557,8 @@ input UserCreateWithoutDebatesRedInput {
 
 input UserCreateWithoutFollowersInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3528,6 +3570,7 @@ input UserCreateWithoutFollowersInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   following: UserCreateManyWithoutFollowersInput
   blocked: UserCreateManyWithoutBlockingInput
@@ -3542,7 +3585,8 @@ input UserCreateWithoutFollowersInput {
 
 input UserCreateWithoutFollowingInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3554,6 +3598,7 @@ input UserCreateWithoutFollowingInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   blocked: UserCreateManyWithoutBlockingInput
@@ -3568,7 +3613,8 @@ input UserCreateWithoutFollowingInput {
 
 input UserCreateWithoutInteractionsInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3580,6 +3626,7 @@ input UserCreateWithoutInteractionsInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3594,7 +3641,8 @@ input UserCreateWithoutInteractionsInput {
 
 input UserCreateWithoutTrophiesInput {
   id: ID
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3606,6 +3654,7 @@ input UserCreateWithoutTrophiesInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
@@ -3626,8 +3675,10 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  pseudo_ASC
-  pseudo_DESC
+  firstname_ASC
+  firstname_DESC
+  lastname_ASC
+  lastname_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -3650,6 +3701,8 @@ enum UserOrderByInput {
   language_DESC
   crowned_ASC
   crowned_DESC
+  private_ASC
+  private_DESC
   lastConnected_ASC
   lastConnected_DESC
   createdAt_ASC
@@ -3660,7 +3713,8 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  pseudo: String!
+  firstname: String!
+  lastname: String!
   email: String!
   password: String!
   birthdate: DateTime!
@@ -3672,6 +3726,7 @@ type UserPreviousValues {
   bio: String
   language: Language!
   crowned: Boolean!
+  private: Boolean!
   lastConnected: DateTime
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -3692,20 +3747,34 @@ input UserScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  pseudo: String
-  pseudo_not: String
-  pseudo_in: [String!]
-  pseudo_not_in: [String!]
-  pseudo_lt: String
-  pseudo_lte: String
-  pseudo_gt: String
-  pseudo_gte: String
-  pseudo_contains: String
-  pseudo_not_contains: String
-  pseudo_starts_with: String
-  pseudo_not_starts_with: String
-  pseudo_ends_with: String
-  pseudo_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -3800,6 +3869,8 @@ input UserScalarWhereInput {
   language_not_in: [Language!]
   crowned: Boolean
   crowned_not: Boolean
+  private: Boolean
+  private_not: Boolean
   lastConnected: DateTime
   lastConnected_not: DateTime
   lastConnected_in: [DateTime!]
@@ -3846,7 +3917,8 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -3858,6 +3930,7 @@ input UserUpdateDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -3872,7 +3945,8 @@ input UserUpdateDataInput {
 }
 
 input UserUpdateInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -3884,6 +3958,7 @@ input UserUpdateInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -3898,7 +3973,8 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -3910,6 +3986,7 @@ input UserUpdateManyDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
 }
 
@@ -3926,7 +4003,8 @@ input UserUpdateManyInput {
 }
 
 input UserUpdateManyMutationInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -3938,6 +4016,7 @@ input UserUpdateManyMutationInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
 }
 
@@ -4064,7 +4143,8 @@ input UserUpdateOneWithoutDebatesRedInput {
 }
 
 input UserUpdateWithoutBlockedDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4076,6 +4156,7 @@ input UserUpdateWithoutBlockedDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4089,7 +4170,8 @@ input UserUpdateWithoutBlockedDataInput {
 }
 
 input UserUpdateWithoutBlockingDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4101,6 +4183,7 @@ input UserUpdateWithoutBlockingDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4114,7 +4197,8 @@ input UserUpdateWithoutBlockingDataInput {
 }
 
 input UserUpdateWithoutConversationsDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4126,6 +4210,7 @@ input UserUpdateWithoutConversationsDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4139,7 +4224,8 @@ input UserUpdateWithoutConversationsDataInput {
 }
 
 input UserUpdateWithoutDebatesBlueDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4151,6 +4237,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4164,7 +4251,8 @@ input UserUpdateWithoutDebatesBlueDataInput {
 }
 
 input UserUpdateWithoutDebatesDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4176,6 +4264,7 @@ input UserUpdateWithoutDebatesDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4189,7 +4278,8 @@ input UserUpdateWithoutDebatesDataInput {
 }
 
 input UserUpdateWithoutDebatesRedDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4201,6 +4291,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4214,7 +4305,8 @@ input UserUpdateWithoutDebatesRedDataInput {
 }
 
 input UserUpdateWithoutFollowersDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4226,6 +4318,7 @@ input UserUpdateWithoutFollowersDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   following: UserUpdateManyWithoutFollowersInput
   blocked: UserUpdateManyWithoutBlockingInput
@@ -4239,7 +4332,8 @@ input UserUpdateWithoutFollowersDataInput {
 }
 
 input UserUpdateWithoutFollowingDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4251,6 +4345,7 @@ input UserUpdateWithoutFollowingDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   blocked: UserUpdateManyWithoutBlockingInput
@@ -4264,7 +4359,8 @@ input UserUpdateWithoutFollowingDataInput {
 }
 
 input UserUpdateWithoutInteractionsDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4276,6 +4372,7 @@ input UserUpdateWithoutInteractionsDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4289,7 +4386,8 @@ input UserUpdateWithoutInteractionsDataInput {
 }
 
 input UserUpdateWithoutTrophiesDataInput {
-  pseudo: String
+  firstname: String
+  lastname: String
   email: String
   password: String
   birthdate: DateTime
@@ -4301,6 +4399,7 @@ input UserUpdateWithoutTrophiesDataInput {
   bio: String
   language: Language
   crowned: Boolean
+  private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
@@ -4424,20 +4523,34 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  pseudo: String
-  pseudo_not: String
-  pseudo_in: [String!]
-  pseudo_not_in: [String!]
-  pseudo_lt: String
-  pseudo_lte: String
-  pseudo_gt: String
-  pseudo_gte: String
-  pseudo_contains: String
-  pseudo_not_contains: String
-  pseudo_starts_with: String
-  pseudo_not_starts_with: String
-  pseudo_ends_with: String
-  pseudo_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -4532,6 +4645,8 @@ input UserWhereInput {
   language_not_in: [Language!]
   crowned: Boolean
   crowned_not: Boolean
+  private: Boolean
+  private_not: Boolean
   lastConnected: DateTime
   lastConnected_not: DateTime
   lastConnected_in: [DateTime!]
@@ -4571,7 +4686,6 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  pseudo: String
   email: String
 }
 `

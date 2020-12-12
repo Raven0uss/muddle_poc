@@ -63,7 +63,9 @@ const Query = prismaObjectType({
       type: "User",
       args: {},
       resolve: async (parent, args, { prisma, currentUser }) => {
+        console.log(currentUser);
         const user = await prisma.user({ id: currentUser.user.id });
+        console.log(user);
         return user;
       },
     });

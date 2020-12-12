@@ -1853,7 +1853,8 @@ export interface CommentFieldDetails {
 type UserObject =
   | UserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'pseudo', args?: [] | false, alias?: string  } 
+  | { name: 'firstname', args?: [] | false, alias?: string  } 
+  | { name: 'lastname', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'birthdate', args?: [] | false, alias?: string  } 
@@ -1865,6 +1866,7 @@ type UserObject =
   | { name: 'bio', args?: [] | false, alias?: string  } 
   | { name: 'language', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
   | { name: 'followers', args?: UserFollowersArgs[] | false, alias?: string  } 
   | { name: 'following', args?: UserFollowingArgs[] | false, alias?: string  } 
@@ -1881,7 +1883,8 @@ type UserObject =
 
 type UserFields =
   | 'id'
-  | 'pseudo'
+  | 'firstname'
+  | 'lastname'
   | 'email'
   | 'password'
   | 'birthdate'
@@ -1893,6 +1896,7 @@ type UserFields =
   | 'bio'
   | 'language'
   | 'crowned'
+  | 'private'
   | 'lastConnected'
   | 'followers'
   | 'following'
@@ -1999,7 +2003,15 @@ export interface UserFieldDetails {
     nullable: false
     resolve: undefined
   }
-  pseudo: {
+  firstname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastname: {
     type: 'String'
     args: {}
     description: string
@@ -2103,6 +2115,14 @@ export interface UserFieldDetails {
     ) => Promise<prisma.Language> | prisma.Language
   }
   crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  private: {
     type: 'Boolean'
     args: {}
     description: string
@@ -2289,6 +2309,7 @@ type DebateObject =
   | { name: 'loser', args?: [] | false, alias?: string  } 
   | { name: 'closed', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'published', args?: [] | false, alias?: string  } 
   | { name: 'interactions', args?: DebateInteractionsArgs[] | false, alias?: string  } 
   | { name: 'answerOne', args?: [] | false, alias?: string  } 
   | { name: 'answerTwo', args?: [] | false, alias?: string  } 
@@ -2314,6 +2335,7 @@ type DebateFields =
   | 'loser'
   | 'closed'
   | 'crowned'
+  | 'published'
   | 'interactions'
   | 'answerOne'
   | 'answerTwo'
@@ -2582,6 +2604,14 @@ export interface DebateFieldDetails {
     resolve: undefined
   }
   crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  published: {
     type: 'Boolean'
     args: {}
     description: string
@@ -6477,6 +6507,7 @@ type DebatePreviousValuesObject =
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'closed', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'published', args?: [] | false, alias?: string  } 
   | { name: 'answerOne', args?: [] | false, alias?: string  } 
   | { name: 'answerTwo', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
@@ -6489,6 +6520,7 @@ type DebatePreviousValuesFields =
   | 'type'
   | 'closed'
   | 'crowned'
+  | 'published'
   | 'answerOne'
   | 'answerTwo'
   | 'createdAt'
@@ -6545,6 +6577,14 @@ export interface DebatePreviousValuesFieldDetails {
     resolve: undefined
   }
   crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  published: {
     type: 'Boolean'
     args: {}
     description: string
@@ -7357,7 +7397,8 @@ export interface UserSubscriptionPayloadFieldDetails {
 type UserPreviousValuesObject =
   | UserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'pseudo', args?: [] | false, alias?: string  } 
+  | { name: 'firstname', args?: [] | false, alias?: string  } 
+  | { name: 'lastname', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'birthdate', args?: [] | false, alias?: string  } 
@@ -7369,13 +7410,15 @@ type UserPreviousValuesObject =
   | { name: 'bio', args?: [] | false, alias?: string  } 
   | { name: 'language', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type UserPreviousValuesFields =
   | 'id'
-  | 'pseudo'
+  | 'firstname'
+  | 'lastname'
   | 'email'
   | 'password'
   | 'birthdate'
@@ -7387,6 +7430,7 @@ type UserPreviousValuesFields =
   | 'bio'
   | 'language'
   | 'crowned'
+  | 'private'
   | 'lastConnected'
   | 'createdAt'
   | 'updatedAt'
@@ -7404,7 +7448,15 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
-  pseudo: {
+  firstname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastname: {
     type: 'String'
     args: {}
     description: string
@@ -7508,6 +7560,14 @@ export interface UserPreviousValuesFieldDetails {
     ) => Promise<prisma.Language> | prisma.Language
   }
   crowned: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  private: {
     type: 'Boolean'
     args: {}
     description: string
@@ -7863,20 +7923,34 @@ export interface UserWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  pseudo?: string | null
-  pseudo_not?: string | null
-  pseudo_in?: string[]
-  pseudo_not_in?: string[]
-  pseudo_lt?: string | null
-  pseudo_lte?: string | null
-  pseudo_gt?: string | null
-  pseudo_gte?: string | null
-  pseudo_contains?: string | null
-  pseudo_not_contains?: string | null
-  pseudo_starts_with?: string | null
-  pseudo_not_starts_with?: string | null
-  pseudo_ends_with?: string | null
-  pseudo_not_ends_with?: string | null
+  firstname?: string | null
+  firstname_not?: string | null
+  firstname_in?: string[]
+  firstname_not_in?: string[]
+  firstname_lt?: string | null
+  firstname_lte?: string | null
+  firstname_gt?: string | null
+  firstname_gte?: string | null
+  firstname_contains?: string | null
+  firstname_not_contains?: string | null
+  firstname_starts_with?: string | null
+  firstname_not_starts_with?: string | null
+  firstname_ends_with?: string | null
+  firstname_not_ends_with?: string | null
+  lastname?: string | null
+  lastname_not?: string | null
+  lastname_in?: string[]
+  lastname_not_in?: string[]
+  lastname_lt?: string | null
+  lastname_lte?: string | null
+  lastname_gt?: string | null
+  lastname_gte?: string | null
+  lastname_contains?: string | null
+  lastname_not_contains?: string | null
+  lastname_starts_with?: string | null
+  lastname_not_starts_with?: string | null
+  lastname_ends_with?: string | null
+  lastname_not_ends_with?: string | null
   email?: string | null
   email_not?: string | null
   email_in?: string[]
@@ -7971,6 +8045,8 @@ export interface UserWhereInput {
   language_not_in?: prisma.Language[]
   crowned?: boolean | null
   crowned_not?: boolean | null
+  private?: boolean | null
+  private_not?: boolean | null
   lastConnected?: string | null
   lastConnected_not?: string | null
   lastConnected_in?: string[]
@@ -8023,20 +8099,34 @@ export type UserWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
-  | { name: 'pseudo_not', alias?: string  } 
-  | { name: 'pseudo_in', alias?: string  } 
-  | { name: 'pseudo_not_in', alias?: string  } 
-  | { name: 'pseudo_lt', alias?: string  } 
-  | { name: 'pseudo_lte', alias?: string  } 
-  | { name: 'pseudo_gt', alias?: string  } 
-  | { name: 'pseudo_gte', alias?: string  } 
-  | { name: 'pseudo_contains', alias?: string  } 
-  | { name: 'pseudo_not_contains', alias?: string  } 
-  | { name: 'pseudo_starts_with', alias?: string  } 
-  | { name: 'pseudo_not_starts_with', alias?: string  } 
-  | { name: 'pseudo_ends_with', alias?: string  } 
-  | { name: 'pseudo_not_ends_with', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'firstname_not', alias?: string  } 
+  | { name: 'firstname_in', alias?: string  } 
+  | { name: 'firstname_not_in', alias?: string  } 
+  | { name: 'firstname_lt', alias?: string  } 
+  | { name: 'firstname_lte', alias?: string  } 
+  | { name: 'firstname_gt', alias?: string  } 
+  | { name: 'firstname_gte', alias?: string  } 
+  | { name: 'firstname_contains', alias?: string  } 
+  | { name: 'firstname_not_contains', alias?: string  } 
+  | { name: 'firstname_starts_with', alias?: string  } 
+  | { name: 'firstname_not_starts_with', alias?: string  } 
+  | { name: 'firstname_ends_with', alias?: string  } 
+  | { name: 'firstname_not_ends_with', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'lastname_not', alias?: string  } 
+  | { name: 'lastname_in', alias?: string  } 
+  | { name: 'lastname_not_in', alias?: string  } 
+  | { name: 'lastname_lt', alias?: string  } 
+  | { name: 'lastname_lte', alias?: string  } 
+  | { name: 'lastname_gt', alias?: string  } 
+  | { name: 'lastname_gte', alias?: string  } 
+  | { name: 'lastname_contains', alias?: string  } 
+  | { name: 'lastname_not_contains', alias?: string  } 
+  | { name: 'lastname_starts_with', alias?: string  } 
+  | { name: 'lastname_not_starts_with', alias?: string  } 
+  | { name: 'lastname_ends_with', alias?: string  } 
+  | { name: 'lastname_not_ends_with', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'email_not', alias?: string  } 
   | { name: 'email_in', alias?: string  } 
@@ -8131,6 +8221,8 @@ export type UserWhereInputInputObject =
   | { name: 'language_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'private', alias?: string  } 
+  | { name: 'private_not', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'lastConnected_not', alias?: string  } 
   | { name: 'lastConnected_in', alias?: string  } 
@@ -8224,6 +8316,8 @@ export interface DebateWhereInput {
   closed_not?: boolean | null
   crowned?: boolean | null
   crowned_not?: boolean | null
+  published?: boolean | null
+  published_not?: boolean | null
   interactions_some?: InteractionWhereInput | null
   answerOne?: string | null
   answerOne_not?: string | null
@@ -8329,6 +8423,8 @@ export type DebateWhereInputInputObject =
   | { name: 'closed_not', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'published', alias?: string  } 
+  | { name: 'published_not', alias?: string  } 
   | { name: 'interactions_some', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerOne_not', alias?: string  } 
@@ -9060,13 +9156,11 @@ export type TrophyWhereUniqueInputInputObject =
   
 export interface UserWhereUniqueInput {
   id?: string | null
-  pseudo?: string | null
   email?: string | null
 }
 export type UserWhereUniqueInputInputObject =
   | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
   | { name: 'email', alias?: string  } 
   
 export interface AdCreateInput {
@@ -9415,7 +9509,8 @@ export type UserCreateOneInputInputObject =
   
 export interface UserCreateInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9427,6 +9522,7 @@ export interface UserCreateInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -9442,7 +9538,8 @@ export interface UserCreateInput {
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9454,6 +9551,7 @@ export type UserCreateInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -9477,7 +9575,8 @@ export type UserCreateManyWithoutFollowingInputInputObject =
   
 export interface UserCreateWithoutFollowingInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9489,6 +9588,7 @@ export interface UserCreateWithoutFollowingInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   blocked?: UserCreateManyWithoutBlockingInput | null
@@ -9503,7 +9603,8 @@ export interface UserCreateWithoutFollowingInput {
 export type UserCreateWithoutFollowingInputInputObject =
   | Extract<keyof UserCreateWithoutFollowingInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9515,6 +9616,7 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'blocked', alias?: string  } 
@@ -9537,7 +9639,8 @@ export type UserCreateManyWithoutBlockingInputInputObject =
   
 export interface UserCreateWithoutBlockingInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9549,6 +9652,7 @@ export interface UserCreateWithoutBlockingInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -9563,7 +9667,8 @@ export interface UserCreateWithoutBlockingInput {
 export type UserCreateWithoutBlockingInputInputObject =
   | Extract<keyof UserCreateWithoutBlockingInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9575,6 +9680,7 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -9597,7 +9703,8 @@ export type UserCreateManyWithoutFollowersInputInputObject =
   
 export interface UserCreateWithoutFollowersInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9609,6 +9716,7 @@ export interface UserCreateWithoutFollowersInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   following?: UserCreateManyWithoutFollowersInput | null
   blocked?: UserCreateManyWithoutBlockingInput | null
@@ -9623,7 +9731,8 @@ export interface UserCreateWithoutFollowersInput {
 export type UserCreateWithoutFollowersInputInputObject =
   | Extract<keyof UserCreateWithoutFollowersInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9635,6 +9744,7 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'following', alias?: string  } 
   | { name: 'blocked', alias?: string  } 
@@ -9657,7 +9767,8 @@ export type UserCreateManyWithoutBlockedInputInputObject =
   
 export interface UserCreateWithoutBlockedInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9669,6 +9780,7 @@ export interface UserCreateWithoutBlockedInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -9683,7 +9795,8 @@ export interface UserCreateWithoutBlockedInput {
 export type UserCreateWithoutBlockedInputInputObject =
   | Extract<keyof UserCreateWithoutBlockedInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9695,6 +9808,7 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -9733,6 +9847,7 @@ export interface DebateCreateWithoutOwnerInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -9756,6 +9871,7 @@ export type DebateCreateWithoutOwnerInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -9771,7 +9887,8 @@ export type UserCreateOneWithoutDebatesBlueInputInputObject =
   
 export interface UserCreateWithoutDebatesBlueInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9783,6 +9900,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -9797,7 +9915,8 @@ export interface UserCreateWithoutDebatesBlueInput {
 export type UserCreateWithoutDebatesBlueInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesBlueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9809,6 +9928,7 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -9847,6 +9967,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -9870,6 +9991,7 @@ export type DebateCreateWithoutOwnerRedInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -9885,7 +10007,8 @@ export type UserCreateOneWithoutDebatesInputInputObject =
   
 export interface UserCreateWithoutDebatesInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -9897,6 +10020,7 @@ export interface UserCreateWithoutDebatesInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -9911,7 +10035,8 @@ export interface UserCreateWithoutDebatesInput {
 export type UserCreateWithoutDebatesInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -9923,6 +10048,7 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -9961,6 +10087,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -9984,6 +10111,7 @@ export type DebateCreateWithoutOwnerBlueInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -9999,7 +10127,8 @@ export type UserCreateOneWithoutDebatesRedInputInputObject =
   
 export interface UserCreateWithoutDebatesRedInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -10011,6 +10140,7 @@ export interface UserCreateWithoutDebatesRedInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -10025,7 +10155,8 @@ export interface UserCreateWithoutDebatesRedInput {
 export type UserCreateWithoutDebatesRedInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesRedInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10037,6 +10168,7 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -10100,6 +10232,7 @@ export interface DebateCreateInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -10124,6 +10257,7 @@ export type DebateCreateInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -10224,6 +10358,7 @@ export interface DebateCreateWithoutReportsInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -10247,6 +10382,7 @@ export type DebateCreateWithoutReportsInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -10293,7 +10429,8 @@ export type UserCreateOneWithoutInteractionsInputInputObject =
   
 export interface UserCreateWithoutInteractionsInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -10305,6 +10442,7 @@ export interface UserCreateWithoutInteractionsInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -10319,7 +10457,8 @@ export interface UserCreateWithoutInteractionsInput {
 export type UserCreateWithoutInteractionsInputInputObject =
   | Extract<keyof UserCreateWithoutInteractionsInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10331,6 +10470,7 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -10478,6 +10618,7 @@ export interface DebateCreateWithoutCommentsInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -10501,6 +10642,7 @@ export type DebateCreateWithoutCommentsInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -10555,6 +10697,7 @@ export interface DebateCreateWithoutInteractionsInput {
   loser?: UserCreateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
 }
@@ -10578,6 +10721,7 @@ export type DebateCreateWithoutInteractionsInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
   
@@ -10616,7 +10760,8 @@ export type UserUpdateOneRequiredInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -10628,6 +10773,7 @@ export interface UserUpdateDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -10642,7 +10788,8 @@ export interface UserUpdateDataInput {
 }
 export type UserUpdateDataInputInputObject =
   | Extract<keyof UserUpdateDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10654,6 +10801,7 @@ export type UserUpdateDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -10699,7 +10847,8 @@ export type UserUpdateWithWhereUniqueWithoutFollowingInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutFollowingDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -10711,6 +10860,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   blocked?: UserUpdateManyWithoutBlockingInput | null
@@ -10724,7 +10874,8 @@ export interface UserUpdateWithoutFollowingDataInput {
 }
 export type UserUpdateWithoutFollowingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowingDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10736,6 +10887,7 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'blocked', alias?: string  } 
@@ -10780,7 +10932,8 @@ export type UserUpdateWithWhereUniqueWithoutBlockingInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutBlockingDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -10792,6 +10945,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -10805,7 +10959,8 @@ export interface UserUpdateWithoutBlockingDataInput {
 }
 export type UserUpdateWithoutBlockingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockingDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10817,6 +10972,7 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -10861,7 +11017,8 @@ export type UserUpdateWithWhereUniqueWithoutFollowersInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutFollowersDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -10873,6 +11030,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   following?: UserUpdateManyWithoutFollowersInput | null
   blocked?: UserUpdateManyWithoutBlockingInput | null
@@ -10886,7 +11044,8 @@ export interface UserUpdateWithoutFollowersDataInput {
 }
 export type UserUpdateWithoutFollowersDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowersDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10898,6 +11057,7 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'following', alias?: string  } 
   | { name: 'blocked', alias?: string  } 
@@ -10942,7 +11102,8 @@ export type UserUpdateWithWhereUniqueWithoutBlockedInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutBlockedDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -10954,6 +11115,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -10967,7 +11129,8 @@ export interface UserUpdateWithoutBlockedDataInput {
 }
 export type UserUpdateWithoutBlockedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockedDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -10979,6 +11142,7 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -11039,6 +11203,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -11061,6 +11226,7 @@ export type DebateUpdateWithoutOwnerDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -11083,7 +11249,8 @@ export type UserUpdateOneWithoutDebatesBlueInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutDebatesBlueDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -11095,6 +11262,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -11108,7 +11276,8 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
 }
 export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesBlueDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -11120,6 +11289,7 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -11180,6 +11350,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -11202,6 +11373,7 @@ export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -11224,7 +11396,8 @@ export type UserUpdateOneWithoutDebatesInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutDebatesDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -11236,6 +11409,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -11249,7 +11423,8 @@ export interface UserUpdateWithoutDebatesDataInput {
 }
 export type UserUpdateWithoutDebatesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -11261,6 +11436,7 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -11321,6 +11497,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -11343,6 +11520,7 @@ export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -11365,7 +11543,8 @@ export type UserUpdateOneWithoutDebatesRedInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutDebatesRedDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -11377,6 +11556,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -11390,7 +11570,8 @@ export interface UserUpdateWithoutDebatesRedDataInput {
 }
 export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesRedDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -11402,6 +11583,7 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -11493,6 +11675,7 @@ export interface DebateUpdateDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -11516,6 +11699,7 @@ export type DebateUpdateDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -11629,20 +11813,34 @@ export interface UserScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  pseudo?: string | null
-  pseudo_not?: string | null
-  pseudo_in?: string[]
-  pseudo_not_in?: string[]
-  pseudo_lt?: string | null
-  pseudo_lte?: string | null
-  pseudo_gt?: string | null
-  pseudo_gte?: string | null
-  pseudo_contains?: string | null
-  pseudo_not_contains?: string | null
-  pseudo_starts_with?: string | null
-  pseudo_not_starts_with?: string | null
-  pseudo_ends_with?: string | null
-  pseudo_not_ends_with?: string | null
+  firstname?: string | null
+  firstname_not?: string | null
+  firstname_in?: string[]
+  firstname_not_in?: string[]
+  firstname_lt?: string | null
+  firstname_lte?: string | null
+  firstname_gt?: string | null
+  firstname_gte?: string | null
+  firstname_contains?: string | null
+  firstname_not_contains?: string | null
+  firstname_starts_with?: string | null
+  firstname_not_starts_with?: string | null
+  firstname_ends_with?: string | null
+  firstname_not_ends_with?: string | null
+  lastname?: string | null
+  lastname_not?: string | null
+  lastname_in?: string[]
+  lastname_not_in?: string[]
+  lastname_lt?: string | null
+  lastname_lte?: string | null
+  lastname_gt?: string | null
+  lastname_gte?: string | null
+  lastname_contains?: string | null
+  lastname_not_contains?: string | null
+  lastname_starts_with?: string | null
+  lastname_not_starts_with?: string | null
+  lastname_ends_with?: string | null
+  lastname_not_ends_with?: string | null
   email?: string | null
   email_not?: string | null
   email_in?: string[]
@@ -11737,6 +11935,8 @@ export interface UserScalarWhereInput {
   language_not_in?: prisma.Language[]
   crowned?: boolean | null
   crowned_not?: boolean | null
+  private?: boolean | null
+  private_not?: boolean | null
   lastConnected?: string | null
   lastConnected_not?: string | null
   lastConnected_in?: string[]
@@ -11781,20 +11981,34 @@ export type UserScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
-  | { name: 'pseudo_not', alias?: string  } 
-  | { name: 'pseudo_in', alias?: string  } 
-  | { name: 'pseudo_not_in', alias?: string  } 
-  | { name: 'pseudo_lt', alias?: string  } 
-  | { name: 'pseudo_lte', alias?: string  } 
-  | { name: 'pseudo_gt', alias?: string  } 
-  | { name: 'pseudo_gte', alias?: string  } 
-  | { name: 'pseudo_contains', alias?: string  } 
-  | { name: 'pseudo_not_contains', alias?: string  } 
-  | { name: 'pseudo_starts_with', alias?: string  } 
-  | { name: 'pseudo_not_starts_with', alias?: string  } 
-  | { name: 'pseudo_ends_with', alias?: string  } 
-  | { name: 'pseudo_not_ends_with', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'firstname_not', alias?: string  } 
+  | { name: 'firstname_in', alias?: string  } 
+  | { name: 'firstname_not_in', alias?: string  } 
+  | { name: 'firstname_lt', alias?: string  } 
+  | { name: 'firstname_lte', alias?: string  } 
+  | { name: 'firstname_gt', alias?: string  } 
+  | { name: 'firstname_gte', alias?: string  } 
+  | { name: 'firstname_contains', alias?: string  } 
+  | { name: 'firstname_not_contains', alias?: string  } 
+  | { name: 'firstname_starts_with', alias?: string  } 
+  | { name: 'firstname_not_starts_with', alias?: string  } 
+  | { name: 'firstname_ends_with', alias?: string  } 
+  | { name: 'firstname_not_ends_with', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'lastname_not', alias?: string  } 
+  | { name: 'lastname_in', alias?: string  } 
+  | { name: 'lastname_not_in', alias?: string  } 
+  | { name: 'lastname_lt', alias?: string  } 
+  | { name: 'lastname_lte', alias?: string  } 
+  | { name: 'lastname_gt', alias?: string  } 
+  | { name: 'lastname_gte', alias?: string  } 
+  | { name: 'lastname_contains', alias?: string  } 
+  | { name: 'lastname_not_contains', alias?: string  } 
+  | { name: 'lastname_starts_with', alias?: string  } 
+  | { name: 'lastname_not_starts_with', alias?: string  } 
+  | { name: 'lastname_ends_with', alias?: string  } 
+  | { name: 'lastname_not_ends_with', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'email_not', alias?: string  } 
   | { name: 'email_in', alias?: string  } 
@@ -11889,6 +12103,8 @@ export type UserScalarWhereInputInputObject =
   | { name: 'language_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'private', alias?: string  } 
+  | { name: 'private_not', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'lastConnected_not', alias?: string  } 
   | { name: 'lastConnected_in', alias?: string  } 
@@ -11927,7 +12143,8 @@ export type UserUpdateManyWithWhereNestedInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateManyDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -11939,11 +12156,13 @@ export interface UserUpdateManyDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
 }
 export type UserUpdateManyDataInputInputObject =
   | Extract<keyof UserUpdateManyDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -11955,6 +12174,7 @@ export type UserUpdateManyDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   
 export interface ReportUpdateManyWithoutCommentInput {
@@ -12068,6 +12288,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -12090,6 +12311,7 @@ export type DebateUpdateWithoutReportsDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -12162,6 +12384,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -12184,6 +12407,7 @@ export type DebateUpdateWithoutCommentsDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -12657,7 +12881,8 @@ export type UserUpdateOneRequiredWithoutInteractionsInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutInteractionsDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -12669,6 +12894,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -12682,7 +12908,8 @@ export interface UserUpdateWithoutInteractionsDataInput {
 }
 export type UserUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutInteractionsDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -12694,6 +12921,7 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -13356,6 +13584,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
 }
@@ -13378,6 +13607,7 @@ export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
   
@@ -13466,6 +13696,8 @@ export interface DebateScalarWhereInput {
   closed_not?: boolean | null
   crowned?: boolean | null
   crowned_not?: boolean | null
+  published?: boolean | null
+  published_not?: boolean | null
   answerOne?: string | null
   answerOne_not?: string | null
   answerOne_in?: string[]
@@ -13560,6 +13792,8 @@ export type DebateScalarWhereInputInputObject =
   | { name: 'closed_not', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'published', alias?: string  } 
+  | { name: 'published_not', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerOne_not', alias?: string  } 
   | { name: 'answerOne_in', alias?: string  } 
@@ -13623,6 +13857,7 @@ export interface DebateUpdateManyDataInput {
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
 }
@@ -13633,6 +13868,7 @@ export type DebateUpdateManyDataInputInputObject =
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
   
@@ -13751,7 +13987,8 @@ export type UserCreateManyWithoutConversationsInputInputObject =
   
 export interface UserCreateWithoutConversationsInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -13763,6 +14000,7 @@ export interface UserCreateWithoutConversationsInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -13777,7 +14015,8 @@ export interface UserCreateWithoutConversationsInput {
 export type UserCreateWithoutConversationsInputInputObject =
   | Extract<keyof UserCreateWithoutConversationsInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -13789,6 +14028,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -13842,7 +14082,8 @@ export type UserUpdateWithWhereUniqueWithoutConversationsInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutConversationsDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -13854,6 +14095,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -13867,7 +14109,8 @@ export interface UserUpdateWithoutConversationsDataInput {
 }
 export type UserUpdateWithoutConversationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutConversationsDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -13879,6 +14122,7 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -13919,6 +14163,7 @@ export interface DebateUpdateInput {
   loser?: UserUpdateOneInput | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
@@ -13942,6 +14187,7 @@ export type DebateUpdateInputInputObject =
   | { name: 'loser', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
@@ -13952,6 +14198,7 @@ export interface DebateUpdateManyMutationInput {
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
+  published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
 }
@@ -13962,6 +14209,7 @@ export type DebateUpdateManyMutationInputInputObject =
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
   
@@ -14214,7 +14462,8 @@ export type UserCreateOneWithoutTrophiesInputInputObject =
   
 export interface UserCreateWithoutTrophiesInput {
   id?: string | null
-  pseudo?: string
+  firstname?: string
+  lastname?: string
   email?: string
   password?: string
   birthdate?: string
@@ -14226,6 +14475,7 @@ export interface UserCreateWithoutTrophiesInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -14240,7 +14490,8 @@ export interface UserCreateWithoutTrophiesInput {
 export type UserCreateWithoutTrophiesInputInputObject =
   | Extract<keyof UserCreateWithoutTrophiesInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -14252,6 +14503,7 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -14292,7 +14544,8 @@ export type UserUpdateOneRequiredWithoutTrophiesInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutTrophiesDataInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -14304,6 +14557,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -14317,7 +14571,8 @@ export interface UserUpdateWithoutTrophiesDataInput {
 }
 export type UserUpdateWithoutTrophiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutTrophiesDataInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -14329,6 +14584,7 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -14359,7 +14615,8 @@ export type TrophyUpdateManyMutationInputInputObject =
   | { name: 'type', alias?: string  } 
   
 export interface UserUpdateInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -14371,6 +14628,7 @@ export interface UserUpdateInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -14385,7 +14643,8 @@ export interface UserUpdateInput {
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -14397,6 +14656,7 @@ export type UserUpdateInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -14410,7 +14670,8 @@ export type UserUpdateInputInputObject =
   | { name: 'interactions', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
-  pseudo?: string | null
+  firstname?: string | null
+  lastname?: string | null
   email?: string | null
   password?: string | null
   birthdate?: string | null
@@ -14422,11 +14683,13 @@ export interface UserUpdateManyMutationInput {
   bio?: string | null
   language?: prisma.Language | null
   crowned?: boolean | null
+  private?: boolean | null
   lastConnected?: string | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
-  | { name: 'pseudo', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'birthdate', alias?: string  } 
@@ -14438,6 +14701,7 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   
 export interface AdSubscriptionWhereInput {
@@ -14712,8 +14976,10 @@ export type TrophyTypeValues =
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'pseudo_ASC'
-  | 'pseudo_DESC'
+  | 'firstname_ASC'
+  | 'firstname_DESC'
+  | 'lastname_ASC'
+  | 'lastname_DESC'
   | 'email_ASC'
   | 'email_DESC'
   | 'password_ASC'
@@ -14736,6 +15002,8 @@ export type UserOrderByInputValues =
   | 'language_DESC'
   | 'crowned_ASC'
   | 'crowned_DESC'
+  | 'private_ASC'
+  | 'private_DESC'
   | 'lastConnected_ASC'
   | 'lastConnected_DESC'
   | 'createdAt_ASC'
@@ -14756,6 +15024,8 @@ export type DebateOrderByInputValues =
   | 'closed_DESC'
   | 'crowned_ASC'
   | 'crowned_DESC'
+  | 'published_ASC'
+  | 'published_DESC'
   | 'answerOne_ASC'
   | 'answerOne_DESC'
   | 'answerTwo_ASC'

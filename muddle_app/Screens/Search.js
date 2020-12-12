@@ -21,11 +21,14 @@ import themeSchema from "../CustomProperties/Theme";
 
 import i18n from "../i18n";
 
+// FIRSTNAME
 const GET_USERS = gql`
-  query($pseudo: String!) {
-    users(where: { pseudo_contains: $pseudo, role_not: MUDDLE }) {
+  query($firstname: String!) {
+    users(where: { firstname_contains: $firstname, role_not: MUDDLE }) {
       id
-      pseudo
+      firstname
+      lastname
+      email
       certified
       profilePicture
       coverPicture
@@ -41,7 +44,7 @@ const Search = (props) => {
   const [skipFetch, setSkipFetch] = React.useState(true);
   const { loading, error } = useQuery(GET_USERS, {
     variables: {
-      pseudo: search,
+      firstname: search,
     },
     onCompleted: (response) => {
       const { users: queryResult } = response;
@@ -155,7 +158,7 @@ const Search = (props) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.push("Profile", {
-                  userId: u.pseudo,
+                  userId: u.email,
                 })
               }
             >
@@ -183,7 +186,7 @@ const Search = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {u.pseudo}
+                  {`${u.firstname} ${u.lastname}`}
                 </Text>
               </View>
             </TouchableOpacity>

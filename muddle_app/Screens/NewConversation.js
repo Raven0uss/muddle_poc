@@ -22,12 +22,13 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
-  query($pseudo: String!) {
-    user(where: { pseudo: $pseudo }) {
+  query($email: String!) {
+    user(where: { email: $email }) {
       id
       followers {
         id
-        pseudo
+        firstname
+        lastname
         certified
         profilePicture
         coverPicture
@@ -36,7 +37,8 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
           id
           speakers {
             id
-            pseudo
+            firstname
+            lastname
             profilePicture
           }
           messages {
@@ -44,12 +46,14 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             content
             from {
               id
-              pseudo
+              firstname
+              lastname
               profilePicture
             }
             to {
               id
-              pseudo
+              firstname
+              lastname
               profilePicture
             }
           }
@@ -57,7 +61,8 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
       }
       following {
         id
-        pseudo
+        firstname
+        lastname
         certified
         profilePicture
         coverPicture
@@ -66,7 +71,8 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
           id
           speakers {
             id
-            pseudo
+            firstname
+            lastname
             profilePicture
           }
           messages {
@@ -74,12 +80,14 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             content
             from {
               id
-              pseudo
+              firstname
+              lastname
               profilePicture
             }
             to {
               id
-              pseudo
+              firstname
+              lastname
               profilePicture
             }
           }
@@ -95,7 +103,7 @@ const NewConversation = (props) => {
   const [search, setSearch] = React.useState("");
   const { loading, error } = useQuery(GET_FOLLOWERS_CONVERSATIONS, {
     variables: {
-      pseudo: props.route.params.userId,
+      email: props.route.params.userId,
     },
     onCompleted: (response) => {
       const { user: queryResult } = response;
@@ -107,9 +115,7 @@ const NewConversation = (props) => {
         return a;
       }, {});
       setUsers(
-        getUnique(userList, "id").sort((a, b) =>
-          a.pseudo.localeCompare(b.pseudo)
-        )
+        getUnique(userList, "id").sort((a, b) => a.email.localeCompare(b.email))
       );
     },
   });
@@ -192,7 +198,7 @@ const NewConversation = (props) => {
             .filter((u) => {
               if (search.length > 0) {
                 return (
-                  u.pseudo.toLowerCase().indexOf(search.toLowerCase()) !== -1
+                  u.firstname.toLowerCase().indexOf(search.toLowerCase()) !== -1 // FIRSTNAME
                 );
               }
               return true;
@@ -228,7 +234,7 @@ const NewConversation = (props) => {
                       color: themeSchema[theme].colorText,
                     }}
                   >
-                    {u.pseudo}
+                    {`${u.firstname} ${u.lastname}`}
                   </Text>
                 </View>
               </TouchableOpacity>

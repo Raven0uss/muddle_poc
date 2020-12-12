@@ -37,10 +37,10 @@ const checkOnlyDigits = (str) => {
 };
 
 const GET_USERS = gql`
-  query($pseudo: String!) {
-    users(where: { pseudo_contains: $pseudo, role_not: MUDDLE }) {
+  query($firstname: String!) {
+    users(where: { firstname_contains: $firstname, role_not: MUDDLE }) {
       id
-      pseudo
+      firstname
       certified
       profilePicture
       coverPicture
@@ -56,7 +56,7 @@ const InvitationDebate = (props) => {
   const [skipFetch, setSkipFetch] = React.useState(true);
   const { loading, error } = useQuery(GET_USERS, {
     variables: {
-      pseudo: search,
+      firstname: search,
     },
     onCompleted: (response) => {
       const { users: queryResult } = response;
@@ -204,7 +204,7 @@ const InvitationDebate = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {u.pseudo}
+                  {`${u.firstname} ${u.lastname}`}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -293,7 +293,7 @@ const CreateDebate = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {currentUser.pseudo}
+                {`${currentUser.firstname} ${currentUser.lastname}`}
               </Text>
             </View>
             <View style={{ marginTop: 10 }}>
@@ -349,7 +349,9 @@ const CreateDebate = (props) => {
                         color: themeSchema[theme].colorText,
                       }}
                     >
-                      {duo === null ? i18n._("invitePeople") : duo.pseudo}
+                      {duo === null
+                        ? i18n._("invitePeople")
+                        : `${duo.firstname} ${duo.lastname}`}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>

@@ -176,7 +176,7 @@ const Chat = (props) => {
         <TouchableOpacity
           onPress={() => {
             navigation.push("Profile", {
-              userId: partner.pseudo,
+              userId: partner.email,
             });
           }}
         >
@@ -211,7 +211,7 @@ const Chat = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {partner.pseudo}
+              {`${partner.firstname} ${partner.lastname}`}
             </Text>
           </View>
         </TouchableOpacity>

@@ -554,6 +554,8 @@ export type DebateOrderByInput =
   | "closed_DESC"
   | "crowned_ASC"
   | "crowned_DESC"
+  | "published_ASC"
+  | "published_DESC"
   | "answerOne_ASC"
   | "answerOne_DESC"
   | "answerTwo_ASC"
@@ -568,8 +570,10 @@ export type GenderFilter = "MALE" | "FEMALE" | "ALL";
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "pseudo_ASC"
-  | "pseudo_DESC"
+  | "firstname_ASC"
+  | "firstname_DESC"
+  | "lastname_ASC"
+  | "lastname_DESC"
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
@@ -592,6 +596,8 @@ export type UserOrderByInput =
   | "language_DESC"
   | "crowned_ASC"
   | "crowned_DESC"
+  | "private_ASC"
+  | "private_DESC"
   | "lastConnected_ASC"
   | "lastConnected_DESC"
   | "createdAt_ASC"
@@ -784,6 +790,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -857,6 +864,8 @@ export interface DebateWhereInput {
   closed_not?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
   interactions_some?: Maybe<InteractionWhereInput>;
   answerOne?: Maybe<String>;
   answerOne_not?: Maybe<String>;
@@ -984,6 +993,7 @@ export interface DebateCreateWithoutCommentsInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -1156,6 +1166,7 @@ export interface DebateCreateWithoutInteractionsInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
 }
@@ -1212,7 +1223,8 @@ export interface ConversationSubscriptionWhereInput {
 }
 
 export interface UserUpdateDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1224,6 +1236,7 @@ export interface UserUpdateDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1347,7 +1360,8 @@ export interface UserUpdateWithWhereUniqueWithoutFollowingInput {
 }
 
 export interface UserUpdateInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1359,6 +1373,7 @@ export interface UserUpdateInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1373,7 +1388,8 @@ export interface UserUpdateInput {
 }
 
 export interface UserUpdateWithoutFollowingDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1385,6 +1401,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
@@ -1438,7 +1455,8 @@ export interface UserUpdateWithWhereUniqueWithoutBlockingInput {
 
 export interface UserCreateWithoutTrophiesInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -1450,6 +1468,7 @@ export interface UserCreateWithoutTrophiesInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -1463,7 +1482,8 @@ export interface UserCreateWithoutTrophiesInput {
 }
 
 export interface UserUpdateWithoutBlockingDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1475,6 +1495,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1538,7 +1559,8 @@ export interface ReportUpdateInput {
 }
 
 export interface UserUpdateWithoutFollowersDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1550,6 +1572,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
   blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
@@ -1609,7 +1632,8 @@ export interface MessageUpdateManyMutationInput {
 }
 
 export interface UserUpdateWithoutBlockedDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1621,6 +1645,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1679,6 +1704,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -1767,7 +1793,8 @@ export interface ConversationCreateOneWithoutMessagesInput {
 }
 
 export interface UserUpdateWithoutDebatesBlueDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1779,6 +1806,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1833,6 +1861,7 @@ export interface DebateUpdateManyMutationInput {
   type?: Maybe<DebateType>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
 }
@@ -1854,6 +1883,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -1873,7 +1903,8 @@ export interface UserUpdateOneWithoutDebatesInput {
 }
 
 export interface UserUpdateWithoutConversationsDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1885,6 +1916,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1898,7 +1930,8 @@ export interface UserUpdateWithoutConversationsDataInput {
 }
 
 export interface UserUpdateWithoutDebatesDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -1910,6 +1943,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -1924,7 +1958,6 @@ export interface UserUpdateWithoutDebatesDataInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  pseudo?: Maybe<String>;
   email?: Maybe<String>;
 }>;
 
@@ -1995,7 +2028,8 @@ export interface AdTargetUpdateWithWhereUniqueNestedInput {
 }
 
 export interface UserUpdateWithoutDebatesRedDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -2007,6 +2041,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -2110,6 +2145,7 @@ export interface DebateUpdateDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -2244,20 +2280,34 @@ export interface UserScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  pseudo?: Maybe<String>;
-  pseudo_not?: Maybe<String>;
-  pseudo_in?: Maybe<String[] | String>;
-  pseudo_not_in?: Maybe<String[] | String>;
-  pseudo_lt?: Maybe<String>;
-  pseudo_lte?: Maybe<String>;
-  pseudo_gt?: Maybe<String>;
-  pseudo_gte?: Maybe<String>;
-  pseudo_contains?: Maybe<String>;
-  pseudo_not_contains?: Maybe<String>;
-  pseudo_starts_with?: Maybe<String>;
-  pseudo_not_starts_with?: Maybe<String>;
-  pseudo_ends_with?: Maybe<String>;
-  pseudo_not_ends_with?: Maybe<String>;
+  firstname?: Maybe<String>;
+  firstname_not?: Maybe<String>;
+  firstname_in?: Maybe<String[] | String>;
+  firstname_not_in?: Maybe<String[] | String>;
+  firstname_lt?: Maybe<String>;
+  firstname_lte?: Maybe<String>;
+  firstname_gt?: Maybe<String>;
+  firstname_gte?: Maybe<String>;
+  firstname_contains?: Maybe<String>;
+  firstname_not_contains?: Maybe<String>;
+  firstname_starts_with?: Maybe<String>;
+  firstname_not_starts_with?: Maybe<String>;
+  firstname_ends_with?: Maybe<String>;
+  firstname_not_ends_with?: Maybe<String>;
+  lastname?: Maybe<String>;
+  lastname_not?: Maybe<String>;
+  lastname_in?: Maybe<String[] | String>;
+  lastname_not_in?: Maybe<String[] | String>;
+  lastname_lt?: Maybe<String>;
+  lastname_lte?: Maybe<String>;
+  lastname_gt?: Maybe<String>;
+  lastname_gte?: Maybe<String>;
+  lastname_contains?: Maybe<String>;
+  lastname_not_contains?: Maybe<String>;
+  lastname_starts_with?: Maybe<String>;
+  lastname_not_starts_with?: Maybe<String>;
+  lastname_ends_with?: Maybe<String>;
+  lastname_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -2352,6 +2402,8 @@ export interface UserScalarWhereInput {
   language_not_in?: Maybe<Language[] | Language>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
+  private_not?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   lastConnected_not?: Maybe<DateTimeInput>;
   lastConnected_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -2399,7 +2451,8 @@ export interface UserCreateOneWithoutDebatesInput {
 }
 
 export interface UserUpdateManyDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -2411,6 +2464,7 @@ export interface UserUpdateManyDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
 }
 
@@ -2537,6 +2591,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -2560,6 +2615,7 @@ export interface DebateCreateWithoutReportsInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -2631,6 +2687,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -2692,20 +2749,34 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  pseudo?: Maybe<String>;
-  pseudo_not?: Maybe<String>;
-  pseudo_in?: Maybe<String[] | String>;
-  pseudo_not_in?: Maybe<String[] | String>;
-  pseudo_lt?: Maybe<String>;
-  pseudo_lte?: Maybe<String>;
-  pseudo_gt?: Maybe<String>;
-  pseudo_gte?: Maybe<String>;
-  pseudo_contains?: Maybe<String>;
-  pseudo_not_contains?: Maybe<String>;
-  pseudo_starts_with?: Maybe<String>;
-  pseudo_not_starts_with?: Maybe<String>;
-  pseudo_ends_with?: Maybe<String>;
-  pseudo_not_ends_with?: Maybe<String>;
+  firstname?: Maybe<String>;
+  firstname_not?: Maybe<String>;
+  firstname_in?: Maybe<String[] | String>;
+  firstname_not_in?: Maybe<String[] | String>;
+  firstname_lt?: Maybe<String>;
+  firstname_lte?: Maybe<String>;
+  firstname_gt?: Maybe<String>;
+  firstname_gte?: Maybe<String>;
+  firstname_contains?: Maybe<String>;
+  firstname_not_contains?: Maybe<String>;
+  firstname_starts_with?: Maybe<String>;
+  firstname_not_starts_with?: Maybe<String>;
+  firstname_ends_with?: Maybe<String>;
+  firstname_not_ends_with?: Maybe<String>;
+  lastname?: Maybe<String>;
+  lastname_not?: Maybe<String>;
+  lastname_in?: Maybe<String[] | String>;
+  lastname_not_in?: Maybe<String[] | String>;
+  lastname_lt?: Maybe<String>;
+  lastname_lte?: Maybe<String>;
+  lastname_gt?: Maybe<String>;
+  lastname_gte?: Maybe<String>;
+  lastname_contains?: Maybe<String>;
+  lastname_not_contains?: Maybe<String>;
+  lastname_starts_with?: Maybe<String>;
+  lastname_not_starts_with?: Maybe<String>;
+  lastname_ends_with?: Maybe<String>;
+  lastname_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -2800,6 +2871,8 @@ export interface UserWhereInput {
   language_not_in?: Maybe<Language[] | Language>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
+  private_not?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   lastConnected_not?: Maybe<DateTimeInput>;
   lastConnected_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -3358,7 +3431,8 @@ export interface AdTargetUpdateManyInput {
 }
 
 export interface UserUpdateWithoutInteractionsDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -3370,6 +3444,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -3508,7 +3583,8 @@ export interface ConversationUpdateWithoutSpeakersDataInput {
 
 export interface UserCreateWithoutFollowingInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -3520,6 +3596,7 @@ export interface UserCreateWithoutFollowingInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
@@ -3558,7 +3635,8 @@ export interface MessageUpdateManyWithoutConversationInput {
 
 export interface UserCreateWithoutFollowersInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -3570,6 +3648,7 @@ export interface UserCreateWithoutFollowersInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
   blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
@@ -3605,6 +3684,7 @@ export interface DebateCreateWithoutOwnerInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -3634,6 +3714,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -3663,6 +3744,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -3887,7 +3969,8 @@ export interface InteractionUpdateManyWithWhereNestedInput {
 }
 
 export interface UserUpdateManyMutationInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -3899,6 +3982,7 @@ export interface UserUpdateManyMutationInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
 }
 
@@ -3985,7 +4069,8 @@ export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -3997,6 +4082,7 @@ export interface UserCreateInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4054,7 +4140,8 @@ export interface TrophyScalarWhereInput {
 
 export interface UserCreateWithoutBlockedInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4066,6 +4153,7 @@ export interface UserCreateWithoutBlockedInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4085,7 +4173,8 @@ export interface TrophyUpdateManyWithWhereNestedInput {
 
 export interface UserCreateWithoutDebatesInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4097,6 +4186,7 @@ export interface UserCreateWithoutDebatesInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4133,6 +4223,7 @@ export interface DebateCreateInput {
   loser?: Maybe<UserCreateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -4203,7 +4294,8 @@ export interface DebateUpdateOneWithoutInteractionsInput {
 }
 
 export interface UserUpdateWithoutTrophiesDataInput {
-  pseudo?: Maybe<String>;
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   birthdate?: Maybe<DateTimeInput>;
@@ -4215,6 +4307,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   following?: Maybe<UserUpdateManyWithoutFollowersInput>;
@@ -4245,6 +4338,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
 }
@@ -4276,6 +4370,7 @@ export interface DebateUpdateInput {
   loser?: Maybe<UserUpdateOneInput>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
@@ -4301,7 +4396,8 @@ export interface UserUpsertWithoutDebatesRedInput {
 
 export interface UserCreateWithoutBlockingInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4313,6 +4409,7 @@ export interface UserCreateWithoutBlockingInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4333,7 +4430,8 @@ export interface DebateUpsertWithWhereUniqueWithoutOwnerBlueInput {
 
 export interface UserCreateWithoutDebatesRedInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4345,6 +4443,7 @@ export interface UserCreateWithoutDebatesRedInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4402,6 +4501,8 @@ export interface DebateScalarWhereInput {
   closed_not?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerOne_not?: Maybe<String>;
   answerOne_in?: Maybe<String[] | String>;
@@ -4453,7 +4554,8 @@ export interface DebateScalarWhereInput {
 
 export interface UserCreateWithoutInteractionsInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4465,6 +4567,7 @@ export interface UserCreateWithoutInteractionsInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4497,6 +4600,7 @@ export interface DebateUpdateManyDataInput {
   type?: Maybe<DebateType>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
 }
@@ -4586,7 +4690,8 @@ export type CommentWhereUniqueInput = AtLeastOne<{
 
 export interface UserCreateWithoutDebatesBlueInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4598,6 +4703,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4612,7 +4718,8 @@ export interface UserCreateWithoutDebatesBlueInput {
 
 export interface UserCreateWithoutConversationsInput {
   id?: Maybe<ID_Input>;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeInput;
@@ -4624,6 +4731,7 @@ export interface UserCreateWithoutConversationsInput {
   bio?: Maybe<String>;
   language?: Maybe<Language>;
   crowned?: Maybe<Boolean>;
+  private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   following?: Maybe<UserCreateManyWithoutFollowersInput>;
@@ -4646,7 +4754,8 @@ export interface NodeNode {
 
 export interface UserPreviousValues {
   id: ID_Output;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeOutput;
@@ -4658,6 +4767,7 @@ export interface UserPreviousValues {
   bio?: String;
   language: Language;
   crowned: Boolean;
+  private: Boolean;
   lastConnected?: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -4667,7 +4777,8 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  pseudo: () => Promise<String>;
+  firstname: () => Promise<String>;
+  lastname: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
@@ -4679,6 +4790,7 @@ export interface UserPreviousValuesPromise
   bio: () => Promise<String>;
   language: () => Promise<Language>;
   crowned: () => Promise<Boolean>;
+  private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -4688,7 +4800,8 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  pseudo: () => Promise<AsyncIterator<String>>;
+  firstname: () => Promise<AsyncIterator<String>>;
+  lastname: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -4700,6 +4813,7 @@ export interface UserPreviousValuesSubscription
   bio: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<Language>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
+  private: () => Promise<AsyncIterator<Boolean>>;
   lastConnected: () => Promise<AsyncIterator<DateTimeOutput>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -4791,7 +4905,8 @@ export interface ConversationNullablePromise
 
 export interface User {
   id: ID_Output;
-  pseudo: String;
+  firstname: String;
+  lastname: String;
   email: String;
   password: String;
   birthdate: DateTimeOutput;
@@ -4803,6 +4918,7 @@ export interface User {
   bio?: String;
   language: Language;
   crowned: Boolean;
+  private: Boolean;
   lastConnected?: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -4810,7 +4926,8 @@ export interface User {
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  pseudo: () => Promise<String>;
+  firstname: () => Promise<String>;
+  lastname: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
@@ -4822,6 +4939,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   bio: () => Promise<String>;
   language: () => Promise<Language>;
   crowned: () => Promise<Boolean>;
+  private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
   followers: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
@@ -4921,7 +5039,8 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  pseudo: () => Promise<AsyncIterator<String>>;
+  firstname: () => Promise<AsyncIterator<String>>;
+  lastname: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   birthdate: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -4933,6 +5052,7 @@ export interface UserSubscription
   bio: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<Language>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
+  private: () => Promise<AsyncIterator<Boolean>>;
   lastConnected: () => Promise<AsyncIterator<DateTimeOutput>>;
   followers: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
     where?: UserWhereInput;
@@ -5032,7 +5152,8 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  pseudo: () => Promise<String>;
+  firstname: () => Promise<String>;
+  lastname: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   birthdate: () => Promise<DateTimeOutput>;
@@ -5044,6 +5165,7 @@ export interface UserNullablePromise
   bio: () => Promise<String>;
   language: () => Promise<Language>;
   crowned: () => Promise<Boolean>;
+  private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
   followers: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
@@ -6181,6 +6303,7 @@ export interface DebatePreviousValues {
   type: DebateType;
   closed: Boolean;
   crowned: Boolean;
+  published: Boolean;
   answerOne?: String;
   answerTwo?: String;
   createdAt: DateTimeOutput;
@@ -6196,6 +6319,7 @@ export interface DebatePreviousValuesPromise
   type: () => Promise<DebateType>;
   closed: () => Promise<Boolean>;
   crowned: () => Promise<Boolean>;
+  published: () => Promise<Boolean>;
   answerOne: () => Promise<String>;
   answerTwo: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
@@ -6211,6 +6335,7 @@ export interface DebatePreviousValuesSubscription
   type: () => Promise<AsyncIterator<DebateType>>;
   closed: () => Promise<AsyncIterator<Boolean>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
   answerOne: () => Promise<AsyncIterator<String>>;
   answerTwo: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -6245,6 +6370,7 @@ export interface Debate {
   type: DebateType;
   closed: Boolean;
   crowned: Boolean;
+  published: Boolean;
   answerOne?: String;
   answerTwo?: String;
   createdAt: DateTimeOutput;
@@ -6318,6 +6444,7 @@ export interface DebatePromise extends Promise<Debate>, Fragmentable {
   loser: <T = UserPromise>() => T;
   closed: () => Promise<Boolean>;
   crowned: () => Promise<Boolean>;
+  published: () => Promise<Boolean>;
   interactions: <T = FragmentableArray<Interaction>>(args?: {
     where?: InteractionWhereInput;
     orderBy?: InteractionOrderByInput;
@@ -6402,6 +6529,7 @@ export interface DebateSubscription
   loser: <T = UserSubscription>() => T;
   closed: () => Promise<AsyncIterator<Boolean>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
+  published: () => Promise<AsyncIterator<Boolean>>;
   interactions: <T = Promise<AsyncIterator<InteractionSubscription>>>(args?: {
     where?: InteractionWhereInput;
     orderBy?: InteractionOrderByInput;
@@ -6486,6 +6614,7 @@ export interface DebateNullablePromise
   loser: <T = UserPromise>() => T;
   closed: () => Promise<Boolean>;
   crowned: () => Promise<Boolean>;
+  published: () => Promise<Boolean>;
   interactions: <T = FragmentableArray<Interaction>>(args?: {
     where?: InteractionWhereInput;
     orderBy?: InteractionOrderByInput;

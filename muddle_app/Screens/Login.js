@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "../Components/Icon";
 import Header from "../Components/Header";
@@ -38,12 +39,18 @@ const GET_CURRENT_USER = gql`
     currentUser {
       id
       email
-      pseudo
+      firstname
+      lastname
       language
       profilePicture
+      coverPicture
     }
   }
 `;
+
+// const SignIn = (props) => {
+
+// }
 
 function LoginComponent(props) {
   const { theme } = React.useContext(ThemeContext);
@@ -58,7 +65,9 @@ function LoginComponent(props) {
     const detectConnected = async () => {
       const token = await getItem("token");
 
+      // console.log(token);
       if (token !== null) {
+        console.log("The token is already here, auto login trigger !");
         setSkipGetUser(false);
       }
     };
@@ -66,68 +75,98 @@ function LoginComponent(props) {
     detectConnected();
 
     return () => {
+      setSkipLogin(true);
       setSkipGetUser(true);
     };
   }, []);
 
-  const { loadingLogin, errorLogin } = useQuery(LOGIN, {
+  const {
+    data: dataLogin,
+    loading: loadingLogin,
+    error: errorLogin,
+  } = useQuery(LOGIN, {
     variables: {
       email,
       password,
     },
-    onCompleted: async (response) => {
-      const { signIn: queryResult } = response;
-
-      console.log("1");
-      console.log(response);
-      const result = await storeItem("token", queryResult.token);
-      console.log(result);
-
-      setSkipLogin(true);
-      setSkipGetUser(false);
-    },
-    onError: (error) => {
-      // console.log(error);
-
-      console.log("2");
-      console.log(error);
-      console.log(email);
-      console.log(password);
-      setSkipLogin(true);
-      setSkipGetUser(true);
-      setSnack({
-        visible: true,
-        message: "L'identifiant ou le mot de passe est incorrect.",
-        type: "error",
-      });
-    },
     skip: skipLogin,
+    fetchPolicy: "network-only",
   });
 
-  const { loadingUser, errorUser } = useQuery(GET_CURRENT_USER, {
-    onCompleted: async (response) => {
-      const { currentUser: queryResult } = response;
-
-      // console.log("wesh");
-      console.log("3");
-      setCurrentUser(queryResult);
-      const token = await storeItem("user", JSON.stringify(queryResult));
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Home" }],
-      });
-      setSkipGetUser(true);
-      setSkipLogin(true);
-    },
-    onError: (error) => {
-      console.log("4");
-
-      console.log(error);
-      setSkipLogin(true);
-      setSkipGetUser(true);
-    },
+  const {
+    data: dataGetUser,
+    loading: loadingGetUser,
+    error: errorGetUser,
+  } = useQuery(GET_CURRENT_USER, {
     skip: skipGetUser,
+    fetchPolicy: "network-only",
   });
+
+  React.useEffect(() => {
+    if (!skipLogin) {
+      const onCompleted = () => {};
+      const onError = () => {};
+      if (onCompleted || onError) {
+        console.log("Trying to get token...");
+        if (onCompleted && !loadingLogin && !errorLogin) {
+          console.log("Token has been trigger !...");
+          const storeTokenAndTriggerGetUser = async () => {
+            const { signIn: queryResult } = dataLogin;
+            const result = await storeItem("token", queryResult.token);
+            console.log("Token has been stored ! :)");
+
+            setSkipGetUser(false); // Trigger get user
+            setSkipLogin(true);
+          };
+          storeTokenAndTriggerGetUser();
+        } else if (onError && !loadingLogin && errorLogin) {
+          console.log("An error occured with token :(");
+          setSkipLogin(true);
+          setSkipGetUser(true);
+
+          setSnack({
+            visible: true,
+            message: "L'identifiant ou le mot de passe est incorrect.",
+            type: "error",
+          });
+        }
+      }
+    }
+  }, [loadingLogin, dataLogin, errorLogin]);
+
+  React.useEffect(() => {
+    if (!skipGetUser) {
+      const onCompleted = () => {};
+      const onError = () => {};
+      if (onCompleted || onError) {
+        console.log("Trying to get user...");
+        if (onCompleted && !loadingGetUser && !errorGetUser) {
+          console.log("User has been trigger !...");
+          const storeUserAndRedirect = async () => {
+            const { currentUser: queryResult } = dataGetUser;
+            setCurrentUser(queryResult);
+            const token = await storeItem("user", JSON.stringify(queryResult));
+            console.log("User has been stored ! :)");
+
+            setSkipGetUser(true);
+            setSkipLogin(true);
+
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
+          };
+          storeUserAndRedirect();
+        } else if (onError && !loadingGetUser && errorGetUser) {
+          console.log(errorGetUser);
+          console.log("An error occured with user :(");
+
+          setSkipLogin(true);
+          setSkipGetUser(true);
+        }
+      }
+    }
+  }, [loadingGetUser, dataGetUser, errorGetUser]);
 
   const [snack, setSnack] = React.useState({
     visible: false,
@@ -136,7 +175,6 @@ function LoginComponent(props) {
   });
 
   const { navigation, route } = props;
-  // const { colors } = props.theme;
 
   React.useEffect(() => {
     const params = props.route.params;
@@ -153,8 +191,6 @@ function LoginComponent(props) {
     { backgroundColor: "#F47658" },
   ]);
 
-  console.log(skipGetUser);
-  console.log(skipLogin);
   return (
     <View style={containerStyle}>
       <Header hidden />
@@ -227,22 +263,26 @@ function LoginComponent(props) {
             onPress={() => {
               Keyboard.dismiss();
               setSkipLogin(false);
-              console.log(skipLogin);
             }}
             style={styles.connectionButton}
-            // disabled
+            disabled={loadingLogin || loadingGetUser}
           >
-            <Text
-              style={{
-                color: "#F47658",
-                fontFamily: "Montserrat_700Bold",
-              }}
-            >
-              {i18n._("connect")}
-            </Text>
+            {loadingLogin || loadingGetUser ? (
+              <ActivityIndicator color="#F47658" />
+            ) : (
+              <Text
+                style={{
+                  color: "#F47658",
+                  fontFamily: "Montserrat_700Bold",
+                }}
+              >
+                {i18n._("connect")}
+              </Text>
+            )}
           </TouchableOpacity>
           {/* DEBUG TOKEN */}
-          <TouchableOpacity
+
+          {/* <TouchableOpacity
             onPress={() => {
               Keyboard.dismiss();
               removeItem("token");
@@ -279,7 +319,7 @@ function LoginComponent(props) {
             >
               LOG ITEMS
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </KeyboardAvoidingView>
       <View style={styles.noAccountBloc}>

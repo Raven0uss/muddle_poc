@@ -41,7 +41,7 @@ const TrophyBox = (props) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.push("Profile", {
-                  userId: trophy.comment.debate.owner.pseudo,
+                  userId: trophy.comment.debate.owner.email,
                 });
               }}
             >
@@ -53,7 +53,7 @@ const TrophyBox = (props) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.push("Profile", {
-                  userId: trophy.comment.debate.owner.pseudo,
+                  userId: trophy.comment.debate.owner.email,
                 });
               }}
             >
@@ -63,7 +63,7 @@ const TrophyBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {trophy.comment.debate.owner.pseudo}
+                {`${trophy.comment.debate.owner.firstname} ${trophy.comment.debate.owner.lastname}`}
               </Text>
             </TouchableOpacity>
             <View style={{ marginLeft: "auto" }}>
@@ -213,7 +213,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: trophy.comment.from.pseudo,
+                    userId: trophy.comment.from.email,
                   });
                 }}
               >
@@ -225,7 +225,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: trophy.comment.from.pseudo,
+                    userId: trophy.comment.from.email,
                   });
                 }}
               >
@@ -235,7 +235,7 @@ const TrophyBox = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {trophy.comment.from.pseudo}
+                  {`${trophy.comment.from.firstname} ${trophy.comment.from.lastname}`}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -282,7 +282,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerBlue.pseudo,
+                    userId: debate.ownerBlue.email,
                   });
                 }}
               >
@@ -294,7 +294,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerBlue.pseudo,
+                    userId: debate.ownerBlue.email,
                   });
                 }}
               >
@@ -304,7 +304,7 @@ const TrophyBox = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {debate.ownerBlue.pseudo}
+                  {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -313,7 +313,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerRed.pseudo,
+                    userId: debate.ownerRed.email,
                   });
                 }}
               >
@@ -325,7 +325,7 @@ const TrophyBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerRed.pseudo,
+                    userId: debate.ownerRed.email,
                   });
                 }}
               >
@@ -335,7 +335,7 @@ const TrophyBox = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {debate.ownerRed.pseudo}
+                  {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
                 </Text>
               </TouchableOpacity>
             </View>

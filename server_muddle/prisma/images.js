@@ -13,4 +13,18 @@ const userProfile = [
   "https://cdn.image4.io/muddles/f_auto/32bb73e0-4a9e-42b7-ac03-8b5aef0fa463.jpg",
 ];
 
-module.exports = { userProfile };
+const userCover = [
+  "https://cdn.image4.io/muddles/f_auto/cb15a069-47a0-4251-b50e-c605d5005dc6.jpg",
+  "https://cdn.image4.io/muddles/f_auto/fb691ad2-2b16-4ea4-ac76-4d149c3168a1.jpg",
+  "https://cdn.image4.io/muddles/f_auto/c1960752-dd14-418d-abec-406571cc5fe7.jpg",
+  "https://cdn.image4.io/muddles/f_auto/89d5c3f8-bce6-45f0-9941-9a1e005bd0cc.jpg",
+  "https://cdn.image4.io/muddles/f_auto/feadd7a6-4e3d-499f-af06-6ea8d60ac0d2.jpg",
+  "https://cdn.image4.io/muddles/f_auto/65fb23b4-2647-41dc-a8cd-7a3a34e3775d.jpg",
+  "https://cdn.image4.io/muddles/f_auto/badb06be-091a-4197-bc73-aa995ec8e61a.jpg",
+  "https://cdn.image4.io/muddles/f_auto/29d7ee33-20be-4919-9676-8196794cabd4.jpg",
+  "https://cdn.image4.io/muddles/f_auto/f6ed3c28-53a0-4034-9226-5575a8db47ea.jpg",
+  "https://cdn.image4.io/muddles/f_auto/7856a21b-b98a-45b9-b99f-703606da65ed.jpg",
+  "https://cdn.image4.io/muddles/f_auto/3be9bd27-c06c-453b-87af-7d3597bfa03d.jpg",
+];
+
+module.exports = { userProfile, userCover };

@@ -867,6 +867,7 @@ type Debate {
   ownerBlue: User
   ownerRed: User
   positives(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  published: Boolean!
   redVotes(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]
   timelimit: DateTime
@@ -892,6 +893,7 @@ input DebateCreateInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -950,6 +952,7 @@ input DebateCreateWithoutCommentsInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -973,6 +976,7 @@ input DebateCreateWithoutInteractionsInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -996,6 +1000,7 @@ input DebateCreateWithoutOwnerBlueInput {
   owner: UserCreateOneWithoutDebatesInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -1019,6 +1024,7 @@ input DebateCreateWithoutOwnerInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -1042,6 +1048,7 @@ input DebateCreateWithoutOwnerRedInput {
   owner: UserCreateOneWithoutDebatesInput
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   reports: ReportCreateManyWithoutDebateInput
   timelimit: DateTime
@@ -1066,6 +1073,7 @@ input DebateCreateWithoutReportsInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   ownerRed: UserCreateOneWithoutDebatesRedInput
   positives: UserCreateManyInput
+  published: Boolean
   redVotes: UserCreateManyInput
   timelimit: DateTime
   topComment: CommentCreateOneInput
@@ -1088,6 +1096,8 @@ enum DebateOrderByInput {
   crowned_DESC
   id_ASC
   id_DESC
+  published_ASC
+  published_DESC
   timelimit_ASC
   timelimit_DESC
   type_ASC
@@ -1168,6 +1178,8 @@ input DebateScalarWhereInput {
   id_starts_with: ID
   NOT: [DebateScalarWhereInput!]
   OR: [DebateScalarWhereInput!]
+  published: Boolean
+  published_not: Boolean
   timelimit: DateTime
   timelimit_gt: DateTime
   timelimit_gte: DateTime
@@ -1211,6 +1223,7 @@ input DebateUpdateDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1234,6 +1247,7 @@ input DebateUpdateInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1248,6 +1262,7 @@ input DebateUpdateManyDataInput {
   closed: Boolean
   content: String
   crowned: Boolean
+  published: Boolean
   timelimit: DateTime
   type: DebateType
 }
@@ -1341,6 +1356,7 @@ input DebateUpdateWithoutCommentsDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1363,6 +1379,7 @@ input DebateUpdateWithoutInteractionsDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1385,6 +1402,7 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   owner: UserUpdateOneWithoutDebatesInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1407,6 +1425,7 @@ input DebateUpdateWithoutOwnerDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1429,6 +1448,7 @@ input DebateUpdateWithoutOwnerRedDataInput {
   owner: UserUpdateOneWithoutDebatesInput
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   reports: ReportUpdateManyWithoutDebateInput
   timelimit: DateTime
@@ -1452,6 +1472,7 @@ input DebateUpdateWithoutReportsDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   positives: UserUpdateManyInput
+  published: Boolean
   redVotes: UserUpdateManyInput
   timelimit: DateTime
   topComment: CommentUpdateOneInput
@@ -1591,6 +1612,8 @@ input DebateWhereInput {
   ownerBlue: UserWhereInput
   ownerRed: UserWhereInput
   positives_some: UserWhereInput
+  published: Boolean
+  published_not: Boolean
   redVotes_some: UserWhereInput
   reports_some: ReportWhereInput
   timelimit: DateTime
@@ -2720,6 +2743,7 @@ type User {
   debatesBlue(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
   debatesRed(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
   email: String!
+  firstname: String!
   followers(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   following(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
   gender: Gender!
@@ -2727,9 +2751,10 @@ type User {
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]
   language: Language!
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean!
   profilePicture: String
-  pseudo: String!
   role: Role!
   trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]
   updatedAt: DateTime!
@@ -2748,6 +2773,7 @@ input UserCreateInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2755,9 +2781,10 @@ input UserCreateInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2834,6 +2861,7 @@ input UserCreateWithoutBlockedInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2841,9 +2869,10 @@ input UserCreateWithoutBlockedInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2860,6 +2889,7 @@ input UserCreateWithoutBlockingInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2867,9 +2897,10 @@ input UserCreateWithoutBlockingInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2886,6 +2917,7 @@ input UserCreateWithoutConversationsInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2893,9 +2925,10 @@ input UserCreateWithoutConversationsInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2912,6 +2945,7 @@ input UserCreateWithoutDebatesBlueInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2919,9 +2953,10 @@ input UserCreateWithoutDebatesBlueInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2938,6 +2973,7 @@ input UserCreateWithoutDebatesInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2945,9 +2981,10 @@ input UserCreateWithoutDebatesInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2964,6 +3001,7 @@ input UserCreateWithoutDebatesRedInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -2971,9 +3009,10 @@ input UserCreateWithoutDebatesRedInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -2991,15 +3030,17 @@ input UserCreateWithoutFollowersInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
   id: ID
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -3017,15 +3058,17 @@ input UserCreateWithoutFollowingInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   gender: Gender
   id: ID
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -3043,15 +3086,17 @@ input UserCreateWithoutInteractionsInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
   id: ID
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
   trophies: TrophyCreateManyWithoutUserInput
 }
@@ -3069,6 +3114,7 @@ input UserCreateWithoutTrophiesInput {
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
+  firstname: String!
   followers: UserCreateManyWithoutFollowingInput
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
@@ -3076,9 +3122,10 @@ input UserCreateWithoutTrophiesInput {
   interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String!
   password: String!
+  private: Boolean
   profilePicture: String
-  pseudo: String!
   role: Role
 }
 
@@ -3097,6 +3144,8 @@ enum UserOrderByInput {
   crowned_DESC
   email_ASC
   email_DESC
+  firstname_ASC
+  firstname_DESC
   gender_ASC
   gender_DESC
   id_ASC
@@ -3105,12 +3154,14 @@ enum UserOrderByInput {
   language_DESC
   lastConnected_ASC
   lastConnected_DESC
+  lastname_ASC
+  lastname_DESC
   password_ASC
   password_DESC
+  private_ASC
+  private_DESC
   profilePicture_ASC
   profilePicture_DESC
-  pseudo_ASC
-  pseudo_DESC
   role_ASC
   role_DESC
   updatedAt_ASC
@@ -3181,6 +3232,20 @@ input UserScalarWhereInput {
   email_not_in: [String!]
   email_not_starts_with: String
   email_starts_with: String
+  firstname: String
+  firstname_contains: String
+  firstname_ends_with: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_not: String
+  firstname_not_contains: String
+  firstname_not_ends_with: String
+  firstname_not_in: [String!]
+  firstname_not_starts_with: String
+  firstname_starts_with: String
   gender: Gender
   gender_in: [Gender!]
   gender_not: Gender
@@ -3211,6 +3276,20 @@ input UserScalarWhereInput {
   lastConnected_lte: DateTime
   lastConnected_not: DateTime
   lastConnected_not_in: [DateTime!]
+  lastname: String
+  lastname_contains: String
+  lastname_ends_with: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_not: String
+  lastname_not_contains: String
+  lastname_not_ends_with: String
+  lastname_not_in: [String!]
+  lastname_not_starts_with: String
+  lastname_starts_with: String
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   password: String
@@ -3227,6 +3306,8 @@ input UserScalarWhereInput {
   password_not_in: [String!]
   password_not_starts_with: String
   password_starts_with: String
+  private: Boolean
+  private_not: Boolean
   profilePicture: String
   profilePicture_contains: String
   profilePicture_ends_with: String
@@ -3241,20 +3322,6 @@ input UserScalarWhereInput {
   profilePicture_not_in: [String!]
   profilePicture_not_starts_with: String
   profilePicture_starts_with: String
-  pseudo: String
-  pseudo_contains: String
-  pseudo_ends_with: String
-  pseudo_gt: String
-  pseudo_gte: String
-  pseudo_in: [String!]
-  pseudo_lt: String
-  pseudo_lte: String
-  pseudo_not: String
-  pseudo_not_contains: String
-  pseudo_not_ends_with: String
-  pseudo_not_in: [String!]
-  pseudo_not_starts_with: String
-  pseudo_starts_with: String
   role: Role
   role_in: [Role!]
   role_not: Role
@@ -3282,15 +3349,17 @@ input UserUpdateDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3308,15 +3377,17 @@ input UserUpdateInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3328,12 +3399,14 @@ input UserUpdateManyDataInput {
   coverPicture: String
   crowned: Boolean
   email: String
+  firstname: String
   gender: Gender
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
 }
 
@@ -3483,15 +3556,17 @@ input UserUpdateWithoutBlockedDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3508,15 +3583,17 @@ input UserUpdateWithoutBlockingDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3533,15 +3610,17 @@ input UserUpdateWithoutConversationsDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3558,15 +3637,17 @@ input UserUpdateWithoutDebatesBlueDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3583,15 +3664,17 @@ input UserUpdateWithoutDebatesDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3608,15 +3691,17 @@ input UserUpdateWithoutDebatesRedDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3634,14 +3719,16 @@ input UserUpdateWithoutFollowersDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3659,14 +3746,16 @@ input UserUpdateWithoutFollowingDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3684,14 +3773,16 @@ input UserUpdateWithoutInteractionsDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
   trophies: TrophyUpdateManyWithoutUserInput
 }
@@ -3709,15 +3800,17 @@ input UserUpdateWithoutTrophiesDataInput {
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
+  firstname: String
   followers: UserUpdateManyWithoutFollowingInput
   following: UserUpdateManyWithoutFollowersInput
   gender: Gender
   interactions: InteractionUpdateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
+  lastname: String
   password: String
+  private: Boolean
   profilePicture: String
-  pseudo: String
   role: Role
 }
 
@@ -3887,6 +3980,20 @@ input UserWhereInput {
   email_not_in: [String!]
   email_not_starts_with: String
   email_starts_with: String
+  firstname: String
+  firstname_contains: String
+  firstname_ends_with: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_not: String
+  firstname_not_contains: String
+  firstname_not_ends_with: String
+  firstname_not_in: [String!]
+  firstname_not_starts_with: String
+  firstname_starts_with: String
   followers_some: UserWhereInput
   following_some: UserWhereInput
   gender: Gender
@@ -3920,6 +4027,20 @@ input UserWhereInput {
   lastConnected_lte: DateTime
   lastConnected_not: DateTime
   lastConnected_not_in: [DateTime!]
+  lastname: String
+  lastname_contains: String
+  lastname_ends_with: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_not: String
+  lastname_not_contains: String
+  lastname_not_ends_with: String
+  lastname_not_in: [String!]
+  lastname_not_starts_with: String
+  lastname_starts_with: String
   password: String
   password_contains: String
   password_ends_with: String
@@ -3934,6 +4055,8 @@ input UserWhereInput {
   password_not_in: [String!]
   password_not_starts_with: String
   password_starts_with: String
+  private: Boolean
+  private_not: Boolean
   profilePicture: String
   profilePicture_contains: String
   profilePicture_ends_with: String
@@ -3948,20 +4071,6 @@ input UserWhereInput {
   profilePicture_not_in: [String!]
   profilePicture_not_starts_with: String
   profilePicture_starts_with: String
-  pseudo: String
-  pseudo_contains: String
-  pseudo_ends_with: String
-  pseudo_gt: String
-  pseudo_gte: String
-  pseudo_in: [String!]
-  pseudo_lt: String
-  pseudo_lte: String
-  pseudo_not: String
-  pseudo_not_contains: String
-  pseudo_not_ends_with: String
-  pseudo_not_in: [String!]
-  pseudo_not_starts_with: String
-  pseudo_starts_with: String
   role: Role
   role_in: [Role!]
   role_not: Role
@@ -3980,5 +4089,4 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   email: String
   id: ID
-  pseudo: String
 }

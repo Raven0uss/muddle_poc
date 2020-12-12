@@ -29,7 +29,7 @@ const DebateBox = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.push("Profile", {
-                userId: debate.owner.pseudo,
+                userId: debate.owner.email,
               });
             }}
           >
@@ -41,14 +41,14 @@ const DebateBox = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.push("Profile", {
-                userId: debate.owner.pseudo,
+                userId: debate.owner.email,
               });
             }}
           >
             <Text
               style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
             >
-              {debate.owner.pseudo}
+              {`${debate.owner.firstname} ${debate.owner.lastname}`}
             </Text>
           </TouchableOpacity>
           <View style={{ marginLeft: "auto" }}>
@@ -195,7 +195,7 @@ const DebateBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerBlue.pseudo,
+                    userId: debate.ownerBlue.email,
                   });
                 }}
               >
@@ -207,7 +207,7 @@ const DebateBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerBlue.pseudo,
+                    userId: debate.ownerBlue.email,
                   });
                 }}
               >
@@ -217,7 +217,7 @@ const DebateBox = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {debate.ownerBlue.pseudo}
+                  {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -226,7 +226,7 @@ const DebateBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerRed.pseudo,
+                    userId: debate.ownerRed.email,
                   });
                 }}
               >
@@ -238,7 +238,7 @@ const DebateBox = (props) => {
               <TouchableOpacity
                 onPress={() => {
                   navigation.push("Profile", {
-                    userId: debate.ownerRed.pseudo,
+                    userId: debate.ownerRed.email,
                   });
                 }}
               >
@@ -248,7 +248,7 @@ const DebateBox = (props) => {
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {debate.ownerRed.pseudo}
+                  {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
                 </Text>
               </TouchableOpacity>
             </View>

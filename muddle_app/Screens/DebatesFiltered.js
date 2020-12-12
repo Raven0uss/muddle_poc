@@ -31,17 +31,20 @@ const GET_DEBATES = gql`
       type
       owner {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       ownerBlue {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       ownerRed {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       positives {
@@ -59,7 +62,8 @@ const GET_DEBATES = gql`
       comments {
         id
         from {
-          pseudo
+          firstname
+          lastname
           profilePicture
         }
         content

@@ -25,7 +25,8 @@ const GET_NOTIFICATIONS = gql`
       id
       who {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       type

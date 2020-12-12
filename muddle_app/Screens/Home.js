@@ -40,17 +40,20 @@ const GET_DEBATES = gql`
       type
       owner {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       ownerBlue {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       ownerRed {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
       }
       positives {
@@ -70,7 +73,8 @@ const GET_DEBATES = gql`
         nested
         from {
           id
-          pseudo
+          firstname
+          lastname
           profilePicture
         }
         content
@@ -143,7 +147,7 @@ const Home = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Profile", {
-                userId: currentUser.pseudo, // Personne connectee
+                userId: currentUser.email, // Personne connectee
               });
             }}
           >

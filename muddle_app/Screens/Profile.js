@@ -24,26 +24,31 @@ import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import InteractionBox from "../Components/InteractionBox";
 import { muddle } from "../CustomProperties/IconsBase64";
-// import UserContext from "../CustomProperties/ThemeContext";
 import { useQuery, gql } from "@apollo/client";
 import { get, isEmpty } from "lodash";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
+import ProfileAction from "../Components/ProfileAction";
 
 const GET_USER = gql`
   query($userId: String!) {
-    user(where: { pseudo: $userId }) {
+    user(where: { email: $userId }) {
       id
-      pseudo
+      firstname
+      lastname
       profilePicture
+      coverPicture
+      email
       trophies {
         id
         type
       }
       followers {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
         trophies {
           id
@@ -52,7 +57,8 @@ const GET_USER = gql`
       }
       following {
         id
-        pseudo
+        firstname
+        lastname
         profilePicture
         trophies {
           id
@@ -66,7 +72,7 @@ const GET_USER = gql`
 const GET_INTERACTIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
     interactions(
-      where: { who: { pseudo: $userId } }
+      where: { who: { email: $userId } }
       first: $first
       skip: $skip
     ) {
@@ -74,7 +80,9 @@ const GET_INTERACTIONS = gql`
       type
       who {
         id
-        pseudo
+        email
+        firstname
+        lastname
         profilePicture
       }
       debate {
@@ -85,17 +93,23 @@ const GET_INTERACTIONS = gql`
         content
         owner {
           id
-          pseudo
+          email
+          firstname
+          lastname
           profilePicture
         }
         ownerBlue {
           id
-          pseudo
+          email
+          firstname
+          lastname
           profilePicture
         }
         ownerRed {
           id
-          pseudo
+          email
+          firstname
+          lastname
           profilePicture
         }
         positives {
@@ -114,7 +128,9 @@ const GET_INTERACTIONS = gql`
           id
           nested
           from {
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           content
@@ -141,16 +157,22 @@ const GET_INTERACTIONS = gql`
           owner {
             id
             profilePicture
-            pseudo
+            firstname
+            lastname
+            email
           }
           ownerBlue {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           ownerRed {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           positives {
@@ -169,7 +191,9 @@ const GET_INTERACTIONS = gql`
             id
             nested
             from {
-              pseudo
+              firstname
+              lastname
+              email
               profilePicture
             }
             content
@@ -185,7 +209,9 @@ const GET_INTERACTIONS = gql`
           }
         }
         from {
-          pseudo
+          firstname
+          lastname
+          email
           profilePicture
         }
         content
@@ -284,11 +310,12 @@ const Interactions = (props) => {
 
 const Profile = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [user, setUser] = React.useState(null);
   const [search, setSearch] = React.useState("");
   const { data, loading, error, fetchMore } = useQuery(GET_USER, {
     variables: {
-      userId: get(props, "route.params.userId", "userA"),
+      userId: get(props, "route.params.userId"),
     },
     onCompleted: (response) => {
       const { user: queryResult } = response;
@@ -311,13 +338,14 @@ const Profile = (props) => {
     );
   }
 
+  const me = currentUser.id === user.id;
   return (
     <View
       style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}
     >
       <Image
         source={{
-          uri: coverTest,
+          uri: user.coverPicture,
         }}
         style={{
           height: 240,
@@ -401,7 +429,7 @@ const Profile = (props) => {
           }}
           onPress={() =>
             navigation.push("Trophies", {
-              userId: user.pseudo,
+              userId: user.email,
               nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
                 .length,
               nbTopComment: user.trophies.filter(
@@ -469,7 +497,7 @@ const Profile = (props) => {
             }}
             numberOfLines={2}
           >
-            {user.pseudo}
+            {`${user.firstname} ${user.lastname}`}
           </Text>
 
           <View
@@ -545,18 +573,19 @@ const Profile = (props) => {
             </View>
           </View>
         </View>
-        <TouchableOpacity
+        <View
           style={{
             marginTop: 12,
             marginLeft: 10,
           }}
         >
-          <CustomIcon
-            name={"more-horiz"}
-            size={22}
-            color={themeSchema[theme].colorText}
+          <ProfileAction
+            me={me}
+            navigation={navigation}
+            theme={theme}
+            user={user}
           />
-        </TouchableOpacity>
+        </View>
       </View>
 
       {/* Historique des interactions */}
@@ -579,7 +608,7 @@ const Profile = (props) => {
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
       /> */}
-      <Interactions userId={user.pseudo} navigation={navigation} />
+      <Interactions userId={user.email} navigation={navigation} />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />
     </View>

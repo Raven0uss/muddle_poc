@@ -26,19 +26,22 @@ const GET_CONVERSATIONS = gql`
       id
       speakers {
         id
-        pseudo
+        firstname
+        lastname
       }
       messages {
         id
         content
         from {
           id
-          pseudo
+          firstname
+          lastname
           profilePicture
         }
         to {
           id
-          pseudo
+          firstname
+          lastname
           profilePicture
         }
       }
@@ -85,7 +88,7 @@ const renderItem = ({ item }, navigation, theme) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {lastMessage.from.pseudo}
+              {`${lastMessage.from.firstname} ${lastMessage.from.lastname}`}
             </Text>
             <Text
               style={{

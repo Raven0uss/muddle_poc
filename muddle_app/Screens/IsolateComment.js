@@ -30,7 +30,8 @@ const GET_SUBCOMMENTS = gql`
       comments {
         id
         from {
-          pseudo
+          firstname
+          lastname
           profilePicture
         }
         content
@@ -170,7 +171,7 @@ const IsolateComment = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.push("Profile", {
-                userId: comment.from.pseudo,
+                userId: comment.from.email,
               });
             }}
           >
@@ -182,14 +183,14 @@ const IsolateComment = (props) => {
           <TouchableOpacity
             onPress={() => {
               navigation.push("Profile", {
-                userId: comment.from.pseudo,
+                userId: comment.from.email,
               });
             }}
           >
             <Text
               style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
             >
-              {comment.from.pseudo}
+              {`${comment.from.firstname} ${comment.from.lastname}`}
             </Text>
           </TouchableOpacity>
         </View>

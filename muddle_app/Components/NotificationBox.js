@@ -61,7 +61,7 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {notification.who[0].pseudo}
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
             </Text>
             <View
               style={{
@@ -130,7 +130,7 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {notification.who[0].pseudo}
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
             </Text>
             <View
               style={{
@@ -256,7 +256,9 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].pseudo}${
+              {`${notification.who[0].firstname} ${
+                notification.who[0].lastname
+              }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
@@ -357,7 +359,7 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {notification.who[0].pseudo}
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
             </Text>
             <View
               style={{
@@ -495,7 +497,9 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].pseudo}${
+              {`${notification.who[0].firstname} ${
+                notification.who[0].lastname
+              }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
@@ -594,7 +598,9 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].pseudo}${
+              {`${notification.who[0].firstname} ${
+                notification.who[0].lastname
+              }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1

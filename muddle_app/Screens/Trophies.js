@@ -25,11 +25,13 @@ import themeSchema from "../CustomProperties/Theme";
 
 const GET_TROPHIES = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
-    trophies(where: { user: { pseudo: $userId } }, first: $first, skip: $skip) {
+    trophies(where: { user: { email: $userId } }, first: $first, skip: $skip) {
       id
       user {
         id
-        pseudo
+        email
+        firstname
+        lastname
         profilePicture
       }
       type
@@ -41,17 +43,23 @@ const GET_TROPHIES = gql`
         answerTwo
         owner {
           id
-          pseudo
+          firstname
+          lastname
+          email
           profilePicture
         }
         ownerBlue {
           id
-          pseudo
+          firstname
+          lastname
+          email
           profilePicture
         }
         ownerRed {
           id
-          pseudo
+          firstname
+          lastname
+          email
           profilePicture
         }
         comments {
@@ -63,7 +71,9 @@ const GET_TROPHIES = gql`
           }
           from {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
         }
@@ -93,13 +103,17 @@ const GET_TROPHIES = gql`
           }
           from {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
         }
         from {
           id
-          pseudo
+          firstname
+          lastname
+          email
           profilePicture
         }
         debate {
@@ -110,17 +124,23 @@ const GET_TROPHIES = gql`
           content
           owner {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           ownerBlue {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           ownerRed {
             id
-            pseudo
+            firstname
+            lastname
+            email
             profilePicture
           }
           positives {
@@ -141,7 +161,9 @@ const GET_TROPHIES = gql`
             content
             from {
               id
-              pseudo
+              firstname
+              lastname
+              email
               profilePicture
             }
             comments {

@@ -1,7 +1,7 @@
 const faker = require("faker");
 const bcrypt = require("bcrypt");
 const { prisma } = require("../generated/prisma-client");
-const { userProfile } = require("./images");
+const { userProfile, userCover } = require("./images");
 
 function shuffleArray(originArray) {
   const array = [...originArray];
@@ -46,11 +46,14 @@ async function main() {
   // Create random users
   for (let index = 0; index < 10; index++) {
     const imageRandom = userProfile[faker.random.number(11)];
+    const coverRandom = userCover[faker.random.number(9)];
     await prisma.createUser({
       email: faker.internet.email(),
       password: bcrypt.hashSync("test", 12),
-      pseudo: faker.internet.userName(),
+      firstname: faker.name.firstName(),
+      lastname: faker.name.lastName(),
       birthdate: faker.date.past(),
+      coverPicture: coverRandom,
       profilePicture: imageRandom,
     });
   }
@@ -125,9 +128,12 @@ async function main() {
   const M = await prisma.createUser({
     email: "appmuddle@appmuddle.muddle",
     password: bcrypt.hashSync("test", 12),
-    pseudo: "Muddle",
+    firstname: "Muddles",
+    lastname: "Team",
     birthdate: faker.date.past(),
     role: "MUDDLE",
+    coverPicture:
+      "https://image.freepik.com/vecteurs-libre/fond-texture-blanc-elegant_23-2148431731.jpg",
     profilePicture:
       "https://cdn.image4.io/muddles/f_auto/541fcf81-ff63-407e-a39f-88f1cf7f1ddf.png",
   });
@@ -135,7 +141,7 @@ async function main() {
   // Create muddle debates
   for (let index = 0; index < 10; index++) {
     await prisma.createDebate({
-      owner: { connect: { pseudo: "Muddle" } },
+      owner: { connect: { email: "appmuddle@appmuddle.muddle" } },
       content: faker.lorem.paragraph(),
       type: "MUDDLE",
       answerOne: "Je suis pour",
@@ -146,10 +152,13 @@ async function main() {
   // Create two users to test the chat
 
   const A = await prisma.createUser({
-    email: "userA@appmuddle.fr",
+    email: "userA",
     password: bcrypt.hashSync("test", 12),
-    pseudo: "userA",
+    firstname: "Elliot",
+    lastname: "Alderson",
     birthdate: faker.date.past(),
+    coverPicture:
+      "https://cdn.image4.io/muddles/f_auto/a0808348-5e78-420e-a724-71e247babb37.jpg",
     followers: { connect: randomUserList({ users }) },
     following: { connect: randomUserList({ users }) },
     profilePicture:
@@ -157,18 +166,21 @@ async function main() {
   });
 
   const B = await prisma.createUser({
-    email: "userB@appmuddle.fr",
+    email: "userB",
     password: bcrypt.hashSync("test", 12),
-    pseudo: "userB",
+    firstname: "Mister",
+    lastname: "Robot",
     birthdate: faker.date.past(),
     followers: { connect: randomUserList({ users }) },
     following: { connect: randomUserList({ users }) },
+    coverPicture:
+      "https://cdn.image4.io/muddles/f_auto/a0808348-5e78-420e-a724-71e247babb37.jpg",
     profilePicture:
       "https://cdn.image4.io/muddles/f_auto/ed428672-8299-4011-b5cc-7512cde89f6c.jpg",
   });
 
   const conversation = await prisma.createConversation({
-    speakers: { connect: [{ pseudo: "userA" }, { pseudo: "userB" }] },
+    speakers: { connect: [{ email: "userA" }, { email: "userB" }] },
   });
 
   //   Create random messages
@@ -176,15 +188,15 @@ async function main() {
     const dice = faker.random.number(8) % 2 === 0;
     await prisma.createMessage({
       content: faker.lorem.sentence(),
-      to: { connect: { pseudo: dice ? "userA" : "userB" } },
-      from: { connect: { pseudo: dice ? "userB" : "userA" } },
+      to: { connect: { email: dice ? "userA" : "userB" } },
+      from: { connect: { email: dice ? "userB" : "userA" } },
       conversation: { connect: { id: conversation.id } },
     });
   }
 
   // Create all type of notifications
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "VOTE",
     status: "INFORMATION",
     new: true,
@@ -192,7 +204,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "INVITATION_DUO",
     status: "PENDING",
     new: true,
@@ -200,7 +212,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }, { pseudo: "userB" }] },
+    who: { connect: [{ email: "userA" }, { email: "userB" }] },
     type: "COMMENT",
     status: "INFORMATION",
     new: false,
@@ -208,7 +220,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "CLOSE_DEBATE",
     status: "PENDING",
     new: false,
@@ -216,7 +228,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "LIKE",
     status: "INFORMATION",
     new: false,
@@ -224,7 +236,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }, { pseudo: "userB" }] },
+    who: { connect: [{ email: "userA" }, { email: "userB" }] },
     type: "DISLIKE",
     status: "INFORMATION",
     new: false,
@@ -232,14 +244,14 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "REJECT_DUO",
     status: "INFORMATION",
     new: false,
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "ACCEPT_DUO",
     status: "INFORMATION",
     new: false,
@@ -247,7 +259,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "ACCEPT_CLOSE_DEBATE",
     status: "INFORMATION",
     new: false,
@@ -255,7 +267,7 @@ async function main() {
   });
 
   await prisma.createNotification({
-    who: { connect: [{ pseudo: "userA" }] },
+    who: { connect: [{ email: "userA" }] },
     type: "REJECT_CLOSE_DEBATE",
     status: "INFORMATION",
     new: false,
@@ -267,14 +279,14 @@ async function main() {
   for (let index = 0; index < 7; index++) {
     if (index % 2 === 0)
       await prisma.createTrophy({
-        user: { connect: { pseudo: "userA" } },
+        user: { connect: { email: "userA" } },
         won: true,
         type: "DUO",
         debate: { connect: { id: duoDebates[0].id } },
       });
     else {
       await prisma.createTrophy({
-        user: { connect: { pseudo: "userA" } },
+        user: { connect: { email: "userA" } },
         won: true,
         type: "TOP_COMMENT",
         // debate: { connect: { id: comments[0].debate.id } },
@@ -285,43 +297,43 @@ async function main() {
 
   // Interactions
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "LIKE",
     comment: { connect: { id: comments[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "DISLIKE",
     comment: { connect: { id: comments[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "COMMENT",
     comment: { connect: { id: comments[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "BLUE_VOTE",
     debate: { connect: { id: duoDebates[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "RED_VOTE",
     debate: { connect: { id: duoDebates[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "POSITIVE_VOTE",
     debate: { connect: { id: standardDebates[0].id } },
   });
 
   await prisma.createInteraction({
-    who: { connect: { pseudo: "userA" } },
+    who: { connect: { email: "userA" } },
     type: "NEGATIVE_VOTE",
     debate: { connect: { id: standardDebates[0].id } },
   });

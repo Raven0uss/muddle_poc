@@ -7,8 +7,10 @@ import DebateBox from "./DebateBox";
 import CommentBox from "./CommentBox";
 import i18n from "../i18n";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const InteractionBox = (props) => {
+  const { currentUser } = React.useContext(UserContext);
   const { interaction, navigation, theme } = props;
   const { comment, debate } = interaction;
 
@@ -29,9 +31,11 @@ const InteractionBox = (props) => {
             }}
           >
             {`${
-              interaction.who.pseudo === "userA"
+              interaction.who.id === currentUser.id
                 ? i18n._("youLiked")
-                : `${interaction.who.pseudo} ${i18n._("liked")}`
+                : `${interaction.who.firstname} ${
+                    interaction.who.lastname
+                  } ${i18n._("liked")}`
             } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
@@ -70,9 +74,11 @@ const InteractionBox = (props) => {
             }}
           >
             {`${
-              interaction.who.pseudo === "userA"
+              interaction.who.id === currentUser.id
                 ? i18n._("youDidntLiked")
-                : `${interaction.who.pseudo} ${i18n._("didntLiked")}`
+                : `${interaction.who.firstname} ${
+                    interaction.who.lastname
+                  } ${i18n._("didntLiked")}`
             } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
@@ -110,9 +116,11 @@ const InteractionBox = (props) => {
             }}
           >
             {`${
-              interaction.who.pseudo === "userA"
+              interaction.who.id === currentUser.id
                 ? i18n._("youCommented")
-                : `${interaction.who.pseudo} ${i18n._("commented")}`
+                : `${interaction.who.firstname} ${
+                    interaction.who.lastname
+                  } ${i18n._("commented")}`
             } ${i18n._("onThisDebate")} ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View
@@ -150,9 +158,11 @@ const InteractionBox = (props) => {
             }}
           >
             {`${
-              interaction.who.pseudo === "userA"
+              interaction.who.id === currentUser.id
                 ? i18n._("youVote")
-                : `${interaction.who.pseudo} ${i18n._("hasVote")}`
+                : `${interaction.who.firstname} ${
+                    interaction.who.lastname
+                  } ${i18n._("hasVote")}`
             } ${i18n._("ago", { time: "2h" })}`}
           </Text>
           <View

@@ -26,7 +26,7 @@ module.exports = {
     Role: [],
     Gender: [],
     Language: [],
-    User: ['id', 'pseudo', 'email']
+    User: ['id', 'email']
   },
   embeddedTypes: [],
   clientPath: 'generated/prisma-client',
@@ -5462,7 +5462,23 @@ module.exports = {
             "deprecationReason": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "args": [],
             "type": {
@@ -5627,6 +5643,22 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "private",
             "description": null,
             "args": [],
             "type": {
@@ -6851,7 +6883,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6861,7 +6893,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not",
+            "name": "firstname_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6871,7 +6903,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_in",
+            "name": "firstname_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -6889,7 +6921,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_in",
+            "name": "firstname_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -6907,7 +6939,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_lt",
+            "name": "firstname_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6917,7 +6949,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_lte",
+            "name": "firstname_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6927,7 +6959,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_gt",
+            "name": "firstname_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6937,7 +6969,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_gte",
+            "name": "firstname_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6947,7 +6979,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_contains",
+            "name": "firstname_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6957,7 +6989,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_contains",
+            "name": "firstname_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6967,7 +6999,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_starts_with",
+            "name": "firstname_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6977,7 +7009,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_starts_with",
+            "name": "firstname_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6987,7 +7019,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_ends_with",
+            "name": "firstname_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6997,7 +7029,163 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_ends_with",
+            "name": "firstname_not_ends_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_starts_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_starts_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_ends_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8091,6 +8279,26 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "private",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "lastConnected",
             "description": null,
             "type": {
@@ -9123,6 +9331,26 @@ module.exports = {
           },
           {
             "name": "crowned_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -13082,13 +13310,25 @@ module.exports = {
             "deprecationReason": null
           },
           {
-            "name": "pseudo_ASC",
+            "name": "firstname_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "pseudo_DESC",
+            "name": "firstname_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastname_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastname_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -13226,6 +13466,18 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "private_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "private_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "lastConnected_ASC",
             "description": null,
             "isDeprecated": false,
@@ -13340,6 +13592,18 @@ module.exports = {
           },
           {
             "name": "crowned_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "published_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "published_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -14096,6 +14360,22 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "published",
             "description": null,
             "args": [],
             "type": {
@@ -17363,16 +17643,6 @@ module.exports = {
             "type": {
               "kind": "SCALAR",
               "name": "ID",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "pseudo",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -21842,7 +22112,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -21969,6 +22253,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -22156,7 +22450,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -22283,6 +22591,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -22460,7 +22778,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -22587,6 +22919,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -22764,7 +23106,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -22891,6 +23247,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -23068,7 +23434,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -23195,6 +23575,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -23540,6 +23930,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -23622,7 +24022,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -23749,6 +24163,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -24094,6 +24518,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -24176,7 +24610,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -24303,6 +24751,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -24648,6 +25106,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -24730,7 +25198,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -24857,6 +25339,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -25299,6 +25791,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -25897,6 +26399,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -26116,7 +26628,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -26243,6 +26769,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -27087,6 +27623,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -27449,6 +27995,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "answerOne",
             "description": null,
             "type": {
@@ -27622,7 +28178,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -27733,6 +28299,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -28075,7 +28651,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -28186,6 +28772,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -28518,7 +29114,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -28629,6 +29235,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -28961,7 +29577,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -29072,6 +29698,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -29404,7 +30040,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -29515,6 +30161,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30007,6 +30663,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -30119,7 +30785,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30230,6 +30906,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30722,6 +31408,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -30834,7 +31530,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30945,6 +31651,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -31437,6 +32153,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -31549,7 +32275,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -31660,6 +32396,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -32275,6 +33021,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33039,7 +33795,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33049,7 +33805,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not",
+            "name": "firstname_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33059,7 +33815,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_in",
+            "name": "firstname_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -33077,7 +33833,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_in",
+            "name": "firstname_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -33095,7 +33851,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_lt",
+            "name": "firstname_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33105,7 +33861,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_lte",
+            "name": "firstname_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33115,7 +33871,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_gt",
+            "name": "firstname_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33125,7 +33881,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_gte",
+            "name": "firstname_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33135,7 +33891,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_contains",
+            "name": "firstname_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33145,7 +33901,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_contains",
+            "name": "firstname_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33155,7 +33911,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_starts_with",
+            "name": "firstname_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33165,7 +33921,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_starts_with",
+            "name": "firstname_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33175,7 +33931,7 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_ends_with",
+            "name": "firstname_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -33185,7 +33941,163 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo_not_ends_with",
+            "name": "firstname_not_ends_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_starts_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_starts_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_ends_with",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -34279,6 +35191,26 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "private",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "lastConnected",
             "description": null,
             "type": {
@@ -34671,7 +35603,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -34782,6 +35724,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -35446,6 +36398,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -35851,6 +36813,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -38457,7 +39429,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -38568,6 +39550,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -42293,6 +43285,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "answerOne",
             "description": null,
             "type": {
@@ -43012,6 +44014,26 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "answerOne",
             "description": null,
             "type": {
@@ -43670,6 +44692,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "answerOne",
             "description": null,
             "type": {
@@ -44226,7 +45258,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -44353,6 +45399,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -44716,7 +45772,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -44827,6 +45893,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -45170,6 +46246,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "published",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "interactions",
             "description": null,
             "type": {
@@ -45252,6 +46338,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "published",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -46331,7 +47427,21 @@ module.exports = {
             "defaultValue": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -46458,6 +47568,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -46690,7 +47810,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -46801,6 +47931,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -46991,7 +48131,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -47102,6 +48252,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -47232,7 +48392,17 @@ module.exports = {
         "fields": null,
         "inputFields": [
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -47343,6 +48513,16 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "private",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -49023,6 +50203,22 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "published",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "answerOne",
             "description": null,
             "args": [],
@@ -50581,7 +51777,23 @@ module.exports = {
             "deprecationReason": null
           },
           {
-            "name": "pseudo",
+            "name": "firstname",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastname",
             "description": null,
             "args": [],
             "type": {
@@ -50746,6 +51958,22 @@ module.exports = {
           },
           {
             "name": "crowned",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "private",
             "description": null,
             "args": [],
             "type": {

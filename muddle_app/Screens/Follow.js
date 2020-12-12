@@ -131,7 +131,7 @@ const Follow = (props) => {
             key={contact.id}
             onPress={() => {
               navigation.push("Profile", {
-                userId: contact.pseudo,
+                userId: contact.email,
               });
             }}
           >
@@ -158,7 +158,7 @@ const Follow = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {contact.pseudo}
+                {`${contact.firstname} ${contact.lastname}`}
               </Text>
             </View>
           </TouchableOpacity>
