@@ -5,7 +5,12 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 
 const CustomIcon = (props) => {
   return (
-    <View>
+    <View
+      style={{
+        borderRadius: props.viewRadius,
+        backgroundColor: props.viewBcolor,
+      }}
+    >
       <Icon
         name={props.name}
         size={props.size}
@@ -25,19 +30,23 @@ CustomIcon.propTypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.number,
   bcolor: PropTypes.string,
+  viewBcolor: PropTypes.string,
   color: PropTypes.string,
   pLeft: PropTypes.number,
   padding: PropTypes.number,
   radius: PropTypes.number,
+  viewRadius: PropTypes.number,
 };
 
 CustomIcon.defaultProps = {
   size: 24,
   bcolor: "transparent",
+  viewBcolor: "transparent",
   color: "#000",
   pLeft: 0,
   padding: 0,
   radius: 0,
+  viewRadius: 0,
 };
 
 export default CustomIcon;

@@ -8,14 +8,27 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 
+const displayPercent = ({ votes, totalVotes }) => {
+  return `${Math.round((votes / totalVotes) * 100)}%`;
+};
+
 const DebateBox = (props) => {
-  const { theme } = React.useContext(ThemeContext);
   const { debate, navigation } = props;
 
-  const votes =
+  const { theme } = React.useContext(ThemeContext);
+  const [pour, setPour] = React.useState(
     debate.type === "STANDARD" || debate.type === "MUDDLE"
-      ? debate.negatives.length + debate.positives.length
-      : debate.redVotes.length + debate.blueVotes.length;
+      ? debate.positives.length
+      : debate.blueVotes.length
+  );
+  const [contre, setContre] = React.useState(
+    debate.type === "STANDARD" || debate.type === "MUDDLE"
+      ? debate.negatives.length
+      : debate.redVotes.length
+  );
+  const [voted, setVoted] = React.useState(null);
+
+  const votes = pour + contre;
   const comments = debate.comments.length;
   if (debate.type === "STANDARD" || debate.type === "MUDDLE") {
     return (
@@ -121,11 +134,25 @@ const DebateBox = (props) => {
         </View>
         <View style={styles.debateActions}>
           <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              ...styles.votePourButton,
-              backgroundColor: themeSchema[theme].backgroundColor2,
+            onPress={() => {
+              setPour((v) => v + 1);
+              setVoted("pour");
             }}
+            style={
+              voted
+                ? {
+                    ...styles.votePourButton,
+                    backgroundColor:
+                      voted === "pour"
+                        ? "#F47658"
+                        : themeSchema[theme].backgroundColor2,
+                  }
+                : {
+                    ...styles.votePourButton,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                  }
+            }
+            disabled={voted}
           >
             <Text
               numberOfLines={1}
@@ -134,31 +161,72 @@ const DebateBox = (props) => {
                 fontSize: 12,
                 paddingLeft: 12,
                 paddingRight: 12,
-                fontFamily: "Montserrat_500Medium",
+                fontFamily: voted
+                  ? "Montserrat_600SemiBold"
+                  : "Montserrat_500Medium",
               }}
             >
-              {debate.answerOne}
+              {voted
+                ? displayPercent({
+                    votes: pour,
+                    totalVotes: votes,
+                  })
+                : debate.answerOne}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {}}
-            style={{
-              ...styles.voteContreButton,
-              backgroundColor: themeSchema[theme].backgroundColor2,
-              borderColor: themeSchema[theme].colorText,
+            style={
+              voted
+                ? {
+                    ...styles.voteContreButton,
+                    backgroundColor:
+                      voted === "contre"
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                    borderColor: themeSchema[theme].colorText,
+                  }
+                : {
+                    ...styles.voteContreButton,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
+            }
+            onPress={() => {
+              setContre((v) => v + 1);
+              setVoted("contre");
             }}
+            disabled={voted}
           >
             <Text
               numberOfLines={1}
-              style={{
-                color: themeSchema[theme].colorText,
-                fontSize: 12,
-                paddingLeft: 6,
-                paddingRight: 6,
-                fontFamily: "Montserrat_500Medium",
-              }}
+              style={
+                voted
+                  ? {
+                      color:
+                        voted === "contre"
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                      fontSize: 12,
+                      paddingLeft: 6,
+                      paddingRight: 6,
+                      fontFamily: "Montserrat_600SemiBold",
+                    }
+                  : {
+                      color: themeSchema[theme].colorText,
+                      fontSize: 12,
+                      paddingLeft: 6,
+                      paddingRight: 6,
+                      fontFamily: "Montserrat_500Medium",
+                    }
+              }
             >
-              {debate.answerTwo}
+              {voted
+                ? displayPercent({
+                    votes: contre,
+                    totalVotes: votes,
+                  })
+                : debate.answerTwo}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -307,11 +375,25 @@ const DebateBox = (props) => {
           </TouchableOpacity>
           <View style={styles.debateActionsDuo}>
             <TouchableOpacity
-              onPress={() => {}}
-              style={{
-                ...styles.voteBlueButton,
-                backgroundColor: themeSchema[theme].backgroundColor2,
+              onPress={() => {
+                setPour((v) => v + 1);
+                setVoted("pour");
               }}
+              style={
+                voted
+                  ? {
+                      ...styles.votePourButton,
+                      backgroundColor:
+                        voted === "pour"
+                          ? "#F47658"
+                          : themeSchema[theme].backgroundColor2,
+                    }
+                  : {
+                      ...styles.votePourButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                    }
+              }
+              disabled={voted}
             >
               <Text
                 numberOfLines={1}
@@ -320,10 +402,18 @@ const DebateBox = (props) => {
                   fontSize: 12,
                   paddingLeft: 12,
                   paddingRight: 12,
-                  fontFamily: "Montserrat_500Medium",
+                  fontFamily:
+                    voted === "pour"
+                      ? "Montserrat_600SemiBold"
+                      : "Montserrat_500Medium",
                 }}
               >
-                {debate.answerOne}
+                {voted
+                  ? displayPercent({
+                      votes: pour,
+                      totalVotes: votes,
+                    })
+                  : debate.answerOne}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -345,24 +435,55 @@ const DebateBox = (props) => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {}}
-              style={{
-                ...styles.voteRedButton,
-                backgroundColor: themeSchema[theme].backgroundColor2,
-                borderColor: themeSchema[theme].colorText,
+              onPress={() => {
+                setContre((v) => v + 1);
+                setVoted("contre");
               }}
+              style={
+                voted
+                  ? {
+                      ...styles.voteRedButton,
+                      backgroundColor: contre
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                      borderColor: themeSchema[theme].colorText,
+                    }
+                  : {
+                      ...styles.voteRedButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                      borderColor: themeSchema[theme].colorText,
+                    }
+              }
+              disabled={voted}
             >
               <Text
                 numberOfLines={1}
-                style={{
-                  color: themeSchema[theme].colorText,
-                  fontSize: 12,
-                  paddingLeft: 6,
-                  paddingRight: 6,
-                  fontFamily: "Montserrat_500Medium",
-                }}
+                style={
+                  voted
+                    ? {
+                        color: contre
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_600SemiBold",
+                      }
+                    : {
+                        color: themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_500Medium",
+                      }
+                }
               >
-                {debate.answerTwo}
+                {voted
+                  ? displayPercent({
+                      votes: contre,
+                      totalVotes: votes,
+                    })
+                  : debate.answerTwo}
               </Text>
             </TouchableOpacity>
           </View>

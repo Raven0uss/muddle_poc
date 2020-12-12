@@ -7,6 +7,7 @@ import i18n from "../i18n";
 import themeSchema from "../CustomProperties/Theme";
 
 const CommentBox = (props) => {
+  const [liked, setLiked] = React.useState(null);
   const { comment, navigation, theme } = props;
   // console.log(comment.comments === undefined);
   return (
@@ -109,15 +110,40 @@ const CommentBox = (props) => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity onPress={() => {}}>
-          <CustomIcon color="#F47658" name="sentiment-satisfied" size={20} />
+        <TouchableOpacity
+          onPress={() => {
+            setLiked("like");
+          }}
+          disabled={liked === "like"}
+        >
+          <CustomIcon
+            name="sentiment-satisfied"
+            size={20}
+            color={liked === "like" ? themeSchema[theme].colorText3 : "#F47658"}
+            viewBcolor={liked === "like" ? "#F47658" : "transparent"}
+            viewRadius={liked === "like" ? 100 : 0}
+          />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={{ marginLeft: 22 }}>
+        <TouchableOpacity
+          onPress={() => {
+            setLiked("dislike");
+          }}
+          style={{ marginLeft: 22 }}
+          disabled={liked === "dislike"}
+        >
           <CustomIcon
             color="#000"
             name="sentiment-dissatisfied"
             size={20}
-            color={themeSchema[theme].colorText}
+            color={
+              liked === "dislike"
+                ? themeSchema[theme].colorText3
+                : themeSchema[theme].colorText
+            }
+            viewBcolor={
+              liked === "dislike" ? themeSchema[theme].colorText : "transparent"
+            }
+            viewRadius={liked === "dislike" ? 100 : 0}
           />
         </TouchableOpacity>
         <TouchableOpacity

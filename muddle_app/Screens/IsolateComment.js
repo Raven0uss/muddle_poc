@@ -75,6 +75,7 @@ const Comments = (props) => {
 
 const IsolateComment = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const [liked, setLiked] = React.useState(null);
   const [newComment, setNewComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -221,14 +222,44 @@ const IsolateComment = (props) => {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity onPress={() => {}}>
-            <CustomIcon color="#F47658" name="sentiment-satisfied" size={20} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}} style={{ marginLeft: 22 }}>
+          <TouchableOpacity
+            onPress={() => {
+              setLiked("like");
+            }}
+            disabled={liked === "like"}
+          >
             <CustomIcon
-              color={themeSchema[theme].colorText}
+              name="sentiment-satisfied"
+              size={20}
+              color={
+                liked === "like" ? themeSchema[theme].colorText3 : "#F47658"
+              }
+              viewBcolor={liked === "like" ? "#F47658" : "transparent"}
+              viewRadius={liked === "like" ? 100 : 0}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setLiked("dislike");
+            }}
+            style={{ marginLeft: 22 }}
+            disabled={liked === "dislike"}
+          >
+            <CustomIcon
+              color="#000"
               name="sentiment-dissatisfied"
               size={20}
+              color={
+                liked === "dislike"
+                  ? themeSchema[theme].colorText3
+                  : themeSchema[theme].colorText
+              }
+              viewBcolor={
+                liked === "dislike"
+                  ? themeSchema[theme].colorText
+                  : "transparent"
+              }
+              viewRadius={liked === "dislike" ? 100 : 0}
             />
           </TouchableOpacity>
         </View>
