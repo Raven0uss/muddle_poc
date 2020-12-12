@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        91
+        93
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        134
+        136
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        159
+        161
       ]
     ]
   },
@@ -27,11 +27,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        220
+        223
       ],
       [
         "Screens/CreateDebate.js",
-        301
+        304
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        305
+        308
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        350
+        354
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        378
+        383
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        440
+        445
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        528
+        533
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        542
+        547
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        554
+        559
       ]
     ]
   },
@@ -95,11 +95,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        582
+        587
       ],
       [
         "Screens/CreateDebate.js",
-        604
+        609
       ]
     ]
   },
@@ -107,7 +107,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        583
+        588
       ]
     ]
   },
@@ -115,7 +115,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        627
+        632
       ]
     ]
   }

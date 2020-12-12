@@ -23,7 +23,8 @@ import themeSchema from "../CustomProperties/Theme";
 function SignUpComponent(props) {
   const { theme } = React.useContext(ThemeContext);
   const [form, setForm] = React.useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -56,23 +57,51 @@ function SignUpComponent(props) {
             }}
           />
           <View style={styles.formConnexion}>
-            <TextInput
-              placeholder="Nom d'utilisateur"
-              value={form.username}
-              onChangeText={(username) =>
-                setForm((previousState) => ({
-                  ...previousState,
-                  username,
-                }))
-              }
+            <View
               style={{
-                ...styles.input,
-                color: themeSchema[theme].colorText,
-                backgroundColor: themeSchema[theme].backgroundColor2,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
               }}
-              keyboardType="default"
-              placeholderTextColor={themeSchema[theme].colorText}
-            />
+            >
+              <TextInput
+                placeholder={i18n._("firstname")}
+                value={form.firstname}
+                onChangeText={(firstname) =>
+                  setForm((previousState) => ({
+                    ...previousState,
+                    firstname,
+                  }))
+                }
+                style={{
+                  ...styles.input,
+                  width: "48%",
+                  color: themeSchema[theme].colorText,
+                  backgroundColor: themeSchema[theme].backgroundColor2,
+                }}
+                keyboardType="default"
+                placeholderTextColor={themeSchema[theme].colorText}
+              />
+              <TextInput
+                placeholder={i18n._("lastname")}
+                value={form.lastname}
+                onChangeText={(lastname) =>
+                  setForm((previousState) => ({
+                    ...previousState,
+                    lastname,
+                  }))
+                }
+                style={{
+                  ...styles.input,
+                  width: "48%",
+                  color: themeSchema[theme].colorText,
+                  backgroundColor: themeSchema[theme].backgroundColor2,
+                }}
+                keyboardType="default"
+                placeholderTextColor={themeSchema[theme].colorText}
+              />
+            </View>
+
             <TextInput
               placeholder={i18n._("mailAddress")}
               value={form.email}
