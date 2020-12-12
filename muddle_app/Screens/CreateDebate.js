@@ -216,42 +216,45 @@ const InvitationDebate = (props) => {
         {loading ? (
           <ActivityIndicator />
         ) : (
-          users.map((u) => (
-            <TouchableOpacity
-              onPress={() => {
-                setDuo(u);
-                setShow(false);
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: themeSchema[theme].backgroundColor1,
-                  padding: 10,
-                  flexDirection: "row",
-                  marginTop: 5,
-                  marginBottom: 10,
-                  alignItems: "center",
-                  borderRadius: 12,
+          users.map((u) => {
+            if (u.id === currentUser.id) return null;
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  setDuo(u);
+                  setShow(false);
                 }}
               >
-                <Image
-                  source={{ uri: u.profilePicture }}
-                  style={styles.userPicture}
-                />
-
-                <Text
+                <View
                   style={{
-                    fontSize: 14,
-                    fontFamily: "Montserrat_500Medium",
-                    marginLeft: 10,
-                    color: themeSchema[theme].colorText,
+                    backgroundColor: themeSchema[theme].backgroundColor1,
+                    padding: 10,
+                    flexDirection: "row",
+                    marginTop: 5,
+                    marginBottom: 10,
+                    alignItems: "center",
+                    borderRadius: 12,
                   }}
                 >
-                  {`${u.firstname} ${u.lastname}`}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))
+                  <Image
+                    source={{ uri: u.profilePicture }}
+                    style={styles.userPicture}
+                  />
+
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontFamily: "Montserrat_500Medium",
+                      marginLeft: 10,
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {`${u.firstname} ${u.lastname}`}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })
         )}
       </ScrollView>
     </View>
