@@ -28,6 +28,7 @@ const GET_CONVERSATIONS = gql`
         id
         firstname
         lastname
+        email
       }
       messages {
         id
@@ -36,12 +37,14 @@ const GET_CONVERSATIONS = gql`
           id
           firstname
           lastname
+          email
           profilePicture
         }
         to {
           id
           firstname
           lastname
+          email
           profilePicture
         }
       }

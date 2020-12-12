@@ -29,6 +29,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
         id
         firstname
         lastname
+        email
         certified
         profilePicture
         coverPicture
@@ -39,6 +40,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             id
             firstname
             lastname
+            email
             profilePicture
           }
           messages {
@@ -48,12 +50,14 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
               id
               firstname
               lastname
+              email
               profilePicture
             }
             to {
               id
               firstname
               lastname
+              email
               profilePicture
             }
           }
@@ -67,6 +71,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
         profilePicture
         coverPicture
         crowned
+        email
         conversations {
           id
           speakers {
@@ -74,6 +79,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
             firstname
             lastname
             profilePicture
+            email
           }
           messages {
             id
@@ -82,12 +88,14 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
               id
               firstname
               lastname
+              email
               profilePicture
             }
             to {
               id
               firstname
               lastname
+              email
               profilePicture
             }
           }

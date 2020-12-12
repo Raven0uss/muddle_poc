@@ -49,6 +49,7 @@ const GET_USER = gql`
         id
         firstname
         lastname
+        email
         profilePicture
         trophies {
           id
@@ -59,6 +60,7 @@ const GET_USER = gql`
         id
         firstname
         lastname
+        email
         profilePicture
         trophies {
           id

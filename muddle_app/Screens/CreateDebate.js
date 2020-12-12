@@ -42,6 +42,7 @@ const GET_USERS = gql`
       id
       firstname
       certified
+      email
       profilePicture
       coverPicture
       crowned

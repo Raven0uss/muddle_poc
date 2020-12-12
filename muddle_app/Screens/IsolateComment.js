@@ -32,6 +32,7 @@ const GET_SUBCOMMENTS = gql`
         from {
           firstname
           lastname
+          email
           profilePicture
         }
         content

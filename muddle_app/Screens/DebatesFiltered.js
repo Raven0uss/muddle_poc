@@ -33,18 +33,21 @@ const GET_DEBATES = gql`
         id
         firstname
         lastname
+        email
         profilePicture
       }
       ownerBlue {
         id
         firstname
         lastname
+        email
         profilePicture
       }
       ownerRed {
         id
         firstname
         lastname
+        email
         profilePicture
       }
       positives {
@@ -64,6 +67,7 @@ const GET_DEBATES = gql`
         from {
           firstname
           lastname
+          email
           profilePicture
         }
         content

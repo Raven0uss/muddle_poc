@@ -27,6 +27,7 @@ const GET_NOTIFICATIONS = gql`
         id
         firstname
         lastname
+        email
         profilePicture
       }
       type
