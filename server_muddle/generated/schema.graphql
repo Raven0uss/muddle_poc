@@ -760,6 +760,11 @@ input ConversationScalarWhereInput {
   updatedAt_not_in: [DateTime!]
 }
 
+type ConversationSubPayload {
+  node: Conversation
+  updatedFields: [String!]
+}
+
 input ConversationUpdateInput {
   messages: MessageUpdateManyWithoutConversationInput
   speakers: UserUpdateManyWithoutConversationsInput
@@ -1889,6 +1894,7 @@ type Message {
   createdAt: DateTime!
   from: User!
   id: ID!
+  read: Boolean!
   to: User!
   updatedAt: DateTime!
 }
@@ -1898,6 +1904,7 @@ input MessageCreateInput {
   conversation: ConversationCreateOneWithoutMessagesInput!
   from: UserCreateOneInput!
   id: ID
+  read: Boolean!
   to: UserCreateOneInput!
 }
 
@@ -1910,6 +1917,7 @@ input MessageCreateWithoutConversationInput {
   content: String!
   from: UserCreateOneInput!
   id: ID
+  read: Boolean!
   to: UserCreateOneInput!
 }
 
@@ -1920,6 +1928,8 @@ enum MessageOrderByInput {
   createdAt_DESC
   id_ASC
   id_DESC
+  read_ASC
+  read_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -1964,6 +1974,8 @@ input MessageScalarWhereInput {
   id_starts_with: ID
   NOT: [MessageScalarWhereInput!]
   OR: [MessageScalarWhereInput!]
+  read: Boolean
+  read_not: Boolean
   updatedAt: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
@@ -1983,11 +1995,13 @@ input MessageUpdateInput {
   content: String
   conversation: ConversationUpdateOneRequiredWithoutMessagesInput
   from: UserUpdateOneRequiredInput
+  read: Boolean
   to: UserUpdateOneRequiredInput
 }
 
 input MessageUpdateManyDataInput {
   content: String
+  read: Boolean
 }
 
 input MessageUpdateManyWithoutConversationInput {
@@ -2010,6 +2024,7 @@ input MessageUpdateManyWithWhereNestedInput {
 input MessageUpdateWithoutConversationDataInput {
   content: String
   from: UserUpdateOneRequiredInput
+  read: Boolean
   to: UserUpdateOneRequiredInput
 }
 
@@ -2064,6 +2079,8 @@ input MessageWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  read: Boolean
+  read_not: Boolean
   to: UserWhereInput
   updatedAt: DateTime
   updatedAt_gt: DateTime
@@ -2103,6 +2120,11 @@ type Mutation {
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
+type NewNotifications {
+  messages: Int!
+  notifications: Int!
+}
+
 type Notification {
   comment: Comment
   debate: Debate
@@ -2110,6 +2132,7 @@ type Notification {
   new: Boolean!
   status: NotificationStatus!
   type: NotificationType!
+  userId: String!
   who(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
 }
 
@@ -2120,7 +2143,23 @@ input NotificationCreateInput {
   new: Boolean!
   status: NotificationStatus!
   type: NotificationType!
-  who: UserCreateManyInput
+  userId: String!
+  who: UserCreateManyWithoutNotificationsInput
+}
+
+input NotificationCreateManyWithoutWhoInput {
+  connect: [NotificationWhereUniqueInput!]
+  create: [NotificationCreateWithoutWhoInput!]
+}
+
+input NotificationCreateWithoutWhoInput {
+  comment: CommentCreateOneInput
+  debate: DebateCreateOneInput
+  id: ID
+  new: Boolean!
+  status: NotificationStatus!
+  type: NotificationType!
+  userId: String!
 }
 
 enum NotificationOrderByInput {
@@ -2132,6 +2171,52 @@ enum NotificationOrderByInput {
   status_DESC
   type_ASC
   type_DESC
+  userId_ASC
+  userId_DESC
+}
+
+input NotificationScalarWhereInput {
+  AND: [NotificationScalarWhereInput!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  new: Boolean
+  new_not: Boolean
+  NOT: [NotificationScalarWhereInput!]
+  OR: [NotificationScalarWhereInput!]
+  status: NotificationStatus
+  status_in: [NotificationStatus!]
+  status_not: NotificationStatus
+  status_not_in: [NotificationStatus!]
+  type: NotificationType
+  type_in: [NotificationType!]
+  type_not: NotificationType
+  type_not_in: [NotificationType!]
+  userId: String
+  userId_contains: String
+  userId_ends_with: String
+  userId_gt: String
+  userId_gte: String
+  userId_in: [String!]
+  userId_lt: String
+  userId_lte: String
+  userId_not: String
+  userId_not_contains: String
+  userId_not_ends_with: String
+  userId_not_in: [String!]
+  userId_not_starts_with: String
+  userId_starts_with: String
 }
 
 enum NotificationStatus {
@@ -2157,6 +2242,50 @@ enum NotificationType {
   REJECT_CLOSE_DEBATE
   REJECT_DUO
   VOTE
+}
+
+input NotificationUpdateManyDataInput {
+  new: Boolean
+  status: NotificationStatus
+  type: NotificationType
+  userId: String
+}
+
+input NotificationUpdateManyWithoutWhoInput {
+  connect: [NotificationWhereUniqueInput!]
+  create: [NotificationCreateWithoutWhoInput!]
+  delete: [NotificationWhereUniqueInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  set: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutWhoInput!]
+  updateMany: [NotificationUpdateManyWithWhereNestedInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutWhoInput!]
+}
+
+input NotificationUpdateManyWithWhereNestedInput {
+  data: NotificationUpdateManyDataInput!
+  where: NotificationScalarWhereInput!
+}
+
+input NotificationUpdateWithoutWhoDataInput {
+  comment: CommentUpdateOneInput
+  debate: DebateUpdateOneInput
+  new: Boolean
+  status: NotificationStatus
+  type: NotificationType
+  userId: String
+}
+
+input NotificationUpdateWithWhereUniqueWithoutWhoInput {
+  data: NotificationUpdateWithoutWhoDataInput!
+  where: NotificationWhereUniqueInput!
+}
+
+input NotificationUpsertWithWhereUniqueWithoutWhoInput {
+  create: NotificationCreateWithoutWhoInput!
+  update: NotificationUpdateWithoutWhoDataInput!
+  where: NotificationWhereUniqueInput!
 }
 
 input NotificationWhereInput {
@@ -2187,6 +2316,20 @@ input NotificationWhereInput {
   type_in: [NotificationType!]
   type_not: NotificationType
   type_not_in: [NotificationType!]
+  userId: String
+  userId_contains: String
+  userId_ends_with: String
+  userId_gt: String
+  userId_gte: String
+  userId_in: [String!]
+  userId_lt: String
+  userId_lte: String
+  userId_not: String
+  userId_not_contains: String
+  userId_not_ends_with: String
+  userId_not_in: [String!]
+  userId_not_starts_with: String
+  userId_starts_with: String
   who_some: UserWhereInput
 }
 
@@ -2210,6 +2353,7 @@ type Query {
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
   message(where: MessageWhereUniqueInput!): Message
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
+  newNotifications: NewNotifications!
   notification(where: NotificationWhereUniqueInput!): Notification
   notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]!
   report(where: ReportWhereUniqueInput!): Report
@@ -2533,8 +2677,9 @@ enum Role {
 
 type Subscription {
   comment(debateId: String): CommentSubPayload!
-  message: MessageSubPayload!
-  notification: NotificationSubPayload!
+  conversation(userId: String): ConversationSubPayload!
+  message(userId: String): MessageSubPayload!
+  notification(userId: String): NotificationSubPayload!
 }
 
 type Token {
@@ -2752,6 +2897,7 @@ type User {
   language: Language!
   lastConnected: DateTime
   lastname: String!
+  notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]
   password: String!
   private: Boolean!
   profilePicture: String
@@ -2782,6 +2928,7 @@ input UserCreateInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -2817,6 +2964,11 @@ input UserCreateManyWithoutFollowersInput {
 input UserCreateManyWithoutFollowingInput {
   connect: [UserWhereUniqueInput!]
   create: [UserCreateWithoutFollowingInput!]
+}
+
+input UserCreateManyWithoutNotificationsInput {
+  connect: [UserWhereUniqueInput!]
+  create: [UserCreateWithoutNotificationsInput!]
 }
 
 input UserCreateOneInput {
@@ -2870,6 +3022,7 @@ input UserCreateWithoutBlockedInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -2898,6 +3051,7 @@ input UserCreateWithoutBlockingInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -2926,6 +3080,7 @@ input UserCreateWithoutConversationsInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -2954,6 +3109,7 @@ input UserCreateWithoutDebatesBlueInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -2982,6 +3138,7 @@ input UserCreateWithoutDebatesInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -3010,6 +3167,7 @@ input UserCreateWithoutDebatesRedInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -3038,6 +3196,7 @@ input UserCreateWithoutFollowersInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -3066,6 +3225,7 @@ input UserCreateWithoutFollowingInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -3091,6 +3251,36 @@ input UserCreateWithoutInteractionsInput {
   following: UserCreateManyWithoutFollowersInput
   gender: Gender
   id: ID
+  language: Language
+  lastConnected: DateTime
+  lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
+  password: String!
+  private: Boolean
+  profilePicture: String
+  role: Role
+  trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutNotificationsInput {
+  bio: String
+  birthdate: DateTime!
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  certified: Boolean
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  coverPicture: String
+  crowned: Boolean
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  email: String!
+  firstname: String!
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  gender: Gender
+  id: ID
+  interactions: InteractionCreateManyWithoutWhoInput
   language: Language
   lastConnected: DateTime
   lastname: String!
@@ -3123,6 +3313,7 @@ input UserCreateWithoutTrophiesInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
   profilePicture: String
@@ -3357,6 +3548,7 @@ input UserUpdateDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3385,6 +3577,7 @@ input UserUpdateInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3564,6 +3757,7 @@ input UserUpdateWithoutBlockedDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3591,6 +3785,7 @@ input UserUpdateWithoutBlockingDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3618,6 +3813,7 @@ input UserUpdateWithoutConversationsDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3645,6 +3841,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3672,6 +3869,7 @@ input UserUpdateWithoutDebatesDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3699,6 +3897,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3726,6 +3925,7 @@ input UserUpdateWithoutFollowersDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3753,6 +3953,7 @@ input UserUpdateWithoutFollowingDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3780,6 +3981,7 @@ input UserUpdateWithoutInteractionsDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -3808,6 +4010,7 @@ input UserUpdateWithoutTrophiesDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
   profilePicture: String
@@ -4041,6 +4244,7 @@ input UserWhereInput {
   lastname_not_in: [String!]
   lastname_not_starts_with: String
   lastname_starts_with: String
+  notifications_some: NotificationWhereInput
   password: String
   password_contains: String
   password_ends_with: String

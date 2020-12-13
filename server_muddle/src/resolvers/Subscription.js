@@ -4,8 +4,39 @@ const Subscription = {
   // message sub
   messageSubscription: subscriptionField("message", {
     type: "MessageSubPayload",
+    args: {
+      userId: stringArg(),
+    },
     subscribe: (parent, args, { prisma }) => {
-      return prisma.$subscribe.message({ mutation_in: "CREATED" });
+      const { userId } = args;
+      return prisma.$subscribe.message({
+        mutation_in: "CREATED",
+        node: {
+          from: {
+            id: userId,
+          },
+        },
+      });
+    },
+    resolve: (payload) => payload,
+  }),
+
+  // conversation
+  conversationSubscription: subscriptionField("conversation", {
+    type: "ConversationSubPayload",
+    args: {
+      userId: stringArg(),
+    },
+    subscribe: (parent, args, { prisma }) => {
+      const { userId } = args;
+      return prisma.$subscribe.subscribe({
+        mutation_in: "CREATED",
+        node: {
+          speakers_some: {
+            id: userId,
+          },
+        },
+      });
     },
     resolve: (payload) => payload,
   }),
@@ -18,7 +49,7 @@ const Subscription = {
     },
     subscribe: (parent, args, { prisma }) => {
       const { debateId } = args;
-      console.log(debateId);
+      // console.log(debateId);
       return prisma.$subscribe.comment({
         mutation_in: "CREATED",
         node: {
@@ -34,8 +65,17 @@ const Subscription = {
   // notification sub
   notificationSubscription: subscriptionField("notification", {
     type: "NotificationSubPayload",
+    args: {
+      userId: stringArg(),
+    },
     subscribe: (parent, args, { prisma }) => {
-      return prisma.$subscribe.notification({ mutation_in: "CREATED" });
+      const { userId } = args;
+      // const user = await prisma.user({ id: userId });
+      // console.log(user.email);
+      return prisma.$subscribe.notification({
+        mutation_in: "CREATED",
+        node: {},
+      });
     },
     resolve: (payload) => payload,
   }),

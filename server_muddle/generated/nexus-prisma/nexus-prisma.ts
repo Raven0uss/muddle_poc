@@ -29,6 +29,7 @@ export interface NexusPrismaTypes {
       Debate: DebateObject
       Report: ReportObject
       Interaction: InteractionObject
+      Notification: NotificationObject
       Trophy: TrophyObject
       Conversation: ConversationObject
       Message: MessageObject
@@ -47,7 +48,6 @@ export interface NexusPrismaTypes {
       MessageConnection: MessageConnectionObject
       MessageEdge: MessageEdgeObject
       AggregateMessage: AggregateMessageObject
-      Notification: NotificationObject
       NotificationConnection: NotificationConnectionObject
       NotificationEdge: NotificationEdgeObject
       AggregateNotification: AggregateNotificationObject
@@ -102,6 +102,7 @@ export interface NexusPrismaTypes {
       Debate: DebateFieldDetails
       Report: ReportFieldDetails
       Interaction: InteractionFieldDetails
+      Notification: NotificationFieldDetails
       Trophy: TrophyFieldDetails
       Conversation: ConversationFieldDetails
       Message: MessageFieldDetails
@@ -120,7 +121,6 @@ export interface NexusPrismaTypes {
       MessageConnection: MessageConnectionFieldDetails
       MessageEdge: MessageEdgeFieldDetails
       AggregateMessage: AggregateMessageFieldDetails
-      Notification: NotificationFieldDetails
       NotificationConnection: NotificationConnectionFieldDetails
       NotificationEdge: NotificationEdgeFieldDetails
       AggregateNotification: AggregateNotificationFieldDetails
@@ -172,6 +172,7 @@ export interface NexusPrismaTypes {
       CommentWhereInput: CommentWhereInputInputObject
       ReportWhereInput: ReportWhereInputInputObject
       InteractionWhereInput: InteractionWhereInputInputObject
+      NotificationWhereInput: NotificationWhereInputInputObject
       TrophyWhereInput: TrophyWhereInputInputObject
       ConversationWhereInput: ConversationWhereInputInputObject
       MessageWhereInput: MessageWhereInputInputObject
@@ -180,7 +181,6 @@ export interface NexusPrismaTypes {
       InteractionWhereUniqueInput: InteractionWhereUniqueInputInputObject
       MessageWhereUniqueInput: MessageWhereUniqueInputInputObject
       NotificationWhereUniqueInput: NotificationWhereUniqueInputInputObject
-      NotificationWhereInput: NotificationWhereInputInputObject
       ReportWhereUniqueInput: ReportWhereUniqueInputInputObject
       TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
@@ -221,8 +221,8 @@ export interface NexusPrismaTypes {
       DebateCreateWithoutOwnerBlueInput: DebateCreateWithoutOwnerBlueInputInputObject
       UserCreateOneWithoutDebatesRedInput: UserCreateOneWithoutDebatesRedInputInputObject
       UserCreateWithoutDebatesRedInput: UserCreateWithoutDebatesRedInputInputObject
-      TrophyCreateManyWithoutUserInput: TrophyCreateManyWithoutUserInputInputObject
-      TrophyCreateWithoutUserInput: TrophyCreateWithoutUserInputInputObject
+      NotificationCreateManyWithoutWhoInput: NotificationCreateManyWithoutWhoInputInputObject
+      NotificationCreateWithoutWhoInput: NotificationCreateWithoutWhoInputInputObject
       DebateCreateOneInput: DebateCreateOneInputInputObject
       DebateCreateInput: DebateCreateInputInputObject
       CommentCreateManyWithoutDebateInput: CommentCreateManyWithoutDebateInputInputObject
@@ -237,6 +237,8 @@ export interface NexusPrismaTypes {
       InteractionCreateWithoutDebateInput: InteractionCreateWithoutDebateInputInputObject
       UserCreateOneWithoutInteractionsInput: UserCreateOneWithoutInteractionsInputInputObject
       UserCreateWithoutInteractionsInput: UserCreateWithoutInteractionsInputInputObject
+      TrophyCreateManyWithoutUserInput: TrophyCreateManyWithoutUserInputInputObject
+      TrophyCreateWithoutUserInput: TrophyCreateWithoutUserInputInputObject
       ConversationCreateManyWithoutSpeakersInput: ConversationCreateManyWithoutSpeakersInputInputObject
       ConversationCreateWithoutSpeakersInput: ConversationCreateWithoutSpeakersInputInputObject
       MessageCreateManyWithoutConversationInput: MessageCreateManyWithoutConversationInputInputObject
@@ -282,9 +284,9 @@ export interface NexusPrismaTypes {
       DebateUpdateWithoutOwnerBlueDataInput: DebateUpdateWithoutOwnerBlueDataInputInputObject
       UserUpdateOneWithoutDebatesRedInput: UserUpdateOneWithoutDebatesRedInputInputObject
       UserUpdateWithoutDebatesRedDataInput: UserUpdateWithoutDebatesRedDataInputInputObject
-      TrophyUpdateManyWithoutUserInput: TrophyUpdateManyWithoutUserInputInputObject
-      TrophyUpdateWithWhereUniqueWithoutUserInput: TrophyUpdateWithWhereUniqueWithoutUserInputInputObject
-      TrophyUpdateWithoutUserDataInput: TrophyUpdateWithoutUserDataInputInputObject
+      NotificationUpdateManyWithoutWhoInput: NotificationUpdateManyWithoutWhoInputInputObject
+      NotificationUpdateWithWhereUniqueWithoutWhoInput: NotificationUpdateWithWhereUniqueWithoutWhoInputInputObject
+      NotificationUpdateWithoutWhoDataInput: NotificationUpdateWithoutWhoDataInputInputObject
       DebateUpdateOneInput: DebateUpdateOneInputInputObject
       DebateUpdateDataInput: DebateUpdateDataInputInputObject
       CommentUpdateManyWithoutDebateInput: CommentUpdateManyWithoutDebateInputInputObject
@@ -328,6 +330,13 @@ export interface NexusPrismaTypes {
       InteractionUpdateWithoutDebateDataInput: InteractionUpdateWithoutDebateDataInputInputObject
       UserUpdateOneRequiredWithoutInteractionsInput: UserUpdateOneRequiredWithoutInteractionsInputInputObject
       UserUpdateWithoutInteractionsDataInput: UserUpdateWithoutInteractionsDataInputInputObject
+      TrophyUpdateManyWithoutUserInput: TrophyUpdateManyWithoutUserInputInputObject
+      TrophyUpdateWithWhereUniqueWithoutUserInput: TrophyUpdateWithWhereUniqueWithoutUserInputInputObject
+      TrophyUpdateWithoutUserDataInput: TrophyUpdateWithoutUserDataInputInputObject
+      TrophyUpsertWithWhereUniqueWithoutUserInput: TrophyUpsertWithWhereUniqueWithoutUserInputInputObject
+      TrophyScalarWhereInput: TrophyScalarWhereInputInputObject
+      TrophyUpdateManyWithWhereNestedInput: TrophyUpdateManyWithWhereNestedInputInputObject
+      TrophyUpdateManyDataInput: TrophyUpdateManyDataInputInputObject
       ConversationUpdateManyWithoutSpeakersInput: ConversationUpdateManyWithoutSpeakersInputInputObject
       ConversationUpdateWithWhereUniqueWithoutSpeakersInput: ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject
       ConversationUpdateWithoutSpeakersDataInput: ConversationUpdateWithoutSpeakersDataInputInputObject
@@ -351,10 +360,10 @@ export interface NexusPrismaTypes {
       ReportUpsertWithWhereUniqueWithoutCommentInput: ReportUpsertWithWhereUniqueWithoutCommentInputInputObject
       CommentUpsertWithWhereUniqueWithoutDebateInput: CommentUpsertWithWhereUniqueWithoutDebateInputInputObject
       DebateUpsertNestedInput: DebateUpsertNestedInputInputObject
-      TrophyUpsertWithWhereUniqueWithoutUserInput: TrophyUpsertWithWhereUniqueWithoutUserInputInputObject
-      TrophyScalarWhereInput: TrophyScalarWhereInputInputObject
-      TrophyUpdateManyWithWhereNestedInput: TrophyUpdateManyWithWhereNestedInputInputObject
-      TrophyUpdateManyDataInput: TrophyUpdateManyDataInputInputObject
+      NotificationUpsertWithWhereUniqueWithoutWhoInput: NotificationUpsertWithWhereUniqueWithoutWhoInputInputObject
+      NotificationScalarWhereInput: NotificationScalarWhereInputInputObject
+      NotificationUpdateManyWithWhereNestedInput: NotificationUpdateManyWithWhereNestedInputInputObject
+      NotificationUpdateManyDataInput: NotificationUpdateManyDataInputInputObject
       InteractionUpdateManyWithoutWhoInput: InteractionUpdateManyWithoutWhoInputInputObject
       InteractionUpdateWithWhereUniqueWithoutWhoInput: InteractionUpdateWithWhereUniqueWithoutWhoInputInputObject
       InteractionUpdateWithoutWhoDataInput: InteractionUpdateWithoutWhoDataInputInputObject
@@ -398,7 +407,13 @@ export interface NexusPrismaTypes {
       ConversationUpsertWithoutMessagesInput: ConversationUpsertWithoutMessagesInputInputObject
       MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
       NotificationCreateInput: NotificationCreateInputInputObject
+      UserCreateManyWithoutNotificationsInput: UserCreateManyWithoutNotificationsInputInputObject
+      UserCreateWithoutNotificationsInput: UserCreateWithoutNotificationsInputInputObject
       NotificationUpdateInput: NotificationUpdateInputInputObject
+      UserUpdateManyWithoutNotificationsInput: UserUpdateManyWithoutNotificationsInputInputObject
+      UserUpdateWithWhereUniqueWithoutNotificationsInput: UserUpdateWithWhereUniqueWithoutNotificationsInputInputObject
+      UserUpdateWithoutNotificationsDataInput: UserUpdateWithoutNotificationsDataInputInputObject
+      UserUpsertWithWhereUniqueWithoutNotificationsInput: UserUpsertWithWhereUniqueWithoutNotificationsInputInputObject
       NotificationUpdateManyMutationInput: NotificationUpdateManyMutationInputInputObject
       ReportCreateInput: ReportCreateInputInputObject
       ReportUpdateInput: ReportUpdateInputInputObject
@@ -437,18 +452,18 @@ export interface NexusPrismaTypes {
     ReportType: ReportTypeValues,
     ReportReason: ReportReasonValues,
     InteractionType: InteractionTypeValues,
+    NotificationType: NotificationTypeValues,
+    NotificationStatus: NotificationStatusValues,
     TrophyType: TrophyTypeValues,
     UserOrderByInput: UserOrderByInputValues,
     DebateOrderByInput: DebateOrderByInputValues,
     CommentOrderByInput: CommentOrderByInputValues,
     ReportOrderByInput: ReportOrderByInputValues,
     InteractionOrderByInput: InteractionOrderByInputValues,
+    NotificationOrderByInput: NotificationOrderByInputValues,
     TrophyOrderByInput: TrophyOrderByInputValues,
     ConversationOrderByInput: ConversationOrderByInputValues,
     MessageOrderByInput: MessageOrderByInputValues,
-    NotificationType: NotificationTypeValues,
-    NotificationStatus: NotificationStatusValues,
-    NotificationOrderByInput: NotificationOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -1875,6 +1890,7 @@ type UserObject =
   | { name: 'debates', args?: UserDebatesArgs[] | false, alias?: string  } 
   | { name: 'debatesBlue', args?: UserDebatesBlueArgs[] | false, alias?: string  } 
   | { name: 'debatesRed', args?: UserDebatesRedArgs[] | false, alias?: string  } 
+  | { name: 'notifications', args?: UserNotificationsArgs[] | false, alias?: string  } 
   | { name: 'trophies', args?: UserTrophiesArgs[] | false, alias?: string  } 
   | { name: 'conversations', args?: UserConversationsArgs[] | false, alias?: string  } 
   | { name: 'interactions', args?: UserInteractionsArgs[] | false, alias?: string  } 
@@ -1905,6 +1921,7 @@ type UserFields =
   | 'debates'
   | 'debatesBlue'
   | 'debatesRed'
+  | 'notifications'
   | 'trophies'
   | 'conversations'
   | 'interactions'
@@ -1961,6 +1978,14 @@ type UserDebatesBlueArgs =
   | 'first'
   | 'last'
 type UserDebatesRedArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserNotificationsArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -2228,6 +2253,19 @@ export interface UserFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Debate[]> | prisma.Debate[]
+  }
+  notifications: {
+    type: 'Notification'
+    args: Record<UserNotificationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: NotificationWhereInput | null, orderBy?: prisma.NotificationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Notification[]> | prisma.Notification[]
   }
   trophies: {
     type: 'Trophy'
@@ -2927,6 +2965,133 @@ export interface InteractionFieldDetails {
 }
   
 
+// Types for Notification
+
+type NotificationObject =
+  | NotificationFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'who', args?: NotificationWhoArgs[] | false, alias?: string  } 
+  | { name: 'userId', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'new', args?: [] | false, alias?: string  } 
+  | { name: 'debate', args?: [] | false, alias?: string  } 
+  | { name: 'comment', args?: [] | false, alias?: string  } 
+
+type NotificationFields =
+  | 'id'
+  | 'who'
+  | 'userId'
+  | 'type'
+  | 'status'
+  | 'new'
+  | 'debate'
+  | 'comment'
+
+
+type NotificationWhoArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface NotificationFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  who: {
+    type: 'User'
+    args: Record<NotificationWhoArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  userId: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
+    type: 'NotificationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationType> | prisma.NotificationType
+  }
+  status: {
+    type: 'NotificationStatus'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.NotificationStatus> | prisma.NotificationStatus
+  }
+  new: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  debate: {
+    type: 'Debate'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Debate | null> | prisma.Debate | null
+  }
+  comment: {
+    type: 'Comment'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Notification">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+}
+  
+
 // Types for Trophy
 
 type TrophyObject =
@@ -3140,6 +3305,7 @@ type MessageObject =
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'to', args?: [] | false, alias?: string  } 
   | { name: 'from', args?: [] | false, alias?: string  } 
+  | { name: 'read', args?: [] | false, alias?: string  } 
   | { name: 'conversation', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
@@ -3149,6 +3315,7 @@ type MessageFields =
   | 'content'
   | 'to'
   | 'from'
+  | 'read'
   | 'conversation'
   | 'createdAt'
   | 'updatedAt'
@@ -3199,6 +3366,14 @@ export interface MessageFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.User> | prisma.User
+  }
+  read: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
   conversation: {
     type: 'Conversation'
@@ -3853,123 +4028,6 @@ export interface AggregateMessageFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
-  }
-}
-  
-
-// Types for Notification
-
-type NotificationObject =
-  | NotificationFields
-  | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'who', args?: NotificationWhoArgs[] | false, alias?: string  } 
-  | { name: 'type', args?: [] | false, alias?: string  } 
-  | { name: 'status', args?: [] | false, alias?: string  } 
-  | { name: 'new', args?: [] | false, alias?: string  } 
-  | { name: 'debate', args?: [] | false, alias?: string  } 
-  | { name: 'comment', args?: [] | false, alias?: string  } 
-
-type NotificationFields =
-  | 'id'
-  | 'who'
-  | 'type'
-  | 'status'
-  | 'new'
-  | 'debate'
-  | 'comment'
-
-
-type NotificationWhoArgs =
-  | 'where'
-  | 'orderBy'
-  | 'skip'
-  | 'after'
-  | 'before'
-  | 'first'
-  | 'last'
-  
-
-export interface NotificationFieldDetails {
-  id: {
-    type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  who: {
-    type: 'User'
-    args: Record<NotificationWhoArgs, core.NexusArgDef<string>>
-    description: string
-    list: true
-    nullable: false
-    resolve: (
-      root: core.RootValue<"Notification">,
-      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.User[]> | prisma.User[]
-  }
-  type: {
-    type: 'NotificationType'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: (
-      root: core.RootValue<"Notification">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.NotificationType> | prisma.NotificationType
-  }
-  status: {
-    type: 'NotificationStatus'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: (
-      root: core.RootValue<"Notification">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.NotificationStatus> | prisma.NotificationStatus
-  }
-  new: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  debate: {
-    type: 'Debate'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: (
-      root: core.RootValue<"Notification">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.Debate | null> | prisma.Debate | null
-  }
-  comment: {
-    type: 'Comment'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: (
-      root: core.RootValue<"Notification">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.Comment | null> | prisma.Comment | null
   }
 }
   
@@ -6833,12 +6891,14 @@ type MessagePreviousValuesObject =
   | MessagePreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'read', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type MessagePreviousValuesFields =
   | 'id'
   | 'content'
+  | 'read'
   | 'createdAt'
   | 'updatedAt'
 
@@ -6857,6 +6917,14 @@ export interface MessagePreviousValuesFieldDetails {
   }
   content: {
     type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  read: {
+    type: 'Boolean'
     args: {}
     description: string
     list: undefined
@@ -6957,12 +7025,14 @@ export interface NotificationSubscriptionPayloadFieldDetails {
 type NotificationPreviousValuesObject =
   | NotificationPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'userId', args?: [] | false, alias?: string  } 
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
   | { name: 'new', args?: [] | false, alias?: string  } 
 
 type NotificationPreviousValuesFields =
   | 'id'
+  | 'userId'
   | 'type'
   | 'status'
   | 'new'
@@ -6974,6 +7044,14 @@ type NotificationPreviousValuesFields =
 export interface NotificationPreviousValuesFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  userId: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -8062,6 +8140,7 @@ export interface UserWhereInput {
   debates_some?: DebateWhereInput | null
   debatesBlue_some?: DebateWhereInput | null
   debatesRed_some?: DebateWhereInput | null
+  notifications_some?: NotificationWhereInput | null
   trophies_some?: TrophyWhereInput | null
   conversations_some?: ConversationWhereInput | null
   interactions_some?: InteractionWhereInput | null
@@ -8238,6 +8317,7 @@ export type UserWhereInputInputObject =
   | { name: 'debates_some', alias?: string  } 
   | { name: 'debatesBlue_some', alias?: string  } 
   | { name: 'debatesRed_some', alias?: string  } 
+  | { name: 'notifications_some', alias?: string  } 
   | { name: 'trophies_some', alias?: string  } 
   | { name: 'conversations_some', alias?: string  } 
   | { name: 'interactions_some', alias?: string  } 
@@ -8787,6 +8867,95 @@ export type InteractionWhereInputInputObject =
   | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface NotificationWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  who_some?: UserWhereInput | null
+  userId?: string | null
+  userId_not?: string | null
+  userId_in?: string[]
+  userId_not_in?: string[]
+  userId_lt?: string | null
+  userId_lte?: string | null
+  userId_gt?: string | null
+  userId_gte?: string | null
+  userId_contains?: string | null
+  userId_not_contains?: string | null
+  userId_starts_with?: string | null
+  userId_not_starts_with?: string | null
+  userId_ends_with?: string | null
+  userId_not_ends_with?: string | null
+  type?: prisma.NotificationType | null
+  type_not?: prisma.NotificationType | null
+  type_in?: prisma.NotificationType[]
+  type_not_in?: prisma.NotificationType[]
+  status?: prisma.NotificationStatus | null
+  status_not?: prisma.NotificationStatus | null
+  status_in?: prisma.NotificationStatus[]
+  status_not_in?: prisma.NotificationStatus[]
+  new?: boolean | null
+  new_not?: boolean | null
+  debate?: DebateWhereInput | null
+  comment?: CommentWhereInput | null
+  AND?: NotificationWhereInput[]
+}
+export type NotificationWhereInputInputObject =
+  | Extract<keyof NotificationWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'who_some', alias?: string  } 
+  | { name: 'userId', alias?: string  } 
+  | { name: 'userId_not', alias?: string  } 
+  | { name: 'userId_in', alias?: string  } 
+  | { name: 'userId_not_in', alias?: string  } 
+  | { name: 'userId_lt', alias?: string  } 
+  | { name: 'userId_lte', alias?: string  } 
+  | { name: 'userId_gt', alias?: string  } 
+  | { name: 'userId_gte', alias?: string  } 
+  | { name: 'userId_contains', alias?: string  } 
+  | { name: 'userId_not_contains', alias?: string  } 
+  | { name: 'userId_starts_with', alias?: string  } 
+  | { name: 'userId_not_starts_with', alias?: string  } 
+  | { name: 'userId_ends_with', alias?: string  } 
+  | { name: 'userId_not_ends_with', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'new', alias?: string  } 
+  | { name: 'new_not', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface TrophyWhereInput {
   id?: string | null
   id_not?: string | null
@@ -8974,6 +9143,8 @@ export interface MessageWhereInput {
   content_not_ends_with?: string | null
   to?: UserWhereInput | null
   from?: UserWhereInput | null
+  read?: boolean | null
+  read_not?: boolean | null
   conversation?: ConversationWhereInput | null
   createdAt?: string | null
   createdAt_not?: string | null
@@ -9025,6 +9196,8 @@ export type MessageWhereInputInputObject =
   | { name: 'content_not_ends_with', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'read', alias?: string  } 
+  | { name: 'read_not', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
@@ -9078,67 +9251,6 @@ export interface NotificationWhereUniqueInput {
 export type NotificationWhereUniqueInputInputObject =
   | Extract<keyof NotificationWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  
-export interface NotificationWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  who_some?: UserWhereInput | null
-  type?: prisma.NotificationType | null
-  type_not?: prisma.NotificationType | null
-  type_in?: prisma.NotificationType[]
-  type_not_in?: prisma.NotificationType[]
-  status?: prisma.NotificationStatus | null
-  status_not?: prisma.NotificationStatus | null
-  status_in?: prisma.NotificationStatus[]
-  status_not_in?: prisma.NotificationStatus[]
-  new?: boolean | null
-  new_not?: boolean | null
-  debate?: DebateWhereInput | null
-  comment?: CommentWhereInput | null
-  AND?: NotificationWhereInput[]
-}
-export type NotificationWhereInputInputObject =
-  | Extract<keyof NotificationWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'who_some', alias?: string  } 
-  | { name: 'type', alias?: string  } 
-  | { name: 'type_not', alias?: string  } 
-  | { name: 'type_in', alias?: string  } 
-  | { name: 'type_not_in', alias?: string  } 
-  | { name: 'status', alias?: string  } 
-  | { name: 'status_not', alias?: string  } 
-  | { name: 'status_in', alias?: string  } 
-  | { name: 'status_not_in', alias?: string  } 
-  | { name: 'new', alias?: string  } 
-  | { name: 'new_not', alias?: string  } 
-  | { name: 'debate', alias?: string  } 
-  | { name: 'comment', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
   
 export interface ReportWhereUniqueInput {
   id?: string | null
@@ -9531,6 +9643,7 @@ export interface UserCreateInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9560,6 +9673,7 @@ export type UserCreateInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -9596,6 +9710,7 @@ export interface UserCreateWithoutFollowingInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9624,6 +9739,7 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -9660,6 +9776,7 @@ export interface UserCreateWithoutBlockingInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9688,6 +9805,7 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -9724,6 +9842,7 @@ export interface UserCreateWithoutFollowersInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9752,6 +9871,7 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -9788,6 +9908,7 @@ export interface UserCreateWithoutBlockedInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9816,6 +9937,7 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -9908,6 +10030,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   blocking?: UserCreateManyWithoutBlockedInput | null
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -9936,6 +10059,7 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -10028,6 +10152,7 @@ export interface UserCreateWithoutDebatesInput {
   blocking?: UserCreateManyWithoutBlockedInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -10056,6 +10181,7 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -10148,6 +10274,7 @@ export interface UserCreateWithoutDebatesRedInput {
   blocking?: UserCreateManyWithoutBlockedInput | null
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
@@ -10176,31 +10303,36 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
-export interface TrophyCreateManyWithoutUserInput {
-  create?: TrophyCreateWithoutUserInput[]
-  connect?: TrophyWhereUniqueInput[]
+export interface NotificationCreateManyWithoutWhoInput {
+  create?: NotificationCreateWithoutWhoInput[]
+  connect?: NotificationWhereUniqueInput[]
 }
-export type TrophyCreateManyWithoutUserInputInputObject =
-  | Extract<keyof TrophyCreateManyWithoutUserInput, string>
+export type NotificationCreateManyWithoutWhoInputInputObject =
+  | Extract<keyof NotificationCreateManyWithoutWhoInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   
-export interface TrophyCreateWithoutUserInput {
+export interface NotificationCreateWithoutWhoInput {
   id?: string | null
-  won?: boolean
-  type?: prisma.TrophyType | null
+  userId?: string
+  type?: prisma.NotificationType
+  status?: prisma.NotificationStatus
+  new?: boolean
   debate?: DebateCreateOneInput | null
   comment?: CommentCreateOneInput | null
 }
-export type TrophyCreateWithoutUserInputInputObject =
-  | Extract<keyof TrophyCreateWithoutUserInput, string>
+export type NotificationCreateWithoutWhoInputInputObject =
+  | Extract<keyof NotificationCreateWithoutWhoInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'won', alias?: string  } 
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comment', alias?: string  } 
   
@@ -10451,6 +10583,7 @@ export interface UserCreateWithoutInteractionsInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
 }
@@ -10479,8 +10612,33 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
+  
+export interface TrophyCreateManyWithoutUserInput {
+  create?: TrophyCreateWithoutUserInput[]
+  connect?: TrophyWhereUniqueInput[]
+}
+export type TrophyCreateManyWithoutUserInputInputObject =
+  | Extract<keyof TrophyCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TrophyCreateWithoutUserInput {
+  id?: string | null
+  won?: boolean
+  type?: prisma.TrophyType | null
+  debate?: DebateCreateOneInput | null
+  comment?: CommentCreateOneInput | null
+}
+export type TrophyCreateWithoutUserInputInputObject =
+  | Extract<keyof TrophyCreateWithoutUserInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
   
 export interface ConversationCreateManyWithoutSpeakersInput {
   create?: ConversationCreateWithoutSpeakersInput[]
@@ -10514,6 +10672,7 @@ export interface MessageCreateWithoutConversationInput {
   content?: string
   to?: UserCreateOneInput
   from?: UserCreateOneInput
+  read?: boolean
 }
 export type MessageCreateWithoutConversationInputInputObject =
   | Extract<keyof MessageCreateWithoutConversationInput, string>
@@ -10521,6 +10680,7 @@ export type MessageCreateWithoutConversationInputInputObject =
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   
 export interface CommentCreateManyInput {
   create?: CommentCreateInput[]
@@ -10782,6 +10942,7 @@ export interface UserUpdateDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -10810,6 +10971,7 @@ export type UserUpdateDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -10868,6 +11030,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -10895,6 +11058,7 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -10953,6 +11117,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -10980,6 +11145,7 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -11038,6 +11204,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -11065,6 +11232,7 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -11123,6 +11291,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -11150,6 +11319,7 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -11270,6 +11440,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   blocking?: UserUpdateManyWithoutBlockedInput | null
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -11297,6 +11468,7 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -11417,6 +11589,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   blocking?: UserUpdateManyWithoutBlockedInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -11444,6 +11617,7 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -11564,6 +11738,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   blocking?: UserUpdateManyWithoutBlockedInput | null
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -11591,23 +11766,24 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | { name: 'blocking', alias?: string  } 
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
-export interface TrophyUpdateManyWithoutUserInput {
-  create?: TrophyCreateWithoutUserInput[]
-  delete?: TrophyWhereUniqueInput[]
-  connect?: TrophyWhereUniqueInput[]
-  set?: TrophyWhereUniqueInput[]
-  disconnect?: TrophyWhereUniqueInput[]
-  update?: TrophyUpdateWithWhereUniqueWithoutUserInput[]
-  upsert?: TrophyUpsertWithWhereUniqueWithoutUserInput[]
-  deleteMany?: TrophyScalarWhereInput[]
-  updateMany?: TrophyUpdateManyWithWhereNestedInput[]
+export interface NotificationUpdateManyWithoutWhoInput {
+  create?: NotificationCreateWithoutWhoInput[]
+  delete?: NotificationWhereUniqueInput[]
+  connect?: NotificationWhereUniqueInput[]
+  set?: NotificationWhereUniqueInput[]
+  disconnect?: NotificationWhereUniqueInput[]
+  update?: NotificationUpdateWithWhereUniqueWithoutWhoInput[]
+  upsert?: NotificationUpsertWithWhereUniqueWithoutWhoInput[]
+  deleteMany?: NotificationScalarWhereInput[]
+  updateMany?: NotificationUpdateManyWithWhereNestedInput[]
 }
-export type TrophyUpdateManyWithoutUserInputInputObject =
-  | Extract<keyof TrophyUpdateManyWithoutUserInput, string>
+export type NotificationUpdateManyWithoutWhoInputInputObject =
+  | Extract<keyof NotificationUpdateManyWithoutWhoInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
@@ -11618,25 +11794,29 @@ export type TrophyUpdateManyWithoutUserInputInputObject =
   | { name: 'deleteMany', alias?: string  } 
   | { name: 'updateMany', alias?: string  } 
   
-export interface TrophyUpdateWithWhereUniqueWithoutUserInput {
-  where?: TrophyWhereUniqueInput
-  data?: TrophyUpdateWithoutUserDataInput
+export interface NotificationUpdateWithWhereUniqueWithoutWhoInput {
+  where?: NotificationWhereUniqueInput
+  data?: NotificationUpdateWithoutWhoDataInput
 }
-export type TrophyUpdateWithWhereUniqueWithoutUserInputInputObject =
-  | Extract<keyof TrophyUpdateWithWhereUniqueWithoutUserInput, string>
+export type NotificationUpdateWithWhereUniqueWithoutWhoInputInputObject =
+  | Extract<keyof NotificationUpdateWithWhereUniqueWithoutWhoInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
   
-export interface TrophyUpdateWithoutUserDataInput {
-  won?: boolean | null
-  type?: prisma.TrophyType | null
+export interface NotificationUpdateWithoutWhoDataInput {
+  userId?: string | null
+  type?: prisma.NotificationType | null
+  status?: prisma.NotificationStatus | null
+  new?: boolean | null
   debate?: DebateUpdateOneInput | null
   comment?: CommentUpdateOneInput | null
 }
-export type TrophyUpdateWithoutUserDataInputInputObject =
-  | Extract<keyof TrophyUpdateWithoutUserDataInput, string>
-  | { name: 'won', alias?: string  } 
+export type NotificationUpdateWithoutWhoDataInputInputObject =
+  | Extract<keyof NotificationUpdateWithoutWhoDataInput, string>
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comment', alias?: string  } 
   
@@ -12903,6 +13083,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
 }
@@ -12930,8 +13111,166 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
+  
+export interface TrophyUpdateManyWithoutUserInput {
+  create?: TrophyCreateWithoutUserInput[]
+  delete?: TrophyWhereUniqueInput[]
+  connect?: TrophyWhereUniqueInput[]
+  set?: TrophyWhereUniqueInput[]
+  disconnect?: TrophyWhereUniqueInput[]
+  update?: TrophyUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: TrophyUpsertWithWhereUniqueWithoutUserInput[]
+  deleteMany?: TrophyScalarWhereInput[]
+  updateMany?: TrophyUpdateManyWithWhereNestedInput[]
+}
+export type TrophyUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpdateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TrophyUpdateWithWhereUniqueWithoutUserInput {
+  where?: TrophyWhereUniqueInput
+  data?: TrophyUpdateWithoutUserDataInput
+}
+export type TrophyUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpdateWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TrophyUpdateWithoutUserDataInput {
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+  debate?: DebateUpdateOneInput | null
+  comment?: CommentUpdateOneInput | null
+}
+export type TrophyUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof TrophyUpdateWithoutUserDataInput, string>
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'debate', alias?: string  } 
+  | { name: 'comment', alias?: string  } 
+  
+export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
+  where?: TrophyWhereUniqueInput
+  update?: TrophyUpdateWithoutUserDataInput
+  create?: TrophyCreateWithoutUserInput
+}
+export type TrophyUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TrophyUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TrophyScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  won?: boolean | null
+  won_not?: boolean | null
+  type?: prisma.TrophyType | null
+  type_not?: prisma.TrophyType | null
+  type_in?: prisma.TrophyType[]
+  type_not_in?: prisma.TrophyType[]
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: TrophyScalarWhereInput[]
+  OR?: TrophyScalarWhereInput[]
+  NOT?: TrophyScalarWhereInput[]
+}
+export type TrophyScalarWhereInputInputObject =
+  | Extract<keyof TrophyScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'won', alias?: string  } 
+  | { name: 'won_not', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TrophyUpdateManyWithWhereNestedInput {
+  where?: TrophyScalarWhereInput
+  data?: TrophyUpdateManyDataInput
+}
+export type TrophyUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof TrophyUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TrophyUpdateManyDataInput {
+  won?: boolean | null
+  type?: prisma.TrophyType | null
+}
+export type TrophyUpdateManyDataInputInputObject =
+  | Extract<keyof TrophyUpdateManyDataInput, string>
+  | { name: 'won', alias?: string  } 
+  | { name: 'type', alias?: string  } 
   
 export interface ConversationUpdateManyWithoutSpeakersInput {
   create?: ConversationCreateWithoutSpeakersInput[]
@@ -13006,12 +13345,14 @@ export interface MessageUpdateWithoutConversationDataInput {
   content?: string | null
   to?: UserUpdateOneRequiredInput | null
   from?: UserUpdateOneRequiredInput | null
+  read?: boolean | null
 }
 export type MessageUpdateWithoutConversationDataInputInputObject =
   | Extract<keyof MessageUpdateWithoutConversationDataInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   
 export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   where?: MessageWhereUniqueInput
@@ -13053,6 +13394,8 @@ export interface MessageScalarWhereInput {
   content_not_starts_with?: string | null
   content_ends_with?: string | null
   content_not_ends_with?: string | null
+  read?: boolean | null
+  read_not?: boolean | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -13103,6 +13446,8 @@ export type MessageScalarWhereInputInputObject =
   | { name: 'content_not_starts_with', alias?: string  } 
   | { name: 'content_ends_with', alias?: string  } 
   | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'read', alias?: string  } 
+  | { name: 'read_not', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -13134,10 +13479,12 @@ export type MessageUpdateManyWithWhereNestedInputInputObject =
   
 export interface MessageUpdateManyDataInput {
   content?: string | null
+  read?: boolean | null
 }
 export type MessageUpdateManyDataInputInputObject =
   | Extract<keyof MessageUpdateManyDataInput, string>
   | { name: 'content', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   
 export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
   where?: ConversationWhereUniqueInput
@@ -13394,18 +13741,18 @@ export type DebateUpsertNestedInputInputObject =
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
-  where?: TrophyWhereUniqueInput
-  update?: TrophyUpdateWithoutUserDataInput
-  create?: TrophyCreateWithoutUserInput
+export interface NotificationUpsertWithWhereUniqueWithoutWhoInput {
+  where?: NotificationWhereUniqueInput
+  update?: NotificationUpdateWithoutWhoDataInput
+  create?: NotificationCreateWithoutWhoInput
 }
-export type TrophyUpsertWithWhereUniqueWithoutUserInputInputObject =
-  | Extract<keyof TrophyUpsertWithWhereUniqueWithoutUserInput, string>
+export type NotificationUpsertWithWhereUniqueWithoutWhoInputInputObject =
+  | Extract<keyof NotificationUpsertWithWhereUniqueWithoutWhoInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface TrophyScalarWhereInput {
+export interface NotificationScalarWhereInput {
   id?: string | null
   id_not?: string | null
   id_in?: string[]
@@ -13420,34 +13767,36 @@ export interface TrophyScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  won?: boolean | null
-  won_not?: boolean | null
-  type?: prisma.TrophyType | null
-  type_not?: prisma.TrophyType | null
-  type_in?: prisma.TrophyType[]
-  type_not_in?: prisma.TrophyType[]
-  createdAt?: string | null
-  createdAt_not?: string | null
-  createdAt_in?: string[]
-  createdAt_not_in?: string[]
-  createdAt_lt?: string | null
-  createdAt_lte?: string | null
-  createdAt_gt?: string | null
-  createdAt_gte?: string | null
-  updatedAt?: string | null
-  updatedAt_not?: string | null
-  updatedAt_in?: string[]
-  updatedAt_not_in?: string[]
-  updatedAt_lt?: string | null
-  updatedAt_lte?: string | null
-  updatedAt_gt?: string | null
-  updatedAt_gte?: string | null
-  AND?: TrophyScalarWhereInput[]
-  OR?: TrophyScalarWhereInput[]
-  NOT?: TrophyScalarWhereInput[]
+  userId?: string | null
+  userId_not?: string | null
+  userId_in?: string[]
+  userId_not_in?: string[]
+  userId_lt?: string | null
+  userId_lte?: string | null
+  userId_gt?: string | null
+  userId_gte?: string | null
+  userId_contains?: string | null
+  userId_not_contains?: string | null
+  userId_starts_with?: string | null
+  userId_not_starts_with?: string | null
+  userId_ends_with?: string | null
+  userId_not_ends_with?: string | null
+  type?: prisma.NotificationType | null
+  type_not?: prisma.NotificationType | null
+  type_in?: prisma.NotificationType[]
+  type_not_in?: prisma.NotificationType[]
+  status?: prisma.NotificationStatus | null
+  status_not?: prisma.NotificationStatus | null
+  status_in?: prisma.NotificationStatus[]
+  status_not_in?: prisma.NotificationStatus[]
+  new?: boolean | null
+  new_not?: boolean | null
+  AND?: NotificationScalarWhereInput[]
+  OR?: NotificationScalarWhereInput[]
+  NOT?: NotificationScalarWhereInput[]
 }
-export type TrophyScalarWhereInputInputObject =
-  | Extract<keyof TrophyScalarWhereInput, string>
+export type NotificationScalarWhereInputInputObject =
+  | Extract<keyof NotificationScalarWhereInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'id_not', alias?: string  } 
   | { name: 'id_in', alias?: string  } 
@@ -13462,49 +13811,55 @@ export type TrophyScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'won', alias?: string  } 
-  | { name: 'won_not', alias?: string  } 
+  | { name: 'userId', alias?: string  } 
+  | { name: 'userId_not', alias?: string  } 
+  | { name: 'userId_in', alias?: string  } 
+  | { name: 'userId_not_in', alias?: string  } 
+  | { name: 'userId_lt', alias?: string  } 
+  | { name: 'userId_lte', alias?: string  } 
+  | { name: 'userId_gt', alias?: string  } 
+  | { name: 'userId_gte', alias?: string  } 
+  | { name: 'userId_contains', alias?: string  } 
+  | { name: 'userId_not_contains', alias?: string  } 
+  | { name: 'userId_starts_with', alias?: string  } 
+  | { name: 'userId_not_starts_with', alias?: string  } 
+  | { name: 'userId_ends_with', alias?: string  } 
+  | { name: 'userId_not_ends_with', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'type_not', alias?: string  } 
   | { name: 'type_in', alias?: string  } 
   | { name: 'type_not_in', alias?: string  } 
-  | { name: 'createdAt', alias?: string  } 
-  | { name: 'createdAt_not', alias?: string  } 
-  | { name: 'createdAt_in', alias?: string  } 
-  | { name: 'createdAt_not_in', alias?: string  } 
-  | { name: 'createdAt_lt', alias?: string  } 
-  | { name: 'createdAt_lte', alias?: string  } 
-  | { name: 'createdAt_gt', alias?: string  } 
-  | { name: 'createdAt_gte', alias?: string  } 
-  | { name: 'updatedAt', alias?: string  } 
-  | { name: 'updatedAt_not', alias?: string  } 
-  | { name: 'updatedAt_in', alias?: string  } 
-  | { name: 'updatedAt_not_in', alias?: string  } 
-  | { name: 'updatedAt_lt', alias?: string  } 
-  | { name: 'updatedAt_lte', alias?: string  } 
-  | { name: 'updatedAt_gt', alias?: string  } 
-  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'new', alias?: string  } 
+  | { name: 'new_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
-export interface TrophyUpdateManyWithWhereNestedInput {
-  where?: TrophyScalarWhereInput
-  data?: TrophyUpdateManyDataInput
+export interface NotificationUpdateManyWithWhereNestedInput {
+  where?: NotificationScalarWhereInput
+  data?: NotificationUpdateManyDataInput
 }
-export type TrophyUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof TrophyUpdateManyWithWhereNestedInput, string>
+export type NotificationUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof NotificationUpdateManyWithWhereNestedInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
   
-export interface TrophyUpdateManyDataInput {
-  won?: boolean | null
-  type?: prisma.TrophyType | null
+export interface NotificationUpdateManyDataInput {
+  userId?: string | null
+  type?: prisma.NotificationType | null
+  status?: prisma.NotificationStatus | null
+  new?: boolean | null
 }
-export type TrophyUpdateManyDataInputInputObject =
-  | Extract<keyof TrophyUpdateManyDataInput, string>
-  | { name: 'won', alias?: string  } 
+export type NotificationUpdateManyDataInputInputObject =
+  | Extract<keyof NotificationUpdateManyDataInput, string>
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'new', alias?: string  } 
   
 export interface InteractionUpdateManyWithoutWhoInput {
   create?: InteractionCreateWithoutWhoInput[]
@@ -14009,6 +14364,7 @@ export interface UserCreateWithoutConversationsInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
 }
@@ -14037,6 +14393,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
@@ -14104,6 +14461,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
 }
@@ -14131,6 +14489,7 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
@@ -14253,6 +14612,7 @@ export interface MessageCreateInput {
   content?: string
   to?: UserCreateOneInput
   from?: UserCreateOneInput
+  read?: boolean
   conversation?: ConversationCreateOneWithoutMessagesInput
 }
 export type MessageCreateInputInputObject =
@@ -14261,6 +14621,7 @@ export type MessageCreateInputInputObject =
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
   
 export interface ConversationCreateOneWithoutMessagesInput {
@@ -14285,6 +14646,7 @@ export interface MessageUpdateInput {
   content?: string | null
   to?: UserUpdateOneRequiredInput | null
   from?: UserUpdateOneRequiredInput | null
+  read?: boolean | null
   conversation?: ConversationUpdateOneRequiredWithoutMessagesInput | null
 }
 export type MessageUpdateInputInputObject =
@@ -14292,6 +14654,7 @@ export type MessageUpdateInputInputObject =
   | { name: 'content', alias?: string  } 
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
   
 export interface ConversationUpdateOneRequiredWithoutMessagesInput {
@@ -14325,14 +14688,17 @@ export type ConversationUpsertWithoutMessagesInputInputObject =
   
 export interface MessageUpdateManyMutationInput {
   content?: string | null
+  read?: boolean | null
 }
 export type MessageUpdateManyMutationInputInputObject =
   | Extract<keyof MessageUpdateManyMutationInput, string>
   | { name: 'content', alias?: string  } 
+  | { name: 'read', alias?: string  } 
   
 export interface NotificationCreateInput {
   id?: string | null
-  who?: UserCreateManyInput | null
+  who?: UserCreateManyWithoutNotificationsInput | null
+  userId?: string
   type?: prisma.NotificationType
   status?: prisma.NotificationStatus
   new?: boolean
@@ -14343,14 +14709,82 @@ export type NotificationCreateInputInputObject =
   | Extract<keyof NotificationCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'who', alias?: string  } 
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'new', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comment', alias?: string  } 
   
+export interface UserCreateManyWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyWithoutNotificationsInputInputObject =
+  | Extract<keyof UserCreateManyWithoutNotificationsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutNotificationsInput {
+  id?: string | null
+  firstname?: string
+  lastname?: string
+  email?: string
+  password?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  private?: boolean | null
+  lastConnected?: string | null
+  followers?: UserCreateManyWithoutFollowingInput | null
+  following?: UserCreateManyWithoutFollowersInput | null
+  blocked?: UserCreateManyWithoutBlockingInput | null
+  blocking?: UserCreateManyWithoutBlockedInput | null
+  debates?: DebateCreateManyWithoutOwnerInput | null
+  debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  trophies?: TrophyCreateManyWithoutUserInput | null
+  conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  interactions?: InteractionCreateManyWithoutWhoInput | null
+}
+export type UserCreateWithoutNotificationsInputInputObject =
+  | Extract<keyof UserCreateWithoutNotificationsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
 export interface NotificationUpdateInput {
-  who?: UserUpdateManyInput | null
+  who?: UserUpdateManyWithoutNotificationsInput | null
+  userId?: string | null
   type?: prisma.NotificationType | null
   status?: prisma.NotificationStatus | null
   new?: boolean | null
@@ -14360,19 +14794,120 @@ export interface NotificationUpdateInput {
 export type NotificationUpdateInputInputObject =
   | Extract<keyof NotificationUpdateInput, string>
   | { name: 'who', alias?: string  } 
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'new', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comment', alias?: string  } 
   
+export interface UserUpdateManyWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  update?: UserUpdateWithWhereUniqueWithoutNotificationsInput[]
+  upsert?: UserUpsertWithWhereUniqueWithoutNotificationsInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyWithoutNotificationsInputInputObject =
+  | Extract<keyof UserUpdateManyWithoutNotificationsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueWithoutNotificationsInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateWithoutNotificationsDataInput
+}
+export type UserUpdateWithWhereUniqueWithoutNotificationsInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueWithoutNotificationsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateWithoutNotificationsDataInput {
+  firstname?: string | null
+  lastname?: string | null
+  email?: string | null
+  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  certified?: boolean | null
+  gender?: prisma.Gender | null
+  profilePicture?: string | null
+  coverPicture?: string | null
+  bio?: string | null
+  language?: prisma.Language | null
+  crowned?: boolean | null
+  private?: boolean | null
+  lastConnected?: string | null
+  followers?: UserUpdateManyWithoutFollowingInput | null
+  following?: UserUpdateManyWithoutFollowersInput | null
+  blocked?: UserUpdateManyWithoutBlockingInput | null
+  blocking?: UserUpdateManyWithoutBlockedInput | null
+  debates?: DebateUpdateManyWithoutOwnerInput | null
+  debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
+  debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  trophies?: TrophyUpdateManyWithoutUserInput | null
+  conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  interactions?: InteractionUpdateManyWithoutWhoInput | null
+}
+export type UserUpdateWithoutNotificationsDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutNotificationsDataInput, string>
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'certified', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'profilePicture', alias?: string  } 
+  | { name: 'coverPicture', alias?: string  } 
+  | { name: 'bio', alias?: string  } 
+  | { name: 'language', alias?: string  } 
+  | { name: 'crowned', alias?: string  } 
+  | { name: 'private', alias?: string  } 
+  | { name: 'lastConnected', alias?: string  } 
+  | { name: 'followers', alias?: string  } 
+  | { name: 'following', alias?: string  } 
+  | { name: 'blocked', alias?: string  } 
+  | { name: 'blocking', alias?: string  } 
+  | { name: 'debates', alias?: string  } 
+  | { name: 'debatesBlue', alias?: string  } 
+  | { name: 'debatesRed', alias?: string  } 
+  | { name: 'trophies', alias?: string  } 
+  | { name: 'conversations', alias?: string  } 
+  | { name: 'interactions', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueWithoutNotificationsInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateWithoutNotificationsDataInput
+  create?: UserCreateWithoutNotificationsInput
+}
+export type UserUpsertWithWhereUniqueWithoutNotificationsInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueWithoutNotificationsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
 export interface NotificationUpdateManyMutationInput {
+  userId?: string | null
   type?: prisma.NotificationType | null
   status?: prisma.NotificationStatus | null
   new?: boolean | null
 }
 export type NotificationUpdateManyMutationInputInputObject =
   | Extract<keyof NotificationUpdateManyMutationInput, string>
+  | { name: 'userId', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'new', alias?: string  } 
@@ -14484,6 +15019,7 @@ export interface UserCreateWithoutTrophiesInput {
   debates?: DebateCreateManyWithoutOwnerInput | null
   debatesBlue?: DebateCreateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateCreateManyWithoutOwnerRedInput | null
+  notifications?: NotificationCreateManyWithoutWhoInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
 }
@@ -14512,6 +15048,7 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
@@ -14566,6 +15103,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
 }
@@ -14593,6 +15131,7 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
   
@@ -14637,6 +15176,7 @@ export interface UserUpdateInput {
   debates?: DebateUpdateManyWithoutOwnerInput | null
   debatesBlue?: DebateUpdateManyWithoutOwnerBlueInput | null
   debatesRed?: DebateUpdateManyWithoutOwnerRedInput | null
+  notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
@@ -14665,6 +15205,7 @@ export type UserUpdateInputInputObject =
   | { name: 'debates', alias?: string  } 
   | { name: 'debatesBlue', alias?: string  } 
   | { name: 'debatesRed', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
@@ -14969,6 +15510,24 @@ export type InteractionTypeValues =
   | 'BLUE_VOTE'
   | 'RED_VOTE'
   
+export type NotificationTypeValues =
+  | 'VOTE'
+  | 'INVITATION_DUO'
+  | 'ACCEPT_DUO'
+  | 'REJECT_DUO'
+  | 'CLOSE_DEBATE'
+  | 'ACCEPT_CLOSE_DEBATE'
+  | 'REJECT_CLOSE_DEBATE'
+  | 'COMMENT'
+  | 'LIKE'
+  | 'DISLIKE'
+  
+export type NotificationStatusValues =
+  | 'ACCEPTED'
+  | 'DECLINED'
+  | 'PENDING'
+  | 'INFORMATION'
+  
 export type TrophyTypeValues =
   | 'DUO'
   | 'TOP_COMMENT'
@@ -15073,6 +15632,18 @@ export type InteractionOrderByInputValues =
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
   
+export type NotificationOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'userId_ASC'
+  | 'userId_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'status_ASC'
+  | 'status_DESC'
+  | 'new_ASC'
+  | 'new_DESC'
+  
 export type TrophyOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
@@ -15098,38 +15669,12 @@ export type MessageOrderByInputValues =
   | 'id_DESC'
   | 'content_ASC'
   | 'content_DESC'
+  | 'read_ASC'
+  | 'read_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
-  
-export type NotificationTypeValues =
-  | 'VOTE'
-  | 'INVITATION_DUO'
-  | 'ACCEPT_DUO'
-  | 'REJECT_DUO'
-  | 'CLOSE_DEBATE'
-  | 'ACCEPT_CLOSE_DEBATE'
-  | 'REJECT_CLOSE_DEBATE'
-  | 'COMMENT'
-  | 'LIKE'
-  | 'DISLIKE'
-  
-export type NotificationStatusValues =
-  | 'ACCEPTED'
-  | 'DECLINED'
-  | 'PENDING'
-  | 'INFORMATION'
-  
-export type NotificationOrderByInputValues =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'type_ASC'
-  | 'type_DESC'
-  | 'status_ASC'
-  | 'status_DESC'
-  | 'new_ASC'
-  | 'new_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

@@ -18,10 +18,11 @@ import NotificationBox from "../Components/NotificationBox";
 import { isEmpty } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const GET_NOTIFICATIONS = gql`
-  query($first: Int!, $skip: Int) {
-    notifications(first: $first, skip: $skip) {
+  query($first: Int!, $skip: Int, $userId: String!) {
+    notifications(first: $first, skip: $skip, where: { userId: $userId }) {
       id
       who {
         id
@@ -56,6 +57,7 @@ const renderItem = ({ item }, navigation, theme) => {
 
 const Notifications = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [notifications, setNotifications] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -63,6 +65,7 @@ const Notifications = (props) => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTIFICATIONS, {
     variables: {
       first: nbNotifications,
+      userId: currentUser.id,
     },
     onCompleted: (response) => {
       const { notifications: queryResult } = response;

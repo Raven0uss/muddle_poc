@@ -40,6 +40,7 @@ type User {
   debates: [Debate] @relation(name: "Owner")
   debatesBlue: [Debate] @relation(name: "OwnerBlue")
   debatesRed: [Debate] @relation(name: "OwnerRed")
+  notifications: [Notification] @relation(name: "NotificationUser")
   trophies: [Trophy]
   conversations: [Conversation]
   interactions: [Interaction]

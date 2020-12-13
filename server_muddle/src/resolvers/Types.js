@@ -32,6 +32,14 @@ const Token = objectType({
   },
 });
 
+const NewNotifications = objectType({
+  name: "NewNotifications",
+  definition(t) {
+    t.int("messages");
+    t.int("notifications");
+  },
+});
+
 const MessageSubPayload = objectType({
   name: "MessageSubPayload",
   definition(t) {
@@ -65,12 +73,25 @@ const NotificationSubPayload = objectType({
   },
 });
 
+const ConversationSubPayload = objectType({
+  name: "ConversationSubPayload",
+  definition(t) {
+    t.field("node", {
+      type: "Conversation",
+      nullable: true,
+    });
+    t.list.string("updatedFields", { nullable: true });
+  },
+});
+
 export { dateArg };
 
 export default {
   Token,
+  NewNotifications,
   DateScalar,
   MessageSubPayload,
   NotificationSubPayload,
   CommentSubPayload,
+  ConversationSubPayload,
 };

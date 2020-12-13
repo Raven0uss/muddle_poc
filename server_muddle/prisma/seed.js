@@ -184,13 +184,14 @@ async function main() {
   });
 
   //   Create random messages
-  for (let index = 0; index < 45; index++) {
+  for (let index = 0; index < 15; index++) {
     const dice = faker.random.number(8) % 2 === 0;
     await prisma.createMessage({
       content: faker.lorem.sentence(),
       to: { connect: { email: dice ? "userA" : "userB" } },
       from: { connect: { email: dice ? "userB" : "userA" } },
       conversation: { connect: { id: conversation.id } },
+      read: false,
     });
   }
 
@@ -201,6 +202,7 @@ async function main() {
     status: "INFORMATION",
     new: true,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -209,6 +211,7 @@ async function main() {
     status: "PENDING",
     new: true,
     debate: { connect: { id: duoDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -217,6 +220,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -225,6 +229,7 @@ async function main() {
     status: "PENDING",
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -233,6 +238,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     comment: { connect: { id: comments[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -241,6 +247,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     comment: { connect: { id: comments[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -248,6 +255,7 @@ async function main() {
     type: "REJECT_DUO",
     status: "INFORMATION",
     new: false,
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -256,6 +264,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     debate: { connect: { id: duoDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -264,6 +273,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
   });
 
   await prisma.createNotification({
@@ -272,6 +282,7 @@ async function main() {
     status: "INFORMATION",
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
   });
 
   // Trophies

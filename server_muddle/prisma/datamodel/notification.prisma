@@ -20,7 +20,8 @@ enum NotificationStatus {
 
 type Notification {
   id: ID! @id
-  who: [User!]! @relation(link: INLINE)
+  who: [User!]! @relation(link: INLINE, name: "NotificationUser")
+  userId: String!
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!

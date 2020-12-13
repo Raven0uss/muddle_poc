@@ -3,6 +3,7 @@ type Message {
   content: String!
   to: User! @relation(link: INLINE, name: "MessageTo")
   from: User! @relation(link: INLINE, name: "MessageFrom")
+  read: Boolean!
   conversation: Conversation! @relation(link: INLINE, name: "Conversation")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

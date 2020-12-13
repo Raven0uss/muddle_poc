@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import { Easing } from "react-native-reanimated";
 import Icon from "./Icon";
+import { gql, useQuery } from "@apollo/client";
+import Badge from "./Badge";
+import { useIsFocused } from "@react-navigation/native";
 
 const properties = {
   borderRadius: {
@@ -40,9 +43,32 @@ properties.left = {
     (Dimensions.get("screen").width - properties.width.undeployed) / 2,
 };
 
+const GET_NEW_NOTIFICATIONS = gql`
+  query {
+    newNotifications {
+      notifications
+      messages
+    }
+  }
+`;
+
 let timer = undefined;
 const AssistiveMenu = (props) => {
+  const [newNotifications, setNewNotifications] = React.useState({
+    messages: 0,
+    notifications: 0,
+  });
   const [deploy, setDeploy] = React.useState(false);
+
+  const { loading, error, refetch } = useQuery(GET_NEW_NOTIFICATIONS, {
+    onCompleted: (response) => {
+      const { newNotifications: queryResponse } = response;
+
+      setNewNotifications(queryResponse);
+    },
+    fetchPolicy: "cache-and-network",
+    notifyOnNetworkStatusChange: true,
+  });
 
   const [borderTopRadiusButton] = React.useState(
     new Animated.Value(
@@ -85,6 +111,11 @@ const AssistiveMenu = (props) => {
   }, [deploy]);
 
   const { navigation, route, scrollViewRef } = props;
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    refetch();
+  }, [isFocused]);
 
   const deployButtonAnimation = (duration) => {
     Animated.timing(borderTopRadiusButton, {
@@ -170,12 +201,15 @@ const AssistiveMenu = (props) => {
     setDeploy((previousState) => !previousState);
   };
 
+  // console.log(newNotifications);
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
         onDeploy(200);
       }}
     >
+      {/* <> */}
       <Animated.View
         style={[
           styles.buttonMenu,
@@ -190,6 +224,30 @@ const AssistiveMenu = (props) => {
           },
         ]}
       >
+        {deploy === false &&
+          (newNotifications.notifications > 0 ||
+            newNotifications.messages > 0) && (
+            <Badge
+              nb={newNotifications.messages + newNotifications.notifications}
+              // nb={104}
+              viewStyle={{
+                backgroundColor: "#F47658",
+                position: "absolute",
+                borderColor: "#fff",
+                borderWidth: 1,
+                // right: 0,
+                marginLeft: 25,
+                width: 26,
+                height: 26,
+                borderRadius: 100,
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: -23,
+                // zIndex: 10000,
+                // elevation: 10
+              }}
+            />
+          )}
         {deploy && (
           <>
             <TouchableOpacity
@@ -240,6 +298,38 @@ const AssistiveMenu = (props) => {
             >
               <Icon name="search" size={32} />
             </TouchableOpacity>
+            {deploy === true && (
+              // && newNotifications.messages > 0
+              <TouchableOpacity
+                style={{
+                  zIndex: 100,
+                }}
+                onPress={() => {
+                  onDeploy(200);
+                  if (route.name !== "Conversations")
+                    navigation.push("Conversations");
+                }}
+              >
+                <Badge
+                  nb={newNotifications.messages}
+                  viewStyle={{
+                    backgroundColor: "#F47658",
+                    position: "absolute",
+                    borderColor: "#fff",
+                    borderWidth: 1,
+                    // right: 0,
+                    marginLeft: 142,
+                    width: 24,
+                    height: 24,
+                    borderRadius: 100,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: 12,
+                    // elevation: 10
+                  }}
+                />
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               style={{
                 position: "absolute",
@@ -262,6 +352,37 @@ const AssistiveMenu = (props) => {
             >
               <Icon name="chat" size={28} />
             </TouchableOpacity>
+            {deploy === true && newNotifications.notifications > 0 && (
+              <TouchableOpacity
+                style={{
+                  zIndex: 100,
+                }}
+                onPress={() => {
+                  onDeploy(200);
+                  if (route.name !== "Conversations")
+                    navigation.push("Conversations");
+                }}
+              >
+                <Badge
+                  nb={newNotifications.notifications}
+                  viewStyle={{
+                    backgroundColor: "#F47658",
+                    position: "absolute",
+                    borderColor: "#fff",
+                    borderWidth: 1,
+                    // right: 0,
+                    marginLeft: 100,
+                    width: 24,
+                    height: 24,
+                    borderRadius: 100,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: -30,
+                    // elevation: 10
+                  }}
+                />
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               style={{
                 position: "absolute",
@@ -309,6 +430,7 @@ const AssistiveMenu = (props) => {
           </>
         )}
       </Animated.View>
+      {/* </> */}
     </TouchableWithoutFeedback>
   );
 };

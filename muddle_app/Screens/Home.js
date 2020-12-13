@@ -21,7 +21,7 @@ import {
   muddle,
 } from "../CustomProperties/IconsBase64";
 import DebateBox from "../Components/DebateBox";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useSubscription } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import { flatten, isEmpty, last } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
@@ -80,6 +80,36 @@ const GET_DEBATES = gql`
   }
 `;
 
+const NOTIFICATIONS_SUB = gql`
+  subscription($userId: String!) {
+    notification(userId: $userId) {
+      node {
+        id
+      }
+    }
+  }
+`;
+
+const MESSAGES_SUB = gql`
+  subscription($userId: String!) {
+    message(userId: $userId) {
+      node {
+        id
+      }
+    }
+  }
+`;
+
+const CONVERSATIONS_SUB = gql`
+  subscription($userId: String!) {
+    conversation(userId: $userId) {
+      node {
+        id
+      }
+    }
+  }
+`;
+
 const frequency = 20; //TESTESTEST
 let nbDebates = frequency;
 
@@ -116,6 +146,36 @@ const Home = (props) => {
     await refetch();
     setRefreshing(false);
   }, []);
+
+  useSubscription(NOTIFICATIONS_SUB, {
+    variables: {
+      userId: currentUser.id,
+    },
+    shouldResubscribe: true,
+    onSubscriptionData: (response) => {
+      console.log("new notification detected");
+    },
+  });
+
+  useSubscription(MESSAGES_SUB, {
+    variables: {
+      userId: currentUser.id,
+    },
+    shouldResubscribe: true,
+    onSubscriptionData: (response) => {
+      console.log("new conversation detected");
+    },
+  });
+
+  useSubscription(CONVERSATIONS_SUB, {
+    variables: {
+      userId: currentUser.id,
+    },
+    shouldResubscribe: true,
+    onSubscriptionData: (response) => {
+      console.log("new message detected");
+    },
+  });
 
   // themeSchema[theme]
 

@@ -2184,6 +2184,7 @@ type Message {
   content: String!
   to: User!
   from: User!
+  read: Boolean!
   conversation: Conversation!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -2200,6 +2201,7 @@ input MessageCreateInput {
   content: String!
   to: UserCreateOneInput!
   from: UserCreateOneInput!
+  read: Boolean!
   conversation: ConversationCreateOneWithoutMessagesInput!
 }
 
@@ -2213,6 +2215,7 @@ input MessageCreateWithoutConversationInput {
   content: String!
   to: UserCreateOneInput!
   from: UserCreateOneInput!
+  read: Boolean!
 }
 
 type MessageEdge {
@@ -2225,6 +2228,8 @@ enum MessageOrderByInput {
   id_DESC
   content_ASC
   content_DESC
+  read_ASC
+  read_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2234,6 +2239,7 @@ enum MessageOrderByInput {
 type MessagePreviousValues {
   id: ID!
   content: String!
+  read: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2267,6 +2273,8 @@ input MessageScalarWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
+  read: Boolean
+  read_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2308,15 +2316,18 @@ input MessageUpdateInput {
   content: String
   to: UserUpdateOneRequiredInput
   from: UserUpdateOneRequiredInput
+  read: Boolean
   conversation: ConversationUpdateOneRequiredWithoutMessagesInput
 }
 
 input MessageUpdateManyDataInput {
   content: String
+  read: Boolean
 }
 
 input MessageUpdateManyMutationInput {
   content: String
+  read: Boolean
 }
 
 input MessageUpdateManyWithoutConversationInput {
@@ -2340,6 +2351,7 @@ input MessageUpdateWithoutConversationDataInput {
   content: String
   to: UserUpdateOneRequiredInput
   from: UserUpdateOneRequiredInput
+  read: Boolean
 }
 
 input MessageUpdateWithWhereUniqueWithoutConversationInput {
@@ -2384,6 +2396,8 @@ input MessageWhereInput {
   content_not_ends_with: String
   to: UserWhereInput
   from: UserWhereInput
+  read: Boolean
+  read_not: Boolean
   conversation: ConversationWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
@@ -2489,6 +2503,7 @@ interface Node {
 type Notification {
   id: ID!
   who(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  userId: String!
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!
@@ -2504,7 +2519,23 @@ type NotificationConnection {
 
 input NotificationCreateInput {
   id: ID
-  who: UserCreateManyInput
+  who: UserCreateManyWithoutNotificationsInput
+  userId: String!
+  type: NotificationType!
+  status: NotificationStatus!
+  new: Boolean!
+  debate: DebateCreateOneInput
+  comment: CommentCreateOneInput
+}
+
+input NotificationCreateManyWithoutWhoInput {
+  create: [NotificationCreateWithoutWhoInput!]
+  connect: [NotificationWhereUniqueInput!]
+}
+
+input NotificationCreateWithoutWhoInput {
+  id: ID
+  userId: String!
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!
@@ -2520,6 +2551,8 @@ type NotificationEdge {
 enum NotificationOrderByInput {
   id_ASC
   id_DESC
+  userId_ASC
+  userId_DESC
   type_ASC
   type_DESC
   status_ASC
@@ -2530,9 +2563,54 @@ enum NotificationOrderByInput {
 
 type NotificationPreviousValues {
   id: ID!
+  userId: String!
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!
+}
+
+input NotificationScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  userId: String
+  userId_not: String
+  userId_in: [String!]
+  userId_not_in: [String!]
+  userId_lt: String
+  userId_lte: String
+  userId_gt: String
+  userId_gte: String
+  userId_contains: String
+  userId_not_contains: String
+  userId_starts_with: String
+  userId_not_starts_with: String
+  userId_ends_with: String
+  userId_not_ends_with: String
+  type: NotificationType
+  type_not: NotificationType
+  type_in: [NotificationType!]
+  type_not_in: [NotificationType!]
+  status: NotificationStatus
+  status_not: NotificationStatus
+  status_in: [NotificationStatus!]
+  status_not_in: [NotificationStatus!]
+  new: Boolean
+  new_not: Boolean
+  AND: [NotificationScalarWhereInput!]
+  OR: [NotificationScalarWhereInput!]
+  NOT: [NotificationScalarWhereInput!]
 }
 
 enum NotificationStatus {
@@ -2572,7 +2650,8 @@ enum NotificationType {
 }
 
 input NotificationUpdateInput {
-  who: UserUpdateManyInput
+  who: UserUpdateManyWithoutNotificationsInput
+  userId: String
   type: NotificationType
   status: NotificationStatus
   new: Boolean
@@ -2580,10 +2659,55 @@ input NotificationUpdateInput {
   comment: CommentUpdateOneInput
 }
 
-input NotificationUpdateManyMutationInput {
+input NotificationUpdateManyDataInput {
+  userId: String
   type: NotificationType
   status: NotificationStatus
   new: Boolean
+}
+
+input NotificationUpdateManyMutationInput {
+  userId: String
+  type: NotificationType
+  status: NotificationStatus
+  new: Boolean
+}
+
+input NotificationUpdateManyWithoutWhoInput {
+  create: [NotificationCreateWithoutWhoInput!]
+  delete: [NotificationWhereUniqueInput!]
+  connect: [NotificationWhereUniqueInput!]
+  set: [NotificationWhereUniqueInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutWhoInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutWhoInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+  updateMany: [NotificationUpdateManyWithWhereNestedInput!]
+}
+
+input NotificationUpdateManyWithWhereNestedInput {
+  where: NotificationScalarWhereInput!
+  data: NotificationUpdateManyDataInput!
+}
+
+input NotificationUpdateWithoutWhoDataInput {
+  userId: String
+  type: NotificationType
+  status: NotificationStatus
+  new: Boolean
+  debate: DebateUpdateOneInput
+  comment: CommentUpdateOneInput
+}
+
+input NotificationUpdateWithWhereUniqueWithoutWhoInput {
+  where: NotificationWhereUniqueInput!
+  data: NotificationUpdateWithoutWhoDataInput!
+}
+
+input NotificationUpsertWithWhereUniqueWithoutWhoInput {
+  where: NotificationWhereUniqueInput!
+  update: NotificationUpdateWithoutWhoDataInput!
+  create: NotificationCreateWithoutWhoInput!
 }
 
 input NotificationWhereInput {
@@ -2602,6 +2726,20 @@ input NotificationWhereInput {
   id_ends_with: ID
   id_not_ends_with: ID
   who_some: UserWhereInput
+  userId: String
+  userId_not: String
+  userId_in: [String!]
+  userId_not_in: [String!]
+  userId_lt: String
+  userId_lte: String
+  userId_gt: String
+  userId_gte: String
+  userId_contains: String
+  userId_not_contains: String
+  userId_starts_with: String
+  userId_not_starts_with: String
+  userId_ends_with: String
+  userId_not_ends_with: String
   type: NotificationType
   type_not: NotificationType
   type_in: [NotificationType!]
@@ -3285,6 +3423,7 @@ type User {
   debates(where: DebateWhereInput, orderBy: DebateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Debate!]
   debatesBlue(where: DebateWhereInput, orderBy: DebateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Debate!]
   debatesRed(where: DebateWhereInput, orderBy: DebateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Debate!]
+  notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification!]
   trophies(where: TrophyWhereInput, orderBy: TrophyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Trophy!]
   conversations(where: ConversationWhereInput, orderBy: ConversationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Conversation!]
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
@@ -3322,6 +3461,7 @@ input UserCreateInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3354,6 +3494,11 @@ input UserCreateManyWithoutFollowersInput {
 
 input UserCreateManyWithoutFollowingInput {
   create: [UserCreateWithoutFollowingInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutNotificationsInput {
+  create: [UserCreateWithoutNotificationsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -3410,6 +3555,7 @@ input UserCreateWithoutBlockedInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3438,6 +3584,7 @@ input UserCreateWithoutBlockingInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3467,6 +3614,7 @@ input UserCreateWithoutConversationsInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   interactions: InteractionCreateManyWithoutWhoInput
 }
@@ -3494,6 +3642,7 @@ input UserCreateWithoutDebatesBlueInput {
   blocking: UserCreateManyWithoutBlockedInput
   debates: DebateCreateManyWithoutOwnerInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3522,6 +3671,7 @@ input UserCreateWithoutDebatesInput {
   blocking: UserCreateManyWithoutBlockedInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3550,6 +3700,7 @@ input UserCreateWithoutDebatesRedInput {
   blocking: UserCreateManyWithoutBlockedInput
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3578,6 +3729,7 @@ input UserCreateWithoutFollowersInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3606,6 +3758,7 @@ input UserCreateWithoutFollowingInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
@@ -3635,8 +3788,38 @@ input UserCreateWithoutInteractionsInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
+}
+
+input UserCreateWithoutNotificationsInput {
+  id: ID
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
+  birthdate: DateTime!
+  role: Role
+  certified: Boolean
+  gender: Gender
+  profilePicture: String
+  coverPicture: String
+  bio: String
+  language: Language
+  crowned: Boolean
+  private: Boolean
+  lastConnected: DateTime
+  followers: UserCreateManyWithoutFollowingInput
+  following: UserCreateManyWithoutFollowersInput
+  blocked: UserCreateManyWithoutBlockingInput
+  blocking: UserCreateManyWithoutBlockedInput
+  debates: DebateCreateManyWithoutOwnerInput
+  debatesBlue: DebateCreateManyWithoutOwnerBlueInput
+  debatesRed: DebateCreateManyWithoutOwnerRedInput
+  trophies: TrophyCreateManyWithoutUserInput
+  conversations: ConversationCreateManyWithoutSpeakersInput
+  interactions: InteractionCreateManyWithoutWhoInput
 }
 
 input UserCreateWithoutTrophiesInput {
@@ -3663,6 +3846,7 @@ input UserCreateWithoutTrophiesInput {
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
+  notifications: NotificationCreateManyWithoutWhoInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
 }
@@ -3939,6 +4123,7 @@ input UserUpdateDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -3967,6 +4152,7 @@ input UserUpdateInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4080,6 +4266,18 @@ input UserUpdateManyWithoutFollowingInput {
   updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
+input UserUpdateManyWithoutNotificationsInput {
+  create: [UserCreateWithoutNotificationsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutNotificationsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutNotificationsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
 input UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput!
   data: UserUpdateManyDataInput!
@@ -4164,6 +4362,7 @@ input UserUpdateWithoutBlockedDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4191,6 +4390,7 @@ input UserUpdateWithoutBlockingDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4219,6 +4419,7 @@ input UserUpdateWithoutConversationsDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   interactions: InteractionUpdateManyWithoutWhoInput
 }
@@ -4245,6 +4446,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   blocking: UserUpdateManyWithoutBlockedInput
   debates: DebateUpdateManyWithoutOwnerInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4272,6 +4474,7 @@ input UserUpdateWithoutDebatesDataInput {
   blocking: UserUpdateManyWithoutBlockedInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4299,6 +4502,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   blocking: UserUpdateManyWithoutBlockedInput
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4326,6 +4530,7 @@ input UserUpdateWithoutFollowersDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4353,6 +4558,7 @@ input UserUpdateWithoutFollowingDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
@@ -4381,8 +4587,37 @@ input UserUpdateWithoutInteractionsDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
+}
+
+input UserUpdateWithoutNotificationsDataInput {
+  firstname: String
+  lastname: String
+  email: String
+  password: String
+  birthdate: DateTime
+  role: Role
+  certified: Boolean
+  gender: Gender
+  profilePicture: String
+  coverPicture: String
+  bio: String
+  language: Language
+  crowned: Boolean
+  private: Boolean
+  lastConnected: DateTime
+  followers: UserUpdateManyWithoutFollowingInput
+  following: UserUpdateManyWithoutFollowersInput
+  blocked: UserUpdateManyWithoutBlockingInput
+  blocking: UserUpdateManyWithoutBlockedInput
+  debates: DebateUpdateManyWithoutOwnerInput
+  debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
+  debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  trophies: TrophyUpdateManyWithoutUserInput
+  conversations: ConversationUpdateManyWithoutSpeakersInput
+  interactions: InteractionUpdateManyWithoutWhoInput
 }
 
 input UserUpdateWithoutTrophiesDataInput {
@@ -4408,6 +4643,7 @@ input UserUpdateWithoutTrophiesDataInput {
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
+  notifications: NotificationUpdateManyWithoutWhoInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
 }
@@ -4440,6 +4676,11 @@ input UserUpdateWithWhereUniqueWithoutFollowersInput {
 input UserUpdateWithWhereUniqueWithoutFollowingInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutFollowingDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutNotificationsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutNotificationsDataInput!
 }
 
 input UserUpsertNestedInput {
@@ -4506,6 +4747,12 @@ input UserUpsertWithWhereUniqueWithoutFollowingInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutFollowingDataInput!
   create: UserCreateWithoutFollowingInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutNotificationsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutNotificationsDataInput!
+  create: UserCreateWithoutNotificationsInput!
 }
 
 input UserWhereInput {
@@ -4662,6 +4909,7 @@ input UserWhereInput {
   debates_some: DebateWhereInput
   debatesBlue_some: DebateWhereInput
   debatesRed_some: DebateWhereInput
+  notifications_some: NotificationWhereInput
   trophies_some: TrophyWhereInput
   conversations_some: ConversationWhereInput
   interactions_some: InteractionWhereInput

@@ -4,7 +4,7 @@ import { getItem } from "./CustomProperties/storage";
 import { setContext } from "@apollo/link-context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const GRAPHQL_API_URL = "362d0aaa2233.ngrok.io";
+const GRAPHQL_API_URL = "2a8549e019ba.ngrok.io";
 
 // asyncAuthLink will run every time request is made and use the token provided while making the request
 const asyncAuthLink = setContext(async () => {
