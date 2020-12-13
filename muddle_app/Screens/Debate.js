@@ -178,7 +178,6 @@ const Debate = (props) => {
       last(comments).from.email === currentUser.email &&
       query
     ) {
-      console.log("trigger");
       if (commentsScrollViewRef.current) {
         commentsScrollViewRef.current.scrollToEnd({
           animated: true,

@@ -12,6 +12,7 @@ import {
   Platform,
   SectionList,
   VirtualizedList,
+  RefreshControl,
 } from "react-native";
 import Header from "../Components/Header";
 import {
@@ -28,6 +29,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import { get } from "lodash";
+import wait from "../Library/wait";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -88,19 +90,32 @@ const renderItem = ({ item }, navigation) => {
 const Home = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
   const [debates, setDebates] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
-  const { data, loading, error, fetchMore } = useQuery(GET_DEBATES, {
+  const { data, loading, error, fetchMore, refetch } = useQuery(GET_DEBATES, {
     variables: {
       first: nbDebates,
     },
     onCompleted: (response) => {
       const { debates: queryResult } = response;
+      console.log("fetch");
       setDebates(queryResult);
       if (queryResult.length === 0) setNoMoreData(true);
     },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "cache-and-network",
   });
   const scrollViewRef = React.useRef(null);
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    setDebates([]);
+    await refetch();
+    setRefreshing(false);
+  }, []);
 
   // themeSchema[theme]
 
@@ -119,7 +134,7 @@ const Home = (props) => {
   //     </View>
   //   );
   // }
-  if (debates.length === 0 && loading) {
+  if (debates.length === 0 && !refreshing && loading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
         <ActivityIndicator />
@@ -173,6 +188,9 @@ const Home = (props) => {
       <FlatList
         ref={scrollViewRef}
         data={debates}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         style={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
@@ -207,7 +225,8 @@ const Home = (props) => {
           });
         }}
         ListFooterComponent={() => {
-          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          if (noMoreData || refreshing)
+            return <View style={{ height: 50, width: 10 }} />;
           return <ActivityIndicator style={{ marginBottom: 70 }} />;
         }}
       />
