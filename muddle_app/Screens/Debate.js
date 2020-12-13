@@ -465,21 +465,23 @@ const Debate = (props) => {
                   : debate.answerTwo}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {}}
-              style={{
-                ...styles.commentButton,
-                backgroundColor: themeSchema[theme].backgroundColor2,
-                borderColor: themeSchema[theme].colorText,
-                alignSelf: "center",
-              }}
-            >
-              <CustomIcon
-                name="more-horiz"
-                size={28}
-                color={themeSchema[theme].colorText}
-              />
-            </TouchableOpacity>
+            {Platform.OS === "ios" && (
+              <TouchableOpacity
+                onPress={() => {}}
+                style={{
+                  ...styles.commentButton,
+                  backgroundColor: themeSchema[theme].backgroundColor2,
+                  borderColor: themeSchema[theme].colorText,
+                  alignSelf: "center",
+                }}
+              >
+                <CustomIcon
+                  name="more-horiz"
+                  size={28}
+                  color={themeSchema[theme].colorText}
+                />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       )}
