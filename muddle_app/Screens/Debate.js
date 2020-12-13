@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
 import { ScrollView } from "react-native-gesture-handler";
@@ -20,6 +21,10 @@ import Select from "../Components/Select";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { gql, useSubscription, useMutation, useQuery } from "@apollo/client";
+import UserContext from "../CustomProperties/UserContext";
+import { get, last } from "lodash";
+import useEffectUpdate from "../Library/useEffectUpdate";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
@@ -53,14 +58,138 @@ const manageHeightButton = ({ answerOne, answerTwo }) => {
   }
 };
 
+const COMMENTS_SUB = gql`
+  subscription($debateId: String!) {
+    comment(debateId: $debateId) {
+      node {
+        id
+        nested
+        from {
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+        content
+        likes {
+          id
+        }
+        dislikes {
+          id
+        }
+        comments {
+          id
+        }
+      }
+    }
+  }
+`;
+
+const CREATE_COMMENT = gql`
+  mutation($content: String!, $from: String!, $debate: ID!) {
+    createComment(
+      data: {
+        content: $content
+        from: { connect: { email: $from } }
+        debate: { connect: { id: $debate } }
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+const GET_COMMENTS = gql`
+  query($debate: ID!) {
+    comments(where: { debate: { id: $debate } }) {
+      id
+      nested
+      from {
+        id
+        firstname
+        lastname
+        email
+        profilePicture
+      }
+      content
+      likes {
+        id
+      }
+      dislikes {
+        id
+      }
+      comments {
+        id
+      }
+    }
+  }
+`;
+
 const Debate = (props) => {
   const { navigation, route } = props;
   const { debate } = route.params;
 
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
+
   const [comment, setComment] = React.useState("");
+  const [comments, setComments] = React.useState([]);
+
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
+  const commentsScrollViewRef = React.useRef(null);
+  const [query, setQuery] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+
+  const { loading, error, fetchMore } = useQuery(GET_COMMENTS, {
+    variables: {
+      debate: debate.id,
+    },
+    onCompleted: (response) => {
+      const { comments: queryResult } = response;
+      setComments(queryResult);
+      if (!query) setQuery(true);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+    fetchPolicy: "cache-and-network",
+  });
+
+  const { data: commentPayload } = useSubscription(COMMENTS_SUB, {
+    variables: {
+      debateId: debate.id,
+    },
+    shouldResubscribe: true,
+    onSubscriptionData: (response) => {
+      // console.log(response);
+      const { subscriptionData } = response;
+      // console.log(subscriptionData);
+      const payload = get(subscriptionData, "data.comment.node");
+      // console.log(payload);
+      if (payload !== undefined) {
+        setComments((cs) => [...cs, payload]);
+      }
+    },
+  });
+
+  useEffectUpdate(() => {
+    if (
+      comments.length !== 0 &&
+      last(comments).from.email === currentUser.email &&
+      query
+    ) {
+      console.log("trigger");
+      if (commentsScrollViewRef.current) {
+        commentsScrollViewRef.current.scrollToEnd({
+          animated: true,
+        });
+      }
+    }
+  }, [comments]);
+
+  const [createComment, { data: mutationResponse }] = useMutation(
+    CREATE_COMMENT
+  );
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -93,9 +222,8 @@ const Debate = (props) => {
   const [voted, setVoted] = React.useState(null);
 
   const votes = pour + contre;
-  const comments = debate.comments.length;
+  const commentsLength = debate.comments.length;
 
-  // console.log(debate);
   return (
     <View
       style={{
@@ -228,8 +356,8 @@ const Debate = (props) => {
                 ...styles.footerText,
                 color: themeSchema[theme].colorText,
               }}
-            >{`${comments} ${i18n._("comment")}${
-              comments > 1 ? "s" : ""
+            >{`${commentsLength} ${i18n._("comment")}${
+              commentsLength > 1 ? "s" : ""
             }`}</Text>
           </View>
           <View style={styles.debateActions}>
@@ -581,27 +709,32 @@ const Debate = (props) => {
                 ...styles.footerText,
                 color: themeSchema[theme].colorText,
               }}
-            >{`${comments} ${i18n._("comment")}${
-              comments > 1 ? "s" : ""
+            >{`${commentsLength} ${i18n._("comment")}${
+              commentsLength > 1 ? "s" : ""
             }`}</Text>
           </View>
         </View>
       )}
       <ScrollView
+        ref={commentsScrollViewRef}
         style={{
           ...styles.seedContainer,
           backgroundColor: themeSchema[theme].backgroundColor1,
         }}
       >
-        {debate.comments
-          .filter((comment) => comment.nested === false)
-          .map((comment) => (
-            <CommentBox
-              theme={theme}
-              comment={comment}
-              navigation={navigation}
-            />
-          ))}
+        {query === false ? (
+          <ActivityIndicator size={36} />
+        ) : (
+          comments
+            .filter((comm) => comm.nested === false)
+            .map((comm) => (
+              <CommentBox
+                theme={theme}
+                comment={comm}
+                navigation={navigation}
+              />
+            ))
+        )}
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
@@ -614,7 +747,7 @@ const Debate = (props) => {
           }
         }
       >
-        <View
+        <View //HAVE TO FIX ISSUE FOR KEYBOARD HERE
           style={{
             minHeight: 60,
             maxHeight: 200,
@@ -672,7 +805,19 @@ const Debate = (props) => {
                 />
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+            <TouchableOpacity
+              onPress={() => {
+                Keyboard.dismiss();
+                createComment({
+                  variables: {
+                    from: currentUser.email,
+                    content: comment,
+                    debate: debate.id,
+                  },
+                });
+                setComment("");
+              }}
+            >
               <CustomIcon
                 name="send"
                 size={26}

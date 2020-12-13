@@ -73,24 +73,6 @@ const GET_DEBATES = gql`
       }
       comments {
         id
-        nested
-        from {
-          id
-          firstname
-          lastname
-          email
-          profilePicture
-        }
-        content
-        likes {
-          id
-        }
-        dislikes {
-          id
-        }
-        comments {
-          id
-        }
       }
     }
   }

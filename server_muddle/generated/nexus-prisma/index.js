@@ -4364,6 +4364,11 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
+  Subscription: {
+    comment: { // args
+      debateId?: string | null; // String
+    }
+  }
   User: {
     blocked: { // args
       after?: string | null; // String

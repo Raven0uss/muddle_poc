@@ -1,4 +1,4 @@
-import { subscriptionField } from "nexus/dist";
+import { subscriptionField, stringArg } from "nexus/dist";
 
 const Subscription = {
   // message sub
@@ -13,8 +13,20 @@ const Subscription = {
   // comment sub
   commentSubscription: subscriptionField("comment", {
     type: "CommentSubPayload",
+    args: {
+      debateId: stringArg(),
+    },
     subscribe: (parent, args, { prisma }) => {
-      return prisma.$subscribe.comment({ mutation_in: "CREATED" });
+      const { debateId } = args;
+      console.log(debateId);
+      return prisma.$subscribe.comment({
+        mutation_in: "CREATED",
+        node: {
+          debate: {
+            id: debateId,
+          },
+        },
+      });
     },
     resolve: (payload) => payload,
   }),

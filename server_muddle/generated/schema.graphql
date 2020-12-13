@@ -2532,7 +2532,7 @@ enum Role {
 }
 
 type Subscription {
-  comment: CommentSubPayload!
+  comment(debateId: String): CommentSubPayload!
   message: MessageSubPayload!
   notification: NotificationSubPayload!
 }

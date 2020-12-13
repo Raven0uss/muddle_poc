@@ -51,7 +51,7 @@ const GET_SUBCOMMENTS = gql`
 `;
 
 const Comments = (props) => {
-  const [comments, setComments] = React.useState([]);
+  const { comments, setComments } = props;
   const { data, loading, error, fetchMore } = useQuery(GET_SUBCOMMENTS, {
     variables: {
       commentId: props.comment.id,
@@ -76,6 +76,7 @@ const Comments = (props) => {
 const IsolateComment = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const [liked, setLiked] = React.useState(null);
+  const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -270,7 +271,13 @@ const IsolateComment = (props) => {
           backgroundColor: themeSchema[theme].backgroundColor1,
         }}
       >
-        <Comments theme={theme} navigation={navigation} comment={comment} />
+        <Comments
+          theme={theme}
+          navigation={navigation}
+          comment={comment}
+          comments={comments}
+          setComments={setComments}
+        />
       </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
@@ -341,7 +348,19 @@ const IsolateComment = (props) => {
                 />
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+            <TouchableOpacity
+              onPress={() => {
+                Keyboard.dismiss();
+                // const newObjectComment = {
+                //   from: 
+                // };
+                // const newObjectCommentRequest = {
+
+                // };
+                // setComments((commentList) => [...commentList,]);
+                // setNewComment("");
+              }}
+            >
               <CustomIcon
                 name="send"
                 size={26}
