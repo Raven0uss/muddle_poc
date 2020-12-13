@@ -19,6 +19,7 @@ import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
@@ -101,6 +102,7 @@ const renderItem = ({ item }, navigation, me, theme) => {
 
 const Chat = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [newMessage, setNewMessage] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -129,8 +131,10 @@ const Chat = (props) => {
   // console.log(conversation);
 
   // DATA TEST
-  const me = conversation.speakers[0];
-  const partner = conversation.speakers[1];
+  const me = currentUser;
+  const speaker = conversation.speakers.filter((u) => u.id !== currentUser.id);
+  if (speaker === null) return null;
+  const partner = speaker[0];
 
   return (
     <View style={styles.container}>
@@ -167,7 +171,6 @@ const Chat = (props) => {
           },
           shadowOpacity: 0.23,
           shadowRadius: 2.62,
-          elevation: 4,
           alignItems: "center",
           borderTopLeftRadius: 12,
           borderTopRightRadius: 12,

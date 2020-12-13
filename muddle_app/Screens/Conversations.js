@@ -34,6 +34,7 @@ const GET_CONVERSATIONS = gql`
         firstname
         lastname
         email
+        profilePicture
       }
       messages {
         id
@@ -60,8 +61,10 @@ const GET_CONVERSATIONS = gql`
 const frequency = 20;
 let nbConversations = frequency;
 
-const renderItem = ({ item }, navigation, theme) => {
+const renderItem = ({ item }, navigation, theme, currentUser) => {
   const lastMessage = item.messages[item.messages.length - 1];
+  const speaker = item.speakers.filter((u) => u.email !== currentUser.email);
+  if (speaker.length === 0) return null;
   return (
     <TouchableOpacity
       onPress={() => {
@@ -84,7 +87,7 @@ const renderItem = ({ item }, navigation, theme) => {
         }}
       >
         <Image
-          source={{ uri: lastMessage.from.profilePicture }}
+          source={{ uri: speaker[0].profilePicture }}
           style={styles.userPicture}
         />
         <View style={{ marginLeft: 40, marginTop: 10 }}>
@@ -96,7 +99,7 @@ const renderItem = ({ item }, navigation, theme) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${lastMessage.from.firstname} ${lastMessage.from.lastname}`}
+              {`${speaker[0].firstname} ${speaker[0].lastname}`}
             </Text>
             <Text
               style={{
@@ -189,7 +192,7 @@ const Conversations = (props) => {
             style={{ marginTop: 5 }}
             onPress={() =>
               navigation.push("NewConversation", {
-                userId: "userA",
+                userId: currentUser.email,
               })
             }
           >
@@ -234,7 +237,9 @@ const Conversations = (props) => {
           paddingLeft: 15,
           paddingRight: 15,
         }}
-        renderItem={(param) => renderItem(param, navigation, theme)}
+        renderItem={(param) =>
+          renderItem(param, navigation, theme, currentUser)
+        }
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
