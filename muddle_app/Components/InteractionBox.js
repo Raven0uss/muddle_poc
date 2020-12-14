@@ -11,10 +11,10 @@ import UserContext from "../CustomProperties/UserContext";
 
 const InteractionBox = (props) => {
   const { currentUser } = React.useContext(UserContext);
-  const { interaction, navigation, theme } = props;
+  const { interaction, navigation, theme, setHomeDebates, setDebates } = props;
   const { comment, debate } = interaction;
 
-  console.log(debate);
+  // console.log(debate);
   switch (interaction.type) {
     case "LIKE":
       return (
@@ -137,6 +137,10 @@ const InteractionBox = (props) => {
             theme={theme}
             debate={comment.debate}
             navigation={navigation}
+            currentUser={currentUser}
+            setDebates={setDebates}
+            setHomeDebates={setHomeDebates}
+            // disabledVotes
           />
         </View>
       );
@@ -175,7 +179,15 @@ const InteractionBox = (props) => {
               marginBottom: 10,
             }}
           />
-          <DebateBox theme={theme} debate={debate} navigation={navigation} />
+          <DebateBox
+            currentUser={currentUser}
+            theme={theme}
+            debate={debate}
+            navigation={navigation}
+            setDebates={setDebates}
+            setHomeDebates={setHomeDebates}
+            // disabledVotes
+          />
         </View>
       );
     // case "RED_VOTE":

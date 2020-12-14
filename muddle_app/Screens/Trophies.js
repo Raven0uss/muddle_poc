@@ -22,6 +22,7 @@ import { get, isEmpty } from "lodash";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const GET_TROPHIES = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
@@ -179,12 +180,19 @@ const GET_TROPHIES = gql`
 const frequency = 10;
 let nbTrophies = frequency;
 
-const renderItem = ({ item }, navigation) => {
-  return <TrophyBox trophy={item} navigation={navigation} />;
+const renderItem = ({ item }, navigation, currentUser) => {
+  return (
+    <TrophyBox
+      currentUser={currentUser}
+      trophy={item}
+      navigation={navigation}
+    />
+  );
 };
 
 const Trophies = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [trophies, setTrophies] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
@@ -302,7 +310,7 @@ const Trophies = (props) => {
           ...styles.seedContainer,
           backgroundColor: themeSchema[theme].backgroundColor2,
         }}
-        renderItem={(param) => renderItem(param, navigation)}
+        renderItem={(param) => renderItem(param, navigation, currentUser)}
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {

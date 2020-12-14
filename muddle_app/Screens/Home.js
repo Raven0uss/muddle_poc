@@ -30,6 +30,7 @@ import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import { get } from "lodash";
 import wait from "../Library/wait";
+import useEffectUpdate from "../Library/useEffectUpdate";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -113,8 +114,16 @@ const CONVERSATIONS_SUB = gql`
 const frequency = 20;
 let nbDebates = frequency;
 
-const renderItem = ({ item }, navigation) => {
-  return <DebateBox debate={item} navigation={navigation} />;
+const renderItem = ({ item, index }, navigation, currentUser, setDebates) => {
+  return (
+    <DebateBox
+      currentUser={currentUser}
+      debate={item}
+      navigation={navigation}
+      index={index}
+      setDebates={setDebates}
+    />
+  );
 };
 
 const Home = (props) => {
@@ -194,6 +203,10 @@ const Home = (props) => {
   //     </View>
   //   );
   // }
+  // useEffectUpdate(() => {
+
+  // }, [debates]);
+
   if (debates.length === 0 && !refreshing && loading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
@@ -210,6 +223,7 @@ const Home = (props) => {
             onPress={() => {
               navigation.navigate("Profile", {
                 userId: currentUser.email, // Personne connectee
+                setHomeDebates: setDebates,
               });
             }}
           >
@@ -233,7 +247,13 @@ const Home = (props) => {
           />
         }
         RightComponent={
-          <TouchableOpacity onPress={() => navigation.push("DebatesFiltered")}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("DebatesFiltered", {
+                setHomeDebates: setDebates,
+              })
+            }
+          >
             <Image
               source={{ uri: debates_logo }}
               style={{
@@ -259,7 +279,9 @@ const Home = (props) => {
           paddingLeft: 15,
           paddingRight: 15,
         }}
-        renderItem={(param) => renderItem(param, navigation)}
+        renderItem={(param) =>
+          renderItem(param, navigation, currentUser, setDebates)
+        }
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {

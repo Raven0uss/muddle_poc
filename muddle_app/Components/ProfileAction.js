@@ -9,7 +9,7 @@ import themeSchema from "../CustomProperties/Theme";
 const ProfileAction = (props) => {
   const { navigation, me, theme, user } = props;
 
-  console.log(user);
+  // console.log(user);
   if (me)
     return (
       <Select

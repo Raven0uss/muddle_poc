@@ -23,11 +23,29 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import GET_DEBATES from "../gql/getDebates";
 
-const frequency = 20;
+const frequency = 10;
 let nbDebates = frequency;
 
-const renderItem = ({ item }, navigation, theme) => {
-  return <DebateBox theme={theme} debate={item} navigation={navigation} />;
+const renderItem = (
+  { item, index },
+  navigation,
+  theme,
+  currentUser,
+  setDebates,
+  setHomeDebates
+) => {
+  // console.log(setHomeDebates);
+  return (
+    <DebateBox
+      currentUser={currentUser}
+      theme={theme}
+      debate={item}
+      navigation={navigation}
+      index={index}
+      setDebates={setDebates}
+      setHomeDebates={setHomeDebates}
+    />
+  );
 };
 
 const applyFilter = ({ debates, debateType }) => {
@@ -57,7 +75,7 @@ const DebatesFiltered = (props) => {
       variables: {
         first: nbDebates,
         ...(debateType === "BEST_DEBATES" || debateType === "MY_DEBATES"
-          ? { filter: "" }
+          ? {}
           : { filter: debateType }),
         user: currentUser.email,
       },
@@ -70,10 +88,14 @@ const DebatesFiltered = (props) => {
       onError: (error) => {
         console.log(error);
       },
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: "cache-and-network",
     }
   );
 
   const { navigation, route } = props;
+
+  const { setHomeDebates } = route.params;
 
   return (
     <View style={styles.container}>
@@ -228,7 +250,16 @@ const DebatesFiltered = (props) => {
             ...styles.seedContainer,
             backgroundColor: themeSchema[theme].backgroundColor1,
           }}
-          renderItem={(param) => renderItem(param, navigation, theme)}
+          renderItem={(param) =>
+            renderItem(
+              param,
+              navigation,
+              theme,
+              currentUser,
+              setDebates,
+              setHomeDebates
+            )
+          }
           keyExtractor={(item) => item.id}
           onEndReachedThreshold={0.5}
           onEndReached={async () => {

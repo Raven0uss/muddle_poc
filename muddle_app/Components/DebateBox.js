@@ -7,6 +7,18 @@ import Select from "../Components/Select";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import hasVoted from "../Library/hasVoted";
+import { useMutation } from "@apollo/client";
+import {
+  SEND_BLUE_VOTE,
+  SEND_RED_VOTE,
+  SEND_POSITIVE_VOTE,
+  SEND_NEGATIVE_VOTE,
+} from "../gql/votes";
+import { cloneDeepWith, findIndex, isNil } from "lodash";
+import useEffectUpdate from "../Library/useEffectUpdate";
+import { useIsFocused } from "@react-navigation/native";
+import voteDispatch from "../Library/voteDispatch";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
@@ -41,8 +53,17 @@ const manageHeightButton = ({ answerOne, answerTwo }) => {
 };
 
 const DebateBox = (props) => {
-  const { debate, navigation } = props;
+  const {
+    debate,
+    navigation,
+    currentUser,
+    setDebates,
+    index: debateIndex,
+    setHomeDebates,
+    disabledVotes,
+  } = props;
 
+  // console.log(setDebates);
   const { theme } = React.useContext(ThemeContext);
   const [pour, setPour] = React.useState(
     debate.type === "STANDARD" || debate.type === "MUDDLE"
@@ -54,7 +75,54 @@ const DebateBox = (props) => {
       ? debate.negatives.length
       : debate.redVotes.length
   );
-  const [voted, setVoted] = React.useState(null);
+  const [voted, setVoted] = React.useState(
+    hasVoted({
+      ...debate,
+      currentUser,
+    })
+  );
+
+  const [sendNegativeVote] = useMutation(SEND_NEGATIVE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendPositiveVote] = useMutation(SEND_POSITIVE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendBlueVote] = useMutation(SEND_BLUE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendRedVote] = useMutation(SEND_RED_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    const result = hasVoted({
+      ...debate,
+      currentUser,
+    });
+    setVoted(result);
+  }, [isFocused]);
+
+  useEffectUpdate(() => {
+    if (voted === "pour") setPour((v) => v + 1);
+    if (voted === "contre") setContre((v) => v + 1);
+  }, [voted]);
 
   const votes = pour + contre;
   const comments = debate.comments.length;
@@ -125,6 +193,9 @@ const DebateBox = (props) => {
           onPress={() => {
             navigation.push("Debate", {
               debate,
+              setDebates,
+              debateIndex,
+              setHomeDebates,
             });
           }}
         >
@@ -162,9 +233,17 @@ const DebateBox = (props) => {
         </View>
         <View style={styles.debateActions}>
           <TouchableOpacity
-            onPress={() => {
-              setPour((v) => v + 1);
+            onPress={async () => {
               setVoted("pour");
+              voteDispatch({
+                setDebates,
+                setHomeDebates,
+                debateIndex,
+                voteType: "positives",
+                currentUser,
+                debate,
+              });
+              await sendPositiveVote();
             }}
             style={
               voted
@@ -182,7 +261,7 @@ const DebateBox = (props) => {
                     backgroundColor: themeSchema[theme].backgroundColor2,
                   }
             }
-            disabled={voted}
+            disabled={voted || disabledVotes}
           >
             <Text
               // numberOfLines={1}
@@ -226,11 +305,19 @@ const DebateBox = (props) => {
                     height: manageHeightButton(debate),
                   }
             }
-            onPress={() => {
-              setContre((v) => v + 1);
+            onPress={async () => {
               setVoted("contre");
+              voteDispatch({
+                setDebates,
+                setHomeDebates,
+                debateIndex,
+                voteType: "negatives",
+                currentUser,
+                debate,
+              });
+              await sendNegativeVote();
             }}
-            disabled={voted}
+            disabled={voted || disabledVotes}
           >
             <Text
               // numberOfLines={1}
@@ -398,6 +485,9 @@ const DebateBox = (props) => {
             onPress={() => {
               navigation.push("Debate", {
                 debate,
+                setDebates,
+                debateIndex,
+                setHomeDebates,
               });
             }}
           >
@@ -413,9 +503,17 @@ const DebateBox = (props) => {
           </TouchableOpacity>
           <View style={styles.debateActionsDuo}>
             <TouchableOpacity
-              onPress={() => {
-                setPour((v) => v + 1);
+              onPress={async () => {
                 setVoted("pour");
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "blueVotes",
+                  currentUser,
+                  debate,
+                });
+                await sendBlueVote();
               }}
               style={
                 voted
@@ -433,7 +531,7 @@ const DebateBox = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted}
+              disabled={voted || disabledVotes}
             >
               <Text
                 // numberOfLines={1}
@@ -478,12 +576,20 @@ const DebateBox = (props) => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {
-                setContre((v) => v + 1);
+              onPress={async () => {
                 setVoted("contre");
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "redVotes",
+                  currentUser,
+                  debate,
+                });
+                await sendRedVote();
               }}
               style={
-                voted
+                voted === "contre"
                   ? {
                       ...styles.voteRedButton,
                       backgroundColor: contre
@@ -499,12 +605,12 @@ const DebateBox = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted}
+              disabled={voted || disabledVotes}
             >
               <Text
                 // numberOfLines={1}
                 style={
-                  voted
+                  voted === "contre"
                     ? {
                         color: contre
                           ? themeSchema[theme].colorText3
@@ -765,10 +871,12 @@ const styles = StyleSheet.create({
 
 DebateBox.propTypes = {
   // type: PropTypes.oneOf(["STANDARD", "DUO", "MUDDLE"]),
+  disabledVotes: PropTypes.bool,
 };
 
 DebateBox.defaultProps = {
   // type: "STANDARD",
+  disabledVotes: false,
 };
 
 export default DebateBox;

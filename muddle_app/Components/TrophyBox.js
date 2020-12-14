@@ -10,7 +10,7 @@ import themeSchema from "../CustomProperties/Theme";
 
 const TrophyBox = (props) => {
   const { theme } = React.useContext(ThemeContext);
-  const { trophy, navigation } = props;
+  const { trophy, navigation, currentUser } = props;
 
   switch (trophy.type) {
     case "TOP_COMMENT":
@@ -37,7 +37,14 @@ const TrophyBox = (props) => {
             borderColor: "#F5D65A",
           }}
         >
-          <View style={styles.headDebate}>
+          <DebateBox
+            currentUser={currentUser}
+            debate={trophy.comment.debate}
+            navigation={navigation}
+            theme={theme}
+            setDebates={null}
+          />
+          {/* <View style={styles.headDebate}>
             <TouchableOpacity
               onPress={() => {
                 navigation.push("Profile", {
@@ -199,6 +206,8 @@ const TrophyBox = (props) => {
               />
             </TouchableOpacity>
           </View>
+            */}
+
           <View
             style={{
               backgroundColor: themeSchema[theme].backgroundColor1,
@@ -273,7 +282,13 @@ const TrophyBox = (props) => {
             borderColor: "#78AE42",
           }}
         >
-          <DebateBox debate={debate} navigation={navigation} />
+          <DebateBox
+            currentUser={currentUser}
+            debate={debate}
+            navigation={navigation}
+            theme={theme}
+            setDebates={null}
+          />
         </View>
         // const votesDuo =
         //   debate.positives.length +

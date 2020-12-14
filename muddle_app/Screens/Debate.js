@@ -25,6 +25,15 @@ import { gql, useSubscription, useMutation, useQuery } from "@apollo/client";
 import UserContext from "../CustomProperties/UserContext";
 import { get, last } from "lodash";
 import useEffectUpdate from "../Library/useEffectUpdate";
+import hasVoted from "../Library/hasVoted";
+import {
+  SEND_BLUE_VOTE,
+  SEND_RED_VOTE,
+  SEND_POSITIVE_VOTE,
+  SEND_NEGATIVE_VOTE,
+} from "../gql/votes";
+import { cloneDeepWith, isNil, findIndex } from "lodash";
+import voteDispatch from "../Library/voteDispatch";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
@@ -127,7 +136,7 @@ const GET_COMMENTS = gql`
 
 const Debate = (props) => {
   const { navigation, route } = props;
-  const { debate } = route.params;
+  const { debate, setDebates, debateIndex, setHomeDebates } = route.params;
 
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
@@ -139,6 +148,51 @@ const Debate = (props) => {
   const commentsScrollViewRef = React.useRef(null);
   const [query, setQuery] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+
+  const [pour, setPour] = React.useState(
+    debate.type === "STANDARD" || debate.type === "MUDDLE"
+      ? debate.positives.length
+      : debate.blueVotes.length
+  );
+  const [contre, setContre] = React.useState(
+    debate.type === "STANDARD" || debate.type === "MUDDLE"
+      ? debate.negatives.length
+      : debate.redVotes.length
+  );
+  const [voted, setVoted] = React.useState(
+    hasVoted({
+      ...debate,
+      currentUser,
+    })
+  );
+
+  const [sendNegativeVote] = useMutation(SEND_NEGATIVE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendPositiveVote] = useMutation(SEND_POSITIVE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendBlueVote] = useMutation(SEND_BLUE_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
+
+  const [sendRedVote] = useMutation(SEND_RED_VOTE, {
+    variables: {
+      debate: debate.id,
+      userId: currentUser.id,
+    },
+  });
 
   const { loading, error, fetchMore } = useQuery(GET_COMMENTS, {
     variables: {
@@ -208,21 +262,12 @@ const Debate = (props) => {
     };
   }, []);
 
-  const [pour, setPour] = React.useState(
-    debate.type === "STANDARD" || debate.type === "MUDDLE"
-      ? debate.positives.length
-      : debate.blueVotes.length
-  );
-  const [contre, setContre] = React.useState(
-    debate.type === "STANDARD" || debate.type === "MUDDLE"
-      ? debate.negatives.length
-      : debate.redVotes.length
-  );
-  const [voted, setVoted] = React.useState(null);
-
   const votes = pour + contre;
   const commentsLength = debate.comments.length;
 
+  // console.log(voted);
+  // console.log(setDebates);
+  // console.log(debateIndex);
   return (
     <View
       style={{
@@ -364,6 +409,15 @@ const Debate = (props) => {
               onPress={() => {
                 setPour((v) => v + 1);
                 setVoted("pour");
+                sendPositiveVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "positives",
+                  currentUser,
+                  debate,
+                });
               }}
               style={
                 voted
@@ -428,6 +482,15 @@ const Debate = (props) => {
               onPress={() => {
                 setContre((v) => v + 1);
                 setVoted("contre");
+                sendNegativeVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "negatives",
+                  currentUser,
+                  debate,
+                });
               }}
               disabled={voted}
             >
@@ -570,6 +633,15 @@ const Debate = (props) => {
               onPress={() => {
                 setPour((v) => v + 1);
                 setVoted("pour");
+                sendBlueVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "blueVotes",
+                  currentUser,
+                  debate,
+                });
               }}
               style={
                 voted
@@ -635,9 +707,18 @@ const Debate = (props) => {
               onPress={() => {
                 setContre((v) => v + 1);
                 setVoted("contre");
+                sendRedVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "redVotes",
+                  currentUser,
+                  debate,
+                });
               }}
               style={
-                voted
+                voted === "contre"
                   ? {
                       ...styles.voteRedButton,
                       backgroundColor: contre
@@ -658,7 +739,7 @@ const Debate = (props) => {
               <Text
                 // numberOfLines={1}
                 style={
-                  voted
+                  voted === "contre"
                     ? {
                         color: contre
                           ? themeSchema[theme].colorText3

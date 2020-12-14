@@ -31,6 +31,8 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import ProfileAction from "../Components/ProfileAction";
+import useEffectUpdate from "../Library/useEffectUpdate";
+import { useIsFocused } from "@react-navigation/native";
 
 const GET_USER = gql`
   query($userId: String!) {
@@ -231,16 +233,20 @@ const GET_INTERACTIONS = gql`
   }
 `;
 
-const frequency = 10;
+const fakeSetDebates = (callback) => callback();
+
+const frequency = 5;
 let nbInteractions = frequency;
 
-const renderItem = ({ item }, navigation, user, theme) => {
+const renderItem = ({ item }, navigation, user, theme, setHomeDebates) => {
   return (
     <InteractionBox
       theme={theme}
       interaction={item}
       navigation={navigation}
       user={user}
+      setDebates={null}
+      setHomeDebates={setHomeDebates}
     />
   );
 };
@@ -249,7 +255,7 @@ const Interactions = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const [interactions, setInteractions] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
-  const { data, loading, error, fetchMore } = useQuery(GET_INTERACTIONS, {
+  const { loading, error, fetchMore, refetch } = useQuery(GET_INTERACTIONS, {
     variables: {
       first: nbInteractions,
       userId: props.userId,
@@ -259,9 +265,22 @@ const Interactions = (props) => {
       setInteractions(queryResult);
       if (queryResult.length === 0) setNoMoreData(true);
     },
+    fetchPolicy: "no-cache",
+    notifyOnNetworkStatusChange: true,
   });
 
-  const { navigation, userId } = props;
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    nbInteractions = frequency;
+    const reloadInteractions = async () => {
+      setInteractions([]);
+      refetch();
+      return true;
+    };
+    reloadInteractions();
+  }, [isFocused]);
+
+  const { navigation, userId, setHomeDebates } = props;
 
   if (interactions.length === 0 && loading) {
     return <ActivityIndicator />;
@@ -274,7 +293,9 @@ const Interactions = (props) => {
         ...styles.seedContainer,
         backgroundColor: themeSchema[theme].backgroundColor1,
       }}
-      renderItem={(param) => renderItem(param, navigation, userId, theme)}
+      renderItem={(param) =>
+        renderItem(param, navigation, userId, theme, setHomeDebates)
+      }
       keyExtractor={(item) => item.id}
       onEndReachedThreshold={0.5}
       onEndReached={async () => {
@@ -327,6 +348,7 @@ const Profile = (props) => {
   });
 
   const { navigation, route } = props;
+  const { setHomeDebates } = route.params;
 
   if (user === null || loading) {
     return (
@@ -372,7 +394,11 @@ const Profile = (props) => {
         }
         RightComponent={
           <TouchableOpacity
-            onPress={() => navigation.push("DebatesFiltered")}
+            onPress={() =>
+              navigation.push("DebatesFiltered", {
+                setHomeDebates,
+              })
+            }
             style={{
               //   marginTop: 3,
               borderRadius: 50,
@@ -611,7 +637,11 @@ const Profile = (props) => {
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
       /> */}
-      <Interactions userId={user.email} navigation={navigation} />
+      <Interactions
+        userId={user.email}
+        navigation={navigation}
+        setHomeDebates={setHomeDebates}
+      />
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />
     </View>
