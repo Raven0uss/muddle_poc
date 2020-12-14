@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 42,
     height: 42,
-    borderStyle: "solid",
+    // borderStyle: "solid",
     borderWidth: 2,
     borderColor: "#fff",
     borderRadius: 30,
-    elevation: 10,
+    // elevation: 10,
   },
 });
 

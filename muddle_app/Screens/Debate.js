@@ -814,6 +814,7 @@ const Debate = (props) => {
                 theme={theme}
                 comment={comm}
                 navigation={navigation}
+                key={comm.id}
               />
             ))
         )}

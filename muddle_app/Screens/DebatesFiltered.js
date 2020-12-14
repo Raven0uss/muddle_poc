@@ -23,7 +23,7 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import GET_DEBATES from "../gql/getDebates";
 
-const frequency = 10;
+const frequency = 6;
 let nbDebates = frequency;
 
 const renderItem = (
@@ -86,6 +86,8 @@ const DebatesFiltered = (props) => {
         if (queryResult.length === 0) setNoMoreData(true);
       },
       onError: (error) => {
+        nbDebates = frequency;
+        setNoMoreData(true);
         console.log(error);
       },
       notifyOnNetworkStatusChange: true,
@@ -147,6 +149,8 @@ const DebatesFiltered = (props) => {
                   }
             }
             onPress={() => {
+              nbDebates = frequency;
+              setDebates([]);
               setDebateType("MY_DEBATES");
               setNoMoreData(false);
             }}
@@ -171,6 +175,8 @@ const DebatesFiltered = (props) => {
                   }
             }
             onPress={() => {
+              nbDebates = frequency;
+              setDebates([]);
               setDebateType("BEST_DEBATES");
               setNoMoreData(false);
             }}
@@ -195,6 +201,8 @@ const DebatesFiltered = (props) => {
                   }
             }
             onPress={() => {
+              nbDebates = frequency;
+              setDebates([]);
               setDebateType("DUO");
               setNoMoreData(false);
             }}
@@ -219,6 +227,8 @@ const DebatesFiltered = (props) => {
                   }
             }
             onPress={() => {
+              nbDebates = frequency;
+              setDebates([]);
               setDebateType("MUDDLE");
               setNoMoreData(false);
             }}
@@ -245,7 +255,8 @@ const DebatesFiltered = (props) => {
         </SafeAreaView>
       ) : (
         <FlatList
-          data={applyFilter({ debates, debateType })}
+          data={debates}
+          // data={applyFilter({ debates, debateType })}
           style={{
             ...styles.seedContainer,
             backgroundColor: themeSchema[theme].backgroundColor1,
@@ -269,6 +280,7 @@ const DebatesFiltered = (props) => {
             await fetchMore({
               variables: { first: frequency, skip: nbDebates - frequency },
               updateQuery: (previousResult, { fetchMoreResult }) => {
+                console.log(fetchMoreResult);
                 const { debates: moreDebates } = fetchMoreResult;
                 if (isEmpty(moreDebates)) setNoMoreData(true);
                 setDebates((previousState) =>

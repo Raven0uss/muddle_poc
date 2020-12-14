@@ -150,6 +150,7 @@ const Home = (props) => {
   const scrollViewRef = React.useRef(null);
 
   const onRefresh = React.useCallback(async () => {
+    nbDebates = frequency;
     setRefreshing(true);
     setDebates([]);
     await refetch();

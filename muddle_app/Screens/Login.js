@@ -178,7 +178,7 @@ function LoginComponent(props) {
 
   React.useEffect(() => {
     const params = props.route.params;
-    console.log(params);
+    // console.log(params);
     setSnack({
       visible: params.snack,
       type: params.snackType,

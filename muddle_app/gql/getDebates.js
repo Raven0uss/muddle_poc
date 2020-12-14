@@ -47,23 +47,6 @@ const GET_DEBATES = (debateType) => {
           }
           comments {
             id
-            nested
-            comments {
-              id
-            }
-            from {
-              firstname
-              lastname
-              email
-              profilePicture
-            }
-            content
-            likes {
-              id
-            }
-            dislikes {
-              id
-            }
           }
         }
       }
@@ -112,23 +95,6 @@ const GET_DEBATES = (debateType) => {
           }
           comments {
             id
-            nested
-            comments {
-              id
-            }
-            from {
-              firstname
-              lastname
-              email
-              profilePicture
-            }
-            content
-            likes {
-              id
-            }
-            dislikes {
-              id
-            }
           }
         }
       }
@@ -181,23 +147,6 @@ const GET_DEBATES = (debateType) => {
           }
           comments {
             id
-            nested
-            comments {
-              id
-            }
-            from {
-              firstname
-              lastname
-              email
-              profilePicture
-            }
-            content
-            likes {
-              id
-            }
-            dislikes {
-              id
-            }
           }
         }
       }

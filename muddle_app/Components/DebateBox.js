@@ -170,7 +170,6 @@ const DebateBox = (props) => {
                   value: "REPORT",
                 },
               ]}
-              selected={null}
               placeholder=""
               onSelect={(action) => {
                 if (action.value === "REPORT")

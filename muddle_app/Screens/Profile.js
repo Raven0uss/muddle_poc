@@ -235,7 +235,7 @@ const GET_INTERACTIONS = gql`
 
 const fakeSetDebates = (callback) => callback();
 
-const frequency = 5;
+const frequency = 3;
 let nbInteractions = frequency;
 
 const renderItem = ({ item }, navigation, user, theme, setHomeDebates) => {

@@ -154,7 +154,7 @@ Select.propTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }).isRequired,
     null,
-  ]).isRequired,
+  ]),
   placeholder: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   renderComponent: PropTypes.any,

@@ -67,7 +67,12 @@ const Comments = (props) => {
   return (
     <>
       {comments.map((c) => (
-        <CommentBox theme={theme} comment={c} navigation={navigation} />
+        <CommentBox
+          theme={theme}
+          comment={c}
+          navigation={navigation}
+          key={c.id}
+        />
       ))}
     </>
   );
@@ -352,7 +357,7 @@ const IsolateComment = (props) => {
               onPress={() => {
                 Keyboard.dismiss();
                 // const newObjectComment = {
-                //   from: 
+                //   from:
                 // };
                 // const newObjectCommentRequest = {
 

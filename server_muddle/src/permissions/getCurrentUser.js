@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
+import { get, isNil } from "lodash";
 
 const getCurrentUser = async (request) => {
   try {
-    if (!request.headers.token) {
+    if (isNil(get(request, "headers.token"))) {
       return null;
     }
     const user = await jwt.decode(
