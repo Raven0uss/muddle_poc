@@ -6,17 +6,31 @@ const Subscription = {
     type: "MessageSubPayload",
     args: {
       userId: stringArg(),
+      conversationId: stringArg(),
     },
     subscribe: (parent, args, { prisma }) => {
-      const { userId } = args;
-      return prisma.$subscribe.message({
-        mutation_in: "CREATED",
-        node: {
-          from: {
-            id: userId,
+      const { userId, conversationId } = args;
+      if (conversationId !== undefined) {
+        return prisma.$subscribe.message({
+          mutation_in: "CREATED",
+          node: {
+            conversation: {
+              id: conversationId,
+            },
           },
-        },
-      });
+        });
+      } else {
+        return prisma.$subscribe.message({
+          mutation_in: "CREATED",
+          node: {
+            conversation: {
+              speakers_some: {
+                id: userId,
+              },
+            },
+          },
+        });
+      }
     },
     resolve: (payload) => payload,
   }),

@@ -12,6 +12,7 @@ import {
   Keyboard,
   TextInput,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
@@ -20,6 +21,10 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
+import { useQuery, gql, useMutation, useSubscription } from "@apollo/client";
+import { get, isEmpty } from "lodash";
+import moment from "moment";
+import { useIsFocused } from "@react-navigation/native";
 
 const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
@@ -57,7 +62,7 @@ const renderItem = ({ item }, navigation, me, theme) => {
             fontFamily: "Montserrat_500Medium",
           }}
         >
-          10:26
+          {moment(item.createdAt).format("HH:mm")}
         </Text>
       </View>
     );
@@ -94,18 +99,159 @@ const renderItem = ({ item }, navigation, me, theme) => {
           fontFamily: "Montserrat_500Medium",
         }}
       >
-        10:26
+        {moment(item.createdAt).format("HH:mm")}
       </Text>
     </View>
   );
 };
 
+const SEND_MESSAGE = gql`
+  mutation($content: String!, $to: ID!, $from: ID!, $conversation: ID!) {
+    createMessage(
+      data: {
+        content: $content
+        to: { connect: { id: $to } }
+        from: { connect: { id: $from } }
+        conversation: { connect: { id: $conversation } }
+        read: false
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+const MESSAGES_CHAT_SUB = gql`
+  subscription($userId: String!, $conversationId: String!) {
+    message(userId: $userId, conversationId: $conversationId) {
+      node {
+        id
+        content
+        from {
+          id
+        }
+        to {
+          id
+        }
+        createdAt
+      }
+    }
+  }
+`;
+
+const GET_MESSAGES = gql`
+  query($last: Int!, $skip: Int) {
+    messages(last: $last, skip: $skip, orderBy: createdAt_DESC) {
+      id
+      content
+      from {
+        id
+      }
+      to {
+        id
+      }
+      createdAt
+    }
+  }
+`;
+
+const MESSAGES_UDPATE_VIEW = gql`
+  mutation($conversationId: ID!, $userId: ID!) {
+    updateManyMessages(
+      where: { conversation: { id: $conversationId }, to: { id: $userId } }
+      data: { read: true }
+    ) {
+      count
+    }
+  }
+`;
+
+const LAST_MESSAGE_READ = gql`
+  mutation($messageId: ID!) {
+    updateMessage(where: { id: $messageId }, data: { read: true }) {
+      id
+    }
+  }
+`;
+
+const frequency = 50;
+let nbMessages = frequency;
+
 const Chat = (props) => {
+  const { navigation, route } = props;
+  const { conversation } = route.params;
+
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
   const [newMessage, setNewMessage] = React.useState("");
+  const [messages, setMessages] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+
+  const me = currentUser;
+  const speaker = conversation.speakers.filter((u) => u.id !== currentUser.id);
+  const partner = speaker[0];
+
+  const { loading, error, fetchMore } = useQuery(GET_MESSAGES, {
+    variables: {
+      last: nbMessages,
+    },
+    onCompleted: (response) => {
+      const { messages: queryResult } = response;
+      setMessages(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
+    },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: "cache-and-network",
+  });
+
+  const [sendMessage] = useMutation(SEND_MESSAGE, {
+    variables: {
+      to: partner.id,
+      from: me.id,
+      content: newMessage,
+      conversation: conversation.id,
+    },
+    onCompleted: (response) => {
+      console.log(response);
+    },
+  });
+
+  const [lastMessageRead] = useMutation(LAST_MESSAGE_READ);
+  const [markAsReadMessages] = useMutation(MESSAGES_UDPATE_VIEW, {
+    variables: {
+      conversationId: conversation.id,
+      userId: currentUser.id,
+    },
+  });
+
+  useSubscription(MESSAGES_CHAT_SUB, {
+    variables: {
+      userId: currentUser.id,
+      conversationId: conversation.id,
+    },
+    shouldResubscribe: true,
+    onSubscriptionData: (response) => {
+      const { subscriptionData } = response;
+      const payload = get(subscriptionData, "data.message.node");
+      if (payload === undefined) return;
+
+      setMessages((m) => [payload, ...m]);
+      if (payload.to.id === currentUser.id) {
+        lastMessageRead({
+          variables: {
+            messageId: payload.id,
+          },
+        });
+      }
+    },
+  });
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    markAsReadMessages();
+  }, [isFocused]);
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -125,16 +271,9 @@ const Chat = (props) => {
     };
   }, []);
 
-  const { navigation, route } = props;
-  const { conversation } = route.params;
-
   // console.log(conversation);
 
   // DATA TEST
-  const me = currentUser;
-  const speaker = conversation.speakers.filter((u) => u.id !== currentUser.id);
-  if (speaker === null) return null;
-  const partner = speaker[0];
 
   return (
     <View style={styles.container}>
@@ -221,7 +360,7 @@ const Chat = (props) => {
       </View>
 
       <FlatList
-        data={conversation.messages}
+        data={messages}
         style={{
           backgroundColor: themeSchema[theme].backgroundColor2,
           paddingLeft: 15,
@@ -230,6 +369,33 @@ const Chat = (props) => {
         renderItem={(param) => renderItem(param, navigation, me, theme)}
         keyExtractor={(item) => item.id}
         inverted={true}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web" || noMoreData) return;
+          // return ;
+          nbMessages += frequency;
+          await fetchMore({
+            variables: { last: frequency, skip: nbMessages - frequency },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { messages: moreMessages } = fetchMoreResult;
+              if (isEmpty(moreMessages)) setNoMoreData(true);
+              setMessages((previousState) =>
+                [...previousState, ...moreMessages].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => {
+          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
@@ -301,7 +467,13 @@ const Chat = (props) => {
                 />
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+            <TouchableOpacity
+              onPress={async () => {
+                Keyboard.dismiss();
+                setNewMessage("");
+                await sendMessage();
+              }}
+            >
               <CustomIcon
                 name="send"
                 size={26}

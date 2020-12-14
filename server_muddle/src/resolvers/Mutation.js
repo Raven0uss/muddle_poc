@@ -15,7 +15,7 @@ const exposedMutations = {
   conversationMutations: ["createConversation", "updateConversation"],
   debateMutations: ["createDebate", "updateDebate"],
   interactionMutations: ["createInteraction", "updateInteraction"],
-  messageMutations: ["createMessage", "updateMessage"],
+  messageMutations: ["createMessage", "updateMessage", "updateManyMessages"],
   notificationMutations: ["createNotification", "updateManyNotifications"],
   reportMutations: ["createReport", "updateReport"],
   trophyMutations: ["createTrophy", "updateTrophy"],

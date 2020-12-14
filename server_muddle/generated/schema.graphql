@@ -2010,6 +2010,11 @@ input MessageUpdateManyDataInput {
   read: Boolean
 }
 
+input MessageUpdateManyMutationInput {
+  content: String
+  read: Boolean
+}
+
 input MessageUpdateManyWithoutConversationInput {
   connect: [MessageWhereUniqueInput!]
   create: [MessageCreateWithoutConversationInput!]
@@ -2120,6 +2125,7 @@ type Mutation {
   updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
   updateDebate(data: DebateUpdateInput!, where: DebateWhereUniqueInput!): Debate
   updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
@@ -2134,11 +2140,13 @@ type NewNotifications {
 
 type Notification {
   comment: Comment
+  createdAt: DateTime!
   debate: Debate
   id: ID!
   new: Boolean!
   status: NotificationStatus!
   type: NotificationType!
+  updatedAt: DateTime!
   userId: String!
   who(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
 }
@@ -2170,6 +2178,8 @@ input NotificationCreateWithoutWhoInput {
 }
 
 enum NotificationOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
   id_ASC
   id_DESC
   new_ASC
@@ -2178,12 +2188,22 @@ enum NotificationOrderByInput {
   status_DESC
   type_ASC
   type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   userId_ASC
   userId_DESC
 }
 
 input NotificationScalarWhereInput {
   AND: [NotificationScalarWhereInput!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -2210,6 +2230,14 @@ input NotificationScalarWhereInput {
   type_in: [NotificationType!]
   type_not: NotificationType
   type_not_in: [NotificationType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
   userId: String
   userId_contains: String
   userId_ends_with: String
@@ -2305,6 +2333,14 @@ input NotificationUpsertWithWhereUniqueWithoutWhoInput {
 input NotificationWhereInput {
   AND: [NotificationWhereInput!]
   comment: CommentWhereInput
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
   debate: DebateWhereInput
   id: ID
   id_contains: ID
@@ -2330,6 +2366,14 @@ input NotificationWhereInput {
   type_in: [NotificationType!]
   type_not: NotificationType
   type_not_in: [NotificationType!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
   userId: String
   userId_contains: String
   userId_ends_with: String
@@ -2692,7 +2736,7 @@ enum Role {
 type Subscription {
   comment(debateId: String): CommentSubPayload!
   conversation(userId: String): ConversationSubPayload!
-  message(userId: String): MessageSubPayload!
+  message(conversationId: String, userId: String): MessageSubPayload!
   notification(userId: String): NotificationSubPayload!
 }
 

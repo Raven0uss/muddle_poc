@@ -2509,6 +2509,8 @@ type Notification {
   new: Boolean!
   debate: Debate
   comment: Comment
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type NotificationConnection {
@@ -2559,6 +2561,10 @@ enum NotificationOrderByInput {
   status_DESC
   new_ASC
   new_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type NotificationPreviousValues {
@@ -2567,6 +2573,8 @@ type NotificationPreviousValues {
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input NotificationScalarWhereInput {
@@ -2608,6 +2616,22 @@ input NotificationScalarWhereInput {
   status_not_in: [NotificationStatus!]
   new: Boolean
   new_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [NotificationScalarWhereInput!]
   OR: [NotificationScalarWhereInput!]
   NOT: [NotificationScalarWhereInput!]
@@ -2752,6 +2776,22 @@ input NotificationWhereInput {
   new_not: Boolean
   debate: DebateWhereInput
   comment: CommentWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [NotificationWhereInput!]
 }
 

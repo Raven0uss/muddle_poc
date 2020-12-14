@@ -23,8 +23,14 @@ import { useIsFocused } from "@react-navigation/native";
 
 const GET_NOTIFICATIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
-    notifications(first: $first, skip: $skip, where: { userId: $userId }) {
+    notifications(
+      last: $first
+      skip: $skip
+      where: { userId: $userId }
+      orderBy: createdAt_DESC
+    ) {
       id
+      createdAt
       who {
         id
         firstname
@@ -84,6 +90,7 @@ const Notifications = (props) => {
       setNotifications(queryResult);
       if (queryResult.length === 0) setNoMoreData(true);
     },
+    fetchPolicy: "cache-and-network",
   });
 
   const [markAsReadNotifcations] = useMutation(NOTIFICATIONS_UPDATE_VIEW, {

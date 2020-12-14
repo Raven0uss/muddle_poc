@@ -2977,6 +2977,8 @@ type NotificationObject =
   | { name: 'new', args?: [] | false, alias?: string  } 
   | { name: 'debate', args?: [] | false, alias?: string  } 
   | { name: 'comment', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type NotificationFields =
   | 'id'
@@ -2987,6 +2989,8 @@ type NotificationFields =
   | 'new'
   | 'debate'
   | 'comment'
+  | 'createdAt'
+  | 'updatedAt'
 
 
 type NotificationWhoArgs =
@@ -3088,6 +3092,22 @@ export interface NotificationFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Comment | null> | prisma.Comment | null
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -7029,6 +7049,8 @@ type NotificationPreviousValuesObject =
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
   | { name: 'new', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type NotificationPreviousValuesFields =
   | 'id'
@@ -7036,6 +7058,8 @@ type NotificationPreviousValuesFields =
   | 'type'
   | 'status'
   | 'new'
+  | 'createdAt'
+  | 'updatedAt'
 
 
 
@@ -7086,6 +7110,22 @@ export interface NotificationPreviousValuesFieldDetails {
   }
   new: {
     type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -8909,6 +8949,22 @@ export interface NotificationWhereInput {
   new_not?: boolean | null
   debate?: DebateWhereInput | null
   comment?: CommentWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
   AND?: NotificationWhereInput[]
 }
 export type NotificationWhereInputInputObject =
@@ -8954,6 +9010,22 @@ export type NotificationWhereInputInputObject =
   | { name: 'new_not', alias?: string  } 
   | { name: 'debate', alias?: string  } 
   | { name: 'comment', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface TrophyWhereInput {
@@ -13791,6 +13863,22 @@ export interface NotificationScalarWhereInput {
   status_not_in?: prisma.NotificationStatus[]
   new?: boolean | null
   new_not?: boolean | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
   AND?: NotificationScalarWhereInput[]
   OR?: NotificationScalarWhereInput[]
   NOT?: NotificationScalarWhereInput[]
@@ -13835,6 +13923,22 @@ export type NotificationScalarWhereInputInputObject =
   | { name: 'status_not_in', alias?: string  } 
   | { name: 'new', alias?: string  } 
   | { name: 'new_not', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -15643,6 +15747,10 @@ export type NotificationOrderByInputValues =
   | 'status_DESC'
   | 'new_ASC'
   | 'new_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
   
 export type TrophyOrderByInputValues =
   | 'id_ASC'

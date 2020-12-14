@@ -20,6 +20,8 @@ import { isEmpty } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
+import { useIsFocused } from "@react-navigation/native";
+import moment from "moment";
 
 const GET_CONVERSATIONS = gql`
   query($first: Int!, $skip: Int, $user: String!) {
@@ -36,23 +38,10 @@ const GET_CONVERSATIONS = gql`
         email
         profilePicture
       }
-      messages {
+      messages(last: 1) {
         id
         content
-        from {
-          id
-          firstname
-          lastname
-          email
-          profilePicture
-        }
-        to {
-          id
-          firstname
-          lastname
-          email
-          profilePicture
-        }
+        createdAt
       }
     }
   }
@@ -109,7 +98,7 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
                 fontFamily: "Montserrat_300Light_Italic",
               }}
             >
-              10h23
+              {moment(lastMessage.createdAt).format("HH[h]mm")}
             </Text>
           </View>
           <Text
@@ -136,32 +125,29 @@ const Conversations = (props) => {
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
-  const { data, loading, error, fetchMore } = useQuery(GET_CONVERSATIONS, {
-    variables: {
-      first: nbConversations,
-      user: currentUser.email,
-    },
-    onCompleted: (response) => {
-      const { conversations: queryResult } = response;
-      setConversations(queryResult);
-      if (queryResult.length === 0) setNoMoreData(true);
-    },
-  });
+  const { data, loading, error, fetchMore, refetch } = useQuery(
+    GET_CONVERSATIONS,
+    {
+      variables: {
+        first: nbConversations,
+        user: currentUser.email,
+      },
+      onCompleted: (response) => {
+        const { conversations: queryResult } = response;
+        setConversations(queryResult);
+        if (queryResult.length === 0) setNoMoreData(true);
+      },
+      fetchPolicy: "cache-and-network",
+      notifyOnNetworkStatusChange: true,
+    }
+  );
 
   const { navigation, route } = props;
 
-  if (conversations.length === 0 && loading) {
-    return (
-      <SafeAreaView
-        style={{
-          ...styles.loadingContainer,
-          backgroundColor: themeSchema[theme].backgroundColor2,
-        }}
-      >
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    refetch();
+  }, [isFocused]);
 
   // console.log(conversations);
   return (
@@ -230,48 +216,63 @@ const Conversations = (props) => {
           onChangeText={(s) => setSearch(s)}
         /> */}
       </View>
-      <FlatList
-        data={conversations}
-        style={{
-          backgroundColor: themeSchema[theme].backgroundColor2,
-          paddingLeft: 15,
-          paddingRight: 15,
-        }}
-        renderItem={(param) =>
-          renderItem(param, navigation, theme, currentUser)
-        }
-        keyExtractor={(item) => item.id}
-        onEndReachedThreshold={0.5}
-        onEndReached={async () => {
-          if (Platform.OS === "web" || noMoreData) return;
-          // return ;
-          nbConversations += frequency;
-          await fetchMore({
-            variables: { first: frequency, skip: nbConversations - frequency },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { conversations: moreConversations } = fetchMoreResult;
-              if (isEmpty(moreConversations)) setNoMoreData(true);
-              setConversations((previousState) =>
-                [...previousState, ...moreConversations].reduce(
-                  (acc, current) => {
-                    const x = acc.find((item) => item.id === current.id);
-                    if (!x) {
-                      return acc.concat([current]);
-                    } else {
-                      return acc;
-                    }
-                  },
-                  []
-                )
-              );
-            },
-          });
-        }}
-        ListFooterComponent={() => {
-          if (noMoreData) return null;
-          return <ActivityIndicator style={{ marginBottom: 70 }} />;
-        }}
-      />
+      {conversations.length === 0 && loading ? (
+        <SafeAreaView
+          style={{
+            ...styles.loadingContainer,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+            flex: 1,
+          }}
+        >
+          <ActivityIndicator />
+        </SafeAreaView>
+      ) : (
+        <FlatList
+          data={conversations}
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor2,
+            paddingLeft: 15,
+            paddingRight: 15,
+          }}
+          renderItem={(param) =>
+            renderItem(param, navigation, theme, currentUser)
+          }
+          keyExtractor={(item) => item.id}
+          onEndReachedThreshold={0.5}
+          onEndReached={async () => {
+            if (Platform.OS === "web" || noMoreData) return;
+            // return ;
+            nbConversations += frequency;
+            await fetchMore({
+              variables: {
+                first: frequency,
+                skip: nbConversations - frequency,
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                const { conversations: moreConversations } = fetchMoreResult;
+                if (isEmpty(moreConversations)) setNoMoreData(true);
+                setConversations((previousState) =>
+                  [...previousState, ...moreConversations].reduce(
+                    (acc, current) => {
+                      const x = acc.find((item) => item.id === current.id);
+                      if (!x) {
+                        return acc.concat([current]);
+                      } else {
+                        return acc;
+                      }
+                    },
+                    []
+                  )
+                );
+              },
+            });
+          }}
+          ListFooterComponent={() => {
+            if (noMoreData) return null;
+            return <ActivityIndicator style={{ marginBottom: 70 }} />;
+          }}
+        />
+      )}
     </View>
   );
 };

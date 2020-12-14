@@ -110,7 +110,7 @@ const CONVERSATIONS_SUB = gql`
   }
 `;
 
-const frequency = 20; //TESTESTEST
+const frequency = 20;
 let nbDebates = frequency;
 
 const renderItem = ({ item }, navigation) => {
@@ -163,7 +163,7 @@ const Home = (props) => {
     },
     shouldResubscribe: true,
     onSubscriptionData: (response) => {
-      console.log("new conversation detected");
+      console.log("new message detected");
     },
   });
 
@@ -173,7 +173,7 @@ const Home = (props) => {
     },
     shouldResubscribe: true,
     onSubscriptionData: (response) => {
-      console.log("new message detected");
+      console.log("new conversation detected");
     },
   });
 

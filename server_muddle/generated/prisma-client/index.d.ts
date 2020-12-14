@@ -713,7 +713,11 @@ export type NotificationOrderByInput =
   | "status_ASC"
   | "status_DESC"
   | "new_ASC"
-  | "new_DESC";
+  | "new_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type TrophyOrderByInput =
   | "id_ASC"
@@ -1129,6 +1133,22 @@ export interface NotificationWhereInput {
   new_not?: Maybe<Boolean>;
   debate?: Maybe<DebateWhereInput>;
   comment?: Maybe<CommentWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<NotificationWhereInput[] | NotificationWhereInput>;
 }
 
@@ -4338,6 +4358,22 @@ export interface NotificationScalarWhereInput {
   status_not_in?: Maybe<NotificationStatus[] | NotificationStatus>;
   new?: Maybe<Boolean>;
   new_not?: Maybe<Boolean>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<NotificationScalarWhereInput[] | NotificationScalarWhereInput>;
   OR?: Maybe<NotificationScalarWhereInput[] | NotificationScalarWhereInput>;
   NOT?: Maybe<NotificationScalarWhereInput[] | NotificationScalarWhereInput>;
@@ -5101,6 +5137,8 @@ export interface Notification {
   type: NotificationType;
   status: NotificationStatus;
   new: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface NotificationPromise
@@ -5122,6 +5160,8 @@ export interface NotificationPromise
   new: () => Promise<Boolean>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface NotificationSubscription
@@ -5143,6 +5183,8 @@ export interface NotificationSubscription
   new: () => Promise<AsyncIterator<Boolean>>;
   debate: <T = DebateSubscription>() => T;
   comment: <T = CommentSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface NotificationNullablePromise
@@ -5164,6 +5206,8 @@ export interface NotificationNullablePromise
   new: () => Promise<Boolean>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface User {
@@ -7450,6 +7494,8 @@ export interface NotificationPreviousValues {
   type: NotificationType;
   status: NotificationStatus;
   new: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface NotificationPreviousValuesPromise
@@ -7460,6 +7506,8 @@ export interface NotificationPreviousValuesPromise
   type: () => Promise<NotificationType>;
   status: () => Promise<NotificationStatus>;
   new: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface NotificationPreviousValuesSubscription
@@ -7470,6 +7518,8 @@ export interface NotificationPreviousValuesSubscription
   type: () => Promise<AsyncIterator<NotificationType>>;
   status: () => Promise<AsyncIterator<NotificationStatus>>;
   new: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface Trophy {
