@@ -12,13 +12,14 @@ import {
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import NotificationBox from "../Components/NotificationBox";
 import { isEmpty } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
+import { useIsFocused } from "@react-navigation/native";
 
 const GET_NOTIFICATIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
@@ -48,6 +49,17 @@ const GET_NOTIFICATIONS = gql`
   }
 `;
 
+const NOTIFICATIONS_UPDATE_VIEW = gql`
+  mutation($userId: String!) {
+    updateManyNotifications(
+      where: { userId: $userId, new: true }
+      data: { new: false }
+    ) {
+      count
+    }
+  }
+`;
+
 const frequency = 10;
 let nbNotifications = frequency;
 
@@ -73,6 +85,17 @@ const Notifications = (props) => {
       if (queryResult.length === 0) setNoMoreData(true);
     },
   });
+
+  const [markAsReadNotifcations] = useMutation(NOTIFICATIONS_UPDATE_VIEW, {
+    variables: {
+      userId: currentUser.id,
+    },
+  });
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    markAsReadNotifcations();
+  }, [isFocused]);
 
   const { navigation, route } = props;
   return (

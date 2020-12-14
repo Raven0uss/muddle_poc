@@ -357,6 +357,10 @@ input AdWhereUniqueInput {
   name: String
 }
 
+type BatchPayload {
+  count: Long!
+}
+
 type Comment {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]
   content: String!
@@ -1888,6 +1892,8 @@ enum Language {
   FR
 }
 
+scalar Long
+
 type Message {
   content: String!
   conversation: Conversation!
@@ -2114,6 +2120,7 @@ type Mutation {
   updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
   updateDebate(data: DebateUpdateInput!, where: DebateWhereUniqueInput!): Debate
   updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
+  updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
   updateTrophy(data: TrophyUpdateInput!, where: TrophyWhereUniqueInput!): Trophy
@@ -2245,6 +2252,13 @@ enum NotificationType {
 }
 
 input NotificationUpdateManyDataInput {
+  new: Boolean
+  status: NotificationStatus
+  type: NotificationType
+  userId: String
+}
+
+input NotificationUpdateManyMutationInput {
   new: Boolean
   status: NotificationStatus
   type: NotificationType
