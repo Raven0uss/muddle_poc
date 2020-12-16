@@ -139,13 +139,21 @@ const Home = (props) => {
       first: nbDebates,
     },
     onCompleted: (response) => {
-      const { debates: queryResult } = response;
-      console.log("fetch");
-      setDebates(queryResult);
-      if (queryResult.length === 0) setNoMoreData(true);
+      try {
+        const { debates: queryResult } = response;
+        console.log("fetch");
+        setDebates(queryResult);
+        if (queryResult.length === 0) setNoMoreData(true);
+      } catch (err) {
+        console.log(err);
+      }
     },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-and-network",
+    ssr: false,
+    onError: () => {
+      setNoMoreData(true);
+    },
   });
   const scrollViewRef = React.useRef(null);
 
@@ -153,7 +161,10 @@ const Home = (props) => {
     nbDebates = frequency;
     setRefreshing(true);
     setDebates([]);
-    await refetch();
+    setNoMoreData(false);
+    try {
+      await refetch();
+    } catch (err) {}
     setRefreshing(false);
   }, []);
 

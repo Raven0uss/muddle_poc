@@ -18,17 +18,24 @@ import CustomIcon from "../Components/Icon";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CommentBox from "../Components/CommentBox";
 import Select from "../Components/Select";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!) {
     comment(where: { id: $commentId }) {
       id
+      debate {
+        id
+      }
       comments {
         id
+        debate {
+          id
+        }
         from {
           firstname
           lastname
@@ -50,19 +57,29 @@ const GET_SUBCOMMENTS = gql`
   }
 `;
 
-const Comments = (props) => {
-  const { comments, setComments } = props;
-  const { data, loading, error, fetchMore } = useQuery(GET_SUBCOMMENTS, {
-    variables: {
-      commentId: props.comment.id,
-    },
-    onCompleted: (response) => {
-      const { comment: queryResult } = response;
-      setComments(queryResult.comments);
-    },
-  });
+const CREATE_SUBCOMMENT = gql`
+  mutation($content: String!, $from: String!, $debate: ID!, $comment: ID!) {
+    updateComment(
+      where: { id: $comment }
+      data: {
+        comments: {
+          create: {
+            content: $content
+            from: { connect: { email: $from } }
+            debate: { connect: { id: $debate } }
+            nested: true
+          }
+        }
+      }
+    ) {
+      id
+    }
+  }
+`;
 
-  const { comment, navigation, theme } = props;
+const Comments = (props) => {
+  const { comments, loading, comment, navigation, theme } = props;
+
   if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
     <>
@@ -72,6 +89,7 @@ const Comments = (props) => {
           comment={c}
           navigation={navigation}
           key={c.id}
+          debateId={c.debate.id}
         />
       ))}
     </>
@@ -79,12 +97,37 @@ const Comments = (props) => {
 };
 
 const IsolateComment = (props) => {
+  const { navigation, route } = props;
+  const { comment } = route.params;
+
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [liked, setLiked] = React.useState(null);
   const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
+
+  const { data, loading, error, fetchMore, refetch } = useQuery(
+    GET_SUBCOMMENTS,
+    {
+      variables: {
+        commentId: comment.id,
+      },
+      onCompleted: (response) => {
+        const { comment: queryResult } = response;
+        setComments(queryResult.comments);
+      },
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: "cache-and-network",
+    }
+  );
+
+  const [createSubComment] = useMutation(CREATE_SUBCOMMENT, {
+    onCompleted: async () => {
+      await refetch();
+    },
+  });
 
   React.useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -104,8 +147,6 @@ const IsolateComment = (props) => {
     };
   }, []);
 
-  const { navigation, route } = props;
-  const { comment } = route.params;
   //   const { comments } = comment;
 
   return (
@@ -282,6 +323,7 @@ const IsolateComment = (props) => {
           comment={comment}
           comments={comments}
           setComments={setComments}
+          loading={loading}
         />
       </ScrollView>
       <KeyboardAvoidingView
@@ -364,6 +406,16 @@ const IsolateComment = (props) => {
                 // };
                 // setComments((commentList) => [...commentList,]);
                 // setNewComment("");
+
+                createSubComment({
+                  variables: {
+                    from: currentUser.email,
+                    content: newComment,
+                    debate: comment.debate.id,
+                    comment: comment.id,
+                  },
+                });
+                setNewComment("");
               }}
             >
               <CustomIcon

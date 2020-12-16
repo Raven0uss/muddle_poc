@@ -8,7 +8,7 @@ import themeSchema from "../CustomProperties/Theme";
 
 const CommentBox = (props) => {
   const [liked, setLiked] = React.useState(null);
-  const { comment, navigation, theme } = props;
+  const { comment, navigation, theme, debateId } = props;
   // console.log(comment.comments === undefined);
   return (
     <View
@@ -80,6 +80,7 @@ const CommentBox = (props) => {
         onPress={() => {
           navigation.push("IsolateComment", {
             comment,
+            debateId,
           });
         }}
       >

@@ -65,7 +65,7 @@ const Subscription = {
       const { debateId } = args;
       // console.log(debateId);
       return prisma.$subscribe.comment({
-        mutation_in: "CREATED",
+        mutation_in: ["CREATED", "UPDATED"],
         node: {
           debate: {
             id: debateId,

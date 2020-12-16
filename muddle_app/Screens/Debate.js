@@ -110,8 +110,11 @@ const CREATE_COMMENT = gql`
 
 const GET_COMMENTS = gql`
   query($debate: ID!) {
-    comments(where: { debate: { id: $debate } }) {
+    comments(where: { debate: { id: $debate }, nested: false }) {
       id
+      debate {
+        id
+      }
       nested
       from {
         id
@@ -215,13 +218,25 @@ const Debate = (props) => {
     },
     shouldResubscribe: true,
     onSubscriptionData: (response) => {
-      // console.log(response);
+      console.log(Object.keys(response));
       const { subscriptionData } = response;
-      // console.log(subscriptionData);
+      // console.log(subscriptionData.data.comment);
       const payload = get(subscriptionData, "data.comment.node");
       // console.log(payload);
       if (payload !== undefined) {
-        setComments((cs) => [...cs, payload]);
+        if (payload.comments.length > 0) {
+          const payloadId = payload.id;
+          const commentIndex = comments.findIndex((c) => c.id === payloadId);
+          if (commentIndex !== -1)
+            setComments((cs) => {
+              const cpyCs = cloneDeepWith(cs);
+              cpyCs[commentIndex] = payload;
+              return cpyCs;
+            });
+        } else {
+          setComments((cs) => [...cs, payload]);
+        }
+        // if (payload.nested === true)
       }
     },
   });
@@ -813,6 +828,7 @@ const Debate = (props) => {
               <CommentBox
                 theme={theme}
                 comment={comm}
+                debateId={debate.id}
                 navigation={navigation}
                 key={comm.id}
               />

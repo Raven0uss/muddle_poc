@@ -88,9 +88,9 @@ const DebatesFiltered = (props) => {
       onError: (error) => {
         nbDebates = frequency;
         setNoMoreData(true);
-        console.log(error);
+        // console.log(error);
       },
-      notifyOnNetworkStatusChange: true,
+      // notifyOnNetworkStatusChange: true,
       fetchPolicy: "cache-and-network",
     }
   );
@@ -280,19 +280,26 @@ const DebatesFiltered = (props) => {
             await fetchMore({
               variables: { first: frequency, skip: nbDebates - frequency },
               updateQuery: (previousResult, { fetchMoreResult }) => {
-                console.log(fetchMoreResult);
-                const { debates: moreDebates } = fetchMoreResult;
-                if (isEmpty(moreDebates)) setNoMoreData(true);
-                setDebates((previousState) =>
-                  [...previousState, ...moreDebates].reduce((acc, current) => {
-                    const x = acc.find((item) => item.id === current.id);
-                    if (!x) {
-                      return acc.concat([current]);
-                    } else {
-                      return acc;
-                    }
-                  }, [])
-                );
+                // console.log(fetchMoreResult);
+                try {
+                  const { debates: moreDebates } = fetchMoreResult;
+                  if (isEmpty(moreDebates)) setNoMoreData(true);
+                  setDebates((previousState) =>
+                    [...previousState, ...moreDebates].reduce(
+                      (acc, current) => {
+                        const x = acc.find((item) => item.id === current.id);
+                        if (!x) {
+                          return acc.concat([current]);
+                        } else {
+                          return acc;
+                        }
+                      },
+                      []
+                    )
+                  );
+                } catch (err) {
+                  console.log(err);
+                }
               },
             });
           }}

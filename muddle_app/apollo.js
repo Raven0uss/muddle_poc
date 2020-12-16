@@ -4,12 +4,24 @@ import { getItem } from "./CustomProperties/storage";
 import { setContext } from "@apollo/link-context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const GRAPHQL_API_URL = "515930696414.ngrok.io";
+const GRAPHQL_API_URL = "6225034f2d9d.ngrok.io";
 
 const customFetch = (uri, options) => {
   return fetch(uri, options).then((response) => {
-    if (response.status >= 500) {
-      // or handle 400 errors
+    if (response.status >= 400) {
+      // or handle 500 errors
+      if (response.status === 429) {
+        console.log("Too many request ngrok.");
+      } else {
+        try {
+          console.log(JSON.stringify(response));
+          if (response.headers.map["content-type"] === "application/json")
+            return response;
+        } catch (err) {
+          console.log(JSON.stringify(response));
+        }
+      }
+      // alert();
       return Promise.reject(response.status);
     }
     return response;
@@ -30,7 +42,7 @@ const asyncAuthLink = setContext(async () => {
 const httpLink = new HttpLink({
   uri: `http://${GRAPHQL_API_URL}/`,
   // useGETForQueries: false,
-  // fetch: customFetch,
+  fetch: customFetch,
 });
 
 const wsLink = new WebSocketLink({
@@ -54,5 +66,6 @@ const splitLink = split(
 
 export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
+  // ssrMode: false,
   link: asyncAuthLink.concat(splitLink),
 });
