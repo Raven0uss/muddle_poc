@@ -130,23 +130,6 @@ const GET_INTERACTIONS = gql`
         }
         comments {
           id
-          nested
-          from {
-            firstname
-            lastname
-            email
-            profilePicture
-          }
-          content
-          likes {
-            id
-          }
-          dislikes {
-            id
-          }
-          comments {
-            id
-          }
         }
       }
       comment {
@@ -193,23 +176,6 @@ const GET_INTERACTIONS = gql`
           }
           comments {
             id
-            nested
-            from {
-              firstname
-              lastname
-              email
-              profilePicture
-            }
-            content
-            likes {
-              id
-            }
-            dislikes {
-              id
-            }
-            comments {
-              id
-            }
           }
         }
         from {
