@@ -226,6 +226,8 @@ const Debate = (props) => {
       // console.log(payload);
       if (payload !== undefined) {
         if (payload.comments.length > 0) {
+          // have to detect here like or dislike action
+          // Solution : CHECK IF ALREADY EXIST IN COMMENTS
           const payloadId = payload.id;
           const commentIndex = comments.findIndex((c) => c.id === payloadId);
           if (commentIndex !== -1)
