@@ -5,11 +5,20 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import i18n from "../i18n";
 import themeSchema from "../CustomProperties/Theme";
+import { useMutation } from "@apollo/client";
+import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
+import hasLiked from "../Library/hasLiked";
 
 const CommentBox = (props) => {
-  const [liked, setLiked] = React.useState(null);
-  const { comment, navigation, theme, debateId } = props;
+  const { comment, navigation, theme, debateId, currentUser } = props;
+  const [liked, setLiked] = React.useState(
+    hasLiked({ ...comment, currentUser })
+  );
   // console.log(comment.comments === undefined);
+
+  const [likeComment] = useMutation(LIKE_COMMENT(liked));
+  const [dislikeComment] = useMutation(DISLIKE_COMMENT(liked));
+
   return (
     <View
       style={{
@@ -114,6 +123,12 @@ const CommentBox = (props) => {
         <TouchableOpacity
           onPress={() => {
             setLiked("like");
+            likeComment({
+              variables: {
+                userId: currentUser.id,
+                comment: comment.id,
+              },
+            });
           }}
           disabled={liked === "like"}
         >
@@ -128,6 +143,12 @@ const CommentBox = (props) => {
         <TouchableOpacity
           onPress={() => {
             setLiked("dislike");
+            dislikeComment({
+              variables: {
+                userId: currentUser.id,
+                comment: comment.id,
+              },
+            });
           }}
           style={{ marginLeft: 22 }}
           disabled={liked === "dislike"}

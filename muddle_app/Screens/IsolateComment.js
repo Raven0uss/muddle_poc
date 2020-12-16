@@ -23,6 +23,8 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
+import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
+import hasLiked from "../Library/hasLiked";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!) {
@@ -78,7 +80,7 @@ const CREATE_SUBCOMMENT = gql`
 `;
 
 const Comments = (props) => {
-  const { comments, loading, comment, navigation, theme } = props;
+  const { comments, loading, comment, navigation, theme, currentUser } = props;
 
   if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
@@ -89,7 +91,7 @@ const Comments = (props) => {
           comment={c}
           navigation={navigation}
           key={c.id}
-          debateId={c.debate.id}
+          currentUser={currentUser}
         />
       ))}
     </>
@@ -102,7 +104,9 @@ const IsolateComment = (props) => {
 
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
-  const [liked, setLiked] = React.useState(null);
+  const [liked, setLiked] = React.useState(
+    hasLiked({ ...comment, currentUser })
+  );
   const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState("");
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
@@ -125,6 +129,7 @@ const IsolateComment = (props) => {
 
   const [createSubComment] = useMutation(CREATE_SUBCOMMENT, {
     onCompleted: async () => {
+      console.log("lol");
       await refetch();
     },
   });
@@ -146,6 +151,19 @@ const IsolateComment = (props) => {
       keyboardDidHideListener.remove();
     };
   }, []);
+
+  const [likeComment] = useMutation(LIKE_COMMENT(liked), {
+    variables: {
+      userId: currentUser.id,
+      comment: comment.id,
+    },
+  });
+  const [dislikeComment] = useMutation(DISLIKE_COMMENT(liked), {
+    variables: {
+      userId: currentUser.id,
+      comment: comment.id,
+    },
+  });
 
   //   const { comments } = comment;
 
@@ -272,6 +290,7 @@ const IsolateComment = (props) => {
           <TouchableOpacity
             onPress={() => {
               setLiked("like");
+              likeComment();
             }}
             disabled={liked === "like"}
           >
@@ -288,6 +307,7 @@ const IsolateComment = (props) => {
           <TouchableOpacity
             onPress={() => {
               setLiked("dislike");
+              dislikeComment();
             }}
             style={{ marginLeft: 22 }}
             disabled={liked === "dislike"}
@@ -324,6 +344,7 @@ const IsolateComment = (props) => {
           comments={comments}
           setComments={setComments}
           loading={loading}
+          currentUser={currentUser}
         />
       </ScrollView>
       <KeyboardAvoidingView

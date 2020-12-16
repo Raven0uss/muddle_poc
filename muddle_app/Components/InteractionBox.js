@@ -55,7 +55,12 @@ const InteractionBox = (props) => {
               })ues
             }
           > */}
-          <CommentBox theme={theme} comment={comment} navigation={navigation} />
+          <CommentBox
+            theme={theme}
+            comment={comment}
+            navigation={navigation}
+            currentUser={currentUser}
+          />
           {/* </TouchableOpacity> */}
         </View>
       );
@@ -97,7 +102,13 @@ const InteractionBox = (props) => {
               })
             }
           > */}
-          <CommentBox theme={theme} comment={comment} navigation={navigation} />
+          <CommentBox
+            theme={theme}
+            comment={comment}
+            navigation={navigation}
+            currentUser={currentUser}
+          />
+
           {/* </TouchableOpacity> */}
         </View>
       );

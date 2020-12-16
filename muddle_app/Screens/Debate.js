@@ -212,6 +212,7 @@ const Debate = (props) => {
     fetchPolicy: "cache-and-network",
   });
 
+  // HERE PROBLEM TO RESOLVE FOR LIKES DISLIKES
   const { data: commentPayload } = useSubscription(COMMENTS_SUB, {
     variables: {
       debateId: debate.id,
@@ -831,6 +832,7 @@ const Debate = (props) => {
                 debateId={debate.id}
                 navigation={navigation}
                 key={comm.id}
+                currentUser={currentUser}
               />
             ))
         )}
