@@ -56,10 +56,8 @@ const DISLIKE_COMMENT = (liked) => {
         updateComment(
           where: { id: $comment }
           data: {
-            dislikes: {
-              connect: { id: $userId }
-              likes: { disconnect: { id: $userId } }
-            }
+            dislikes: { connect: { id: $userId } }
+            likes: { disconnect: { id: $userId } }
           }
         ) {
           id

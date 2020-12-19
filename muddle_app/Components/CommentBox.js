@@ -8,16 +8,31 @@ import themeSchema from "../CustomProperties/Theme";
 import { useMutation } from "@apollo/client";
 import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
+// import { useIsFocused } from "@react-navigation/native";
 
 const CommentBox = (props) => {
   const { comment, navigation, theme, debateId, currentUser } = props;
+  // const [comment, setComment] = React.useState(propComment);
   const [liked, setLiked] = React.useState(
     hasLiked({ ...comment, currentUser })
   );
   // console.log(comment.comments === undefined);
 
-  const [likeComment] = useMutation(LIKE_COMMENT(liked));
-  const [dislikeComment] = useMutation(DISLIKE_COMMENT(liked));
+  const [likeComment] = useMutation(LIKE_COMMENT(liked), {
+    onCompleted: () => {
+      setLiked("like");
+    },
+  });
+  const [dislikeComment] = useMutation(DISLIKE_COMMENT(liked), {
+    onCompleted: () => {
+      setLiked("dislike");
+    },
+  });
+
+  // const isFocused = useIsFocused();
+  React.useEffect(() => {
+    setLiked(hasLiked({ ...comment, currentUser }));
+  }, [comment]);
 
   return (
     <View
@@ -121,9 +136,10 @@ const CommentBox = (props) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => {
+          onPress={async () => {
             setLiked("like");
-            likeComment({
+            // setComment();
+            await likeComment({
               variables: {
                 userId: currentUser.id,
                 comment: comment.id,
@@ -141,14 +157,15 @@ const CommentBox = (props) => {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {
+          onPress={async () => {
             setLiked("dislike");
-            dislikeComment({
+            await dislikeComment({
               variables: {
                 userId: currentUser.id,
                 comment: comment.id,
               },
             });
+            // setLiked("dislike");
           }}
           style={{ marginLeft: 22 }}
           disabled={liked === "dislike"}

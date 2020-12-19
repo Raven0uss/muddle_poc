@@ -25,11 +25,18 @@ import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
+import { useIsFocused } from "@react-navigation/native";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!) {
     comment(where: { id: $commentId }) {
       id
+      likes {
+        id
+      }
+      dislikes {
+        id
+      }
       debate {
         id
       }
@@ -82,7 +89,8 @@ const CREATE_SUBCOMMENT = gql`
 const Comments = (props) => {
   const { comments, loading, comment, navigation, theme, currentUser } = props;
 
-  if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
+  // console.log(loading);
+  // if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
     <>
       {comments.map((c) => (
@@ -109,9 +117,11 @@ const IsolateComment = (props) => {
   );
   const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState("");
+  // const [notify, setNotify] = React.useState(false);
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
+  // console.log(notify);
   const { data, loading, error, fetchMore, refetch } = useQuery(
     GET_SUBCOMMENTS,
     {
@@ -120,17 +130,20 @@ const IsolateComment = (props) => {
       },
       onCompleted: (response) => {
         const { comment: queryResult } = response;
+        // console.log(last(comments).likes);
         setComments(queryResult.comments);
+        hasLiked({ ...queryResult, currentUser });
       },
       notifyOnNetworkStatusChange: true,
       fetchPolicy: "cache-and-network",
+      // skip: notify,
     }
   );
 
   const [createSubComment] = useMutation(CREATE_SUBCOMMENT, {
     onCompleted: async () => {
-      console.log("lol");
-      await refetch();
+      // console.log("lol");
+      // await refetch();
     },
   });
 
@@ -157,13 +170,26 @@ const IsolateComment = (props) => {
       userId: currentUser.id,
       comment: comment.id,
     },
+    onCompleted: async () => {
+      // console.log("lol");
+      // await refetch();
+    },
   });
   const [dislikeComment] = useMutation(DISLIKE_COMMENT(liked), {
     variables: {
       userId: currentUser.id,
       comment: comment.id,
     },
+    onCompleted: async () => {
+      // console.log("lol");
+      // await refetch();
+    },
   });
+
+  // const isFocused = useIsFocused();
+  // React.useEffect(() => {
+  //   refetch();
+  // }, [isFocused]);
 
   //   const { comments } = comment;
 
@@ -288,9 +314,10 @@ const IsolateComment = (props) => {
           }}
         >
           <TouchableOpacity
-            onPress={() => {
+            onPress={async () => {
+              await likeComment();
               setLiked("like");
-              likeComment();
+              // setNotify(true);
             }}
             disabled={liked === "like"}
           >
@@ -305,9 +332,10 @@ const IsolateComment = (props) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
+            onPress={async () => {
               setLiked("dislike");
-              dislikeComment();
+              await dislikeComment();
+              // setNotify(true);
             }}
             style={{ marginLeft: 22 }}
             disabled={liked === "dislike"}
@@ -417,7 +445,7 @@ const IsolateComment = (props) => {
               </TouchableOpacity>
             )}
             <TouchableOpacity
-              onPress={() => {
+              onPress={async () => {
                 Keyboard.dismiss();
                 // const newObjectComment = {
                 //   from:
@@ -428,7 +456,7 @@ const IsolateComment = (props) => {
                 // setComments((commentList) => [...commentList,]);
                 // setNewComment("");
 
-                createSubComment({
+                await createSubComment({
                   variables: {
                     from: currentUser.email,
                     content: newComment,

@@ -34,6 +34,7 @@ import {
 } from "../gql/votes";
 import { cloneDeepWith, isNil, findIndex } from "lodash";
 import voteDispatch from "../Library/voteDispatch";
+import idExist from "../Library/idExist";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
@@ -210,36 +211,35 @@ const Debate = (props) => {
       console.log(error);
     },
     fetchPolicy: "cache-and-network",
+    // skip: true,
   });
 
-  // HERE PROBLEM TO RESOLVE FOR LIKES DISLIKES
   const { data: commentPayload } = useSubscription(COMMENTS_SUB, {
     variables: {
       debateId: debate.id,
     },
     shouldResubscribe: true,
     onSubscriptionData: (response) => {
-      console.log(Object.keys(response));
+      // console.log(Object.keys(response));
       const { subscriptionData } = response;
       // console.log(subscriptionData.data.comment);
       const payload = get(subscriptionData, "data.comment.node");
       // console.log(payload);
       if (payload !== undefined) {
-        if (payload.comments.length > 0) {
-          // have to detect here like or dislike action
-          // Solution : CHECK IF ALREADY EXIST IN COMMENTS
+        if (idExist(comments, payload.id)) {
           const payloadId = payload.id;
           const commentIndex = comments.findIndex((c) => c.id === payloadId);
+          // console.log(commentIndex);
           if (commentIndex !== -1)
             setComments((cs) => {
               const cpyCs = cloneDeepWith(cs);
               cpyCs[commentIndex] = payload;
+              // console.log(cpyCs[commentIndex].likes);
               return cpyCs;
             });
         } else {
           setComments((cs) => [...cs, payload]);
         }
-        // if (payload.nested === true)
       }
     },
   });
