@@ -89,7 +89,6 @@ const CREATE_SUBCOMMENT = gql`
 const Comments = (props) => {
   const { comments, loading, comment, navigation, theme, currentUser } = props;
 
-  // console.log(loading);
   // if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
   return (
     <>

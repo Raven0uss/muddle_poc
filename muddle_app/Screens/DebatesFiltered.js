@@ -48,19 +48,19 @@ const renderItem = (
   );
 };
 
-const applyFilter = ({ debates, debateType }) => {
-  if (debateType === "DUO")
-    return debates.filter((debate) => debate.type === "DUO");
-  if (debateType === "MUDDLE")
-    return debates.filter((debate) => debate.type === "MUDDLE");
-  if (debateType === "BEST_DEBATES")
-    return debates.filter((debate) => debate.type === "STANDARD");
-  if (debateType === "MY_DEBATES")
-    return debates.filter((debate) => {
-      return debate.type === "STANDARD";
-    });
-  return debates;
-};
+// const applyFilter = ({ debates, debateType }) => {
+//   if (debateType === "DUO")
+//     return debates.filter((debate) => debate.type === "DUO");
+//   if (debateType === "MUDDLE")
+//     return debates.filter((debate) => debate.type === "MUDDLE");
+//   if (debateType === "BEST_DEBATES")
+//     return debates.filter((debate) => debate.type === "STANDARD");
+//   if (debateType === "MY_DEBATES")
+//     return debates.filter((debate) => {
+//       return debate.type === "STANDARD";
+//     });
+//   return debates;
+// };
 
 const DebatesFiltered = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -80,7 +80,8 @@ const DebatesFiltered = (props) => {
         user: currentUser.email,
       },
       onCompleted: (response) => {
-        const { debates: queryResult } = response;
+        const queryResult = response[Object.keys(response)[0]];
+        // const { debates: queryResult } = response;
         // console.log(response);
         setDebates(queryResult);
         if (queryResult.length === 0) setNoMoreData(true);
@@ -282,7 +283,10 @@ const DebatesFiltered = (props) => {
               updateQuery: (previousResult, { fetchMoreResult }) => {
                 // console.log(fetchMoreResult);
                 try {
-                  const { debates: moreDebates } = fetchMoreResult;
+                  // const { debates: moreDebates } = fetchMoreResult;
+                  const moreDebates =
+                    fetchMoreResult[Object.keys(fetchMoreResult)[0]];
+
                   if (isEmpty(moreDebates)) setNoMoreData(true);
                   setDebates((previousState) =>
                     [...previousState, ...moreDebates].reduce(

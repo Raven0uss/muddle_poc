@@ -1,11 +1,13 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { flattenDeep } from "lodash";
+import { flattenDeep, isNil } from "lodash";
 
 import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
-import { combineResolvers, skip } from "graphql-resolvers";
-import { stringArg } from "nexus/dist";
+import { combineResolvers } from "graphql-resolvers";
+import { intArg, stringArg } from "nexus/dist";
+
+import filterHomeDebates from "../algorithms/filterHomeDebates";
 
 // Queries
 const exposedQueries = {
@@ -21,6 +23,56 @@ const exposedQueries = {
   trophyQueries: ["trophy", "trophies"],
   userQueries: ["users", "user"],
 };
+
+// Fragments
+const fragBestDebates = `
+fragment BestDebate on Debate {
+  id
+  content
+  answerOne
+  answerTwo
+  type
+  owner {
+    id
+    firstname
+    lastname
+    email
+    profilePicture
+  }
+  ownerBlue {
+    id
+    firstname
+    lastname
+    email
+    profilePicture
+  }
+  ownerRed {
+    id
+    firstname
+    lastname
+    email
+    profilePicture
+  }
+  positives {
+    id
+  }
+  negatives {
+    id
+  }
+  redVotes {
+    id
+  }
+  blueVotes {
+    id
+  }
+  comments {
+    id
+  }
+  createdAt
+  updatedAt
+  closed
+}
+`;
 
 const Query = prismaObjectType({
   name: "Query",
@@ -73,7 +125,7 @@ const Query = prismaObjectType({
     t.field("newNotifications", {
       type: "NewNotifications",
       resolve: async (parent, args, { prisma, currentUser }) => {
-        console.log(currentUser);
+        // console.log(currentUser);
         const notifications = await prisma.notifications({
           where: {
             userId: currentUser.user.id,
@@ -103,6 +155,100 @@ const Query = prismaObjectType({
           notifications: numberOfNewNotifications,
           messages: numbreOfNewMessages,
         };
+      },
+    });
+
+    t.list.field("homeDebates", {
+      type: "Debate",
+      args: {
+        skip: intArg(),
+        first: intArg(),
+      },
+      resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
+        const debates = await prisma
+          .debates({ orderBy: "updatedAt_DESC" })
+          .$fragment(fragBestDebates);
+        const following = await prisma
+          .user({ id: currentUser.user.id })
+          .following();
+
+        const sorted = filterHomeDebates({
+          debates,
+          following,
+        });
+
+        const skipProps = isNil(skip) ? 0 : skip;
+        const firstProps = isNil(first) ? 0 : first;
+        if (firstProps === 0) return sorted.slice(skipProps);
+        return sorted.slice(skipProps, skipProps + firstProps);
+      },
+    });
+
+    t.list.field("myDebates", {
+      type: "Debate",
+      args: {
+        skip: intArg(),
+        first: intArg(),
+      },
+      resolve: async (parent, { first, skip }, { prisma, currentUser }) => {
+        const myDebates = await (async () => {
+          const standard = await prisma
+            .user({ id: currentUser.user.id })
+            .debates();
+          const blue = await prisma
+            .user({ id: currentUser.user.id })
+            .debatesBlue();
+          const red = await prisma
+            .user({ id: currentUser.user.id })
+            .debatesRed();
+          // console.log(standard);
+          return [
+            ...(isNil(standard) ? [] : standard),
+            ...(isNil(blue) ? [] : blue),
+            ...(isNil(red) ? [] : red),
+          ];
+        })();
+        const sorted = myDebates.sort((a, b) => b.updatedAt - a.updatedAt);
+
+        const skipProps = isNil(skip) ? 0 : skip;
+        const firstProps = isNil(first) ? 0 : first;
+        if (firstProps === 0) return sorted.slice(skipProps);
+        return sorted.slice(skipProps, skipProps + firstProps);
+      },
+    });
+
+    t.list.field("bestDebates", {
+      type: "Debate",
+      args: {
+        first: intArg(),
+        skip: intArg(),
+      },
+      resolve: async (parent, { first, skip }, { prisma }) => {
+        const debates = await prisma
+          .debates({ orderBy: "updatedAt_DESC" })
+          .$fragment(fragBestDebates);
+        if (isNil(debates)) return [];
+        const bestDebates = debates.sort((a, b) => {
+          const aPopularity =
+            a.positives.length +
+            a.negatives.length +
+            a.redVotes.length +
+            a.blueVotes.length +
+            a.comments.length;
+          const bPopularity =
+            b.positives.length +
+            b.negatives.length +
+            b.redVotes.length +
+            b.blueVotes.length +
+            b.comments.length;
+
+          return bPopularity - aPopularity;
+        });
+
+        const skipProps = isNil(skip) ? 0 : skip;
+        const firstProps = isNil(first) ? 0 : first;
+        if (firstProps === 0) return bestDebates.slice(skipProps);
+        return bestDebates.slice(skipProps, skipProps + firstProps);
       },
     });
 

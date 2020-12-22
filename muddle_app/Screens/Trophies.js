@@ -42,6 +42,7 @@ const GET_TROPHIES = gql`
         content
         answerOne
         answerTwo
+        closed
         owner {
           id
           firstname

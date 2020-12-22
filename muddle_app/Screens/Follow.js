@@ -21,8 +21,8 @@ const Follow = (props) => {
 
   const { navigation, route } = props;
   const { follow } = route.params;
-  console.log(vision);
-  console.log(props.route.params);
+  // console.log(vision);
+  // console.log(props.route.params);
   return (
     <View style={styles.container}>
       <Header

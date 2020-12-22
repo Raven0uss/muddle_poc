@@ -2400,6 +2400,7 @@ type Query {
   ads(after: String, before: String, first: Int, last: Int, orderBy: AdOrderByInput, skip: Int, where: AdWhereInput): [Ad!]!
   adTarget(where: AdTargetWhereUniqueInput!): AdTarget
   adTargets(after: String, before: String, first: Int, last: Int, orderBy: AdTargetOrderByInput, skip: Int, where: AdTargetWhereInput): [AdTarget!]!
+  bestDebates(first: Int, skip: Int): [Debate!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]!
   conversation(where: ConversationWhereUniqueInput!): Conversation
@@ -2407,10 +2408,12 @@ type Query {
   currentUser: User!
   debate(where: DebateWhereUniqueInput!): Debate
   debates(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]!
+  homeDebates(first: Int, skip: Int): [Debate!]!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
   message(where: MessageWhereUniqueInput!): Message
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
+  myDebates(first: Int, skip: Int): [Debate!]!
   newNotifications: NewNotifications!
   notification(where: NotificationWhereUniqueInput!): Notification
   notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]!

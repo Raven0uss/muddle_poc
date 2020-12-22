@@ -34,7 +34,7 @@ import useEffectUpdate from "../Library/useEffectUpdate";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
-    debates(first: $first, skip: $skip) {
+    homeDebates(first: $first, skip: $skip) {
       id
       content
       createdAt
@@ -77,6 +77,7 @@ const GET_DEBATES = gql`
       comments {
         id
       }
+      closed
     }
   }
 `;
@@ -140,7 +141,7 @@ const Home = (props) => {
     },
     onCompleted: (response) => {
       try {
-        const { debates: queryResult } = response;
+        const { homeDebates: queryResult } = response;
         console.log("fetch");
         setDebates(queryResult);
         if (queryResult.length === 0) setNoMoreData(true);
@@ -303,7 +304,7 @@ const Home = (props) => {
           await fetchMore({
             variables: { first: frequency, skip: nbDebates - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { debates: moreDebates } = fetchMoreResult;
+              const { homeDebates: moreDebates } = fetchMoreResult;
               if (isEmpty(moreDebates)) setNoMoreData(true);
               setDebates((previousState) =>
                 [...previousState, ...moreDebates].reduce((acc, current) => {

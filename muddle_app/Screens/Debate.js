@@ -453,7 +453,7 @@ const Debate = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted}
+              disabled={voted || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -468,7 +468,7 @@ const Debate = (props) => {
                     : "Montserrat_500Medium",
                 }}
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: pour,
                       totalVotes: votes,
@@ -510,7 +510,7 @@ const Debate = (props) => {
                   debate,
                 });
               }}
-              disabled={voted}
+              disabled={voted || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -537,7 +537,7 @@ const Debate = (props) => {
                       }
                 }
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: contre,
                       totalVotes: votes,
@@ -677,7 +677,7 @@ const Debate = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted}
+              disabled={voted || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -693,7 +693,7 @@ const Debate = (props) => {
                       : "Montserrat_500Medium",
                 }}
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: pour,
                       totalVotes: votes,
@@ -752,7 +752,7 @@ const Debate = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted}
+              disabled={voted || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -778,7 +778,7 @@ const Debate = (props) => {
                       }
                 }
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: contre,
                       totalVotes: votes,

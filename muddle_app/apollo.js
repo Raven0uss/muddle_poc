@@ -4,7 +4,7 @@ import { getItem } from "./CustomProperties/storage";
 import { setContext } from "@apollo/link-context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const GRAPHQL_API_URL = "ccb036000061.ngrok.io";
+const GRAPHQL_API_URL = "86810b5bc1fd.ngrok.io";
 
 const customFetch = (uri, options) => {
   return fetch(uri, options).then((response) => {

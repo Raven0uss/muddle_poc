@@ -4180,6 +4180,7 @@ export interface NexusGenFieldTypes {
     ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
     adTarget: NexusGenRootTypes['AdTarget'] | null; // AdTarget
     adTargets: NexusGenRootTypes['AdTarget'][]; // [AdTarget!]!
+    bestDebates: NexusGenRootTypes['Debate'][]; // [Debate!]!
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     conversation: NexusGenRootTypes['Conversation'] | null; // Conversation
@@ -4187,10 +4188,12 @@ export interface NexusGenFieldTypes {
     currentUser: NexusGenRootTypes['User']; // User!
     debate: NexusGenRootTypes['Debate'] | null; // Debate
     debates: NexusGenRootTypes['Debate'][]; // [Debate!]!
+    homeDebates: NexusGenRootTypes['Debate'][]; // [Debate!]!
     interaction: NexusGenRootTypes['Interaction'] | null; // Interaction
     interactions: NexusGenRootTypes['Interaction'][]; // [Interaction!]!
     message: NexusGenRootTypes['Message'] | null; // Message
     messages: NexusGenRootTypes['Message'][]; // [Message!]!
+    myDebates: NexusGenRootTypes['Debate'][]; // [Debate!]!
     newNotifications: NexusGenRootTypes['NewNotifications']; // NewNotifications!
     notification: NexusGenRootTypes['Notification'] | null; // Notification
     notifications: NexusGenRootTypes['Notification'][]; // [Notification!]!
@@ -4524,6 +4527,10 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
     }
+    bestDebates: { // args
+      first?: number | null; // Int
+      skip?: number | null; // Int
+    }
     comment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
@@ -4560,6 +4567,10 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
     }
+    homeDebates: { // args
+      first?: number | null; // Int
+      skip?: number | null; // Int
+    }
     interaction: { // args
       where: NexusGenInputs['InteractionWhereUniqueInput']; // InteractionWhereUniqueInput!
     }
@@ -4583,6 +4594,10 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
       skip?: number | null; // Int
       where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+    myDebates: { // args
+      first?: number | null; // Int
+      skip?: number | null; // Int
     }
     notification: { // args
       where: NexusGenInputs['NotificationWhereUniqueInput']; // NotificationWhereUniqueInput!

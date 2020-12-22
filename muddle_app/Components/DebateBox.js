@@ -260,7 +260,7 @@ const DebateBox = (props) => {
                     backgroundColor: themeSchema[theme].backgroundColor2,
                   }
             }
-            disabled={voted || disabledVotes}
+            disabled={voted || disabledVotes || debate.closed}
           >
             <Text
               // numberOfLines={1}
@@ -275,7 +275,7 @@ const DebateBox = (props) => {
                   : "Montserrat_500Medium",
               }}
             >
-              {voted
+              {voted || debate.closed
                 ? displayPercent({
                     votes: pour,
                     totalVotes: votes,
@@ -316,7 +316,7 @@ const DebateBox = (props) => {
               });
               await sendNegativeVote();
             }}
-            disabled={voted || disabledVotes}
+            disabled={voted || disabledVotes || debate.closed}
           >
             <Text
               // numberOfLines={1}
@@ -343,7 +343,7 @@ const DebateBox = (props) => {
                     }
               }
             >
-              {voted
+              {voted || debate.closed
                 ? displayPercent({
                     votes: contre,
                     totalVotes: votes,
@@ -530,7 +530,7 @@ const DebateBox = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted || disabledVotes}
+              disabled={voted || disabledVotes || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -546,7 +546,7 @@ const DebateBox = (props) => {
                   textAlign: "center",
                 }}
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: pour,
                       totalVotes: votes,
@@ -604,7 +604,7 @@ const DebateBox = (props) => {
                       height: manageHeightButton(debate),
                     }
               }
-              disabled={voted || disabledVotes}
+              disabled={voted || disabledVotes || debate.closed}
             >
               <Text
                 // numberOfLines={1}
@@ -630,7 +630,7 @@ const DebateBox = (props) => {
                       }
                 }
               >
-                {voted
+                {voted || debate.closed
                   ? displayPercent({
                       votes: contre,
                       totalVotes: votes,

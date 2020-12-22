@@ -570,8 +570,8 @@ const Profile = (props) => {
         </View>
         <View
           style={{
-            marginTop: 12,
-            marginLeft: 10,
+            marginTop: 13,
+            marginLeft: 17,
           }}
         >
           <ProfileAction
