@@ -18,6 +18,7 @@ import PropTypes from "prop-types";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { isNil } from "lodash";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,7 +30,10 @@ const Select = (props) => {
   const onPress = () => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: [...[i18n._("cancel")], ...list.map((l) => l.label)],
+        options: [
+          ...[i18n._("cancel")],
+          ...list.filter((l) => !isNil(l)).map((l) => l.label),
+        ],
         cancelButtonIndex: 0,
       },
       (buttonIndex) => {
@@ -98,25 +102,28 @@ const Select = (props) => {
               }}
             >
               <ScrollView style={{ marginBottom: 10 }}>
-                {list.map((element) => (
-                  <TouchableOpacity
-                    onPress={() => {
-                      onSelect(element);
-                      setVisible(false);
-                    }}
-                  >
-                    <Text
-                      style={{
-                        padding: 10,
-                        fontSize: 18,
-                        fontFamily: "Montserrat_500Medium",
-                        color: themeSchema[theme].colorText,
+                {list.map((element) => {
+                  if (isNil(element)) return null;
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        onSelect(element);
+                        setVisible(false);
                       }}
                     >
-                      {element.label}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
+                      <Text
+                        style={{
+                          padding: 10,
+                          fontSize: 18,
+                          fontFamily: "Montserrat_500Medium",
+                          color: themeSchema[theme].colorText,
+                        }}
+                      >
+                        {element.label}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
               </ScrollView>
               <TouchableOpacity
                 onPress={() => {
@@ -143,10 +150,13 @@ const Select = (props) => {
 
 Select.propTypes = {
   list: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    }).isRequired
+    PropTypes.oneOf([
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+      null,
+    ])
   ).isRequired,
   selected: PropTypes.oneOf([
     PropTypes.shape({

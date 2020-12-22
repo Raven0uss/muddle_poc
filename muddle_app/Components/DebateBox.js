@@ -169,6 +169,18 @@ const DebateBox = (props) => {
                   label: i18n._("reportDebate"),
                   value: "REPORT",
                 },
+                currentUser.id === debate.owner.id
+                  ? {
+                      label: "Clore le debat",
+                      value: "CLOSE",
+                    }
+                  : null,
+                currentUser.id === debate.owner.id
+                  ? {
+                      label: "Supprimer le debat",
+                      value: "DELETE",
+                    }
+                  : null,
               ]}
               placeholder=""
               onSelect={(action) => {
