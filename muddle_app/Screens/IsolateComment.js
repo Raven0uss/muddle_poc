@@ -39,6 +39,7 @@ const GET_SUBCOMMENTS = gql`
       }
       debate {
         id
+        closed
       }
       comments {
         id
@@ -398,6 +399,7 @@ const IsolateComment = (props) => {
           }}
         >
           <TextInput
+            editable={!comment.debate.closed}
             multiline
             placeholder={i18n._("yourComment")}
             value={newComment}
@@ -465,6 +467,7 @@ const IsolateComment = (props) => {
                 });
                 setNewComment("");
               }}
+              disabled={newComment.length > 0 || comment.debate.closed}
             >
               <CustomIcon
                 name="send"

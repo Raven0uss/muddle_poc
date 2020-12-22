@@ -21,6 +21,7 @@ import { useIsFocused } from "@react-navigation/native";
 import voteDispatch from "../Library/voteDispatch";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
+  if (totalVotes === 0) return `0%\n${answer}`;
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
 };
 
@@ -169,7 +170,7 @@ const DebateBox = (props) => {
                   label: i18n._("reportDebate"),
                   value: "REPORT",
                 },
-                currentUser.id === debate.owner.id
+                currentUser.id === debate.owner.id && !debate.closed
                   ? {
                       label: "Clore le debat",
                       value: "CLOSE",

@@ -37,6 +37,7 @@ import voteDispatch from "../Library/voteDispatch";
 import idExist from "../Library/idExist";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
+  if (totalVotes === 0) return `0%\n${answer}`;
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
 };
 
@@ -115,6 +116,7 @@ const GET_COMMENTS = gql`
       id
       debate {
         id
+        closed
       }
       nested
       from {
@@ -863,6 +865,7 @@ const Debate = (props) => {
           }}
         >
           <TextInput
+            editable={!debate.closed}
             multiline
             placeholder={i18n._("yourComment")}
             value={comment}
@@ -920,6 +923,7 @@ const Debate = (props) => {
                 });
                 setComment("");
               }}
+              disabled={comment.length > 0 || debate.closed}
             >
               <CustomIcon
                 name="send"
