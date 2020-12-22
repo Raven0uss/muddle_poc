@@ -1,0 +1,34 @@
+{
+  "duoDebate": {
+    "origin": [
+      [
+        "Screens/CreateDuoDebate.js",
+        89
+      ]
+    ]
+  },
+  "debateDuration": {
+    "origin": [
+      [
+        "Screens/CreateDuoDebate.js",
+        154
+      ]
+    ]
+  },
+  "yourOpinion": {
+    "origin": [
+      [
+        "Screens/CreateDuoDebate.js",
+        197
+      ]
+    ]
+  },
+  "publish": {
+    "origin": [
+      [
+        "Screens/CreateDuoDebate.js",
+        230
+      ]
+    ]
+  }
+}

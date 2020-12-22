@@ -1061,6 +1061,7 @@ type Debate {
   ownerRed: User
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   topComment: Comment
@@ -1094,6 +1095,7 @@ input DebateCreateInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1154,6 +1156,7 @@ input DebateCreateWithoutCommentsInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   topComment: CommentCreateOneInput
   reports: ReportCreateManyWithoutDebateInput
@@ -1178,6 +1181,7 @@ input DebateCreateWithoutInteractionsInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1201,6 +1205,7 @@ input DebateCreateWithoutOwnerBlueInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1225,6 +1230,7 @@ input DebateCreateWithoutOwnerInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1249,6 +1255,7 @@ input DebateCreateWithoutOwnerRedInput {
   ownerBlue: UserCreateOneWithoutDebatesBlueInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1274,6 +1281,7 @@ input DebateCreateWithoutReportsInput {
   ownerRed: UserCreateOneWithoutDebatesRedInput
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: CommentCreateManyWithoutDebateInput
   topComment: CommentCreateOneInput
@@ -1303,6 +1311,8 @@ enum DebateOrderByInput {
   content_DESC
   timelimit_ASC
   timelimit_DESC
+  timelimitString_ASC
+  timelimitString_DESC
   type_ASC
   type_DESC
   closed_ASC
@@ -1325,6 +1335,7 @@ type DebatePreviousValues {
   id: ID!
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   closed: Boolean!
   crowned: Boolean!
@@ -1372,6 +1383,20 @@ input DebateScalarWhereInput {
   timelimit_lte: DateTime
   timelimit_gt: DateTime
   timelimit_gte: DateTime
+  timelimitString: String
+  timelimitString_not: String
+  timelimitString_in: [String!]
+  timelimitString_not_in: [String!]
+  timelimitString_lt: String
+  timelimitString_lte: String
+  timelimitString_gt: String
+  timelimitString_gte: String
+  timelimitString_contains: String
+  timelimitString_not_contains: String
+  timelimitString_starts_with: String
+  timelimitString_not_starts_with: String
+  timelimitString_ends_with: String
+  timelimitString_not_ends_with: String
   type: DebateType
   type_not: DebateType
   type_in: [DebateType!]
@@ -1459,6 +1484,7 @@ input DebateUpdateDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1483,6 +1509,7 @@ input DebateUpdateInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1504,6 +1531,7 @@ input DebateUpdateInput {
 input DebateUpdateManyDataInput {
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   closed: Boolean
   crowned: Boolean
@@ -1515,6 +1543,7 @@ input DebateUpdateManyDataInput {
 input DebateUpdateManyMutationInput {
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   closed: Boolean
   crowned: Boolean
@@ -1604,6 +1633,7 @@ input DebateUpdateWithoutCommentsDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   topComment: CommentUpdateOneInput
   reports: ReportUpdateManyWithoutDebateInput
@@ -1627,6 +1657,7 @@ input DebateUpdateWithoutInteractionsDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1649,6 +1680,7 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1672,6 +1704,7 @@ input DebateUpdateWithoutOwnerDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1695,6 +1728,7 @@ input DebateUpdateWithoutOwnerRedDataInput {
   ownerBlue: UserUpdateOneWithoutDebatesBlueInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1719,6 +1753,7 @@ input DebateUpdateWithoutReportsDataInput {
   ownerRed: UserUpdateOneWithoutDebatesRedInput
   content: String
   timelimit: DateTime
+  timelimitString: String
   type: DebateType
   comments: CommentUpdateManyWithoutDebateInput
   topComment: CommentUpdateOneInput
@@ -1829,6 +1864,20 @@ input DebateWhereInput {
   timelimit_lte: DateTime
   timelimit_gt: DateTime
   timelimit_gte: DateTime
+  timelimitString: String
+  timelimitString_not: String
+  timelimitString_in: [String!]
+  timelimitString_not_in: [String!]
+  timelimitString_lt: String
+  timelimitString_lte: String
+  timelimitString_gt: String
+  timelimitString_gte: String
+  timelimitString_contains: String
+  timelimitString_not_contains: String
+  timelimitString_starts_with: String
+  timelimitString_not_starts_with: String
+  timelimitString_ends_with: String
+  timelimitString_not_ends_with: String
   type: DebateType
   type_not: DebateType
   type_in: [DebateType!]

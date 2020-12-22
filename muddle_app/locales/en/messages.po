@@ -13,8 +13,8 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: Components/NotificationBox.js:176
-#: Components/NotificationBox.js:417
+#: Components/NotificationBox.js:181
+#: Components/NotificationBox.js:422
 msgid "accept"
 msgstr "Accept"
 
@@ -23,13 +23,13 @@ msgid "accronymCGU"
 msgstr "CGU"
 
 #: Components/InteractionBox.js:39
-#: Components/InteractionBox.js:82
-#: Components/InteractionBox.js:124
-#: Components/InteractionBox.js:166
+#: Components/InteractionBox.js:87
+#: Components/InteractionBox.js:135
+#: Components/InteractionBox.js:181
 #: Components/NotificationBox.js:79
-#: Components/NotificationBox.js:297
-#: Components/NotificationBox.js:377
-#: Components/NotificationBox.js:639
+#: Components/NotificationBox.js:302
+#: Components/NotificationBox.js:382
+#: Components/NotificationBox.js:644
 msgid "ago"
 msgstr "{time} ago"
 
@@ -37,21 +37,21 @@ msgstr "{time} ago"
 msgid "alreadyMember?"
 msgstr "Already member ?"
 
-#: Components/NotificationBox.js:263
-#: Components/NotificationBox.js:504
-#: Components/NotificationBox.js:605
+#: Components/NotificationBox.js:268
+#: Components/NotificationBox.js:509
+#: Components/NotificationBox.js:610
 msgid "and"
 msgstr "and"
 
-#: Components/CommentBox.js:145
+#: Components/CommentBox.js:211
 msgid "answer"
 msgstr "Answer"
 
-#: Components/NotificationBox.js:377
+#: Components/NotificationBox.js:382
 msgid "askToCloseThisDebate"
 msgstr "ask to close this debate"
 
-#: Screens/DebatesFiltered.js:211
+#: Screens/DebatesFiltered.js:191
 msgid "bestDebates"
 msgstr "Best debates"
 
@@ -60,7 +60,7 @@ msgid "birthdate"
 msgstr "Birthdate"
 
 #: Components/Select.js:32
-#: Screens/CreateDebate.js:161
+#: Screens/CreateDebate.js:254
 msgid "cancel"
 msgstr "Cancel"
 
@@ -69,8 +69,8 @@ msgstr "Cancel"
 msgid "cgu"
 msgstr "General Conditions of Use"
 
-#: Screens/CreateDebate.js:587
-#: Screens/CreateDebate.js:609
+#: Screens/CreateDebate.js:747
+#: Screens/CreateDebate.js:769
 msgid "choice"
 msgstr "Choice"
 
@@ -78,29 +78,27 @@ msgstr "Choice"
 msgid "close"
 msgstr "Close"
 
-#: Components/DebateBox.js:118
-#: Components/DebateBox.js:388
-#: Components/TrophyBox.js:133
-#: Components/TrophyBox.js:469
-#: Screens/Debate.js:187
-#: Screens/Debate.js:412
+#: Components/DebateBox.js:231
+#: Components/DebateBox.js:664
+#: Screens/Debate.js:421
+#: Screens/Debate.js:812
 #: Screens/Report.js:71
 msgid "comment"
 msgstr "comment"
 
-#: Components/NotificationBox.js:287
+#: Components/NotificationBox.js:292
 msgid "commentYourDebatePlural"
 msgstr "commented on your debate"
 
-#: Components/NotificationBox.js:288
+#: Components/NotificationBox.js:293
 msgid "commentYourDebateSingular"
 msgstr "commented on your debate"
 
-#: Components/InteractionBox.js:123
+#: Components/InteractionBox.js:134
 msgid "commented"
 msgstr "commented"
 
-#: Screens/Trophies.js:284
+#: Screens/Trophies.js:294
 msgid "commentsWon"
 msgstr "Comments won"
 
@@ -121,7 +119,7 @@ msgstr "Log in"
 msgid "contactUs"
 msgstr "Contact us"
 
-#: Screens/CreateDebate.js:445
+#: Screens/CreateDebate.js:605
 msgid "days"
 msgstr "Days"
 
@@ -129,32 +127,33 @@ msgstr "Days"
 msgid "debate"
 msgstr "debate"
 
-#: Screens/CreateDebate.js:383
+#: Screens/CreateDebate.js:543
+#: Screens/CreateDuoDebate.js:154
 msgid "debateDuration"
 msgstr "Debate duration"
 
-#: Screens/CreateDebate.js:547
+#: Screens/CreateDebate.js:707
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
-#: Components/NotificationBox.js:206
-#: Components/NotificationBox.js:447
+#: Components/NotificationBox.js:211
+#: Components/NotificationBox.js:452
 msgid "decline"
 msgstr "Decline"
 
-#: Screens/CreateDebate.js:559
+#: Screens/CreateDebate.js:719
 msgid "describeDebate"
 msgstr "Describe your debate"
 
-#: Components/InteractionBox.js:81
+#: Components/InteractionBox.js:86
 msgid "didntLiked"
 msgstr "did not like"
 
-#: Components/NotificationBox.js:629
+#: Components/NotificationBox.js:634
 msgid "didntLikedCommentPlural"
 msgstr "did not like your comment"
 
-#: Components/NotificationBox.js:628
+#: Components/NotificationBox.js:633
 msgid "didntLikedCommentSingular"
 msgstr "did not like your comment"
 
@@ -162,29 +161,35 @@ msgstr "did not like your comment"
 msgid "disconnect"
 msgstr "Log out"
 
-#: Screens/CreateDebate.js:308
+#: Screens/CreateDuoDebate.js:89
+msgid "duoDebate"
+msgstr "Duo debate"
+
+#: Screens/CreateDebate.js:468
 msgid "duoDebateSelect"
 msgstr "Duo debate"
 
-#: Screens/DebatesFiltered.js:235
+#: Screens/DebatesFiltered.js:217
 msgid "duoDebates"
 msgstr "Duo debates"
 
-#: Screens/Trophies.js:259
+#: Screens/Trophies.js:269
 msgid "duoDebatesWon"
 msgstr "Duo debates won"
 
+#: Screens/CreateDebate.js:160
+#: Screens/Search.js:115
 #: Screens/SignUp.js:68
 msgid "firstname"
 msgstr "Firstname"
 
 #: Screens/Follow.js:93
-#: Screens/Profile.js:540
+#: Screens/Profile.js:533
 msgid "followers"
 msgstr "Followers"
 
 #: Screens/Follow.js:118
-#: Screens/Profile.js:572
+#: Screens/Profile.js:565
 msgid "following"
 msgstr "Followings"
 
@@ -216,7 +221,7 @@ msgstr "Not defined"
 msgid "gender_woman"
 msgstr "Woman"
 
-#: Screens/DebatesFiltered.js:259
+#: Screens/DebatesFiltered.js:243
 msgid "generatedDebates"
 msgstr "Generated debates"
 
@@ -228,11 +233,11 @@ msgstr "Log in"
 msgid "goToSubscribe"
 msgstr "Sign in"
 
-#: Components/InteractionBox.js:165
+#: Components/InteractionBox.js:180
 msgid "hasVote"
 msgstr "voted"
 
-#: Screens/CreateDebate.js:533
+#: Screens/CreateDebate.js:693
 msgid "hours"
 msgstr "Hours"
 
@@ -240,7 +245,7 @@ msgstr "Hours"
 msgid "iAcceptThe"
 msgstr "I accept the"
 
-#: Screens/CreateDebate.js:354
+#: Screens/CreateDebate.js:514
 msgid "invitePeople"
 msgstr "Invite someone"
 
@@ -248,6 +253,8 @@ msgstr "Invite someone"
 msgid "inviteYouDuoDebate"
 msgstr "invite you to a duo debate"
 
+#: Screens/CreateDebate.js:182
+#: Screens/Search.js:137
 #: Screens/SignUp.js:86
 msgid "lastname"
 msgstr "Lastname"
@@ -261,11 +268,11 @@ msgstr "Legals Mentions and Privacy"
 msgid "liked"
 msgstr "liked"
 
-#: Components/NotificationBox.js:528
+#: Components/NotificationBox.js:533
 msgid "likedCommentPlural"
 msgstr "liked your comment"
 
-#: Components/NotificationBox.js:527
+#: Components/NotificationBox.js:532
 msgid "likedCommentSingular"
 msgstr "liked your comment"
 
@@ -275,7 +282,7 @@ msgstr "liked your comment"
 msgid "mailAddress"
 msgstr "E-mail"
 
-#: Screens/DebatesFiltered.js:187
+#: Screens/DebatesFiltered.js:165
 msgid "myDebates"
 msgstr "My debates"
 
@@ -283,23 +290,23 @@ msgstr "My debates"
 msgid "noAccount?"
 msgstr "No account yet ?"
 
-#: Components/InteractionBox.js:124
+#: Components/InteractionBox.js:135
 msgid "onThisDebate"
 msgstr "on this debate"
 
-#: Components/CommentBox.js:165
+#: Components/CommentBox.js:231
 msgid "otherAnswers"
 msgstr "other answers"
 
-#: Components/NotificationBox.js:266
-#: Components/NotificationBox.js:507
-#: Components/NotificationBox.js:608
+#: Components/NotificationBox.js:271
+#: Components/NotificationBox.js:512
+#: Components/NotificationBox.js:613
 msgid "otherPeoplePlural"
 msgstr "other persons"
 
-#: Components/NotificationBox.js:265
-#: Components/NotificationBox.js:506
-#: Components/NotificationBox.js:607
+#: Components/NotificationBox.js:270
+#: Components/NotificationBox.js:511
+#: Components/NotificationBox.js:612
 msgid "otherPeopleSingular"
 msgstr "another person"
 
@@ -308,12 +315,13 @@ msgstr "another person"
 msgid "password"
 msgstr "Password"
 
-#: Screens/CreateDebate.js:223
-#: Screens/CreateDebate.js:304
+#: Screens/CreateDebate.js:359
+#: Screens/CreateDebate.js:464
 msgid "publicDebateSelect"
 msgstr "Public debate"
 
-#: Screens/CreateDebate.js:632
+#: Screens/CreateDebate.js:822
+#: Screens/CreateDuoDebate.js:230
 msgid "publish"
 msgstr "Publish"
 
@@ -325,16 +333,14 @@ msgstr "Report"
 msgid "reportA"
 msgstr "Report a"
 
-#: Components/CommentBox.js:54
-#: Screens/IsolateComment.js:142
+#: Components/CommentBox.js:80
+#: Screens/IsolateComment.js:233
 msgid "reportComment"
 msgstr "Report the comment"
 
-#: Components/DebateBox.js:58
-#: Components/DebateBox.js:266
-#: Components/TrophyBox.js:73
-#: Components/TrophyBox.js:353
-#: Screens/Debate.js:98
+#: Components/DebateBox.js:169
+#: Components/DebateBox.js:460
+#: Screens/Debate.js:330
 msgid "reportDebate"
 msgstr "Report the debate"
 
@@ -366,21 +372,21 @@ msgstr "Sexism"
 msgid "reportViolence"
 msgstr "Violence"
 
-#: Screens/CreateDebate.js:136
-#: Screens/Search.js:143
+#: Screens/CreateDebate.js:229
+#: Screens/Search.js:184
 msgid "search"
 msgstr "Search"
 
-#: Screens/NewConversation.js:174
+#: Screens/NewConversation.js:175
 msgid "searchContact"
 msgstr "Search a contact"
 
 #: Screens/CreateDebate.js:93
 #: Screens/Search.js:101
-msgid "searchUser"
-msgstr "Search a user"
+#~ msgid "searchUser"
+#~ msgstr "Search a user"
 
-#: Components/CommentBox.js:165
+#: Components/CommentBox.js:231
 msgid "seeThe"
 msgstr "See"
 
@@ -413,7 +419,7 @@ msgid "switchLanguage"
 msgstr "Switch language"
 
 #: Components/InteractionBox.js:39
-#: Components/InteractionBox.js:82
+#: Components/InteractionBox.js:87
 msgid "that"
 msgstr "this"
 
@@ -425,11 +431,11 @@ msgstr "voted on your debate"
 msgid "votePrivacy"
 msgstr "Votes privacy"
 
-#: Components/InteractionBox.js:120
+#: Components/InteractionBox.js:131
 msgid "youCommented"
 msgstr "You commented"
 
-#: Components/InteractionBox.js:78
+#: Components/InteractionBox.js:83
 msgid "youDidntLiked"
 msgstr "You did not like"
 
@@ -437,19 +443,20 @@ msgstr "You did not like"
 msgid "youLiked"
 msgstr "You liked"
 
-#: Components/InteractionBox.js:162
+#: Components/InteractionBox.js:177
 msgid "youVote"
 msgstr "You voted"
 
-#: Screens/Debate.js:459
-#: Screens/IsolateComment.js:269
+#: Screens/Debate.js:867
+#: Screens/IsolateComment.js:402
 msgid "yourComment"
 msgstr "Your comment"
 
-#: Screens/Chat.js:256
+#: Screens/Chat.js:425
 msgid "yourMessage"
 msgstr "Your message"
 
-#: Screens/CreateDebate.js:588
+#: Screens/CreateDebate.js:748
+#: Screens/CreateDuoDebate.js:197
 msgid "yourOpinion"
 msgstr "Your opinion"

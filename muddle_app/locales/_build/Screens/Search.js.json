@@ -1,9 +1,17 @@
 {
-  "searchUser": {
+  "firstname": {
     "origin": [
       [
         "Screens/Search.js",
-        101
+        115
+      ]
+    ]
+  },
+  "lastname": {
+    "origin": [
+      [
+        "Screens/Search.js",
+        137
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/Search.js",
-        143
+        184
       ]
     ]
   }

@@ -227,7 +227,7 @@ function SignUpComponent(props) {
             </View>
             <TouchableOpacity
               onPress={() => {
-                console.log("SignUp");
+                // console.log("SignUp");
                 navigation.navigate("Login", {
                   snackType: "success",
                   snackMessage: i18n._("succesMailSubscribe"),

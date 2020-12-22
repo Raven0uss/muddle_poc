@@ -18,13 +18,13 @@ const voteDispatch = ({
         setHomeDebates((homeDebates) => {
           const copyHomeDebates = cloneDeepWith(homeDebates);
 
-          console.log(copyHomeDebates.length);
+          // console.log(copyHomeDebates.length);
           const homeDebateIndex = findIndex(
             copyHomeDebates,
             (h) => h.id === copyDebates[debateIndex].id
           );
 
-          console.log(homeDebateIndex);
+          // console.log(homeDebateIndex);
 
           if (homeDebateIndex !== -1) {
             copyHomeDebates[homeDebateIndex][voteType].push({
@@ -41,13 +41,13 @@ const voteDispatch = ({
     setHomeDebates((homeDebates) => {
       const copyHomeDebates = cloneDeepWith(homeDebates);
 
-      console.log(copyHomeDebates.length);
+      // console.log(copyHomeDebates.length);
       const homeDebateIndex = findIndex(
         copyHomeDebates,
         (h) => h.id === debate.id
       );
 
-      console.log(homeDebateIndex);
+      // console.log(homeDebateIndex);
       if (homeDebateIndex !== -1) {
         copyHomeDebates[homeDebateIndex][voteType].push({
           id: currentUser.id,

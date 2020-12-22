@@ -10,7 +10,7 @@ import themeSchema from "../CustomProperties/Theme";
 
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
-  const { notification, theme } = props;
+  const { notification, theme, navigation } = props;
 
   //   console.log(notification);
 
@@ -166,6 +166,11 @@ const NotificationBox = (props) => {
                   borderRadius: 12,
                 }}
                 disabled={status === "DECLINED"}
+                onPress={() => {
+                  navigation.push("CreateDuoDebate", {
+                    debate: notification.debate,
+                  });
+                }}
               >
                 <Text
                   style={{

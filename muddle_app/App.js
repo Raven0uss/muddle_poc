@@ -45,6 +45,7 @@ import SearchScreen from "./Screens/Search";
 import ConversationsScreen from "./Screens/Conversations";
 import NotificationsScreen from "./Screens/Notifications";
 import CreateDebateScreen from "./Screens/CreateDebate";
+import CreateDuoDebateScreen from "./Screens/CreateDuoDebate";
 import FollowScreen from "./Screens/Follow";
 import DebatesFilteredScreen from "./Screens/DebatesFiltered";
 import ProfileScreen from "./Screens/Profile";
@@ -60,6 +61,7 @@ import NewConversationScreen from "./Screens/NewConversation";
 import TrophiesScreen from "./Screens/Trophies";
 import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
+
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
 import { getItem } from "./CustomProperties/storage";
@@ -121,7 +123,7 @@ export default function App() {
   }, []);
 
   const changeLanguage = (lang) => {
-    console.log(lang);
+    // console.log(lang);
     i18n.activate(lang);
     setLanguage(lang);
   };
@@ -281,6 +283,16 @@ export default function App() {
                 <Stack.Screen
                   name="CreateDebate"
                   component={CreateDebateScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="CreateDuoDebate"
+                  component={CreateDuoDebateScreen}
                   initialParams={{
                     changeLanguage,
                   }}

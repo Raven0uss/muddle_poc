@@ -142,7 +142,7 @@ const Home = (props) => {
     onCompleted: (response) => {
       try {
         const { homeDebates: queryResult } = response;
-        console.log("fetch");
+        // console.log("fetch");
         setDebates(queryResult);
         if (queryResult.length === 0) setNoMoreData(true);
       } catch (err) {

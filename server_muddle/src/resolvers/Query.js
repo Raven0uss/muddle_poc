@@ -93,10 +93,10 @@ const Query = prismaObjectType({
           if (!user) {
             throw new Error("Invalid credentials");
           }
-          console.log(user);
+          // console.log(user);
           const passwordMatch = bcrypt.compareSync(password, user.password);
 
-          console.log(password);
+          // console.log(password);
           if (!passwordMatch) {
             throw new Error("Invalid credentials");
           }
@@ -117,7 +117,7 @@ const Query = prismaObjectType({
       resolve: async (parent, args, { prisma, currentUser }) => {
         // console.log(currentUser);
         const user = await prisma.user({ id: currentUser.user.id });
-        console.log(user);
+        // console.log(user);
         return user;
       },
     });
@@ -166,7 +166,7 @@ const Query = prismaObjectType({
       },
       resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
         const debates = await prisma
-          .debates({ orderBy: "updatedAt_DESC" })
+          .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
           .$fragment(fragBestDebates);
         const following = await prisma
           .user({ id: currentUser.user.id })
@@ -194,13 +194,13 @@ const Query = prismaObjectType({
         const myDebates = await (async () => {
           const standard = await prisma
             .user({ id: currentUser.user.id })
-            .debates();
+            .debates({ where: { published: true } });
           const blue = await prisma
             .user({ id: currentUser.user.id })
-            .debatesBlue();
+            .debatesBlue({ where: { published: true } });
           const red = await prisma
             .user({ id: currentUser.user.id })
-            .debatesRed();
+            .debatesRed({ where: { published: true } });
           // console.log(standard);
           return [
             ...(isNil(standard) ? [] : standard),
@@ -225,7 +225,7 @@ const Query = prismaObjectType({
       },
       resolve: async (parent, { first, skip }, { prisma }) => {
         const debates = await prisma
-          .debates({ orderBy: "updatedAt_DESC" })
+          .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
           .$fragment(fragBestDebates);
         if (isNil(debates)) return [];
         const bestDebates = debates.sort((a, b) => {

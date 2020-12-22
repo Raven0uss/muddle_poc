@@ -11,13 +11,13 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from "react-native";
 import Header from "../Components/Header";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import Select from "../Components/Select";
 import DatePicker from "../Components/DatePicker";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
 import moment from "moment";
 import i18n from "../i18n";
@@ -25,6 +25,21 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import strUcFirst from "../Library/strUcFirst";
+import { isEmpty, isNil } from "lodash";
+
+const isErrorInCreateDebate = (
+  debateType,
+  { content, answerOne, answerTwo, duration, duo }
+) => {
+  if (duration.day === "0" && duration.hour === "00") return true;
+  if (isEmpty(content) || isEmpty(answerOne)) return true;
+  if (debateType.value === "DUO") {
+    if (isNil(duo)) return true;
+  } else {
+    if (isEmpty(answerTwo)) return true;
+  }
+  return false;
+};
 
 const checkOnlyDigits = (str) => {
   const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -54,6 +69,42 @@ const GET_USERS = gql`
       profilePicture
       coverPicture
       crowned
+    }
+  }
+`;
+
+const CREATE_DEBATE = gql`
+  mutation(
+    $content: String!
+    $answerOne: String!
+    $answerTwo: String!
+    $timelimit: String!
+  ) {
+    createPublicDebate(
+      content: $content
+      answerOne: $answerOne
+      answerTwo: $answerTwo
+      timelimit: $timelimit
+    ) {
+      id
+    }
+  }
+`;
+
+const CREATE_INVITATION_DUO_DEBATE = gql`
+  mutation(
+    $content: String!
+    $answerOne: String!
+    $user: ID!
+    $timelimit: String!
+  ) {
+    createInvitationDuoDebate(
+      content: $content
+      answerOne: $answerOne
+      timelimit: $timelimit
+      user: $user
+    ) {
+      id
     }
   }
 `;
@@ -261,7 +312,47 @@ const InvitationDebate = (props) => {
   );
 };
 
+const createPublicDebate = async ({
+  content,
+  answerOne,
+  answerTwo,
+  duration,
+  reqCreatePublicDebate,
+}) => {
+  const timelimit = `${duration.day} ${duration.hour}`;
+
+  await reqCreatePublicDebate({
+    variables: {
+      content,
+      answerOne,
+      answerTwo,
+      timelimit,
+    },
+  });
+};
+
+const createDuoDebate = async ({
+  content,
+  answerOne,
+  duo,
+  duration,
+  reqCreateDuoDebate,
+}) => {
+  const timelimit = `${duration.day} ${duration.hour}`;
+
+  await reqCreateDuoDebate({
+    variables: {
+      content,
+      answerOne,
+      timelimit,
+      user: duo.id,
+    },
+  });
+};
+
 const CreateDebate = (props) => {
+  const { navigation, route } = props;
+
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
   const [debateType, setDebateType] = React.useState({
@@ -281,7 +372,31 @@ const CreateDebate = (props) => {
   const [optionOne, setOptionOne] = React.useState("");
   const [optionTwo, setOptionTwo] = React.useState("");
 
-  const { navigation, route } = props;
+  const [reqCreatePublicDebate] = useMutation(CREATE_DEBATE, {
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
+  const [reqCreateDuoDebate] = useMutation(CREATE_INVITATION_DUO_DEBATE, {
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
+  const disabledButton = isErrorInCreateDebate(debateType, {
+    content,
+    answerOne: optionOne,
+    answerTwo: optionTwo,
+    duration,
+    duo,
+  });
   if (show) return <InvitationDebate setShow={setShow} setDuo={setDuo} />;
   return (
     <View style={styles.container}>
@@ -672,7 +787,37 @@ const CreateDebate = (props) => {
               )}
             </View>
           </View>
-          <TouchableOpacity onPress={() => {}} style={styles.connectionButton}>
+          <TouchableOpacity
+            onPress={() => {
+              if (debateType.value === "PUBLIC")
+                createPublicDebate({
+                  content,
+                  answerOne: optionOne,
+                  answerTwo: optionTwo,
+                  duration,
+                  reqCreatePublicDebate,
+                });
+              if (debateType.value === "DUO") {
+                createDuoDebate({
+                  content,
+                  answerOne: optionOne,
+                  duration,
+                  duo,
+                  reqCreateDuoDebate,
+                });
+              }
+            }}
+            style={{
+              alignSelf: "flex-end",
+              backgroundColor: disabledButton ? "#d3d3d3" : "#F47658",
+              padding: 12,
+              paddingLeft: 30,
+              paddingRight: 30,
+              borderRadius: 30,
+              marginTop: 20,
+            }}
+            disabled={disabledButton}
+          >
             <Text style={{ color: "#000", fontFamily: "Montserrat_700Bold" }}>
               {i18n._("publish")}
             </Text>

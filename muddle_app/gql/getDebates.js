@@ -9,7 +9,7 @@ const GET_DEBATES = (debateType) => {
         debates(
           first: $first
           skip: $skip
-          where: { type: $filter }
+          where: { type: $filter, published: true }
           orderBy: updatedAt_DESC
         ) {
           id

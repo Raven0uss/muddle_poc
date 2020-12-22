@@ -719,6 +719,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -770,6 +771,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -793,6 +795,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -816,6 +819,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -839,6 +843,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -862,6 +867,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     reports?: NexusGenInputs['ReportCreateManyWithoutDebateInput'] | null; // ReportCreateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -885,6 +891,7 @@ export interface NexusGenInputs {
     published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentCreateOneInput'] | null; // CommentCreateOneInput
     type: NexusGenEnums['DebateType']; // DebateType!
     winner?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
@@ -971,6 +978,20 @@ export interface NexusGenInputs {
     timelimit_lte?: any | null; // DateTime
     timelimit_not?: any | null; // DateTime
     timelimit_not_in?: any[] | null; // [DateTime!]
+    timelimitString?: string | null; // String
+    timelimitString_contains?: string | null; // String
+    timelimitString_ends_with?: string | null; // String
+    timelimitString_gt?: string | null; // String
+    timelimitString_gte?: string | null; // String
+    timelimitString_in?: string[] | null; // [String!]
+    timelimitString_lt?: string | null; // String
+    timelimitString_lte?: string | null; // String
+    timelimitString_not?: string | null; // String
+    timelimitString_not_contains?: string | null; // String
+    timelimitString_not_ends_with?: string | null; // String
+    timelimitString_not_in?: string[] | null; // [String!]
+    timelimitString_not_starts_with?: string | null; // String
+    timelimitString_starts_with?: string | null; // String
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     type_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
     type_not?: NexusGenEnums['DebateType'] | null; // DebateType
@@ -1003,6 +1024,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1026,6 +1048,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1038,6 +1061,7 @@ export interface NexusGenInputs {
     crowned?: boolean | null; // Boolean
     published?: boolean | null; // Boolean
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     type?: NexusGenEnums['DebateType'] | null; // DebateType
   }
   DebateUpdateManyWithWhereNestedInput: { // input type
@@ -1137,6 +1161,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1159,6 +1184,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1181,6 +1207,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1203,6 +1230,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1225,6 +1253,7 @@ export interface NexusGenInputs {
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     reports?: NexusGenInputs['ReportUpdateManyWithoutDebateInput'] | null; // ReportUpdateManyWithoutDebateInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1247,6 +1276,7 @@ export interface NexusGenInputs {
     published?: boolean | null; // Boolean
     redVotes?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     topComment?: NexusGenInputs['CommentUpdateOneInput'] | null; // CommentUpdateOneInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     winner?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
@@ -1373,6 +1403,20 @@ export interface NexusGenInputs {
     timelimit_lte?: any | null; // DateTime
     timelimit_not?: any | null; // DateTime
     timelimit_not_in?: any[] | null; // [DateTime!]
+    timelimitString?: string | null; // String
+    timelimitString_contains?: string | null; // String
+    timelimitString_ends_with?: string | null; // String
+    timelimitString_gt?: string | null; // String
+    timelimitString_gte?: string | null; // String
+    timelimitString_in?: string[] | null; // [String!]
+    timelimitString_lt?: string | null; // String
+    timelimitString_lte?: string | null; // String
+    timelimitString_not?: string | null; // String
+    timelimitString_not_contains?: string | null; // String
+    timelimitString_not_ends_with?: string | null; // String
+    timelimitString_not_in?: string[] | null; // [String!]
+    timelimitString_not_starts_with?: string | null; // String
+    timelimitString_starts_with?: string | null; // String
     topComment?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
     type?: NexusGenEnums['DebateType'] | null; // DebateType
     type_in?: NexusGenEnums['DebateType'][] | null; // [DebateType!]
@@ -3592,7 +3636,7 @@ export interface NexusGenEnums {
   AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "nested_ASC" | "nested_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "published_ASC" | "published_DESC" | "timelimit_ASC" | "timelimit_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "published_ASC" | "published_DESC" | "timelimit_ASC" | "timelimit_DESC" | "timelimitString_ASC" | "timelimitString_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateType: "DUO" | "MUDDLE" | "STANDARD"
   Gender: "FEMALE" | "MALE" | "NO_INDICATION"
   GenderFilter: "ALL" | "FEMALE" | "MALE"
@@ -3664,6 +3708,7 @@ export interface NexusGenRootTypes {
     id: string; // ID!
     published: boolean; // Boolean!
     timelimit?: any | null; // DateTime
+    timelimitString?: string | null; // String
     type: NexusGenEnums['DebateType']; // DebateType!
     updatedAt: any; // DateTime!
   }
@@ -4102,6 +4147,7 @@ export interface NexusGenFieldTypes {
     redVotes: NexusGenRootTypes['User'][] | null; // [User!]
     reports: NexusGenRootTypes['Report'][] | null; // [Report!]
     timelimit: any | null; // DateTime
+    timelimitString: string | null; // String
     topComment: NexusGenRootTypes['Comment'] | null; // Comment
     type: NexusGenEnums['DebateType']; // DebateType!
     updatedAt: any; // DateTime!
@@ -4137,10 +4183,13 @@ export interface NexusGenFieldTypes {
     createConversation: NexusGenRootTypes['Conversation']; // Conversation!
     createDebate: NexusGenRootTypes['Debate']; // Debate!
     createInteraction: NexusGenRootTypes['Interaction']; // Interaction!
+    createInvitationDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     createMessage: NexusGenRootTypes['Message']; // Message!
     createNotification: NexusGenRootTypes['Notification']; // Notification!
+    createPublicDebate: NexusGenRootTypes['Debate']; // Debate!
     createReport: NexusGenRootTypes['Report']; // Report!
     createTrophy: NexusGenRootTypes['Trophy']; // Trophy!
+    publishDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     signUp: NexusGenRootTypes['Token']; // Token!
     updateAd: NexusGenRootTypes['Ad'] | null; // Ad
     updateAdTarget: NexusGenRootTypes['AdTarget'] | null; // AdTarget
@@ -4424,17 +4473,34 @@ export interface NexusGenArgTypes {
     createInteraction: { // args
       data: NexusGenInputs['InteractionCreateInput']; // InteractionCreateInput!
     }
+    createInvitationDuoDebate: { // args
+      answerOne?: string | null; // String
+      content?: string | null; // String
+      timelimit?: string | null; // String
+      user?: string | null; // ID
+    }
     createMessage: { // args
       data: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
     }
     createNotification: { // args
       data: NexusGenInputs['NotificationCreateInput']; // NotificationCreateInput!
     }
+    createPublicDebate: { // args
+      answerOne?: string | null; // String
+      answerTwo?: string | null; // String
+      content?: string | null; // String
+      timelimit?: string | null; // String
+    }
     createReport: { // args
       data: NexusGenInputs['ReportCreateInput']; // ReportCreateInput!
     }
     createTrophy: { // args
       data: NexusGenInputs['TrophyCreateInput']; // TrophyCreateInput!
+    }
+    publishDuoDebate: { // args
+      answerTwo?: string | null; // String
+      debateId?: string | null; // ID
+      timelimit?: string | null; // String
     }
     signUp: { // args
       birthdate?: any | null; // DateTime

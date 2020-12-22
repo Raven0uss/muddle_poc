@@ -24,10 +24,10 @@ import { useIsFocused } from "@react-navigation/native";
 const GET_NOTIFICATIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
     notifications(
+      orderBy: createdAt_DESC
       last: $first
       skip: $skip
       where: { userId: $userId }
-      orderBy: createdAt_DESC
     ) {
       id
       createdAt
@@ -43,9 +43,24 @@ const GET_NOTIFICATIONS = gql`
       new
       debate {
         id
+        ownerRed {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+        ownerBlue {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
         content
         answerOne
         answerTwo
+        timelimitString
       }
       comment {
         id
@@ -70,7 +85,13 @@ const frequency = 10;
 let nbNotifications = frequency;
 
 const renderItem = ({ item }, navigation, theme) => {
-  return <NotificationBox theme={theme} notification={item} />;
+  return (
+    <NotificationBox
+      theme={theme}
+      notification={item}
+      navigation={navigation}
+    />
+  );
 };
 
 const Notifications = (props) => {

@@ -4,8 +4,10 @@ import jwt from "jsonwebtoken";
 import { flattenDeep } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
-import { stringArg } from "nexus/dist";
+import { idArg, stringArg } from "nexus/dist";
 import { dateArg } from "./Types";
+
+import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 
 // Mutations
 const exposedMutations = {
@@ -57,6 +59,121 @@ const Mutation = prismaObjectType({
           return { token };
         } catch (error) {
           throw new Error(error);
+        }
+      },
+    });
+
+    t.field("createPublicDebate", {
+      type: "Debate",
+      args: {
+        content: stringArg(),
+        answerOne: stringArg(),
+        answerTwo: stringArg(),
+        timelimit: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { content, answerOne, answerTwo, timelimit },
+        { prisma, currentUser }
+      ) => {
+        if (timelimit === "0 00") throw new Error("Timelimit is not correct");
+        try {
+          const limit = timelimitToDateTime(timelimit);
+          const newDebate = await prisma.createDebate({
+            owner: {
+              connect: { id: currentUser.user.id },
+            },
+            content,
+            answerOne,
+            answerTwo,
+            type: "STANDARD",
+            timelimit: limit,
+          });
+          return newDebate;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("createInvitationDuoDebate", {
+      type: "Debate",
+      args: {
+        user: idArg(),
+        content: stringArg(),
+        answerOne: stringArg(),
+        timelimit: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { content, answerOne, timelimit, user },
+        { prisma, currentUser }
+      ) => {
+        if (timelimit === "0 00") throw new Error("Timelimit is not correct");
+        try {
+          // const limit = timelimitToDateTime(timelimit);
+          const newDebate = await prisma.createDebate({
+            ownerBlue: {
+              connect: { id: currentUser.user.id },
+            },
+            ownerRed: {
+              connect: { id: user },
+            },
+            content,
+            answerOne,
+            type: "DUO",
+            timelimitString: timelimit,
+            published: false,
+          });
+
+          const notif = await prisma.createNotification({
+            who: { connect: { id: currentUser.user.id } },
+            userId: user,
+            type: "INVITATION_DUO",
+            status: "PENDING",
+            debate: {
+              connect: {
+                id: newDebate.id,
+              },
+            },
+            new: true,
+          });
+
+          return newDebate;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("publishDuoDebate", {
+      type: "Debate",
+      args: {
+        answerTwo: stringArg(),
+        debateId: idArg(),
+        timelimit: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { debateId, answerTwo, timelimit },
+        { prisma, currentUser }
+      ) => {
+        if (timelimit === "0 00") throw new Error("Timelimit is not correct");
+        try {
+          const limit = timelimitToDateTime(timelimit);
+          const debate = await prisma.updateDebate({
+            where: {
+              id: debateId,
+            },
+            data: {
+              timelimit: limit,
+              answerTwo,
+              published: true,
+            },
+          });
+          return debate;
+        } catch (err) {
+          throw new Error(err);
         }
       },
     });

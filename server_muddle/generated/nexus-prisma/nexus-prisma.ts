@@ -2335,6 +2335,7 @@ type DebateObject =
   | { name: 'ownerRed', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'timelimit', args?: [] | false, alias?: string  } 
+  | { name: 'timelimitString', args?: [] | false, alias?: string  } 
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'comments', args?: DebateCommentsArgs[] | false, alias?: string  } 
   | { name: 'topComment', args?: [] | false, alias?: string  } 
@@ -2361,6 +2362,7 @@ type DebateFields =
   | 'ownerRed'
   | 'content'
   | 'timelimit'
+  | 'timelimitString'
   | 'type'
   | 'comments'
   | 'topComment'
@@ -2497,6 +2499,14 @@ export interface DebateFieldDetails {
   }
   timelimit: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  timelimitString: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -6582,6 +6592,7 @@ type DebatePreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'timelimit', args?: [] | false, alias?: string  } 
+  | { name: 'timelimitString', args?: [] | false, alias?: string  } 
   | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'closed', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
@@ -6595,6 +6606,7 @@ type DebatePreviousValuesFields =
   | 'id'
   | 'content'
   | 'timelimit'
+  | 'timelimitString'
   | 'type'
   | 'closed'
   | 'crowned'
@@ -6627,6 +6639,14 @@ export interface DebatePreviousValuesFieldDetails {
   }
   timelimit: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  timelimitString: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -8419,6 +8439,20 @@ export interface DebateWhereInput {
   timelimit_lte?: string | null
   timelimit_gt?: string | null
   timelimit_gte?: string | null
+  timelimitString?: string | null
+  timelimitString_not?: string | null
+  timelimitString_in?: string[]
+  timelimitString_not_in?: string[]
+  timelimitString_lt?: string | null
+  timelimitString_lte?: string | null
+  timelimitString_gt?: string | null
+  timelimitString_gte?: string | null
+  timelimitString_contains?: string | null
+  timelimitString_not_contains?: string | null
+  timelimitString_starts_with?: string | null
+  timelimitString_not_starts_with?: string | null
+  timelimitString_ends_with?: string | null
+  timelimitString_not_ends_with?: string | null
   type?: prisma.DebateType | null
   type_not?: prisma.DebateType | null
   type_in?: prisma.DebateType[]
@@ -8526,6 +8560,20 @@ export type DebateWhereInputInputObject =
   | { name: 'timelimit_lte', alias?: string  } 
   | { name: 'timelimit_gt', alias?: string  } 
   | { name: 'timelimit_gte', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
+  | { name: 'timelimitString_not', alias?: string  } 
+  | { name: 'timelimitString_in', alias?: string  } 
+  | { name: 'timelimitString_not_in', alias?: string  } 
+  | { name: 'timelimitString_lt', alias?: string  } 
+  | { name: 'timelimitString_lte', alias?: string  } 
+  | { name: 'timelimitString_gt', alias?: string  } 
+  | { name: 'timelimitString_gte', alias?: string  } 
+  | { name: 'timelimitString_contains', alias?: string  } 
+  | { name: 'timelimitString_not_contains', alias?: string  } 
+  | { name: 'timelimitString_starts_with', alias?: string  } 
+  | { name: 'timelimitString_not_starts_with', alias?: string  } 
+  | { name: 'timelimitString_ends_with', alias?: string  } 
+  | { name: 'timelimitString_not_ends_with', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'type_not', alias?: string  } 
   | { name: 'type_in', alias?: string  } 
@@ -10029,6 +10077,7 @@ export interface DebateCreateWithoutOwnerInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10053,6 +10102,7 @@ export type DebateCreateWithoutOwnerInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -10151,6 +10201,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   ownerBlue?: UserCreateOneWithoutDebatesBlueInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10175,6 +10226,7 @@ export type DebateCreateWithoutOwnerRedInputInputObject =
   | { name: 'ownerBlue', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -10273,6 +10325,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10297,6 +10350,7 @@ export type DebateCreateWithoutOwnerBlueInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -10424,6 +10478,7 @@ export interface DebateCreateInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10449,6 +10504,7 @@ export type DebateCreateInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -10551,6 +10607,7 @@ export interface DebateCreateWithoutReportsInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10575,6 +10632,7 @@ export type DebateCreateWithoutReportsInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -10839,6 +10897,7 @@ export interface DebateCreateWithoutCommentsInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   topComment?: CommentCreateOneInput | null
   reports?: ReportCreateManyWithoutDebateInput | null
@@ -10863,6 +10922,7 @@ export type DebateCreateWithoutCommentsInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
   | { name: 'reports', alias?: string  } 
@@ -10917,6 +10977,7 @@ export interface DebateCreateWithoutInteractionsInput {
   ownerRed?: UserCreateOneWithoutDebatesRedInput | null
   content?: string
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType
   comments?: CommentCreateManyWithoutDebateInput | null
   topComment?: CommentCreateOneInput | null
@@ -10941,6 +11002,7 @@ export type DebateCreateWithoutInteractionsInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -11433,6 +11495,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -11456,6 +11519,7 @@ export type DebateUpdateWithoutOwnerDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -11582,6 +11646,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   ownerBlue?: UserUpdateOneWithoutDebatesBlueInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -11605,6 +11670,7 @@ export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | { name: 'ownerBlue', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -11731,6 +11797,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -11754,6 +11821,7 @@ export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -11915,6 +11983,7 @@ export interface DebateUpdateDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -11939,6 +12008,7 @@ export type DebateUpdateDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -12529,6 +12599,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -12552,6 +12623,7 @@ export type DebateUpdateWithoutReportsDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -12625,6 +12697,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   topComment?: CommentUpdateOneInput | null
   reports?: ReportUpdateManyWithoutDebateInput | null
@@ -12648,6 +12721,7 @@ export type DebateUpdateWithoutCommentsDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
   | { name: 'reports', alias?: string  } 
@@ -14031,6 +14105,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -14054,6 +14129,7 @@ export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -14147,6 +14223,20 @@ export interface DebateScalarWhereInput {
   timelimit_lte?: string | null
   timelimit_gt?: string | null
   timelimit_gte?: string | null
+  timelimitString?: string | null
+  timelimitString_not?: string | null
+  timelimitString_in?: string[]
+  timelimitString_not_in?: string[]
+  timelimitString_lt?: string | null
+  timelimitString_lte?: string | null
+  timelimitString_gt?: string | null
+  timelimitString_gte?: string | null
+  timelimitString_contains?: string | null
+  timelimitString_not_contains?: string | null
+  timelimitString_starts_with?: string | null
+  timelimitString_not_starts_with?: string | null
+  timelimitString_ends_with?: string | null
+  timelimitString_not_ends_with?: string | null
   type?: prisma.DebateType | null
   type_not?: prisma.DebateType | null
   type_in?: prisma.DebateType[]
@@ -14243,6 +14333,20 @@ export type DebateScalarWhereInputInputObject =
   | { name: 'timelimit_lte', alias?: string  } 
   | { name: 'timelimit_gt', alias?: string  } 
   | { name: 'timelimit_gte', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
+  | { name: 'timelimitString_not', alias?: string  } 
+  | { name: 'timelimitString_in', alias?: string  } 
+  | { name: 'timelimitString_not_in', alias?: string  } 
+  | { name: 'timelimitString_lt', alias?: string  } 
+  | { name: 'timelimitString_lte', alias?: string  } 
+  | { name: 'timelimitString_gt', alias?: string  } 
+  | { name: 'timelimitString_gte', alias?: string  } 
+  | { name: 'timelimitString_contains', alias?: string  } 
+  | { name: 'timelimitString_not_contains', alias?: string  } 
+  | { name: 'timelimitString_starts_with', alias?: string  } 
+  | { name: 'timelimitString_not_starts_with', alias?: string  } 
+  | { name: 'timelimitString_ends_with', alias?: string  } 
+  | { name: 'timelimitString_not_ends_with', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'type_not', alias?: string  } 
   | { name: 'type_in', alias?: string  } 
@@ -14313,6 +14417,7 @@ export type DebateUpdateManyWithWhereNestedInputInputObject =
 export interface DebateUpdateManyDataInput {
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
@@ -14324,6 +14429,7 @@ export type DebateUpdateManyDataInputInputObject =
   | Extract<keyof DebateUpdateManyDataInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
@@ -14614,6 +14720,7 @@ export interface DebateUpdateInput {
   ownerRed?: UserUpdateOneWithoutDebatesRedInput | null
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   comments?: CommentUpdateManyWithoutDebateInput | null
   topComment?: CommentUpdateOneInput | null
@@ -14638,6 +14745,7 @@ export type DebateUpdateInputInputObject =
   | { name: 'ownerRed', alias?: string  } 
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'comments', alias?: string  } 
   | { name: 'topComment', alias?: string  } 
@@ -14658,6 +14766,7 @@ export type DebateUpdateInputInputObject =
 export interface DebateUpdateManyMutationInput {
   content?: string | null
   timelimit?: string | null
+  timelimitString?: string | null
   type?: prisma.DebateType | null
   closed?: boolean | null
   crowned?: boolean | null
@@ -14669,6 +14778,7 @@ export type DebateUpdateManyMutationInputInputObject =
   | Extract<keyof DebateUpdateManyMutationInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'timelimit', alias?: string  } 
+  | { name: 'timelimitString', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'closed', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
@@ -15681,6 +15791,8 @@ export type DebateOrderByInputValues =
   | 'content_DESC'
   | 'timelimit_ASC'
   | 'timelimit_DESC'
+  | 'timelimitString_ASC'
+  | 'timelimitString_DESC'
   | 'type_ASC'
   | 'type_DESC'
   | 'closed_ASC'

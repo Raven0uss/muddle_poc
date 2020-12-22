@@ -1,9 +1,17 @@
 {
-  "searchUser": {
+  "firstname": {
     "origin": [
       [
         "Screens/CreateDebate.js",
-        93
+        160
+      ]
+    ]
+  },
+  "lastname": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        182
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        136
+        229
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        161
+        254
       ]
     ]
   },
@@ -27,11 +35,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        223
+        359
       ],
       [
         "Screens/CreateDebate.js",
-        304
+        464
       ]
     ]
   },
@@ -39,7 +47,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        308
+        468
       ]
     ]
   },
@@ -47,7 +55,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        354
+        514
       ]
     ]
   },
@@ -55,7 +63,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        383
+        543
       ]
     ]
   },
@@ -63,7 +71,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        445
+        605
       ]
     ]
   },
@@ -71,7 +79,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        533
+        693
       ]
     ]
   },
@@ -79,7 +87,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        547
+        707
       ]
     ]
   },
@@ -87,7 +95,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        559
+        719
       ]
     ]
   },
@@ -95,11 +103,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        587
+        747
       ],
       [
         "Screens/CreateDebate.js",
-        609
+        769
       ]
     ]
   },
@@ -107,7 +115,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        588
+        748
       ]
     ]
   },
@@ -115,7 +123,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        632
+        822
       ]
     ]
   }

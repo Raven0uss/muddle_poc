@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        98
+        330
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "Screens/Debate.js",
-        187
+        421
       ],
       [
         "Screens/Debate.js",
-        412
+        812
       ]
     ]
   },
@@ -23,7 +23,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        459
+        867
       ]
     ]
   }

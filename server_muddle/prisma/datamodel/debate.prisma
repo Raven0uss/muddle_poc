@@ -11,6 +11,7 @@ type Debate {
   ownerRed: User @relation(link: INLINE, name: "OwnerRed")
   content: String!
   timelimit: DateTime
+  timelimitString: String
   type: DebateType!
   comments: [Comment] @relation(name: "Comments")
   topComment: Comment @relation(link: INLINE, name: "TopComment")

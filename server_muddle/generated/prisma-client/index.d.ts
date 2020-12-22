@@ -508,6 +508,8 @@ export type DebateOrderByInput =
   | "content_DESC"
   | "timelimit_ASC"
   | "timelimit_DESC"
+  | "timelimitString_ASC"
+  | "timelimitString_DESC"
   | "type_ASC"
   | "type_DESC"
   | "closed_ASC"
@@ -792,6 +794,7 @@ export interface DebateCreateWithoutInteractionsInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -849,6 +852,20 @@ export interface DebateWhereInput {
   timelimit_lte?: Maybe<DateTimeInput>;
   timelimit_gt?: Maybe<DateTimeInput>;
   timelimit_gte?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  timelimitString_not?: Maybe<String>;
+  timelimitString_in?: Maybe<String[] | String>;
+  timelimitString_not_in?: Maybe<String[] | String>;
+  timelimitString_lt?: Maybe<String>;
+  timelimitString_lte?: Maybe<String>;
+  timelimitString_gt?: Maybe<String>;
+  timelimitString_gte?: Maybe<String>;
+  timelimitString_contains?: Maybe<String>;
+  timelimitString_not_contains?: Maybe<String>;
+  timelimitString_starts_with?: Maybe<String>;
+  timelimitString_not_starts_with?: Maybe<String>;
+  timelimitString_ends_with?: Maybe<String>;
+  timelimitString_not_ends_with?: Maybe<String>;
   type?: Maybe<DebateType>;
   type_not?: Maybe<DebateType>;
   type_in?: Maybe<DebateType[] | DebateType>;
@@ -1649,6 +1666,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -1777,6 +1795,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -1892,6 +1911,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -2002,6 +2022,7 @@ export interface NotificationUpdateWithWhereUniqueWithoutWhoInput {
 export interface DebateUpdateManyMutationInput {
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
@@ -2060,6 +2081,7 @@ export interface DebateUpdateDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -2527,6 +2549,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -2603,6 +2626,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   topComment?: Maybe<CommentUpdateOneInput>;
   reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
@@ -2671,6 +2695,7 @@ export interface DebateCreateWithoutReportsInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -2880,6 +2905,7 @@ export interface DebateCreateWithoutCommentsInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   topComment?: Maybe<CommentCreateOneInput>;
   reports?: Maybe<ReportCreateManyWithoutDebateInput>;
@@ -3944,6 +3970,7 @@ export interface DebateCreateWithoutOwnerInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -3973,6 +4000,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -4002,6 +4030,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -4561,6 +4590,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -4585,6 +4615,7 @@ export interface DebateCreateInput {
   ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type: DebateType;
   comments?: Maybe<CommentCreateManyWithoutDebateInput>;
   topComment?: Maybe<CommentCreateOneInput>;
@@ -4682,6 +4713,20 @@ export interface DebateScalarWhereInput {
   timelimit_lte?: Maybe<DateTimeInput>;
   timelimit_gt?: Maybe<DateTimeInput>;
   timelimit_gte?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  timelimitString_not?: Maybe<String>;
+  timelimitString_in?: Maybe<String[] | String>;
+  timelimitString_not_in?: Maybe<String[] | String>;
+  timelimitString_lt?: Maybe<String>;
+  timelimitString_lte?: Maybe<String>;
+  timelimitString_gt?: Maybe<String>;
+  timelimitString_gte?: Maybe<String>;
+  timelimitString_contains?: Maybe<String>;
+  timelimitString_not_contains?: Maybe<String>;
+  timelimitString_starts_with?: Maybe<String>;
+  timelimitString_not_starts_with?: Maybe<String>;
+  timelimitString_ends_with?: Maybe<String>;
+  timelimitString_not_ends_with?: Maybe<String>;
   type?: Maybe<DebateType>;
   type_not?: Maybe<DebateType>;
   type_in?: Maybe<DebateType[] | DebateType>;
@@ -4759,6 +4804,7 @@ export interface UserUpdateWithWhereUniqueWithoutNotificationsInput {
 export interface DebateUpdateManyDataInput {
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
@@ -4923,6 +4969,7 @@ export interface DebateUpdateInput {
   ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
   content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
   type?: Maybe<DebateType>;
   comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
   topComment?: Maybe<CommentUpdateOneInput>;
@@ -6406,6 +6453,7 @@ export interface Debate {
   id: ID_Output;
   content: String;
   timelimit?: DateTimeOutput;
+  timelimitString?: String;
   type: DebateType;
   closed: Boolean;
   crowned: Boolean;
@@ -6423,6 +6471,7 @@ export interface DebatePromise extends Promise<Debate>, Fragmentable {
   ownerRed: <T = UserPromise>() => T;
   content: () => Promise<String>;
   timelimit: () => Promise<DateTimeOutput>;
+  timelimitString: () => Promise<String>;
   type: () => Promise<DebateType>;
   comments: <T = FragmentableArray<Comment>>(args?: {
     where?: CommentWhereInput;
@@ -6508,6 +6557,7 @@ export interface DebateSubscription
   ownerRed: <T = UserSubscription>() => T;
   content: () => Promise<AsyncIterator<String>>;
   timelimit: () => Promise<AsyncIterator<DateTimeOutput>>;
+  timelimitString: () => Promise<AsyncIterator<String>>;
   type: () => Promise<AsyncIterator<DebateType>>;
   comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
     where?: CommentWhereInput;
@@ -6593,6 +6643,7 @@ export interface DebateNullablePromise
   ownerRed: <T = UserPromise>() => T;
   content: () => Promise<String>;
   timelimit: () => Promise<DateTimeOutput>;
+  timelimitString: () => Promise<String>;
   type: () => Promise<DebateType>;
   comments: <T = FragmentableArray<Comment>>(args?: {
     where?: CommentWhereInput;
@@ -6945,6 +6996,7 @@ export interface DebatePreviousValues {
   id: ID_Output;
   content: String;
   timelimit?: DateTimeOutput;
+  timelimitString?: String;
   type: DebateType;
   closed: Boolean;
   crowned: Boolean;
@@ -6961,6 +7013,7 @@ export interface DebatePreviousValuesPromise
   id: () => Promise<ID_Output>;
   content: () => Promise<String>;
   timelimit: () => Promise<DateTimeOutput>;
+  timelimitString: () => Promise<String>;
   type: () => Promise<DebateType>;
   closed: () => Promise<Boolean>;
   crowned: () => Promise<Boolean>;
@@ -6977,6 +7030,7 @@ export interface DebatePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   content: () => Promise<AsyncIterator<String>>;
   timelimit: () => Promise<AsyncIterator<DateTimeOutput>>;
+  timelimitString: () => Promise<AsyncIterator<String>>;
   type: () => Promise<AsyncIterator<DebateType>>;
   closed: () => Promise<AsyncIterator<Boolean>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
