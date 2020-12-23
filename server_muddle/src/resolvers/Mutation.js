@@ -24,6 +24,21 @@ const exposedMutations = {
   userMutations: ["updateUser"],
 };
 
+const fragmentGetAllComments = `
+  fragment GetAllComments on Debate  {
+    id
+    comments {
+      id
+      from {
+        id
+      }
+      likes {
+        id
+      }
+    }
+  }
+`;
+
 const Mutation = prismaObjectType({
   name: "Mutation",
   definition(t) {
@@ -335,7 +350,7 @@ const Mutation = prismaObjectType({
       args: {
         debateId: idArg(),
       },
-      resolve: async (parent, { debateId }, { prisma }) => {
+      resolve: async (parent, { debateId }, { prisma, currentUser }) => {
         const debate = await prisma.updateDebate({
           where: { id: debateId },
           data: {
@@ -362,7 +377,38 @@ const Mutation = prismaObjectType({
             debate: { connect: { id: debate.id } },
           });
         } else {
-          // Have to implement top comment
+          const comments = await prisma
+            .debate({ id: debateId, comments: { id_not: currentUser.user.id } })
+            .$fragment(fragmentGetAllComments);
+
+          if (comments.length === 0) return debate;
+
+          const sortedComments = comments.sort(
+            (a, b) => b.likes.length - a.likes.length
+          );
+
+          const topCommentId = {
+            comment: sortedComments[0].id,
+            user: sortedComments[0].from.id,
+          };
+
+          const trophyComment = await prisma.createTrophy({
+            user: { connect: { id: topCommentId.user } },
+            won: true,
+            type: "TOP_COMMENT",
+            debate: { connect: { id: debate.id } },
+            comment: { connect: { id: topCommentId.comment } },
+          });
+
+          // Don't use this feature or have to implement remove topComment when deleteComment
+          // const updatedDebate = await prisma.updateDebate({
+          //   where: { id: debate.id },
+          //   data: {
+          //     topComment: {
+          //       connect: { id: topCommentId.comment },
+          //     },
+          //   },
+          // });
         }
         return debate;
       },
@@ -383,7 +429,7 @@ const Mutation = prismaObjectType({
         const notification = await prisma.createNotification({
           who: {
             connect: {
-              id: currentUser.id,
+              id: currentUser.user.id,
             },
           },
           userId,
@@ -410,7 +456,7 @@ const Mutation = prismaObjectType({
         const notification = await prisma.createNotification({
           who: {
             connect: {
-              id: currentUser.id,
+              id: currentUser.user.id,
             },
           },
           userId,
@@ -421,7 +467,6 @@ const Mutation = prismaObjectType({
         });
       },
     });
-
   },
 });
 
