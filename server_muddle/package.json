@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/index.js",
-    "reseed": "cd prisma ; prisma reset --force ; prisma seed ; cd -"
+    "reseed": "cd prisma ; prisma reset --force ; prisma seed ; cd -",
+    "closeDeb": "node -r esm ./src/cronjobs/checkClosedDebate.js"
   },
   "keywords": [],
   "author": "",

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { flattenDeep } from "lodash";
+import { flattenDeep, get, isNil } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
 import { idArg, stringArg } from "nexus/dist";
@@ -377,15 +377,21 @@ const Mutation = prismaObjectType({
             debate: { connect: { id: debate.id } },
           });
         } else {
-          const comments = await prisma
-            .debate({ id: debateId, comments: { id_not: currentUser.user.id } })
+          const debateComments = await prisma
+            .debate({
+              id: debateId,
+              // comments_some: { id_not: currentUser.user.id },
+            })
             .$fragment(fragmentGetAllComments);
 
-          if (comments.length === 0) return debate;
+          const comments = get(debateComments, "comments");
+          if (isNil(comments) || comments.length === 0) return debate;
 
-          const sortedComments = comments.sort(
-            (a, b) => b.likes.length - a.likes.length
-          );
+          const sortedComments = comments
+            .filter((c) => c.from.id !== currentUser.user.id)
+            .sort((a, b) => b.likes.length - a.likes.length);
+          if (sortedComments.length === 0) return debate;
+          if (sortedComments[0].likes.length === 0) return debate;
 
           const topCommentId = {
             comment: sortedComments[0].id,
@@ -426,6 +432,9 @@ const Mutation = prismaObjectType({
         { debateId, userId },
         { prisma, currentUser }
       ) => {
+        const debate = await prisma.debate({ id: debateId });
+        if (isNil(debate)) throw new Error("Debate doesn't exist");
+
         const notification = await prisma.createNotification({
           who: {
             connect: {
@@ -438,6 +447,8 @@ const Mutation = prismaObjectType({
           status: "PENDING",
           debate: { connect: { id: debateId } },
         });
+
+        return debate;
       },
     });
 
@@ -453,6 +464,9 @@ const Mutation = prismaObjectType({
         { debateId, userId },
         { prisma, currentUser }
       ) => {
+        const debate = await prisma.debate({ id: debateId });
+        if (isNil(debate)) throw new Error("Debate doesn't exist");
+
         const notification = await prisma.createNotification({
           who: {
             connect: {
@@ -465,6 +479,8 @@ const Mutation = prismaObjectType({
           status: "PENDING",
           debate: { connect: { id: debateId } },
         });
+
+        return debate;
       },
     });
   },

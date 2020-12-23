@@ -124,6 +124,7 @@ const GET_TROPHIES = gql`
           answerOne
           answerTwo
           content
+          closed
           owner {
             id
             firstname
@@ -212,6 +213,7 @@ const Trophies = (props) => {
 
   const { navigation, route } = props;
   const { userId, nbTopComment, nbDuoTrophies } = route.params;
+  console.log(nbDuoTrophies);
   return (
     <View style={styles.container}>
       <Header

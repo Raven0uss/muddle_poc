@@ -312,6 +312,7 @@ const Profile = (props) => {
       const { user: queryResult } = response;
       setUser(queryResult);
     },
+    fetchPolicy: "cache-and-network",
   });
 
   const { navigation, route } = props;
@@ -331,6 +332,7 @@ const Profile = (props) => {
   }
 
   const me = currentUser.id === user.id;
+  console.log(user.trophies);
   return (
     <View
       style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}

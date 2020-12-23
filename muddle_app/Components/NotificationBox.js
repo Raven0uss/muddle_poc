@@ -3,14 +3,24 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
-import { not } from "react-native-reanimated";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { gql, useMutation } from "@apollo/client";
+
+const CLOSE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    closeMyDebate(debateId: $debateId) {
+      id
+    }
+  }
+`;
 
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
   const { notification, theme, navigation } = props;
+
+  const [closeDebate] = useMutation(CLOSE_DEBATE);
 
   //   console.log(notification);
 
@@ -412,6 +422,13 @@ const NotificationBox = (props) => {
                   borderRadius: 12,
                 }}
                 disabled={status === "DECLINED"}
+                onPress={() => {
+                  closeDebate({
+                    variables: {
+                      debateId: notification.debate.id,
+                    },
+                  });
+                }}
               >
                 <Text
                   style={{
