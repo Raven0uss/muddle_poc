@@ -16,12 +16,14 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
-import { isEmpty } from "lodash";
+import { isEmpty, isNil } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { useIsFocused } from "@react-navigation/native";
 import moment from "moment";
+
+// messages_some: { content_not: null }
 
 const GET_CONVERSATIONS = gql`
   query($first: Int!, $skip: Int, $user: String!) {
@@ -52,6 +54,7 @@ let nbConversations = frequency;
 
 const renderItem = ({ item }, navigation, theme, currentUser) => {
   const lastMessage = item.messages[item.messages.length - 1];
+  if (isNil(lastMessage)) return null;
   const speaker = item.speakers.filter((u) => u.email !== currentUser.email);
   if (speaker.length === 0) return null;
   return (

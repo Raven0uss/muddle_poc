@@ -14,7 +14,7 @@ import Header from "../Components/Header";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import getUnique from "../Library/getUnique";
 import i18n from "../i18n";
@@ -22,6 +22,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import strUcFirst from "../Library/strUcFirst";
 import { isNil } from "lodash";
+import UserContext from "../CustomProperties/UserContext";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($email: String!) {
@@ -107,8 +108,44 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
   }
 `;
 
+const CREATE_NEW_CONVERSATION = gql`
+  mutation($from: ID!, $to: ID!) {
+    createConversation(
+      data: { speakers: { connect: [{ id: $from }, { id: $to }] } }
+    ) {
+      id
+      speakers {
+        id
+        firstname
+        lastname
+        profilePicture
+        email
+      }
+      messages {
+        id
+        content
+        from {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+        to {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+      }
+    }
+  }
+`;
+
 const NewConversation = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [users, setUsers] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const { loading, error } = useQuery(GET_FOLLOWERS_CONVERSATIONS, {
@@ -131,11 +168,26 @@ const NewConversation = (props) => {
   });
 
   const { navigation, route } = props;
+
+  const [createNewConversation, { loading: loadingMutation }] = useMutation(
+    CREATE_NEW_CONVERSATION,
+    {
+      onCompleted: (response) => {
+        const { createConversation: queryResponse } = response;
+
+        navigation.replace("Chat", {
+          conversation: queryResponse,
+        });
+      },
+    }
+  );
+
   return (
     <View style={styles.container}>
       <Header
         LeftComponent={
           <TouchableOpacity
+            disabled={loadingMutation}
             onPress={() => navigation.goBack()}
             style={{ marginTop: 3 }}
           >
@@ -219,11 +271,18 @@ const NewConversation = (props) => {
                 onPress={() => {
                   if (isNil(u.conversation)) {
                     console.log("Create a new conversation...");
+                    createNewConversation({
+                      variables: {
+                        from: currentUser.id,
+                        to: u.id,
+                      },
+                    });
                   } else
                     navigation.push("Chat", {
                       conversation: u.conversation,
                     });
                 }}
+                disabled={loadingMutation}
               >
                 <View
                   style={{

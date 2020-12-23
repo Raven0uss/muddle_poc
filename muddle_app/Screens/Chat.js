@@ -140,8 +140,13 @@ const MESSAGES_CHAT_SUB = gql`
 `;
 
 const GET_MESSAGES = gql`
-  query($last: Int!, $skip: Int) {
-    messages(last: $last, skip: $skip, orderBy: createdAt_DESC) {
+  query($conversationId: ID!, $last: Int!, $skip: Int) {
+    messages(
+      last: $last
+      skip: $skip
+      orderBy: createdAt_DESC
+      where: { conversation: { id: $conversationId } }
+    ) {
       id
       content
       from {
@@ -196,6 +201,7 @@ const Chat = (props) => {
   const { loading, error, fetchMore } = useQuery(GET_MESSAGES, {
     variables: {
       last: nbMessages,
+      conversationId: conversation.id,
     },
     onCompleted: (response) => {
       const { messages: queryResult } = response;
@@ -375,7 +381,11 @@ const Chat = (props) => {
           // return ;
           nbMessages += frequency;
           await fetchMore({
-            variables: { last: frequency, skip: nbMessages - frequency },
+            variables: {
+              last: frequency,
+              skip: nbMessages - frequency,
+              conversationId: conversation.id,
+            },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { messages: moreMessages } = fetchMoreResult;
               if (isEmpty(moreMessages)) setNoMoreData(true);
