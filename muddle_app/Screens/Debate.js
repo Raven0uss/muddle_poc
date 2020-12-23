@@ -153,7 +153,7 @@ const GET_COMMENTS = gql`
 
 const CLOSE_DEBATE = gql`
   mutation($debateId: ID!) {
-    updateDebate(where: { id: $debateId }, data: { closed: true }) {
+    closeMyDebate(debateId: $debateId) {
       id
     }
   }

@@ -330,7 +330,35 @@ const Mutation = prismaObjectType({
         debateId: idArg(),
       },
       resolve: async (parent, { debateId }, { prisma }) => {
-        const debate = await prisma.updateDebate({ id: debateId });
+        const debate = await prisma.updateDebate({
+          where: { id: debateId },
+          data: {
+            closed: true,
+          },
+        });
+
+        if (debate.type === "DUO") {
+          const redVotes = await prisma.debate({ id: debateId }).redVotes();
+          const blueVotes = await prisma.debate({ id: debateId }).blueVotes();
+
+          if (redVotes.length === blueVotes.length) return debate;
+
+          const ownerRed = await prisma.debate({ id: debateId }).ownerRed();
+          const ownerBlue = await prisma.debate({ id: debateId }).ownerBlue();
+
+          const winnerId =
+            redVotes.length > blueVotes.length ? ownerRed.id : ownerBlue.id;
+
+          const trophyDuo = await prisma.createTrophy({
+            user: { connect: { id: winnerId } },
+            won: true,
+            type: "DUO",
+            debate: { connect: { id: debate.id } },
+          });
+        } else {
+          // Have to implement top comment
+        }
+        return debate;
       },
     });
   },
