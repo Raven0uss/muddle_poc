@@ -25,18 +25,23 @@ const { width, height } = Dimensions.get("window");
 const Select = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const [visible, setVisible] = React.useState(false);
-  const { list, selected, placeholder, onSelect, renderComponent } = props;
+  const {
+    list: propList,
+    selected,
+    placeholder,
+    onSelect,
+    renderComponent,
+  } = props;
 
+  const list = propList.filter((l) => !isNil(l));
   const onPress = () => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: [
-          ...[i18n._("cancel")],
-          ...list.filter((l) => !isNil(l)).map((l) => l.label),
-        ],
+        options: [...[i18n._("cancel")], ...list.map((l) => l.label)],
         cancelButtonIndex: 0,
       },
       (buttonIndex) => {
+        console.log(buttonIndex);
         if (buttonIndex === 0) {
           setVisible((v) => !v);
         } else {

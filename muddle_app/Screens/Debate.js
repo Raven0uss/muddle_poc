@@ -151,6 +151,14 @@ const GET_COMMENTS = gql`
   }
 `;
 
+const CLOSE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    updateDebate(where: { id: $debateId }, data: { closed: true }) {
+      id
+    }
+  }
+`;
+
 const renderItem = (
   { item },
   navigation,
@@ -245,6 +253,18 @@ const Debate = (props) => {
     variables: {
       debate: debate.id,
       userId: currentUser.id,
+    },
+  });
+
+  const [closeDebate] = useMutation(CLOSE_DEBATE, {
+    variables: {
+      debateId: debate.id,
+    },
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
     },
   });
 
@@ -416,6 +436,10 @@ const Debate = (props) => {
                   type: "DEBATE",
                   content: debate,
                 });
+
+              if (action.value === "CLOSE") {
+                closeDebate();
+              }
             }}
             renderComponent={
               <CustomIcon

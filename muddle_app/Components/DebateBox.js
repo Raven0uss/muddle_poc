@@ -8,7 +8,7 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import hasVoted from "../Library/hasVoted";
-import { useMutation } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import {
   SEND_BLUE_VOTE,
   SEND_RED_VOTE,
@@ -19,6 +19,22 @@ import { cloneDeepWith, findIndex, isNil } from "lodash";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
 import voteDispatch from "../Library/voteDispatch";
+
+const DELETE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    deleteMyDebate(debateId: $debateId) {
+      id
+    }
+  }
+`;
+
+const CLOSE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    updateDebate(where: { id: $debateId }, data: { closed: true }) {
+      id
+    }
+  }
+`;
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   if (totalVotes === 0) return `0%\n${answer}`;
@@ -111,6 +127,30 @@ const DebateBox = (props) => {
     },
   });
 
+  const [deleteDebate] = useMutation(DELETE_DEBATE, {
+    variables: {
+      debateId: debate.id,
+    },
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
+  const [closeDebate] = useMutation(CLOSE_DEBATE, {
+    variables: {
+      debateId: debate.id,
+    },
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
   const isFocused = useIsFocused();
   React.useEffect(() => {
     const result = hasVoted({
@@ -192,6 +232,13 @@ const DebateBox = (props) => {
                     type: "DEBATE",
                     content: debate,
                   });
+
+                if (action.value === "DELETE") {
+                  deleteDebate();
+                }
+                if (action.value === "CLOSE") {
+                  closeDebate();
+                }
               }}
               renderComponent={
                 <CustomIcon
@@ -499,6 +546,9 @@ const DebateBox = (props) => {
                       type: "DEBATE",
                       content: debate,
                     });
+                  // if (action.value === "DELETE") {
+                  //   deleteDebate();
+                  // }
                 }}
                 renderComponent={
                   <CustomIcon

@@ -4177,6 +4177,7 @@ export interface NexusGenFieldTypes {
     updatedFields: string[] | null; // [String!]
   }
   Mutation: { // field return type
+    closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
     createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
     createComment: NexusGenRootTypes['Comment']; // Comment!
@@ -4189,6 +4190,10 @@ export interface NexusGenFieldTypes {
     createPublicDebate: NexusGenRootTypes['Debate']; // Debate!
     createReport: NexusGenRootTypes['Report']; // Report!
     createTrophy: NexusGenRootTypes['Trophy']; // Trophy!
+    deleteComment: NexusGenRootTypes['Comment'] | null; // Comment
+    deleteDebate: NexusGenRootTypes['Debate'] | null; // Debate
+    deleteMyComment: NexusGenRootTypes['Comment']; // Comment!
+    deleteMyDebate: NexusGenRootTypes['Debate']; // Debate!
     publishDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     signUp: NexusGenRootTypes['Token']; // Token!
     updateAd: NexusGenRootTypes['Ad'] | null; // Ad
@@ -4455,6 +4460,9 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    closeMyDebate: { // args
+      debateId?: string | null; // ID
+    }
     createAd: { // args
       data: NexusGenInputs['AdCreateInput']; // AdCreateInput!
     }
@@ -4496,6 +4504,18 @@ export interface NexusGenArgTypes {
     }
     createTrophy: { // args
       data: NexusGenInputs['TrophyCreateInput']; // TrophyCreateInput!
+    }
+    deleteComment: { // args
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+    }
+    deleteDebate: { // args
+      where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+    }
+    deleteMyComment: { // args
+      commentId?: string | null; // ID
+    }
+    deleteMyDebate: { // args
+      debateId?: string | null; // ID
     }
     publishDuoDebate: { // args
       answerTwo?: string | null; // String

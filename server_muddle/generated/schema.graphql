@@ -2155,6 +2155,7 @@ input MessageWhereUniqueInput {
 }
 
 type Mutation {
+  closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
   createComment(data: CommentCreateInput!): Comment!
@@ -2167,6 +2168,10 @@ type Mutation {
   createPublicDebate(answerOne: String, answerTwo: String, content: String, timelimit: String): Debate!
   createReport(data: ReportCreateInput!): Report!
   createTrophy(data: TrophyCreateInput!): Trophy!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteDebate(where: DebateWhereUniqueInput!): Debate
+  deleteMyComment(commentId: ID): Comment!
+  deleteMyDebate(debateId: ID): Debate!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
   signUp(birthdate: DateTime, email: String, password: String, pseudo: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad

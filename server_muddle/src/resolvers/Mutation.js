@@ -13,9 +13,9 @@ import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 const exposedMutations = {
   adMutations: ["createAd", "updateAd"],
   adTargetMutations: ["createAdTarget", "updateAdTarget"],
-  commentMutations: ["createComment", "updateComment"],
+  commentMutations: ["createComment", "updateComment", "deleteComment"],
   conversationMutations: ["createConversation", "updateConversation"],
-  debateMutations: ["createDebate", "updateDebate"],
+  debateMutations: ["createDebate", "updateDebate", "deleteDebate"],
   interactionMutations: ["createInteraction", "updateInteraction"],
   messageMutations: ["createMessage", "updateMessage", "updateManyMessages"],
   notificationMutations: ["createNotification", "updateManyNotifications"],
@@ -175,6 +175,162 @@ const Mutation = prismaObjectType({
         } catch (err) {
           throw new Error(err);
         }
+      },
+    });
+
+    t.field("deleteMyDebate", {
+      type: "Debate",
+      args: {
+        debateId: idArg(),
+      },
+      resolve: async (parent, { debateId }, { prisma, currentUser }) => {
+        try {
+          const notifications = await prisma.notifications({
+            where: {
+              debate: {
+                id: debateId,
+              },
+            },
+          });
+
+          const interactions = await prisma.interactions({
+            where: {
+              debate: {
+                id: debateId,
+              },
+            },
+          });
+
+          const trophies = await prisma.trophies({
+            where: {
+              debate: {
+                id: debateId,
+              },
+            },
+          });
+
+          const comments = await prisma.comments({
+            where: {
+              debate: {
+                id: debateId,
+              },
+            },
+          });
+
+          const reports = await prisma.reports({
+            where: {
+              debate: {
+                id: debateId,
+              },
+            },
+          });
+
+          Promise.all(
+            notifications.map(
+              async (n) => await prisma.deleteNotification({ id: n.id })
+            )
+          );
+
+          Promise.all(
+            interactions.map(
+              async (i) => await prisma.deleteInteraction({ id: i.id })
+            )
+          );
+
+          Promise.all(
+            trophies.map(async (t) => await prisma.deleteTrophy({ id: t.id }))
+          );
+
+          Promise.all(
+            comments.map(async (c) => await prisma.deleteComment({ id: c.id }))
+          );
+
+          Promise.all(
+            reports.map(async (r) => await prisma.deleteReport({ id: r.id }))
+          );
+
+          const d = await prisma.deleteDebate({ id: debateId });
+          return d;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("deleteMyComment", {
+      type: "Comment",
+      args: {
+        commentId: idArg(),
+      },
+      resolve: async (parent, { commentId }, { prisma, currentUser }) => {
+        try {
+          const notifications = await prisma.notifications({
+            where: {
+              comment: {
+                id: commentId,
+              },
+            },
+          });
+
+          const interactions = await prisma.interactions({
+            where: {
+              comment: {
+                id: commentId,
+              },
+            },
+          });
+
+          const trophies = await prisma.trophies({
+            where: {
+              comment: {
+                id: commentId,
+              },
+            },
+          });
+
+          const reports = await prisma.reports({
+            where: {
+              comment: {
+                id: commentId,
+              },
+            },
+          });
+
+          Promise.all(
+            notifications.map(
+              async (n) => await prisma.deleteNotification({ id: n.id })
+            )
+          );
+
+          Promise.all(
+            interactions.map(
+              async (i) => await prisma.deleteInteraction({ id: i.id })
+            )
+          );
+
+          Promise.all(
+            trophies.map(async (t) => await prisma.deleteTrophy({ id: t.id }))
+          );
+
+          Promise.all(
+            reports.map(async (r) => await prisma.deleteReport({ id: r.id }))
+          );
+
+          const c = await prisma.deleteComment({ id: commentId });
+          return c;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("closeMyDebate", {
+      type: "Debate",
+      args: {
+        debateId: idArg(),
+      },
+      resolve: async (parent, { debateId }, { prisma }) => {
+        const debate = await prisma.updateDebate({ id: debateId });
       },
     });
   },

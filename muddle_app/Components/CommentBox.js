@@ -5,13 +5,22 @@ import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import i18n from "../i18n";
 import themeSchema from "../CustomProperties/Theme";
-import { useMutation } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
 // import { useIsFocused } from "@react-navigation/native";
 
+const DELETE_COMMENT = gql`
+  mutation($commentId: ID!) {
+    deleteMyComment(commentId: $commentId) {
+      id
+    }
+  }
+`;
+
 const CommentBox = (props) => {
   const { comment, navigation, theme, debateId, currentUser } = props;
+  const [deleted, setDeleted] = React.useState(false);
   // const [comment, setComment] = React.useState(propComment);
   const [liked, setLiked] = React.useState(
     hasLiked({ ...comment, currentUser })
@@ -29,11 +38,18 @@ const CommentBox = (props) => {
     },
   });
 
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
+    variables: {
+      commentId: comment.id,
+    },
+  });
+
   // const isFocused = useIsFocused();
   React.useEffect(() => {
     setLiked(hasLiked({ ...comment, currentUser }));
   }, [comment]);
 
+  if (deleted) return null;
   return (
     <View
       style={{
@@ -92,11 +108,16 @@ const CommentBox = (props) => {
             selected={null}
             placeholder=""
             onSelect={(action) => {
+              console.log(action);
               if (action.value === "REPORT")
                 navigation.push("Report", {
                   type: "COMMENT",
                   content: comment,
                 });
+              if (action.value === "DELETE") {
+                setDeleted(true);
+                deleteComment();
+              }
             }}
             renderComponent={
               <CustomIcon
