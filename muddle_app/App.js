@@ -61,6 +61,7 @@ import NewConversationScreen from "./Screens/NewConversation";
 import TrophiesScreen from "./Screens/Trophies";
 import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
+import IsolateImageScreen from "./Screens/IsolateImage";
 
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
@@ -330,6 +331,18 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
+
+                <Stack.Screen
+                  name="IsolateImage"
+                  component={IsolateImageScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+
                 <Stack.Screen
                   name="Trophies"
                   component={TrophiesScreen}

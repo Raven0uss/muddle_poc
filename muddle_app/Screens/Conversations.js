@@ -253,7 +253,7 @@ const Conversations = (props) => {
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
                 const { conversations: moreConversations } = fetchMoreResult;
-                if (isEmpty(moreConversations)) setNoMoreData(true);
+                if (isEmpty(moreConversations)) return setNoMoreData(true);
                 setConversations((previousState) =>
                   [...previousState, ...moreConversations].reduce(
                     (acc, current) => {

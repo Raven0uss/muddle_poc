@@ -326,7 +326,7 @@ const Trophies = (props) => {
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { trophies: moreTrophies } = fetchMoreResult;
-              if (isEmpty(moreTrophies)) setNoMoreData(true);
+              if (isEmpty(moreTrophies)) return setNoMoreData(true);
               setTrophies((previousState) =>
                 [...previousState, ...moreTrophies].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);

@@ -151,7 +151,7 @@ const Home = (props) => {
     },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-and-network",
-    ssr: false,
+    // ssr: false,
     onError: () => {
       setNoMoreData(true);
     },
@@ -305,7 +305,7 @@ const Home = (props) => {
             variables: { first: frequency, skip: nbDebates - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { homeDebates: moreDebates } = fetchMoreResult;
-              if (isEmpty(moreDebates)) setNoMoreData(true);
+              if (isEmpty(moreDebates)) return setNoMoreData(true);
               setDebates((previousState) =>
                 [...previousState, ...moreDebates].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);

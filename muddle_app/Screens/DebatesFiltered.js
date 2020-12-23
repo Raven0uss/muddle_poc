@@ -287,7 +287,7 @@ const DebatesFiltered = (props) => {
                   const moreDebates =
                     fetchMoreResult[Object.keys(fetchMoreResult)[0]];
 
-                  if (isEmpty(moreDebates)) setNoMoreData(true);
+                  if (isEmpty(moreDebates)) return setNoMoreData(true);
                   setDebates((previousState) =>
                     [...previousState, ...moreDebates].reduce(
                       (acc, current) => {

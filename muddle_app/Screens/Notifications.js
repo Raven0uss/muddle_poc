@@ -196,7 +196,7 @@ const Notifications = (props) => {
             variables: { first: frequency, skip: nbNotifications - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { notifications: moreNotifications } = fetchMoreResult;
-              if (isEmpty(moreNotifications)) setNoMoreData(true);
+              if (isEmpty(moreNotifications)) return setNoMoreData(true);
               setNotifications((previousState) =>
                 [...previousState, ...moreNotifications].reduce(
                   (acc, current) => {

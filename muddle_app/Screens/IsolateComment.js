@@ -11,6 +11,7 @@ import {
   Keyboard,
   Platform,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import Header from "../Components/Header";
 import { ScrollView } from "react-native-gesture-handler";
@@ -26,9 +27,10 @@ import UserContext from "../CustomProperties/UserContext";
 import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
 import { useIsFocused } from "@react-navigation/native";
+import { get, last, isEmpty } from "lodash";
 
 const GET_SUBCOMMENTS = gql`
-  query($commentId: ID!) {
+  query($commentId: ID!, $last: Int, $skip: Int) {
     comment(where: { id: $commentId }) {
       id
       likes {
@@ -41,7 +43,7 @@ const GET_SUBCOMMENTS = gql`
         id
         closed
       }
-      comments {
+      comments(last: $last, skip: $skip, orderBy: updatedAt_DESC) {
         id
         debate {
           id
@@ -62,6 +64,8 @@ const GET_SUBCOMMENTS = gql`
         comments {
           id
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -87,24 +91,38 @@ const CREATE_SUBCOMMENT = gql`
   }
 `;
 
-const Comments = (props) => {
-  const { comments, loading, comment, navigation, theme, currentUser } = props;
-
-  // if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
+const renderItem = ({ item }, navigation, theme, currentUser) => {
   return (
-    <>
-      {comments.map((c) => (
-        <CommentBox
-          theme={theme}
-          comment={c}
-          navigation={navigation}
-          key={c.id}
-          currentUser={currentUser}
-        />
-      ))}
-    </>
+    <CommentBox
+      theme={theme}
+      comment={item}
+      navigation={navigation}
+      currentUser={currentUser}
+    />
   );
 };
+
+// const Comments = (props) => {
+//   const { comments, loading, comment, navigation, theme, currentUser } = props;
+
+//   // if (loading) return <ActivityIndicator style={{ marginTop: 20 }} />;
+//   return (
+//     <>
+//       {comments.map((c) => (
+//         <CommentBox
+//           theme={theme}
+//           comment={c}
+//           navigation={navigation}
+//           key={c.id}
+//           currentUser={currentUser}
+//         />
+//       ))}
+//     </>
+//   );
+// };
+
+const frequency = 10;
+let nbComments = frequency;
 
 const IsolateComment = (props) => {
   const { navigation, route } = props;
@@ -121,16 +139,21 @@ const IsolateComment = (props) => {
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
+  const [noMoreData, setNoMoreData] = React.useState(false);
+
   // console.log(notify);
   const { data, loading, error, fetchMore, refetch } = useQuery(
     GET_SUBCOMMENTS,
     {
       variables: {
         commentId: comment.id,
+        last: nbComments,
       },
       onCompleted: (response) => {
         const { comment: queryResult } = response;
         // console.log(last(comments).likes);
+        if (queryResult.comments.length === 0) setNoMoreData(true);
+
         setComments(queryResult.comments);
         hasLiked({ ...queryResult, currentUser });
       },
@@ -367,7 +390,57 @@ const IsolateComment = (props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView
+
+      <FlatList
+        data={comments}
+        // ref={commentsScrollViewRef}
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+        renderItem={(param) =>
+          renderItem(param, navigation, theme, currentUser)
+        }
+        keyExtractor={(item) => item.id}
+        inverted={true}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web" || noMoreData) return;
+          // return ;
+          nbComments += frequency;
+          await fetchMore({
+            variables: {
+              last: frequency,
+              skip: nbComments - frequency,
+              commentId: comment.id,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { comment: moreComments } = fetchMoreResult;
+              if (isEmpty(moreComments.comments)) return setNoMoreData(true);
+              console.log(moreComments.comments);
+              setComments((previousState) =>
+                [...previousState.comments, ...moreComments.comments].reduce(
+                  (acc, current) => {
+                    const x = acc.find((item) => item.id === current.id);
+                    if (!x) {
+                      return acc.concat([current]);
+                    } else {
+                      return acc;
+                    }
+                  },
+                  []
+                )
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => {
+          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          // return null;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
+      />
+      {/* <ScrollView
         style={{
           ...styles.seedContainer,
           backgroundColor: themeSchema[theme].backgroundColor1,
@@ -382,7 +455,7 @@ const IsolateComment = (props) => {
           loading={loading}
           currentUser={currentUser}
         />
-      </ScrollView>
+      </ScrollView> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
         style={
@@ -464,7 +537,7 @@ const IsolateComment = (props) => {
                 // };
                 // setComments((commentList) => [...commentList,]);
                 // setNewComment("");
-
+                setNoMoreData(false);
                 await createSubComment({
                   variables: {
                     from: currentUser.email,
@@ -475,7 +548,7 @@ const IsolateComment = (props) => {
                 });
                 setNewComment("");
               }}
-              disabled={newComment.length > 0 || comment.debate.closed}
+              disabled={newComment.length <= 0 || comment.debate.closed}
             >
               <CustomIcon
                 name="send"

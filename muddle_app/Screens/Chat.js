@@ -388,7 +388,10 @@ const Chat = (props) => {
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { messages: moreMessages } = fetchMoreResult;
-              if (isEmpty(moreMessages)) setNoMoreData(true);
+              if (isEmpty(moreMessages)) {
+                setNoMoreData(true);
+                return;
+              }
               setMessages((previousState) =>
                 [...previousState, ...moreMessages].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);

@@ -277,7 +277,7 @@ const Interactions = (props) => {
           },
           updateQuery: (previousResult, { fetchMoreResult }) => {
             const { interactions: moreInteractions } = fetchMoreResult;
-            if (isEmpty(moreInteractions)) setNoMoreData(true);
+            if (isEmpty(moreInteractions)) return setNoMoreData(true);
             setInteractions((previousState) =>
               [...previousState, ...moreInteractions].reduce((acc, current) => {
                 const x = acc.find((item) => item.id === current.id);
@@ -335,17 +335,27 @@ const Profile = (props) => {
     <View
       style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}
     >
-      <Image
-        source={{
-          uri: user.coverPicture,
-        }}
+      <TouchableOpacity
         style={{
-          height: 240,
-          width: Dimensions.get("screen").width,
           position: "absolute",
         }}
-        resizeMode="cover"
-      />
+        onPress={() => {
+          navigation.push("IsolateImage", {
+            image: user.coverPicture,
+          });
+        }}
+      >
+        <Image
+          source={{
+            uri: user.coverPicture,
+          }}
+          style={{
+            height: 240,
+            width: Dimensions.get("screen").width,
+          }}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
       <Header
         LeftComponent={
           <TouchableOpacity
@@ -460,22 +470,30 @@ const Profile = (props) => {
           />
           {/* Nombre des trophees */}
         </TouchableOpacity>
-        <Image
-          source={{
-            uri: user.profilePicture,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateImage", {
+              image: user.profilePicture,
+            });
           }}
-          style={{
-            width: 90,
-            height: 90,
-            borderRadius: 30,
-            // borderWidth: 1,
-            marginTop: "auto",
-            marginBottom: "auto",
-            padding: 5,
-            marginLeft: 5,
-          }}
-          // resizeMode="center"
-        />
+        >
+          <Image
+            source={{
+              uri: user.profilePicture,
+            }}
+            style={{
+              width: 90,
+              height: 90,
+              borderRadius: 30,
+              // borderWidth: 1,
+              marginTop: "auto",
+              marginBottom: "auto",
+              padding: 5,
+              marginLeft: 5,
+            }}
+            // resizeMode="center"
+          />
+        </TouchableOpacity>
 
         <View
           style={{

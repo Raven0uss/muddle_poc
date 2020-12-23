@@ -11,6 +11,7 @@ import {
   Keyboard,
   Platform,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import Header from "../Components/Header";
 import { ScrollView } from "react-native-gesture-handler";
@@ -23,7 +24,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import { gql, useSubscription, useMutation, useQuery } from "@apollo/client";
 import UserContext from "../CustomProperties/UserContext";
-import { get, last } from "lodash";
+import { get, last, isEmpty } from "lodash";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import hasVoted from "../Library/hasVoted";
 import {
@@ -74,6 +75,10 @@ const COMMENTS_SUB = gql`
     comment(debateId: $debateId) {
       node {
         id
+        debate {
+          id
+          closed
+        }
         nested
         from {
           firstname
@@ -111,8 +116,13 @@ const CREATE_COMMENT = gql`
 `;
 
 const GET_COMMENTS = gql`
-  query($debate: ID!) {
-    comments(where: { debate: { id: $debate }, nested: false }) {
+  query($debate: ID!, $last: Int, $skip: Int) {
+    comments(
+      where: { debate: { id: $debate }, nested: false }
+      last: $last
+      skip: $skip
+      orderBy: updatedAt_DESC
+    ) {
       id
       debate {
         id
@@ -136,9 +146,31 @@ const GET_COMMENTS = gql`
       comments {
         id
       }
+      updatedAt
     }
   }
 `;
+
+const renderItem = (
+  { item },
+  navigation,
+  theme,
+  debateId,
+  currentUser,
+  query
+) => {
+  if (query === false) return <ActivityIndicator size={36} />;
+
+  return (
+    <CommentBox
+      theme={theme}
+      comment={item}
+      debateId={debateId}
+      navigation={navigation}
+      currentUser={currentUser}
+    />
+  );
+};
 
 const isOwner = (currentUser, debate) => {
   if (isNil(get(currentUser, "id"))) return false;
@@ -151,6 +183,9 @@ const isOwner = (currentUser, debate) => {
   }
   return owner === currentUser.id;
 };
+
+const frequency = 10;
+let nbComments = frequency;
 
 const Debate = (props) => {
   const { navigation, route } = props;
@@ -165,6 +200,7 @@ const Debate = (props) => {
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   const commentsScrollViewRef = React.useRef(null);
   const [query, setQuery] = React.useState(false);
+  const [noMoreData, setNoMoreData] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
 
   const [pour, setPour] = React.useState(
@@ -215,11 +251,13 @@ const Debate = (props) => {
   const { loading, error, fetchMore } = useQuery(GET_COMMENTS, {
     variables: {
       debate: debate.id,
+      last: nbComments,
     },
     onCompleted: (response) => {
       const { comments: queryResult } = response;
       setComments(queryResult);
       if (!query) setQuery(true);
+      if (queryResult.length === 0) setNoMoreData(true);
     },
     onError: (error) => {
       console.log(error);
@@ -252,7 +290,7 @@ const Debate = (props) => {
               return cpyCs;
             });
         } else {
-          setComments((cs) => [...cs, payload]);
+          setComments((cs) => [payload, ...cs]);
         }
       }
     },
@@ -265,7 +303,8 @@ const Debate = (props) => {
       query
     ) {
       if (commentsScrollViewRef.current) {
-        commentsScrollViewRef.current.scrollToEnd({
+        commentsScrollViewRef.current.scrollToIndex({
+          index: 0,
           animated: true,
         });
       }
@@ -853,8 +892,55 @@ const Debate = (props) => {
           </View>
         </View>
       )}
-      <ScrollView
+      <FlatList
+        data={comments}
         ref={commentsScrollViewRef}
+        style={{
+          ...styles.seedContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+        renderItem={(param) =>
+          renderItem(param, navigation, theme, debate.id, currentUser, query)
+        }
+        keyExtractor={(item) => item.id}
+        inverted={true}
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => {
+          if (Platform.OS === "web" || noMoreData) return;
+          // return ;
+          nbComments += frequency;
+          await fetchMore({
+            variables: {
+              last: frequency,
+              skip: nbComments - frequency,
+              debate: debate.id,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const { comments: moreComments } = fetchMoreResult;
+              if (isEmpty(moreComments)) return setNoMoreData(true);
+              setComments((previousState) =>
+                [...previousState, ...moreComments].reduce((acc, current) => {
+                  const x = acc.find((item) => item.id === current.id);
+                  if (!x) {
+                    return acc.concat([current]);
+                  } else {
+                    return acc;
+                  }
+                }, [])
+              );
+            },
+          });
+        }}
+        ListFooterComponent={() => {
+          if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
+          // return null;
+          return <ActivityIndicator style={{ marginBottom: 70 }} />;
+        }}
+      />
+
+      {/* <ScrollView
+        ref={commentsScrollViewRef}
+
         style={{
           ...styles.seedContainer,
           backgroundColor: themeSchema[theme].backgroundColor1,
@@ -876,7 +962,7 @@ const Debate = (props) => {
               />
             ))
         )}
-      </ScrollView>
+      </ScrollView> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
         style={
@@ -959,7 +1045,7 @@ const Debate = (props) => {
                 });
                 setComment("");
               }}
-              disabled={comment.length > 0 || debate.closed}
+              disabled={comment.length <= 0 || debate.closed}
             >
               <CustomIcon
                 name="send"
