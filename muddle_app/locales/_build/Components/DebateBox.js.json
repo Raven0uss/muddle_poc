@@ -3,11 +3,27 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        169
+        171
       ],
       [
         "Components/DebateBox.js",
-        460
+        475
+      ]
+    ]
+  },
+  "closeDebate": {
+    "origin": [
+      [
+        "Components/DebateBox.js",
+        177
+      ]
+    ]
+  },
+  "deleteDebate": {
+    "origin": [
+      [
+        "Components/DebateBox.js",
+        183
       ]
     ]
   },
@@ -15,11 +31,27 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        231
+        246
       ],
       [
         "Components/DebateBox.js",
-        664
+        694
+      ]
+    ]
+  },
+  "askCloseDebate": {
+    "origin": [
+      [
+        "Components/DebateBox.js",
+        482
+      ]
+    ]
+  },
+  "askDeleteDebate": {
+    "origin": [
+      [
+        "Components/DebateBox.js",
+        489
       ]
     ]
   }

@@ -166,19 +166,21 @@ const DebateBox = (props) => {
           <View style={{ marginLeft: "auto" }}>
             <Select
               list={[
-                {
-                  label: i18n._("reportDebate"),
-                  value: "REPORT",
-                },
+                currentUser.id !== debate.owner.id
+                  ? {
+                      label: i18n._("reportDebate"),
+                      value: "REPORT",
+                    }
+                  : null,
                 currentUser.id === debate.owner.id && !debate.closed
                   ? {
-                      label: "Clore le debat",
+                      label: i18n._("closeDebate"),
                       value: "CLOSE",
                     }
                   : null,
                 currentUser.id === debate.owner.id
                   ? {
-                      label: "Supprimer le debat",
+                      label: i18n._("deleteDebate"),
                       value: "DELETE",
                     }
                   : null,
@@ -473,6 +475,21 @@ const DebateBox = (props) => {
                     label: i18n._("reportDebate"),
                     value: "REPORT",
                   },
+                  (currentUser.id === debate.ownerRed.id ||
+                    currentUser.id === debate.ownerBlue.id) &&
+                  !debate.closed
+                    ? {
+                        label: i18n._("askCloseDebate"),
+                        value: "CLOSE",
+                      }
+                    : null,
+                  currentUser.id === debate.ownerRed.id ||
+                  currentUser.id === debate.ownerBlue.id
+                    ? {
+                        label: i18n._("askDeleteDebate"),
+                        value: "DELETE",
+                      }
+                    : null,
                 ]}
                 selected={null}
                 placeholder=""

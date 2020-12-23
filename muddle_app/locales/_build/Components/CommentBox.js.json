@@ -3,7 +3,15 @@
     "origin": [
       [
         "Components/CommentBox.js",
-        80
+        81
+      ]
+    ]
+  },
+  "deleteComment": {
+    "origin": [
+      [
+        "Components/CommentBox.js",
+        87
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Components/CommentBox.js",
-        211
+        219
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Components/CommentBox.js",
-        231
+        239
       ]
     ]
   },
@@ -27,7 +35,7 @@
     "origin": [
       [
         "Components/CommentBox.js",
-        231
+        239
       ]
     ]
   }

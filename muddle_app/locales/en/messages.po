@@ -22,6 +22,22 @@ msgstr "Accept"
 msgid "accronymCGU"
 msgstr "CGU"
 
+#: Components/ProfileAction.js:75
+msgid "actionBlock"
+msgstr "Block"
+
+#: Components/ProfileAction.js:71
+msgid "actionContact"
+msgstr "Contact"
+
+#: Components/ProfileAction.js:67
+msgid "actionFollow"
+msgstr "Follow"
+
+#: Components/ProfileAction.js:63
+msgid "actionUnfollow"
+msgstr "Unfollow"
+
 #: Components/InteractionBox.js:39
 #: Components/InteractionBox.js:87
 #: Components/InteractionBox.js:135
@@ -43,9 +59,19 @@ msgstr "Already member ?"
 msgid "and"
 msgstr "and"
 
-#: Components/CommentBox.js:211
+#: Components/CommentBox.js:219
 msgid "answer"
 msgstr "Answer"
+
+#: Components/DebateBox.js:482
+#: Screens/Debate.js:352
+msgid "askCloseDebate"
+msgstr "Ask to close"
+
+#: Components/DebateBox.js:489
+#: Screens/Debate.js:363
+msgid "askDeleteDebate"
+msgstr "Ask to delete"
 
 #: Components/NotificationBox.js:382
 msgid "askToCloseThisDebate"
@@ -59,7 +85,7 @@ msgstr "Best debates"
 msgid "birthdate"
 msgstr "Birthdate"
 
-#: Components/Select.js:32
+#: Components/Select.js:34
 #: Screens/CreateDebate.js:254
 msgid "cancel"
 msgstr "Cancel"
@@ -74,14 +100,19 @@ msgstr "General Conditions of Use"
 msgid "choice"
 msgstr "Choice"
 
-#: Components/Select.js:133
+#: Components/Select.js:140
 msgid "close"
 msgstr "Close"
 
-#: Components/DebateBox.js:231
-#: Components/DebateBox.js:664
-#: Screens/Debate.js:421
-#: Screens/Debate.js:812
+#: Components/DebateBox.js:177
+#: Screens/Debate.js:356
+msgid "closeDebate"
+msgstr "Close debate"
+
+#: Components/DebateBox.js:246
+#: Components/DebateBox.js:694
+#: Screens/Debate.js:459
+#: Screens/Debate.js:850
 #: Screens/Report.js:71
 msgid "comment"
 msgstr "comment"
@@ -128,7 +159,7 @@ msgid "debate"
 msgstr "debate"
 
 #: Screens/CreateDebate.js:543
-#: Screens/CreateDuoDebate.js:154
+#: Screens/CreateDuoDebate.js:188
 msgid "debateDuration"
 msgstr "Debate duration"
 
@@ -140,6 +171,16 @@ msgstr "The duration maximum for a debate is 9 days and 23 hours."
 #: Components/NotificationBox.js:452
 msgid "decline"
 msgstr "Decline"
+
+#: Components/CommentBox.js:87
+#: Screens/IsolateComment.js:241
+msgid "deleteComment"
+msgstr "Delete comment"
+
+#: Components/DebateBox.js:183
+#: Screens/Debate.js:367
+msgid "deleteDebate"
+msgstr "Delete debate"
 
 #: Screens/CreateDebate.js:719
 msgid "describeDebate"
@@ -161,7 +202,7 @@ msgstr "did not like your comment"
 msgid "disconnect"
 msgstr "Log out"
 
-#: Screens/CreateDuoDebate.js:89
+#: Screens/CreateDuoDebate.js:123
 msgid "duoDebate"
 msgstr "Duo debate"
 
@@ -282,6 +323,14 @@ msgstr "liked your comment"
 msgid "mailAddress"
 msgstr "E-mail"
 
+#: Components/ProfileAction.js:33
+msgid "modifyCoverPicture"
+msgstr "Change cover"
+
+#: Components/ProfileAction.js:29
+msgid "modifyProfilePicture"
+msgstr "Change profile picture"
+
 #: Screens/DebatesFiltered.js:165
 msgid "myDebates"
 msgstr "My debates"
@@ -294,7 +343,7 @@ msgstr "No account yet ?"
 msgid "onThisDebate"
 msgstr "on this debate"
 
-#: Components/CommentBox.js:231
+#: Components/CommentBox.js:239
 msgid "otherAnswers"
 msgstr "other answers"
 
@@ -315,13 +364,21 @@ msgstr "another person"
 msgid "password"
 msgstr "Password"
 
+#: Components/ProfileAction.js:42
+msgid "privateMode"
+msgstr "Enable private mode"
+
 #: Screens/CreateDebate.js:359
 #: Screens/CreateDebate.js:464
 msgid "publicDebateSelect"
 msgstr "Public debate"
 
+#: Components/ProfileAction.js:38
+msgid "publicMode"
+msgstr "Disable private mode"
+
 #: Screens/CreateDebate.js:822
-#: Screens/CreateDuoDebate.js:230
+#: Screens/CreateDuoDebate.js:271
 msgid "publish"
 msgstr "Publish"
 
@@ -333,14 +390,14 @@ msgstr "Report"
 msgid "reportA"
 msgstr "Report a"
 
-#: Components/CommentBox.js:80
-#: Screens/IsolateComment.js:233
+#: Components/CommentBox.js:81
+#: Screens/IsolateComment.js:235
 msgid "reportComment"
 msgstr "Report the comment"
 
-#: Components/DebateBox.js:169
-#: Components/DebateBox.js:460
-#: Screens/Debate.js:330
+#: Components/DebateBox.js:171
+#: Components/DebateBox.js:475
+#: Screens/Debate.js:345
 msgid "reportDebate"
 msgstr "Report the debate"
 
@@ -386,7 +443,7 @@ msgstr "Search a contact"
 #~ msgid "searchUser"
 #~ msgstr "Search a user"
 
-#: Components/CommentBox.js:231
+#: Components/CommentBox.js:239
 msgid "seeThe"
 msgstr "See"
 
@@ -447,8 +504,8 @@ msgstr "You liked"
 msgid "youVote"
 msgstr "You voted"
 
-#: Screens/Debate.js:867
-#: Screens/IsolateComment.js:402
+#: Screens/Debate.js:906
+#: Screens/IsolateComment.js:412
 msgid "yourComment"
 msgstr "Your comment"
 
@@ -457,6 +514,6 @@ msgid "yourMessage"
 msgstr "Your message"
 
 #: Screens/CreateDebate.js:748
-#: Screens/CreateDuoDebate.js:197
+#: Screens/CreateDuoDebate.js:231
 msgid "yourOpinion"
 msgstr "Your opinion"

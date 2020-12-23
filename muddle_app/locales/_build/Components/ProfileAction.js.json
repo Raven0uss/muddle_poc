@@ -1,0 +1,66 @@
+{
+  "modifyProfilePicture": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        29
+      ]
+    ]
+  },
+  "modifyCoverPicture": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        33
+      ]
+    ]
+  },
+  "publicMode": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        38
+      ]
+    ]
+  },
+  "privateMode": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        42
+      ]
+    ]
+  },
+  "actionUnfollow": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        63
+      ]
+    ]
+  },
+  "actionFollow": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        67
+      ]
+    ]
+  },
+  "actionContact": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        71
+      ]
+    ]
+  },
+  "actionBlock": {
+    "origin": [
+      [
+        "Components/ProfileAction.js",
+        75
+      ]
+    ]
+  }
+}

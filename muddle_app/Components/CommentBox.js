@@ -76,10 +76,18 @@ const CommentBox = (props) => {
         <View style={{ marginLeft: "auto" }}>
           <Select
             list={[
-              {
-                label: i18n._("reportComment"),
-                value: "REPORT",
-              },
+              comment.from.id !== currentUser.id
+                ? {
+                    label: i18n._("reportComment"),
+                    value: "REPORT",
+                  }
+                : null,
+              comment.from.id === currentUser.id
+                ? {
+                    label: i18n._("deleteComment"),
+                    value: "DELETE",
+                  }
+                : null,
             ]}
             selected={null}
             placeholder=""

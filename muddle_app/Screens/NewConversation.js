@@ -21,6 +21,7 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import strUcFirst from "../Library/strUcFirst";
+import { isNil } from "lodash";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($email: String!) {
@@ -216,9 +217,12 @@ const NewConversation = (props) => {
             .map((u) => (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.push("Chat", {
-                    conversation: u.conversation,
-                  });
+                  if (isNil(u.conversation)) {
+                    console.log("Create a new conversation...");
+                  } else
+                    navigation.push("Chat", {
+                      conversation: u.conversation,
+                    });
                 }}
               >
                 <View

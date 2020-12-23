@@ -140,6 +140,18 @@ const GET_COMMENTS = gql`
   }
 `;
 
+const isOwner = (currentUser, debate) => {
+  if (isNil(get(currentUser, "id"))) return false;
+  const owner = get(debate, "owner.id");
+  if (isNil(owner)) {
+    const ownerBlue = get(debate, "ownerBlue.id");
+    const ownerRed = get(debate, "ownerRed.id");
+    if (isNil(ownerBlue) || isNil(ownerRed)) return false;
+    return currentUser.id === ownerRed || currentUser.id === ownerBlue;
+  }
+  return owner === currentUser.id;
+};
+
 const Debate = (props) => {
   const { navigation, route } = props;
   const { debate, setDebates, debateIndex, setHomeDebates } = route.params;
@@ -328,10 +340,34 @@ const Debate = (props) => {
         >
           <Select
             list={[
-              {
-                label: i18n._("reportDebate"),
-                value: "REPORT",
-              },
+              !isOwner(currentUser, debate)
+                ? {
+                    label: i18n._("reportDebate"),
+                    value: "REPORT",
+                  }
+                : null,
+              isOwner(currentUser, debate) && !debate.closed
+                ? debate.type === "DUO"
+                  ? {
+                      label: i18n._("askCloseDebate"),
+                      value: "CLOSE_DUO",
+                    }
+                  : {
+                      label: i18n._("closeDebate"),
+                      value: "CLOSE",
+                    }
+                : null,
+              isOwner(currentUser, debate)
+                ? debate.type === "DUO"
+                  ? {
+                      label: i18n._("askDeleteDebate"),
+                      value: "DELETE_DUO",
+                    }
+                  : {
+                      label: i18n._("deleteDebate"),
+                      value: "DELETE",
+                    }
+                : null,
             ]}
             selected={null}
             placeholder=""

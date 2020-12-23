@@ -43,6 +43,7 @@ const GET_USER = gql`
       profilePicture
       coverPicture
       email
+      private
       trophies {
         id
         type
@@ -199,7 +200,7 @@ const GET_INTERACTIONS = gql`
   }
 `;
 
-const fakeSetDebates = (callback) => callback();
+// const fakeSetDebates = (callback) => callback();
 
 const frequency = 3;
 let nbInteractions = frequency;

@@ -3,7 +3,39 @@
     "origin": [
       [
         "Screens/Debate.js",
-        330
+        345
+      ]
+    ]
+  },
+  "askCloseDebate": {
+    "origin": [
+      [
+        "Screens/Debate.js",
+        352
+      ]
+    ]
+  },
+  "closeDebate": {
+    "origin": [
+      [
+        "Screens/Debate.js",
+        356
+      ]
+    ]
+  },
+  "askDeleteDebate": {
+    "origin": [
+      [
+        "Screens/Debate.js",
+        363
+      ]
+    ]
+  },
+  "deleteDebate": {
+    "origin": [
+      [
+        "Screens/Debate.js",
+        367
       ]
     ]
   },
@@ -11,11 +43,11 @@
     "origin": [
       [
         "Screens/Debate.js",
-        421
+        459
       ],
       [
         "Screens/Debate.js",
-        812
+        850
       ]
     ]
   },
@@ -23,7 +55,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        867
+        906
       ]
     ]
   }
