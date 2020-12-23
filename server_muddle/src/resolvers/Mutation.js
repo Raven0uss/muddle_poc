@@ -361,6 +361,9 @@ const Mutation = prismaObjectType({
         return debate;
       },
     });
+
+    // askCloseDebate => Duo
+    // askDeleteDebate => Duo
   },
 });
 
