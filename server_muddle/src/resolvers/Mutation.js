@@ -369,7 +369,59 @@ const Mutation = prismaObjectType({
     });
 
     // askCloseDebate => Duo
+    t.field("askCloseDebate", {
+      type: "Debate",
+      args: {
+        debateId: idArg(),
+        userId: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { debateId, userId },
+        { prisma, currentUser }
+      ) => {
+        const notification = await prisma.createNotification({
+          who: {
+            connect: {
+              id: currentUser.id,
+            },
+          },
+          userId,
+          type: "CLOSE_DEBATE",
+          new: true,
+          status: "PENDING",
+          debate: { connect: { id: debateId } },
+        });
+      },
+    });
+
     // askDeleteDebate => Duo
+    t.field("askDeleteDebate", {
+      type: "Debate",
+      args: {
+        debateId: idArg(),
+        userId: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { debateId, userId },
+        { prisma, currentUser }
+      ) => {
+        const notification = await prisma.createNotification({
+          who: {
+            connect: {
+              id: currentUser.id,
+            },
+          },
+          userId,
+          type: "DELETE_DEBATE",
+          new: true,
+          status: "PENDING",
+          debate: { connect: { id: debateId } },
+        });
+      },
+    });
+
   },
 });
 

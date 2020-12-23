@@ -2155,6 +2155,8 @@ input MessageWhereUniqueInput {
 }
 
 type Mutation {
+  askCloseDebate(debateId: ID, userId: String): Debate!
+  askDeleteDebate(debateId: ID, userId: String): Debate!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
@@ -2323,13 +2325,16 @@ type NotificationSubPayload {
 
 enum NotificationType {
   ACCEPT_CLOSE_DEBATE
+  ACCEPT_DELETE_DEBATE
   ACCEPT_DUO
   CLOSE_DEBATE
   COMMENT
+  DELETE_DEBATE
   DISLIKE
   INVITATION_DUO
   LIKE
   REJECT_CLOSE_DEBATE
+  REJECT_DELETE_DEBATE
   REJECT_DUO
   VOTE
 }

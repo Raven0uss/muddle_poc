@@ -3646,7 +3646,7 @@ export interface NexusGenEnums {
   MessageOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "read_ASC" | "read_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   NotificationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "new_ASC" | "new_DESC" | "status_ASC" | "status_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "userId_ASC" | "userId_DESC"
   NotificationStatus: "ACCEPTED" | "DECLINED" | "INFORMATION" | "PENDING"
-  NotificationType: "ACCEPT_CLOSE_DEBATE" | "ACCEPT_DUO" | "CLOSE_DEBATE" | "COMMENT" | "DISLIKE" | "INVITATION_DUO" | "LIKE" | "REJECT_CLOSE_DEBATE" | "REJECT_DUO" | "VOTE"
+  NotificationType: "ACCEPT_CLOSE_DEBATE" | "ACCEPT_DELETE_DEBATE" | "ACCEPT_DUO" | "CLOSE_DEBATE" | "COMMENT" | "DELETE_DEBATE" | "DISLIKE" | "INVITATION_DUO" | "LIKE" | "REJECT_CLOSE_DEBATE" | "REJECT_DELETE_DEBATE" | "REJECT_DUO" | "VOTE"
   ReportOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "reason_ASC" | "reason_DESC" | "reasonText_ASC" | "reasonText_DESC" | "treated_ASC" | "treated_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ReportReason: "INSULT" | "PORNOGRAPHY" | "RACISM" | "SEXISM" | "VIOLENCE"
   ReportType: "COMMENT" | "DEBATE"
@@ -4177,6 +4177,8 @@ export interface NexusGenFieldTypes {
     updatedFields: string[] | null; // [String!]
   }
   Mutation: { // field return type
+    askCloseDebate: NexusGenRootTypes['Debate']; // Debate!
+    askDeleteDebate: NexusGenRootTypes['Debate']; // Debate!
     closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
     createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
@@ -4460,6 +4462,14 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    askCloseDebate: { // args
+      debateId?: string | null; // ID
+      userId?: string | null; // String
+    }
+    askDeleteDebate: { // args
+      debateId?: string | null; // ID
+      userId?: string | null; // String
+    }
     closeMyDebate: { // args
       debateId?: string | null; // ID
     }

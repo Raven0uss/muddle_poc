@@ -160,6 +160,30 @@ const CLOSE_DEBATE = gql`
   }
 `;
 
+const DELETE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    deleteMyDebate(debateId: $debateId) {
+      id
+    }
+  }
+`;
+
+const ASK_DELETE_DEBATE = gql`
+  mutation($debateId: ID!, $userId: String!) {
+    askDeleteDebate(debateId: $debateId, userId: $userId) {
+      id
+    }
+  }
+`;
+
+const ASK_CLOSE_DEBATE = gql`
+  mutation($debateId: ID!, $userId: String!) {
+    askCloseDebate(debateId: $debateId, userId: $userId) {
+      id
+    }
+  }
+`;
+
 const renderItem = (
   { item },
   navigation,
@@ -258,6 +282,21 @@ const Debate = (props) => {
   });
 
   const [closeDebate] = useMutation(CLOSE_DEBATE, {
+    variables: {
+      debateId: debate.id,
+    },
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
+  const [askCloseDebate] = useMutation(ASK_CLOSE_DEBATE);
+  const [askDeleteDebate] = useMutation(ASK_DELETE_DEBATE);
+
+  const [deleteDebate] = useMutation(DELETE_DEBATE, {
     variables: {
       debateId: debate.id,
     },
@@ -440,6 +479,31 @@ const Debate = (props) => {
 
               if (action.value === "CLOSE") {
                 closeDebate();
+              }
+              if (action.value === "CLOSE_DUO") {
+                askCloseDebate({
+                  variables: {
+                    debateId: debate.id,
+                    userId:
+                      debate.ownerRed.id === currentUser.id
+                        ? debate.ownerBlue.id
+                        : debate.ownerRed.id,
+                  },
+                });
+              }
+              if (action.value === "DELETE") {
+                deleteDebate();
+              }
+              if (action.value === "DELETE_DUO") {
+                askDeleteDebate({
+                  variables: {
+                    debateId: debate.id,
+                    userId:
+                      debate.ownerRed.id === currentUser.id
+                        ? debate.ownerBlue.id
+                        : debate.ownerRed.id,
+                  },
+                });
               }
             }}
             renderComponent={

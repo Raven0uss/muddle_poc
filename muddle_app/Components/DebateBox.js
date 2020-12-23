@@ -36,6 +36,22 @@ const CLOSE_DEBATE = gql`
   }
 `;
 
+const ASK_DELETE_DEBATE = gql`
+  mutation($debateId: ID!, $userId: String!) {
+    askDeleteDebate(debateId: $debateId, userId: $userId) {
+      id
+    }
+  }
+`;
+
+const ASK_CLOSE_DEBATE = gql`
+  mutation($debateId: ID!, $userId: String!) {
+    askCloseDebate(debateId: $debateId, userId: $userId) {
+      id
+    }
+  }
+`;
+
 const displayPercent = ({ votes, totalVotes, answer }) => {
   if (totalVotes === 0) return `0%\n${answer}`;
   return `${Math.round((votes / totalVotes) * 100)}%\n${answer}`;
@@ -150,6 +166,9 @@ const DebateBox = (props) => {
       });
     },
   });
+
+  const [askCloseDebate] = useMutation(ASK_CLOSE_DEBATE);
+  const [askDeleteDebate] = useMutation(ASK_DELETE_DEBATE);
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
@@ -546,9 +565,28 @@ const DebateBox = (props) => {
                       type: "DEBATE",
                       content: debate,
                     });
-                  // if (action.value === "DELETE") {
-                  //   deleteDebate();
-                  // }
+                  if (action.value === "DELETE") {
+                    askDeleteDebate({
+                      variables: {
+                        debateId: debate.id,
+                        userId:
+                          debate.ownerRed.id === currentUser.id
+                            ? debate.ownerBlue.id
+                            : debate.ownerRed.id,
+                      },
+                    });
+                  }
+                  if (action.value === "CLOSE") {
+                    askCloseDebate({
+                      variables: {
+                        debateId: debate.id,
+                        userId:
+                          debate.ownerRed.id === currentUser.id
+                            ? debate.ownerBlue.id
+                            : debate.ownerRed.id,
+                      },
+                    });
+                  }
                 }}
                 renderComponent={
                   <CustomIcon

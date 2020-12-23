@@ -12826,6 +12826,24 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "DELETE_DEBATE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ACCEPT_DELETE_DEBATE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "REJECT_DELETE_DEBATE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "COMMENT",
             "description": null,
             "isDeprecated": false,
