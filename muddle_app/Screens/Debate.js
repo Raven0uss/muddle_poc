@@ -81,6 +81,7 @@ const COMMENTS_SUB = gql`
         }
         nested
         from {
+          id
           firstname
           lastname
           email
@@ -168,7 +169,7 @@ const renderItem = (
   query
 ) => {
   if (query === false) return <ActivityIndicator size={36} />;
-
+  if (item.nested === true) return null;
   return (
     <CommentBox
       theme={theme}

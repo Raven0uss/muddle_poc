@@ -280,6 +280,8 @@ const Mutation = prismaObjectType({
             },
           });
 
+          const comments = await prisma.comment({ id: commentId }).comments();
+
           const trophies = await prisma.trophies({
             where: {
               comment: {
@@ -306,6 +308,10 @@ const Mutation = prismaObjectType({
             interactions.map(
               async (i) => await prisma.deleteInteraction({ id: i.id })
             )
+          );
+
+          Promise.all(
+            comments.map(async (c) => await prisma.deleteComment({ id: c.id }))
           );
 
           Promise.all(

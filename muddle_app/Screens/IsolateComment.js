@@ -91,6 +91,14 @@ const CREATE_SUBCOMMENT = gql`
   }
 `;
 
+const DELETE_COMMENT = gql`
+  mutation($commentId: ID!) {
+    deleteMyComment(commentId: $commentId) {
+      id
+    }
+  }
+`;
+
 const renderItem = ({ item }, navigation, theme, currentUser) => {
   return (
     <CommentBox
@@ -209,6 +217,19 @@ const IsolateComment = (props) => {
     },
   });
 
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
+    variables: {
+      commentId: comment.id,
+    },
+
+    onCompleted: () => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    },
+  });
+
   // const isFocused = useIsFocused();
   // React.useEffect(() => {
   //   refetch();
@@ -274,6 +295,9 @@ const IsolateComment = (props) => {
                   type: "COMMENT",
                   content: comment,
                 });
+              if (action.value === "DELETE") {
+                deleteComment();
+              }
             }}
             renderComponent={
               <CustomIcon
