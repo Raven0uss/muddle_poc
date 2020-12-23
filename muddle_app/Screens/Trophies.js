@@ -209,11 +209,11 @@ const Trophies = (props) => {
       setTrophies(queryResult);
       if (queryResult.length === 0) setNoMoreData(true);
     },
+    fetchPolicy: "cache-and-network",
   });
 
   const { navigation, route } = props;
   const { userId, nbTopComment, nbDuoTrophies } = route.params;
-  console.log(nbDuoTrophies);
   return (
     <View style={styles.container}>
       <Header
