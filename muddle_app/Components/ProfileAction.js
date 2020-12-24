@@ -4,7 +4,7 @@ import CustomIcon from "./Icon";
 import themeSchema from "../CustomProperties/Theme";
 import i18n from "../i18n";
 import UserContext from "../CustomProperties/UserContext";
-import { get } from "lodash";
+import { get, isEmpty, isNil } from "lodash";
 import { gql, useMutation } from "@apollo/client";
 
 const isFollowing = (user, currentUser) => {
@@ -45,6 +45,41 @@ const UNFOLLOW = gql`
   }
 `;
 
+const CREATE_NEW_CONVERSATION = gql`
+  mutation($from: ID!, $to: ID!) {
+    createConversation(
+      data: { speakers: { connect: [{ id: $from }, { id: $to }] } }
+    ) {
+      id
+      speakers {
+        id
+        firstname
+        lastname
+        profilePicture
+        email
+      }
+      messages {
+        id
+        content
+        from {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+        to {
+          id
+          firstname
+          lastname
+          email
+          profilePicture
+        }
+      }
+    }
+  }
+`;
+
 const ProfileAction = (props) => {
   const { currentUser } = React.useContext(UserContext);
   const { navigation, me, theme, user } = props;
@@ -57,6 +92,19 @@ const ProfileAction = (props) => {
   const [setPrivate] = useMutation(SET_PRIVATE);
   const [reqFollow] = useMutation(FOLLOW);
   const [reqUnfollow] = useMutation(UNFOLLOW);
+
+  const [createNewConversation, { loading: loadingMutation }] = useMutation(
+    CREATE_NEW_CONVERSATION,
+    {
+      onCompleted: (response) => {
+        const { createConversation: queryResponse } = response;
+
+        navigation.replace("Chat", {
+          conversation: queryResponse,
+        });
+      },
+    }
+  );
 
   if (me)
     return (
@@ -154,10 +202,22 @@ const ProfileAction = (props) => {
           });
         }
         if (action.value === "CONTACT") {
-          // Ouvrir le chat ici
+          // HAVE TO FIX IT
+          const conversation = user.conversation;
+          if (isNil(conversation) || isEmpty(conversation)) {
+            createNewConversation({
+              variables: {
+                from: currentUser.id,
+                to: user.id,
+              },
+            });
+          } else {
+            navigation.push("Chat", {
+              conversation,
+            });
+          }
         }
         if (action.value === "BLOCK") {
-          
         }
       }}
       renderComponent={

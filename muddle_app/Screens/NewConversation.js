@@ -269,6 +269,7 @@ const NewConversation = (props) => {
             .map((u) => (
               <TouchableOpacity
                 onPress={() => {
+                  // HAVE TO FIX IT
                   if (isNil(u.conversation)) {
                     console.log("Create a new conversation...");
                     createNewConversation({

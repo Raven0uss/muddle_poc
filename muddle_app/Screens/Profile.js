@@ -44,6 +44,11 @@ const GET_USER = gql`
       coverPicture
       email
       private
+      conversations {
+        speakers {
+          id
+        }
+      }
       trophies {
         id
         type
