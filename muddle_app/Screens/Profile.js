@@ -35,7 +35,7 @@ import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
 
 const GET_USER = gql`
-  query($userId: String!) {
+  query($userId: String!, $currentUserId: ID!) {
     user(where: { email: $userId }) {
       id
       firstname
@@ -44,9 +44,14 @@ const GET_USER = gql`
       coverPicture
       email
       private
-      conversations {
+      conversations(where: { speakers_some: { id: $currentUserId } }) {
+        id
         speakers {
           id
+          firstname
+          lastname
+          profilePicture
+          email
         }
       }
       trophies {
@@ -312,6 +317,7 @@ const Profile = (props) => {
   const { data, loading, error, fetchMore } = useQuery(GET_USER, {
     variables: {
       userId: get(props, "route.params.userId"),
+      currentUserId: currentUser.id,
     },
     onCompleted: (response) => {
       const { user: queryResult } = response;

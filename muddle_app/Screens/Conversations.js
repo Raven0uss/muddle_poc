@@ -31,7 +31,9 @@ const GET_CONVERSATIONS = gql`
       first: $first
       skip: $skip
       where: { speakers_some: { email: $user } }
+      orderBy: updatedAt_DESC
     ) {
+      updatedAt
       id
       speakers {
         id

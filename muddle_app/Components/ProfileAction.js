@@ -202,9 +202,9 @@ const ProfileAction = (props) => {
           });
         }
         if (action.value === "CONTACT") {
-          // HAVE TO FIX IT
-          const conversation = user.conversation;
-          if (isNil(conversation) || isEmpty(conversation)) {
+          const conversations = user.conversations;
+          console.log(conversations);
+          if (isNil(conversations) || isEmpty(conversations)) {
             createNewConversation({
               variables: {
                 from: currentUser.id,
@@ -213,7 +213,7 @@ const ProfileAction = (props) => {
             });
           } else {
             navigation.push("Chat", {
-              conversation,
+              conversation: conversations[0],
             });
           }
         }

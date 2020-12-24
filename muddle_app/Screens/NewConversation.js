@@ -21,7 +21,7 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import strUcFirst from "../Library/strUcFirst";
-import { isNil } from "lodash";
+import { isEmpty, isNil } from "lodash";
 import UserContext from "../CustomProperties/UserContext";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
@@ -37,7 +37,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
         profilePicture
         coverPicture
         crowned
-        conversations {
+        conversations(where: { speakers_some: { email: $email } }) {
           id
           speakers {
             id
@@ -75,7 +75,7 @@ const GET_FOLLOWERS_CONVERSATIONS = gql`
         coverPicture
         crowned
         email
-        conversations {
+        conversations(where: { speakers_some: { email: $email } }) {
           id
           speakers {
             id
@@ -165,6 +165,7 @@ const NewConversation = (props) => {
         getUnique(userList, "id").sort((a, b) => a.email.localeCompare(b.email))
       );
     },
+    fetchPolicy: "cache-and-network",
   });
 
   const { navigation, route } = props;
@@ -269,8 +270,8 @@ const NewConversation = (props) => {
             .map((u) => (
               <TouchableOpacity
                 onPress={() => {
-                  // HAVE TO FIX IT
-                  if (isNil(u.conversation)) {
+                  console.log(u.conversations);
+                  if (isEmpty(u.conversations) || isNil(u.conversations)) {
                     console.log("Create a new conversation...");
                     createNewConversation({
                       variables: {
@@ -280,7 +281,7 @@ const NewConversation = (props) => {
                     });
                   } else
                     navigation.push("Chat", {
-                      conversation: u.conversation,
+                      conversation: u.conversations[0],
                     });
                 }}
                 disabled={loadingMutation}
