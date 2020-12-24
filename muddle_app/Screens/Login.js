@@ -264,8 +264,20 @@ function LoginComponent(props) {
               Keyboard.dismiss();
               setSkipLogin(false);
             }}
-            style={styles.connectionButton}
-            disabled={loadingLogin || loadingGetUser}
+            style={{
+              ...styles.connectionButton,
+              ...(email.length <= 0 || password.length <= 0
+                ? {
+                    backgroundColor: "#00000076",
+                  }
+                : {}),
+            }}
+            disabled={
+              loadingLogin ||
+              loadingGetUser ||
+              email.length <= 0 ||
+              password.length <= 0
+            }
           >
             {loadingLogin || loadingGetUser ? (
               <ActivityIndicator color="#F47658" />
@@ -273,6 +285,11 @@ function LoginComponent(props) {
               <Text
                 style={{
                   color: "#F47658",
+                  // ...(email.length <= 0 || password.length <= 0
+                  //   ? {
+                  //       color: "#00000077",
+                  //     }
+                  //   : {}),
                   fontFamily: "Montserrat_700Bold",
                 }}
               >

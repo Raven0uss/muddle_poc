@@ -16,11 +16,23 @@ const CLOSE_DEBATE = gql`
   }
 `;
 
+const UPDATE_NOTIFICATION = gql`
+  mutation($notificationId: ID!, $status: NotificationStatus!) {
+    updateNotification(
+      where: { id: $notificationId }
+      data: { status: $status }
+    ) {
+      id
+    }
+  }
+`;
+
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
   const { notification, theme, navigation } = props;
 
   const [closeDebate] = useMutation(CLOSE_DEBATE);
+  const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
 
   //   console.log(notification);
 
@@ -171,14 +183,19 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: themeSchema[theme].backgroundColor2,
+                  backgroundColor:
+                    status === "ACCEPTED"
+                      ? "#F47658"
+                      : themeSchema[theme].backgroundColor2,
                   width: 100,
                   borderRadius: 12,
                 }}
-                disabled={status === "DECLINED"}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
                 onPress={() => {
                   navigation.push("CreateDuoDebate", {
                     debate: notification.debate,
+                    notificationId: notification.id,
+                    updateNotification,
                   });
                 }}
               >
@@ -206,8 +223,14 @@ const NotificationBox = (props) => {
                 onPress={() => {
                   // HERE SEND REQUEST TO DELETE DUO DEBATE
                   setStatus("DECLINED");
+                  updateNotification({
+                    variables: {
+                      notificationId: notification.id,
+                      status: "DECLINED",
+                    },
+                  });
                 }}
-                disabled={status === "DECLINED"}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
               >
                 <Text
                   style={{
@@ -417,12 +440,22 @@ const NotificationBox = (props) => {
                   height: 36,
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: themeSchema[theme].backgroundColor2,
+                  backgroundColor:
+                    status === "ACCEPTED"
+                      ? "#F47658"
+                      : themeSchema[theme].backgroundColor2,
                   width: 100,
                   borderRadius: 12,
                 }}
-                disabled={status === "DECLINED"}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
                 onPress={() => {
+                  setStatus("ACCEPTED");
+                  updateNotification({
+                    variables: {
+                      notificationId: notification.id,
+                      status: "ACCEPTED",
+                    },
+                  });
                   closeDebate({
                     variables: {
                       debateId: notification.debate.id,
@@ -451,10 +484,16 @@ const NotificationBox = (props) => {
                   width: 100,
                   borderRadius: 12,
                 }}
-                disabled={status === "DECLINED"}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
                 onPress={() => {
                   // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
                   setStatus("DECLINED");
+                  updateNotification({
+                    variables: {
+                      notificationId: notification.id,
+                      status: "DECLINED",
+                    },
+                  });
                 }}
               >
                 <Text

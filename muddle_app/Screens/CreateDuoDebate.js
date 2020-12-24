@@ -60,10 +60,16 @@ const CreateDuoDebate = (props) => {
   const [optionOne, setOptionOne] = React.useState("");
 
   const { navigation, route } = props;
-  const { debate } = route.params;
+  const { debate, notificationId, updateNotification } = route.params;
 
   const [reqPublishDuoDebate] = useMutation(PUBLISH_DUO_DEBATE, {
     onCompleted: () => {
+      updateNotification({
+        variables: {
+          notificationId,
+          status: "ACCEPTED",
+        },
+      });
       navigation.reset({
         index: 0,
         routes: [{ name: "Home" }],

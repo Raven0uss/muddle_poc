@@ -3,11 +3,11 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        171
+        230
       ],
       [
         "Components/DebateBox.js",
-        475
+        541
       ]
     ]
   },
@@ -15,7 +15,7 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        177
+        236
       ]
     ]
   },
@@ -23,7 +23,7 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        183
+        242
       ]
     ]
   },
@@ -31,11 +31,11 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        246
+        312
       ],
       [
         "Components/DebateBox.js",
-        694
+        782
       ]
     ]
   },
@@ -43,7 +43,7 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        482
+        548
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "origin": [
       [
         "Components/DebateBox.js",
-        489
+        555
       ]
     ]
   }

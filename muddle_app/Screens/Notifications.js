@@ -22,15 +22,16 @@ import UserContext from "../CustomProperties/UserContext";
 import { useIsFocused } from "@react-navigation/native";
 
 const GET_NOTIFICATIONS = gql`
-  query($first: Int!, $skip: Int, $userId: String!) {
+  query($last: Int!, $skip: Int, $userId: String!) {
     notifications(
-      orderBy: createdAt_DESC
-      last: $first
+      orderBy: updatedAt_DESC
+      last: $last
       skip: $skip
       where: { userId: $userId }
     ) {
       id
       createdAt
+      updatedAt
       who {
         id
         firstname
@@ -103,12 +104,14 @@ const Notifications = (props) => {
 
   const { data, loading, error, fetchMore } = useQuery(GET_NOTIFICATIONS, {
     variables: {
-      first: nbNotifications,
+      last: nbNotifications,
       userId: currentUser.id,
     },
     onCompleted: (response) => {
       const { notifications: queryResult } = response;
       setNotifications(queryResult);
+      markAsReadNotifcations();
+
       if (queryResult.length === 0) setNoMoreData(true);
     },
     fetchPolicy: "cache-and-network",
@@ -122,7 +125,7 @@ const Notifications = (props) => {
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
-    markAsReadNotifcations();
+    // markAsReadNotifcations();
   }, [isFocused]);
 
   const { navigation, route } = props;
@@ -193,7 +196,7 @@ const Notifications = (props) => {
           // return ;
           nbNotifications += frequency;
           await fetchMore({
-            variables: { first: frequency, skip: nbNotifications - frequency },
+            variables: { last: frequency, skip: nbNotifications - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { notifications: moreNotifications } = fetchMoreResult;
               if (isEmpty(moreNotifications)) return setNoMoreData(true);

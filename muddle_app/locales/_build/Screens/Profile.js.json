@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        533
+        554
       ]
     ]
   },
@@ -11,7 +11,15 @@
     "origin": [
       [
         "Screens/Profile.js",
-        565
+        586
+      ]
+    ]
+  },
+  "messagePrivateProfile": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        647
       ]
     ]
   }

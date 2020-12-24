@@ -332,7 +332,7 @@ const Profile = (props) => {
   }
 
   const me = currentUser.id === user.id;
-  console.log(user.trophies);
+  // console.log(user.trophies);
   return (
     <View
       style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}
@@ -435,16 +435,17 @@ const Profile = (props) => {
             elevation: 20,
             zIndex: 20,
           }}
-          onPress={() =>
-            navigation.push("Trophies", {
-              userId: user.email,
-              nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
-                .length,
-              nbTopComment: user.trophies.filter(
-                (t) => t.type === "TOP_COMMENT"
-              ).length,
-            })
-          }
+          onPress={() => {
+            if (user.id === currentUser.id || !user.private)
+              navigation.push("Trophies", {
+                userId: user.email,
+                nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
+                  .length,
+                nbTopComment: user.trophies.filter(
+                  (t) => t.type === "TOP_COMMENT"
+                ).length,
+              });
+          }}
         >
           <Text
             style={{
@@ -526,13 +527,14 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.push("Follow", {
-                    follow: {
-                      following: user.following,
-                      followers: user.followers,
-                    },
-                    selected: "followers",
-                  });
+                  if (user.id === currentUser.id || !user.private)
+                    navigation.push("Follow", {
+                      follow: {
+                        following: user.following,
+                        followers: user.followers,
+                      },
+                      selected: "followers",
+                    });
                 }}
               >
                 <Text
@@ -558,13 +560,14 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.push("Follow", {
-                    follow: {
-                      following: user.following,
-                      followers: user.followers,
-                    },
-                    selected: "following",
-                  });
+                  if (user.id === currentUser.id || !user.private)
+                    navigation.push("Follow", {
+                      follow: {
+                        following: user.following,
+                        followers: user.followers,
+                      },
+                      selected: "following",
+                    });
                 }}
               >
                 <Text
@@ -624,11 +627,32 @@ const Profile = (props) => {
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
       /> */}
-      <Interactions
-        userId={user.email}
-        navigation={navigation}
-        setHomeDebates={setHomeDebates}
-      />
+      {user.id === currentUser.id || !user.private ? (
+        <Interactions
+          userId={user.email}
+          navigation={navigation}
+          setHomeDebates={setHomeDebates}
+        />
+      ) : (
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: 15,
+          }}
+        >
+          <CustomIcon name="lock" size={108} color="#d3d3d3" />
+          <Text
+            style={{
+              color: "#d3d3d3",
+              fontFamily: "Montserrat_600SemiBold",
+              fontSize: 12,
+              marginTop: 10,
+            }}
+          >
+            {i18n._("messagePrivateProfile")}
+          </Text>
+        </View>
+      )}
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />
     </View>

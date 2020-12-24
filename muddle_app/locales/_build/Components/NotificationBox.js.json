@@ -3,7 +3,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        79
+        101
       ]
     ]
   },
@@ -11,19 +11,19 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        79
+        101
       ],
       [
         "Components/NotificationBox.js",
-        302
+        335
       ],
       [
         "Components/NotificationBox.js",
-        382
+        415
       ],
       [
         "Components/NotificationBox.js",
-        644
+        700
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        149
+        171
       ]
     ]
   },
@@ -39,11 +39,11 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        181
+        208
       ],
       [
         "Components/NotificationBox.js",
-        422
+        472
       ]
     ]
   },
@@ -51,11 +51,11 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        211
+        244
       ],
       [
         "Components/NotificationBox.js",
-        452
+        508
       ]
     ]
   },
@@ -63,15 +63,15 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        268
+        301
       ],
       [
         "Components/NotificationBox.js",
-        509
+        565
       ],
       [
         "Components/NotificationBox.js",
-        610
+        666
       ]
     ]
   },
@@ -79,15 +79,15 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        270
+        303
       ],
       [
         "Components/NotificationBox.js",
-        511
+        567
       ],
       [
         "Components/NotificationBox.js",
-        612
+        668
       ]
     ]
   },
@@ -95,15 +95,15 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        271
+        304
       ],
       [
         "Components/NotificationBox.js",
-        512
+        568
       ],
       [
         "Components/NotificationBox.js",
-        613
+        669
       ]
     ]
   },
@@ -111,7 +111,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        292
+        325
       ]
     ]
   },
@@ -119,7 +119,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        293
+        326
       ]
     ]
   },
@@ -127,7 +127,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        382
+        415
       ]
     ]
   },
@@ -135,7 +135,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        532
+        588
       ]
     ]
   },
@@ -143,7 +143,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        533
+        589
       ]
     ]
   },
@@ -151,7 +151,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        633
+        689
       ]
     ]
   },
@@ -159,7 +159,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        634
+        690
       ]
     ]
   }
