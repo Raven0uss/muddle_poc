@@ -101,12 +101,19 @@ const DELETE_COMMENT = gql`
 
 const renderItem = ({ item }, navigation, theme, currentUser) => {
   return (
-    <CommentBox
-      theme={theme}
-      comment={item}
-      navigation={navigation}
-      currentUser={currentUser}
-    />
+    <View
+      style={{
+        paddingLeft: 15,
+        paddingRight: 15,
+      }}
+    >
+      <CommentBox
+        theme={theme}
+        comment={item}
+        navigation={navigation}
+        currentUser={currentUser}
+      />
+    </View>
   );
 };
 
@@ -309,111 +316,6 @@ const IsolateComment = (props) => {
           />
         </View>
       </View>
-      <View
-        style={{
-          backgroundColor: themeSchema[theme].backgroundColor2,
-          padding: 20,
-        }}
-      >
-        <View style={styles.headDebate}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.push("Profile", {
-                userId: comment.from.email,
-              });
-            }}
-          >
-            <Image
-              source={{ uri: comment.from.profilePicture }}
-              style={styles.userPicture}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.push("Profile", {
-                userId: comment.from.email,
-              });
-            }}
-          >
-            <Text
-              style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
-            >
-              {`${comment.from.firstname} ${comment.from.lastname}`}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text
-          style={{
-            fontSize: 12,
-            fontFamily: "Montserrat_500Medium",
-            color: themeSchema[theme].colorText,
-          }}
-        >
-          {comment.content}
-        </Text>
-        <View
-          style={{
-            height: 1,
-            backgroundColor: themeSchema[theme].hrLineColor,
-            width: "100%",
-            alignSelf: "center",
-            marginTop: 10,
-            marginBottom: 10,
-          }}
-        />
-        <View
-          style={{
-            flexDirection: "row",
-            marginTop: 3,
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity
-            onPress={async () => {
-              await likeComment();
-              setLiked("like");
-              // setNotify(true);
-            }}
-            disabled={liked === "like"}
-          >
-            <CustomIcon
-              name="sentiment-satisfied"
-              size={20}
-              color={
-                liked === "like" ? themeSchema[theme].colorText3 : "#F47658"
-              }
-              viewBcolor={liked === "like" ? "#F47658" : "transparent"}
-              viewRadius={liked === "like" ? 100 : 0}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={async () => {
-              setLiked("dislike");
-              await dislikeComment();
-              // setNotify(true);
-            }}
-            style={{ marginLeft: 22 }}
-            disabled={liked === "dislike"}
-          >
-            <CustomIcon
-              color="#000"
-              name="sentiment-dissatisfied"
-              size={20}
-              color={
-                liked === "dislike"
-                  ? themeSchema[theme].colorText3
-                  : themeSchema[theme].colorText
-              }
-              viewBcolor={
-                liked === "dislike"
-                  ? themeSchema[theme].colorText
-                  : "transparent"
-              }
-              viewRadius={liked === "dislike" ? 100 : 0}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
 
       <FlatList
         data={comments}
@@ -426,7 +328,7 @@ const IsolateComment = (props) => {
           renderItem(param, navigation, theme, currentUser)
         }
         keyExtractor={(item) => item.id}
-        inverted={true}
+        // inverted={true}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {
           if (Platform.OS === "web" || noMoreData) return;
@@ -458,6 +360,126 @@ const IsolateComment = (props) => {
             },
           });
         }}
+        ListHeaderComponent={() => {
+          return (
+            <View
+              style={{
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                padding: 20,
+              }}
+            >
+              <View style={styles.headDebate}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.push("Profile", {
+                      userId: comment.from.email,
+                    });
+                  }}
+                >
+                  <Image
+                    source={{ uri: comment.from.profilePicture }}
+                    style={styles.userPicture}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.push("Profile", {
+                      userId: comment.from.email,
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      ...styles.pseudo,
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {`${comment.from.firstname} ${comment.from.lastname}`}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              {/* <ScrollView
+                style={{
+                  maxHeight: Dimensions.get("screen").height / 6,
+                }}
+              > */}
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {comment.content}
+              </Text>
+              {/* </ScrollView> */}
+              <View
+                style={{
+                  height: 1,
+                  backgroundColor: themeSchema[theme].hrLineColor,
+                  width: "100%",
+                  alignSelf: "center",
+                  marginTop: 10,
+                  marginBottom: 10,
+                }}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 3,
+                  alignItems: "center",
+                }}
+              >
+                <TouchableOpacity
+                  onPress={async () => {
+                    await likeComment();
+                    setLiked("like");
+                    // setNotify(true);
+                  }}
+                  disabled={liked === "like"}
+                >
+                  <CustomIcon
+                    name="sentiment-satisfied"
+                    size={20}
+                    color={
+                      liked === "like"
+                        ? themeSchema[theme].colorText3
+                        : "#F47658"
+                    }
+                    viewBcolor={liked === "like" ? "#F47658" : "transparent"}
+                    viewRadius={liked === "like" ? 100 : 0}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={async () => {
+                    setLiked("dislike");
+                    await dislikeComment();
+                    // setNotify(true);
+                  }}
+                  style={{ marginLeft: 22 }}
+                  disabled={liked === "dislike"}
+                >
+                  <CustomIcon
+                    color="#000"
+                    name="sentiment-dissatisfied"
+                    size={20}
+                    color={
+                      liked === "dislike"
+                        ? themeSchema[theme].colorText3
+                        : themeSchema[theme].colorText
+                    }
+                    viewBcolor={
+                      liked === "dislike"
+                        ? themeSchema[theme].colorText
+                        : "transparent"
+                    }
+                    viewRadius={liked === "dislike" ? 100 : 0}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        }}
         ListFooterComponent={() => {
           if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
           // return null;
@@ -483,7 +505,7 @@ const IsolateComment = (props) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : ""}
         style={
-          Platform.OS === "android" &&
+          // Platform.OS === "android" &&
           keyboardIsOpen && {
             bottom: 0,
             elevation: 10,
@@ -595,8 +617,7 @@ const styles = StyleSheet.create({
   seedContainer: {
     // flex: 1,
     backgroundColor: "#F7F7F7",
-    paddingLeft: 15,
-    paddingRight: 15,
+
     // marginTop: 10,
   },
   pseudo: {

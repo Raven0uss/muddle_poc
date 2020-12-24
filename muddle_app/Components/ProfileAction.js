@@ -23,6 +23,28 @@ const SET_PRIVATE = gql`
   }
 `;
 
+const FOLLOW = gql`
+  mutation($userId: ID!, $currentUserId: ID!) {
+    updateUser(
+      where: { id: $currentUserId }
+      data: { following: { connect: { id: $userId } } }
+    ) {
+      id
+    }
+  }
+`;
+
+const UNFOLLOW = gql`
+  mutation($userId: ID!, $currentUserId: ID!) {
+    updateUser(
+      where: { id: $currentUserId }
+      data: { following: { disconnect: { id: $userId } } }
+    ) {
+      id
+    }
+  }
+`;
+
 const ProfileAction = (props) => {
   const { currentUser } = React.useContext(UserContext);
   const { navigation, me, theme, user } = props;
@@ -33,6 +55,8 @@ const ProfileAction = (props) => {
   const [privateAccount, setPrivateAccount] = React.useState(isPrivate(user));
 
   const [setPrivate] = useMutation(SET_PRIVATE);
+  const [reqFollow] = useMutation(FOLLOW);
+  const [reqUnfollow] = useMutation(UNFOLLOW);
 
   if (me)
     return (
@@ -113,14 +137,27 @@ const ProfileAction = (props) => {
       onSelect={(action) => {
         if (action.value === "FOLLOW") {
           setFollowing(true);
+          reqFollow({
+            variables: {
+              userId: user.id,
+              currentUserId: currentUser.id,
+            },
+          });
         }
         if (action.value === "UNFOLLOW") {
           setFollowing(false);
+          reqUnfollow({
+            variables: {
+              userId: user.id,
+              currentUserId: currentUser.id,
+            },
+          });
         }
         if (action.value === "CONTACT") {
           // Ouvrir le chat ici
         }
         if (action.value === "BLOCK") {
+          
         }
       }}
       renderComponent={
