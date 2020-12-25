@@ -125,6 +125,7 @@ const CreateDuoDebate = (props) => {
               marginTop: 30,
               textAlign: "center",
               marginBottom: 20,
+              color: themeSchema[theme].colorText,
             }}
           >
             {i18n._("duoDebate")}
@@ -149,6 +150,7 @@ const CreateDuoDebate = (props) => {
                 marginLeft: 5,
                 fontSize: 12,
                 width: 100,
+                color: themeSchema[theme].colorText,
               }}
             >
               {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
@@ -168,6 +170,7 @@ const CreateDuoDebate = (props) => {
                   fontSize: 12,
                   width: 100,
                   textAlign: "right",
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
@@ -186,7 +189,7 @@ const CreateDuoDebate = (props) => {
           <View
             style={{
               marginTop: 10,
-              backgroundColor: "#F7F7F7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               padding: 15,
               borderRadius: 12,
               flexDirection: "row",
@@ -196,6 +199,7 @@ const CreateDuoDebate = (props) => {
               style={{
                 fontFamily: "Montserrat_500Medium",
                 fontSize: 12,
+                color: themeSchema[theme].colorText,
               }}
             >
               {i18n._("debateDuration")}
@@ -210,6 +214,7 @@ const CreateDuoDebate = (props) => {
                 style={{
                   fontFamily: "Montserrat_500Medium",
                   fontSize: 12,
+                  color: themeSchema[theme].colorText,
                 }}
               >{`${objTL.days} jours et ${parseInt(
                 objTL.hours,
@@ -219,13 +224,19 @@ const CreateDuoDebate = (props) => {
           </View>
           <View
             style={{
-              backgroundColor: "#F7F7F7",
+              backgroundColor: themeSchema[theme].backgroundColor1,
               marginTop: 10,
               padding: 20,
               borderRadius: 14,
             }}
           >
-            <Text style={{ fontFamily: "Montserrat_500Medium", fontSize: 12 }}>
+            <Text
+              style={{
+                color: themeSchema[theme].colorText,
+                fontFamily: "Montserrat_500Medium",
+                fontSize: 12,
+              }}
+            >
               {debate.content}
             </Text>
             {debate.image && (
@@ -241,7 +252,7 @@ const CreateDuoDebate = (props) => {
                     uri: debate.image,
                   }}
                   style={{
-                    width: Dimensions.get("screen").width / 1.15,
+                    width: Dimensions.get("screen").width / 1.24,
                     height: 280,
                     borderRadius: 5,
                     marginTop: 5,
@@ -307,6 +318,11 @@ const CreateDuoDebate = (props) => {
               {i18n._("publish")}
             </Text>
           </TouchableOpacity>
+          <View
+            style={{
+              height: 20,
+            }}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

@@ -372,10 +372,10 @@ const CreateDebate = (props) => {
   });
   const [duo, setDuo] = React.useState(null);
   const [show, setShow] = React.useState(false);
-  // const [image, setImage] = React.useState(null);
-  const [image, setImage] = React.useState(
-    "https://www.travelercar.com/wp-content/uploads/2016/04/4a36e314016aa914f203ea6b7d579dc6_large.jpeg"
-  );
+  const [image, setImage] = React.useState(null);
+  // const [image, setImage] = React.useState(
+  //   "https://www.travelercar.com/wp-content/uploads/2016/04/4a36e314016aa914f203ea6b7d579dc6_large.jpeg"
+  // );
   const [loadingImage, setLoadingImage] = React.useState(false);
   // const [duration, setDuration] = React.useState(
   //   new Date(moment().add(1, "days"))
@@ -918,6 +918,11 @@ const CreateDebate = (props) => {
               {i18n._("publish")}
             </Text>
           </TouchableOpacity>
+          <View
+            style={{
+              height: 20,
+            }}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

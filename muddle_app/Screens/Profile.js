@@ -635,8 +635,11 @@ const Profile = (props) => {
         </View>
         <View
           style={{
+            marginLeft: "auto",
+            // alignSelf: "flex-end",
             marginTop: 13,
-            marginLeft: 17,
+            marginRight: 5,
+            // marginLeft: 17,
           }}
         >
           <ProfileAction
