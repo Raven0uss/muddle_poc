@@ -3,7 +3,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        35
+        36
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        38
+        39
       ]
     ]
   },
@@ -19,31 +19,11 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        39
+        40
       ],
       [
         "Components/InteractionBox.js",
-        87
-      ]
-    ]
-  },
-  "ago": {
-    "origin": [
-      [
-        "Components/InteractionBox.js",
-        39
-      ],
-      [
-        "Components/InteractionBox.js",
-        87
-      ],
-      [
-        "Components/InteractionBox.js",
-        135
-      ],
-      [
-        "Components/InteractionBox.js",
-        181
+        88
       ]
     ]
   },
@@ -51,7 +31,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        83
+        84
       ]
     ]
   },
@@ -59,7 +39,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        86
+        87
       ]
     ]
   },
@@ -67,7 +47,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        131
+        132
       ]
     ]
   },
@@ -75,7 +55,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        134
+        135
       ]
     ]
   },
@@ -83,7 +63,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        135
+        136
       ]
     ]
   },
@@ -91,7 +71,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        177
+        178
       ]
     ]
   },
@@ -99,7 +79,7 @@
     "origin": [
       [
         "Components/InteractionBox.js",
-        180
+        181
       ]
     ]
   }

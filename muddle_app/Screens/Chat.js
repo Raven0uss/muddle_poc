@@ -26,6 +26,7 @@ import { get, isEmpty } from "lodash";
 import moment from "moment";
 import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import getDateMessage from "../Library/getDateMessage";
 
 const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
@@ -63,7 +64,7 @@ const renderItem = ({ item }, navigation, me, theme) => {
             fontFamily: "Montserrat_500Medium",
           }}
         >
-          {moment(item.createdAt).format("HH:mm")}
+          {getDateMessage(item.createdAt)}
         </Text>
       </View>
     );
@@ -100,7 +101,7 @@ const renderItem = ({ item }, navigation, me, theme) => {
           fontFamily: "Montserrat_500Medium",
         }}
       >
-        {moment(item.createdAt).format("HH:mm")}
+        {getDateMessage(item.createdAt)}
       </Text>
     </View>
   );

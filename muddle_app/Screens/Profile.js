@@ -98,6 +98,8 @@ const GET_INTERACTIONS = gql`
     ) {
       id
       type
+      updatedAt
+      createdAt
       who {
         id
         email

@@ -8,6 +8,7 @@ import CommentBox from "./CommentBox";
 import i18n from "../i18n";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
+import getTimeSpent from "../Library/getTimeSpent";
 
 const InteractionBox = (props) => {
   const { currentUser } = React.useContext(UserContext);
@@ -36,7 +37,7 @@ const InteractionBox = (props) => {
                 : `${interaction.who.firstname} ${
                     interaction.who.lastname
                   } ${i18n._("liked")}`
-            } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
+            } ${i18n._("that")} ${getTimeSpent(interaction.updatedAt)}`}
           </Text>
           <View
             style={{
@@ -84,7 +85,7 @@ const InteractionBox = (props) => {
                 : `${interaction.who.firstname} ${
                     interaction.who.lastname
                   } ${i18n._("didntLiked")}`
-            } ${i18n._("that")} ${i18n._("ago", { time: "2h" })}`}
+            } ${i18n._("that")} ${getTimeSpent(interaction.updatedAt)}`}
           </Text>
           <View
             style={{
@@ -132,7 +133,7 @@ const InteractionBox = (props) => {
                 : `${interaction.who.firstname} ${
                     interaction.who.lastname
                   } ${i18n._("commented")}`
-            } ${i18n._("onThisDebate")} ${i18n._("ago", { time: "2h" })}`}
+            } ${i18n._("onThisDebate")} ${getTimeSpent(interaction.updatedAt)}`}
           </Text>
           <View
             style={{
@@ -178,7 +179,7 @@ const InteractionBox = (props) => {
                 : `${interaction.who.firstname} ${
                     interaction.who.lastname
                   } ${i18n._("hasVote")}`
-            } ${i18n._("ago", { time: "2h" })}`}
+            } ${getTimeSpent(interaction.updatedAt)}`}
           </Text>
           <View
             style={{

@@ -23,6 +23,7 @@ import themeSchema from "../CustomProperties/Theme";
 import { useIsFocused } from "@react-navigation/native";
 import moment from "moment";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import getDateMessage from "../Library/getDateMessage";
 
 // messages_some: { content_not: null }
 
@@ -110,7 +111,7 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
                 fontFamily: "Montserrat_300Light_Italic",
               }}
             >
-              {moment(lastMessage.createdAt).format("HH[h]mm")}
+              {getDateMessage(lastMessage.createdAt)}
             </Text>
             {!lastMessage.read && lastMessage.from.id !== currentUser.id && (
               <View

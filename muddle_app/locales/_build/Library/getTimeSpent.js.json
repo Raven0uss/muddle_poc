@@ -1,0 +1,42 @@
+{
+  "nowAgo": {
+    "origin": [
+      [
+        "Library/getTimeSpent.js",
+        10
+      ]
+    ]
+  },
+  "minutesAgo": {
+    "origin": [
+      [
+        "Library/getTimeSpent.js",
+        14
+      ]
+    ]
+  },
+  "hoursAgo": {
+    "origin": [
+      [
+        "Library/getTimeSpent.js",
+        20
+      ]
+    ]
+  },
+  "daysAgo": {
+    "origin": [
+      [
+        "Library/getTimeSpent.js",
+        26
+      ]
+    ]
+  },
+  "moreOneWeekAgo": {
+    "origin": [
+      [
+        "Library/getTimeSpent.js",
+        30
+      ]
+    ]
+  }
+}

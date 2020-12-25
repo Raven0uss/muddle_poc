@@ -267,7 +267,9 @@ function LoginComponent(props) {
             }}
             style={{
               ...styles.connectionButton,
-              ...(email.length <= 0 || password.length <= 0
+              ...((email.length <= 0 || password.length <= 0) &&
+              !loadingGetUser &&
+              !loadingLogin
                 ? {
                     backgroundColor: "#00000076",
                   }

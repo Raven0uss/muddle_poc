@@ -2,7 +2,8 @@
   "localeDir": "locales/",
   "srcPathDirs": [
     "Screens",
-    "Components"
+    "Components",
+    "Library"
   ],
   "format": "po"
 }

@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        165
+        166
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        187
+        188
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        234
+        235
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        259
+        260
       ]
     ]
   },
@@ -35,11 +35,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        369
+        370
       ],
       [
         "Screens/CreateDebate.js",
-        479
+        481
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        483
+        485
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        529
+        531
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        558
+        560
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        620
+        622
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        708
+        710
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        722
+        724
       ]
     ]
   },
@@ -95,7 +95,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        734
+        736
       ]
     ]
   },
@@ -103,11 +103,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        839
+        841
       ],
       [
         "Screens/CreateDebate.js",
-        861
+        863
       ]
     ]
   },
@@ -115,7 +115,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        840
+        842
       ]
     ]
   },
@@ -123,7 +123,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        916
+        918
       ]
     ]
   }

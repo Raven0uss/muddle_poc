@@ -3,27 +3,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        101
-      ]
-    ]
-  },
-  "ago": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        101
-      ],
-      [
-        "Components/NotificationBox.js",
-        335
-      ],
-      [
-        "Components/NotificationBox.js",
-        415
-      ],
-      [
-        "Components/NotificationBox.js",
-        700
+        104
       ]
     ]
   },
@@ -31,7 +11,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        171
+        175
       ]
     ]
   },
@@ -39,11 +19,11 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        208
+        212
       ],
       [
         "Components/NotificationBox.js",
-        472
+        475
       ]
     ]
   },
@@ -51,11 +31,11 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        244
+        248
       ],
       [
         "Components/NotificationBox.js",
-        508
+        511
       ]
     ]
   },
@@ -63,39 +43,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        301
-      ],
-      [
-        "Components/NotificationBox.js",
-        565
-      ],
-      [
-        "Components/NotificationBox.js",
-        666
-      ]
-    ]
-  },
-  "otherPeopleSingular": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        303
-      ],
-      [
-        "Components/NotificationBox.js",
-        567
-      ],
-      [
-        "Components/NotificationBox.js",
-        668
-      ]
-    ]
-  },
-  "otherPeoplePlural": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        304
+        305
       ],
       [
         "Components/NotificationBox.js",
@@ -107,11 +55,43 @@
       ]
     ]
   },
+  "otherPeoplePlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        307
+      ],
+      [
+        "Components/NotificationBox.js",
+        570
+      ],
+      [
+        "Components/NotificationBox.js",
+        671
+      ]
+    ]
+  },
+  "otherPeopleSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        308
+      ],
+      [
+        "Components/NotificationBox.js",
+        571
+      ],
+      [
+        "Components/NotificationBox.js",
+        672
+      ]
+    ]
+  },
   "commentYourDebatePlural": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        325
+        329
       ]
     ]
   },
@@ -119,7 +99,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        326
+        330
       ]
     ]
   },
@@ -127,15 +107,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        415
-      ]
-    ]
-  },
-  "likedCommentSingular": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        588
+        418
       ]
     ]
   },
@@ -143,15 +115,15 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        589
+        591
       ]
     ]
   },
-  "didntLikedCommentSingular": {
+  "likedCommentSingular": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        689
+        592
       ]
     ]
   },
@@ -159,7 +131,15 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        690
+        692
+      ]
+    ]
+  },
+  "didntLikedCommentSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        693
       ]
     ]
   }

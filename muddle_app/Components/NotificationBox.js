@@ -8,6 +8,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import { gql, useMutation } from "@apollo/client";
 import CertifiedIcon from "./CertifiedIcon";
+import getTimeSpent from "../Library/getTimeSpent";
 
 const CLOSE_DEBATE = gql`
   mutation($debateId: ID!) {
@@ -100,9 +101,9 @@ const NotificationBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("voteOnYourDebate")} ${i18n._("ago", {
-                  time: "2h",
-                })}`}
+                {`${i18n._("voteOnYourDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
               </Text>
             </View>
           </View>
@@ -303,8 +304,8 @@ const NotificationBox = (props) => {
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? i18n._("otherPeopleSingular")
-                        : i18n._("otherPeoplePlural")
+                        ? i18n._("otherPeoplePlural")
+                        : i18n._("otherPeopleSingular")
                     }`
                   : ""
               }`}
@@ -327,7 +328,7 @@ const NotificationBox = (props) => {
                   notification.who.length > 1
                     ? i18n._("commentYourDebatePlural")
                     : i18n._("commentYourDebateSingular")
-                }`}
+                } `}
               </Text>
               <Text
                 style={{
@@ -335,13 +336,11 @@ const NotificationBox = (props) => {
                   fontFamily: "Montserrat_500Medium",
                 }}
               >
-                {` ${i18n._("ago", {
-                  time: "2h",
-                })}`}
+                {getTimeSpent(notification.updatedAt)}
               </Text>
             </View>
             <Text
-              numberOfLines={2}
+              numberOfLines={3}
               style={{
                 fontSize: 12,
                 marginTop: 5,
@@ -416,13 +415,13 @@ const NotificationBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {` ${i18n._("askToCloseThisDebate")} ${i18n._("ago", {
-                  time: "2h",
-                })}`}
+                {` ${i18n._("askToCloseThisDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
               </Text>
             </View>
             <Text
-              numberOfLines={2}
+              numberOfLines={3}
               style={{
                 fontSize: 12,
                 marginTop: 5,
@@ -568,8 +567,8 @@ const NotificationBox = (props) => {
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? i18n._("otherPeopleSingular")
-                        : i18n._("otherPeoplePlural")
+                        ? i18n._("otherPeoplePlural")
+                        : i18n._("otherPeopleSingular")
                     }`
                   : ""
               }`}
@@ -589,9 +588,9 @@ const NotificationBox = (props) => {
               >
                 {`${
                   notification.who.length > 1
-                    ? i18n._("likedCommentSingular")
-                    : i18n._("likedCommentPlural")
-                }`}
+                    ? i18n._("likedCommentPlural")
+                    : i18n._("likedCommentSingular")
+                } `}
               </Text>
               <Text
                 style={{
@@ -600,11 +599,11 @@ const NotificationBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {" il y a 3 jours"}
+                {getTimeSpent(notification.updatedAt)}
               </Text>
             </View>
             <Text
-              numberOfLines={2}
+              numberOfLines={3}
               style={{
                 fontSize: 12,
                 marginTop: 5,
@@ -669,8 +668,8 @@ const NotificationBox = (props) => {
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
                       notification.who.length - 1 > 1
-                        ? i18n._("otherPeopleSingular")
-                        : i18n._("otherPeoplePlural")
+                        ? i18n._("otherPeoplePlural")
+                        : i18n._("otherPeopleSingular")
                     }`
                   : ""
               }`}
@@ -690,9 +689,9 @@ const NotificationBox = (props) => {
               >
                 {`${
                   notification.who.length > 1
-                    ? i18n._("didntLikedCommentSingular")
-                    : i18n._("didntLikedCommentPlural")
-                }`}
+                    ? i18n._("didntLikedCommentPlural")
+                    : i18n._("didntLikedCommentSingular")
+                } `}
               </Text>
               <Text
                 style={{
@@ -701,13 +700,11 @@ const NotificationBox = (props) => {
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {` ${i18n._("ago", {
-                  time: "2h",
-                })}`}
+                {getTimeSpent(notification.updatedAt)}
               </Text>
             </View>
             <Text
-              numberOfLines={2}
+              numberOfLines={3}
               style={{
                 fontSize: 12,
                 marginTop: 5,
