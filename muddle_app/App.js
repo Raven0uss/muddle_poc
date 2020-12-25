@@ -69,9 +69,9 @@ import { getItem } from "./CustomProperties/storage";
 
 const Stack = createStackNavigator();
 
-// const mode = "COMPONENTS";
+const mode = "COMPONENTS";
 // const mode = "APP";
-const mode = "LOGIN";
+// const mode = "LOGIN";
 
 const setInitialRoute = () => {
   switch (mode) {

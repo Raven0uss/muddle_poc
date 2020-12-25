@@ -32,6 +32,13 @@ const Token = objectType({
   },
 });
 
+// const ImageURI = objectType({
+//   name: "ImageURI",
+//   definition(t) {
+//     t.string("image");
+//   },
+// });
+
 const NewNotifications = objectType({
   name: "NewNotifications",
   definition(t) {
@@ -88,6 +95,7 @@ export { dateArg };
 
 export default {
   Token,
+  // ImageURI,
   NewNotifications,
   DateScalar,
   MessageSubPayload,

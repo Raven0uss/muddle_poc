@@ -487,6 +487,18 @@ const Mutation = prismaObjectType({
         return debate;
       },
     });
+
+    // t.field("imageUpload", {
+    //   type: "ImageURI",
+    //   args: {
+    //     localUri: stringArg(),
+    //   },
+    //   resolve: async (parent, { localUri }, ctx) => {
+    //     return {
+    //       image: "test",
+    //     };
+    //   },
+    // });
   },
 });
 
