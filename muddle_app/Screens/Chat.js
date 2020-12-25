@@ -25,6 +25,7 @@ import { useQuery, gql, useMutation, useSubscription } from "@apollo/client";
 import { get, isEmpty } from "lodash";
 import moment from "moment";
 import { useIsFocused } from "@react-navigation/native";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
@@ -360,6 +361,7 @@ const Chat = (props) => {
               }}
             >
               {`${partner.firstname} ${partner.lastname}`}
+              {partner.certified && <CertifiedIcon />}
             </Text>
           </View>
         </TouchableOpacity>

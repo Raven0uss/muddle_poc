@@ -9,6 +9,7 @@ import { useMutation, gql } from "@apollo/client";
 import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
 // import { useIsFocused } from "@react-navigation/native";
+import CertifiedIcon from "./CertifiedIcon";
 
 const DELETE_COMMENT = gql`
   mutation($commentId: ID!) {
@@ -87,6 +88,7 @@ const CommentBox = (props) => {
             style={{ ...styles.pseudo, color: themeSchema[theme].colorText }}
           >
             {`${comment.from.firstname} ${comment.from.lastname}`}
+            {comment.from.certified && <CertifiedIcon />}
           </Text>
         </TouchableOpacity>
         <View style={{ marginLeft: "auto" }}>

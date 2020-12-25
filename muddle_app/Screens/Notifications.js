@@ -22,10 +22,10 @@ import UserContext from "../CustomProperties/UserContext";
 import { useIsFocused } from "@react-navigation/native";
 
 const GET_NOTIFICATIONS = gql`
-  query($last: Int!, $skip: Int, $userId: String!) {
+  query($first: Int!, $skip: Int, $userId: String!) {
     notifications(
       orderBy: updatedAt_DESC
-      last: $last
+      first: $first
       skip: $skip
       where: { userId: $userId }
     ) {
@@ -34,6 +34,7 @@ const GET_NOTIFICATIONS = gql`
       updatedAt
       who {
         id
+        certified
         firstname
         lastname
         email
@@ -46,6 +47,7 @@ const GET_NOTIFICATIONS = gql`
         id
         ownerRed {
           id
+          certified
           firstname
           lastname
           email
@@ -55,6 +57,7 @@ const GET_NOTIFICATIONS = gql`
           id
           firstname
           lastname
+          certified
           email
           profilePicture
         }
@@ -105,7 +108,7 @@ const Notifications = (props) => {
 
   const { data, loading, error, fetchMore } = useQuery(GET_NOTIFICATIONS, {
     variables: {
-      last: nbNotifications,
+      first: nbNotifications,
       userId: currentUser.id,
     },
     onCompleted: (response) => {
@@ -197,7 +200,7 @@ const Notifications = (props) => {
           // return ;
           nbNotifications += frequency;
           await fetchMore({
-            variables: { last: frequency, skip: nbNotifications - frequency },
+            variables: { first: frequency, skip: nbNotifications - frequency },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { notifications: moreNotifications } = fetchMoreResult;
               if (isEmpty(moreNotifications)) return setNoMoreData(true);

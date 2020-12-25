@@ -35,6 +35,7 @@ fragment BestDebate on Debate {
   type
   owner {
     id
+    certified
     firstname
     lastname
     email
@@ -42,6 +43,7 @@ fragment BestDebate on Debate {
   }
   ownerBlue {
     id
+    certified
     firstname
     lastname
     email
@@ -49,6 +51,7 @@ fragment BestDebate on Debate {
   }
   ownerRed {
     id
+    certified
     firstname
     lastname
     email

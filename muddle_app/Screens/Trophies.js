@@ -31,6 +31,7 @@ const GET_TROPHIES = gql`
       user {
         id
         email
+        certified
         firstname
         lastname
         profilePicture
@@ -47,12 +48,14 @@ const GET_TROPHIES = gql`
         owner {
           id
           firstname
+          certified
           lastname
           email
           profilePicture
         }
         ownerBlue {
           id
+          certified
           firstname
           lastname
           email
@@ -60,6 +63,7 @@ const GET_TROPHIES = gql`
         }
         ownerRed {
           id
+          certified
           firstname
           lastname
           email
@@ -74,6 +78,7 @@ const GET_TROPHIES = gql`
           }
           from {
             id
+            certified
             firstname
             lastname
             email
@@ -106,6 +111,7 @@ const GET_TROPHIES = gql`
           }
           from {
             id
+            certified
             firstname
             lastname
             email
@@ -114,6 +120,7 @@ const GET_TROPHIES = gql`
         }
         from {
           id
+          certified
           firstname
           lastname
           email
@@ -129,6 +136,7 @@ const GET_TROPHIES = gql`
           closed
           owner {
             id
+            certified
             firstname
             lastname
             email
@@ -137,12 +145,14 @@ const GET_TROPHIES = gql`
           ownerBlue {
             id
             firstname
+            certified
             lastname
             email
             profilePicture
           }
           ownerRed {
             id
+            certified
             firstname
             lastname
             email
@@ -166,6 +176,7 @@ const GET_TROPHIES = gql`
             content
             from {
               id
+              certified
               firstname
               lastname
               email

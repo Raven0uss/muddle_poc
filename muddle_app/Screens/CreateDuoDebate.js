@@ -23,6 +23,7 @@ import { gql, useMutation } from "@apollo/client";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 import { isEmpty } from "lodash";
 
@@ -149,7 +150,10 @@ const CreateDuoDebate = (props) => {
                 fontSize: 12,
                 width: 100,
               }}
-            >{`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}</Text>
+            >
+              {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
+              {debate.ownerRed.certified && <CertifiedIcon />}
+            </Text>
             <View
               style={{
                 flexDirection: "row",
@@ -165,7 +169,10 @@ const CreateDuoDebate = (props) => {
                   width: 100,
                   textAlign: "right",
                 }}
-              >{`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}</Text>
+              >
+                {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
+                {debate.ownerBlue.certified && <CertifiedIcon />}
+              </Text>
               <Image
                 source={{ uri: debate.ownerBlue.profilePicture }}
                 style={{

@@ -27,6 +27,7 @@ import UserContext from "../CustomProperties/UserContext";
 import strUcFirst from "../Library/strUcFirst";
 import { isEmpty, isNil } from "lodash";
 import { pickImageAndGetUrl } from "../Library/pickImage";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const isErrorInCreateDebate = (
   debateType,
@@ -470,6 +471,7 @@ const CreateDebate = (props) => {
                 }}
               >
                 {`${currentUser.firstname} ${currentUser.lastname}`}
+                {currentUser.certified && <CertifiedIcon />}
               </Text>
             </View>
             <View style={{ marginTop: 10 }}>

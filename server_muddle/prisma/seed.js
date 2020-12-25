@@ -53,6 +53,7 @@ async function main() {
       firstname: faker.name.firstName(),
       lastname: faker.name.lastName(),
       birthdate: faker.date.past(),
+      // certified: true,
       coverPicture: coverRandom,
       profilePicture: imageRandom,
     });
@@ -131,6 +132,7 @@ async function main() {
     firstname: "Muddles",
     lastname: "Team",
     birthdate: faker.date.past(),
+    certified: true,
     role: "MUDDLE",
     coverPicture:
       "https://image.freepik.com/vecteurs-libre/fond-texture-blanc-elegant_23-2148431731.jpg",
@@ -196,23 +198,6 @@ async function main() {
   }
 
   // Create all type of notifications
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "VOTE",
-    status: "INFORMATION",
-    new: true,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
-
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "INVITATION_DUO",
-    status: "PENDING",
-    new: true,
-    debate: { connect: { id: duoDebates[0].id } },
-    userId: A.id,
-  });
 
   await prisma.createNotification({
     who: { connect: [{ email: "userA" }, { email: "userB" }] },
@@ -282,6 +267,24 @@ async function main() {
     status: "INFORMATION",
     new: false,
     debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ email: "userA" }] },
+    type: "VOTE",
+    status: "INFORMATION",
+    new: true,
+    debate: { connect: { id: standardDebates[0].id } },
+    userId: A.id,
+  });
+
+  await prisma.createNotification({
+    who: { connect: [{ email: "userA" }] },
+    type: "INVITATION_DUO",
+    status: "PENDING",
+    new: true,
+    debate: { connect: { id: duoDebates[0].id } },
     userId: A.id,
   });
 

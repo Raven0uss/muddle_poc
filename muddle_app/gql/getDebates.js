@@ -24,6 +24,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerBlue {
             id
@@ -31,6 +32,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerRed {
             id
@@ -38,6 +40,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           positives {
             id
@@ -74,6 +77,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerBlue {
             id
@@ -81,6 +85,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerRed {
             id
@@ -88,6 +93,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           positives {
             id
@@ -124,6 +130,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerBlue {
             id
@@ -131,6 +138,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           ownerRed {
             id
@@ -138,6 +146,7 @@ const GET_DEBATES = (debateType) => {
             lastname
             email
             profilePicture
+            certified
           }
           positives {
             id

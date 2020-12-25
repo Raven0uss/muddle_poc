@@ -44,6 +44,7 @@ const GET_DEBATES = gql`
       type
       owner {
         id
+        certified
         firstname
         lastname
         email
@@ -52,6 +53,7 @@ const GET_DEBATES = gql`
       ownerBlue {
         id
         firstname
+        certified
         lastname
         email
         profilePicture
@@ -59,6 +61,7 @@ const GET_DEBATES = gql`
       ownerRed {
         id
         firstname
+        certified
         lastname
         email
         profilePicture

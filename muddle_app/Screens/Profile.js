@@ -33,12 +33,14 @@ import UserContext from "../CustomProperties/UserContext";
 import ProfileAction from "../Components/ProfileAction";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
     user(where: { email: $userId }) {
       id
       firstname
+      certified
       lastname
       profilePicture
       coverPicture
@@ -51,6 +53,7 @@ const GET_USER = gql`
           firstname
           lastname
           profilePicture
+          certified
           email
         }
       }
@@ -63,6 +66,7 @@ const GET_USER = gql`
         firstname
         lastname
         email
+        certified
         profilePicture
         trophies {
           id
@@ -72,6 +76,7 @@ const GET_USER = gql`
       following {
         id
         firstname
+        certified
         lastname
         email
         profilePicture
@@ -97,6 +102,7 @@ const GET_INTERACTIONS = gql`
         id
         email
         firstname
+        certified
         lastname
         profilePicture
       }
@@ -109,6 +115,7 @@ const GET_INTERACTIONS = gql`
         owner {
           id
           email
+          certified
           firstname
           lastname
           profilePicture
@@ -116,6 +123,7 @@ const GET_INTERACTIONS = gql`
         ownerBlue {
           id
           email
+          certified
           firstname
           lastname
           profilePicture
@@ -123,6 +131,7 @@ const GET_INTERACTIONS = gql`
         ownerRed {
           id
           email
+          certified
           firstname
           lastname
           profilePicture
@@ -155,6 +164,7 @@ const GET_INTERACTIONS = gql`
           owner {
             id
             profilePicture
+            certified
             firstname
             lastname
             email
@@ -162,6 +172,7 @@ const GET_INTERACTIONS = gql`
           ownerBlue {
             id
             firstname
+            certified
             lastname
             email
             profilePicture
@@ -170,6 +181,7 @@ const GET_INTERACTIONS = gql`
             id
             firstname
             lastname
+            certified
             email
             profilePicture
           }
@@ -190,6 +202,8 @@ const GET_INTERACTIONS = gql`
           }
         }
         from {
+          id
+          certified
           firstname
           lastname
           email
@@ -539,6 +553,7 @@ const Profile = (props) => {
             numberOfLines={2}
           >
             {`${user.firstname} ${user.lastname}`}
+            {user.certified && <CertifiedIcon />}
           </Text>
 
           <View

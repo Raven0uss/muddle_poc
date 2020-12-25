@@ -14,6 +14,7 @@ import { muddle, defaultProfile } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const Follow = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -159,6 +160,7 @@ const Follow = (props) => {
                 }}
               >
                 {`${contact.firstname} ${contact.lastname}`}
+                {contact.certified && <CertifiedIcon />}
               </Text>
             </View>
           </TouchableOpacity>

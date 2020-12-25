@@ -59,6 +59,7 @@ const CREATE_NEW_CONVERSATION = gql`
         lastname
         profilePicture
         email
+        certified
       }
       messages {
         id
@@ -68,6 +69,7 @@ const CREATE_NEW_CONVERSATION = gql`
           firstname
           lastname
           email
+          certified
           profilePicture
         }
         to {
@@ -75,6 +77,7 @@ const CREATE_NEW_CONVERSATION = gql`
           firstname
           lastname
           email
+          certified
           profilePicture
         }
       }
@@ -91,6 +94,7 @@ const UPDATE_PROFILE_PICTURE = gql`
       id
       email
       firstname
+      certified
       lastname
       language
       profilePicture
@@ -109,6 +113,7 @@ const UPDATE_COVER_PICTURE = gql`
       language
       profilePicture
       coverPicture
+      certified
     }
   }
 `;

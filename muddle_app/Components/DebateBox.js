@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { defaultProfile } from "../CustomProperties/IconsBase64";
+import { badges, defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
 import i18n from "../i18n";
@@ -26,6 +26,7 @@ import { cloneDeepWith, findIndex, isNil } from "lodash";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
 import voteDispatch from "../Library/voteDispatch";
+import CertifiedIcon from "./CertifiedIcon";
 
 const DELETE_DEBATE = gql`
   mutation($debateId: ID!) {
@@ -228,6 +229,7 @@ const DebateBox = (props) => {
               {debate.type === "MUDDLE"
                 ? debate.owner.firstname
                 : `${debate.owner.firstname} ${debate.owner.lastname}`}
+              {debate.owner.certified && <CertifiedIcon />}
             </Text>
           </TouchableOpacity>
           <View style={{ marginLeft: "auto" }}>
@@ -517,6 +519,7 @@ const DebateBox = (props) => {
                   }}
                 >
                   {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
+                  {debate.ownerBlue.certified && <CertifiedIcon />}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -548,6 +551,7 @@ const DebateBox = (props) => {
                   }}
                 >
                   {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
+                  {debate.ownerRed.certified && <CertifiedIcon />}
                 </Text>
               </TouchableOpacity>
             </View>

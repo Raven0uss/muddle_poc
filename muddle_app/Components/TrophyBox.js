@@ -7,6 +7,7 @@ import DebateBox from "./DebateBox";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import CertifiedIcon from "./CertifiedIcon";
 
 const TrophyBox = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -247,6 +248,7 @@ const TrophyBox = (props) => {
                   }}
                 >
                   {`${trophy.comment.from.firstname} ${trophy.comment.from.lastname}`}
+                  {trophy.comment.from.certified && <CertifiedIcon />}
                 </Text>
               </TouchableOpacity>
             </View>

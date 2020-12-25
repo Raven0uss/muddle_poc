@@ -7,6 +7,7 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import { gql, useMutation } from "@apollo/client";
+import CertifiedIcon from "./CertifiedIcon";
 
 const CLOSE_DEBATE = gql`
   mutation($debateId: ID!) {
@@ -84,6 +85,7 @@ const NotificationBox = (props) => {
               }}
             >
               {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
             </Text>
             <View
               style={{
@@ -153,6 +155,7 @@ const NotificationBox = (props) => {
               }}
             >
               {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
             </Text>
             <View
               style={{
@@ -398,6 +401,7 @@ const NotificationBox = (props) => {
               }}
             >
               {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
             </Text>
             <View
               style={{

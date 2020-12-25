@@ -22,6 +22,7 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { useIsFocused } from "@react-navigation/native";
 import moment from "moment";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 // messages_some: { content_not: null }
 
@@ -38,6 +39,7 @@ const GET_CONVERSATIONS = gql`
       speakers {
         id
         firstname
+        certified
         lastname
         email
         profilePicture
@@ -46,6 +48,10 @@ const GET_CONVERSATIONS = gql`
         id
         content
         createdAt
+        read
+        from {
+          id
+        }
       }
     }
   }
@@ -94,6 +100,7 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
               }}
             >
               {`${speaker[0].firstname} ${speaker[0].lastname}`}
+              {speaker[0].certified && <CertifiedIcon />}
             </Text>
             <Text
               style={{
@@ -105,6 +112,19 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
             >
               {moment(lastMessage.createdAt).format("HH[h]mm")}
             </Text>
+            {!lastMessage.read && lastMessage.from.id !== currentUser.id && (
+              <View
+                style={{
+                  backgroundColor: "#F47658",
+                  borderRadius: 50,
+                  width: 10,
+                  height: 10,
+                  marginLeft: "auto",
+                  marginTop: -5,
+                  marginRight: 5,
+                }}
+              />
+            )}
           </View>
           <Text
             numberOfLines={1}

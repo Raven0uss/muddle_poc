@@ -40,6 +40,7 @@ const GET_CURRENT_USER = gql`
       id
       email
       firstname
+      certified
       lastname
       language
       profilePicture

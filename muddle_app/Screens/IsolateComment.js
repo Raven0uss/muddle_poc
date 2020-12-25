@@ -28,6 +28,7 @@ import { LIKE_COMMENT, DISLIKE_COMMENT } from "../gql/likeDislike";
 import hasLiked from "../Library/hasLiked";
 import { useIsFocused } from "@react-navigation/native";
 import { get, last, isEmpty } from "lodash";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!, $last: Int, $skip: Int) {
@@ -49,6 +50,8 @@ const GET_SUBCOMMENTS = gql`
           id
         }
         from {
+          id
+          certified
           firstname
           lastname
           email
@@ -395,6 +398,7 @@ const IsolateComment = (props) => {
                     }}
                   >
                     {`${comment.from.firstname} ${comment.from.lastname}`}
+                    {comment.from.certified && <CertifiedIcon />}
                   </Text>
                 </TouchableOpacity>
               </View>

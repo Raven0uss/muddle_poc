@@ -21,6 +21,7 @@ import themeSchema from "../CustomProperties/Theme";
 import strUcFirst from "../Library/strUcFirst";
 import UserContext from "../CustomProperties/UserContext";
 import i18n from "../i18n";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const GET_USERS = gql`
   query($firstname: String!, $lastname: String!) {
@@ -230,6 +231,7 @@ const Search = (props) => {
                     }}
                   >
                     {`${u.firstname} ${u.lastname}`}
+                    {u.certified && <CertifiedIcon />}
                   </Text>
                 </View>
               </TouchableOpacity>

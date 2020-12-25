@@ -36,6 +36,7 @@ import {
 import { cloneDeepWith, isNil, findIndex } from "lodash";
 import voteDispatch from "../Library/voteDispatch";
 import idExist from "../Library/idExist";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   if (totalVotes === 0) return `0%\n${answer}`;
@@ -83,6 +84,7 @@ const COMMENTS_SUB = gql`
         from {
           id
           firstname
+          certified
           lastname
           email
           profilePicture
@@ -132,6 +134,7 @@ const GET_COMMENTS = gql`
       nested
       from {
         id
+        certified
         firstname
         lastname
         email
@@ -602,6 +605,7 @@ const Debate = (props) => {
                       {debate.type === "MUDDLE"
                         ? debate.owner.firstname
                         : `${debate.owner.firstname} ${debate.owner.lastname}`}
+                      {debate.owner.certified && <CertifiedIcon />}
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -862,6 +866,7 @@ const Debate = (props) => {
                         }}
                       >
                         {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
+                        {debate.ownerBlue.certified && <CertifiedIcon />}
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -893,6 +898,7 @@ const Debate = (props) => {
                         }}
                       >
                         {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
+                        {debate.ownerRed.certified && <CertifiedIcon />}
                       </Text>
                     </TouchableOpacity>
                   </View>

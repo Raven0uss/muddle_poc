@@ -23,6 +23,7 @@ import themeSchema from "../CustomProperties/Theme";
 import strUcFirst from "../Library/strUcFirst";
 import { isEmpty, isNil } from "lodash";
 import UserContext from "../CustomProperties/UserContext";
+import CertifiedIcon from "../Components/CertifiedIcon";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($email: String!) {
@@ -310,6 +311,7 @@ const NewConversation = (props) => {
                     }}
                   >
                     {`${u.firstname} ${u.lastname}`}
+                    {u.certified && <CertifiedIcon />}
                   </Text>
                 </View>
               </TouchableOpacity>
