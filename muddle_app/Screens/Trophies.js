@@ -42,6 +42,7 @@ const GET_TROPHIES = gql`
         content
         answerOne
         answerTwo
+        image
         closed
         owner {
           id
@@ -123,6 +124,7 @@ const GET_TROPHIES = gql`
           type
           answerOne
           answerTwo
+          image
           content
           closed
           owner {

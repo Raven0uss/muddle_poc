@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        160
+        165
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        182
+        187
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        229
+        234
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        254
+        259
       ]
     ]
   },
@@ -35,11 +35,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        359
+        369
       ],
       [
         "Screens/CreateDebate.js",
-        464
+        479
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        468
+        483
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        514
+        529
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        543
+        558
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        605
+        620
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        693
+        708
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        707
+        722
       ]
     ]
   },
@@ -95,7 +95,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        719
+        734
       ]
     ]
   },
@@ -103,11 +103,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        747
+        839
       ],
       [
         "Screens/CreateDebate.js",
-        769
+        861
       ]
     ]
   },
@@ -115,7 +115,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        748
+        840
       ]
     ]
   },
@@ -123,7 +123,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        822
+        916
       ]
     ]
   }

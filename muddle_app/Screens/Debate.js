@@ -618,6 +618,29 @@ const Debate = (props) => {
                 >
                   {debate.content}
                 </Text>
+                {debate.image && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.push("IsolateImage", {
+                        image: debate.image,
+                      });
+                    }}
+                  >
+                    <Image
+                      source={{
+                        uri: debate.image,
+                      }}
+                      style={{
+                        width: Dimensions.get("screen").width / 1.15,
+                        height: 280,
+                        borderRadius: 5,
+                        marginTop: 5,
+                        marginBottom: 5,
+                      }}
+                      resizeMode="cover"
+                    />
+                  </TouchableOpacity>
+                )}
                 {/* 
                 // Use that to integrate image + add touchable oppacity for isolate image view
                 <Image
@@ -874,21 +897,39 @@ const Debate = (props) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-                <ScrollView
+
+                <Text
+                  // numberOfLines={8}
                   style={{
-                    maxHeight: Dimensions.get("screen").height / 6,
+                    ...styles.debateTextDuo,
+                    color: themeSchema[theme].colorText,
                   }}
                 >
-                  <Text
-                    // numberOfLines={8}
-                    style={{
-                      ...styles.debateTextDuo,
-                      color: themeSchema[theme].colorText,
+                  {debate.content}
+                </Text>
+                {debate.image && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.push("IsolateImage", {
+                        image: debate.image,
+                      });
                     }}
                   >
-                    {debate.content}
-                  </Text>
-                </ScrollView>
+                    <Image
+                      source={{
+                        uri: debate.image,
+                      }}
+                      style={{
+                        width: Dimensions.get("screen").width / 1.15,
+                        height: 280,
+                        borderRadius: 5,
+                        marginTop: 5,
+                        marginBottom: 5,
+                      }}
+                      resizeMode="cover"
+                    />
+                  </TouchableOpacity>
+                )}
 
                 <View style={styles.debateActionsDuo}>
                   <TouchableOpacity

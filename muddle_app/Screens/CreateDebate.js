@@ -26,6 +26,7 @@ import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import strUcFirst from "../Library/strUcFirst";
 import { isEmpty, isNil } from "lodash";
+import { pickImageAndGetUrl } from "../Library/pickImage";
 
 const isErrorInCreateDebate = (
   debateType,
@@ -78,6 +79,7 @@ const CREATE_DEBATE = gql`
     $content: String!
     $answerOne: String!
     $answerTwo: String!
+    $image: String
     $timelimit: String!
   ) {
     createPublicDebate(
@@ -85,6 +87,7 @@ const CREATE_DEBATE = gql`
       answerOne: $answerOne
       answerTwo: $answerTwo
       timelimit: $timelimit
+      image: $image
     ) {
       id
     }
@@ -97,11 +100,13 @@ const CREATE_INVITATION_DUO_DEBATE = gql`
     $answerOne: String!
     $user: ID!
     $timelimit: String!
+    $image: String
   ) {
     createInvitationDuoDebate(
       content: $content
       answerOne: $answerOne
       timelimit: $timelimit
+      image: $image
       user: $user
     ) {
       id
@@ -318,15 +323,18 @@ const createPublicDebate = async ({
   answerTwo,
   duration,
   reqCreatePublicDebate,
+  image,
 }) => {
   const timelimit = `${duration.day} ${duration.hour}`;
 
+  console.log(image);
   await reqCreatePublicDebate({
     variables: {
       content,
       answerOne,
       answerTwo,
       timelimit,
+      image,
     },
   });
 };
@@ -337,6 +345,7 @@ const createDuoDebate = async ({
   duo,
   duration,
   reqCreateDuoDebate,
+  image,
 }) => {
   const timelimit = `${duration.day} ${duration.hour}`;
 
@@ -346,6 +355,7 @@ const createDuoDebate = async ({
       answerOne,
       timelimit,
       user: duo.id,
+      image,
     },
   });
 };
@@ -361,6 +371,11 @@ const CreateDebate = (props) => {
   });
   const [duo, setDuo] = React.useState(null);
   const [show, setShow] = React.useState(false);
+  // const [image, setImage] = React.useState(null);
+  const [image, setImage] = React.useState(
+    "https://www.travelercar.com/wp-content/uploads/2016/04/4a36e314016aa914f203ea6b7d579dc6_large.jpeg"
+  );
+  const [loadingImage, setLoadingImage] = React.useState(false);
   // const [duration, setDuration] = React.useState(
   //   new Date(moment().add(1, "days"))
   // ); // minutes
@@ -723,6 +738,8 @@ const CreateDebate = (props) => {
                   ...styles.input,
                   color: themeSchema[theme].colorText,
                   backgroundColor: themeSchema[theme].backgroundColor1,
+                  borderBottomLeftRadius: 0,
+                  borderBottomRightRadius: 0,
                 }}
                 keyboardType="default"
                 placeholderTextColor={themeSchema[theme].colorText}
@@ -732,8 +749,83 @@ const CreateDebate = (props) => {
             </View>
             <View
               style={{
+                // marginTop: 10,
+                borderRadius: 10,
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                padding: 10,
+                paddingTop: 5,
+                backgroundColor: themeSchema[theme].backgroundColor1,
+              }}
+            >
+              {loadingImage ? (
+                <ActivityIndicator
+                  style={{
+                    alignSelf: "center",
+                  }}
+                  size={36}
+                />
+              ) : image === null ? (
+                <TouchableOpacity
+                  style={{
+                    alignSelf: "flex-end",
+                  }}
+                  onPress={async () => {
+                    setLoadingImage(true);
+                    const imageUrl = await pickImageAndGetUrl();
+                    if (imageUrl === null) {
+                      setLoadingImage(false);
+                      return;
+                    }
+                    setImage(imageUrl);
+                    setLoadingImage(false);
+                  }}
+                >
+                  <CustomIcon
+                    size={36}
+                    name="wallpaper"
+                    color={themeSchema[theme].colorText}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View
+                  style={{
+                    alignSelf: "center",
+                  }}
+                >
+                  <Image
+                    source={{
+                      uri: image,
+                    }}
+                    style={{
+                      width: Dimensions.get("screen").width / 1.2,
+                      height: 280,
+                      borderRadius: 10,
+                    }}
+                    resizeMode="cover"
+                  />
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      zIndex: 100,
+                      backgroundColor: "#00000055",
+                      right: 0,
+                      marginTop: 5,
+                      marginRight: 5,
+                    }}
+                    onPress={() => {
+                      setImage(null);
+                    }}
+                  >
+                    <CustomIcon name="delete" size={32} color="#ffffffee" />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            <View
+              style={{
                 marginTop: 10,
-                borderRadius: 20,
+                borderRadius: 10,
                 backgroundColor: themeSchema[theme].backgroundColor1,
                 height: 100,
                 justifyContent: "space-around",
@@ -795,6 +887,7 @@ const CreateDebate = (props) => {
                   answerOne: optionOne,
                   answerTwo: optionTwo,
                   duration,
+                  image,
                   reqCreatePublicDebate,
                 });
               if (debateType.value === "DUO") {
@@ -803,6 +896,7 @@ const CreateDebate = (props) => {
                   answerOne: optionOne,
                   duration,
                   duo,
+                  image,
                   reqCreateDuoDebate,
                 });
               }

@@ -1,6 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CustomIcon from "./Icon";
 import Select from "../Components/Select";
@@ -186,6 +193,7 @@ const DebateBox = (props) => {
 
   const votes = pour + contre;
   const comments = debate.comments.length;
+  // console.log(debate.image);
   if (debate.type === "STANDARD" || debate.type === "MUDDLE") {
     return (
       <View
@@ -288,7 +296,23 @@ const DebateBox = (props) => {
           >
             {debate.content}
           </Text>
+          {debate.image && (
+            <Image
+              source={{
+                uri: debate.image,
+              }}
+              style={{
+                width: Dimensions.get("screen").width / 1.2,
+                height: 140,
+                borderRadius: 5,
+                marginTop: 5,
+                marginBottom: 5,
+              }}
+              resizeMode="cover"
+            />
+          )}
         </TouchableOpacity>
+
         <View
           style={{
             height: 1,
@@ -617,6 +641,21 @@ const DebateBox = (props) => {
             >
               {debate.content}
             </Text>
+            {debate.image && (
+              <Image
+                source={{
+                  uri: debate.image,
+                }}
+                style={{
+                  width: Dimensions.get("screen").width / 1.2,
+                  height: 140,
+                  borderRadius: 5,
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+                resizeMode="cover"
+              />
+            )}
           </TouchableOpacity>
           <View style={styles.debateActionsDuo}>
             <TouchableOpacity
@@ -791,7 +830,7 @@ const DebateBox = (props) => {
 
 const styles = StyleSheet.create({
   boxDebate: {
-    maxHeight: 340,
+    // maxHeight: 340,
     backgroundColor: "white",
     elevation: 4,
     borderRadius: 7,

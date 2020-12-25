@@ -522,6 +522,8 @@ export type DebateOrderByInput =
   | "answerOne_DESC"
   | "answerTwo_ASC"
   | "answerTwo_DESC"
+  | "image_ASC"
+  | "image_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -813,6 +815,7 @@ export interface DebateCreateWithoutInteractionsInput {
   published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface DebateWhereInput {
@@ -917,6 +920,20 @@ export interface DebateWhereInput {
   answerTwo_not_starts_with?: Maybe<String>;
   answerTwo_ends_with?: Maybe<String>;
   answerTwo_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1686,6 +1703,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface ReportCreateInput {
@@ -1815,6 +1833,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export type MessageWhereUniqueInput = AtLeastOne<{
@@ -1931,6 +1950,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface ConversationCreateWithoutMessagesInput {
@@ -2032,6 +2052,7 @@ export interface DebateUpdateManyMutationInput {
   published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface NotificationUpdateWithoutWhoDataInput {
@@ -2101,6 +2122,7 @@ export interface DebateUpdateDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface AdTargetUpdateWithWhereUniqueNestedInput {
@@ -2568,6 +2590,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface UserCreateOneWithoutDebatesRedInput {
@@ -2645,6 +2668,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface UserCreateManyInput {
@@ -2714,6 +2738,7 @@ export interface DebateCreateWithoutReportsInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface ReportUpdateWithoutDebateDataInput {
@@ -2924,6 +2949,7 @@ export interface DebateCreateWithoutCommentsInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface CommentUpsertWithoutReportsInput {
@@ -3990,6 +4016,7 @@ export interface DebateCreateWithoutOwnerInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
@@ -4020,6 +4047,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface MessageUpdateManyDataInput {
@@ -4050,6 +4078,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
@@ -4609,6 +4638,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface DebateCreateInput {
@@ -4635,6 +4665,7 @@ export interface DebateCreateInput {
   interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface DebateUpsertWithoutInteractionsInput {
@@ -4768,6 +4799,20 @@ export interface DebateScalarWhereInput {
   answerTwo_not_starts_with?: Maybe<String>;
   answerTwo_ends_with?: Maybe<String>;
   answerTwo_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -4814,6 +4859,7 @@ export interface DebateUpdateManyDataInput {
   published?: Maybe<Boolean>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface ConversationCreateOneWithoutMessagesInput {
@@ -4989,6 +5035,7 @@ export interface DebateUpdateInput {
   interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface UserUpsertWithWhereUniqueWithoutFollowingInput {
@@ -6463,6 +6510,7 @@ export interface Debate {
   published: Boolean;
   answerOne?: String;
   answerTwo?: String;
+  image?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -6547,6 +6595,7 @@ export interface DebatePromise extends Promise<Debate>, Fragmentable {
   }) => T;
   answerOne: () => Promise<String>;
   answerTwo: () => Promise<String>;
+  image: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -6633,6 +6682,7 @@ export interface DebateSubscription
   }) => T;
   answerOne: () => Promise<AsyncIterator<String>>;
   answerTwo: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -6719,6 +6769,7 @@ export interface DebateNullablePromise
   }) => T;
   answerOne: () => Promise<String>;
   answerTwo: () => Promise<String>;
+  image: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -7006,6 +7057,7 @@ export interface DebatePreviousValues {
   published: Boolean;
   answerOne?: String;
   answerTwo?: String;
+  image?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -7023,6 +7075,7 @@ export interface DebatePreviousValuesPromise
   published: () => Promise<Boolean>;
   answerOne: () => Promise<String>;
   answerTwo: () => Promise<String>;
+  image: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -7040,6 +7093,7 @@ export interface DebatePreviousValuesSubscription
   published: () => Promise<AsyncIterator<Boolean>>;
   answerOne: () => Promise<AsyncIterator<String>>;
   answerTwo: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }

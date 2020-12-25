@@ -1,9 +1,17 @@
 {
+  "loadingPictureMessage": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        351
+      ]
+    ]
+  },
   "followers": {
     "origin": [
       [
         "Screens/Profile.js",
-        554
+        580
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        586
+        613
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        647
+        677
       ]
     ]
   }

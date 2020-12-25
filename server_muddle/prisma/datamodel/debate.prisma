@@ -28,6 +28,7 @@ type Debate {
   interactions: [Interaction]
   answerOne: String
   answerTwo: String
+  image: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -31,6 +31,7 @@ fragment BestDebate on Debate {
   content
   answerOne
   answerTwo
+  image
   type
   owner {
     id

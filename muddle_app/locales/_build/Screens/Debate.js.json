@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        444
+        451
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        451
+        458
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        455
+        462
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        462
+        469
       ]
     ]
   },
@@ -35,7 +35,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        466
+        473
       ]
     ]
   },
@@ -43,11 +43,11 @@
     "origin": [
       [
         "Screens/Debate.js",
-        587
+        679
       ],
       [
         "Screens/Debate.js",
-        978
+        1099
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        1081
+        1164
       ]
     ]
   }

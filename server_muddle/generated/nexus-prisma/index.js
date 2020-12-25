@@ -708,6 +708,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -760,6 +761,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -785,6 +787,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
     owner?: NexusGenInputs['UserCreateOneWithoutDebatesInput'] | null; // UserCreateOneWithoutDebatesInput
@@ -809,6 +812,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -833,6 +837,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -857,6 +862,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -881,6 +887,7 @@ export interface NexusGenInputs {
     content: string; // String!
     crowned?: boolean | null; // Boolean
     id?: string | null; // ID
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionCreateManyWithoutDebateInput'] | null; // InteractionCreateManyWithoutDebateInput
     loser?: NexusGenInputs['UserCreateOneInput'] | null; // UserCreateOneInput
     negatives?: NexusGenInputs['UserCreateManyInput'] | null; // UserCreateManyInput
@@ -966,6 +973,20 @@ export interface NexusGenInputs {
     id_not_in?: string[] | null; // [ID!]
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
+    image?: string | null; // String
+    image_contains?: string | null; // String
+    image_ends_with?: string | null; // String
+    image_gt?: string | null; // String
+    image_gte?: string | null; // String
+    image_in?: string[] | null; // [String!]
+    image_lt?: string | null; // String
+    image_lte?: string | null; // String
+    image_not?: string | null; // String
+    image_not_contains?: string | null; // String
+    image_not_ends_with?: string | null; // String
+    image_not_in?: string[] | null; // [String!]
+    image_not_starts_with?: string | null; // String
+    image_starts_with?: string | null; // String
     NOT?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
     OR?: NexusGenInputs['DebateScalarWhereInput'][] | null; // [DebateScalarWhereInput!]
     published?: boolean | null; // Boolean
@@ -1013,6 +1034,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1037,6 +1059,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1059,6 +1082,7 @@ export interface NexusGenInputs {
     closed?: boolean | null; // Boolean
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     published?: boolean | null; // Boolean
     timelimit?: any | null; // DateTime
     timelimitString?: string | null; // String
@@ -1150,6 +1174,7 @@ export interface NexusGenInputs {
     closed?: boolean | null; // Boolean
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1174,6 +1199,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
     owner?: NexusGenInputs['UserUpdateOneWithoutDebatesInput'] | null; // UserUpdateOneWithoutDebatesInput
@@ -1197,6 +1223,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1220,6 +1247,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1243,6 +1271,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1266,6 +1295,7 @@ export interface NexusGenInputs {
     comments?: NexusGenInputs['CommentUpdateManyWithoutDebateInput'] | null; // CommentUpdateManyWithoutDebateInput
     content?: string | null; // String
     crowned?: boolean | null; // Boolean
+    image?: string | null; // String
     interactions?: NexusGenInputs['InteractionUpdateManyWithoutDebateInput'] | null; // InteractionUpdateManyWithoutDebateInput
     loser?: NexusGenInputs['UserUpdateOneInput'] | null; // UserUpdateOneInput
     negatives?: NexusGenInputs['UserUpdateManyInput'] | null; // UserUpdateManyInput
@@ -1384,6 +1414,20 @@ export interface NexusGenInputs {
     id_not_in?: string[] | null; // [ID!]
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
+    image?: string | null; // String
+    image_contains?: string | null; // String
+    image_ends_with?: string | null; // String
+    image_gt?: string | null; // String
+    image_gte?: string | null; // String
+    image_in?: string[] | null; // [String!]
+    image_lt?: string | null; // String
+    image_lte?: string | null; // String
+    image_not?: string | null; // String
+    image_not_contains?: string | null; // String
+    image_not_ends_with?: string | null; // String
+    image_not_in?: string[] | null; // [String!]
+    image_not_starts_with?: string | null; // String
+    image_starts_with?: string | null; // String
     interactions_some?: NexusGenInputs['InteractionWhereInput'] | null; // InteractionWhereInput
     loser?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     negatives_some?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
@@ -3692,7 +3736,7 @@ export interface NexusGenEnums {
   AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "nested_ASC" | "nested_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "published_ASC" | "published_DESC" | "timelimit_ASC" | "timelimit_DESC" | "timelimitString_ASC" | "timelimitString_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  DebateOrderByInput: "answerOne_ASC" | "answerOne_DESC" | "answerTwo_ASC" | "answerTwo_DESC" | "closed_ASC" | "closed_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "id_ASC" | "id_DESC" | "image_ASC" | "image_DESC" | "published_ASC" | "published_DESC" | "timelimit_ASC" | "timelimit_DESC" | "timelimitString_ASC" | "timelimitString_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   DebateType: "DUO" | "MUDDLE" | "STANDARD"
   Gender: "FEMALE" | "MALE" | "NO_INDICATION"
   GenderFilter: "ALL" | "FEMALE" | "MALE"
@@ -3762,6 +3806,7 @@ export interface NexusGenRootTypes {
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
     id: string; // ID!
+    image?: string | null; // String
     published: boolean; // Boolean!
     timelimit?: any | null; // DateTime
     timelimitString?: string | null; // String
@@ -4197,6 +4242,7 @@ export interface NexusGenFieldTypes {
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
     id: string; // ID!
+    image: string | null; // String
     interactions: NexusGenRootTypes['Interaction'][] | null; // [Interaction!]
     loser: NexusGenRootTypes['User'] | null; // User
     negatives: NexusGenRootTypes['User'][] | null; // [User!]
@@ -4556,6 +4602,7 @@ export interface NexusGenArgTypes {
     createInvitationDuoDebate: { // args
       answerOne?: string | null; // String
       content?: string | null; // String
+      image?: string | null; // String
       timelimit?: string | null; // String
       user?: string | null; // ID
     }
@@ -4569,6 +4616,7 @@ export interface NexusGenArgTypes {
       answerOne?: string | null; // String
       answerTwo?: string | null; // String
       content?: string | null; // String
+      image?: string | null; // String
       timelimit?: string | null; // String
     }
     createReport: { // args

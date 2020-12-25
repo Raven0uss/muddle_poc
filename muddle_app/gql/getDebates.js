@@ -16,6 +16,7 @@ const GET_DEBATES = (debateType) => {
           content
           answerOne
           answerTwo
+          image
           type
           owner {
             id
@@ -65,6 +66,7 @@ const GET_DEBATES = (debateType) => {
           content
           answerOne
           answerTwo
+          image
           type
           owner {
             id
@@ -114,6 +116,7 @@ const GET_DEBATES = (debateType) => {
           content
           answerOne
           answerTwo
+          image
           type
           owner {
             id

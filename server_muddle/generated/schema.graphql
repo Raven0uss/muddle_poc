@@ -869,6 +869,7 @@ type Debate {
   createdAt: DateTime!
   crowned: Boolean!
   id: ID!
+  image: String
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]
   loser: User
   negatives(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
@@ -896,6 +897,7 @@ input DebateCreateInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -956,6 +958,7 @@ input DebateCreateWithoutCommentsInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -982,6 +985,7 @@ input DebateCreateWithoutInteractionsInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
   owner: UserCreateOneWithoutDebatesInput
@@ -1007,6 +1011,7 @@ input DebateCreateWithoutOwnerBlueInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -1032,6 +1037,7 @@ input DebateCreateWithoutOwnerInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -1057,6 +1063,7 @@ input DebateCreateWithoutOwnerRedInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -1082,6 +1089,7 @@ input DebateCreateWithoutReportsInput {
   content: String!
   crowned: Boolean
   id: ID
+  image: String
   interactions: InteractionCreateManyWithoutDebateInput
   loser: UserCreateOneInput
   negatives: UserCreateManyInput
@@ -1113,6 +1121,8 @@ enum DebateOrderByInput {
   crowned_DESC
   id_ASC
   id_DESC
+  image_ASC
+  image_DESC
   published_ASC
   published_DESC
   timelimit_ASC
@@ -1195,6 +1205,20 @@ input DebateScalarWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  image: String
+  image_contains: String
+  image_ends_with: String
+  image_gt: String
+  image_gte: String
+  image_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_not: String
+  image_not_contains: String
+  image_not_ends_with: String
+  image_not_in: [String!]
+  image_not_starts_with: String
+  image_starts_with: String
   NOT: [DebateScalarWhereInput!]
   OR: [DebateScalarWhereInput!]
   published: Boolean
@@ -1249,6 +1273,7 @@ input DebateUpdateDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1274,6 +1299,7 @@ input DebateUpdateInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1297,6 +1323,7 @@ input DebateUpdateManyDataInput {
   closed: Boolean
   content: String
   crowned: Boolean
+  image: String
   published: Boolean
   timelimit: DateTime
   timelimitString: String
@@ -1385,6 +1412,7 @@ input DebateUpdateWithoutCommentsDataInput {
   closed: Boolean
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1410,6 +1438,7 @@ input DebateUpdateWithoutInteractionsDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
   owner: UserUpdateOneWithoutDebatesInput
@@ -1434,6 +1463,7 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1458,6 +1488,7 @@ input DebateUpdateWithoutOwnerDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1482,6 +1513,7 @@ input DebateUpdateWithoutOwnerRedDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1506,6 +1538,7 @@ input DebateUpdateWithoutReportsDataInput {
   comments: CommentUpdateManyWithoutDebateInput
   content: String
   crowned: Boolean
+  image: String
   interactions: InteractionUpdateManyWithoutDebateInput
   loser: UserUpdateOneInput
   negatives: UserUpdateManyInput
@@ -1647,6 +1680,20 @@ input DebateWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  image: String
+  image_contains: String
+  image_ends_with: String
+  image_gt: String
+  image_gte: String
+  image_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_not: String
+  image_not_contains: String
+  image_not_ends_with: String
+  image_not_in: [String!]
+  image_not_starts_with: String
+  image_starts_with: String
   interactions_some: InteractionWhereInput
   loser: UserWhereInput
   negatives_some: UserWhereInput
@@ -2164,10 +2211,10 @@ type Mutation {
   createConversation(data: ConversationCreateInput!): Conversation!
   createDebate(data: DebateCreateInput!): Debate!
   createInteraction(data: InteractionCreateInput!): Interaction!
-  createInvitationDuoDebate(answerOne: String, content: String, timelimit: String, user: ID): Debate!
+  createInvitationDuoDebate(answerOne: String, content: String, image: String, timelimit: String, user: ID): Debate!
   createMessage(data: MessageCreateInput!): Message!
   createNotification(data: NotificationCreateInput!): Notification!
-  createPublicDebate(answerOne: String, answerTwo: String, content: String, timelimit: String): Debate!
+  createPublicDebate(answerOne: String, answerTwo: String, content: String, image: String, timelimit: String): Debate!
   createReport(data: ReportCreateInput!): Report!
   createTrophy(data: TrophyCreateInput!): Trophy!
   deleteComment(where: CommentWhereUniqueInput!): Comment

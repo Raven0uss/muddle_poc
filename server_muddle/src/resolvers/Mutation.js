@@ -89,10 +89,11 @@ const Mutation = prismaObjectType({
         answerOne: stringArg(),
         answerTwo: stringArg(),
         timelimit: stringArg(),
+        image: stringArg(),
       },
       resolve: async (
         parent,
-        { content, answerOne, answerTwo, timelimit },
+        { content, answerOne, answerTwo, timelimit, image },
         { prisma, currentUser }
       ) => {
         if (timelimit === "0 00") throw new Error("Timelimit is not correct");
@@ -107,6 +108,7 @@ const Mutation = prismaObjectType({
             answerTwo,
             type: "STANDARD",
             timelimit: limit,
+            image,
           });
           return newDebate;
         } catch (err) {
@@ -122,10 +124,11 @@ const Mutation = prismaObjectType({
         content: stringArg(),
         answerOne: stringArg(),
         timelimit: stringArg(),
+        image: stringArg(),
       },
       resolve: async (
         parent,
-        { content, answerOne, timelimit, user },
+        { content, answerOne, timelimit, user, image },
         { prisma, currentUser }
       ) => {
         if (timelimit === "0 00") throw new Error("Timelimit is not correct");
@@ -140,6 +143,7 @@ const Mutation = prismaObjectType({
             },
             content,
             answerOne,
+            image,
             type: "DUO",
             timelimitString: timelimit,
             published: false,

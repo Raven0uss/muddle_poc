@@ -1078,6 +1078,7 @@ type Debate {
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
   answerOne: String
   answerTwo: String
+  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1112,6 +1113,7 @@ input DebateCreateInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateManyWithoutOwnerBlueInput {
@@ -1172,6 +1174,7 @@ input DebateCreateWithoutCommentsInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateWithoutInteractionsInput {
@@ -1197,6 +1200,7 @@ input DebateCreateWithoutInteractionsInput {
   published: Boolean
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateWithoutOwnerBlueInput {
@@ -1222,6 +1226,7 @@ input DebateCreateWithoutOwnerBlueInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateWithoutOwnerInput {
@@ -1247,6 +1252,7 @@ input DebateCreateWithoutOwnerInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateWithoutOwnerRedInput {
@@ -1272,6 +1278,7 @@ input DebateCreateWithoutOwnerRedInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateCreateWithoutReportsInput {
@@ -1297,6 +1304,7 @@ input DebateCreateWithoutReportsInput {
   interactions: InteractionCreateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 type DebateEdge {
@@ -1325,6 +1333,8 @@ enum DebateOrderByInput {
   answerOne_DESC
   answerTwo_ASC
   answerTwo_DESC
+  image_ASC
+  image_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1342,6 +1352,7 @@ type DebatePreviousValues {
   published: Boolean!
   answerOne: String
   answerTwo: String
+  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1435,6 +1446,20 @@ input DebateScalarWhereInput {
   answerTwo_not_starts_with: String
   answerTwo_ends_with: String
   answerTwo_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1501,6 +1526,7 @@ input DebateUpdateDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateInput {
@@ -1526,6 +1552,7 @@ input DebateUpdateInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateManyDataInput {
@@ -1538,6 +1565,7 @@ input DebateUpdateManyDataInput {
   published: Boolean
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateManyMutationInput {
@@ -1550,6 +1578,7 @@ input DebateUpdateManyMutationInput {
   published: Boolean
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateManyWithoutOwnerBlueInput {
@@ -1649,6 +1678,7 @@ input DebateUpdateWithoutCommentsDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithoutInteractionsDataInput {
@@ -1673,6 +1703,7 @@ input DebateUpdateWithoutInteractionsDataInput {
   published: Boolean
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithoutOwnerBlueDataInput {
@@ -1697,6 +1728,7 @@ input DebateUpdateWithoutOwnerBlueDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithoutOwnerDataInput {
@@ -1721,6 +1753,7 @@ input DebateUpdateWithoutOwnerDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithoutOwnerRedDataInput {
@@ -1745,6 +1778,7 @@ input DebateUpdateWithoutOwnerRedDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithoutReportsDataInput {
@@ -1769,6 +1803,7 @@ input DebateUpdateWithoutReportsDataInput {
   interactions: InteractionUpdateManyWithoutDebateInput
   answerOne: String
   answerTwo: String
+  image: String
 }
 
 input DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
@@ -1926,6 +1961,20 @@ input DebateWhereInput {
   answerTwo_not_starts_with: String
   answerTwo_ends_with: String
   answerTwo_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

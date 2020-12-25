@@ -314,6 +314,7 @@ const Profile = (props) => {
   const { currentUser } = React.useContext(UserContext);
   const [user, setUser] = React.useState(null);
   const [search, setSearch] = React.useState("");
+  const [loadingPicture, setLoadingPicture] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_USER, {
     variables: {
       userId: get(props, "route.params.userId"),
@@ -329,7 +330,7 @@ const Profile = (props) => {
   const { navigation, route } = props;
   const { setHomeDebates } = route.params;
 
-  if (user === null || loading) {
+  if (user === null || loading || loadingPicture) {
     return (
       <SafeAreaView
         style={{
@@ -338,6 +339,18 @@ const Profile = (props) => {
         }}
       >
         <ActivityIndicator />
+        {loadingPicture && (
+          <Text
+            style={{
+              marginTop: 10,
+              fontFamily: "Montserrat_600SemiBold",
+              color: "#a7a7a7",
+              textAlign: "center",
+            }}
+          >
+            {i18n._("loadingPictureMessage")}
+          </Text>
+        )}
       </SafeAreaView>
     );
   }
@@ -614,6 +627,7 @@ const Profile = (props) => {
             navigation={navigation}
             theme={theme}
             user={user}
+            setLoadingPicture={setLoadingPicture}
           />
         </View>
       </View>

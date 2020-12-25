@@ -6,6 +6,8 @@ import i18n from "../i18n";
 import UserContext from "../CustomProperties/UserContext";
 import { get, isEmpty, isNil } from "lodash";
 import { gql, useMutation } from "@apollo/client";
+import { pickImageAndGetUrl } from "../Library/pickImage";
+import { storeItem } from "../CustomProperties/storage";
 
 const isFollowing = (user, currentUser) => {
   const index = user.followers.findIndex((u) => u.id === currentUser.id);
@@ -80,9 +82,40 @@ const CREATE_NEW_CONVERSATION = gql`
   }
 `;
 
+const UPDATE_PROFILE_PICTURE = gql`
+  mutation($profilePicture: String!, $userId: ID!) {
+    updateUser(
+      where: { id: $userId }
+      data: { profilePicture: $profilePicture }
+    ) {
+      id
+      email
+      firstname
+      lastname
+      language
+      profilePicture
+      coverPicture
+    }
+  }
+`;
+
+const UPDATE_COVER_PICTURE = gql`
+  mutation($coverPicture: String!, $userId: ID!) {
+    updateUser(where: { id: $userId }, data: { coverPicture: $coverPicture }) {
+      id
+      email
+      firstname
+      lastname
+      language
+      profilePicture
+      coverPicture
+    }
+  }
+`;
+
 const ProfileAction = (props) => {
-  const { currentUser } = React.useContext(UserContext);
-  const { navigation, me, theme, user } = props;
+  const { currentUser, setCurrentUser } = React.useContext(UserContext);
+  const { navigation, me, theme, user, setLoadingPicture } = props;
 
   const [following, setFollowing] = React.useState(
     me ? false : isFollowing(user, currentUser)
@@ -92,6 +125,24 @@ const ProfileAction = (props) => {
   const [setPrivate] = useMutation(SET_PRIVATE);
   const [reqFollow] = useMutation(FOLLOW);
   const [reqUnfollow] = useMutation(UNFOLLOW);
+
+  const [updateProfilePicture] = useMutation(UPDATE_PROFILE_PICTURE, {
+    onCompleted: async (response) => {
+      const { updateUser: queryResponse } = response;
+      setCurrentUser(queryResponse);
+      await storeItem("user", JSON.stringify(queryResponse));
+      setLoadingPicture(false);
+    },
+  });
+
+  const [updateCoverPicture] = useMutation(UPDATE_COVER_PICTURE, {
+    onCompleted: async (response) => {
+      const { updateUser: queryResponse } = response;
+      setCurrentUser(queryResponse);
+      await storeItem("user", JSON.stringify(queryResponse));
+      setLoadingPicture(false);
+    },
+  });
 
   const [createNewConversation, { loading: loadingMutation }] = useMutation(
     CREATE_NEW_CONVERSATION,
@@ -130,7 +181,7 @@ const ProfileAction = (props) => {
         ]}
         selected={null}
         placeholder=""
-        onSelect={(action) => {
+        onSelect={async (action) => {
           if (action.value === "PUBLIC") {
             setPrivateAccount(false);
             setPrivate({
@@ -148,6 +199,34 @@ const ProfileAction = (props) => {
                 private: true,
               },
             });
+          }
+          if (action.value === "PROFILE_PICTURE") {
+            setLoadingPicture(true);
+            const imageUrl = await pickImageAndGetUrl();
+            if (imageUrl !== null)
+              updateProfilePicture({
+                variables: {
+                  userId: currentUser.id,
+                  profilePicture: imageUrl,
+                },
+              });
+            else {
+              setLoadingPicture(false);
+            }
+          }
+          if (action.value === "COVER_PICTURE") {
+            setLoadingPicture(true);
+            const imageUrl = await pickImageAndGetUrl();
+            if (imageUrl !== null)
+              updateCoverPicture({
+                variables: {
+                  userId: currentUser.id,
+                  coverPicture: imageUrl,
+                },
+              });
+            else {
+              setLoadingPicture(false);
+            }
           }
         }}
         renderComponent={

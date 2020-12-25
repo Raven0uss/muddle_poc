@@ -221,6 +221,29 @@ const CreateDuoDebate = (props) => {
             <Text style={{ fontFamily: "Montserrat_500Medium", fontSize: 12 }}>
               {debate.content}
             </Text>
+            {debate.image && (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("IsolateImage", {
+                    image: debate.image,
+                  });
+                }}
+              >
+                <Image
+                  source={{
+                    uri: debate.image,
+                  }}
+                  style={{
+                    width: Dimensions.get("screen").width / 1.15,
+                    height: 280,
+                    borderRadius: 5,
+                    marginTop: 5,
+                    marginBottom: 5,
+                  }}
+                  resizeMode="cover"
+                />
+              </TouchableOpacity>
+            )}
           </View>
           <View
             style={{

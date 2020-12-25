@@ -61,6 +61,7 @@ const GET_NOTIFICATIONS = gql`
         content
         answerOne
         answerTwo
+        image
         timelimitString
       }
       comment {

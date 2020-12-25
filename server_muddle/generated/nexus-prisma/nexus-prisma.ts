@@ -2352,6 +2352,7 @@ type DebateObject =
   | { name: 'interactions', args?: DebateInteractionsArgs[] | false, alias?: string  } 
   | { name: 'answerOne', args?: [] | false, alias?: string  } 
   | { name: 'answerTwo', args?: [] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -2379,6 +2380,7 @@ type DebateFields =
   | 'interactions'
   | 'answerOne'
   | 'answerTwo'
+  | 'image'
   | 'createdAt'
   | 'updatedAt'
 
@@ -2689,6 +2691,14 @@ export interface DebateFieldDetails {
     resolve: undefined
   }
   answerTwo: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  image: {
     type: 'String'
     args: {}
     description: string
@@ -6599,6 +6609,7 @@ type DebatePreviousValuesObject =
   | { name: 'published', args?: [] | false, alias?: string  } 
   | { name: 'answerOne', args?: [] | false, alias?: string  } 
   | { name: 'answerTwo', args?: [] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -6613,6 +6624,7 @@ type DebatePreviousValuesFields =
   | 'published'
   | 'answerOne'
   | 'answerTwo'
+  | 'image'
   | 'createdAt'
   | 'updatedAt'
 
@@ -6699,6 +6711,14 @@ export interface DebatePreviousValuesFieldDetails {
     resolve: undefined
   }
   answerTwo: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  image: {
     type: 'String'
     args: {}
     description: string
@@ -8501,6 +8521,20 @@ export interface DebateWhereInput {
   answerTwo_not_starts_with?: string | null
   answerTwo_ends_with?: string | null
   answerTwo_not_ends_with?: string | null
+  image?: string | null
+  image_not?: string | null
+  image_in?: string[]
+  image_not_in?: string[]
+  image_lt?: string | null
+  image_lte?: string | null
+  image_gt?: string | null
+  image_gte?: string | null
+  image_contains?: string | null
+  image_not_contains?: string | null
+  image_starts_with?: string | null
+  image_not_starts_with?: string | null
+  image_ends_with?: string | null
+  image_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -8622,6 +8656,20 @@ export type DebateWhereInputInputObject =
   | { name: 'answerTwo_not_starts_with', alias?: string  } 
   | { name: 'answerTwo_ends_with', alias?: string  } 
   | { name: 'answerTwo_not_ends_with', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'image_not', alias?: string  } 
+  | { name: 'image_in', alias?: string  } 
+  | { name: 'image_not_in', alias?: string  } 
+  | { name: 'image_lt', alias?: string  } 
+  | { name: 'image_lte', alias?: string  } 
+  | { name: 'image_gt', alias?: string  } 
+  | { name: 'image_gte', alias?: string  } 
+  | { name: 'image_contains', alias?: string  } 
+  | { name: 'image_not_contains', alias?: string  } 
+  | { name: 'image_starts_with', alias?: string  } 
+  | { name: 'image_not_starts_with', alias?: string  } 
+  | { name: 'image_ends_with', alias?: string  } 
+  | { name: 'image_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -10094,6 +10142,7 @@ export interface DebateCreateWithoutOwnerInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutOwnerInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerInput, string>
@@ -10119,6 +10168,7 @@ export type DebateCreateWithoutOwnerInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesBlueInput {
   create?: UserCreateWithoutDebatesBlueInput | null
@@ -10218,6 +10268,7 @@ export interface DebateCreateWithoutOwnerRedInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutOwnerRedInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerRedInput, string>
@@ -10243,6 +10294,7 @@ export type DebateCreateWithoutOwnerRedInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesInput {
   create?: UserCreateWithoutDebatesInput | null
@@ -10342,6 +10394,7 @@ export interface DebateCreateWithoutOwnerBlueInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutOwnerBlueInputInputObject =
   | Extract<keyof DebateCreateWithoutOwnerBlueInput, string>
@@ -10367,6 +10420,7 @@ export type DebateCreateWithoutOwnerBlueInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserCreateOneWithoutDebatesRedInput {
   create?: UserCreateWithoutDebatesRedInput | null
@@ -10495,6 +10549,7 @@ export interface DebateCreateInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateInputInputObject =
   | Extract<keyof DebateCreateInput, string>
@@ -10521,6 +10576,7 @@ export type DebateCreateInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface CommentCreateManyWithoutDebateInput {
   create?: CommentCreateWithoutDebateInput[]
@@ -10623,6 +10679,7 @@ export interface DebateCreateWithoutReportsInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutReportsInputInputObject =
   | Extract<keyof DebateCreateWithoutReportsInput, string>
@@ -10648,6 +10705,7 @@ export type DebateCreateWithoutReportsInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface CommentCreateOneInput {
   create?: CommentCreateInput | null
@@ -10913,6 +10971,7 @@ export interface DebateCreateWithoutCommentsInput {
   interactions?: InteractionCreateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutCommentsInputInputObject =
   | Extract<keyof DebateCreateWithoutCommentsInput, string>
@@ -10938,6 +10997,7 @@ export type DebateCreateWithoutCommentsInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface InteractionCreateManyWithoutWhoInput {
   create?: InteractionCreateWithoutWhoInput[]
@@ -10993,6 +11053,7 @@ export interface DebateCreateWithoutInteractionsInput {
   published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateCreateWithoutInteractionsInputInputObject =
   | Extract<keyof DebateCreateWithoutInteractionsInput, string>
@@ -11018,6 +11079,7 @@ export type DebateCreateWithoutInteractionsInputInputObject =
   | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface CommentUpdateInput {
   from?: UserUpdateOneRequiredInput | null
@@ -11512,6 +11574,7 @@ export interface DebateUpdateWithoutOwnerDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutOwnerDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerDataInput, string>
@@ -11536,6 +11599,7 @@ export type DebateUpdateWithoutOwnerDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesBlueInput {
   create?: UserCreateWithoutDebatesBlueInput | null
@@ -11663,6 +11727,7 @@ export interface DebateUpdateWithoutOwnerRedDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerRedDataInput, string>
@@ -11687,6 +11752,7 @@ export type DebateUpdateWithoutOwnerRedDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesInput {
   create?: UserCreateWithoutDebatesInput | null
@@ -11814,6 +11880,7 @@ export interface DebateUpdateWithoutOwnerBlueDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutOwnerBlueDataInput, string>
@@ -11838,6 +11905,7 @@ export type DebateUpdateWithoutOwnerBlueDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserUpdateOneWithoutDebatesRedInput {
   create?: UserCreateWithoutDebatesRedInput | null
@@ -12000,6 +12068,7 @@ export interface DebateUpdateDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateDataInputInputObject =
   | Extract<keyof DebateUpdateDataInput, string>
@@ -12025,6 +12094,7 @@ export type DebateUpdateDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface CommentUpdateManyWithoutDebateInput {
   create?: CommentCreateWithoutDebateInput[]
@@ -12615,6 +12685,7 @@ export interface DebateUpdateWithoutReportsDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutReportsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutReportsDataInput, string>
@@ -12639,6 +12710,7 @@ export type DebateUpdateWithoutReportsDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface CommentUpdateOneInput {
   create?: CommentCreateInput | null
@@ -12713,6 +12785,7 @@ export interface DebateUpdateWithoutCommentsDataInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutCommentsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutCommentsDataInput, string>
@@ -12737,6 +12810,7 @@ export type DebateUpdateWithoutCommentsDataInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface ReportUpdateManyWithoutDebateInput {
   create?: ReportCreateWithoutDebateInput[]
@@ -14121,6 +14195,7 @@ export interface DebateUpdateWithoutInteractionsDataInput {
   published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof DebateUpdateWithoutInteractionsDataInput, string>
@@ -14145,6 +14220,7 @@ export type DebateUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface DebateUpsertWithoutInteractionsInput {
   update?: DebateUpdateWithoutInteractionsDataInput
@@ -14275,6 +14351,20 @@ export interface DebateScalarWhereInput {
   answerTwo_not_starts_with?: string | null
   answerTwo_ends_with?: string | null
   answerTwo_not_ends_with?: string | null
+  image?: string | null
+  image_not?: string | null
+  image_in?: string[]
+  image_not_in?: string[]
+  image_lt?: string | null
+  image_lte?: string | null
+  image_gt?: string | null
+  image_gte?: string | null
+  image_contains?: string | null
+  image_not_contains?: string | null
+  image_starts_with?: string | null
+  image_not_starts_with?: string | null
+  image_ends_with?: string | null
+  image_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -14385,6 +14475,20 @@ export type DebateScalarWhereInputInputObject =
   | { name: 'answerTwo_not_starts_with', alias?: string  } 
   | { name: 'answerTwo_ends_with', alias?: string  } 
   | { name: 'answerTwo_not_ends_with', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'image_not', alias?: string  } 
+  | { name: 'image_in', alias?: string  } 
+  | { name: 'image_not_in', alias?: string  } 
+  | { name: 'image_lt', alias?: string  } 
+  | { name: 'image_lte', alias?: string  } 
+  | { name: 'image_gt', alias?: string  } 
+  | { name: 'image_gte', alias?: string  } 
+  | { name: 'image_contains', alias?: string  } 
+  | { name: 'image_not_contains', alias?: string  } 
+  | { name: 'image_starts_with', alias?: string  } 
+  | { name: 'image_not_starts_with', alias?: string  } 
+  | { name: 'image_ends_with', alias?: string  } 
+  | { name: 'image_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -14424,6 +14528,7 @@ export interface DebateUpdateManyDataInput {
   published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateManyDataInputInputObject =
   | Extract<keyof DebateUpdateManyDataInput, string>
@@ -14436,6 +14541,7 @@ export type DebateUpdateManyDataInputInputObject =
   | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface UserUpsertWithoutDebatesInput {
   update?: UserUpdateWithoutDebatesDataInput
@@ -14737,6 +14843,7 @@ export interface DebateUpdateInput {
   interactions?: InteractionUpdateManyWithoutDebateInput | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateInputInputObject =
   | Extract<keyof DebateUpdateInput, string>
@@ -14762,6 +14869,7 @@ export type DebateUpdateInputInputObject =
   | { name: 'interactions', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface DebateUpdateManyMutationInput {
   content?: string | null
@@ -14773,6 +14881,7 @@ export interface DebateUpdateManyMutationInput {
   published?: boolean | null
   answerOne?: string | null
   answerTwo?: string | null
+  image?: string | null
 }
 export type DebateUpdateManyMutationInputInputObject =
   | Extract<keyof DebateUpdateManyMutationInput, string>
@@ -14785,6 +14894,7 @@ export type DebateUpdateManyMutationInputInputObject =
   | { name: 'published', alias?: string  } 
   | { name: 'answerOne', alias?: string  } 
   | { name: 'answerTwo', alias?: string  } 
+  | { name: 'image', alias?: string  } 
   
 export interface InteractionCreateInput {
   id?: string | null
@@ -15808,6 +15918,8 @@ export type DebateOrderByInputValues =
   | 'answerOne_DESC'
   | 'answerTwo_ASC'
   | 'answerTwo_DESC'
+  | 'image_ASC'
+  | 'image_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

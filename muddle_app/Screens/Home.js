@@ -40,6 +40,7 @@ const GET_DEBATES = gql`
       createdAt
       answerOne
       answerTwo
+      image
       type
       owner {
         id
