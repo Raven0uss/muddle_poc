@@ -2221,7 +2221,12 @@ type Mutation {
   deleteDebate(where: DebateWhereUniqueInput!): Debate
   deleteMyComment(commentId: ID): Comment!
   deleteMyDebate(debateId: ID): Debate!
+  dislikeComment(commentId: ID, userId: ID): Comment!
+  likeComment(commentId: ID, userId: ID): Comment!
+  notifyComment(debateId: ID): NoValue!
+  notifySubComment(commentId: ID, debateId: ID): NoValue!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
+  sendVote(debateId: ID, type: String, userId: ID): Debate!
   signUp(birthdate: DateTime, email: String, password: String, pseudo: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
   updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget
@@ -2384,6 +2389,7 @@ enum NotificationType {
   REJECT_CLOSE_DEBATE
   REJECT_DELETE_DEBATE
   REJECT_DUO
+  SUBCOMMENT
   VOTE
 }
 
@@ -2513,6 +2519,10 @@ input NotificationWhereUniqueInput {
   id: ID
 }
 
+type NoValue {
+  value: Int!
+}
+
 type Query {
   ad(where: AdWhereUniqueInput!): Ad
   ads(after: String, before: String, first: Int, last: Int, orderBy: AdOrderByInput, skip: Int, where: AdWhereInput): [Ad!]!
@@ -2535,6 +2545,7 @@ type Query {
   newNotifications: NewNotifications!
   notification(where: NotificationWhereUniqueInput!): Notification
   notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]!
+  ownerDebates(first: Int, skip: Int, userId: ID): [Debate!]!
   report(where: ReportWhereUniqueInput!): Report
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]!
   signIn(email: String, password: String): Token!

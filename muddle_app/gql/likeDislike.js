@@ -1,37 +1,9 @@
 import { gql } from "@apollo/client";
 
 const LIKE_COMMENT = (liked) => {
-  if (liked === null)
-    return gql`
-      mutation($comment: ID!, $userId: ID!) {
-        updateComment(
-          where: { id: $comment }
-          data: { likes: { connect: { id: $userId } } }
-        ) {
-          id
-        }
-      }
-    `;
-  if (liked === "dislike")
-    return gql`
-      mutation($comment: ID!, $userId: ID!) {
-        updateComment(
-          where: { id: $comment }
-          data: {
-            likes: { connect: { id: $userId } }
-            dislikes: { disconnect: { id: $userId } }
-          }
-        ) {
-          id
-        }
-      }
-    `;
   return gql`
     mutation($comment: ID!, $userId: ID!) {
-      updateComment(
-        where: { id: $comment }
-        data: { likes: { disconnect: { id: $userId } } }
-      ) {
+      likeComment(userId: $userId, commentId: $comment) {
         id
       }
     }
@@ -39,37 +11,9 @@ const LIKE_COMMENT = (liked) => {
 };
 
 const DISLIKE_COMMENT = (liked) => {
-  if (liked === null)
-    return gql`
-      mutation($comment: ID!, $userId: ID!) {
-        updateComment(
-          where: { id: $comment }
-          data: { dislikes: { connect: { id: $userId } } }
-        ) {
-          id
-        }
-      }
-    `;
-  if (liked === "like")
-    return gql`
-      mutation($comment: ID!, $userId: ID!) {
-        updateComment(
-          where: { id: $comment }
-          data: {
-            dislikes: { connect: { id: $userId } }
-            likes: { disconnect: { id: $userId } }
-          }
-        ) {
-          id
-        }
-      }
-    `;
   return gql`
     mutation($comment: ID!, $userId: ID!) {
-      updateComment(
-        where: { id: $comment }
-        data: { dislikes: { disconnect: { id: $userId } } }
-      ) {
+      dislikeComment(userId: $userId, commentId: $comment) {
         id
       }
     }

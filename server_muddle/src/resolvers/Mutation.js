@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { flattenDeep, get, isNil } from "lodash";
+import { flattenDeep, get, isEmpty, isNil } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
 import { idArg, stringArg } from "nexus/dist";
@@ -39,6 +39,82 @@ const fragmentGetAllComments = `
       likes {
         id
       }
+    }
+  }
+`;
+
+const fragmentGetSingleComment = `
+  fragment GetAllComments on Comment  {
+    id
+    from {
+      id
+    }
+    likes {
+      id
+    }
+    dislikes {
+      id
+    }
+  }
+`;
+
+const fragmentDebateVotes = `
+  fragment GetDebateVotes on Debate {
+    id
+    owner {
+      id
+    }
+    ownerRed {
+      id
+    }
+    ownerBlue {
+      id
+    }
+    positives {
+      id
+    }
+    negatives {
+      id
+    }
+    blueVotes {
+      id
+    }
+    redVotes {
+      id
+    }
+  }
+`;
+
+const fragmentNotif = `
+  fragment GetNotificationWho on Notification {
+    id
+    who {
+      id
+    }
+  }
+`;
+
+const fragmentDebateOwner = `
+  fragment GetDebateOwner on Debate {
+    id
+    type
+    owner {
+      id
+    }
+    ownerRed {
+      id
+    }
+    ownerBlue {
+      id
+    }
+  }
+`;
+
+const fragmentCommentFrom = `
+  fragment GetCommentFrom on Comment {
+    id
+    from {
+      id
     }
   }
 `;
@@ -248,27 +324,27 @@ const Mutation = prismaObjectType({
             },
           });
 
-          Promise.all(
+          await Promise.all(
             notifications.map(
               async (n) => await prisma.deleteNotification({ id: n.id })
             )
           );
 
-          Promise.all(
+          await Promise.all(
             interactions.map(
               async (i) => await prisma.deleteInteraction({ id: i.id })
             )
           );
 
-          Promise.all(
+          await Promise.all(
             trophies.map(async (t) => await prisma.deleteTrophy({ id: t.id }))
           );
 
-          Promise.all(
+          await Promise.all(
             comments.map(async (c) => await prisma.deleteComment({ id: c.id }))
           );
 
-          Promise.all(
+          await Promise.all(
             reports.map(async (r) => await prisma.deleteReport({ id: r.id }))
           );
 
@@ -321,27 +397,27 @@ const Mutation = prismaObjectType({
             },
           });
 
-          Promise.all(
+          await Promise.all(
             notifications.map(
               async (n) => await prisma.deleteNotification({ id: n.id })
             )
           );
 
-          Promise.all(
+          await Promise.all(
             interactions.map(
               async (i) => await prisma.deleteInteraction({ id: i.id })
             )
           );
 
-          Promise.all(
+          await Promise.all(
             comments.map(async (c) => await prisma.deleteComment({ id: c.id }))
           );
 
-          Promise.all(
+          await Promise.all(
             trophies.map(async (t) => await prisma.deleteTrophy({ id: t.id }))
           );
 
-          Promise.all(
+          await Promise.all(
             reports.map(async (r) => await prisma.deleteReport({ id: r.id }))
           );
 
@@ -359,72 +435,76 @@ const Mutation = prismaObjectType({
         debateId: idArg(),
       },
       resolve: async (parent, { debateId }, { prisma, currentUser }) => {
-        const debate = await prisma.updateDebate({
-          where: { id: debateId },
-          data: {
-            closed: true,
-          },
-        });
-
-        if (debate.type === "DUO") {
-          const redVotes = await prisma.debate({ id: debateId }).redVotes();
-          const blueVotes = await prisma.debate({ id: debateId }).blueVotes();
-
-          if (redVotes.length === blueVotes.length) return debate;
-
-          const ownerRed = await prisma.debate({ id: debateId }).ownerRed();
-          const ownerBlue = await prisma.debate({ id: debateId }).ownerBlue();
-
-          const winnerId =
-            redVotes.length > blueVotes.length ? ownerRed.id : ownerBlue.id;
-
-          const trophyDuo = await prisma.createTrophy({
-            user: { connect: { id: winnerId } },
-            won: true,
-            type: "DUO",
-            debate: { connect: { id: debate.id } },
-          });
-        } else {
-          const debateComments = await prisma
-            .debate({
-              id: debateId,
-              // comments_some: { id_not: currentUser.user.id },
-            })
-            .$fragment(fragmentGetAllComments);
-
-          const comments = get(debateComments, "comments");
-          if (isNil(comments) || comments.length === 0) return debate;
-
-          const sortedComments = comments
-            .filter((c) => c.from.id !== currentUser.user.id)
-            .sort((a, b) => b.likes.length - a.likes.length);
-          if (sortedComments.length === 0) return debate;
-          if (sortedComments[0].likes.length === 0) return debate;
-
-          const topCommentId = {
-            comment: sortedComments[0].id,
-            user: sortedComments[0].from.id,
-          };
-
-          const trophyComment = await prisma.createTrophy({
-            user: { connect: { id: topCommentId.user } },
-            won: true,
-            type: "TOP_COMMENT",
-            debate: { connect: { id: debate.id } },
-            comment: { connect: { id: topCommentId.comment } },
+        try {
+          const debate = await prisma.updateDebate({
+            where: { id: debateId },
+            data: {
+              closed: true,
+            },
           });
 
-          // Don't use this feature or have to implement remove topComment when deleteComment
-          // const updatedDebate = await prisma.updateDebate({
-          //   where: { id: debate.id },
-          //   data: {
-          //     topComment: {
-          //       connect: { id: topCommentId.comment },
-          //     },
-          //   },
-          // });
+          if (debate.type === "DUO") {
+            const redVotes = await prisma.debate({ id: debateId }).redVotes();
+            const blueVotes = await prisma.debate({ id: debateId }).blueVotes();
+
+            if (redVotes.length === blueVotes.length) return debate;
+
+            const ownerRed = await prisma.debate({ id: debateId }).ownerRed();
+            const ownerBlue = await prisma.debate({ id: debateId }).ownerBlue();
+
+            const winnerId =
+              redVotes.length > blueVotes.length ? ownerRed.id : ownerBlue.id;
+
+            const trophyDuo = await prisma.createTrophy({
+              user: { connect: { id: winnerId } },
+              won: true,
+              type: "DUO",
+              debate: { connect: { id: debate.id } },
+            });
+          } else {
+            const debateComments = await prisma
+              .debate({
+                id: debateId,
+                // comments_some: { id_not: currentUser.user.id },
+              })
+              .$fragment(fragmentGetAllComments);
+
+            const comments = get(debateComments, "comments");
+            if (isNil(comments) || comments.length === 0) return debate;
+
+            const sortedComments = comments
+              .filter((c) => c.from.id !== currentUser.user.id)
+              .sort((a, b) => b.likes.length - a.likes.length);
+            if (sortedComments.length === 0) return debate;
+            if (sortedComments[0].likes.length === 0) return debate;
+
+            const topCommentId = {
+              comment: sortedComments[0].id,
+              user: sortedComments[0].from.id,
+            };
+
+            const trophyComment = await prisma.createTrophy({
+              user: { connect: { id: topCommentId.user } },
+              won: true,
+              type: "TOP_COMMENT",
+              debate: { connect: { id: debate.id } },
+              comment: { connect: { id: topCommentId.comment } },
+            });
+
+            // Don't use this feature or have to implement remove topComment when deleteComment
+            // const updatedDebate = await prisma.updateDebate({
+            //   where: { id: debate.id },
+            //   data: {
+            //     topComment: {
+            //       connect: { id: topCommentId.comment },
+            //     },
+            //   },
+            // });
+          }
+          return debate;
+        } catch (err) {
+          throw new Error(err);
         }
-        return debate;
       },
     });
 
@@ -440,23 +520,27 @@ const Mutation = prismaObjectType({
         { debateId, userId },
         { prisma, currentUser }
       ) => {
-        const debate = await prisma.debate({ id: debateId });
-        if (isNil(debate)) throw new Error("Debate doesn't exist");
+        try {
+          const debate = await prisma.debate({ id: debateId });
+          if (isNil(debate)) throw new Error("Debate doesn't exist");
 
-        const notification = await prisma.createNotification({
-          who: {
-            connect: {
-              id: currentUser.user.id,
+          const notification = await prisma.createNotification({
+            who: {
+              connect: {
+                id: currentUser.user.id,
+              },
             },
-          },
-          userId,
-          type: "CLOSE_DEBATE",
-          new: true,
-          status: "PENDING",
-          debate: { connect: { id: debateId } },
-        });
+            userId,
+            type: "CLOSE_DEBATE",
+            new: true,
+            status: "PENDING",
+            debate: { connect: { id: debateId } },
+          });
 
-        return debate;
+          return debate;
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 
@@ -472,23 +556,700 @@ const Mutation = prismaObjectType({
         { debateId, userId },
         { prisma, currentUser }
       ) => {
-        const debate = await prisma.debate({ id: debateId });
-        if (isNil(debate)) throw new Error("Debate doesn't exist");
+        try {
+          const debate = await prisma.debate({ id: debateId });
+          if (isNil(debate)) throw new Error("Debate doesn't exist");
 
-        const notification = await prisma.createNotification({
-          who: {
-            connect: {
-              id: currentUser.user.id,
+          const notification = await prisma.createNotification({
+            who: {
+              connect: {
+                id: currentUser.user.id,
+              },
             },
-          },
-          userId,
-          type: "DELETE_DEBATE",
-          new: true,
-          status: "PENDING",
-          debate: { connect: { id: debateId } },
-        });
+            userId,
+            type: "DELETE_DEBATE",
+            new: true,
+            status: "PENDING",
+            debate: { connect: { id: debateId } },
+          });
 
-        return debate;
+          return debate;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("likeComment", {
+      type: "Comment",
+      args: {
+        commentId: idArg(),
+        userId: idArg(),
+      },
+      resolve: async (
+        parent,
+        { commentId, userId },
+        { prisma, currentUser }
+      ) => {
+        try {
+          const comment = await prisma
+            .comment({ id: commentId })
+            .$fragment(fragmentGetSingleComment);
+
+          if (isNil(comment) || isEmpty(comment)) {
+            throw new Error("Comment doesn't exist");
+          }
+
+          // Check if already liked
+          const index = comment.likes.findIndex((like) => like.id === userId);
+          if (index !== -1) return comment;
+
+          // Check if dislike
+          const dislikeIndex = comment.dislikes.findIndex(
+            (dislike) => dislike.id === userId
+          );
+
+          // search existing notification
+          const notificationLike = await prisma.notifications({
+            where: {
+              userId: comment.from.id,
+              type: "LIKE",
+              comment: { id: commentId },
+            },
+          });
+          if (comment.from.id !== currentUser.user.id)
+            if (isEmpty(notificationLike)) {
+              await prisma.createNotification({
+                who: { connect: { id: currentUser.user.id } },
+                userId: comment.from.id,
+                type: "LIKE",
+                status: "INFORMATION",
+                new: true,
+                comment: { connect: { id: commentId } },
+              });
+            } else {
+              await prisma.updateNotification({
+                where: {
+                  id: notificationLike[0].id,
+                },
+                data: {
+                  who: { connect: { id: currentUser.user.id } },
+                  new: true,
+                },
+              });
+            }
+
+          if (dislikeIndex !== -1) {
+            const updatedComment = await prisma.updateComment({
+              where: { id: commentId },
+              data: {
+                likes: { connect: { id: userId } },
+                dislikes: { disconnect: { id: userId } },
+              },
+            });
+            return updatedComment;
+          } else {
+            const updatedCommentWithoutDisconnect = await prisma.updateComment({
+              where: { id: commentId },
+              data: {
+                likes: { connect: { id: userId } },
+              },
+            });
+            return updatedCommentWithoutDisconnect;
+          }
+          return comment;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("dislikeComment", {
+      type: "Comment",
+      args: {
+        commentId: idArg(),
+        userId: idArg(),
+      },
+      resolve: async (
+        parent,
+        { commentId, userId },
+        { prisma, currentUser }
+      ) => {
+        try {
+          const comment = await prisma
+            .comment({ id: commentId })
+            .$fragment(fragmentGetSingleComment);
+
+          if (isNil(comment) || isEmpty(comment)) {
+            throw new Error("Comment doesn't exist");
+          }
+
+          // Check if already disliked
+          const index = comment.dislikes.findIndex(
+            (dislike) => dislike.id === userId
+          );
+          if (index !== -1) return comment;
+
+          // Check if dislike
+          const likeIndex = comment.likes.findIndex(
+            (like) => like.id === userId
+          );
+
+          // console.log(userId);
+          // const stringUserId = `${userId}`;
+          // search existing notification
+          const notificationDislike = await prisma.notifications({
+            where: {
+              userId: comment.from.id,
+              type: "DISLIKE",
+              comment: { id: commentId },
+            },
+          });
+          if (comment.from.id !== currentUser.user.id)
+            if (isEmpty(notificationDislike)) {
+              await prisma.createNotification({
+                who: { connect: { id: currentUser.user.id } },
+                userId: comment.from.id,
+                type: "DISLIKE",
+                status: "INFORMATION",
+                new: true,
+                comment: { connect: { id: commentId } },
+              });
+            } else {
+              await prisma.updateNotification({
+                where: {
+                  id: notificationDislike[0].id,
+                },
+                data: {
+                  who: { connect: { id: currentUser.user.id } },
+                  new: true,
+                },
+              });
+            }
+
+          if (likeIndex !== -1) {
+            const updatedComment = await prisma.updateComment({
+              where: { id: commentId },
+              data: {
+                likes: { disconnect: { id: userId } },
+                dislikes: { connect: { id: userId } },
+              },
+            });
+            return updatedComment;
+          } else {
+            const updatedCommentWithoutDisconnect = await prisma.updateComment({
+              where: { id: commentId },
+              data: {
+                dislikes: { connect: { id: userId } },
+              },
+            });
+            return updatedCommentWithoutDisconnect;
+          }
+          return comment;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("sendVote", {
+      type: "Debate",
+      args: {
+        debateId: idArg(),
+        userId: idArg(),
+        type: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { debateId, userId, type },
+        { prisma, currentUser }
+      ) => {
+        try {
+          const debate = await prisma
+            .debate({ id: debateId })
+            .$fragment(fragmentDebateVotes);
+          if (isNil(debate)) throw new Error("Debate doesn't exist");
+
+          // search existing notification
+          if (type === "positive" || type == "negative") {
+            const notificationVoteStandard = await prisma.notifications({
+              where: {
+                userId: debate.owner.id,
+                type: "VOTE",
+                debate: { id: debateId },
+              },
+            });
+            if (debate.owner.id !== currentUser.user.id)
+              if (isEmpty(notificationVoteStandard)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.owner.id,
+                  type: "VOTE",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationVoteStandard[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+          }
+
+          if (type === "blue" || type === "red") {
+            const notificationVoteRed = await prisma.notifications({
+              where: {
+                userId: debate.ownerRed.id,
+                type: "VOTE",
+                debate: { id: debateId },
+              },
+            });
+            const notificationVoteBlue = await prisma.notifications({
+              where: {
+                userId: debate.ownerBlue.id,
+                type: "VOTE",
+                debate: { id: debateId },
+              },
+            });
+            if (
+              debate.ownerBlue.id !== currentUser.user.id &&
+              debate.ownerRed.id !== currentUser.user.id
+            ) {
+              if (isEmpty(notificationVoteRed)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerRed.id,
+                  type: "VOTE",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationVoteRed[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+              if (isEmpty(notificationVoteBlue)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerBlue.id,
+                  type: "VOTE",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationVoteBlue[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+          }
+
+          switch (type) {
+            case "positive": {
+              if (
+                debate.positives.findIndex((p) => p.id === userId) !== -1 ||
+                debate.negatives.findIndex((p) => p.id === userId) !== -1
+              ) {
+                return debate;
+              }
+
+              const positiveVote = await prisma.updateDebate({
+                where: { id: debateId },
+                data: { positives: { connect: { id: userId } } },
+              });
+              await prisma.createInteraction({
+                type: "POSITIVE_VOTE",
+                who: {
+                  connect: {
+                    id: currentUser.user.id,
+                  },
+                },
+                debate: {
+                  connect: {
+                    id: debateId,
+                  },
+                },
+              });
+              return positiveVote;
+            }
+            case "negative": {
+              if (
+                debate.negatives.findIndex((p) => p.id === userId) !== -1 ||
+                debate.positives.findIndex((p) => p.id === userId) !== -1
+              ) {
+                return debate;
+              }
+              const negativeVote = await prisma.updateDebate({
+                where: { id: debateId },
+                data: { negatives: { connect: { id: userId } } },
+              });
+              await prisma.createInteraction({
+                type: "NEGATIVE_VOTE",
+                who: {
+                  connect: {
+                    id: currentUser.user.id,
+                  },
+                },
+                debate: {
+                  connect: {
+                    id: debateId,
+                  },
+                },
+              });
+              return negativeVote;
+            }
+            case "blue": {
+              if (
+                debate.blueVotes.findIndex((p) => p.id === userId) !== -1 ||
+                debate.redVotes.findIndex((p) => p.id === userId) !== -1
+              ) {
+                return debate;
+              }
+              const blueVote = await prisma.updateDebate({
+                where: { id: debateId },
+                data: { blueVotes: { connect: { id: userId } } },
+              });
+
+              await prisma.createInteraction({
+                type: "BLUE_VOTE",
+                who: {
+                  connect: {
+                    id: currentUser.user.id,
+                  },
+                },
+                debate: {
+                  connect: {
+                    id: debateId,
+                  },
+                },
+              });
+
+              return blueVote;
+              break;
+            }
+            case "red": {
+              if (
+                debate.blueVotes.findIndex((p) => p.id === userId) !== -1 ||
+                debate.redVotes.findIndex((p) => p.id === userId) !== -1
+              ) {
+                return debate;
+              }
+              const redVote = await prisma.updateDebate({
+                where: { id: debateId },
+                data: { redVotes: { connect: { id: userId } } },
+              });
+              await prisma.createInteraction({
+                type: "RED_VOTE",
+                who: {
+                  connect: {
+                    id: currentUser.user.id,
+                  },
+                },
+                debate: {
+                  connect: {
+                    id: debateId,
+                  },
+                },
+              });
+              return redVote;
+            }
+            default:
+              throw new Error("Bad type");
+          }
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("notifyComment", {
+      type: "NoValue",
+      args: {
+        debateId: idArg(),
+      },
+      resolve: async (parent, { debateId }, { prisma, currentUser }) => {
+        try {
+          const debate = await prisma
+            .debate({ id: debateId })
+            .$fragment(fragmentDebateOwner);
+
+          if (isNil(debate)) throw new Error("Debate doesnt exist");
+
+          if (debate.type === "DUO") {
+            const notificationsRed = await prisma.notifications({
+              where: {
+                userId: debate.ownerRed.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+            const notificationsBlue = await prisma.notifications({
+              where: {
+                userId: debate.ownerBlue.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+
+            if (debate.ownerRed.id !== currentUser.user.id) {
+              if (isEmpty(notificationsRed)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerRed.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationsRed[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+
+            if (debate.ownerBlue.id !== currentUser.user.id) {
+              if (isEmpty(notificationsBlue)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerBlue.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationsBlue[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+          } else {
+            const notifications = await prisma.notifications({
+              where: {
+                userId: debate.owner.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+
+            if (debate.owner.id !== currentUser.user.id) {
+              if (isEmpty(notifications)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.owner.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notifications[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+          }
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("notifySubComment", {
+      type: "NoValue",
+      args: {
+        debateId: idArg(),
+        commentId: idArg(),
+      },
+      resolve: async (
+        parent,
+        { debateId, commentId },
+        { prisma, currentUser }
+      ) => {
+        try {
+          // Here for the owner debate
+          const debate = await prisma
+            .debate({ id: debateId })
+            .$fragment(fragmentDebateOwner);
+
+          if (isNil(debate)) throw new Error("Debate doesnt exist");
+
+          if (debate.type === "DUO") {
+            const notificationsRed = await prisma.notifications({
+              where: {
+                userId: debate.ownerRed.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+            const notificationsBlue = await prisma.notifications({
+              where: {
+                userId: debate.ownerBlue.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+
+            if (debate.ownerRed.id !== currentUser.user.id) {
+              if (isEmpty(notificationsRed)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerRed.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationsRed[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+
+            if (debate.ownerBlue.id !== currentUser.user.id) {
+              if (isEmpty(notificationsBlue)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.ownerBlue.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notificationsBlue[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+          } else {
+            const notifications = await prisma.notifications({
+              where: {
+                userId: debate.owner.id,
+                type: "COMMENT",
+                debate: { id: debateId },
+              },
+            });
+
+            if (debate.owner.id !== currentUser.user.id) {
+              if (isEmpty(notifications)) {
+                await prisma.createNotification({
+                  who: { connect: { id: currentUser.user.id } },
+                  userId: debate.owner.id,
+                  type: "COMMENT",
+                  status: "INFORMATION",
+                  new: true,
+                  debate: { connect: { id: debateId } },
+                });
+              } else {
+                await prisma.updateNotification({
+                  where: {
+                    id: notifications[0].id,
+                  },
+                  data: {
+                    who: { connect: { id: currentUser.user.id } },
+                    new: true,
+                  },
+                });
+              }
+            }
+          }
+
+          // Here for the comment owner
+          const comment = await prisma
+            .comment({ id: commentId })
+            .$fragment(fragmentCommentFrom);
+
+          if (isNil(comment)) throw new Error("comment doesnt exist");
+
+          const commentNotification = await prisma.notifications({
+            where: {
+              userId: comment.from.id,
+              type: "SUBCOMMENT",
+              comment: { id: commentId },
+            },
+          });
+
+          if (comment.from.id !== currentUser.user.id) {
+            if (isEmpty(commentNotification)) {
+              await prisma.createNotification({
+                who: { connect: { id: currentUser.user.id } },
+                userId: comment.from.id,
+                type: "SUBCOMMENT",
+                status: "INFORMATION",
+                new: true,
+                comment: { connect: { id: commentId } },
+              });
+            } else {
+              await prisma.updateNotification({
+                where: {
+                  id: notifications[0].id,
+                },
+                data: {
+                  who: { connect: { id: currentUser.user.id } },
+                  new: true,
+                },
+              });
+            }
+          }
+
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 

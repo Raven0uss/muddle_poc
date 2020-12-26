@@ -14,7 +14,11 @@ import {
   FlatList,
 } from "react-native";
 import Header from "../Components/Header";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import CommentBox from "../Components/CommentBox";
@@ -37,6 +41,7 @@ import { cloneDeepWith, isNil, findIndex } from "lodash";
 import voteDispatch from "../Library/voteDispatch";
 import idExist from "../Library/idExist";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import { NoFlickerImage } from "react-native-no-flicker-image";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   if (totalVotes === 0) return `0%\n${answer}`;
@@ -183,6 +188,14 @@ const ASK_CLOSE_DEBATE = gql`
   mutation($debateId: ID!, $userId: String!) {
     askCloseDebate(debateId: $debateId, userId: $userId) {
       id
+    }
+  }
+`;
+
+const NOTIFY_COMMENT = gql`
+  mutation($debateId: ID!) {
+    notifyComment(debateId: $debateId) {
+      value
     }
   }
 `;
@@ -381,8 +394,19 @@ const Debate = (props) => {
     }
   }, [comments]);
 
+  const [notifyComment] = useMutation(NOTIFY_COMMENT);
+
   const [createComment, { data: mutationResponse }] = useMutation(
-    CREATE_COMMENT
+    CREATE_COMMENT,
+    {
+      onCompleted: () => {
+        notifyComment({
+          variables: {
+            debateId: debate.id,
+          },
+        });
+      },
+    }
   );
 
   React.useEffect(() => {
@@ -630,7 +654,7 @@ const Debate = (props) => {
                       });
                     }}
                   >
-                    <Image
+                    <NoFlickerImage
                       source={{
                         uri: debate.image,
                       }}

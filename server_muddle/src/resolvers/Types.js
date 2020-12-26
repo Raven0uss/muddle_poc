@@ -32,6 +32,13 @@ const Token = objectType({
   },
 });
 
+const NoValue = objectType({
+  name: "NoValue",
+  definition(t) {
+    t.int("value");
+  },
+});
+
 // const ImageURI = objectType({
 //   name: "ImageURI",
 //   definition(t) {
@@ -95,6 +102,7 @@ export { dateArg };
 
 export default {
   Token,
+  NoValue,
   // ImageURI,
   NewNotifications,
   DateScalar,

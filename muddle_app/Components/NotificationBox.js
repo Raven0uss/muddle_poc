@@ -18,6 +18,14 @@ const CLOSE_DEBATE = gql`
   }
 `;
 
+const DELETE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    deleteMyDebate(debateId: $debateId) {
+      id
+    }
+  }
+`;
+
 const UPDATE_NOTIFICATION = gql`
   mutation($notificationId: ID!, $status: NotificationStatus!) {
     updateNotification(
@@ -29,14 +37,96 @@ const UPDATE_NOTIFICATION = gql`
   }
 `;
 
+const NOTIFY_DEBATE = gql`
+  mutation(
+    $debateId: ID!
+    $currentUserId: ID!
+    $userId: String!
+    $type: NotificationType!
+  ) {
+    createNotification(
+      data: {
+        who: { connect: { id: $currentUserId } }
+        userId: $userId
+        type: $type
+        status: INFORMATION
+        new: true
+        debate: { connect: { id: $debateId } }
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+const NOTIFY_DELETE_DEBATE = gql`
+  mutation($currentUserId: ID!, $userId: String!) {
+    createNotification(
+      data: {
+        who: { connect: { id: $currentUserId } }
+        userId: $userId
+        type: ACCEPT_DELETE_DEBATE
+        status: INFORMATION
+        new: true
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+const NOTIFY_REJECT_DUO = gql`
+  mutation($currentUserId: ID!, $userId: String!) {
+    createNotification(
+      data: {
+        who: { connect: { id: $currentUserId } }
+        userId: $userId
+        type: REJECT_DUO
+        status: INFORMATION
+        new: true
+      }
+    ) {
+      id
+    }
+  }
+`;
+
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
-  const { notification, theme, navigation } = props;
+  const { notification, theme, navigation, currentUser } = props;
 
-  const [closeDebate] = useMutation(CLOSE_DEBATE);
+  const [notifyDebateAction] = useMutation(NOTIFY_DEBATE);
+  const [notifyDebateDelete] = useMutation(NOTIFY_DELETE_DEBATE);
+  const [notifyRejectDuo] = useMutation(NOTIFY_REJECT_DUO);
+
+  const [closeDebate] = useMutation(CLOSE_DEBATE, {
+    onCompleted: () => {
+      notifyDebateAction({
+        variables: {
+          userId: notification.who[0].id,
+          currentUserId: currentUser.id,
+          debateId: notification.debate.id,
+          type: "ACCEPT_CLOSE_DEBATE",
+        },
+      });
+    },
+  });
+
+  // To avoid notif for duo
+  const [deleteDebateDuo] = useMutation(DELETE_DEBATE);
+
+  const [deleteDebate] = useMutation(DELETE_DEBATE, {
+    onCompleted: () => {
+      notifyDebateDelete({
+        variables: {
+          userId: notification.who[0].id,
+          currentUserId: currentUser.id,
+        },
+      });
+    },
+  });
+
   const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
-
-  //   console.log(notification);
 
   switch (notification.type) {
     case "VOTE":
@@ -69,7 +159,9 @@ const NotificationBox = (props) => {
             />
           )}
           <Image
-            source={{ uri: notification.who[0].profilePicture }}
+            source={{
+              uri: notification.who[notification.who.length - 1].profilePicture,
+            }}
             style={styles.userPicture}
           />
           <View
@@ -85,8 +177,17 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
+              {`${notification.who[notification.who.length - 1].firstname} ${
+                notification.who[notification.who.length - 1].lastname
+              }${
+                notification.who.length > 1
+                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                      notification.who.length - 1 > 1
+                        ? i18n._("otherPeoplePlural")
+                        : i18n._("otherPeopleSingular")
+                    }`
+                  : ""
+              }`}
             </Text>
             <View
               style={{
@@ -106,6 +207,17 @@ const NotificationBox = (props) => {
                 )}`}
               </Text>
             </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
           </View>
         </View>
       );
@@ -224,7 +336,7 @@ const NotificationBox = (props) => {
                   width: 100,
                   borderRadius: 12,
                 }}
-                onPress={() => {
+                onPress={async () => {
                   // HERE SEND REQUEST TO DELETE DUO DEBATE
                   setStatus("DECLINED");
                   updateNotification({
@@ -232,6 +344,15 @@ const NotificationBox = (props) => {
                       notificationId: notification.id,
                       status: "DECLINED",
                     },
+                  });
+                  await notifyRejectDuo({
+                    variables: {
+                      userId: notification.who[0].id,
+                      currentUserId: currentUser.id,
+                    },
+                  });
+                  deleteDebateDuo({
+                    variables: { debateId: notification.debate.id },
                   });
                 }}
                 disabled={status === "DECLINED" || status === "ACCEPTED"}
@@ -252,7 +373,7 @@ const NotificationBox = (props) => {
           </View>
         </View>
       );
-    case "COMMENT":
+    case "ACCEPT_DUO":
       return (
         <View
           style={{
@@ -298,8 +419,476 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].firstname} ${
-                notification.who[0].lastname
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("acceptYourInvitation")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
+          </View>
+        </View>
+      );
+    case "REJECT_DUO":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("rejectYourInvitation")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+          </View>
+        </View>
+      );
+    case "ACCEPT_CLOSE_DEBATE":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("acceptCloseDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
+          </View>
+        </View>
+      );
+    case "REJECT_CLOSE_DEBATE":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("rejectCloseDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
+          </View>
+        </View>
+      );
+    case "ACCEPT_DELETE_DEBATE":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("acceptDeleteDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+          </View>
+        </View>
+      );
+    case "REJECT_DELETE_DEBATE":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("rejectDeleteDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
+          </View>
+        </View>
+      );
+    case "COMMENT":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{
+              uri: notification.who[notification.who.length - 1].profilePicture,
+            }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[notification.who.length - 1].firstname} ${
+                notification.who[notification.who.length - 1].lastname
               }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
@@ -328,15 +917,7 @@ const NotificationBox = (props) => {
                   notification.who.length > 1
                     ? i18n._("commentYourDebatePlural")
                     : i18n._("commentYourDebateSingular")
-                } `}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
-                }}
-              >
-                {getTimeSpent(notification.updatedAt)}
+                } ${getTimeSpent(notification.updatedAt)}`}
               </Text>
             </View>
             <Text
@@ -349,6 +930,101 @@ const NotificationBox = (props) => {
               }}
             >
               {notification.debate.content}
+            </Text>
+          </View>
+        </View>
+      );
+    case "SUBCOMMENT":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{
+              uri: notification.who[notification.who.length - 1].profilePicture,
+            }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[notification.who.length - 1].firstname} ${
+                notification.who[notification.who.length - 1].lastname
+              }${
+                notification.who.length > 1
+                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                      notification.who.length - 1 > 1
+                        ? i18n._("otherPeoplePlural")
+                        : i18n._("otherPeopleSingular")
+                    }`
+                  : ""
+              }`}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${
+                  notification.who.length > 1
+                    ? i18n._("answerYourCommentPlural")
+                    : i18n._("answerYourCommentSingular")
+                } ${getTimeSpent(notification.updatedAt)}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.comment.content}
             </Text>
           </View>
         </View>
@@ -497,6 +1173,184 @@ const NotificationBox = (props) => {
                       status: "DECLINED",
                     },
                   });
+                  notifyDebateAction({
+                    variables: {
+                      userId: notification.who[0].id,
+                      currentUserId: currentUser.id,
+                      debateId: notification.debate.id,
+                      type: "REJECT_CLOSE_DEBATE",
+                    },
+                  });
+                }}
+              >
+                <Text
+                  style={{
+                    color:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText3
+                        : themeSchema[theme].colorText,
+                    fontFamily: "Montserrat_500Medium",
+                  }}
+                >
+                  {`${i18n._("decline")}`}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      );
+    case "DELETE_DEBATE":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {` ${i18n._("askToDeleteThisDebate")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={3}
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {notification.debate.content}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                justifyContent: "space-around",
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  height: 36,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    status === "ACCEPTED"
+                      ? "#F47658"
+                      : themeSchema[theme].backgroundColor2,
+                  width: 100,
+                  borderRadius: 12,
+                }}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
+                onPress={() => {
+                  setStatus("ACCEPTED");
+                  updateNotification({
+                    variables: {
+                      notificationId: notification.id,
+                      status: "ACCEPTED",
+                    },
+                  });
+                  deleteDebate({
+                    variables: {
+                      debateId: notification.debate.id,
+                    },
+                  });
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("accept")}`}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  height: 36,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    status === "DECLINED"
+                      ? themeSchema[theme].colorText
+                      : themeSchema[theme].colorText3,
+                  width: 100,
+                  borderRadius: 12,
+                }}
+                disabled={status === "DECLINED" || status === "ACCEPTED"}
+                onPress={() => {
+                  // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
+                  setStatus("DECLINED");
+                  updateNotification({
+                    variables: {
+                      notificationId: notification.id,
+                      status: "DECLINED",
+                    },
+                  });
+                  notifyDebateAction({
+                    variables: {
+                      userId: notification.who[0].id,
+                      currentUserId: currentUser.id,
+                      debateId: notification.debate.id,
+                      type: "REJECT_DELETE_DEBATE",
+                    },
+                  });
                 }}
               >
                 <Text
@@ -545,7 +1399,9 @@ const NotificationBox = (props) => {
             />
           )}
           <Image
-            source={{ uri: notification.who[0].profilePicture }}
+            source={{
+              uri: notification.who[notification.who.length - 1].profilePicture,
+            }}
             style={styles.userPicture}
           />
           <View
@@ -561,8 +1417,8 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].firstname} ${
-                notification.who[0].lastname
+              {`${notification.who[notification.who.length - 1].firstname} ${
+                notification.who[notification.who.length - 1].lastname
               }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
@@ -590,16 +1446,7 @@ const NotificationBox = (props) => {
                   notification.who.length > 1
                     ? i18n._("likedCommentPlural")
                     : i18n._("likedCommentSingular")
-                } `}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
-                  color: themeSchema[theme].colorText,
-                }}
-              >
-                {getTimeSpent(notification.updatedAt)}
+                } ${getTimeSpent(notification.updatedAt)}`}
               </Text>
             </View>
             <Text
@@ -646,7 +1493,9 @@ const NotificationBox = (props) => {
             />
           )}
           <Image
-            source={{ uri: notification.who[0].profilePicture }}
+            source={{
+              uri: notification.who[notification.who.length - 1].profilePicture,
+            }}
             style={styles.userPicture}
           />
           <View
@@ -662,8 +1511,8 @@ const NotificationBox = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${notification.who[0].firstname} ${
-                notification.who[0].lastname
+              {`${notification.who[notification.who.length - 1].firstname} ${
+                notification.who[notification.who.length - 1].lastname
               }${
                 notification.who.length > 1
                   ? ` ${i18n._("and")} ${notification.who.length - 1} ${
@@ -691,16 +1540,7 @@ const NotificationBox = (props) => {
                   notification.who.length > 1
                     ? i18n._("didntLikedCommentPlural")
                     : i18n._("didntLikedCommentSingular")
-                } `}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
-                  color: themeSchema[theme].colorText,
-                }}
-              >
-                {getTimeSpent(notification.updatedAt)}
+                } ${getTimeSpent(notification.updatedAt)}`}
               </Text>
             </View>
             <Text

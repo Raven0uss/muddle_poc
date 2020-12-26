@@ -13006,6 +13006,12 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "SUBCOMMENT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "LIKE",
             "description": null,
             "isDeprecated": false,

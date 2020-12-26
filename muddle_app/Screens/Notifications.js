@@ -89,12 +89,13 @@ const NOTIFICATIONS_UPDATE_VIEW = gql`
 const frequency = 10;
 let nbNotifications = frequency;
 
-const renderItem = ({ item }, navigation, theme) => {
+const renderItem = ({ item }, navigation, theme, currentUser) => {
   return (
     <NotificationBox
       theme={theme}
       notification={item}
       navigation={navigation}
+      currentUser={currentUser}
     />
   );
 };
@@ -192,7 +193,9 @@ const Notifications = (props) => {
           ...styles.seedContainer,
           backgroundColor: themeSchema[theme].backgroundColor2,
         }}
-        renderItem={(param) => renderItem(param, navigation, theme)}
+        renderItem={(param) =>
+          renderItem(param, navigation, theme, currentUser)
+        }
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}
         onEndReached={async () => {

@@ -10,6 +10,7 @@ enum NotificationType {
   ACCEPT_DELETE_DEBATE
   REJECT_DELETE_DEBATE
   COMMENT
+  SUBCOMMENT
   LIKE
   DISLIKE
 }
@@ -24,7 +25,7 @@ enum NotificationStatus {
 type Notification {
   id: ID! @id
   who: [User!]! @relation(link: INLINE, name: "NotificationUser")
-  userId: String!
+  userId: String! 
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!

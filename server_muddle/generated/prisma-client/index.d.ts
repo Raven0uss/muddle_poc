@@ -619,6 +619,7 @@ export type NotificationType =
   | "ACCEPT_DELETE_DEBATE"
   | "REJECT_DELETE_DEBATE"
   | "COMMENT"
+  | "SUBCOMMENT"
   | "LIKE"
   | "DISLIKE";
 

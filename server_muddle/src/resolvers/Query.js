@@ -5,9 +5,10 @@ import { flattenDeep, isNil } from "lodash";
 
 import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
 import { combineResolvers } from "graphql-resolvers";
-import { intArg, stringArg } from "nexus/dist";
+import { idArg, intArg, stringArg } from "nexus/dist";
 
 import filterHomeDebates from "../algorithms/filterHomeDebates";
+import moment from "moment";
 
 // Queries
 const exposedQueries = {
@@ -130,35 +131,39 @@ const Query = prismaObjectType({
       type: "NewNotifications",
       resolve: async (parent, args, { prisma, currentUser }) => {
         // console.log(currentUser);
-        const notifications = await prisma.notifications({
-          where: {
-            userId: currentUser.user.id,
-            new: true,
-          },
-        });
-        const conversations = await prisma
-          .conversations({
+        try {
+          const notifications = await prisma.notifications({
             where: {
-              speakers_some: { id: currentUser.user.id },
-            },
-          })
-          .messages({
-            where: {
-              to: {
-                id: currentUser.user.id,
-              },
-              read: false,
+              userId: currentUser.user.id,
+              new: true,
             },
           });
+          const conversations = await prisma
+            .conversations({
+              where: {
+                speakers_some: { id: currentUser.user.id },
+              },
+            })
+            .messages({
+              where: {
+                to: {
+                  id: currentUser.user.id,
+                },
+                read: false,
+              },
+            });
 
-        const { messages } = conversations[0];
-        // console.log(conversations);
-        const numberOfNewNotifications = notifications.length;
-        const numbreOfNewMessages = messages.length;
-        return {
-          notifications: numberOfNewNotifications,
-          messages: numbreOfNewMessages,
-        };
+          const { messages } = conversations[0];
+          // console.log(conversations);
+          const numberOfNewNotifications = notifications.length;
+          const numbreOfNewMessages = messages.length;
+          return {
+            notifications: numberOfNewNotifications,
+            messages: numbreOfNewMessages,
+          };
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 
@@ -169,22 +174,26 @@ const Query = prismaObjectType({
         first: intArg(),
       },
       resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
-        const debates = await prisma
-          .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
-          .$fragment(fragBestDebates);
-        const following = await prisma
-          .user({ id: currentUser.user.id })
-          .following();
+        try {
+          const debates = await prisma
+            .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
+            .$fragment(fragBestDebates);
+          const following = await prisma
+            .user({ id: currentUser.user.id })
+            .following();
 
-        const sorted = filterHomeDebates({
-          debates,
-          following,
-        });
+          const sorted = filterHomeDebates({
+            debates,
+            following,
+          });
 
-        const skipProps = isNil(skip) ? 0 : skip;
-        const firstProps = isNil(first) ? 0 : first;
-        if (firstProps === 0) return sorted.slice(skipProps);
-        return sorted.slice(skipProps, skipProps + firstProps);
+          const skipProps = isNil(skip) ? 0 : skip;
+          const firstProps = isNil(first) ? 0 : first;
+          if (firstProps === 0) return sorted.slice(skipProps);
+          return sorted.slice(skipProps, skipProps + firstProps);
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 
@@ -195,29 +204,75 @@ const Query = prismaObjectType({
         first: intArg(),
       },
       resolve: async (parent, { first, skip }, { prisma, currentUser }) => {
-        const myDebates = await (async () => {
-          const standard = await prisma
-            .user({ id: currentUser.user.id })
-            .debates({ where: { published: true } });
-          const blue = await prisma
-            .user({ id: currentUser.user.id })
-            .debatesBlue({ where: { published: true } });
-          const red = await prisma
-            .user({ id: currentUser.user.id })
-            .debatesRed({ where: { published: true } });
-          // console.log(standard);
-          return [
-            ...(isNil(standard) ? [] : standard),
-            ...(isNil(blue) ? [] : blue),
-            ...(isNil(red) ? [] : red),
-          ];
-        })();
-        const sorted = myDebates.sort((a, b) => b.updatedAt - a.updatedAt);
+        try {
+          const myDebates = await (async () => {
+            const standard = await prisma
+              .user({ id: currentUser.user.id })
+              .debates({ where: { published: true } });
+            const blue = await prisma
+              .user({ id: currentUser.user.id })
+              .debatesBlue({ where: { published: true } });
+            const red = await prisma
+              .user({ id: currentUser.user.id })
+              .debatesRed({ where: { published: true } });
+            // console.log(standard);
+            return [
+              ...(isNil(standard) ? [] : standard),
+              ...(isNil(blue) ? [] : blue),
+              ...(isNil(red) ? [] : red),
+            ];
+          })();
+          const sorted = myDebates.sort((a, b) =>
+            moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1
+          );
 
-        const skipProps = isNil(skip) ? 0 : skip;
-        const firstProps = isNil(first) ? 0 : first;
-        if (firstProps === 0) return sorted.slice(skipProps);
-        return sorted.slice(skipProps, skipProps + firstProps);
+          const skipProps = isNil(skip) ? 0 : skip;
+          const firstProps = isNil(first) ? 0 : first;
+          if (firstProps === 0) return sorted.slice(skipProps);
+          return sorted.slice(skipProps, skipProps + firstProps);
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.list.field("ownerDebates", {
+      type: "Debate",
+      args: {
+        skip: intArg(),
+        first: intArg(),
+        userId: idArg(),
+      },
+      resolve: async (parent, { first, skip, userId }, { prisma }) => {
+        try {
+          const myDebates = await (async () => {
+            const standard = await prisma
+              .user({ id: userId })
+              .debates({ where: { published: true } });
+            const blue = await prisma
+              .user({ id: userId })
+              .debatesBlue({ where: { published: true } });
+            const red = await prisma
+              .user({ id: userId })
+              .debatesRed({ where: { published: true } });
+            // console.log(standard);
+            return [
+              ...(isNil(standard) ? [] : standard),
+              ...(isNil(blue) ? [] : blue),
+              ...(isNil(red) ? [] : red),
+            ];
+          })();
+          const sorted = myDebates.sort((a, b) =>
+            moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1
+          );
+
+          const skipProps = isNil(skip) ? 0 : skip;
+          const firstProps = isNil(first) ? 0 : first;
+          if (firstProps === 0) return sorted.slice(skipProps);
+          return sorted.slice(skipProps, skipProps + firstProps);
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 
@@ -228,31 +283,35 @@ const Query = prismaObjectType({
         skip: intArg(),
       },
       resolve: async (parent, { first, skip }, { prisma }) => {
-        const debates = await prisma
-          .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
-          .$fragment(fragBestDebates);
-        if (isNil(debates)) return [];
-        const bestDebates = debates.sort((a, b) => {
-          const aPopularity =
-            a.positives.length +
-            a.negatives.length +
-            a.redVotes.length +
-            a.blueVotes.length +
-            a.comments.length;
-          const bPopularity =
-            b.positives.length +
-            b.negatives.length +
-            b.redVotes.length +
-            b.blueVotes.length +
-            b.comments.length;
+        try {
+          const debates = await prisma
+            .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
+            .$fragment(fragBestDebates);
+          if (isNil(debates)) return [];
+          const bestDebates = debates.sort((a, b) => {
+            const aPopularity =
+              a.positives.length +
+              a.negatives.length +
+              a.redVotes.length +
+              a.blueVotes.length +
+              a.comments.length;
+            const bPopularity =
+              b.positives.length +
+              b.negatives.length +
+              b.redVotes.length +
+              b.blueVotes.length +
+              b.comments.length;
 
-          return bPopularity - aPopularity;
-        });
+            return bPopularity - aPopularity;
+          });
 
-        const skipProps = isNil(skip) ? 0 : skip;
-        const firstProps = isNil(first) ? 0 : first;
-        if (firstProps === 0) return bestDebates.slice(skipProps);
-        return bestDebates.slice(skipProps, skipProps + firstProps);
+          const skipProps = isNil(skip) ? 0 : skip;
+          const firstProps = isNil(first) ? 0 : first;
+          if (firstProps === 0) return bestDebates.slice(skipProps);
+          return bestDebates.slice(skipProps, skipProps + firstProps);
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 

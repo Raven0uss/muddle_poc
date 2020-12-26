@@ -39,6 +39,23 @@ const PUBLISH_DUO_DEBATE = gql`
   }
 `;
 
+const NOTIFY_DEBATE_DUO_ACCEPTED = gql`
+  mutation($debateId: ID!, $currentUserId: ID!, $userId: String!) {
+    createNotification(
+      data: {
+        who: { connect: { id: $currentUserId } }
+        userId: $userId
+        type: ACCEPT_DUO
+        status: INFORMATION
+        new: true
+        debate: { connect: { id: debateId } }
+      }
+    ) {
+      id
+    }
+  }
+`;
+
 const publishDuoDebate = async ({
   id,
   answerTwo,
@@ -63,12 +80,21 @@ const CreateDuoDebate = (props) => {
   const { navigation, route } = props;
   const { debate, notificationId, updateNotification } = route.params;
 
+  const [notifyDebateDuoAccepted] = useMutation(NOTIFY_DEBATE_DUO_ACCEPTED);
+
   const [reqPublishDuoDebate] = useMutation(PUBLISH_DUO_DEBATE, {
     onCompleted: () => {
       updateNotification({
         variables: {
           notificationId,
           status: "ACCEPTED",
+        },
+      });
+      notifyDebateDuoAccepted({
+        variables: {
+          userId: debate.ownerRed.id,
+          currentUserId: currentUser.id,
+          debateId: debate.id,
         },
       });
       navigation.reset({

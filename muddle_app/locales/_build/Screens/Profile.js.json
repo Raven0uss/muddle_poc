@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        367
+        369
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        597
+        599
       ]
     ]
   },
@@ -19,7 +19,39 @@
     "origin": [
       [
         "Screens/Profile.js",
-        630
+        632
+      ]
+    ]
+  },
+  "yourVotesProfile": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        725
+      ]
+    ]
+  },
+  "votesProfile": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        726
+      ]
+    ]
+  },
+  "yourDebatesProfile": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        752
+      ]
+    ]
+  },
+  "debatesProfile": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        753
       ]
     ]
   },
@@ -27,7 +59,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        694
+        782
       ]
     ]
   }

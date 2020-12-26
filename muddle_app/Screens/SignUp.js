@@ -19,6 +19,30 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { isEmpty, isNil } from "lodash";
+
+const buttonIsDisable = ({
+  firstname,
+  lastname,
+  email,
+  password,
+  confirmPassword,
+  birthdate,
+  gender,
+  cgu,
+}) => {
+  if (
+    isEmpty(firstname) ||
+    isEmpty(lastname) ||
+    isEmpty(email) ||
+    isEmpty(password) ||
+    isEmpty(confirmPassword) ||
+    isNil(birthdate) ||
+    isNil(gender) ||
+    cgu === false
+  )
+    return true;
+};
 
 function SignUpComponent(props) {
   const { theme } = React.useContext(ThemeContext);
@@ -234,7 +258,14 @@ function SignUpComponent(props) {
                   snack: true,
                 });
               }}
-              style={styles.connectionButton}
+              style={{
+                ...styles.connectionButton,
+                ...(buttonIsDisable(form)
+                  ? {
+                      backgroundColor: "#00000076",
+                    }
+                  : {}),
+              }}
             >
               <Text
                 style={{
@@ -249,7 +280,10 @@ function SignUpComponent(props) {
         </View>
       </ScrollView>
       <View style={styles.noAccountBloc}>
-        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.goBack()}
+          disabled={buttonIsDisable(form)}
+        >
           <Text style={styles.noAccountText}>
             {`${i18n._("alreadyMember?")} `}
             <Text style={styles.subscriptionLink}>{i18n._("connect")}</Text>

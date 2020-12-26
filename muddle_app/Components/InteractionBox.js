@@ -10,6 +10,14 @@ import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import getTimeSpent from "../Library/getTimeSpent";
 
+const getVote = ({ interactionType, answerOne, answerTwo }) => {
+  if (interactionType === "POSITIVE_VOTE" || interactionType === "BLUE_VOTE")
+    return `"${answerOne}"`;
+  if (interactionType === "NEGATIVE_VOTE" || interactionType === "RED_VOTE")
+    return `"${answerTwo}"`;
+  return "";
+};
+
 const InteractionBox = (props) => {
   const { currentUser } = React.useContext(UserContext);
   const { interaction, navigation, theme, setHomeDebates, setDebates } = props;
@@ -179,7 +187,11 @@ const InteractionBox = (props) => {
                 : `${interaction.who.firstname} ${
                     interaction.who.lastname
                   } ${i18n._("hasVote")}`
-            } ${getTimeSpent(interaction.updatedAt)}`}
+            } ${getVote({
+              interactionType: interaction.type,
+              answerOne: debate.answerOne,
+              answerTwo: debate.answerTwo,
+            })} ${getTimeSpent(interaction.updatedAt)}`}
           </Text>
           <View
             style={{

@@ -102,6 +102,14 @@ const DELETE_COMMENT = gql`
   }
 `;
 
+const NOTIFY_SUBCOMMENT = gql`
+  mutation($debateId: ID!, $commentId: ID!) {
+    notifySubComment(debateId: $debateId, commentId: $commentId) {
+      value
+    }
+  }
+`;
+
 const renderItem = ({ item }, navigation, theme, currentUser) => {
   return (
     <View
@@ -181,10 +189,16 @@ const IsolateComment = (props) => {
     }
   );
 
+  const [notifySubComment] = useMutation(NOTIFY_SUBCOMMENT);
+
   const [createSubComment] = useMutation(CREATE_SUBCOMMENT, {
     onCompleted: async () => {
-      // console.log("lol");
-      // await refetch();
+      notifySubComment({
+        variables: {
+          debateId: comment.debate.id,
+          commentId: comment.id,
+        },
+      });
     },
   });
 

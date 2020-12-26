@@ -23,6 +23,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import AssistiveMenu from "../Components/AssistiveMenu";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import InteractionBox from "../Components/InteractionBox";
+import DebateBox from "../Components/DebateBox";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql } from "@apollo/client";
 import { get, isEmpty } from "lodash";
@@ -34,6 +35,7 @@ import ProfileAction from "../Components/ProfileAction";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import GET_DEBATES from "../gql/getDebates";
 
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
@@ -89,12 +91,15 @@ const GET_USER = gql`
   }
 `;
 
+const GET_OWNER_DEBATES = GET_DEBATES("OWNER_DEBATES");
+
 const GET_INTERACTIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
     interactions(
       where: { who: { email: $userId } }
       first: $first
       skip: $skip
+      orderBy: updatedAt_DESC
     ) {
       id
       type
@@ -258,7 +263,7 @@ const Interactions = (props) => {
       setInteractions(queryResult);
       if (queryResult.length === 0) setNoMoreData(true);
     },
-    fetchPolicy: "no-cache",
+    fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
   });
 
@@ -325,11 +330,116 @@ const Interactions = (props) => {
   );
 };
 
+const renderItemDebates = (
+  { item },
+  navigation,
+  theme,
+  currentUser,
+  setHomeDebates
+) => {
+  return (
+    <View style={{ paddingLeft: 15, paddingRight: 15 }}>
+      <DebateBox
+        currentUser={currentUser}
+        theme={theme}
+        debate={item}
+        navigation={navigation}
+        setDebates={null}
+        setHomeDebates={setHomeDebates}
+      />
+    </View>
+  );
+};
+
+let nbDebates = frequency;
+const OwnerDebates = (props) => {
+  const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
+  const [debates, setDebates] = React.useState([]);
+  const [noMoreData, setNoMoreData] = React.useState(false);
+  const { loading, error, fetchMore, refetch } = useQuery(GET_OWNER_DEBATES, {
+    variables: {
+      first: nbDebates,
+      userId: props.userId,
+    },
+    onCompleted: (response) => {
+      const { ownerDebates: queryResult } = response;
+      setDebates(queryResult);
+      if (queryResult.length === 0) setNoMoreData(true);
+    },
+    fetchPolicy: "cache-and-network",
+    notifyOnNetworkStatusChange: true,
+  });
+
+  const isFocused = useIsFocused();
+  React.useEffect(() => {
+    nbDebates = frequency;
+    const reloadDebates = async () => {
+      setDebates([]);
+      refetch();
+      return true;
+    };
+    reloadDebates();
+  }, [isFocused]);
+
+  const { navigation, userId, setHomeDebates } = props;
+
+  if (debates.length === 0 && loading) {
+    return <ActivityIndicator />;
+  }
+
+  return (
+    <FlatList
+      data={debates}
+      style={{
+        ...styles.seedContainer,
+        backgroundColor: themeSchema[theme].backgroundColor1,
+      }}
+      renderItem={(param) =>
+        renderItemDebates(param, navigation, theme, currentUser, setHomeDebates)
+      }
+      keyExtractor={(item) => item.id}
+      onEndReachedThreshold={0.5}
+      onEndReached={async () => {
+        if (Platform.OS === "web" || noMoreData) return;
+        // return ;
+        nbDebates += frequency;
+        await fetchMore({
+          variables: {
+            first: frequency,
+            skip: nbDebates - frequency,
+            userId,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const { debates: moreDebates } = fetchMoreResult;
+            if (isEmpty(moreDebates)) return setNoMoreData(true);
+            setDebates((previousState) =>
+              [...previousState, ...moreDebates].reduce((acc, current) => {
+                const x = acc.find((item) => item.id === current.id);
+                if (!x) {
+                  return acc.concat([current]);
+                } else {
+                  return acc;
+                }
+              }, [])
+            );
+          },
+        });
+      }}
+      ListFooterComponent={() => {
+        if (noMoreData) return null;
+        return <ActivityIndicator style={{ marginBottom: 70 }} />;
+      }}
+    />
+  );
+};
+
 const Profile = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
   const [user, setUser] = React.useState(null);
-  const [search, setSearch] = React.useState("");
+  // const [search, setSearch] = React.useState("");
+  const [vision, setVision] = React.useState("votes");
   const [loadingPicture, setLoadingPicture] = React.useState(false);
   const { data, loading, error, fetchMore } = useQuery(GET_USER, {
     variables: {
@@ -673,11 +783,103 @@ const Profile = (props) => {
         // placeholderTextColor="#222"
       /> */}
       {user.id === currentUser.id || !user.private ? (
-        <Interactions
-          userId={user.email}
-          navigation={navigation}
-          setHomeDebates={setHomeDebates}
-        />
+        <>
+          <View
+            style={{
+              backgroundColor: "transparent",
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
+              paddingLeft: 15,
+              paddingRight: 15,
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                width: Dimensions.get("screen").width / 1.5,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                height: 30,
+                borderRadius: 40,
+                marginTop: 0,
+                marginBottom: 5,
+                flexDirection: "row",
+                borderWidth: 1,
+                borderColor: themeSchema[theme].backgroundColor2,
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  width: "50%",
+                  backgroundColor:
+                    vision === "votes"
+                      ? "#F47658"
+                      : themeSchema[theme].backgroundColor2,
+                  borderRadius: 40,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onPress={() => {
+                  setVision("votes");
+                  nbInteractions = frequency;
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_600SemiBold",
+                    fontSize: 10,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {currentUser.id === user.id
+                    ? i18n._("yourVotesProfile")
+                    : i18n._("votesProfile")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  width: "50%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    vision === "debates"
+                      ? "#F47658"
+                      : themeSchema[theme].backgroundColor2,
+                  borderRadius: 40,
+                }}
+                onPress={() => {
+                  setVision("debates");
+                  nbDebates = frequency;
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_600SemiBold",
+                    fontSize: 10,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {currentUser.id === user.id
+                    ? i18n._("yourDebatesProfile")
+                    : i18n._("debatesProfile")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          {vision === "votes" && (
+            <Interactions
+              userId={user.email}
+              navigation={navigation}
+              setHomeDebates={setHomeDebates}
+            />
+          )}
+          {vision === "debates" && (
+            <OwnerDebates
+              userId={user.id}
+              navigation={navigation}
+              setHomeDebates={setHomeDebates}
+            />
+          )}
+        </>
       ) : (
         <View
           style={{

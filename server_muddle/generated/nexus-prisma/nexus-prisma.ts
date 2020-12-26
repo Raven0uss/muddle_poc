@@ -15846,6 +15846,7 @@ export type NotificationTypeValues =
   | 'ACCEPT_DELETE_DEBATE'
   | 'REJECT_DELETE_DEBATE'
   | 'COMMENT'
+  | 'SUBCOMMENT'
   | 'LIKE'
   | 'DISLIKE'
   

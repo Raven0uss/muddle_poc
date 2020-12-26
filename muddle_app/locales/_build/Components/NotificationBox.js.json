@@ -1,57 +1,25 @@
 {
-  "voteOnYourDebate": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        104
-      ]
-    ]
-  },
-  "inviteYouDuoDebate": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        175
-      ]
-    ]
-  },
-  "accept": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        212
-      ],
-      [
-        "Components/NotificationBox.js",
-        475
-      ]
-    ]
-  },
-  "decline": {
-    "origin": [
-      [
-        "Components/NotificationBox.js",
-        248
-      ],
-      [
-        "Components/NotificationBox.js",
-        511
-      ]
-    ]
-  },
   "and": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        305
+        184
       ],
       [
         "Components/NotificationBox.js",
-        568
+        894
       ],
       [
         "Components/NotificationBox.js",
-        669
+        989
+      ],
+      [
+        "Components/NotificationBox.js",
+        1424
+      ],
+      [
+        "Components/NotificationBox.js",
+        1518
       ]
     ]
   },
@@ -59,15 +27,23 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        307
+        186
       ],
       [
         "Components/NotificationBox.js",
-        570
+        896
       ],
       [
         "Components/NotificationBox.js",
-        671
+        991
+      ],
+      [
+        "Components/NotificationBox.js",
+        1426
+      ],
+      [
+        "Components/NotificationBox.js",
+        1520
       ]
     ]
   },
@@ -75,43 +51,91 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        308
+        187
       ],
       [
         "Components/NotificationBox.js",
-        571
+        897
       ],
       [
         "Components/NotificationBox.js",
-        672
+        992
+      ],
+      [
+        "Components/NotificationBox.js",
+        1427
+      ],
+      [
+        "Components/NotificationBox.js",
+        1521
       ]
     ]
   },
-  "commentYourDebatePlural": {
+  "voteOnYourDebate": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        329
+        205
       ]
     ]
   },
-  "commentYourDebateSingular": {
+  "inviteYouDuoDebate": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        330
+        287
       ]
     ]
   },
-  "askToCloseThisDebate": {
+  "accept": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        418
+        324
+      ],
+      [
+        "Components/NotificationBox.js",
+        1151
+      ],
+      [
+        "Components/NotificationBox.js",
+        1321
       ]
     ]
   },
-  "likedCommentPlural": {
+  "decline": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        369
+      ],
+      [
+        "Components/NotificationBox.js",
+        1195
+      ],
+      [
+        "Components/NotificationBox.js",
+        1365
+      ]
+    ]
+  },
+  "acceptYourInvitation": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        439
+      ]
+    ]
+  },
+  "rejectYourInvitation": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        521
+      ]
+    ]
+  },
+  "acceptCloseDebate": {
     "origin": [
       [
         "Components/NotificationBox.js",
@@ -119,11 +143,91 @@
       ]
     ]
   },
+  "rejectCloseDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        672
+      ]
+    ]
+  },
+  "acceptDeleteDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        753
+      ]
+    ]
+  },
+  "rejectDeleteDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        823
+      ]
+    ]
+  },
+  "commentYourDebatePlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        918
+      ]
+    ]
+  },
+  "commentYourDebateSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        919
+      ]
+    ]
+  },
+  "answerYourCommentPlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1013
+      ]
+    ]
+  },
+  "answerYourCommentSingular": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1014
+      ]
+    ]
+  },
+  "askToCloseThisDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1094
+      ]
+    ]
+  },
+  "askToDeleteThisDebate": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1264
+      ]
+    ]
+  },
+  "likedCommentPlural": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1447
+      ]
+    ]
+  },
   "likedCommentSingular": {
     "origin": [
       [
         "Components/NotificationBox.js",
-        592
+        1448
       ]
     ]
   },
@@ -131,7 +235,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        692
+        1541
       ]
     ]
   },
@@ -139,7 +243,7 @@
     "origin": [
       [
         "Components/NotificationBox.js",
-        693
+        1542
       ]
     ]
   }

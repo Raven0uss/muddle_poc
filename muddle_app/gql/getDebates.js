@@ -167,6 +167,60 @@ const GET_DEBATES = (debateType) => {
         }
       }
     `;
+  if (debateType === "OWNER_DEBATES") {
+    return gql`
+      query($first: Int!, $skip: Int, $userId: ID!) {
+        ownerDebates(first: $first, skip: $skip, userId: $userId) {
+          id
+          content
+          answerOne
+          answerTwo
+          image
+          type
+          owner {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+          }
+          ownerBlue {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+          }
+          ownerRed {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+          }
+          positives {
+            id
+          }
+          negatives {
+            id
+          }
+          redVotes {
+            id
+          }
+          blueVotes {
+            id
+          }
+          comments {
+            id
+          }
+          closed
+        }
+      }
+    `;
+  }
 };
 
 export default GET_DEBATES;

@@ -134,6 +134,7 @@ async function main() {
     birthdate: faker.date.past(),
     certified: true,
     role: "MUDDLE",
+    private: true,
     coverPicture:
       "https://image.freepik.com/vecteurs-libre/fond-texture-blanc-elegant_23-2148431731.jpg",
     profilePicture:
@@ -199,94 +200,94 @@ async function main() {
 
   // Create all type of notifications
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }, { email: "userB" }] },
-    type: "COMMENT",
-    status: "INFORMATION",
-    new: false,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }, { email: "userB" }] },
+  //   type: "COMMENT",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   debate: { connect: { id: standardDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "CLOSE_DEBATE",
-    status: "PENDING",
-    new: false,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "CLOSE_DEBATE",
+  //   status: "PENDING",
+  //   new: false,
+  //   debate: { connect: { id: standardDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "LIKE",
-    status: "INFORMATION",
-    new: false,
-    comment: { connect: { id: comments[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "LIKE",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   comment: { connect: { id: comments[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }, { email: "userB" }] },
-    type: "DISLIKE",
-    status: "INFORMATION",
-    new: false,
-    comment: { connect: { id: comments[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }, { email: "userB" }] },
+  //   type: "DISLIKE",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   comment: { connect: { id: comments[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "REJECT_DUO",
-    status: "INFORMATION",
-    new: false,
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "REJECT_DUO",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "ACCEPT_DUO",
-    status: "INFORMATION",
-    new: false,
-    debate: { connect: { id: duoDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "ACCEPT_DUO",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   debate: { connect: { id: duoDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "ACCEPT_CLOSE_DEBATE",
-    status: "INFORMATION",
-    new: false,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "ACCEPT_CLOSE_DEBATE",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   debate: { connect: { id: standardDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "REJECT_CLOSE_DEBATE",
-    status: "INFORMATION",
-    new: false,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "REJECT_CLOSE_DEBATE",
+  //   status: "INFORMATION",
+  //   new: false,
+  //   debate: { connect: { id: standardDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "VOTE",
-    status: "INFORMATION",
-    new: true,
-    debate: { connect: { id: standardDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "VOTE",
+  //   status: "INFORMATION",
+  //   new: true,
+  //   debate: { connect: { id: standardDebates[0].id } },
+  //   userId: A.id,
+  // });
 
-  await prisma.createNotification({
-    who: { connect: [{ email: "userA" }] },
-    type: "INVITATION_DUO",
-    status: "PENDING",
-    new: true,
-    debate: { connect: { id: duoDebates[0].id } },
-    userId: A.id,
-  });
+  // await prisma.createNotification({
+  //   who: { connect: [{ email: "userA" }] },
+  //   type: "INVITATION_DUO",
+  //   status: "PENDING",
+  //   new: true,
+  //   debate: { connect: { id: duoDebates[0].id } },
+  //   userId: A.id,
+  // });
 
   // Trophies
 
@@ -310,47 +311,47 @@ async function main() {
   }
 
   // Interactions
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "LIKE",
-    comment: { connect: { id: comments[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "LIKE",
+  //   comment: { connect: { id: comments[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "DISLIKE",
-    comment: { connect: { id: comments[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "DISLIKE",
+  //   comment: { connect: { id: comments[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "COMMENT",
-    comment: { connect: { id: comments[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "COMMENT",
+  //   comment: { connect: { id: comments[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "BLUE_VOTE",
-    debate: { connect: { id: duoDebates[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "BLUE_VOTE",
+  //   debate: { connect: { id: duoDebates[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "RED_VOTE",
-    debate: { connect: { id: duoDebates[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "RED_VOTE",
+  //   debate: { connect: { id: duoDebates[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "POSITIVE_VOTE",
-    debate: { connect: { id: standardDebates[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "POSITIVE_VOTE",
+  //   debate: { connect: { id: standardDebates[0].id } },
+  // });
 
-  await prisma.createInteraction({
-    who: { connect: { email: "userA" } },
-    type: "NEGATIVE_VOTE",
-    debate: { connect: { id: standardDebates[0].id } },
-  });
+  // await prisma.createInteraction({
+  //   who: { connect: { email: "userA" } },
+  //   type: "NEGATIVE_VOTE",
+  //   debate: { connect: { id: standardDebates[0].id } },
+  // });
 }
 
 main().catch(console.error);
