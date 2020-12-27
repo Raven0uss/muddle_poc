@@ -570,15 +570,17 @@ msgstr "Changer la langue"
 msgid "that"
 msgstr "ceci"
 
-#: Screens/BlackList.js:198
+#: Screens/BlackList.js:208
 msgid "unblockAction"
 msgstr "Débloquer"
 
-#: Screens/BlackList.js:125
+#: Screens/BlackList.js:127
 msgid "unblockInstruction"
-msgstr "Pour débloquer un utilisateur, il suffit de rester appuyé quelques instants sur le bouton \"Débloquer\".\nCette personne sera à nouveau capable de vous contacter et voir vos contenus."
+msgstr ""
+"Pour débloquer un utilisateur, il suffit de rester appuyé quelques instants sur le bouton \"Débloquer\".\n"
+"Cette personne sera à nouveau capable de vous contacter et voir vos contenus."
 
-#: Screens/BlackList.js:114
+#: Screens/BlackList.js:115
 msgid "userBlockedTitle"
 msgstr "Utilisateurs bloqués"
 

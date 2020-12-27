@@ -2219,6 +2219,7 @@ type Mutation {
   createTrophy(data: TrophyCreateInput!): Trophy!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteDebate(where: DebateWhereUniqueInput!): Debate
+  deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
   deleteMyComment(commentId: ID): Comment!
   deleteMyDebate(debateId: ID): Debate!
   dislikeComment(commentId: ID, userId: ID): Comment!

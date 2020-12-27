@@ -86,6 +86,14 @@ const NOTIFICATIONS_UPDATE_VIEW = gql`
   }
 `;
 
+const DELETE_NOTIFICATIONS = gql`
+  mutation($userId: String!) {
+    deleteManyNotifications(where: { status_not: PENDING, userId: $userId }) {
+      count
+    }
+  }
+`;
+
 const frequency = 10;
 let nbNotifications = frequency;
 
@@ -128,6 +136,18 @@ const Notifications = (props) => {
     },
   });
 
+  const [deleteAllNotifications] = useMutation(DELETE_NOTIFICATIONS, {
+    variables: {
+      userId: currentUser.id,
+    },
+    onCompleted: () => {
+      nbNotifications = frequency;
+      setNotifications((visiblesNotifs) =>
+        visiblesNotifs.filter((n) => n.status === "PENDING")
+      );
+    },
+  });
+
   const isFocused = useIsFocused();
   React.useEffect(() => {
     // markAsReadNotifcations();
@@ -156,6 +176,16 @@ const Notifications = (props) => {
               marginBottom: 10,
             }}
           />
+        }
+        RightComponent={
+          <TouchableOpacity
+            onPress={async () => {
+              await deleteAllNotifications();
+            }}
+            style={{ marginTop: 3 }}
+          >
+            <CustomIcon name={"delete"} size={38} />
+          </TouchableOpacity>
         }
       />
       <View

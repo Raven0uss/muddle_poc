@@ -22,6 +22,7 @@ const exposedMutations = {
     "createNotification",
     "updateManyNotifications",
     "updateNotification",
+    "deleteManyNotifications"
   ],
   reportMutations: ["createReport", "updateReport"],
   trophyMutations: ["createTrophy", "updateTrophy"],

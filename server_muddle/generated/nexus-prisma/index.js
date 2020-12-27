@@ -4304,6 +4304,7 @@ export interface NexusGenFieldTypes {
     createTrophy: NexusGenRootTypes['Trophy']; // Trophy!
     deleteComment: NexusGenRootTypes['Comment'] | null; // Comment
     deleteDebate: NexusGenRootTypes['Debate'] | null; // Debate
+    deleteManyNotifications: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteMyComment: NexusGenRootTypes['Comment']; // Comment!
     deleteMyDebate: NexusGenRootTypes['Debate']; // Debate!
     dislikeComment: NexusGenRootTypes['Comment']; // Comment!
@@ -4642,6 +4643,9 @@ export interface NexusGenArgTypes {
     }
     deleteDebate: { // args
       where: NexusGenInputs['DebateWhereUniqueInput']; // DebateWhereUniqueInput!
+    }
+    deleteManyNotifications: { // args
+      where?: NexusGenInputs['NotificationWhereInput'] | null; // NotificationWhereInput
     }
     deleteMyComment: { // args
       commentId?: string | null; // ID

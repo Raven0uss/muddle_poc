@@ -570,15 +570,17 @@ msgstr "Switch language"
 msgid "that"
 msgstr "this"
 
-#: Screens/BlackList.js:198
+#: Screens/BlackList.js:208
 msgid "unblockAction"
 msgstr "Unblock"
 
-#: Screens/BlackList.js:125
+#: Screens/BlackList.js:127
 msgid "unblockInstruction"
-msgstr "To remove a user from your blocklist, press the button \"Unblock\" few seconds.\nThis person will be able again to interact with you."
+msgstr ""
+"To remove a user from your blocklist, press the button \"Unblock\" few seconds.\n"
+"This person will be able again to interact with you."
 
-#: Screens/BlackList.js:114
+#: Screens/BlackList.js:115
 msgid "userBlockedTitle"
 msgstr "Blocked Users"
 
