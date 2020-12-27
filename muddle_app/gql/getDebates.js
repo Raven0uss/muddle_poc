@@ -25,6 +25,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerBlue {
             id
@@ -33,6 +37,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerRed {
             id
@@ -41,6 +49,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           positives {
             id
@@ -78,6 +90,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerBlue {
             id
@@ -86,6 +102,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerRed {
             id
@@ -94,6 +114,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           positives {
             id
@@ -131,6 +155,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerBlue {
             id
@@ -139,6 +167,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerRed {
             id
@@ -147,6 +179,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           positives {
             id
@@ -184,6 +220,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerBlue {
             id
@@ -192,6 +232,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           ownerRed {
             id
@@ -200,6 +244,10 @@ const GET_DEBATES = (debateType) => {
             email
             profilePicture
             certified
+            private
+            followers {
+              id
+            }
           }
           positives {
             id

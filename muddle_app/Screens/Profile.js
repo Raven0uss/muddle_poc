@@ -37,6 +37,7 @@ import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import GET_DEBATES from "../gql/getDebates";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import isFollowing from "../Library/isFollowing";
 
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
@@ -49,6 +50,7 @@ const GET_USER = gql`
       coverPicture
       email
       private
+      role
       conversations(where: { speakers_some: { id: $currentUserId } }) {
         id
         speakers {
@@ -566,70 +568,72 @@ const Profile = (props) => {
           flexDirection: "row",
         }}
       >
-        <TouchableOpacity
-          style={{
-            position: "absolute",
-            width: 50,
-            height: 52,
-            backgroundColor: themeSchema[theme].backgroundColor2,
-            borderRadius: 20,
-            borderColor: "#F47658",
-            borderStyle: "solid",
-            borderWidth: 2,
-            // marginLeft: "auto",
-            right: 0,
-            bottom: 0,
-            marginRight: -10,
-            // marginTop: "auto",
-            marginBottom: -10,
-            justifyContent: "center",
-            alignItems: "center",
-            elevation: 20,
-            zIndex: 20,
-          }}
-          onPress={() => {
-            if (
-              user.id === currentUser.id ||
-              (!user.private &&
-                !isBlocked({ currentUser, userId: user.id }) &&
-                !isBlockingMe({ currentUser, userId: user.id }))
-            )
-              navigation.push("Trophies", {
-                userId: user.email,
-                nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
-                  .length,
-                nbTopComment: user.trophies.filter(
-                  (t) => t.type === "TOP_COMMENT"
-                ).length,
-              });
-          }}
-        >
-          <Text
+        {user.role !== "MUDDLE" && (
+          <TouchableOpacity
             style={{
-              fontSize: 10,
-              marginTop: -3,
-              marginBottom: 3,
-              fontWeight: "bold",
-              fontFamily: "Montserrat_600SemiBold",
-              color: themeSchema[theme].colorText,
+              position: "absolute",
+              width: 50,
+              height: 52,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+              borderRadius: 20,
+              borderColor: "#F47658",
+              borderStyle: "solid",
+              borderWidth: 2,
+              // marginLeft: "auto",
+              right: 0,
+              bottom: 0,
+              marginRight: -10,
+              // marginTop: "auto",
+              marginBottom: -10,
+              justifyContent: "center",
+              alignItems: "center",
+              elevation: 20,
+              zIndex: 20,
+            }}
+            onPress={() => {
+              if (
+                user.id === currentUser.id ||
+                ((!user.private || isFollowing(user, currentUser)) &&
+                  !isBlocked({ currentUser, userId: user.id }) &&
+                  !isBlockingMe({ currentUser, userId: user.id }))
+              )
+                navigation.push("Trophies", {
+                  userId: user.email,
+                  nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
+                    .length,
+                  nbTopComment: user.trophies.filter(
+                    (t) => t.type === "TOP_COMMENT"
+                  ).length,
+                });
             }}
           >
-            {user.trophies.length}
-          </Text>
-          <Image
-            source={{
-              uri:
-                theme === "light"
-                  ? muddle.trophies_light
-                  : muddle.trophies_dark,
-            }}
-            style={{
-              width: 30,
-              height: 22,
-            }}
-          />
-          {/* Nombre des trophees */}
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 10,
+                marginTop: -3,
+                marginBottom: 3,
+                fontWeight: "bold",
+                fontFamily: "Montserrat_600SemiBold",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {user.trophies.length}
+            </Text>
+            <Image
+              source={{
+                uri:
+                  theme === "light"
+                    ? muddle.trophies_light
+                    : muddle.trophies_dark,
+              }}
+              style={{
+                width: 30,
+                height: 22,
+              }}
+            />
+            {/* Nombre des trophees */}
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           onPress={() => {
             navigation.push("IsolateImage", {
@@ -671,95 +675,116 @@ const Profile = (props) => {
             }}
             numberOfLines={2}
           >
-            {`${user.firstname} ${user.lastname}`}
+            {`${user.firstname}${
+              user.role !== "MUDDLE" ? ` ${user.lastname}` : ""
+            }`}
             {user.certified && <CertifiedIcon />}
           </Text>
-
-          <View
-            style={{
-              flexDirection: "row",
-              width: 145,
-              justifyContent: "space-between",
-            }}
-          >
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  if (
-                    user.id === currentUser.id ||
-                    (!user.private &&
-                      !isBlocked({ currentUser, userId: user.id }) &&
-                      !isBlockingMe({ currentUser, userId: user.id }))
-                  )
-                    navigation.push("Follow", {
-                      follow: {
-                        following: user.following,
-                        followers: user.followers,
-                      },
-                      selected: "followers",
-                    });
+          {user.role === "MUDDLE" && (
+            <View
+              style={{
+                marginTop: -10,
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Montserrat_400Regular",
+                  fontSize: 10,
+                  width: Dimensions.get("screen").width / 2.1,
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 10,
-                    fontFamily: "Montserrat_600SemiBold",
-                    color: themeSchema[theme].colorText,
-                  }}
-                >
-                  {user.followers.length}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "#A3A3A3",
-                    fontFamily: "Montserrat_500Medium",
-                  }}
-                >
-                  {i18n._("followers").toLowerCase()}
-                </Text>
-              </TouchableOpacity>
+                {i18n._("muddleAccountDesc")}
+              </Text>
             </View>
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  if (
-                    user.id === currentUser.id ||
-                    (!user.private &&
-                      !isBlocked({ currentUser, userId: user.id }) &&
-                      !isBlockingMe({ currentUser, userId: user.id }))
-                  )
-                    navigation.push("Follow", {
-                      follow: {
-                        following: user.following,
-                        followers: user.followers,
-                      },
-                      selected: "following",
-                    });
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 10,
-                    fontFamily: "Montserrat_600SemiBold",
-                    color: themeSchema[theme].colorText,
+          )}
+          {user.role !== "MUDDLE" && (
+            <View
+              style={{
+                flexDirection: "row",
+                width: 145,
+                justifyContent: "space-between",
+              }}
+            >
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (
+                      user.id === currentUser.id ||
+                      ((!user.private || isFollowing(user, currentUser)) &&
+                        !isBlocked({ currentUser, userId: user.id }) &&
+                        !isBlockingMe({ currentUser, userId: user.id }))
+                    )
+                      navigation.push("Follow", {
+                        follow: {
+                          following: user.following,
+                          followers: user.followers,
+                        },
+                        selected: "followers",
+                      });
                   }}
                 >
-                  {user.following.length}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "#A3A3A3",
-                    fontFamily: "Montserrat_500Medium",
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      fontFamily: "Montserrat_600SemiBold",
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {user.followers.length}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "#A3A3A3",
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {i18n._("followers").toLowerCase()}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (
+                      user.id === currentUser.id ||
+                      ((!user.private || isFollowing(user, currentUser)) &&
+                        !isBlocked({ currentUser, userId: user.id }) &&
+                        !isBlockingMe({ currentUser, userId: user.id }))
+                    )
+                      navigation.push("Follow", {
+                        follow: {
+                          following: user.following,
+                          followers: user.followers,
+                        },
+                        selected: "following",
+                      });
                   }}
                 >
-                  {i18n._("following").toLowerCase()}
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      fontFamily: "Montserrat_600SemiBold",
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {user.following.length}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "#A3A3A3",
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {i18n._("following").toLowerCase()}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          )}
         </View>
+
         <View
           style={{
             marginLeft: "auto",
@@ -769,15 +794,16 @@ const Profile = (props) => {
             // marginLeft: 17,
           }}
         >
-          {isBlockingMe({ userId: user.id, currentUser }) === false && (
-            <ProfileAction
-              me={me}
-              navigation={navigation}
-              theme={theme}
-              user={user}
-              setLoadingPicture={setLoadingPicture}
-            />
-          )}
+          {isBlockingMe({ userId: user.id, currentUser }) === false &&
+            user.role !== "MUDDLE" && (
+              <ProfileAction
+                me={me}
+                navigation={navigation}
+                theme={theme}
+                user={user}
+                setLoadingPicture={setLoadingPicture}
+              />
+            )}
         </View>
       </View>
 
@@ -801,10 +827,18 @@ const Profile = (props) => {
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
       /> */}
-      {user.id === currentUser.id ||
-      (!user.private &&
-        !isBlocked({ currentUser, userId: user.id }) &&
-        !isBlockingMe({ currentUser, userId: user.id })) ? (
+      {user.role === "MUDDLE" && (
+        <OwnerDebates
+          userId={user.id}
+          navigation={navigation}
+          setHomeDebates={setHomeDebates}
+        />
+      )}
+      {user.role !== "MUDDLE" &&
+      (user.id === currentUser.id ||
+        ((!user.private || isFollowing(user, currentUser)) &&
+          !isBlocked({ currentUser, userId: user.id }) &&
+          !isBlockingMe({ currentUser, userId: user.id }))) ? (
         <>
           <View
             style={{
@@ -903,24 +937,26 @@ const Profile = (props) => {
           )}
         </>
       ) : (
-        <View
-          style={{
-            alignItems: "center",
-            marginTop: 15,
-          }}
-        >
-          <CustomIcon name="lock" size={108} color="#d3d3d3" />
-          <Text
+        user.role !== "MUDDLE" && (
+          <View
             style={{
-              color: "#d3d3d3",
-              fontFamily: "Montserrat_600SemiBold",
-              fontSize: 12,
-              marginTop: 10,
+              alignItems: "center",
+              marginTop: 15,
             }}
           >
-            {i18n._("messagePrivateProfile")}
-          </Text>
-        </View>
+            <CustomIcon name="lock" size={108} color="#d3d3d3" />
+            <Text
+              style={{
+                color: "#d3d3d3",
+                fontFamily: "Montserrat_600SemiBold",
+                fontSize: 12,
+                marginTop: 10,
+              }}
+            >
+              {i18n._("messagePrivateProfile")}
+            </Text>
+          </View>
+        )
       )}
       <AssistiveMenu navigation={navigation} route={route} />
       <CreateDebateButton navigation={navigation} />

@@ -474,7 +474,7 @@ const Debate = (props) => {
         >
           <Select
             list={[
-              !isOwner(currentUser, debate)
+              !isOwner(currentUser, debate) && debate.type !== "MUDDLE"
                 ? {
                     label: i18n._("reportDebate"),
                     value: "REPORT",

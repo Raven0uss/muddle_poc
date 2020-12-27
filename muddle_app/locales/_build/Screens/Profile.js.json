@@ -3,7 +3,15 @@
     "origin": [
       [
         "Screens/Profile.js",
-        479
+        481
+      ]
+    ]
+  },
+  "muddleAccountDesc": {
+    "origin": [
+      [
+        "Screens/Profile.js",
+        694
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        719
+        740
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        757
+        778
       ]
     ]
   },
@@ -27,7 +35,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        856
+        888
       ]
     ]
   },
@@ -35,7 +43,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        857
+        889
       ]
     ]
   },
@@ -43,7 +51,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        884
+        916
       ]
     ]
   },
@@ -51,7 +59,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        885
+        917
       ]
     ]
   },
@@ -59,7 +67,7 @@
     "origin": [
       [
         "Screens/Profile.js",
-        921
+        954
       ]
     ]
   }

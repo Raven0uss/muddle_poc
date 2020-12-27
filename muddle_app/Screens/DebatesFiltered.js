@@ -23,6 +23,7 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import GET_DEBATES from "../gql/getDebates";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import isFollowing from "../Library/isFollowing";
 
 const frequency = 6;
 let nbDebates = frequency;
@@ -260,6 +261,13 @@ const DebatesFiltered = (props) => {
           data={debates.filter((d) => {
             if (d.type === "DUO") {
               if (
+                currentUser.id === d.ownerRed.id ||
+                currentUser.id === d.ownerBlue.id ||
+                d.ownerBlue.role === "MUDDLE" ||
+                d.ownerRed.role === "MUDDLE"
+              )
+                return true;
+              if (
                 isBlocked({ currentUser, userId: d.ownerRed.id }) ||
                 isBlocked({ currentUser, userId: d.ownerBlue.id })
               )
@@ -269,11 +277,20 @@ const DebatesFiltered = (props) => {
                 isBlockingMe({ currentUser, userId: d.ownerBlue.id })
               )
                 return false;
+              if (
+                (d.ownerRed.private && !isFollowing(d.ownerRed, currentUser)) ||
+                (d.ownerRed.private && !isFollowing(d.ownerRed, currentUser))
+              )
+                return false;
             } else {
+              if (currentUser.id === d.owner.id || d.owner.role === "MUDDLE")
+                return true;
               if (
                 isBlockingMe({ currentUser, userId: d.owner.id }) ||
                 isBlocked({ currentUser, userId: d.owner.id })
               )
+                return false;
+              if (d.owner.private && !isFollowing(d.owner, currentUser))
                 return false;
             }
             return true;

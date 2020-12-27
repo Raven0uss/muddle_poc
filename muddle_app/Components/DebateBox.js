@@ -235,7 +235,7 @@ const DebateBox = (props) => {
           <View style={{ marginLeft: "auto" }}>
             <Select
               list={[
-                currentUser.id !== debate.owner.id
+                currentUser.id !== debate.owner.id && debate.type !== "MUDDLE"
                   ? {
                       label: i18n._("reportDebate"),
                       value: "REPORT",

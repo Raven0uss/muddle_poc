@@ -41,6 +41,11 @@ fragment BestDebate on Debate {
     lastname
     email
     profilePicture
+    private
+    role
+    followers {
+      id
+    }
   }
   ownerBlue {
     id
@@ -49,6 +54,11 @@ fragment BestDebate on Debate {
     lastname
     email
     profilePicture
+    private
+    role
+    followers {
+      id
+    }
   }
   ownerRed {
     id
@@ -57,6 +67,11 @@ fragment BestDebate on Debate {
     lastname
     email
     profilePicture
+    role
+    private
+    followers {
+      id
+    }
   }
   positives {
     id

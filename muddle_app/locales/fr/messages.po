@@ -35,23 +35,23 @@ msgstr "a accepté votre invitation au débat"
 msgid "accronymCGU"
 msgstr "CGU"
 
-#: Components/ProfileAction.js:316
+#: Components/ProfileAction.js:313
 msgid "actionBlock"
 msgstr "Bloquer"
 
-#: Components/ProfileAction.js:312
+#: Components/ProfileAction.js:309
 msgid "actionContact"
 msgstr "Contacter"
 
-#: Components/ProfileAction.js:308
+#: Components/ProfileAction.js:305
 msgid "actionFollow"
 msgstr "Suivre"
 
-#: Components/ProfileAction.js:297
+#: Components/ProfileAction.js:294
 msgid "actionUnblock"
 msgstr "Débloquer"
 
-#: Components/ProfileAction.js:304
+#: Components/ProfileAction.js:301
 msgid "actionUnfollow"
 msgstr "Ne plus suivre"
 
@@ -112,7 +112,7 @@ msgstr "a demandé de clore ce débat"
 msgid "askToDeleteThisDebate"
 msgstr "a demandé de supprimer ce débat"
 
-#: Screens/DebatesFiltered.js:192
+#: Screens/DebatesFiltered.js:193
 msgid "bestDebates"
 msgstr "Les meilleurs débats"
 
@@ -212,7 +212,7 @@ msgstr "Durée du débat"
 msgid "debateLimitationDurationMessage"
 msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 
-#: Screens/Profile.js:885
+#: Screens/Profile.js:917
 msgid "debatesProfile"
 msgstr "Débats"
 
@@ -227,7 +227,7 @@ msgstr "Refuser"
 msgid "deleteComment"
 msgstr "Supprimer le commentaire"
 
-#: Screens/Conversations.js:109
+#: Screens/Conversations.js:111
 msgid "deleteConversation"
 msgstr "Supprimer la conversation"
 
@@ -264,7 +264,7 @@ msgstr "Débat en duo"
 msgid "duoDebateSelect"
 msgstr "Débat duo"
 
-#: Screens/DebatesFiltered.js:218
+#: Screens/DebatesFiltered.js:219
 msgid "duoDebates"
 msgstr "Les débats en duo"
 
@@ -279,12 +279,12 @@ msgid "firstname"
 msgstr "Prénom"
 
 #: Screens/Follow.js:95
-#: Screens/Profile.js:719
+#: Screens/Profile.js:740
 msgid "followers"
 msgstr "Abonnés"
 
 #: Screens/Follow.js:120
-#: Screens/Profile.js:757
+#: Screens/Profile.js:778
 msgid "following"
 msgstr "Abonnements"
 
@@ -316,7 +316,7 @@ msgstr "Non défini"
 msgid "gender_woman"
 msgstr "Femme"
 
-#: Screens/DebatesFiltered.js:244
+#: Screens/DebatesFiltered.js:245
 msgid "generatedDebates"
 msgstr "Les débats générés"
 
@@ -375,7 +375,7 @@ msgstr "ont aimé votre commentaire"
 msgid "likedCommentSingular"
 msgstr "a aimé votre commentaire"
 
-#: Screens/Profile.js:479
+#: Screens/Profile.js:481
 msgid "loadingPictureMessage"
 msgstr ""
 "Téléchargement de votre image...\n"
@@ -387,7 +387,7 @@ msgstr ""
 msgid "mailAddress"
 msgstr "Adresse e-mail"
 
-#: Screens/Profile.js:921
+#: Screens/Profile.js:954
 msgid "messagePrivateProfile"
 msgstr "Ce compte est privé"
 
@@ -395,11 +395,11 @@ msgstr "Ce compte est privé"
 msgid "minutesAgo"
 msgstr "il y a {time} min"
 
-#: Components/ProfileAction.js:219
+#: Components/ProfileAction.js:216
 msgid "modifyCoverPicture"
 msgstr "Modifier votre couverture"
 
-#: Components/ProfileAction.js:215
+#: Components/ProfileAction.js:212
 msgid "modifyProfilePicture"
 msgstr "Modifier votre photo"
 
@@ -407,7 +407,11 @@ msgstr "Modifier votre photo"
 msgid "moreOneWeekAgo"
 msgstr "il y a plus d'une semaine"
 
-#: Screens/DebatesFiltered.js:166
+#: Screens/Profile.js:694
+msgid "muddleAccountDesc"
+msgstr "Équipe Muddles - Compte Officiel"
+
+#: Screens/DebatesFiltered.js:167
 msgid "myDebates"
 msgstr "Mes débats"
 
@@ -448,7 +452,7 @@ msgstr "autre personne"
 msgid "password"
 msgstr "Mot de passe"
 
-#: Components/ProfileAction.js:228
+#: Components/ProfileAction.js:225
 msgid "privateMode"
 msgstr "Passer en mode privé"
 
@@ -457,7 +461,7 @@ msgstr "Passer en mode privé"
 msgid "publicDebateSelect"
 msgstr "Débat publique"
 
-#: Components/ProfileAction.js:224
+#: Components/ProfileAction.js:221
 msgid "publicMode"
 msgstr "Passer en mode publique"
 
@@ -598,7 +602,7 @@ msgstr "a voté sur votre débat"
 msgid "votePrivacy"
 msgstr "Confidentialité des votes"
 
-#: Screens/Profile.js:857
+#: Screens/Profile.js:889
 msgid "votesProfile"
 msgstr "Votes"
 
@@ -606,7 +610,7 @@ msgstr "Votes"
 msgid "yesterday"
 msgstr "hier"
 
-#: Screens/Chat.js:450
+#: Screens/Chat.js:635
 msgid "youCantContact"
 msgstr "Vous ne pouvez plus contacter cet utilisateur."
 
@@ -631,11 +635,11 @@ msgstr "Vous avez voté"
 msgid "yourComment"
 msgstr "Votre commentaire"
 
-#: Screens/Profile.js:884
+#: Screens/Profile.js:916
 msgid "yourDebatesProfile"
 msgstr "Mes débats"
 
-#: Screens/Chat.js:449
+#: Screens/Chat.js:634
 msgid "yourMessage"
 msgstr "Votre message"
 
@@ -644,6 +648,6 @@ msgstr "Votre message"
 msgid "yourOpinion"
 msgstr "Votre opinion"
 
-#: Screens/Profile.js:856
+#: Screens/Profile.js:888
 msgid "yourVotesProfile"
 msgstr "Mes votes"

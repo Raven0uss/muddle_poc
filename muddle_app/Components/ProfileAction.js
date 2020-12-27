@@ -9,11 +9,8 @@ import { gql, useMutation } from "@apollo/client";
 import { pickImageAndGetUrl } from "../Library/pickImage";
 import { storeItem } from "../CustomProperties/storage";
 import { isBlocked } from "../Library/isBlock";
+import isFollowing from "../Library/isFollowing";
 
-const isFollowing = (user, currentUser) => {
-  const index = user.followers.findIndex((u) => u.id === currentUser.id);
-  return index !== -1;
-};
 const isPrivate = (user) => {
   return get(user, "private", false);
 };

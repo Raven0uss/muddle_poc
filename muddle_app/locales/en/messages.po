@@ -35,23 +35,23 @@ msgstr "accepted your invitation for duo debate"
 msgid "accronymCGU"
 msgstr "CGU"
 
-#: Components/ProfileAction.js:316
+#: Components/ProfileAction.js:313
 msgid "actionBlock"
 msgstr "Block"
 
-#: Components/ProfileAction.js:312
+#: Components/ProfileAction.js:309
 msgid "actionContact"
 msgstr "Contact"
 
-#: Components/ProfileAction.js:308
+#: Components/ProfileAction.js:305
 msgid "actionFollow"
 msgstr "Follow"
 
-#: Components/ProfileAction.js:297
+#: Components/ProfileAction.js:294
 msgid "actionUnblock"
 msgstr "Unblock"
 
-#: Components/ProfileAction.js:304
+#: Components/ProfileAction.js:301
 msgid "actionUnfollow"
 msgstr "Unfollow"
 
@@ -112,7 +112,7 @@ msgstr "ask to close this debate"
 msgid "askToDeleteThisDebate"
 msgstr "ask to delete this debate"
 
-#: Screens/DebatesFiltered.js:192
+#: Screens/DebatesFiltered.js:193
 msgid "bestDebates"
 msgstr "Best debates"
 
@@ -212,7 +212,7 @@ msgstr "Debate duration"
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
-#: Screens/Profile.js:885
+#: Screens/Profile.js:917
 msgid "debatesProfile"
 msgstr "Debates"
 
@@ -227,7 +227,7 @@ msgstr "Decline"
 msgid "deleteComment"
 msgstr "Delete comment"
 
-#: Screens/Conversations.js:109
+#: Screens/Conversations.js:111
 msgid "deleteConversation"
 msgstr "Delete conversation"
 
@@ -264,7 +264,7 @@ msgstr "Duo debate"
 msgid "duoDebateSelect"
 msgstr "Duo debate"
 
-#: Screens/DebatesFiltered.js:218
+#: Screens/DebatesFiltered.js:219
 msgid "duoDebates"
 msgstr "Duo debates"
 
@@ -279,12 +279,12 @@ msgid "firstname"
 msgstr "Firstname"
 
 #: Screens/Follow.js:95
-#: Screens/Profile.js:719
+#: Screens/Profile.js:740
 msgid "followers"
 msgstr "Followers"
 
 #: Screens/Follow.js:120
-#: Screens/Profile.js:757
+#: Screens/Profile.js:778
 msgid "following"
 msgstr "Followings"
 
@@ -316,7 +316,7 @@ msgstr "Not defined"
 msgid "gender_woman"
 msgstr "Woman"
 
-#: Screens/DebatesFiltered.js:244
+#: Screens/DebatesFiltered.js:245
 msgid "generatedDebates"
 msgstr "Generated debates"
 
@@ -375,7 +375,7 @@ msgstr "liked your comment"
 msgid "likedCommentSingular"
 msgstr "liked your comment"
 
-#: Screens/Profile.js:479
+#: Screens/Profile.js:481
 msgid "loadingPictureMessage"
 msgstr ""
 "Uploading your picture...̣\n"
@@ -387,7 +387,7 @@ msgstr ""
 msgid "mailAddress"
 msgstr "E-mail"
 
-#: Screens/Profile.js:921
+#: Screens/Profile.js:954
 msgid "messagePrivateProfile"
 msgstr "This account is private."
 
@@ -395,11 +395,11 @@ msgstr "This account is private."
 msgid "minutesAgo"
 msgstr "{time} min ago"
 
-#: Components/ProfileAction.js:219
+#: Components/ProfileAction.js:216
 msgid "modifyCoverPicture"
 msgstr "Change cover"
 
-#: Components/ProfileAction.js:215
+#: Components/ProfileAction.js:212
 msgid "modifyProfilePicture"
 msgstr "Change profile picture"
 
@@ -407,7 +407,11 @@ msgstr "Change profile picture"
 msgid "moreOneWeekAgo"
 msgstr "more than one week ago"
 
-#: Screens/DebatesFiltered.js:166
+#: Screens/Profile.js:694
+msgid "muddleAccountDesc"
+msgstr "Muddles Team - Official Account"
+
+#: Screens/DebatesFiltered.js:167
 msgid "myDebates"
 msgstr "My debates"
 
@@ -448,7 +452,7 @@ msgstr "another person"
 msgid "password"
 msgstr "Password"
 
-#: Components/ProfileAction.js:228
+#: Components/ProfileAction.js:225
 msgid "privateMode"
 msgstr "Enable private mode"
 
@@ -457,7 +461,7 @@ msgstr "Enable private mode"
 msgid "publicDebateSelect"
 msgstr "Public debate"
 
-#: Components/ProfileAction.js:224
+#: Components/ProfileAction.js:221
 msgid "publicMode"
 msgstr "Disable private mode"
 
@@ -598,7 +602,7 @@ msgstr "voted on your debate"
 msgid "votePrivacy"
 msgstr "Votes privacy"
 
-#: Screens/Profile.js:857
+#: Screens/Profile.js:889
 msgid "votesProfile"
 msgstr "Votes"
 
@@ -606,7 +610,7 @@ msgstr "Votes"
 msgid "yesterday"
 msgstr "yesterday"
 
-#: Screens/Chat.js:450
+#: Screens/Chat.js:635
 msgid "youCantContact"
 msgstr "You can't contact this user"
 
@@ -631,11 +635,11 @@ msgstr "You voted"
 msgid "yourComment"
 msgstr "Your comment"
 
-#: Screens/Profile.js:884
+#: Screens/Profile.js:916
 msgid "yourDebatesProfile"
 msgstr "My debates"
 
-#: Screens/Chat.js:449
+#: Screens/Chat.js:634
 msgid "yourMessage"
 msgstr "Your message"
 
@@ -644,6 +648,6 @@ msgstr "Your message"
 msgid "yourOpinion"
 msgstr "Your opinion"
 
-#: Screens/Profile.js:856
+#: Screens/Profile.js:888
 msgid "yourVotesProfile"
 msgstr "My votes"

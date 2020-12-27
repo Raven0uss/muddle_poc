@@ -32,6 +32,7 @@ import { get } from "lodash";
 import wait from "../Library/wait";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import isFollowing from "../Library/isFollowing";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -50,6 +51,11 @@ const GET_DEBATES = gql`
         lastname
         email
         profilePicture
+        private
+        role
+        followers {
+          id
+        }
       }
       ownerBlue {
         id
@@ -58,6 +64,11 @@ const GET_DEBATES = gql`
         lastname
         email
         profilePicture
+        private
+        role
+        followers {
+          id
+        }
       }
       ownerRed {
         id
@@ -66,6 +77,11 @@ const GET_DEBATES = gql`
         lastname
         email
         profilePicture
+        private
+        role
+        followers {
+          id
+        }
       }
       positives {
         id
@@ -225,7 +241,6 @@ const Home = (props) => {
 
   // }, [debates]);
 
-
   // console.log(currentUser);
 
   if (debates.length === 0 && !refreshing && loading) {
@@ -291,6 +306,13 @@ const Home = (props) => {
         data={debates.filter((d) => {
           if (d.type === "DUO") {
             if (
+              currentUser.id === d.ownerRed.id ||
+              currentUser.id === d.ownerBlue.id ||
+              d.ownerBlue.role === "MUDDLE" ||
+              d.ownerRed.role === "MUDDLE"
+            )
+              return true;
+            if (
               isBlocked({ currentUser, userId: d.ownerRed.id }) ||
               isBlocked({ currentUser, userId: d.ownerBlue.id })
             )
@@ -300,11 +322,20 @@ const Home = (props) => {
               isBlockingMe({ currentUser, userId: d.ownerBlue.id })
             )
               return false;
+            if (
+              (d.ownerRed.private && !isFollowing(d.ownerRed, currentUser)) ||
+              (d.ownerRed.private && !isFollowing(d.ownerRed, currentUser))
+            )
+              return false;
           } else {
+            if (currentUser.id === d.owner.id || d.owner.role === "MUDDLE")
+              return true;
             if (
               isBlockingMe({ currentUser, userId: d.owner.id }) ||
               isBlocked({ currentUser, userId: d.owner.id })
             )
+              return false;
+            if (d.owner.private && !isFollowing(d.owner, currentUser))
               return false;
           }
           return true;
