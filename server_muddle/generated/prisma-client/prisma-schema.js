@@ -857,6 +857,7 @@ type Conversation {
   id: ID!
   speakers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  deleted: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -871,6 +872,7 @@ input ConversationCreateInput {
   id: ID
   speakers: UserCreateManyWithoutConversationsInput
   messages: MessageCreateManyWithoutConversationInput
+  deleted: String
 }
 
 input ConversationCreateManyWithoutSpeakersInput {
@@ -886,11 +888,13 @@ input ConversationCreateOneWithoutMessagesInput {
 input ConversationCreateWithoutMessagesInput {
   id: ID
   speakers: UserCreateManyWithoutConversationsInput
+  deleted: String
 }
 
 input ConversationCreateWithoutSpeakersInput {
   id: ID
   messages: MessageCreateManyWithoutConversationInput
+  deleted: String
 }
 
 type ConversationEdge {
@@ -901,6 +905,8 @@ type ConversationEdge {
 enum ConversationOrderByInput {
   id_ASC
   id_DESC
+  deleted_ASC
+  deleted_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -909,6 +915,7 @@ enum ConversationOrderByInput {
 
 type ConversationPreviousValues {
   id: ID!
+  deleted: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -928,6 +935,20 @@ input ConversationScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  deleted: String
+  deleted_not: String
+  deleted_in: [String!]
+  deleted_not_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_contains: String
+  deleted_not_contains: String
+  deleted_starts_with: String
+  deleted_not_starts_with: String
+  deleted_ends_with: String
+  deleted_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -968,6 +989,15 @@ input ConversationSubscriptionWhereInput {
 input ConversationUpdateInput {
   speakers: UserUpdateManyWithoutConversationsInput
   messages: MessageUpdateManyWithoutConversationInput
+  deleted: String
+}
+
+input ConversationUpdateManyDataInput {
+  deleted: String
+}
+
+input ConversationUpdateManyMutationInput {
+  deleted: String
 }
 
 input ConversationUpdateManyWithoutSpeakersInput {
@@ -979,6 +1009,12 @@ input ConversationUpdateManyWithoutSpeakersInput {
   update: [ConversationUpdateWithWhereUniqueWithoutSpeakersInput!]
   upsert: [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
   deleteMany: [ConversationScalarWhereInput!]
+  updateMany: [ConversationUpdateManyWithWhereNestedInput!]
+}
+
+input ConversationUpdateManyWithWhereNestedInput {
+  where: ConversationScalarWhereInput!
+  data: ConversationUpdateManyDataInput!
 }
 
 input ConversationUpdateOneRequiredWithoutMessagesInput {
@@ -990,10 +1026,12 @@ input ConversationUpdateOneRequiredWithoutMessagesInput {
 
 input ConversationUpdateWithoutMessagesDataInput {
   speakers: UserUpdateManyWithoutConversationsInput
+  deleted: String
 }
 
 input ConversationUpdateWithoutSpeakersDataInput {
   messages: MessageUpdateManyWithoutConversationInput
+  deleted: String
 }
 
 input ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
@@ -1029,6 +1067,20 @@ input ConversationWhereInput {
   id_not_ends_with: ID
   speakers_some: UserWhereInput
   messages_some: MessageWhereInput
+  deleted: String
+  deleted_not: String
+  deleted_in: [String!]
+  deleted_not_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_contains: String
+  deleted_not_contains: String
+  deleted_starts_with: String
+  deleted_not_starts_with: String
+  deleted_ends_with: String
+  deleted_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2284,6 +2336,7 @@ type Message {
   from: User!
   read: Boolean!
   conversation: Conversation!
+  deleted: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2301,6 +2354,7 @@ input MessageCreateInput {
   from: UserCreateOneInput!
   read: Boolean!
   conversation: ConversationCreateOneWithoutMessagesInput!
+  deleted: String
 }
 
 input MessageCreateManyWithoutConversationInput {
@@ -2314,6 +2368,7 @@ input MessageCreateWithoutConversationInput {
   to: UserCreateOneInput!
   from: UserCreateOneInput!
   read: Boolean!
+  deleted: String
 }
 
 type MessageEdge {
@@ -2328,6 +2383,8 @@ enum MessageOrderByInput {
   content_DESC
   read_ASC
   read_DESC
+  deleted_ASC
+  deleted_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2338,6 +2395,7 @@ type MessagePreviousValues {
   id: ID!
   content: String!
   read: Boolean!
+  deleted: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2373,6 +2431,20 @@ input MessageScalarWhereInput {
   content_not_ends_with: String
   read: Boolean
   read_not: Boolean
+  deleted: String
+  deleted_not: String
+  deleted_in: [String!]
+  deleted_not_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_contains: String
+  deleted_not_contains: String
+  deleted_starts_with: String
+  deleted_not_starts_with: String
+  deleted_ends_with: String
+  deleted_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2416,16 +2488,19 @@ input MessageUpdateInput {
   from: UserUpdateOneRequiredInput
   read: Boolean
   conversation: ConversationUpdateOneRequiredWithoutMessagesInput
+  deleted: String
 }
 
 input MessageUpdateManyDataInput {
   content: String
   read: Boolean
+  deleted: String
 }
 
 input MessageUpdateManyMutationInput {
   content: String
   read: Boolean
+  deleted: String
 }
 
 input MessageUpdateManyWithoutConversationInput {
@@ -2450,6 +2525,7 @@ input MessageUpdateWithoutConversationDataInput {
   to: UserUpdateOneRequiredInput
   from: UserUpdateOneRequiredInput
   read: Boolean
+  deleted: String
 }
 
 input MessageUpdateWithWhereUniqueWithoutConversationInput {
@@ -2497,6 +2573,20 @@ input MessageWhereInput {
   read: Boolean
   read_not: Boolean
   conversation: ConversationWhereInput
+  deleted: String
+  deleted_not: String
+  deleted_in: [String!]
+  deleted_not_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_contains: String
+  deleted_not_contains: String
+  deleted_starts_with: String
+  deleted_not_starts_with: String
+  deleted_ends_with: String
+  deleted_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2541,6 +2631,7 @@ type Mutation {
   deleteManyComments(where: CommentWhereInput): BatchPayload!
   createConversation(data: ConversationCreateInput!): Conversation!
   updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
+  updateManyConversations(data: ConversationUpdateManyMutationInput!, where: ConversationWhereInput): BatchPayload!
   upsertConversation(where: ConversationWhereUniqueInput!, create: ConversationCreateInput!, update: ConversationUpdateInput!): Conversation!
   deleteConversation(where: ConversationWhereUniqueInput!): Conversation
   deleteManyConversations(where: ConversationWhereInput): BatchPayload!

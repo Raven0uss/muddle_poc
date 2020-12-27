@@ -5,6 +5,7 @@ type Message {
   from: User! @relation(link: INLINE, name: "MessageFrom")
   read: Boolean!
   conversation: Conversation! @relation(link: INLINE, name: "Conversation")
+  deleted: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

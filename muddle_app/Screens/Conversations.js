@@ -16,7 +16,7 @@ import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
-import { isEmpty, isNil } from "lodash";
+import { isEmpty, isNil, last } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
@@ -27,16 +27,16 @@ import getDateMessage from "../Library/getDateMessage";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
 import LongPressMenu from "../Components/LongPressMenu";
 import i18n from "../i18n";
-import { cloneDeep } from "@apollo/client/utilities";
+import { cloneDeep, get } from "lodash";
 
 // messages_some: { content_not: null }
 
 const GET_CONVERSATIONS = gql`
-  query($first: Int!, $skip: Int, $user: String!) {
+  query($first: Int!, $skip: Int, $user: String!, $userId: String!) {
     conversations(
       first: $first
       skip: $skip
-      where: { speakers_some: { email: $user } }
+      where: { speakers_some: { email: $user }}
       orderBy: updatedAt_DESC
     ) {
       updatedAt
@@ -49,7 +49,7 @@ const GET_CONVERSATIONS = gql`
         email
         profilePicture
       }
-      messages(last: 1) {
+      messages(last: 1, where: { deleted_not: $userId }) {
         id
         content
         createdAt
@@ -81,7 +81,9 @@ const renderItem = (
   setConversations,
   deleteConversation
 ) => {
-  const lastMessage = item.messages[item.messages.length - 1];
+  const messages = get(item, "messages");
+  if (isNil(messages)) return null;
+  const lastMessage = last(messages);
   if (isNil(lastMessage)) return null;
   const speaker = item.speakers.filter((u) => u.email !== currentUser.email);
   if (speaker.length === 0) return null;
@@ -210,6 +212,7 @@ const Conversations = (props) => {
       variables: {
         first: nbConversations,
         user: currentUser.email,
+        userId: currentUser.id,
       },
       onCompleted: (response) => {
         const { conversations: queryResult } = response;

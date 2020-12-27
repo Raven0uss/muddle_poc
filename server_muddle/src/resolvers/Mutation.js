@@ -1261,7 +1261,7 @@ const Mutation = prismaObjectType({
       args: {
         conversationId: idArg(),
       },
-      resolve: async (parent, { conversationId }, { prisma }) => {
+      resolve: async (parent, { conversationId }, { prisma, currentUser }) => {
         try {
           const conversation = await prisma
             .conversation({ id: conversationId })
@@ -1271,6 +1271,7 @@ const Mutation = prismaObjectType({
                 id
                 messages {
                   id
+                  deleted
                 }
               }
             `
@@ -1280,9 +1281,22 @@ const Mutation = prismaObjectType({
           const messages = get(conversation, "messages");
           if (isNil(messages)) throw new Error("messages are nil");
           await Promise.all(
-            messages.map(async (m) => await prisma.deleteMessage({ id: m.id }))
+            messages.map(async (m) => {
+              if (isEmpty(m.deleted))
+                return await prisma.updateMessage({
+                  where: { id: m.id },
+                  data: {
+                    deleted: currentUser.user.id,
+                  },
+                });
+              else {
+                return await prisma.deleteMessage({ id: m.id });
+              }
+            })
           );
-          await prisma.deleteConversation({ id: conversation.id });
+          // await prisma.updateConversation({ where: {id: conversation.id }, data: {
+          //   deleted:
+          // }});
           return { value: 0 };
         } catch (err) {
           throw new Error(err);

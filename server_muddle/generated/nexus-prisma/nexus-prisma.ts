@@ -349,6 +349,8 @@ export interface NexusPrismaTypes {
       MessageUpdateManyDataInput: MessageUpdateManyDataInputInputObject
       ConversationUpsertWithWhereUniqueWithoutSpeakersInput: ConversationUpsertWithWhereUniqueWithoutSpeakersInputInputObject
       ConversationScalarWhereInput: ConversationScalarWhereInputInputObject
+      ConversationUpdateManyWithWhereNestedInput: ConversationUpdateManyWithWhereNestedInputInputObject
+      ConversationUpdateManyDataInput: ConversationUpdateManyDataInputInputObject
       UserUpsertWithoutInteractionsInput: UserUpsertWithoutInteractionsInputInputObject
       InteractionUpsertWithWhereUniqueWithoutDebateInput: InteractionUpsertWithWhereUniqueWithoutDebateInputInputObject
       InteractionScalarWhereInput: InteractionScalarWhereInputInputObject
@@ -393,6 +395,7 @@ export interface NexusPrismaTypes {
       UserUpdateWithWhereUniqueWithoutConversationsInput: UserUpdateWithWhereUniqueWithoutConversationsInputInputObject
       UserUpdateWithoutConversationsDataInput: UserUpdateWithoutConversationsDataInputInputObject
       UserUpsertWithWhereUniqueWithoutConversationsInput: UserUpsertWithWhereUniqueWithoutConversationsInputInputObject
+      ConversationUpdateManyMutationInput: ConversationUpdateManyMutationInputInputObject
       DebateUpdateInput: DebateUpdateInputInputObject
       DebateUpdateManyMutationInput: DebateUpdateManyMutationInputInputObject
       InteractionCreateInput: InteractionCreateInputInputObject
@@ -3270,6 +3273,7 @@ type ConversationObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'speakers', args?: ConversationSpeakersArgs[] | false, alias?: string  } 
   | { name: 'messages', args?: ConversationMessagesArgs[] | false, alias?: string  } 
+  | { name: 'deleted', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -3277,6 +3281,7 @@ type ConversationFields =
   | 'id'
   | 'speakers'
   | 'messages'
+  | 'deleted'
   | 'createdAt'
   | 'updatedAt'
 
@@ -3334,6 +3339,14 @@ export interface ConversationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Message[]> | prisma.Message[]
   }
+  deleted: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
   createdAt: {
     type: 'DateTime'
     args: {}
@@ -3363,6 +3376,7 @@ type MessageObject =
   | { name: 'from', args?: [] | false, alias?: string  } 
   | { name: 'read', args?: [] | false, alias?: string  } 
   | { name: 'conversation', args?: [] | false, alias?: string  } 
+  | { name: 'deleted', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -3373,6 +3387,7 @@ type MessageFields =
   | 'from'
   | 'read'
   | 'conversation'
+  | 'deleted'
   | 'createdAt'
   | 'updatedAt'
 
@@ -3443,6 +3458,14 @@ export interface MessageFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Conversation> | prisma.Conversation
+  }
+  deleted: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
   }
   createdAt: {
     type: 'DateTime'
@@ -4612,6 +4635,7 @@ type MutationObject =
   | { name: 'deleteManyComments', args?: MutationDeleteManyCommentsArgs[] | false, alias?: string  } 
   | { name: 'createConversation', args?: MutationCreateConversationArgs[] | false, alias?: string  } 
   | { name: 'updateConversation', args?: MutationUpdateConversationArgs[] | false, alias?: string  } 
+  | { name: 'updateManyConversations', args?: MutationUpdateManyConversationsArgs[] | false, alias?: string  } 
   | { name: 'upsertConversation', args?: MutationUpsertConversationArgs[] | false, alias?: string  } 
   | { name: 'deleteConversation', args?: MutationDeleteConversationArgs[] | false, alias?: string  } 
   | { name: 'deleteManyConversations', args?: MutationDeleteManyConversationsArgs[] | false, alias?: string  } 
@@ -4679,6 +4703,7 @@ type MutationFields =
   | 'deleteManyComments'
   | 'createConversation'
   | 'updateConversation'
+  | 'updateManyConversations'
   | 'upsertConversation'
   | 'deleteConversation'
   | 'deleteManyConversations'
@@ -4777,6 +4802,9 @@ type MutationDeleteManyCommentsArgs =
 type MutationCreateConversationArgs =
   | 'data'
 type MutationUpdateConversationArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyConversationsArgs =
   | 'data'
   | 'where'
 type MutationUpsertConversationArgs =
@@ -5161,6 +5189,19 @@ export interface MutationFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Conversation | null> | prisma.Conversation | null
+  }
+  updateManyConversations: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyConversationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConversationUpdateManyMutationInput, where?: ConversationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
   upsertConversation: {
     type: 'Conversation'
@@ -6501,11 +6542,13 @@ export interface ConversationSubscriptionPayloadFieldDetails {
 type ConversationPreviousValuesObject =
   | ConversationPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'deleted', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type ConversationPreviousValuesFields =
   | 'id'
+  | 'deleted'
   | 'createdAt'
   | 'updatedAt'
 
@@ -6520,6 +6563,14 @@ export interface ConversationPreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  deleted: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
   createdAt: {
@@ -6968,6 +7019,7 @@ type MessagePreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
   | { name: 'read', args?: [] | false, alias?: string  } 
+  | { name: 'deleted', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -6975,6 +7027,7 @@ type MessagePreviousValuesFields =
   | 'id'
   | 'content'
   | 'read'
+  | 'deleted'
   | 'createdAt'
   | 'updatedAt'
 
@@ -7005,6 +7058,14 @@ export interface MessagePreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  deleted: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
   createdAt: {
@@ -9265,6 +9326,20 @@ export interface ConversationWhereInput {
   id_not_ends_with?: string | null
   speakers_some?: UserWhereInput | null
   messages_some?: MessageWhereInput | null
+  deleted?: string | null
+  deleted_not?: string | null
+  deleted_in?: string[]
+  deleted_not_in?: string[]
+  deleted_lt?: string | null
+  deleted_lte?: string | null
+  deleted_gt?: string | null
+  deleted_gte?: string | null
+  deleted_contains?: string | null
+  deleted_not_contains?: string | null
+  deleted_starts_with?: string | null
+  deleted_not_starts_with?: string | null
+  deleted_ends_with?: string | null
+  deleted_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -9301,6 +9376,20 @@ export type ConversationWhereInputInputObject =
   | { name: 'id_not_ends_with', alias?: string  } 
   | { name: 'speakers_some', alias?: string  } 
   | { name: 'messages_some', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
+  | { name: 'deleted_not', alias?: string  } 
+  | { name: 'deleted_in', alias?: string  } 
+  | { name: 'deleted_not_in', alias?: string  } 
+  | { name: 'deleted_lt', alias?: string  } 
+  | { name: 'deleted_lte', alias?: string  } 
+  | { name: 'deleted_gt', alias?: string  } 
+  | { name: 'deleted_gte', alias?: string  } 
+  | { name: 'deleted_contains', alias?: string  } 
+  | { name: 'deleted_not_contains', alias?: string  } 
+  | { name: 'deleted_starts_with', alias?: string  } 
+  | { name: 'deleted_not_starts_with', alias?: string  } 
+  | { name: 'deleted_ends_with', alias?: string  } 
+  | { name: 'deleted_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -9353,6 +9442,20 @@ export interface MessageWhereInput {
   read?: boolean | null
   read_not?: boolean | null
   conversation?: ConversationWhereInput | null
+  deleted?: string | null
+  deleted_not?: string | null
+  deleted_in?: string[]
+  deleted_not_in?: string[]
+  deleted_lt?: string | null
+  deleted_lte?: string | null
+  deleted_gt?: string | null
+  deleted_gte?: string | null
+  deleted_contains?: string | null
+  deleted_not_contains?: string | null
+  deleted_starts_with?: string | null
+  deleted_not_starts_with?: string | null
+  deleted_ends_with?: string | null
+  deleted_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -9406,6 +9509,20 @@ export type MessageWhereInputInputObject =
   | { name: 'read', alias?: string  } 
   | { name: 'read_not', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
+  | { name: 'deleted_not', alias?: string  } 
+  | { name: 'deleted_in', alias?: string  } 
+  | { name: 'deleted_not_in', alias?: string  } 
+  | { name: 'deleted_lt', alias?: string  } 
+  | { name: 'deleted_lte', alias?: string  } 
+  | { name: 'deleted_gt', alias?: string  } 
+  | { name: 'deleted_gte', alias?: string  } 
+  | { name: 'deleted_contains', alias?: string  } 
+  | { name: 'deleted_not_contains', alias?: string  } 
+  | { name: 'deleted_starts_with', alias?: string  } 
+  | { name: 'deleted_not_starts_with', alias?: string  } 
+  | { name: 'deleted_ends_with', alias?: string  } 
+  | { name: 'deleted_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -10897,11 +11014,13 @@ export type ConversationCreateManyWithoutSpeakersInputInputObject =
 export interface ConversationCreateWithoutSpeakersInput {
   id?: string | null
   messages?: MessageCreateManyWithoutConversationInput | null
+  deleted?: string | null
 }
 export type ConversationCreateWithoutSpeakersInputInputObject =
   | Extract<keyof ConversationCreateWithoutSpeakersInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'messages', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface MessageCreateManyWithoutConversationInput {
   create?: MessageCreateWithoutConversationInput[]
@@ -10918,6 +11037,7 @@ export interface MessageCreateWithoutConversationInput {
   to?: UserCreateOneInput
   from?: UserCreateOneInput
   read?: boolean
+  deleted?: string | null
 }
 export type MessageCreateWithoutConversationInputInputObject =
   | Extract<keyof MessageCreateWithoutConversationInput, string>
@@ -10926,6 +11046,7 @@ export type MessageCreateWithoutConversationInputInputObject =
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
   | { name: 'read', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface CommentCreateManyInput {
   create?: CommentCreateInput[]
@@ -13586,6 +13707,7 @@ export interface ConversationUpdateManyWithoutSpeakersInput {
   update?: ConversationUpdateWithWhereUniqueWithoutSpeakersInput[]
   upsert?: ConversationUpsertWithWhereUniqueWithoutSpeakersInput[]
   deleteMany?: ConversationScalarWhereInput[]
+  updateMany?: ConversationUpdateManyWithWhereNestedInput[]
 }
 export type ConversationUpdateManyWithoutSpeakersInputInputObject =
   | Extract<keyof ConversationUpdateManyWithoutSpeakersInput, string>
@@ -13597,6 +13719,7 @@ export type ConversationUpdateManyWithoutSpeakersInputInputObject =
   | { name: 'update', alias?: string  } 
   | { name: 'upsert', alias?: string  } 
   | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
   
 export interface ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
   where?: ConversationWhereUniqueInput
@@ -13609,10 +13732,12 @@ export type ConversationUpdateWithWhereUniqueWithoutSpeakersInputInputObject =
   
 export interface ConversationUpdateWithoutSpeakersDataInput {
   messages?: MessageUpdateManyWithoutConversationInput | null
+  deleted?: string | null
 }
 export type ConversationUpdateWithoutSpeakersDataInputInputObject =
   | Extract<keyof ConversationUpdateWithoutSpeakersDataInput, string>
   | { name: 'messages', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface MessageUpdateManyWithoutConversationInput {
   create?: MessageCreateWithoutConversationInput[]
@@ -13651,6 +13776,7 @@ export interface MessageUpdateWithoutConversationDataInput {
   to?: UserUpdateOneRequiredInput | null
   from?: UserUpdateOneRequiredInput | null
   read?: boolean | null
+  deleted?: string | null
 }
 export type MessageUpdateWithoutConversationDataInputInputObject =
   | Extract<keyof MessageUpdateWithoutConversationDataInput, string>
@@ -13658,6 +13784,7 @@ export type MessageUpdateWithoutConversationDataInputInputObject =
   | { name: 'to', alias?: string  } 
   | { name: 'from', alias?: string  } 
   | { name: 'read', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   where?: MessageWhereUniqueInput
@@ -13701,6 +13828,20 @@ export interface MessageScalarWhereInput {
   content_not_ends_with?: string | null
   read?: boolean | null
   read_not?: boolean | null
+  deleted?: string | null
+  deleted_not?: string | null
+  deleted_in?: string[]
+  deleted_not_in?: string[]
+  deleted_lt?: string | null
+  deleted_lte?: string | null
+  deleted_gt?: string | null
+  deleted_gte?: string | null
+  deleted_contains?: string | null
+  deleted_not_contains?: string | null
+  deleted_starts_with?: string | null
+  deleted_not_starts_with?: string | null
+  deleted_ends_with?: string | null
+  deleted_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -13753,6 +13894,20 @@ export type MessageScalarWhereInputInputObject =
   | { name: 'content_not_ends_with', alias?: string  } 
   | { name: 'read', alias?: string  } 
   | { name: 'read_not', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
+  | { name: 'deleted_not', alias?: string  } 
+  | { name: 'deleted_in', alias?: string  } 
+  | { name: 'deleted_not_in', alias?: string  } 
+  | { name: 'deleted_lt', alias?: string  } 
+  | { name: 'deleted_lte', alias?: string  } 
+  | { name: 'deleted_gt', alias?: string  } 
+  | { name: 'deleted_gte', alias?: string  } 
+  | { name: 'deleted_contains', alias?: string  } 
+  | { name: 'deleted_not_contains', alias?: string  } 
+  | { name: 'deleted_starts_with', alias?: string  } 
+  | { name: 'deleted_not_starts_with', alias?: string  } 
+  | { name: 'deleted_ends_with', alias?: string  } 
+  | { name: 'deleted_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -13785,11 +13940,13 @@ export type MessageUpdateManyWithWhereNestedInputInputObject =
 export interface MessageUpdateManyDataInput {
   content?: string | null
   read?: boolean | null
+  deleted?: string | null
 }
 export type MessageUpdateManyDataInputInputObject =
   | Extract<keyof MessageUpdateManyDataInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'read', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
   where?: ConversationWhereUniqueInput
@@ -13817,6 +13974,20 @@ export interface ConversationScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  deleted?: string | null
+  deleted_not?: string | null
+  deleted_in?: string[]
+  deleted_not_in?: string[]
+  deleted_lt?: string | null
+  deleted_lte?: string | null
+  deleted_gt?: string | null
+  deleted_gte?: string | null
+  deleted_contains?: string | null
+  deleted_not_contains?: string | null
+  deleted_starts_with?: string | null
+  deleted_not_starts_with?: string | null
+  deleted_ends_with?: string | null
+  deleted_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -13853,6 +14024,20 @@ export type ConversationScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
+  | { name: 'deleted_not', alias?: string  } 
+  | { name: 'deleted_in', alias?: string  } 
+  | { name: 'deleted_not_in', alias?: string  } 
+  | { name: 'deleted_lt', alias?: string  } 
+  | { name: 'deleted_lte', alias?: string  } 
+  | { name: 'deleted_gt', alias?: string  } 
+  | { name: 'deleted_gte', alias?: string  } 
+  | { name: 'deleted_contains', alias?: string  } 
+  | { name: 'deleted_not_contains', alias?: string  } 
+  | { name: 'deleted_starts_with', alias?: string  } 
+  | { name: 'deleted_not_starts_with', alias?: string  } 
+  | { name: 'deleted_ends_with', alias?: string  } 
+  | { name: 'deleted_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -13872,6 +14057,22 @@ export type ConversationScalarWhereInputInputObject =
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
+  
+export interface ConversationUpdateManyWithWhereNestedInput {
+  where?: ConversationScalarWhereInput
+  data?: ConversationUpdateManyDataInput
+}
+export type ConversationUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof ConversationUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ConversationUpdateManyDataInput {
+  deleted?: string | null
+}
+export type ConversationUpdateManyDataInputInputObject =
+  | Extract<keyof ConversationUpdateManyDataInput, string>
+  | { name: 'deleted', alias?: string  } 
   
 export interface UserUpsertWithoutInteractionsInput {
   update?: UserUpdateWithoutInteractionsDataInput
@@ -14725,12 +14926,14 @@ export interface ConversationCreateInput {
   id?: string | null
   speakers?: UserCreateManyWithoutConversationsInput | null
   messages?: MessageCreateManyWithoutConversationInput | null
+  deleted?: string | null
 }
 export type ConversationCreateInputInputObject =
   | Extract<keyof ConversationCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'speakers', alias?: string  } 
   | { name: 'messages', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface UserCreateManyWithoutConversationsInput {
   create?: UserCreateWithoutConversationsInput[]
@@ -14803,11 +15006,13 @@ export type UserCreateWithoutConversationsInputInputObject =
 export interface ConversationUpdateInput {
   speakers?: UserUpdateManyWithoutConversationsInput | null
   messages?: MessageUpdateManyWithoutConversationInput | null
+  deleted?: string | null
 }
 export type ConversationUpdateInputInputObject =
   | Extract<keyof ConversationUpdateInput, string>
   | { name: 'speakers', alias?: string  } 
   | { name: 'messages', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface UserUpdateManyWithoutConversationsInput {
   create?: UserCreateWithoutConversationsInput[]
@@ -14908,6 +15113,13 @@ export type UserUpsertWithWhereUniqueWithoutConversationsInputInputObject =
   | { name: 'where', alias?: string  } 
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
+  
+export interface ConversationUpdateManyMutationInput {
+  deleted?: string | null
+}
+export type ConversationUpdateManyMutationInputInputObject =
+  | Extract<keyof ConversationUpdateManyMutationInput, string>
+  | { name: 'deleted', alias?: string  } 
   
 export interface DebateUpdateInput {
   owner?: UserUpdateOneWithoutDebatesInput | null
@@ -15027,6 +15239,7 @@ export interface MessageCreateInput {
   from?: UserCreateOneInput
   read?: boolean
   conversation?: ConversationCreateOneWithoutMessagesInput
+  deleted?: string | null
 }
 export type MessageCreateInputInputObject =
   | Extract<keyof MessageCreateInput, string>
@@ -15036,6 +15249,7 @@ export type MessageCreateInputInputObject =
   | { name: 'from', alias?: string  } 
   | { name: 'read', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface ConversationCreateOneWithoutMessagesInput {
   create?: ConversationCreateWithoutMessagesInput | null
@@ -15049,11 +15263,13 @@ export type ConversationCreateOneWithoutMessagesInputInputObject =
 export interface ConversationCreateWithoutMessagesInput {
   id?: string | null
   speakers?: UserCreateManyWithoutConversationsInput | null
+  deleted?: string | null
 }
 export type ConversationCreateWithoutMessagesInputInputObject =
   | Extract<keyof ConversationCreateWithoutMessagesInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'speakers', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface MessageUpdateInput {
   content?: string | null
@@ -15061,6 +15277,7 @@ export interface MessageUpdateInput {
   from?: UserUpdateOneRequiredInput | null
   read?: boolean | null
   conversation?: ConversationUpdateOneRequiredWithoutMessagesInput | null
+  deleted?: string | null
 }
 export type MessageUpdateInputInputObject =
   | Extract<keyof MessageUpdateInput, string>
@@ -15069,6 +15286,7 @@ export type MessageUpdateInputInputObject =
   | { name: 'from', alias?: string  } 
   | { name: 'read', alias?: string  } 
   | { name: 'conversation', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface ConversationUpdateOneRequiredWithoutMessagesInput {
   create?: ConversationCreateWithoutMessagesInput | null
@@ -15085,10 +15303,12 @@ export type ConversationUpdateOneRequiredWithoutMessagesInputInputObject =
   
 export interface ConversationUpdateWithoutMessagesDataInput {
   speakers?: UserUpdateManyWithoutConversationsInput | null
+  deleted?: string | null
 }
 export type ConversationUpdateWithoutMessagesDataInputInputObject =
   | Extract<keyof ConversationUpdateWithoutMessagesDataInput, string>
   | { name: 'speakers', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface ConversationUpsertWithoutMessagesInput {
   update?: ConversationUpdateWithoutMessagesDataInput
@@ -15102,11 +15322,13 @@ export type ConversationUpsertWithoutMessagesInputInputObject =
 export interface MessageUpdateManyMutationInput {
   content?: string | null
   read?: boolean | null
+  deleted?: string | null
 }
 export type MessageUpdateManyMutationInputInputObject =
   | Extract<keyof MessageUpdateManyMutationInput, string>
   | { name: 'content', alias?: string  } 
   | { name: 'read', alias?: string  } 
+  | { name: 'deleted', alias?: string  } 
   
 export interface NotificationCreateInput {
   id?: string | null
@@ -16102,6 +16324,8 @@ export type TrophyOrderByInputValues =
 export type ConversationOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'deleted_ASC'
+  | 'deleted_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
@@ -16114,6 +16338,8 @@ export type MessageOrderByInputValues =
   | 'content_DESC'
   | 'read_ASC'
   | 'read_DESC'
+  | 'deleted_ASC'
+  | 'deleted_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

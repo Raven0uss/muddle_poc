@@ -447,7 +447,7 @@ const Chat = (props) => {
               }}
               style={{ marginTop: 5 }}
             >
-              <CustomIcon name={"delete-forever"} size={36} />
+              <CustomIcon name={"delete"} size={36} />
             </TouchableOpacity>
           ) : null
         }

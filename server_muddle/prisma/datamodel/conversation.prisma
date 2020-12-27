@@ -2,6 +2,7 @@ type Conversation {
   id: ID! @id
   speakers: [User!]! @relation(link: INLINE)
   messages: [Message] @relation(name: "Conversation")
+  deleted: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

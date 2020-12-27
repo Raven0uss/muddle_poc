@@ -687,6 +687,7 @@ input CommentWhereUniqueInput {
 
 type Conversation {
   createdAt: DateTime!
+  deleted: String
   id: ID!
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]
   speakers(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
@@ -694,6 +695,7 @@ type Conversation {
 }
 
 input ConversationCreateInput {
+  deleted: String
   id: ID
   messages: MessageCreateManyWithoutConversationInput
   speakers: UserCreateManyWithoutConversationsInput
@@ -710,11 +712,13 @@ input ConversationCreateOneWithoutMessagesInput {
 }
 
 input ConversationCreateWithoutMessagesInput {
+  deleted: String
   id: ID
   speakers: UserCreateManyWithoutConversationsInput
 }
 
 input ConversationCreateWithoutSpeakersInput {
+  deleted: String
   id: ID
   messages: MessageCreateManyWithoutConversationInput
 }
@@ -722,6 +726,8 @@ input ConversationCreateWithoutSpeakersInput {
 enum ConversationOrderByInput {
   createdAt_ASC
   createdAt_DESC
+  deleted_ASC
+  deleted_DESC
   id_ASC
   id_DESC
   updatedAt_ASC
@@ -738,6 +744,20 @@ input ConversationScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_not: DateTime
   createdAt_not_in: [DateTime!]
+  deleted: String
+  deleted_contains: String
+  deleted_ends_with: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_not: String
+  deleted_not_contains: String
+  deleted_not_ends_with: String
+  deleted_not_in: [String!]
+  deleted_not_starts_with: String
+  deleted_starts_with: String
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -770,8 +790,13 @@ type ConversationSubPayload {
 }
 
 input ConversationUpdateInput {
+  deleted: String
   messages: MessageUpdateManyWithoutConversationInput
   speakers: UserUpdateManyWithoutConversationsInput
+}
+
+input ConversationUpdateManyDataInput {
+  deleted: String
 }
 
 input ConversationUpdateManyWithoutSpeakersInput {
@@ -782,7 +807,13 @@ input ConversationUpdateManyWithoutSpeakersInput {
   disconnect: [ConversationWhereUniqueInput!]
   set: [ConversationWhereUniqueInput!]
   update: [ConversationUpdateWithWhereUniqueWithoutSpeakersInput!]
+  updateMany: [ConversationUpdateManyWithWhereNestedInput!]
   upsert: [ConversationUpsertWithWhereUniqueWithoutSpeakersInput!]
+}
+
+input ConversationUpdateManyWithWhereNestedInput {
+  data: ConversationUpdateManyDataInput!
+  where: ConversationScalarWhereInput!
 }
 
 input ConversationUpdateOneRequiredWithoutMessagesInput {
@@ -793,10 +824,12 @@ input ConversationUpdateOneRequiredWithoutMessagesInput {
 }
 
 input ConversationUpdateWithoutMessagesDataInput {
+  deleted: String
   speakers: UserUpdateManyWithoutConversationsInput
 }
 
 input ConversationUpdateWithoutSpeakersDataInput {
+  deleted: String
   messages: MessageUpdateManyWithoutConversationInput
 }
 
@@ -826,6 +859,20 @@ input ConversationWhereInput {
   createdAt_lte: DateTime
   createdAt_not: DateTime
   createdAt_not_in: [DateTime!]
+  deleted: String
+  deleted_contains: String
+  deleted_ends_with: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_not: String
+  deleted_not_contains: String
+  deleted_not_ends_with: String
+  deleted_not_in: [String!]
+  deleted_not_starts_with: String
+  deleted_starts_with: String
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -1992,6 +2039,7 @@ type Message {
   content: String!
   conversation: Conversation!
   createdAt: DateTime!
+  deleted: String
   from: User!
   id: ID!
   read: Boolean!
@@ -2002,6 +2050,7 @@ type Message {
 input MessageCreateInput {
   content: String!
   conversation: ConversationCreateOneWithoutMessagesInput!
+  deleted: String
   from: UserCreateOneInput!
   id: ID
   read: Boolean!
@@ -2015,6 +2064,7 @@ input MessageCreateManyWithoutConversationInput {
 
 input MessageCreateWithoutConversationInput {
   content: String!
+  deleted: String
   from: UserCreateOneInput!
   id: ID
   read: Boolean!
@@ -2026,6 +2076,8 @@ enum MessageOrderByInput {
   content_DESC
   createdAt_ASC
   createdAt_DESC
+  deleted_ASC
+  deleted_DESC
   id_ASC
   id_DESC
   read_ASC
@@ -2058,6 +2110,20 @@ input MessageScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_not: DateTime
   createdAt_not_in: [DateTime!]
+  deleted: String
+  deleted_contains: String
+  deleted_ends_with: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_not: String
+  deleted_not_contains: String
+  deleted_not_ends_with: String
+  deleted_not_in: [String!]
+  deleted_not_starts_with: String
+  deleted_starts_with: String
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -2094,6 +2160,7 @@ type MessageSubPayload {
 input MessageUpdateInput {
   content: String
   conversation: ConversationUpdateOneRequiredWithoutMessagesInput
+  deleted: String
   from: UserUpdateOneRequiredInput
   read: Boolean
   to: UserUpdateOneRequiredInput
@@ -2101,11 +2168,13 @@ input MessageUpdateInput {
 
 input MessageUpdateManyDataInput {
   content: String
+  deleted: String
   read: Boolean
 }
 
 input MessageUpdateManyMutationInput {
   content: String
+  deleted: String
   read: Boolean
 }
 
@@ -2128,6 +2197,7 @@ input MessageUpdateManyWithWhereNestedInput {
 
 input MessageUpdateWithoutConversationDataInput {
   content: String
+  deleted: String
   from: UserUpdateOneRequiredInput
   read: Boolean
   to: UserUpdateOneRequiredInput
@@ -2169,6 +2239,20 @@ input MessageWhereInput {
   createdAt_lte: DateTime
   createdAt_not: DateTime
   createdAt_not_in: [DateTime!]
+  deleted: String
+  deleted_contains: String
+  deleted_ends_with: String
+  deleted_gt: String
+  deleted_gte: String
+  deleted_in: [String!]
+  deleted_lt: String
+  deleted_lte: String
+  deleted_not: String
+  deleted_not_contains: String
+  deleted_not_ends_with: String
+  deleted_not_in: [String!]
+  deleted_not_starts_with: String
+  deleted_starts_with: String
   from: UserWhereInput
   id: ID
   id_contains: ID
