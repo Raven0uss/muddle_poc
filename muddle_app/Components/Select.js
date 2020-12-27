@@ -99,9 +99,9 @@ const Select = (props) => {
           <View style={styles.centeredView}>
             <View
               style={{
-                backgroundColor: themeSchema[theme].backgroundColor2,
+                backgroundColor: "transparent",
                 padding: 10,
-                elevation: 5,
+                // elevation: 5,
                 borderRadius: 5,
                 margin: 10,
               }}
@@ -115,13 +115,18 @@ const Select = (props) => {
                         onSelect(element);
                         setVisible(false);
                       }}
+                      style={{
+                        ...styles.validationButton,
+                        marginTop: 4,
+                      }}
                     >
                       <Text
                         style={{
-                          padding: 10,
-                          fontSize: 18,
+                          // padding: 10,
+                          fontSize: 14,
                           fontFamily: "Montserrat_500Medium",
-                          color: themeSchema[theme].colorText,
+                          color: "#FFFFFF",
+                          textAlign: "center",
                         }}
                       >
                         {element.label}
@@ -134,15 +139,21 @@ const Select = (props) => {
                 onPress={() => {
                   setVisible(false);
                 }}
-                style={styles.validationButton}
+                style={{
+                  ...styles.validationButton,
+                  // backgroundColor: themeSchema[theme].colorText,
+                  alignItems: "center",
+                  backgroundColor: "#000000ee",
+                }}
               >
                 <Text
                   style={{
-                    color: themeSchema[theme].colorText,
+                    color: "#FFFFFF",
                     fontFamily: "Montserrat_700Bold",
+                    fontSize: 14,
                   }}
                 >
-                  {i18n._("close")}
+                  {i18n._("cancel")}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -194,7 +205,7 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   modalView: {
     margin: 20,
@@ -212,23 +223,23 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   validationButton: {
-    backgroundColor: "#000",
+    backgroundColor: "#000000e8",
     padding: 12,
     paddingLeft: 30,
     paddingRight: 30,
-    borderRadius: 30,
-    width: 112,
+    borderRadius: 14,
+    width: width / 1.2,
     alignSelf: "center",
   },
   mask: {
     justifyContent: "center",
     backgroundColor: "#383838",
-    opacity: 0.8,
+    opacity: 0.3,
     position: "absolute",
     width: width,
     height: height,
     left: 0,
-    top: 0,
+    bottom: 0,
   },
 });
 

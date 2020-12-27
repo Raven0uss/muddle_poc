@@ -1,7 +1,17 @@
 {
   "expo": {
+    "name": "Muddles",
+    "icon": "./assets/icon_no_transparency.png",
+    "version": "1.0.0",
+    "slug": "muddles",
     "ios": {
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "bundleIdentifier": "com.muddles.muddles",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.muddles.muddles",
+      "versionCode": 1
     }
   }
 }
