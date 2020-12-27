@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        190
+        195
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        212
+        217
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        259
+        264
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        284
+        289
       ]
     ]
   },
@@ -35,23 +35,15 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        405
+        410
       ],
-      [
-        "Screens/CreateDebate.js",
-        568
-      ],
-      [
-        "Screens/CreateDebate.js",
-        592
-      ]
-    ]
-  },
-  "enableCrown": {
-    "origin": [
       [
         "Screens/CreateDebate.js",
         581
+      ],
+      [
+        "Screens/CreateDebate.js",
+        605
       ]
     ]
   },
@@ -59,7 +51,15 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        582
+        594
+      ]
+    ]
+  },
+  "enableCrown": {
+    "origin": [
+      [
+        "Screens/CreateDebate.js",
+        595
       ]
     ]
   },
@@ -67,7 +67,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        596
+        609
       ]
     ]
   },
@@ -75,7 +75,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        650
+        661
       ]
     ]
   },
@@ -83,7 +83,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        688
+        696
       ]
     ]
   },
@@ -91,7 +91,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        750
+        758
       ]
     ]
   },
@@ -99,7 +99,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        838
+        846
       ]
     ]
   },
@@ -107,7 +107,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        852
+        860
       ]
     ]
   },
@@ -115,7 +115,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        871
+        877
       ]
     ]
   },
@@ -123,11 +123,11 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        1000
+        998
       ],
       [
         "Screens/CreateDebate.js",
-        1022
+        1020
       ]
     ]
   },
@@ -135,7 +135,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        1001
+        999
       ]
     ]
   },
@@ -143,7 +143,7 @@
     "origin": [
       [
         "Screens/CreateDebate.js",
-        1086
+        1082
       ]
     ]
   }

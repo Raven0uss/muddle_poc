@@ -126,7 +126,7 @@ msgstr "Blocked List"
 
 #: Components/LongPressMenu.js:34
 #: Components/Select.js:40
-#: Screens/CreateDebate.js:284
+#: Screens/CreateDebate.js:289
 msgid "cancel"
 msgstr "Cancel"
 
@@ -135,8 +135,8 @@ msgstr "Cancel"
 msgid "cgu"
 msgstr "General Conditions of Use"
 
-#: Screens/CreateDebate.js:1000
-#: Screens/CreateDebate.js:1022
+#: Screens/CreateDebate.js:998
+#: Screens/CreateDebate.js:1020
 msgid "choice"
 msgstr "Choice"
 
@@ -195,7 +195,11 @@ msgstr "Contact us"
 msgid "crownDescription"
 msgstr "The crown give you the priviledge to create a debate visible on top of the timeline for all users. You have 24H to use it, but don't forget : \"With great power comes great responsibility\"."
 
-#: Screens/CreateDebate.js:750
+#: Screens/DebatesFiltered.js:271
+msgid "crownedDebates"
+msgstr "Crowned debates"
+
+#: Screens/CreateDebate.js:758
 msgid "days"
 msgstr "Days"
 
@@ -207,12 +211,12 @@ msgstr "{time}d ago"
 msgid "debate"
 msgstr "debate"
 
-#: Screens/CreateDebate.js:688
+#: Screens/CreateDebate.js:696
 #: Screens/CreateDuoDebate.js:231
 msgid "debateDuration"
 msgstr "Debate duration"
 
-#: Screens/CreateDebate.js:852
+#: Screens/CreateDebate.js:860
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
@@ -240,7 +244,7 @@ msgstr "Delete conversation"
 msgid "deleteDebate"
 msgstr "Delete debate"
 
-#: Screens/CreateDebate.js:871
+#: Screens/CreateDebate.js:877
 msgid "describeDebate"
 msgstr "Describe your debate"
 
@@ -256,7 +260,7 @@ msgstr "did not like your comment"
 msgid "didntLikedCommentSingular"
 msgstr "did not like your comment"
 
-#: Screens/CreateDebate.js:582
+#: Screens/CreateDebate.js:594
 msgid "disableCrown"
 msgstr "Disable crown"
 
@@ -268,7 +272,7 @@ msgstr "Log out"
 msgid "duoDebate"
 msgstr "Duo debate"
 
-#: Screens/CreateDebate.js:596
+#: Screens/CreateDebate.js:609
 msgid "duoDebateSelect"
 msgstr "Duo debate"
 
@@ -280,11 +284,11 @@ msgstr "Duo debates"
 msgid "duoDebatesWon"
 msgstr "Duo debates won"
 
-#: Screens/CreateDebate.js:581
+#: Screens/CreateDebate.js:595
 msgid "enableCrown"
 msgstr "Enable crown"
 
-#: Screens/CreateDebate.js:190
+#: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
 #: Screens/SignUp.js:92
 msgid "firstname"
@@ -344,7 +348,7 @@ msgstr "Sign in"
 msgid "hasVote"
 msgstr "voted"
 
-#: Screens/CreateDebate.js:838
+#: Screens/CreateDebate.js:846
 msgid "hours"
 msgstr "Hours"
 
@@ -356,7 +360,7 @@ msgstr "{time}h ago"
 msgid "iAcceptThe"
 msgstr "I accept the"
 
-#: Screens/CreateDebate.js:650
+#: Screens/CreateDebate.js:661
 msgid "invitePeople"
 msgstr "Invite someone"
 
@@ -364,7 +368,7 @@ msgstr "Invite someone"
 msgid "inviteYouDuoDebate"
 msgstr "invite you to a duo debate"
 
-#: Screens/CreateDebate.js:212
+#: Screens/CreateDebate.js:217
 #: Screens/Search.js:143
 #: Screens/SignUp.js:110
 msgid "lastname"
@@ -468,9 +472,9 @@ msgstr "Password"
 msgid "privateMode"
 msgstr "Enable private mode"
 
-#: Screens/CreateDebate.js:405
-#: Screens/CreateDebate.js:568
-#: Screens/CreateDebate.js:592
+#: Screens/CreateDebate.js:410
+#: Screens/CreateDebate.js:581
+#: Screens/CreateDebate.js:605
 msgid "publicDebateSelect"
 msgstr "Public debate"
 
@@ -478,7 +482,7 @@ msgstr "Public debate"
 msgid "publicMode"
 msgstr "Disable private mode"
 
-#: Screens/CreateDebate.js:1086
+#: Screens/CreateDebate.js:1082
 #: Screens/CreateDuoDebate.js:344
 msgid "publish"
 msgstr "Publish"
@@ -542,7 +546,7 @@ msgstr "Sexism"
 msgid "reportViolence"
 msgstr "Violence"
 
-#: Screens/CreateDebate.js:259
+#: Screens/CreateDebate.js:264
 #: Screens/Search.js:190
 msgid "search"
 msgstr "Search"
@@ -664,7 +668,7 @@ msgstr "My debates"
 msgid "yourMessage"
 msgstr "Your message"
 
-#: Screens/CreateDebate.js:1001
+#: Screens/CreateDebate.js:999
 #: Screens/CreateDuoDebate.js:304
 msgid "yourOpinion"
 msgstr "Your opinion"

@@ -126,7 +126,7 @@ msgstr "Utilisateurs bloqués"
 
 #: Components/LongPressMenu.js:34
 #: Components/Select.js:40
-#: Screens/CreateDebate.js:284
+#: Screens/CreateDebate.js:289
 msgid "cancel"
 msgstr "Annuler"
 
@@ -135,8 +135,8 @@ msgstr "Annuler"
 msgid "cgu"
 msgstr "Conditions Générales d'Utilisation"
 
-#: Screens/CreateDebate.js:1000
-#: Screens/CreateDebate.js:1022
+#: Screens/CreateDebate.js:998
+#: Screens/CreateDebate.js:1020
 msgid "choice"
 msgstr "Choix"
 
@@ -195,7 +195,11 @@ msgstr "Nous contacter"
 msgid "crownDescription"
 msgstr "La couronne vous donne le privilège de créer un débat visible en premier dans le fil d'actualité de tout les utilisateurs. Vous avez 24H pour l'utiliser, mais n'oubliez pas : \"Un grand pouvoir implique de grandes responsabilités\"."
 
-#: Screens/CreateDebate.js:750
+#: Screens/DebatesFiltered.js:271
+msgid "crownedDebates"
+msgstr "Les débats couronnés"
+
+#: Screens/CreateDebate.js:758
 msgid "days"
 msgstr "Jours"
 
@@ -207,12 +211,12 @@ msgstr "il y a {time}j"
 msgid "debate"
 msgstr "débat"
 
-#: Screens/CreateDebate.js:688
+#: Screens/CreateDebate.js:696
 #: Screens/CreateDuoDebate.js:231
 msgid "debateDuration"
 msgstr "Durée du débat"
 
-#: Screens/CreateDebate.js:852
+#: Screens/CreateDebate.js:860
 msgid "debateLimitationDurationMessage"
 msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 
@@ -240,7 +244,7 @@ msgstr "Supprimer la conversation"
 msgid "deleteDebate"
 msgstr "Supprimer le débat"
 
-#: Screens/CreateDebate.js:871
+#: Screens/CreateDebate.js:877
 msgid "describeDebate"
 msgstr "Décrivez votre débat"
 
@@ -256,7 +260,7 @@ msgstr "n'ont pas aimé votre commentaire"
 msgid "didntLikedCommentSingular"
 msgstr "n'a pas aimé votre commentaire"
 
-#: Screens/CreateDebate.js:582
+#: Screens/CreateDebate.js:594
 msgid "disableCrown"
 msgstr "Désactiver la couronne"
 
@@ -268,7 +272,7 @@ msgstr "Se déconnecter"
 msgid "duoDebate"
 msgstr "Débat en duo"
 
-#: Screens/CreateDebate.js:596
+#: Screens/CreateDebate.js:609
 msgid "duoDebateSelect"
 msgstr "Débat duo"
 
@@ -280,11 +284,11 @@ msgstr "Les débats en duo"
 msgid "duoDebatesWon"
 msgstr "Débats en duo remportés"
 
-#: Screens/CreateDebate.js:581
+#: Screens/CreateDebate.js:595
 msgid "enableCrown"
 msgstr "Activer la couronne"
 
-#: Screens/CreateDebate.js:190
+#: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
 #: Screens/SignUp.js:92
 msgid "firstname"
@@ -344,7 +348,7 @@ msgstr "S'inscrire"
 msgid "hasVote"
 msgstr "a voté"
 
-#: Screens/CreateDebate.js:838
+#: Screens/CreateDebate.js:846
 msgid "hours"
 msgstr "Heures"
 
@@ -356,7 +360,7 @@ msgstr "il y a {time}h"
 msgid "iAcceptThe"
 msgstr "J'accepte les"
 
-#: Screens/CreateDebate.js:650
+#: Screens/CreateDebate.js:661
 msgid "invitePeople"
 msgstr "Inviter une personne"
 
@@ -364,7 +368,7 @@ msgstr "Inviter une personne"
 msgid "inviteYouDuoDebate"
 msgstr "vous invite à un débat en duo"
 
-#: Screens/CreateDebate.js:212
+#: Screens/CreateDebate.js:217
 #: Screens/Search.js:143
 #: Screens/SignUp.js:110
 msgid "lastname"
@@ -468,9 +472,9 @@ msgstr "Mot de passe"
 msgid "privateMode"
 msgstr "Passer en mode privé"
 
-#: Screens/CreateDebate.js:405
-#: Screens/CreateDebate.js:568
-#: Screens/CreateDebate.js:592
+#: Screens/CreateDebate.js:410
+#: Screens/CreateDebate.js:581
+#: Screens/CreateDebate.js:605
 msgid "publicDebateSelect"
 msgstr "Débat publique"
 
@@ -478,7 +482,7 @@ msgstr "Débat publique"
 msgid "publicMode"
 msgstr "Passer en mode publique"
 
-#: Screens/CreateDebate.js:1086
+#: Screens/CreateDebate.js:1082
 #: Screens/CreateDuoDebate.js:344
 msgid "publish"
 msgstr "Publier"
@@ -542,7 +546,7 @@ msgstr "Propos sexistes"
 msgid "reportViolence"
 msgstr "Contenu violent"
 
-#: Screens/CreateDebate.js:259
+#: Screens/CreateDebate.js:264
 #: Screens/Search.js:190
 msgid "search"
 msgstr "Rechercher"
@@ -664,7 +668,7 @@ msgstr "Mes débats"
 msgid "yourMessage"
 msgstr "Votre message"
 
-#: Screens/CreateDebate.js:1001
+#: Screens/CreateDebate.js:999
 #: Screens/CreateDuoDebate.js:304
 msgid "yourOpinion"
 msgstr "Votre opinion"

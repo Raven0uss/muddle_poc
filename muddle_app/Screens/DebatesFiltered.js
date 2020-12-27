@@ -245,6 +245,32 @@ const DebatesFiltered = (props) => {
               {i18n._("generatedDebates")}
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={
+              debateType === "CROWNED_DEBATES"
+                ? styles.buttonActivate
+                : {
+                    ...styles.buttonDefaultState,
+                    backgroundColor: themeSchema[theme].backgroundColor2,
+                    borderColor: themeSchema[theme].colorText,
+                  }
+            }
+            onPress={() => {
+              nbDebates = frequency;
+              setDebates([]);
+              setDebateType("CROWNED_DEBATES");
+              setNoMoreData(false);
+            }}
+          >
+            <Text
+              style={{
+                ...styles.buttonTextDefaultState,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {i18n._("crownedDebates")}
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
       {loading && debates.length === 0 ? (

@@ -30,5 +30,13 @@
         245
       ]
     ]
+  },
+  "crownedDebates": {
+    "origin": [
+      [
+        "Screens/DebatesFiltered.js",
+        271
+      ]
+    ]
   }
 }

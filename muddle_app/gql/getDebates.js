@@ -74,6 +74,77 @@ const GET_DEBATES = (debateType) => {
         }
       }
     `;
+  if (debateType === "CROWNED_DEBATES")
+    return gql`
+      query($first: Int!, $skip: Int) {
+        debates(
+          first: $first
+          skip: $skip
+          where: { published: true, crowned: true }
+          orderBy: updatedAt_DESC
+        ) {
+          id
+          content
+          answerOne
+          answerTwo
+          image
+          type
+          crowned
+          owner {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+            private
+            followers {
+              id
+            }
+          }
+          ownerBlue {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+            private
+            followers {
+              id
+            }
+          }
+          ownerRed {
+            id
+            firstname
+            lastname
+            email
+            profilePicture
+            certified
+            private
+            followers {
+              id
+            }
+          }
+          positives {
+            id
+          }
+          negatives {
+            id
+          }
+          redVotes {
+            id
+          }
+          blueVotes {
+            id
+          }
+          comments {
+            id
+          }
+          closed
+        }
+      }
+    `;
   if (debateType === "BEST_DEBATES")
     return gql`
       query($first: Int!, $skip: Int) {
