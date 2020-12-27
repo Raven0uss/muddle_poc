@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { flattenDeep, get, isEmpty, isNil } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
-import { idArg, stringArg } from "nexus/dist";
+import { booleanArg, idArg, stringArg } from "nexus/dist";
 import { dateArg } from "./Types";
 
 import timelimitToDateTime from "../algorithms/timelimitToDateTime";
@@ -169,10 +169,11 @@ const Mutation = prismaObjectType({
         answerTwo: stringArg(),
         timelimit: stringArg(),
         image: stringArg(),
+        crowned: booleanArg(),
       },
       resolve: async (
         parent,
-        { content, answerOne, answerTwo, timelimit, image },
+        { content, answerOne, answerTwo, timelimit, image, crowned },
         { prisma, currentUser }
       ) => {
         if (timelimit === "0 00") throw new Error("Timelimit is not correct");
@@ -188,6 +189,7 @@ const Mutation = prismaObjectType({
             type: "STANDARD",
             timelimit: limit,
             image,
+            crowned,
           });
           return newDebate;
         } catch (err) {
@@ -1319,7 +1321,7 @@ const Mutation = prismaObjectType({
           const messagesId = get(messagesIdObject, "messagesId");
           if (isNil(messagesId))
             throw new Error("bad payload for deleteMessages");
-          console.log(messagesId);
+          // console.log(messagesId);
           await Promise.all(
             messagesId.map(async (m) => {
               //     const message = await prisma.message({ id: m.id });
@@ -1336,6 +1338,52 @@ const Mutation = prismaObjectType({
             })
           );
           return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("giveCrown", {
+      type: "User",
+      args: {
+        userId: idArg(),
+      },
+      resolve: async (parent, { userId }, { prisma }) => {
+        try {
+          const user = await prisma.user({ id: userId });
+          if (isNil(user)) throw new Error("user doesnt exist");
+
+          const updatedUser = await prisma.updateUser({
+            where: {
+              id: userId,
+            },
+            data: {
+              crowned: true,
+              crownedDate: new Date(),
+            },
+          });
+          const getMuddleAccount = await prisma.users({
+            where: {
+              role: "MUDDLE",
+            },
+          });
+          if (isNil(getMuddleAccount)) throw new Error("muddle doesnt exist");
+          const muddleAccount = get(getMuddleAccount, "[0].id");
+          console.log(muddleAccount);
+          if (isNil(muddleAccount)) throw new Error("muddle doesnt exist");
+          const notif = await prisma.createNotification({
+            who: {
+              connect: {
+                id: muddleAccount,
+              },
+            },
+            userId,
+            type: "CROWNED",
+            status: "INFORMATION",
+            new: true,
+          });
+          return updatedUser;
         } catch (err) {
           throw new Error(err);
         }

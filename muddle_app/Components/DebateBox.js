@@ -289,15 +289,55 @@ const DebateBox = (props) => {
             });
           }}
         >
-          <Text
-            numberOfLines={8}
+          <View
             style={{
-              ...styles.debateText,
-              color: themeSchema[theme].colorText,
+              flexDirection: "row",
             }}
           >
-            {debate.content}
-          </Text>
+            {debate.crowned && (
+              <View
+                style={{
+                  width: 15,
+                  height: 15,
+                  backgroundColor: "#F47658",
+                  // marginRight: 10,
+                  position: "absolute",
+                  // marginTop: -1,
+                  // float: "left",
+                  borderRadius: 50,
+                  borderColor: themeSchema[theme].backgroundColor2,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={{ uri: badges.crown }}
+                  style={{
+                    width: 10,
+                    height: 8,
+                  }}
+                />
+              </View>
+            )}
+            <Text
+              numberOfLines={8}
+              style={{
+                ...styles.debateText,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {debate.crowned && (
+                <View
+                  style={{
+                    width: 20,
+                    height: 1,
+                  }}
+                />
+              )}
+              {debate.content}
+            </Text>
+          </View>
+
           {debate.image && (
             <Image
               source={{

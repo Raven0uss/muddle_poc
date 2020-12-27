@@ -16,11 +16,11 @@ export interface NexusPrismaTypes {
     fields: {
       Query: QueryObject
       Ad: AdObject
-      AdTarget: AdTargetObject
       AdConnection: AdConnectionObject
       PageInfo: PageInfoObject
       AdEdge: AdEdgeObject
       AggregateAd: AggregateAdObject
+      AdTarget: AdTargetObject
       AdTargetConnection: AdTargetConnectionObject
       AdTargetEdge: AdTargetEdgeObject
       AggregateAdTarget: AggregateAdTargetObject
@@ -89,11 +89,11 @@ export interface NexusPrismaTypes {
     fieldsDetails: {
       Query: QueryFieldDetails
       Ad: AdFieldDetails
-      AdTarget: AdTargetFieldDetails
       AdConnection: AdConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
       AdEdge: AdEdgeFieldDetails
       AggregateAd: AggregateAdFieldDetails
+      AdTarget: AdTargetFieldDetails
       AdTargetConnection: AdTargetConnectionFieldDetails
       AdTargetEdge: AdTargetEdgeFieldDetails
       AggregateAdTarget: AggregateAdTargetFieldDetails
@@ -163,9 +163,9 @@ export interface NexusPrismaTypes {
   inputTypes: {
     fields: {
       AdWhereUniqueInput: AdWhereUniqueInputInputObject
-      AdTargetWhereInput: AdTargetWhereInputInputObject
       AdWhereInput: AdWhereInputInputObject
       AdTargetWhereUniqueInput: AdTargetWhereUniqueInputInputObject
+      AdTargetWhereInput: AdTargetWhereInputInputObject
       CommentWhereUniqueInput: CommentWhereUniqueInputInputObject
       UserWhereInput: UserWhereInputInputObject
       DebateWhereInput: DebateWhereInputInputObject
@@ -185,17 +185,9 @@ export interface NexusPrismaTypes {
       TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
       AdCreateInput: AdCreateInputInputObject
-      AdTargetCreateManyInput: AdTargetCreateManyInputInputObject
-      AdTargetCreateInput: AdTargetCreateInputInputObject
       AdUpdateInput: AdUpdateInputInputObject
-      AdTargetUpdateManyInput: AdTargetUpdateManyInputInputObject
-      AdTargetUpdateWithWhereUniqueNestedInput: AdTargetUpdateWithWhereUniqueNestedInputInputObject
-      AdTargetUpdateDataInput: AdTargetUpdateDataInputInputObject
-      AdTargetUpsertWithWhereUniqueNestedInput: AdTargetUpsertWithWhereUniqueNestedInputInputObject
-      AdTargetScalarWhereInput: AdTargetScalarWhereInputInputObject
-      AdTargetUpdateManyWithWhereNestedInput: AdTargetUpdateManyWithWhereNestedInputInputObject
-      AdTargetUpdateManyDataInput: AdTargetUpdateManyDataInputInputObject
       AdUpdateManyMutationInput: AdUpdateManyMutationInputInputObject
+      AdTargetCreateInput: AdTargetCreateInputInputObject
       AdTargetUpdateInput: AdTargetUpdateInputInputObject
       AdTargetUpdateManyMutationInput: AdTargetUpdateManyMutationInputInputObject
       CommentCreateInput: CommentCreateInputInputObject
@@ -445,9 +437,9 @@ export interface NexusPrismaTypes {
     }
   }
   enumTypes: {
+    AdOrderByInput: AdOrderByInputValues,
     GenderFilter: GenderFilterValues,
     AdTargetOrderByInput: AdTargetOrderByInputValues,
-    AdOrderByInput: AdOrderByInputValues,
     Role: RoleValues,
     Gender: GenderValues,
     Language: LanguageValues,
@@ -1185,8 +1177,11 @@ type AdObject =
   | AdFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'company', args?: [] | false, alias?: string  } 
+  | { name: 'companyIcon', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
-  | { name: 'targets', args?: AdTargetsArgs[] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
+  | { name: 'link', args?: [] | false, alias?: string  } 
   | { name: 'active', args?: [] | false, alias?: string  } 
   | { name: 'ratio', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
@@ -1195,22 +1190,18 @@ type AdObject =
 type AdFields =
   | 'id'
   | 'name'
+  | 'company'
+  | 'companyIcon'
   | 'content'
-  | 'targets'
+  | 'image'
+  | 'link'
   | 'active'
   | 'ratio'
   | 'createdAt'
   | 'updatedAt'
 
 
-type AdTargetsArgs =
-  | 'where'
-  | 'orderBy'
-  | 'skip'
-  | 'after'
-  | 'before'
-  | 'first'
-  | 'last'
+
   
 
 export interface AdFieldDetails {
@@ -1230,6 +1221,22 @@ export interface AdFieldDetails {
     nullable: false
     resolve: undefined
   }
+  company: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  companyIcon: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
   content: {
     type: 'String'
     args: {}
@@ -1238,18 +1245,21 @@ export interface AdFieldDetails {
     nullable: false
     resolve: undefined
   }
-  targets: {
-    type: 'AdTarget'
-    args: Record<AdTargetsArgs, core.NexusArgDef<string>>
+  image: {
+    type: 'String'
+    args: {}
     description: string
-    list: true
+    list: undefined
     nullable: false
-    resolve: (
-      root: core.RootValue<"Ad">,
-      args: { where?: AdTargetWhereInput | null, orderBy?: prisma.AdTargetOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.AdTarget[]> | prisma.AdTarget[]
+    resolve: undefined
+  }
+  link: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
   }
   active: {
     type: 'Boolean'
@@ -1261,96 +1271,6 @@ export interface AdFieldDetails {
   }
   ratio: {
     type: 'Int'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  createdAt: {
-    type: 'DateTime'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  updatedAt: {
-    type: 'DateTime'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-}
-  
-
-// Types for AdTarget
-
-type AdTargetObject =
-  | AdTargetFields
-  | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'name', args?: [] | false, alias?: string  } 
-  | { name: 'gender', args?: [] | false, alias?: string  } 
-  | { name: 'birthdateMin', args?: [] | false, alias?: string  } 
-  | { name: 'birthdateMax', args?: [] | false, alias?: string  } 
-  | { name: 'createdAt', args?: [] | false, alias?: string  } 
-  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
-
-type AdTargetFields =
-  | 'id'
-  | 'name'
-  | 'gender'
-  | 'birthdateMin'
-  | 'birthdateMax'
-  | 'createdAt'
-  | 'updatedAt'
-
-
-
-  
-
-export interface AdTargetFieldDetails {
-  id: {
-    type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  name: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  gender: {
-    type: 'GenderFilter'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: (
-      root: core.RootValue<"AdTarget">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.GenderFilter> | prisma.GenderFilter
-  }
-  birthdateMin: {
-    type: 'DateTime'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  birthdateMax: {
-    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -1547,6 +1467,96 @@ type AggregateAdFields =
 export interface AggregateAdFieldDetails {
   count: {
     type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AdTarget
+
+type AdTargetObject =
+  | AdTargetFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMin', args?: [] | false, alias?: string  } 
+  | { name: 'birthdateMax', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type AdTargetFields =
+  | 'id'
+  | 'name'
+  | 'gender'
+  | 'birthdateMin'
+  | 'birthdateMax'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface AdTargetFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  gender: {
+    type: 'GenderFilter'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"AdTarget">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.GenderFilter> | prisma.GenderFilter
+  }
+  birthdateMin: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  birthdateMax: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -1886,6 +1896,7 @@ type UserObject =
   | { name: 'language', args?: [] | false, alias?: string  } 
   | { name: 'theme', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'crownedDate', args?: [] | false, alias?: string  } 
   | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
   | { name: 'followers', args?: UserFollowersArgs[] | false, alias?: string  } 
@@ -1918,6 +1929,7 @@ type UserFields =
   | 'language'
   | 'theme'
   | 'crowned'
+  | 'crownedDate'
   | 'private'
   | 'lastConnected'
   | 'followers'
@@ -2164,6 +2176,14 @@ export interface UserFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  crownedDate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
   private: {
@@ -6093,7 +6113,11 @@ type AdPreviousValuesObject =
   | AdPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'company', args?: [] | false, alias?: string  } 
+  | { name: 'companyIcon', args?: [] | false, alias?: string  } 
   | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
+  | { name: 'link', args?: [] | false, alias?: string  } 
   | { name: 'active', args?: [] | false, alias?: string  } 
   | { name: 'ratio', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
@@ -6102,7 +6126,11 @@ type AdPreviousValuesObject =
 type AdPreviousValuesFields =
   | 'id'
   | 'name'
+  | 'company'
+  | 'companyIcon'
   | 'content'
+  | 'image'
+  | 'link'
   | 'active'
   | 'ratio'
   | 'createdAt'
@@ -6129,12 +6157,44 @@ export interface AdPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
+  company: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  companyIcon: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
   content: {
     type: 'String'
     args: {}
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  image: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  link: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
   active: {
@@ -7646,6 +7706,7 @@ type UserPreviousValuesObject =
   | { name: 'language', args?: [] | false, alias?: string  } 
   | { name: 'theme', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
+  | { name: 'crownedDate', args?: [] | false, alias?: string  } 
   | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
@@ -7667,6 +7728,7 @@ type UserPreviousValuesFields =
   | 'language'
   | 'theme'
   | 'crowned'
+  | 'crownedDate'
   | 'private'
   | 'lastConnected'
   | 'createdAt'
@@ -7817,6 +7879,14 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
+  crownedDate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
   private: {
     type: 'Boolean'
     args: {}
@@ -7859,6 +7929,270 @@ export interface AdWhereUniqueInput {
 }
 export type AdWhereUniqueInputInputObject =
   | Extract<keyof AdWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  
+export interface AdWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  company?: string | null
+  company_not?: string | null
+  company_in?: string[]
+  company_not_in?: string[]
+  company_lt?: string | null
+  company_lte?: string | null
+  company_gt?: string | null
+  company_gte?: string | null
+  company_contains?: string | null
+  company_not_contains?: string | null
+  company_starts_with?: string | null
+  company_not_starts_with?: string | null
+  company_ends_with?: string | null
+  company_not_ends_with?: string | null
+  companyIcon?: string | null
+  companyIcon_not?: string | null
+  companyIcon_in?: string[]
+  companyIcon_not_in?: string[]
+  companyIcon_lt?: string | null
+  companyIcon_lte?: string | null
+  companyIcon_gt?: string | null
+  companyIcon_gte?: string | null
+  companyIcon_contains?: string | null
+  companyIcon_not_contains?: string | null
+  companyIcon_starts_with?: string | null
+  companyIcon_not_starts_with?: string | null
+  companyIcon_ends_with?: string | null
+  companyIcon_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  image?: string | null
+  image_not?: string | null
+  image_in?: string[]
+  image_not_in?: string[]
+  image_lt?: string | null
+  image_lte?: string | null
+  image_gt?: string | null
+  image_gte?: string | null
+  image_contains?: string | null
+  image_not_contains?: string | null
+  image_starts_with?: string | null
+  image_not_starts_with?: string | null
+  image_ends_with?: string | null
+  image_not_ends_with?: string | null
+  link?: string | null
+  link_not?: string | null
+  link_in?: string[]
+  link_not_in?: string[]
+  link_lt?: string | null
+  link_lte?: string | null
+  link_gt?: string | null
+  link_gte?: string | null
+  link_contains?: string | null
+  link_not_contains?: string | null
+  link_starts_with?: string | null
+  link_not_starts_with?: string | null
+  link_ends_with?: string | null
+  link_not_ends_with?: string | null
+  active?: boolean | null
+  active_not?: boolean | null
+  ratio?: number | null
+  ratio_not?: number | null
+  ratio_in?: number[]
+  ratio_not_in?: number[]
+  ratio_lt?: number | null
+  ratio_lte?: number | null
+  ratio_gt?: number | null
+  ratio_gte?: number | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: AdWhereInput[]
+}
+export type AdWhereInputInputObject =
+  | Extract<keyof AdWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'company', alias?: string  } 
+  | { name: 'company_not', alias?: string  } 
+  | { name: 'company_in', alias?: string  } 
+  | { name: 'company_not_in', alias?: string  } 
+  | { name: 'company_lt', alias?: string  } 
+  | { name: 'company_lte', alias?: string  } 
+  | { name: 'company_gt', alias?: string  } 
+  | { name: 'company_gte', alias?: string  } 
+  | { name: 'company_contains', alias?: string  } 
+  | { name: 'company_not_contains', alias?: string  } 
+  | { name: 'company_starts_with', alias?: string  } 
+  | { name: 'company_not_starts_with', alias?: string  } 
+  | { name: 'company_ends_with', alias?: string  } 
+  | { name: 'company_not_ends_with', alias?: string  } 
+  | { name: 'companyIcon', alias?: string  } 
+  | { name: 'companyIcon_not', alias?: string  } 
+  | { name: 'companyIcon_in', alias?: string  } 
+  | { name: 'companyIcon_not_in', alias?: string  } 
+  | { name: 'companyIcon_lt', alias?: string  } 
+  | { name: 'companyIcon_lte', alias?: string  } 
+  | { name: 'companyIcon_gt', alias?: string  } 
+  | { name: 'companyIcon_gte', alias?: string  } 
+  | { name: 'companyIcon_contains', alias?: string  } 
+  | { name: 'companyIcon_not_contains', alias?: string  } 
+  | { name: 'companyIcon_starts_with', alias?: string  } 
+  | { name: 'companyIcon_not_starts_with', alias?: string  } 
+  | { name: 'companyIcon_ends_with', alias?: string  } 
+  | { name: 'companyIcon_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'image_not', alias?: string  } 
+  | { name: 'image_in', alias?: string  } 
+  | { name: 'image_not_in', alias?: string  } 
+  | { name: 'image_lt', alias?: string  } 
+  | { name: 'image_lte', alias?: string  } 
+  | { name: 'image_gt', alias?: string  } 
+  | { name: 'image_gte', alias?: string  } 
+  | { name: 'image_contains', alias?: string  } 
+  | { name: 'image_not_contains', alias?: string  } 
+  | { name: 'image_starts_with', alias?: string  } 
+  | { name: 'image_not_starts_with', alias?: string  } 
+  | { name: 'image_ends_with', alias?: string  } 
+  | { name: 'image_not_ends_with', alias?: string  } 
+  | { name: 'link', alias?: string  } 
+  | { name: 'link_not', alias?: string  } 
+  | { name: 'link_in', alias?: string  } 
+  | { name: 'link_not_in', alias?: string  } 
+  | { name: 'link_lt', alias?: string  } 
+  | { name: 'link_lte', alias?: string  } 
+  | { name: 'link_gt', alias?: string  } 
+  | { name: 'link_gte', alias?: string  } 
+  | { name: 'link_contains', alias?: string  } 
+  | { name: 'link_not_contains', alias?: string  } 
+  | { name: 'link_starts_with', alias?: string  } 
+  | { name: 'link_not_starts_with', alias?: string  } 
+  | { name: 'link_ends_with', alias?: string  } 
+  | { name: 'link_not_ends_with', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'active_not', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  | { name: 'ratio_not', alias?: string  } 
+  | { name: 'ratio_in', alias?: string  } 
+  | { name: 'ratio_not_in', alias?: string  } 
+  | { name: 'ratio_lt', alias?: string  } 
+  | { name: 'ratio_lte', alias?: string  } 
+  | { name: 'ratio_gt', alias?: string  } 
+  | { name: 'ratio_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface AdTargetWhereUniqueInput {
+  id?: string | null
+  name?: string | null
+}
+export type AdTargetWhereUniqueInputInputObject =
+  | Extract<keyof AdTargetWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
   
@@ -7996,160 +8330,6 @@ export type AdTargetWhereInputInputObject =
   | { name: 'updatedAt_gt', alias?: string  } 
   | { name: 'updatedAt_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
-  
-export interface AdWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  content?: string | null
-  content_not?: string | null
-  content_in?: string[]
-  content_not_in?: string[]
-  content_lt?: string | null
-  content_lte?: string | null
-  content_gt?: string | null
-  content_gte?: string | null
-  content_contains?: string | null
-  content_not_contains?: string | null
-  content_starts_with?: string | null
-  content_not_starts_with?: string | null
-  content_ends_with?: string | null
-  content_not_ends_with?: string | null
-  targets_some?: AdTargetWhereInput | null
-  active?: boolean | null
-  active_not?: boolean | null
-  ratio?: number | null
-  ratio_not?: number | null
-  ratio_in?: number[]
-  ratio_not_in?: number[]
-  ratio_lt?: number | null
-  ratio_lte?: number | null
-  ratio_gt?: number | null
-  ratio_gte?: number | null
-  createdAt?: string | null
-  createdAt_not?: string | null
-  createdAt_in?: string[]
-  createdAt_not_in?: string[]
-  createdAt_lt?: string | null
-  createdAt_lte?: string | null
-  createdAt_gt?: string | null
-  createdAt_gte?: string | null
-  updatedAt?: string | null
-  updatedAt_not?: string | null
-  updatedAt_in?: string[]
-  updatedAt_not_in?: string[]
-  updatedAt_lt?: string | null
-  updatedAt_lte?: string | null
-  updatedAt_gt?: string | null
-  updatedAt_gte?: string | null
-  AND?: AdWhereInput[]
-}
-export type AdWhereInputInputObject =
-  | Extract<keyof AdWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'content', alias?: string  } 
-  | { name: 'content_not', alias?: string  } 
-  | { name: 'content_in', alias?: string  } 
-  | { name: 'content_not_in', alias?: string  } 
-  | { name: 'content_lt', alias?: string  } 
-  | { name: 'content_lte', alias?: string  } 
-  | { name: 'content_gt', alias?: string  } 
-  | { name: 'content_gte', alias?: string  } 
-  | { name: 'content_contains', alias?: string  } 
-  | { name: 'content_not_contains', alias?: string  } 
-  | { name: 'content_starts_with', alias?: string  } 
-  | { name: 'content_not_starts_with', alias?: string  } 
-  | { name: 'content_ends_with', alias?: string  } 
-  | { name: 'content_not_ends_with', alias?: string  } 
-  | { name: 'targets_some', alias?: string  } 
-  | { name: 'active', alias?: string  } 
-  | { name: 'active_not', alias?: string  } 
-  | { name: 'ratio', alias?: string  } 
-  | { name: 'ratio_not', alias?: string  } 
-  | { name: 'ratio_in', alias?: string  } 
-  | { name: 'ratio_not_in', alias?: string  } 
-  | { name: 'ratio_lt', alias?: string  } 
-  | { name: 'ratio_lte', alias?: string  } 
-  | { name: 'ratio_gt', alias?: string  } 
-  | { name: 'ratio_gte', alias?: string  } 
-  | { name: 'createdAt', alias?: string  } 
-  | { name: 'createdAt_not', alias?: string  } 
-  | { name: 'createdAt_in', alias?: string  } 
-  | { name: 'createdAt_not_in', alias?: string  } 
-  | { name: 'createdAt_lt', alias?: string  } 
-  | { name: 'createdAt_lte', alias?: string  } 
-  | { name: 'createdAt_gt', alias?: string  } 
-  | { name: 'createdAt_gte', alias?: string  } 
-  | { name: 'updatedAt', alias?: string  } 
-  | { name: 'updatedAt_not', alias?: string  } 
-  | { name: 'updatedAt_in', alias?: string  } 
-  | { name: 'updatedAt_not_in', alias?: string  } 
-  | { name: 'updatedAt_lt', alias?: string  } 
-  | { name: 'updatedAt_lte', alias?: string  } 
-  | { name: 'updatedAt_gt', alias?: string  } 
-  | { name: 'updatedAt_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  
-export interface AdTargetWhereUniqueInput {
-  id?: string | null
-  name?: string | null
-}
-export type AdTargetWhereUniqueInputInputObject =
-  | Extract<keyof AdTargetWhereUniqueInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
   
 export interface CommentWhereUniqueInput {
   id?: string | null
@@ -8299,6 +8479,14 @@ export interface UserWhereInput {
   theme_not_in?: prisma.Theme[]
   crowned?: boolean | null
   crowned_not?: boolean | null
+  crownedDate?: string | null
+  crownedDate_not?: string | null
+  crownedDate_in?: string[]
+  crownedDate_not_in?: string[]
+  crownedDate_lt?: string | null
+  crownedDate_lte?: string | null
+  crownedDate_gt?: string | null
+  crownedDate_gte?: string | null
   private?: boolean | null
   private_not?: boolean | null
   lastConnected?: string | null
@@ -8480,6 +8668,14 @@ export type UserWhereInputInputObject =
   | { name: 'theme_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
+  | { name: 'crownedDate_not', alias?: string  } 
+  | { name: 'crownedDate_in', alias?: string  } 
+  | { name: 'crownedDate_not_in', alias?: string  } 
+  | { name: 'crownedDate_lt', alias?: string  } 
+  | { name: 'crownedDate_lte', alias?: string  } 
+  | { name: 'crownedDate_gt', alias?: string  } 
+  | { name: 'crownedDate_gte', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'private_not', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -9602,8 +9798,11 @@ export type UserWhereUniqueInputInputObject =
 export interface AdCreateInput {
   id?: string | null
   name?: string
+  company?: string
+  companyIcon?: string
   content?: string
-  targets?: AdTargetCreateManyInput | null
+  image?: string
+  link?: string | null
   active?: boolean | null
   ratio?: number | null
 }
@@ -9611,19 +9810,55 @@ export type AdCreateInputInputObject =
   | Extract<keyof AdCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'company', alias?: string  } 
+  | { name: 'companyIcon', alias?: string  } 
   | { name: 'content', alias?: string  } 
-  | { name: 'targets', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'link', alias?: string  } 
   | { name: 'active', alias?: string  } 
   | { name: 'ratio', alias?: string  } 
   
-export interface AdTargetCreateManyInput {
-  create?: AdTargetCreateInput[]
-  connect?: AdTargetWhereUniqueInput[]
+export interface AdUpdateInput {
+  name?: string | null
+  company?: string | null
+  companyIcon?: string | null
+  content?: string | null
+  image?: string | null
+  link?: string | null
+  active?: boolean | null
+  ratio?: number | null
 }
-export type AdTargetCreateManyInputInputObject =
-  | Extract<keyof AdTargetCreateManyInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
+export type AdUpdateInputInputObject =
+  | Extract<keyof AdUpdateInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'company', alias?: string  } 
+  | { name: 'companyIcon', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'link', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
+  
+export interface AdUpdateManyMutationInput {
+  name?: string | null
+  company?: string | null
+  companyIcon?: string | null
+  content?: string | null
+  image?: string | null
+  link?: string | null
+  active?: boolean | null
+  ratio?: number | null
+}
+export type AdUpdateManyMutationInputInputObject =
+  | Extract<keyof AdUpdateManyMutationInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'company', alias?: string  } 
+  | { name: 'companyIcon', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'link', alias?: string  } 
+  | { name: 'active', alias?: string  } 
+  | { name: 'ratio', alias?: string  } 
   
 export interface AdTargetCreateInput {
   id?: string | null
@@ -9639,251 +9874,6 @@ export type AdTargetCreateInputInputObject =
   | { name: 'gender', alias?: string  } 
   | { name: 'birthdateMin', alias?: string  } 
   | { name: 'birthdateMax', alias?: string  } 
-  
-export interface AdUpdateInput {
-  name?: string | null
-  content?: string | null
-  targets?: AdTargetUpdateManyInput | null
-  active?: boolean | null
-  ratio?: number | null
-}
-export type AdUpdateInputInputObject =
-  | Extract<keyof AdUpdateInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'content', alias?: string  } 
-  | { name: 'targets', alias?: string  } 
-  | { name: 'active', alias?: string  } 
-  | { name: 'ratio', alias?: string  } 
-  
-export interface AdTargetUpdateManyInput {
-  create?: AdTargetCreateInput[]
-  update?: AdTargetUpdateWithWhereUniqueNestedInput[]
-  upsert?: AdTargetUpsertWithWhereUniqueNestedInput[]
-  delete?: AdTargetWhereUniqueInput[]
-  connect?: AdTargetWhereUniqueInput[]
-  set?: AdTargetWhereUniqueInput[]
-  disconnect?: AdTargetWhereUniqueInput[]
-  deleteMany?: AdTargetScalarWhereInput[]
-  updateMany?: AdTargetUpdateManyWithWhereNestedInput[]
-}
-export type AdTargetUpdateManyInputInputObject =
-  | Extract<keyof AdTargetUpdateManyInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
-  
-export interface AdTargetUpdateWithWhereUniqueNestedInput {
-  where?: AdTargetWhereUniqueInput
-  data?: AdTargetUpdateDataInput
-}
-export type AdTargetUpdateWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof AdTargetUpdateWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface AdTargetUpdateDataInput {
-  name?: string | null
-  gender?: prisma.GenderFilter | null
-  birthdateMin?: string | null
-  birthdateMax?: string | null
-}
-export type AdTargetUpdateDataInputInputObject =
-  | Extract<keyof AdTargetUpdateDataInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'gender', alias?: string  } 
-  | { name: 'birthdateMin', alias?: string  } 
-  | { name: 'birthdateMax', alias?: string  } 
-  
-export interface AdTargetUpsertWithWhereUniqueNestedInput {
-  where?: AdTargetWhereUniqueInput
-  update?: AdTargetUpdateDataInput
-  create?: AdTargetCreateInput
-}
-export type AdTargetUpsertWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof AdTargetUpsertWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
-  
-export interface AdTargetScalarWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  gender?: prisma.GenderFilter | null
-  gender_not?: prisma.GenderFilter | null
-  gender_in?: prisma.GenderFilter[]
-  gender_not_in?: prisma.GenderFilter[]
-  birthdateMin?: string | null
-  birthdateMin_not?: string | null
-  birthdateMin_in?: string[]
-  birthdateMin_not_in?: string[]
-  birthdateMin_lt?: string | null
-  birthdateMin_lte?: string | null
-  birthdateMin_gt?: string | null
-  birthdateMin_gte?: string | null
-  birthdateMax?: string | null
-  birthdateMax_not?: string | null
-  birthdateMax_in?: string[]
-  birthdateMax_not_in?: string[]
-  birthdateMax_lt?: string | null
-  birthdateMax_lte?: string | null
-  birthdateMax_gt?: string | null
-  birthdateMax_gte?: string | null
-  createdAt?: string | null
-  createdAt_not?: string | null
-  createdAt_in?: string[]
-  createdAt_not_in?: string[]
-  createdAt_lt?: string | null
-  createdAt_lte?: string | null
-  createdAt_gt?: string | null
-  createdAt_gte?: string | null
-  updatedAt?: string | null
-  updatedAt_not?: string | null
-  updatedAt_in?: string[]
-  updatedAt_not_in?: string[]
-  updatedAt_lt?: string | null
-  updatedAt_lte?: string | null
-  updatedAt_gt?: string | null
-  updatedAt_gte?: string | null
-  AND?: AdTargetScalarWhereInput[]
-  OR?: AdTargetScalarWhereInput[]
-  NOT?: AdTargetScalarWhereInput[]
-}
-export type AdTargetScalarWhereInputInputObject =
-  | Extract<keyof AdTargetScalarWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'gender', alias?: string  } 
-  | { name: 'gender_not', alias?: string  } 
-  | { name: 'gender_in', alias?: string  } 
-  | { name: 'gender_not_in', alias?: string  } 
-  | { name: 'birthdateMin', alias?: string  } 
-  | { name: 'birthdateMin_not', alias?: string  } 
-  | { name: 'birthdateMin_in', alias?: string  } 
-  | { name: 'birthdateMin_not_in', alias?: string  } 
-  | { name: 'birthdateMin_lt', alias?: string  } 
-  | { name: 'birthdateMin_lte', alias?: string  } 
-  | { name: 'birthdateMin_gt', alias?: string  } 
-  | { name: 'birthdateMin_gte', alias?: string  } 
-  | { name: 'birthdateMax', alias?: string  } 
-  | { name: 'birthdateMax_not', alias?: string  } 
-  | { name: 'birthdateMax_in', alias?: string  } 
-  | { name: 'birthdateMax_not_in', alias?: string  } 
-  | { name: 'birthdateMax_lt', alias?: string  } 
-  | { name: 'birthdateMax_lte', alias?: string  } 
-  | { name: 'birthdateMax_gt', alias?: string  } 
-  | { name: 'birthdateMax_gte', alias?: string  } 
-  | { name: 'createdAt', alias?: string  } 
-  | { name: 'createdAt_not', alias?: string  } 
-  | { name: 'createdAt_in', alias?: string  } 
-  | { name: 'createdAt_not_in', alias?: string  } 
-  | { name: 'createdAt_lt', alias?: string  } 
-  | { name: 'createdAt_lte', alias?: string  } 
-  | { name: 'createdAt_gt', alias?: string  } 
-  | { name: 'createdAt_gte', alias?: string  } 
-  | { name: 'updatedAt', alias?: string  } 
-  | { name: 'updatedAt_not', alias?: string  } 
-  | { name: 'updatedAt_in', alias?: string  } 
-  | { name: 'updatedAt_not_in', alias?: string  } 
-  | { name: 'updatedAt_lt', alias?: string  } 
-  | { name: 'updatedAt_lte', alias?: string  } 
-  | { name: 'updatedAt_gt', alias?: string  } 
-  | { name: 'updatedAt_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface AdTargetUpdateManyWithWhereNestedInput {
-  where?: AdTargetScalarWhereInput
-  data?: AdTargetUpdateManyDataInput
-}
-export type AdTargetUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof AdTargetUpdateManyWithWhereNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface AdTargetUpdateManyDataInput {
-  name?: string | null
-  gender?: prisma.GenderFilter | null
-  birthdateMin?: string | null
-  birthdateMax?: string | null
-}
-export type AdTargetUpdateManyDataInputInputObject =
-  | Extract<keyof AdTargetUpdateManyDataInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'gender', alias?: string  } 
-  | { name: 'birthdateMin', alias?: string  } 
-  | { name: 'birthdateMax', alias?: string  } 
-  
-export interface AdUpdateManyMutationInput {
-  name?: string | null
-  content?: string | null
-  active?: boolean | null
-  ratio?: number | null
-}
-export type AdUpdateManyMutationInputInputObject =
-  | Extract<keyof AdUpdateManyMutationInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'content', alias?: string  } 
-  | { name: 'active', alias?: string  } 
-  | { name: 'ratio', alias?: string  } 
   
 export interface AdTargetUpdateInput {
   name?: string | null
@@ -9959,6 +9949,7 @@ export interface UserCreateInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -9990,6 +9981,7 @@ export type UserCreateInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10029,6 +10021,7 @@ export interface UserCreateWithoutFollowingInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10059,6 +10052,7 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10097,6 +10091,7 @@ export interface UserCreateWithoutBlockingInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10127,6 +10122,7 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10165,6 +10161,7 @@ export interface UserCreateWithoutFollowersInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   following?: UserCreateManyWithoutFollowersInput | null
@@ -10195,6 +10192,7 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -10233,6 +10231,7 @@ export interface UserCreateWithoutBlockedInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10263,6 +10262,7 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10361,6 +10361,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10391,6 +10392,7 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10489,6 +10491,7 @@ export interface UserCreateWithoutDebatesInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10519,6 +10522,7 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10617,6 +10621,7 @@ export interface UserCreateWithoutDebatesRedInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10647,6 +10652,7 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -10935,6 +10941,7 @@ export interface UserCreateWithoutInteractionsInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -10965,6 +10972,7 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11308,6 +11316,7 @@ export interface UserUpdateDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -11338,6 +11347,7 @@ export type UserUpdateDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11399,6 +11409,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -11428,6 +11439,7 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11488,6 +11500,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -11517,6 +11530,7 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11577,6 +11591,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   following?: UserUpdateManyWithoutFollowersInput | null
@@ -11606,6 +11621,7 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'following', alias?: string  } 
@@ -11666,6 +11682,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -11695,6 +11712,7 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11821,6 +11839,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -11850,6 +11869,7 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -11976,6 +11996,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -12005,6 +12026,7 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -12131,6 +12153,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -12160,6 +12183,7 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -12525,6 +12549,14 @@ export interface UserScalarWhereInput {
   theme_not_in?: prisma.Theme[]
   crowned?: boolean | null
   crowned_not?: boolean | null
+  crownedDate?: string | null
+  crownedDate_not?: string | null
+  crownedDate_in?: string[]
+  crownedDate_not_in?: string[]
+  crownedDate_lt?: string | null
+  crownedDate_lte?: string | null
+  crownedDate_gt?: string | null
+  crownedDate_gte?: string | null
   private?: boolean | null
   private_not?: boolean | null
   lastConnected?: string | null
@@ -12697,6 +12729,14 @@ export type UserScalarWhereInputInputObject =
   | { name: 'theme_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
+  | { name: 'crownedDate_not', alias?: string  } 
+  | { name: 'crownedDate_in', alias?: string  } 
+  | { name: 'crownedDate_not_in', alias?: string  } 
+  | { name: 'crownedDate_lt', alias?: string  } 
+  | { name: 'crownedDate_lte', alias?: string  } 
+  | { name: 'crownedDate_gt', alias?: string  } 
+  | { name: 'crownedDate_gte', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'private_not', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -12751,6 +12791,7 @@ export interface UserUpdateManyDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
 }
@@ -12770,6 +12811,7 @@ export type UserUpdateManyDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   
@@ -13499,6 +13541,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -13528,6 +13571,7 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -14960,6 +15004,7 @@ export interface UserCreateWithoutConversationsInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -14990,6 +15035,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15061,6 +15107,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -15090,6 +15137,7 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15376,6 +15424,7 @@ export interface UserCreateWithoutNotificationsInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -15406,6 +15455,7 @@ export type UserCreateWithoutNotificationsInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15485,6 +15535,7 @@ export interface UserUpdateWithoutNotificationsDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -15514,6 +15565,7 @@ export type UserUpdateWithoutNotificationsDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15650,6 +15702,7 @@ export interface UserCreateWithoutTrophiesInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserCreateManyWithoutFollowingInput | null
@@ -15680,6 +15733,7 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15736,6 +15790,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -15765,6 +15820,7 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15811,6 +15867,7 @@ export interface UserUpdateInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
   followers?: UserUpdateManyWithoutFollowingInput | null
@@ -15841,6 +15898,7 @@ export type UserUpdateInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   | { name: 'followers', alias?: string  } 
@@ -15870,6 +15928,7 @@ export interface UserUpdateManyMutationInput {
   language?: prisma.Language | null
   theme?: prisma.Theme | null
   crowned?: boolean | null
+  crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
 }
@@ -15889,6 +15948,7 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'language', alias?: string  } 
   | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
+  | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
   
@@ -16080,6 +16140,30 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'AND', alias?: string  } 
   
 
+export type AdOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'company_ASC'
+  | 'company_DESC'
+  | 'companyIcon_ASC'
+  | 'companyIcon_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'image_ASC'
+  | 'image_DESC'
+  | 'link_ASC'
+  | 'link_DESC'
+  | 'active_ASC'
+  | 'active_DESC'
+  | 'ratio_ASC'
+  | 'ratio_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
 export type GenderFilterValues =
   | 'MALE'
   | 'FEMALE'
@@ -16096,22 +16180,6 @@ export type AdTargetOrderByInputValues =
   | 'birthdateMin_DESC'
   | 'birthdateMax_ASC'
   | 'birthdateMax_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  
-export type AdOrderByInputValues =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'content_ASC'
-  | 'content_DESC'
-  | 'active_ASC'
-  | 'active_DESC'
-  | 'ratio_ASC'
-  | 'ratio_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
@@ -16176,6 +16244,7 @@ export type NotificationTypeValues =
   | 'SUBCOMMENT'
   | 'LIKE'
   | 'DISLIKE'
+  | 'CROWNED'
   
 export type NotificationStatusValues =
   | 'ACCEPTED'
@@ -16218,6 +16287,8 @@ export type UserOrderByInputValues =
   | 'theme_DESC'
   | 'crowned_ASC'
   | 'crowned_DESC'
+  | 'crownedDate_ASC'
+  | 'crownedDate_DESC'
   | 'private_ASC'
   | 'private_DESC'
   | 'lastConnected_ASC'

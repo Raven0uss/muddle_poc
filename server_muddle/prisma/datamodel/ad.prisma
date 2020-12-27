@@ -1,8 +1,14 @@
 type Ad {
   id: ID! @id
   name: String! @unique
+  company: String!
+  companyIcon: String!
   content: String!
+  image: String!
+  """
   targets: [AdTarget] @relation(link: INLINE)
+  """
+  link: String
   active: Boolean! @default(value: true)
   ratio: Int! @default(value: 1)
   createdAt: DateTime! @createdAt

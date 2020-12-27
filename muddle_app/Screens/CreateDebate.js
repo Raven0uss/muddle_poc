@@ -12,23 +12,29 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
 import Select from "../Components/Select";
 import DatePicker from "../Components/DatePicker";
 import { useQuery, gql, useMutation } from "@apollo/client";
-import { defaultProfile, muddle } from "../CustomProperties/IconsBase64";
+import {
+  defaultProfile,
+  muddle,
+  badges,
+} from "../CustomProperties/IconsBase64";
 import moment from "moment";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import strUcFirst from "../Library/strUcFirst";
-import { isEmpty, isNil } from "lodash";
+import { isEmpty, isNil, get } from "lodash";
 import { pickImageAndGetUrl } from "../Library/pickImage";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+// import ConfettiCannon from "react-native-confetti-cannon";
 
 const isErrorInCreateDebate = (
   debateType,
@@ -83,6 +89,7 @@ const CREATE_DEBATE = gql`
     $answerTwo: String!
     $image: String
     $timelimit: String!
+    $crowned: Boolean
   ) {
     createPublicDebate(
       content: $content
@@ -90,6 +97,7 @@ const CREATE_DEBATE = gql`
       answerTwo: $answerTwo
       timelimit: $timelimit
       image: $image
+      crowned: $crowned
     ) {
       id
     }
@@ -110,6 +118,26 @@ const CREATE_INVITATION_DUO_DEBATE = gql`
       timelimit: $timelimit
       image: $image
       user: $user
+    ) {
+      id
+    }
+  }
+`;
+
+const GET_CROWN = gql`
+  query($userId: ID!) {
+    user(where: { id: $userId }) {
+      id
+      crowned
+    }
+  }
+`;
+
+const REMOVE_CROWN = gql`
+  mutation($userId: ID!) {
+    updateUser(
+      where: { id: $userId }
+      data: { crowned: false, crownedDate: null }
     ) {
       id
     }
@@ -331,20 +359,25 @@ const createPublicDebate = async ({
   answerTwo,
   duration,
   reqCreatePublicDebate,
+  crowned,
   image,
+  reqRemoveCrown,
 }) => {
   const timelimit = `${duration.day} ${duration.hour}`;
 
-  console.log(image);
   await reqCreatePublicDebate({
     variables: {
       content,
       answerOne,
       answerTwo,
       timelimit,
+      crowned,
       image,
     },
   });
+  if (crowned) {
+    await reqRemoveCrown();
+  }
 };
 
 const createDuoDebate = async ({
@@ -394,6 +427,32 @@ const CreateDebate = (props) => {
   const [content, setContent] = React.useState("");
   const [optionOne, setOptionOne] = React.useState("");
   const [optionTwo, setOptionTwo] = React.useState("");
+  const [isCrownedUser, setIsCrownedUser] = React.useState(false);
+  const [isCrownedDebate, setIsCrownedDebate] = React.useState(false);
+
+  const [reqRemoveCrown] = useMutation(REMOVE_CROWN, {
+    variables: {
+      userId: currentUser.id,
+    },
+  });
+
+  const { loading } = useQuery(GET_CROWN, {
+    variables: {
+      userId: currentUser.id,
+    },
+    onCompleted: (response) => {
+      const { user: queryResponse } = response;
+
+      console.log(response);
+      if (isNil(queryResponse)) return;
+      const crownCheck = get(queryResponse, "crowned");
+      if (isNil(crownCheck)) return;
+      if (crownCheck) {
+        setIsCrownedUser(true);
+      }
+    },
+    fetchPolicy: "cache-and-network",
+  });
 
   const [reqCreatePublicDebate] = useMutation(CREATE_DEBATE, {
     onCompleted: () => {
@@ -413,6 +472,20 @@ const CreateDebate = (props) => {
     },
   });
 
+  if (loading) {
+    return (
+      <SafeAreaView
+        style={{
+          ...styles.loadingContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+      >
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
+  }
+
+  console.log(isCrownedUser);
   const disabledButton = isErrorInCreateDebate(debateType, {
     content,
     answerOne: optionOne,
@@ -445,6 +518,14 @@ const CreateDebate = (props) => {
           />
         }
       />
+      {/* {isCrownedDebate && (
+        <ConfettiCannon
+          count={300}
+          origin={{ x: -10, y: -20 }}
+          colors={["#FFD700", "#F47658"]}
+          // fallSpeed={000}
+        />
+      )} */}
       <KeyboardAvoidingView
         behavior="padding"
         style={{
@@ -480,41 +561,83 @@ const CreateDebate = (props) => {
                 {`${currentUser.firstname} ${currentUser.lastname}`}
                 {currentUser.certified && <CertifiedIcon />}
               </Text>
-            </View>
-            <View style={{ marginTop: 10 }}>
-              <Select
-                list={[
-                  {
-                    label: i18n._("publicDebateSelect"),
-                    value: "PUBLIC",
-                  },
-                  {
-                    label: i18n._("duoDebateSelect"),
-                    value: "DUO",
-                  },
-                ]}
-                selected={debateType}
-                placeholder=""
-                onSelect={(type) => setDebateType(type)}
-                renderComponent={
-                  <View
+              {isCrownedUser && (
+                <TouchableOpacity
+                  style={{
+                    marginLeft: "auto",
+                    marginTop: -40,
+                    padding: 8,
+                    backgroundColor: "#F47658",
+                    borderRadius: 10,
+                    ...(isCrownedDebate
+                      ? {
+                          // crown style
+                        }
+                      : {}),
+                  }}
+                  onPress={() => {
+                    setIsCrownedDebate((c) => !c);
+                    setDebateType({
+                      label: i18n._("publicDebateSelect"),
+                      value: "PUBLIC",
+                    });
+                  }}
+                >
+                  <Text
                     style={{
-                      ...styles.inputSelect,
-                      backgroundColor: themeSchema[theme].backgroundColor1,
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 12,
+                      color: "#222222",
                     }}
                   >
-                    <Text
+                    {isCrownedDebate
+                      ? i18n._("disableCrown")
+                      : i18n._("enableCrown")}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            {!isCrownedDebate && (
+              <View style={{ marginTop: 10 }}>
+                <Select
+                  list={[
+                    {
+                      label: i18n._("publicDebateSelect"),
+                      value: "PUBLIC",
+                    },
+                    {
+                      label: i18n._("duoDebateSelect"),
+                      value: "DUO",
+                    },
+                  ]}
+                  selected={debateType}
+                  placeholder=""
+                  onSelect={(type) => setDebateType(type)}
+                  renderComponent={
+                    <View
                       style={{
-                        fontFamily: "Montserrat_500Medium",
-                        color: themeSchema[theme].colorText,
+                        ...styles.inputSelect,
+                        backgroundColor: themeSchema[theme].backgroundColor1,
+                        ...(isCrownedDebate
+                          ? {
+                              // crown style
+                            }
+                          : {}),
                       }}
                     >
-                      {debateType.label}
-                    </Text>
-                  </View>
-                }
-              />
-            </View>
+                      <Text
+                        style={{
+                          fontFamily: "Montserrat_500Medium",
+                          color: themeSchema[theme].colorText,
+                        }}
+                      >
+                        {debateType.label}
+                      </Text>
+                    </View>
+                  }
+                />
+              </View>
+            )}
             {
               debateType.value === "DUO" && (
                 <TouchableWithoutFeedback
@@ -555,6 +678,12 @@ const CreateDebate = (props) => {
                   marginBottom: 3,
                   height: 40,
                   flexDirection: "row",
+                  ...(isCrownedDebate
+                    ? {
+                        // crown style
+                        marginTop: 10,
+                      }
+                    : {}),
                 }}
               >
                 <Text
@@ -736,6 +865,11 @@ const CreateDebate = (props) => {
                 backgroundColor: themeSchema[theme].hrLineColor,
                 width: "90%",
                 alignSelf: "center",
+                ...(isCrownedDebate
+                  ? {
+                      // crown style
+                    }
+                  : {}),
               }}
             />
             <View style={{ marginTop: 10 }}>
@@ -749,6 +883,12 @@ const CreateDebate = (props) => {
                   backgroundColor: themeSchema[theme].backgroundColor1,
                   borderBottomLeftRadius: 0,
                   borderBottomRightRadius: 0,
+                  alignSelf: "center",
+                  ...(isCrownedDebate
+                    ? {
+                        // crown style
+                      }
+                    : {}),
                 }}
                 keyboardType="default"
                 placeholderTextColor={themeSchema[theme].colorText}
@@ -765,6 +905,11 @@ const CreateDebate = (props) => {
                 padding: 10,
                 paddingTop: 5,
                 backgroundColor: themeSchema[theme].backgroundColor1,
+                ...(isCrownedDebate
+                  ? {
+                      // crown style
+                    }
+                  : {}),
               }}
             >
               {loadingImage ? (
@@ -840,6 +985,11 @@ const CreateDebate = (props) => {
                 justifyContent: "space-around",
                 alignItems: "center",
                 flexDirection: "row",
+                ...(isCrownedDebate
+                  ? {
+                      // crown style
+                    }
+                  : {}),
               }}
             >
               <TextInput
@@ -897,6 +1047,8 @@ const CreateDebate = (props) => {
                   answerTwo: optionTwo,
                   duration,
                   image,
+                  crowned: isCrownedDebate,
+                  reqRemoveCrown,
                   reqCreatePublicDebate,
                 });
               if (debateType.value === "DUO") {
@@ -918,12 +1070,42 @@ const CreateDebate = (props) => {
               paddingRight: 30,
               borderRadius: 30,
               marginTop: 20,
+              ...(isCrownedDebate
+                ? {
+                    // crown style
+                  }
+                : {}),
             }}
             disabled={disabledButton}
           >
             <Text style={{ color: "#000", fontFamily: "Montserrat_700Bold" }}>
               {i18n._("publish")}
             </Text>
+            {isCrownedDebate && (
+              <View
+                style={{
+                  width: 15,
+                  height: 15,
+                  backgroundColor: "#F47658",
+                  // marginRight: 10,
+                  position: "absolute",
+                  // marginTop: -1,
+                  // float: "left",
+                  borderRadius: 50,
+                  borderColor: themeSchema[theme].backgroundColor2,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={{ uri: badges.crown }}
+                  style={{
+                    width: 10,
+                    height: 8,
+                  }}
+                />
+              </View>
+            )}
           </TouchableOpacity>
           <View
             style={{
@@ -940,6 +1122,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F47658",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   seedContainer: {
     borderTopLeftRadius: 15,

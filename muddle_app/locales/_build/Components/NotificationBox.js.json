@@ -246,5 +246,21 @@
         1542
       ]
     ]
+  },
+  "sendYouCrown": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1623
+      ]
+    ]
+  },
+  "crownDescription": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1636
+      ]
+    ]
   }
 }

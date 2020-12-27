@@ -4,33 +4,47 @@
 
 type Ad {
   active: Boolean!
+  company: String!
+  companyIcon: String!
   content: String!
   createdAt: DateTime!
   id: ID!
+  image: String!
+  link: String
   name: String!
   ratio: Int!
-  targets(after: String, before: String, first: Int, last: Int, orderBy: AdTargetOrderByInput, skip: Int, where: AdTargetWhereInput): [AdTarget!]
   updatedAt: DateTime!
 }
 
 input AdCreateInput {
   active: Boolean
+  company: String!
+  companyIcon: String!
   content: String!
   id: ID
+  image: String!
+  link: String
   name: String!
   ratio: Int
-  targets: AdTargetCreateManyInput
 }
 
 enum AdOrderByInput {
   active_ASC
   active_DESC
+  company_ASC
+  company_DESC
+  companyIcon_ASC
+  companyIcon_DESC
   content_ASC
   content_DESC
   createdAt_ASC
   createdAt_DESC
   id_ASC
   id_DESC
+  image_ASC
+  image_DESC
+  link_ASC
+  link_DESC
   name_ASC
   name_DESC
   ratio_ASC
@@ -57,11 +71,6 @@ input AdTargetCreateInput {
   name: String!
 }
 
-input AdTargetCreateManyInput {
-  connect: [AdTargetWhereUniqueInput!]
-  create: [AdTargetCreateInput!]
-}
-
 enum AdTargetOrderByInput {
   birthdateMax_ASC
   birthdateMax_DESC
@@ -79,123 +88,11 @@ enum AdTargetOrderByInput {
   updatedAt_DESC
 }
 
-input AdTargetScalarWhereInput {
-  AND: [AdTargetScalarWhereInput!]
-  birthdateMax: DateTime
-  birthdateMax_gt: DateTime
-  birthdateMax_gte: DateTime
-  birthdateMax_in: [DateTime!]
-  birthdateMax_lt: DateTime
-  birthdateMax_lte: DateTime
-  birthdateMax_not: DateTime
-  birthdateMax_not_in: [DateTime!]
-  birthdateMin: DateTime
-  birthdateMin_gt: DateTime
-  birthdateMin_gte: DateTime
-  birthdateMin_in: [DateTime!]
-  birthdateMin_lt: DateTime
-  birthdateMin_lte: DateTime
-  birthdateMin_not: DateTime
-  birthdateMin_not_in: [DateTime!]
-  createdAt: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_not: DateTime
-  createdAt_not_in: [DateTime!]
-  gender: GenderFilter
-  gender_in: [GenderFilter!]
-  gender_not: GenderFilter
-  gender_not_in: [GenderFilter!]
-  id: ID
-  id_contains: ID
-  id_ends_with: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_not: ID
-  id_not_contains: ID
-  id_not_ends_with: ID
-  id_not_in: [ID!]
-  id_not_starts_with: ID
-  id_starts_with: ID
-  name: String
-  name_contains: String
-  name_ends_with: String
-  name_gt: String
-  name_gte: String
-  name_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_not: String
-  name_not_contains: String
-  name_not_ends_with: String
-  name_not_in: [String!]
-  name_not_starts_with: String
-  name_starts_with: String
-  NOT: [AdTargetScalarWhereInput!]
-  OR: [AdTargetScalarWhereInput!]
-  updatedAt: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_not: DateTime
-  updatedAt_not_in: [DateTime!]
-}
-
-input AdTargetUpdateDataInput {
-  birthdateMax: DateTime
-  birthdateMin: DateTime
-  gender: GenderFilter
-  name: String
-}
-
 input AdTargetUpdateInput {
   birthdateMax: DateTime
   birthdateMin: DateTime
   gender: GenderFilter
   name: String
-}
-
-input AdTargetUpdateManyDataInput {
-  birthdateMax: DateTime
-  birthdateMin: DateTime
-  gender: GenderFilter
-  name: String
-}
-
-input AdTargetUpdateManyInput {
-  connect: [AdTargetWhereUniqueInput!]
-  create: [AdTargetCreateInput!]
-  delete: [AdTargetWhereUniqueInput!]
-  deleteMany: [AdTargetScalarWhereInput!]
-  disconnect: [AdTargetWhereUniqueInput!]
-  set: [AdTargetWhereUniqueInput!]
-  update: [AdTargetUpdateWithWhereUniqueNestedInput!]
-  updateMany: [AdTargetUpdateManyWithWhereNestedInput!]
-  upsert: [AdTargetUpsertWithWhereUniqueNestedInput!]
-}
-
-input AdTargetUpdateManyWithWhereNestedInput {
-  data: AdTargetUpdateManyDataInput!
-  where: AdTargetScalarWhereInput!
-}
-
-input AdTargetUpdateWithWhereUniqueNestedInput {
-  data: AdTargetUpdateDataInput!
-  where: AdTargetWhereUniqueInput!
-}
-
-input AdTargetUpsertWithWhereUniqueNestedInput {
-  create: AdTargetCreateInput!
-  update: AdTargetUpdateDataInput!
-  where: AdTargetWhereUniqueInput!
 }
 
 input AdTargetWhereInput {
@@ -273,16 +170,47 @@ input AdTargetWhereUniqueInput {
 
 input AdUpdateInput {
   active: Boolean
+  company: String
+  companyIcon: String
   content: String
+  image: String
+  link: String
   name: String
   ratio: Int
-  targets: AdTargetUpdateManyInput
 }
 
 input AdWhereInput {
   active: Boolean
   active_not: Boolean
   AND: [AdWhereInput!]
+  company: String
+  company_contains: String
+  company_ends_with: String
+  company_gt: String
+  company_gte: String
+  company_in: [String!]
+  company_lt: String
+  company_lte: String
+  company_not: String
+  company_not_contains: String
+  company_not_ends_with: String
+  company_not_in: [String!]
+  company_not_starts_with: String
+  company_starts_with: String
+  companyIcon: String
+  companyIcon_contains: String
+  companyIcon_ends_with: String
+  companyIcon_gt: String
+  companyIcon_gte: String
+  companyIcon_in: [String!]
+  companyIcon_lt: String
+  companyIcon_lte: String
+  companyIcon_not: String
+  companyIcon_not_contains: String
+  companyIcon_not_ends_with: String
+  companyIcon_not_in: [String!]
+  companyIcon_not_starts_with: String
+  companyIcon_starts_with: String
   content: String
   content_contains: String
   content_ends_with: String
@@ -319,6 +247,34 @@ input AdWhereInput {
   id_not_in: [ID!]
   id_not_starts_with: ID
   id_starts_with: ID
+  image: String
+  image_contains: String
+  image_ends_with: String
+  image_gt: String
+  image_gte: String
+  image_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_not: String
+  image_not_contains: String
+  image_not_ends_with: String
+  image_not_in: [String!]
+  image_not_starts_with: String
+  image_starts_with: String
+  link: String
+  link_contains: String
+  link_ends_with: String
+  link_gt: String
+  link_gte: String
+  link_in: [String!]
+  link_lt: String
+  link_lte: String
+  link_not: String
+  link_not_contains: String
+  link_not_ends_with: String
+  link_not_in: [String!]
+  link_not_starts_with: String
+  link_starts_with: String
   name: String
   name_contains: String
   name_ends_with: String
@@ -341,7 +297,6 @@ input AdWhereInput {
   ratio_lte: Int
   ratio_not: Int
   ratio_not_in: [Int!]
-  targets_some: AdTargetWhereInput
   updatedAt: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
@@ -2298,7 +2253,7 @@ type Mutation {
   createInvitationDuoDebate(answerOne: String, content: String, image: String, timelimit: String, user: ID): Debate!
   createMessage(data: MessageCreateInput!): Message!
   createNotification(data: NotificationCreateInput!): Notification!
-  createPublicDebate(answerOne: String, answerTwo: String, content: String, image: String, timelimit: String): Debate!
+  createPublicDebate(answerOne: String, answerTwo: String, content: String, crowned: Boolean, image: String, timelimit: String): Debate!
   createReport(data: ReportCreateInput!): Report!
   createTrophy(data: TrophyCreateInput!): Trophy!
   deleteComment(where: CommentWhereUniqueInput!): Comment
@@ -2309,6 +2264,7 @@ type Mutation {
   deleteMyDebate(debateId: ID): Debate!
   deleteThisConversation(conversationId: ID): NoValue!
   dislikeComment(commentId: ID, userId: ID): Comment!
+  giveCrown(userId: ID): User!
   likeComment(commentId: ID, userId: ID): Comment!
   notifyComment(debateId: ID): NoValue!
   notifySubComment(commentId: ID, debateId: ID): NoValue!
@@ -2469,6 +2425,7 @@ enum NotificationType {
   ACCEPT_DUO
   CLOSE_DEBATE
   COMMENT
+  CROWNED
   DELETE_DEBATE
   DISLIKE
   INVITATION_DUO
@@ -3166,6 +3123,7 @@ type User {
   coverPicture: String
   createdAt: DateTime!
   crowned: Boolean!
+  crownedDate: DateTime
   debates(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
   debatesBlue(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
   debatesRed(after: String, before: String, first: Int, last: Int, orderBy: DebateOrderByInput, skip: Int, where: DebateWhereInput): [Debate!]
@@ -3198,6 +3156,7 @@ input UserCreateInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3293,6 +3252,7 @@ input UserCreateWithoutBlockedInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3323,6 +3283,7 @@ input UserCreateWithoutBlockingInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3353,6 +3314,7 @@ input UserCreateWithoutConversationsInput {
   certified: Boolean
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3384,6 +3346,7 @@ input UserCreateWithoutDebatesBlueInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
@@ -3414,6 +3377,7 @@ input UserCreateWithoutDebatesInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
   email: String!
@@ -3444,6 +3408,7 @@ input UserCreateWithoutDebatesRedInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   email: String!
@@ -3474,6 +3439,7 @@ input UserCreateWithoutFollowersInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3504,6 +3470,7 @@ input UserCreateWithoutFollowingInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3534,6 +3501,7 @@ input UserCreateWithoutInteractionsInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3564,6 +3532,7 @@ input UserCreateWithoutNotificationsInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3594,6 +3563,7 @@ input UserCreateWithoutTrophiesInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateCreateManyWithoutOwnerInput
   debatesBlue: DebateCreateManyWithoutOwnerBlueInput
   debatesRed: DebateCreateManyWithoutOwnerRedInput
@@ -3628,6 +3598,8 @@ enum UserOrderByInput {
   createdAt_DESC
   crowned_ASC
   crowned_DESC
+  crownedDate_ASC
+  crownedDate_DESC
   email_ASC
   email_DESC
   firstname_ASC
@@ -3706,6 +3678,14 @@ input UserScalarWhereInput {
   createdAt_not_in: [DateTime!]
   crowned: Boolean
   crowned_not: Boolean
+  crownedDate: DateTime
+  crownedDate_gt: DateTime
+  crownedDate_gte: DateTime
+  crownedDate_in: [DateTime!]
+  crownedDate_lt: DateTime
+  crownedDate_lte: DateTime
+  crownedDate_not: DateTime
+  crownedDate_not_in: [DateTime!]
   email: String
   email_contains: String
   email_ends_with: String
@@ -3837,6 +3817,7 @@ input UserUpdateDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -3867,6 +3848,7 @@ input UserUpdateInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -3894,6 +3876,7 @@ input UserUpdateManyDataInput {
   certified: Boolean
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   email: String
   firstname: String
   gender: Gender
@@ -4061,6 +4044,7 @@ input UserUpdateWithoutBlockedDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4090,6 +4074,7 @@ input UserUpdateWithoutBlockingDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4119,6 +4104,7 @@ input UserUpdateWithoutConversationsDataInput {
   certified: Boolean
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4149,6 +4135,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
@@ -4178,6 +4165,7 @@ input UserUpdateWithoutDebatesDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
   email: String
@@ -4207,6 +4195,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   email: String
@@ -4236,6 +4225,7 @@ input UserUpdateWithoutFollowersDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4265,6 +4255,7 @@ input UserUpdateWithoutFollowingDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4294,6 +4285,7 @@ input UserUpdateWithoutInteractionsDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4323,6 +4315,7 @@ input UserUpdateWithoutNotificationsDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4352,6 +4345,7 @@ input UserUpdateWithoutTrophiesDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   coverPicture: String
   crowned: Boolean
+  crownedDate: DateTime
   debates: DebateUpdateManyWithoutOwnerInput
   debatesBlue: DebateUpdateManyWithoutOwnerBlueInput
   debatesRed: DebateUpdateManyWithoutOwnerRedInput
@@ -4532,6 +4526,14 @@ input UserWhereInput {
   createdAt_not_in: [DateTime!]
   crowned: Boolean
   crowned_not: Boolean
+  crownedDate: DateTime
+  crownedDate_gt: DateTime
+  crownedDate_gte: DateTime
+  crownedDate_in: [DateTime!]
+  crownedDate_lt: DateTime
+  crownedDate_lte: DateTime
+  crownedDate_not: DateTime
+  crownedDate_not_in: [DateTime!]
   debates_some: DebateWhereInput
   debatesBlue_some: DebateWhereInput
   debatesRed_some: DebateWhereInput

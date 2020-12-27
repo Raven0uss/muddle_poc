@@ -18,11 +18,14 @@ declare global {
 export interface NexusGenInputs {
   AdCreateInput: { // input type
     active?: boolean | null; // Boolean
+    company: string; // String!
+    companyIcon: string; // String!
     content: string; // String!
     id?: string | null; // ID
+    image: string; // String!
+    link?: string | null; // String
     name: string; // String!
     ratio?: number | null; // Int
-    targets?: NexusGenInputs['AdTargetCreateManyInput'] | null; // AdTargetCreateManyInput
   }
   AdTargetCreateInput: { // input type
     birthdateMax: any; // DateTime!
@@ -31,120 +34,11 @@ export interface NexusGenInputs {
     id?: string | null; // ID
     name: string; // String!
   }
-  AdTargetCreateManyInput: { // input type
-    connect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
-    create?: NexusGenInputs['AdTargetCreateInput'][] | null; // [AdTargetCreateInput!]
-  }
-  AdTargetScalarWhereInput: { // input type
-    AND?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
-    birthdateMax?: any | null; // DateTime
-    birthdateMax_gt?: any | null; // DateTime
-    birthdateMax_gte?: any | null; // DateTime
-    birthdateMax_in?: any[] | null; // [DateTime!]
-    birthdateMax_lt?: any | null; // DateTime
-    birthdateMax_lte?: any | null; // DateTime
-    birthdateMax_not?: any | null; // DateTime
-    birthdateMax_not_in?: any[] | null; // [DateTime!]
-    birthdateMin?: any | null; // DateTime
-    birthdateMin_gt?: any | null; // DateTime
-    birthdateMin_gte?: any | null; // DateTime
-    birthdateMin_in?: any[] | null; // [DateTime!]
-    birthdateMin_lt?: any | null; // DateTime
-    birthdateMin_lte?: any | null; // DateTime
-    birthdateMin_not?: any | null; // DateTime
-    birthdateMin_not_in?: any[] | null; // [DateTime!]
-    createdAt?: any | null; // DateTime
-    createdAt_gt?: any | null; // DateTime
-    createdAt_gte?: any | null; // DateTime
-    createdAt_in?: any[] | null; // [DateTime!]
-    createdAt_lt?: any | null; // DateTime
-    createdAt_lte?: any | null; // DateTime
-    createdAt_not?: any | null; // DateTime
-    createdAt_not_in?: any[] | null; // [DateTime!]
-    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
-    gender_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
-    gender_not?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
-    gender_not_in?: NexusGenEnums['GenderFilter'][] | null; // [GenderFilter!]
-    id?: string | null; // ID
-    id_contains?: string | null; // ID
-    id_ends_with?: string | null; // ID
-    id_gt?: string | null; // ID
-    id_gte?: string | null; // ID
-    id_in?: string[] | null; // [ID!]
-    id_lt?: string | null; // ID
-    id_lte?: string | null; // ID
-    id_not?: string | null; // ID
-    id_not_contains?: string | null; // ID
-    id_not_ends_with?: string | null; // ID
-    id_not_in?: string[] | null; // [ID!]
-    id_not_starts_with?: string | null; // ID
-    id_starts_with?: string | null; // ID
-    name?: string | null; // String
-    name_contains?: string | null; // String
-    name_ends_with?: string | null; // String
-    name_gt?: string | null; // String
-    name_gte?: string | null; // String
-    name_in?: string[] | null; // [String!]
-    name_lt?: string | null; // String
-    name_lte?: string | null; // String
-    name_not?: string | null; // String
-    name_not_contains?: string | null; // String
-    name_not_ends_with?: string | null; // String
-    name_not_in?: string[] | null; // [String!]
-    name_not_starts_with?: string | null; // String
-    name_starts_with?: string | null; // String
-    NOT?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
-    OR?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
-    updatedAt?: any | null; // DateTime
-    updatedAt_gt?: any | null; // DateTime
-    updatedAt_gte?: any | null; // DateTime
-    updatedAt_in?: any[] | null; // [DateTime!]
-    updatedAt_lt?: any | null; // DateTime
-    updatedAt_lte?: any | null; // DateTime
-    updatedAt_not?: any | null; // DateTime
-    updatedAt_not_in?: any[] | null; // [DateTime!]
-  }
-  AdTargetUpdateDataInput: { // input type
-    birthdateMax?: any | null; // DateTime
-    birthdateMin?: any | null; // DateTime
-    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
-    name?: string | null; // String
-  }
   AdTargetUpdateInput: { // input type
     birthdateMax?: any | null; // DateTime
     birthdateMin?: any | null; // DateTime
     gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
     name?: string | null; // String
-  }
-  AdTargetUpdateManyDataInput: { // input type
-    birthdateMax?: any | null; // DateTime
-    birthdateMin?: any | null; // DateTime
-    gender?: NexusGenEnums['GenderFilter'] | null; // GenderFilter
-    name?: string | null; // String
-  }
-  AdTargetUpdateManyInput: { // input type
-    connect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
-    create?: NexusGenInputs['AdTargetCreateInput'][] | null; // [AdTargetCreateInput!]
-    delete?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['AdTargetScalarWhereInput'][] | null; // [AdTargetScalarWhereInput!]
-    disconnect?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
-    set?: NexusGenInputs['AdTargetWhereUniqueInput'][] | null; // [AdTargetWhereUniqueInput!]
-    update?: NexusGenInputs['AdTargetUpdateWithWhereUniqueNestedInput'][] | null; // [AdTargetUpdateWithWhereUniqueNestedInput!]
-    updateMany?: NexusGenInputs['AdTargetUpdateManyWithWhereNestedInput'][] | null; // [AdTargetUpdateManyWithWhereNestedInput!]
-    upsert?: NexusGenInputs['AdTargetUpsertWithWhereUniqueNestedInput'][] | null; // [AdTargetUpsertWithWhereUniqueNestedInput!]
-  }
-  AdTargetUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['AdTargetUpdateManyDataInput']; // AdTargetUpdateManyDataInput!
-    where: NexusGenInputs['AdTargetScalarWhereInput']; // AdTargetScalarWhereInput!
-  }
-  AdTargetUpdateWithWhereUniqueNestedInput: { // input type
-    data: NexusGenInputs['AdTargetUpdateDataInput']; // AdTargetUpdateDataInput!
-    where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
-  }
-  AdTargetUpsertWithWhereUniqueNestedInput: { // input type
-    create: NexusGenInputs['AdTargetCreateInput']; // AdTargetCreateInput!
-    update: NexusGenInputs['AdTargetUpdateDataInput']; // AdTargetUpdateDataInput!
-    where: NexusGenInputs['AdTargetWhereUniqueInput']; // AdTargetWhereUniqueInput!
   }
   AdTargetWhereInput: { // input type
     AND?: NexusGenInputs['AdTargetWhereInput'][] | null; // [AdTargetWhereInput!]
@@ -219,15 +113,46 @@ export interface NexusGenInputs {
   }
   AdUpdateInput: { // input type
     active?: boolean | null; // Boolean
+    company?: string | null; // String
+    companyIcon?: string | null; // String
     content?: string | null; // String
+    image?: string | null; // String
+    link?: string | null; // String
     name?: string | null; // String
     ratio?: number | null; // Int
-    targets?: NexusGenInputs['AdTargetUpdateManyInput'] | null; // AdTargetUpdateManyInput
   }
   AdWhereInput: { // input type
     active?: boolean | null; // Boolean
     active_not?: boolean | null; // Boolean
     AND?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
+    company?: string | null; // String
+    company_contains?: string | null; // String
+    company_ends_with?: string | null; // String
+    company_gt?: string | null; // String
+    company_gte?: string | null; // String
+    company_in?: string[] | null; // [String!]
+    company_lt?: string | null; // String
+    company_lte?: string | null; // String
+    company_not?: string | null; // String
+    company_not_contains?: string | null; // String
+    company_not_ends_with?: string | null; // String
+    company_not_in?: string[] | null; // [String!]
+    company_not_starts_with?: string | null; // String
+    company_starts_with?: string | null; // String
+    companyIcon?: string | null; // String
+    companyIcon_contains?: string | null; // String
+    companyIcon_ends_with?: string | null; // String
+    companyIcon_gt?: string | null; // String
+    companyIcon_gte?: string | null; // String
+    companyIcon_in?: string[] | null; // [String!]
+    companyIcon_lt?: string | null; // String
+    companyIcon_lte?: string | null; // String
+    companyIcon_not?: string | null; // String
+    companyIcon_not_contains?: string | null; // String
+    companyIcon_not_ends_with?: string | null; // String
+    companyIcon_not_in?: string[] | null; // [String!]
+    companyIcon_not_starts_with?: string | null; // String
+    companyIcon_starts_with?: string | null; // String
     content?: string | null; // String
     content_contains?: string | null; // String
     content_ends_with?: string | null; // String
@@ -264,6 +189,34 @@ export interface NexusGenInputs {
     id_not_in?: string[] | null; // [ID!]
     id_not_starts_with?: string | null; // ID
     id_starts_with?: string | null; // ID
+    image?: string | null; // String
+    image_contains?: string | null; // String
+    image_ends_with?: string | null; // String
+    image_gt?: string | null; // String
+    image_gte?: string | null; // String
+    image_in?: string[] | null; // [String!]
+    image_lt?: string | null; // String
+    image_lte?: string | null; // String
+    image_not?: string | null; // String
+    image_not_contains?: string | null; // String
+    image_not_ends_with?: string | null; // String
+    image_not_in?: string[] | null; // [String!]
+    image_not_starts_with?: string | null; // String
+    image_starts_with?: string | null; // String
+    link?: string | null; // String
+    link_contains?: string | null; // String
+    link_ends_with?: string | null; // String
+    link_gt?: string | null; // String
+    link_gte?: string | null; // String
+    link_in?: string[] | null; // [String!]
+    link_lt?: string | null; // String
+    link_lte?: string | null; // String
+    link_not?: string | null; // String
+    link_not_contains?: string | null; // String
+    link_not_ends_with?: string | null; // String
+    link_not_in?: string[] | null; // [String!]
+    link_not_starts_with?: string | null; // String
+    link_starts_with?: string | null; // String
     name?: string | null; // String
     name_contains?: string | null; // String
     name_ends_with?: string | null; // String
@@ -286,7 +239,6 @@ export interface NexusGenInputs {
     ratio_lte?: number | null; // Int
     ratio_not?: number | null; // Int
     ratio_not_in?: number[] | null; // [Int!]
-    targets_some?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
     updatedAt_gte?: any | null; // DateTime
@@ -2490,6 +2442,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2571,6 +2524,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2600,6 +2554,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2629,6 +2584,7 @@ export interface NexusGenInputs {
     certified?: boolean | null; // Boolean
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2659,6 +2615,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
@@ -2688,6 +2645,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
     email: string; // String!
@@ -2717,6 +2675,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     email: string; // String!
@@ -2746,6 +2705,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2775,6 +2735,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2804,6 +2765,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2833,6 +2795,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2862,6 +2825,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationCreateManyWithoutSpeakersInput'] | null; // ConversationCreateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateCreateManyWithoutOwnerInput'] | null; // DebateCreateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateCreateManyWithoutOwnerBlueInput'] | null; // DebateCreateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateCreateManyWithoutOwnerRedInput'] | null; // DebateCreateManyWithoutOwnerRedInput
@@ -2932,6 +2896,14 @@ export interface NexusGenInputs {
     createdAt_not_in?: any[] | null; // [DateTime!]
     crowned?: boolean | null; // Boolean
     crowned_not?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
+    crownedDate_gt?: any | null; // DateTime
+    crownedDate_gte?: any | null; // DateTime
+    crownedDate_in?: any[] | null; // [DateTime!]
+    crownedDate_lt?: any | null; // DateTime
+    crownedDate_lte?: any | null; // DateTime
+    crownedDate_not?: any | null; // DateTime
+    crownedDate_not_in?: any[] | null; // [DateTime!]
     email?: string | null; // String
     email_contains?: string | null; // String
     email_ends_with?: string | null; // String
@@ -3062,6 +3034,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3091,6 +3064,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3117,6 +3091,7 @@ export interface NexusGenInputs {
     certified?: boolean | null; // Boolean
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     email?: string | null; // String
     firstname?: string | null; // String
     gender?: NexusGenEnums['Gender'] | null; // Gender
@@ -3296,6 +3271,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3324,6 +3300,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3352,6 +3329,7 @@ export interface NexusGenInputs {
     certified?: boolean | null; // Boolean
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3381,6 +3359,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
@@ -3409,6 +3388,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
     email?: string | null; // String
@@ -3437,6 +3417,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     email?: string | null; // String
@@ -3465,6 +3446,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3493,6 +3475,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3521,6 +3504,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3549,6 +3533,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3577,6 +3562,7 @@ export interface NexusGenInputs {
     conversations?: NexusGenInputs['ConversationUpdateManyWithoutSpeakersInput'] | null; // ConversationUpdateManyWithoutSpeakersInput
     coverPicture?: string | null; // String
     crowned?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
     debates?: NexusGenInputs['DebateUpdateManyWithoutOwnerInput'] | null; // DebateUpdateManyWithoutOwnerInput
     debatesBlue?: NexusGenInputs['DebateUpdateManyWithoutOwnerBlueInput'] | null; // DebateUpdateManyWithoutOwnerBlueInput
     debatesRed?: NexusGenInputs['DebateUpdateManyWithoutOwnerRedInput'] | null; // DebateUpdateManyWithoutOwnerRedInput
@@ -3708,6 +3694,14 @@ export interface NexusGenInputs {
     createdAt_not_in?: any[] | null; // [DateTime!]
     crowned?: boolean | null; // Boolean
     crowned_not?: boolean | null; // Boolean
+    crownedDate?: any | null; // DateTime
+    crownedDate_gt?: any | null; // DateTime
+    crownedDate_gte?: any | null; // DateTime
+    crownedDate_in?: any[] | null; // [DateTime!]
+    crownedDate_lt?: any | null; // DateTime
+    crownedDate_lte?: any | null; // DateTime
+    crownedDate_not?: any | null; // DateTime
+    crownedDate_not_in?: any[] | null; // [DateTime!]
     debates_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
     debatesBlue_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
     debatesRed_some?: NexusGenInputs['DebateWhereInput'] | null; // DebateWhereInput
@@ -3842,7 +3836,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  AdOrderByInput: "active_ASC" | "active_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "ratio_ASC" | "ratio_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  AdOrderByInput: "active_ASC" | "active_DESC" | "company_ASC" | "company_DESC" | "companyIcon_ASC" | "companyIcon_DESC" | "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "image_ASC" | "image_DESC" | "link_ASC" | "link_DESC" | "name_ASC" | "name_DESC" | "ratio_ASC" | "ratio_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   AdTargetOrderByInput: "birthdateMax_ASC" | "birthdateMax_DESC" | "birthdateMin_ASC" | "birthdateMin_DESC" | "createdAt_ASC" | "createdAt_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   CommentOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "nested_ASC" | "nested_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ConversationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "deleted_ASC" | "deleted_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
@@ -3856,7 +3850,7 @@ export interface NexusGenEnums {
   MessageOrderByInput: "content_ASC" | "content_DESC" | "createdAt_ASC" | "createdAt_DESC" | "deleted_ASC" | "deleted_DESC" | "id_ASC" | "id_DESC" | "read_ASC" | "read_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   NotificationOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "new_ASC" | "new_DESC" | "status_ASC" | "status_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "userId_ASC" | "userId_DESC"
   NotificationStatus: "ACCEPTED" | "DECLINED" | "INFORMATION" | "PENDING"
-  NotificationType: "ACCEPT_CLOSE_DEBATE" | "ACCEPT_DELETE_DEBATE" | "ACCEPT_DUO" | "CLOSE_DEBATE" | "COMMENT" | "DELETE_DEBATE" | "DISLIKE" | "INVITATION_DUO" | "LIKE" | "REJECT_CLOSE_DEBATE" | "REJECT_DELETE_DEBATE" | "REJECT_DUO" | "SUBCOMMENT" | "VOTE"
+  NotificationType: "ACCEPT_CLOSE_DEBATE" | "ACCEPT_DELETE_DEBATE" | "ACCEPT_DUO" | "CLOSE_DEBATE" | "COMMENT" | "CROWNED" | "DELETE_DEBATE" | "DISLIKE" | "INVITATION_DUO" | "LIKE" | "REJECT_CLOSE_DEBATE" | "REJECT_DELETE_DEBATE" | "REJECT_DUO" | "SUBCOMMENT" | "VOTE"
   ReportOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "reason_ASC" | "reason_DESC" | "reasonText_ASC" | "reasonText_DESC" | "treated_ASC" | "treated_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   ReportReason: "INSULT" | "PORNOGRAPHY" | "RACISM" | "SEXISM" | "VIOLENCE"
   ReportType: "COMMENT" | "DEBATE"
@@ -3864,15 +3858,19 @@ export interface NexusGenEnums {
   Theme: "DARK" | "LIGHT"
   TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
   TrophyType: "DUO" | "TOP_COMMENT"
-  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "theme_ASC" | "theme_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "crownedDate_ASC" | "crownedDate_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "theme_ASC" | "theme_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
   Ad: { // root type
     active: boolean; // Boolean!
+    company: string; // String!
+    companyIcon: string; // String!
     content: string; // String!
     createdAt: any; // DateTime!
     id: string; // ID!
+    image: string; // String!
+    link?: string | null; // String
     name: string; // String!
     ratio: number; // Int!
     updatedAt: any; // DateTime!
@@ -3992,6 +3990,7 @@ export interface NexusGenRootTypes {
     coverPicture?: string | null; // String
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
+    crownedDate?: any | null; // DateTime
     email: string; // String!
     firstname: string; // String!
     gender: NexusGenEnums['Gender']; // Gender!
@@ -4018,15 +4017,7 @@ export interface NexusGenRootTypes {
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AdCreateInput: NexusGenInputs['AdCreateInput'];
   AdTargetCreateInput: NexusGenInputs['AdTargetCreateInput'];
-  AdTargetCreateManyInput: NexusGenInputs['AdTargetCreateManyInput'];
-  AdTargetScalarWhereInput: NexusGenInputs['AdTargetScalarWhereInput'];
-  AdTargetUpdateDataInput: NexusGenInputs['AdTargetUpdateDataInput'];
   AdTargetUpdateInput: NexusGenInputs['AdTargetUpdateInput'];
-  AdTargetUpdateManyDataInput: NexusGenInputs['AdTargetUpdateManyDataInput'];
-  AdTargetUpdateManyInput: NexusGenInputs['AdTargetUpdateManyInput'];
-  AdTargetUpdateManyWithWhereNestedInput: NexusGenInputs['AdTargetUpdateManyWithWhereNestedInput'];
-  AdTargetUpdateWithWhereUniqueNestedInput: NexusGenInputs['AdTargetUpdateWithWhereUniqueNestedInput'];
-  AdTargetUpsertWithWhereUniqueNestedInput: NexusGenInputs['AdTargetUpsertWithWhereUniqueNestedInput'];
   AdTargetWhereInput: NexusGenInputs['AdTargetWhereInput'];
   AdTargetWhereUniqueInput: NexusGenInputs['AdTargetWhereUniqueInput'];
   AdUpdateInput: NexusGenInputs['AdUpdateInput'];
@@ -4304,12 +4295,15 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Ad: { // field return type
     active: boolean; // Boolean!
+    company: string; // String!
+    companyIcon: string; // String!
     content: string; // String!
     createdAt: any; // DateTime!
     id: string; // ID!
+    image: string; // String!
+    link: string | null; // String
     name: string; // String!
     ratio: number; // Int!
-    targets: NexusGenRootTypes['AdTarget'][] | null; // [AdTarget!]
     updatedAt: any; // DateTime!
   }
   AdTarget: { // field return type
@@ -4429,6 +4423,7 @@ export interface NexusGenFieldTypes {
     deleteMyDebate: NexusGenRootTypes['Debate']; // Debate!
     deleteThisConversation: NexusGenRootTypes['NoValue']; // NoValue!
     dislikeComment: NexusGenRootTypes['Comment']; // Comment!
+    giveCrown: NexusGenRootTypes['User']; // User!
     likeComment: NexusGenRootTypes['Comment']; // Comment!
     notifyComment: NexusGenRootTypes['NoValue']; // NoValue!
     notifySubComment: NexusGenRootTypes['NoValue']; // NoValue!
@@ -4545,6 +4540,7 @@ export interface NexusGenFieldTypes {
     coverPicture: string | null; // String
     createdAt: any; // DateTime!
     crowned: boolean; // Boolean!
+    crownedDate: any | null; // DateTime
     debates: NexusGenRootTypes['Debate'][] | null; // [Debate!]
     debatesBlue: NexusGenRootTypes['Debate'][] | null; // [Debate!]
     debatesRed: NexusGenRootTypes['Debate'][] | null; // [Debate!]
@@ -4570,17 +4566,6 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
-  Ad: {
-    targets: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenEnums['AdTargetOrderByInput'] | null; // AdTargetOrderByInput
-      skip?: number | null; // Int
-      where?: NexusGenInputs['AdTargetWhereInput'] | null; // AdTargetWhereInput
-    }
-  }
   Comment: {
     comments: { // args
       after?: string | null; // String
@@ -4751,6 +4736,7 @@ export interface NexusGenArgTypes {
       answerOne?: string | null; // String
       answerTwo?: string | null; // String
       content?: string | null; // String
+      crowned?: boolean | null; // Boolean
       image?: string | null; // String
       timelimit?: string | null; // String
     }
@@ -4783,6 +4769,9 @@ export interface NexusGenArgTypes {
     }
     dislikeComment: { // args
       commentId?: string | null; // ID
+      userId?: string | null; // ID
+    }
+    giveCrown: { // args
       userId?: string | null; // ID
     }
     likeComment: { // args
@@ -5157,7 +5146,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Ad" | "AdTarget" | "BatchPayload" | "Comment" | "CommentSubPayload" | "Conversation" | "ConversationSubPayload" | "Debate" | "Interaction" | "Message" | "MessageSubPayload" | "Mutation" | "NewNotifications" | "NoValue" | "Notification" | "NotificationSubPayload" | "Query" | "Report" | "Subscription" | "Token" | "Trophy" | "User";
 
-export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetCreateManyInput" | "AdTargetScalarWhereInput" | "AdTargetUpdateDataInput" | "AdTargetUpdateInput" | "AdTargetUpdateManyDataInput" | "AdTargetUpdateManyInput" | "AdTargetUpdateManyWithWhereNestedInput" | "AdTargetUpdateWithWhereUniqueNestedInput" | "AdTargetUpsertWithWhereUniqueNestedInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueNestedInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateOneWithoutMessagesInput" | "ConversationCreateWithoutMessagesInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyDataInput" | "ConversationUpdateManyWithWhereNestedInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateOneRequiredWithoutMessagesInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutMessagesDataInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationUpsertWithoutMessagesInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyWithoutConversationInput" | "MessageCreateWithoutConversationInput" | "MessageScalarWhereInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyMutationInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateManyWithoutConversationInput" | "MessageUpdateWithWhereUniqueWithoutConversationInput" | "MessageUpdateWithoutConversationDataInput" | "MessageUpsertWithWhereUniqueWithoutConversationInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "NotificationCreateInput" | "NotificationCreateManyWithoutWhoInput" | "NotificationCreateWithoutWhoInput" | "NotificationScalarWhereInput" | "NotificationUpdateInput" | "NotificationUpdateManyDataInput" | "NotificationUpdateManyMutationInput" | "NotificationUpdateManyWithWhereNestedInput" | "NotificationUpdateManyWithoutWhoInput" | "NotificationUpdateWithWhereUniqueWithoutWhoInput" | "NotificationUpdateWithoutWhoDataInput" | "NotificationUpsertWithWhereUniqueWithoutWhoInput" | "NotificationWhereInput" | "NotificationWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateManyWithoutNotificationsInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutNotificationsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateManyWithoutNotificationsInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithWhereUniqueWithoutNotificationsInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutNotificationsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithWhereUniqueWithoutNotificationsInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetUpdateInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueNestedInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateOneWithoutMessagesInput" | "ConversationCreateWithoutMessagesInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyDataInput" | "ConversationUpdateManyWithWhereNestedInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateOneRequiredWithoutMessagesInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutMessagesDataInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationUpsertWithoutMessagesInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyWithoutConversationInput" | "MessageCreateWithoutConversationInput" | "MessageScalarWhereInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyMutationInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateManyWithoutConversationInput" | "MessageUpdateWithWhereUniqueWithoutConversationInput" | "MessageUpdateWithoutConversationDataInput" | "MessageUpsertWithWhereUniqueWithoutConversationInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "NotificationCreateInput" | "NotificationCreateManyWithoutWhoInput" | "NotificationCreateWithoutWhoInput" | "NotificationScalarWhereInput" | "NotificationUpdateInput" | "NotificationUpdateManyDataInput" | "NotificationUpdateManyMutationInput" | "NotificationUpdateManyWithWhereNestedInput" | "NotificationUpdateManyWithoutWhoInput" | "NotificationUpdateWithWhereUniqueWithoutWhoInput" | "NotificationUpdateWithoutWhoDataInput" | "NotificationUpsertWithWhereUniqueWithoutWhoInput" | "NotificationWhereInput" | "NotificationWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateManyWithoutNotificationsInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutNotificationsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateManyWithoutNotificationsInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithWhereUniqueWithoutNotificationsInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutNotificationsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithWhereUniqueWithoutNotificationsInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "AdOrderByInput" | "AdTargetOrderByInput" | "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "GenderFilter" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "NotificationOrderByInput" | "NotificationStatus" | "NotificationType" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "Theme" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
 

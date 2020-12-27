@@ -8,7 +8,8 @@
     "reseed": "cd prisma ; prisma reset --force ; prisma seed ; cd -",
     "cjob:closeDeb": "node -r esm ./src/cronjobs/checkClosedDebates.js",
     "cjob:deleteUnpub": "node -r esm ./src/cronjobs/checkUnpublishedDebates.js",
-    "cjob:deleteNotif": "node -r esm ./src/cronjobs/checkOldNotifications.js"
+    "cjob:deleteNotif": "node -r esm ./src/cronjobs/checkOldNotifications.js",
+    "cjob:crown": "node -r esm ./src/cronjobs/checkUserCrowned.js"
   },
   "keywords": [],
   "author": "",

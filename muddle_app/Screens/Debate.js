@@ -20,7 +20,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
-import { defaultProfile } from "../CustomProperties/IconsBase64";
+import { badges, defaultProfile } from "../CustomProperties/IconsBase64";
 import CommentBox from "../Components/CommentBox";
 import Select from "../Components/Select";
 import i18n from "../i18n";
@@ -646,14 +646,50 @@ const Debate = (props) => {
                     // maxHeight: Dimensions.get("screen").height / 6,
                   }}
                 > */}
-                <Text
-                  style={{
-                    ...styles.debateText,
-                    color: themeSchema[theme].colorText,
-                  }}
-                >
-                  {debate.content}
-                </Text>
+                <View style={{ flexDirection: "row" }}>
+                  {debate.crowned && (
+                    <View
+                      style={{
+                        width: 15,
+                        height: 15,
+                        backgroundColor: "#F47658",
+                        // marginRight: 10,
+                        position: "absolute",
+                        // marginTop: -1,
+                        // float: "left",
+                        borderRadius: 50,
+                        borderColor: themeSchema[theme].backgroundColor2,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Image
+                        source={{ uri: badges.crown }}
+                        style={{
+                          width: 10,
+                          height: 8,
+                        }}
+                      />
+                    </View>
+                  )}
+                  <Text
+                    style={{
+                      ...styles.debateText,
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {debate.crowned && (
+                      <View
+                        style={{
+                          width: 20,
+                          height: 1,
+                        }}
+                      />
+                    )}
+                    {debate.content}
+                  </Text>
+                </View>
+
                 {debate.image && (
                   <TouchableOpacity
                     onPress={() => {

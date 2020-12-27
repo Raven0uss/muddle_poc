@@ -6,8 +6,11 @@ module.exports = {
 /* GraphQL */ `type Ad {
   id: ID!
   name: String!
+  company: String!
+  companyIcon: String!
   content: String!
-  targets(where: AdTargetWhereInput, orderBy: AdTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdTarget!]
+  image: String!
+  link: String
   active: Boolean!
   ratio: Int!
   createdAt: DateTime!
@@ -23,8 +26,11 @@ type AdConnection {
 input AdCreateInput {
   id: ID
   name: String!
+  company: String!
+  companyIcon: String!
   content: String!
-  targets: AdTargetCreateManyInput
+  image: String!
+  link: String
   active: Boolean
   ratio: Int
 }
@@ -39,8 +45,16 @@ enum AdOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  company_ASC
+  company_DESC
+  companyIcon_ASC
+  companyIcon_DESC
   content_ASC
   content_DESC
+  image_ASC
+  image_DESC
+  link_ASC
+  link_DESC
   active_ASC
   active_DESC
   ratio_ASC
@@ -54,7 +68,11 @@ enum AdOrderByInput {
 type AdPreviousValues {
   id: ID!
   name: String!
+  company: String!
+  companyIcon: String!
   content: String!
+  image: String!
+  link: String
   active: Boolean!
   ratio: Int!
   createdAt: DateTime!
@@ -101,11 +119,6 @@ input AdTargetCreateInput {
   birthdateMax: DateTime!
 }
 
-input AdTargetCreateManyInput {
-  create: [AdTargetCreateInput!]
-  connect: [AdTargetWhereUniqueInput!]
-}
-
 type AdTargetEdge {
   node: AdTarget!
   cursor: String!
@@ -138,76 +151,6 @@ type AdTargetPreviousValues {
   updatedAt: DateTime!
 }
 
-input AdTargetScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  gender: GenderFilter
-  gender_not: GenderFilter
-  gender_in: [GenderFilter!]
-  gender_not_in: [GenderFilter!]
-  birthdateMin: DateTime
-  birthdateMin_not: DateTime
-  birthdateMin_in: [DateTime!]
-  birthdateMin_not_in: [DateTime!]
-  birthdateMin_lt: DateTime
-  birthdateMin_lte: DateTime
-  birthdateMin_gt: DateTime
-  birthdateMin_gte: DateTime
-  birthdateMax: DateTime
-  birthdateMax_not: DateTime
-  birthdateMax_in: [DateTime!]
-  birthdateMax_not_in: [DateTime!]
-  birthdateMax_lt: DateTime
-  birthdateMax_lte: DateTime
-  birthdateMax_gt: DateTime
-  birthdateMax_gte: DateTime
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [AdTargetScalarWhereInput!]
-  OR: [AdTargetScalarWhereInput!]
-  NOT: [AdTargetScalarWhereInput!]
-}
-
 type AdTargetSubscriptionPayload {
   mutation: MutationType!
   node: AdTarget
@@ -224,13 +167,6 @@ input AdTargetSubscriptionWhereInput {
   AND: [AdTargetSubscriptionWhereInput!]
 }
 
-input AdTargetUpdateDataInput {
-  name: String
-  gender: GenderFilter
-  birthdateMin: DateTime
-  birthdateMax: DateTime
-}
-
 input AdTargetUpdateInput {
   name: String
   gender: GenderFilter
@@ -238,46 +174,11 @@ input AdTargetUpdateInput {
   birthdateMax: DateTime
 }
 
-input AdTargetUpdateManyDataInput {
-  name: String
-  gender: GenderFilter
-  birthdateMin: DateTime
-  birthdateMax: DateTime
-}
-
-input AdTargetUpdateManyInput {
-  create: [AdTargetCreateInput!]
-  update: [AdTargetUpdateWithWhereUniqueNestedInput!]
-  upsert: [AdTargetUpsertWithWhereUniqueNestedInput!]
-  delete: [AdTargetWhereUniqueInput!]
-  connect: [AdTargetWhereUniqueInput!]
-  set: [AdTargetWhereUniqueInput!]
-  disconnect: [AdTargetWhereUniqueInput!]
-  deleteMany: [AdTargetScalarWhereInput!]
-  updateMany: [AdTargetUpdateManyWithWhereNestedInput!]
-}
-
 input AdTargetUpdateManyMutationInput {
   name: String
   gender: GenderFilter
   birthdateMin: DateTime
   birthdateMax: DateTime
-}
-
-input AdTargetUpdateManyWithWhereNestedInput {
-  where: AdTargetScalarWhereInput!
-  data: AdTargetUpdateManyDataInput!
-}
-
-input AdTargetUpdateWithWhereUniqueNestedInput {
-  where: AdTargetWhereUniqueInput!
-  data: AdTargetUpdateDataInput!
-}
-
-input AdTargetUpsertWithWhereUniqueNestedInput {
-  where: AdTargetWhereUniqueInput!
-  update: AdTargetUpdateDataInput!
-  create: AdTargetCreateInput!
 }
 
 input AdTargetWhereInput {
@@ -355,15 +256,22 @@ input AdTargetWhereUniqueInput {
 
 input AdUpdateInput {
   name: String
+  company: String
+  companyIcon: String
   content: String
-  targets: AdTargetUpdateManyInput
+  image: String
+  link: String
   active: Boolean
   ratio: Int
 }
 
 input AdUpdateManyMutationInput {
   name: String
+  company: String
+  companyIcon: String
   content: String
+  image: String
+  link: String
   active: Boolean
   ratio: Int
 }
@@ -397,6 +305,34 @@ input AdWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  company: String
+  company_not: String
+  company_in: [String!]
+  company_not_in: [String!]
+  company_lt: String
+  company_lte: String
+  company_gt: String
+  company_gte: String
+  company_contains: String
+  company_not_contains: String
+  company_starts_with: String
+  company_not_starts_with: String
+  company_ends_with: String
+  company_not_ends_with: String
+  companyIcon: String
+  companyIcon_not: String
+  companyIcon_in: [String!]
+  companyIcon_not_in: [String!]
+  companyIcon_lt: String
+  companyIcon_lte: String
+  companyIcon_gt: String
+  companyIcon_gte: String
+  companyIcon_contains: String
+  companyIcon_not_contains: String
+  companyIcon_starts_with: String
+  companyIcon_not_starts_with: String
+  companyIcon_ends_with: String
+  companyIcon_not_ends_with: String
   content: String
   content_not: String
   content_in: [String!]
@@ -411,7 +347,34 @@ input AdWhereInput {
   content_not_starts_with: String
   content_ends_with: String
   content_not_ends_with: String
-  targets_some: AdTargetWhereInput
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  link: String
+  link_not: String
+  link_in: [String!]
+  link_not_in: [String!]
+  link_lt: String
+  link_lte: String
+  link_gt: String
+  link_gte: String
+  link_contains: String
+  link_not_contains: String
+  link_starts_with: String
+  link_not_starts_with: String
+  link_ends_with: String
+  link_not_ends_with: String
   active: Boolean
   active_not: Boolean
   ratio: Int
@@ -2864,6 +2827,7 @@ enum NotificationType {
   SUBCOMMENT
   LIKE
   DISLIKE
+  CROWNED
 }
 
 input NotificationUpdateInput {
@@ -3653,6 +3617,7 @@ type User {
   language: Language!
   theme: Theme!
   crowned: Boolean!
+  crownedDate: DateTime
   private: Boolean!
   lastConnected: DateTime
   followers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -3692,6 +3657,7 @@ input UserCreateInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3788,6 +3754,7 @@ input UserCreateWithoutBlockedInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3818,6 +3785,7 @@ input UserCreateWithoutBlockingInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3848,6 +3816,7 @@ input UserCreateWithoutConversationsInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3878,6 +3847,7 @@ input UserCreateWithoutDebatesBlueInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3908,6 +3878,7 @@ input UserCreateWithoutDebatesInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3938,6 +3909,7 @@ input UserCreateWithoutDebatesRedInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -3968,6 +3940,7 @@ input UserCreateWithoutFollowersInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   following: UserCreateManyWithoutFollowersInput
@@ -3998,6 +3971,7 @@ input UserCreateWithoutFollowingInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -4028,6 +4002,7 @@ input UserCreateWithoutInteractionsInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -4058,6 +4033,7 @@ input UserCreateWithoutNotificationsInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -4088,6 +4064,7 @@ input UserCreateWithoutTrophiesInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserCreateManyWithoutFollowingInput
@@ -4138,6 +4115,8 @@ enum UserOrderByInput {
   theme_DESC
   crowned_ASC
   crowned_DESC
+  crownedDate_ASC
+  crownedDate_DESC
   private_ASC
   private_DESC
   lastConnected_ASC
@@ -4164,6 +4143,7 @@ type UserPreviousValues {
   language: Language!
   theme: Theme!
   crowned: Boolean!
+  crownedDate: DateTime
   private: Boolean!
   lastConnected: DateTime
   createdAt: DateTime!
@@ -4311,6 +4291,14 @@ input UserScalarWhereInput {
   theme_not_in: [Theme!]
   crowned: Boolean
   crowned_not: Boolean
+  crownedDate: DateTime
+  crownedDate_not: DateTime
+  crownedDate_in: [DateTime!]
+  crownedDate_not_in: [DateTime!]
+  crownedDate_lt: DateTime
+  crownedDate_lte: DateTime
+  crownedDate_gt: DateTime
+  crownedDate_gte: DateTime
   private: Boolean
   private_not: Boolean
   lastConnected: DateTime
@@ -4373,6 +4361,7 @@ input UserUpdateDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4403,6 +4392,7 @@ input UserUpdateInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4433,6 +4423,7 @@ input UserUpdateManyDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
 }
@@ -4464,6 +4455,7 @@ input UserUpdateManyMutationInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
 }
@@ -4617,6 +4609,7 @@ input UserUpdateWithoutBlockedDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4646,6 +4639,7 @@ input UserUpdateWithoutBlockingDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4675,6 +4669,7 @@ input UserUpdateWithoutConversationsDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4704,6 +4699,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4733,6 +4729,7 @@ input UserUpdateWithoutDebatesDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4762,6 +4759,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4791,6 +4789,7 @@ input UserUpdateWithoutFollowersDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   following: UserUpdateManyWithoutFollowersInput
@@ -4820,6 +4819,7 @@ input UserUpdateWithoutFollowingDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4849,6 +4849,7 @@ input UserUpdateWithoutInteractionsDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4878,6 +4879,7 @@ input UserUpdateWithoutNotificationsDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -4907,6 +4909,7 @@ input UserUpdateWithoutTrophiesDataInput {
   language: Language
   theme: Theme
   crowned: Boolean
+  crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
   followers: UserUpdateManyWithoutFollowingInput
@@ -5169,6 +5172,14 @@ input UserWhereInput {
   theme_not_in: [Theme!]
   crowned: Boolean
   crowned_not: Boolean
+  crownedDate: DateTime
+  crownedDate_not: DateTime
+  crownedDate_in: [DateTime!]
+  crownedDate_not_in: [DateTime!]
+  crownedDate_lt: DateTime
+  crownedDate_lte: DateTime
+  crownedDate_gt: DateTime
+  crownedDate_gte: DateTime
   private: Boolean
   private_not: Boolean
   lastConnected: DateTime

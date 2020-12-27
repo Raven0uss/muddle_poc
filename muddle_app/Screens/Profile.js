@@ -17,6 +17,7 @@ import {
   debates_logo,
   coverTest,
   defaultProfile,
+  badges,
 } from "../CustomProperties/IconsBase64";
 import CustomIcon from "../Components/Icon";
 import { ScrollView } from "react-native-gesture-handler";
@@ -50,6 +51,7 @@ const GET_USER = gql`
       coverPicture
       email
       private
+      crowned
       role
       conversations(where: { speakers_some: { id: $currentUserId } }) {
         id
@@ -641,6 +643,33 @@ const Profile = (props) => {
             });
           }}
         >
+          {user.crowned && (
+            <View
+              style={{
+                position: "absolute",
+                zIndex: 100,
+                width: 20,
+                height: 20,
+                backgroundColor: "#F47658",
+                right: 0,
+                marginTop: 5,
+                // marginLeft: 10,
+                borderRadius: 50,
+                borderWidth: 2,
+                borderColor: themeSchema[theme].backgroundColor2,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                source={{ uri: badges.crown }}
+                style={{
+                  width: 10,
+                  height: 8,
+                }}
+              />
+            </View>
+          )}
           <Image
             source={{
               uri: user.profilePicture,

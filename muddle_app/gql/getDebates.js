@@ -18,6 +18,7 @@ const GET_DEBATES = (debateType) => {
           answerTwo
           image
           type
+          crowned
           owner {
             id
             firstname
@@ -79,6 +80,7 @@ const GET_DEBATES = (debateType) => {
         bestDebates(first: $first, skip: $skip) {
           id
           content
+          crowned
           answerOne
           answerTwo
           image
@@ -143,6 +145,7 @@ const GET_DEBATES = (debateType) => {
       query($first: Int!, $skip: Int) {
         myDebates(first: $first, skip: $skip) {
           id
+          crowned
           content
           answerOne
           answerTwo
@@ -209,6 +212,7 @@ const GET_DEBATES = (debateType) => {
         ownerDebates(first: $first, skip: $skip, userId: $userId) {
           id
           content
+          crowned
           answerOne
           answerTwo
           image

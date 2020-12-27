@@ -15,24 +15,20 @@ import {
   RefreshControl,
 } from "react-native";
 import Header from "../Components/Header";
-import {
-  debates_logo,
-  defaultProfile,
-  muddle,
-} from "../CustomProperties/IconsBase64";
+import { debates_logo, muddle } from "../CustomProperties/IconsBase64";
 import DebateBox from "../Components/DebateBox";
 import { useQuery, gql, useSubscription } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
-import { flatten, isEmpty, last } from "lodash";
+import { flatten, isEmpty, last, get } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
-import { get } from "lodash";
 import wait from "../Library/wait";
 import useEffectUpdate from "../Library/useEffectUpdate";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
 import isFollowing from "../Library/isFollowing";
+import AdBox from "../Components/AdBox";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -44,6 +40,7 @@ const GET_DEBATES = gql`
       answerTwo
       image
       type
+      crowned
       owner {
         id
         certified
@@ -133,10 +130,59 @@ const CONVERSATIONS_SUB = gql`
   }
 `;
 
+const GET_ADS = gql`
+  query {
+    ads(orderBy: ratio_DESC, where: { active: true }) {
+      id
+      name
+      company
+      companyIcon
+      content
+      image
+      link
+      active
+      ratio
+    }
+  }
+`;
+
 const frequency = 20;
 let nbDebates = frequency;
 
-const renderItem = ({ item, index }, navigation, currentUser, setDebates) => {
+const pubFrequency = 8;
+
+const getPubIndex = (index, adLength) => {
+  let result = index;
+  const limit = adLength * pubFrequency;
+  while (result > limit) {
+    result = result - limit;
+  }
+  result = result / pubFrequency - 1;
+  return result;
+};
+
+const renderItem = (
+  { item, index },
+  navigation,
+  currentUser,
+  setDebates,
+  ads
+) => {
+  if (!isEmpty(ads) && index % pubFrequency === 0 && index !== 0) {
+    const pubIndex = getPubIndex(index, ads.length);
+    return (
+      <>
+        <AdBox ad={ads[pubIndex]} />
+        <DebateBox
+          currentUser={currentUser}
+          debate={item}
+          navigation={navigation}
+          index={index}
+          setDebates={setDebates}
+        />
+      </>
+    );
+  }
   return (
     <DebateBox
       currentUser={currentUser}
@@ -155,6 +201,7 @@ const Home = (props) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const [debates, setDebates] = React.useState([]);
+  const [ads, setAds] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const { data, loading, error, fetchMore, refetch } = useQuery(GET_DEBATES, {
     variables: {
@@ -176,6 +223,15 @@ const Home = (props) => {
     onError: () => {
       setNoMoreData(true);
     },
+  });
+
+  useQuery(GET_ADS, {
+    onCompleted: (response) => {
+      const { ads: queryResponse } = response;
+      console.log(response);
+      setAds(queryResponse);
+    },
+    fetchPolicy: "cache-and-network",
   });
   const scrollViewRef = React.useRef(null);
 
@@ -270,7 +326,7 @@ const Home = (props) => {
           >
             <Image
               source={{
-                uri: get(currentUser, "profilePicture", defaultProfile),
+                uri: get(currentUser, "profilePicture", ""),
               }}
               style={styles.profilePicture}
             />
@@ -357,7 +413,7 @@ const Home = (props) => {
           paddingRight: 15,
         }}
         renderItem={(param) =>
-          renderItem(param, navigation, currentUser, setDebates)
+          renderItem(param, navigation, currentUser, setDebates, ads)
         }
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}

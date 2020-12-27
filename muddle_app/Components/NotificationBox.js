@@ -1557,6 +1557,87 @@ const NotificationBox = (props) => {
           </View>
         </View>
       );
+    case "CROWNED":
+      return (
+        <View
+          style={{
+            width: "90%",
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 5,
+            marginBottom: 10, // android
+            padding: 15,
+          }}
+        >
+          {notification.new && (
+            <View
+              style={{
+                width: 9,
+                height: 9,
+                backgroundColor: "#F47658",
+                position: "absolute",
+                //   alignSelf: "flex-end",
+                marginTop: 9,
+                borderRadius: 50,
+                right: 0,
+                marginRight: 10,
+              }}
+            />
+          )}
+          <Image
+            source={{ uri: notification.who[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "Montserrat_600SemiBold",
+                marginTop: -5,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              {notification.who[0].certified && <CertifiedIcon />}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 10,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 11,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${i18n._("sendYouCrown")} ${getTimeSpent(
+                  notification.updatedAt
+                )}`}
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontSize: 12,
+                marginTop: 5,
+                fontFamily: "Montserrat_500Medium",
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {i18n._("crownDescription")}
+            </Text>
+          </View>
+        </View>
+      );
     default:
       return null;
   }

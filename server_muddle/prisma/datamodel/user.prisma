@@ -43,6 +43,7 @@ type User {
   language: Language! @default(value: FR)
   theme: Theme! @default(value: LIGHT)
   crowned: Boolean! @default(value: false)
+  crownedDate: DateTime
   private: Boolean! @default(value: false)
   lastConnected: DateTime
   followers: [User] @relation(name: "FollowRelation")

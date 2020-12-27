@@ -152,6 +152,42 @@ async function main() {
     });
   }
 
+  await prisma.createAd({
+    name: "coca",
+    company: "Coca-Cola",
+    companyIcon:
+      "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/08/09/10/coco-cola.jpg",
+    content:
+      "Coca-Cola, parfois appelé Coca, est une boisson très plus populaire dans le monde fabriquée par la société Coca-Cola. D’abord présentée comme un médicament breveté lorsqu’elle a été formulée par John Pemberton à la fin du XIXe siècle, la boisson a été achetée par l’homme d’affaires Asa Griggs Candler en 1887. C’était Candler qui a fabriqué l’une des plus célèbres boissons de la planète.",
+    image: "https://daniellatif.fr/files/2016/01/cocacola-savoure-linstant.jpg",
+    ratio: 3,
+  });
+
+  await prisma.createAd({
+    name: "pringles",
+    company: "Pringles",
+    link: "http://www.pringles.com",
+    companyIcon:
+      "https://www.litecom.fr/wp-content/uploads/2020/08/pringle_history.jpg",
+    content:
+      "Mr Pringle est devenu un symbole du produit. C’était une tête d’homme avec des cheveux, des yeux et des sourcils noirs séparés et une moustache noire touffue. Pour comprendre la signification de ce symbole Pringles, il faut savoir que les Pringles sont des chips. Bien que les chips doivent leur goût à Alexander Liepa, un chercheur de P&G, le personnage caricatural du logo des Pringles ne ressemble pas du tout à l’homme, mais plutôt à une pomme de terre.",
+    image:
+      "https://i1.wp.com/jai-un-pote-dans-la.com/wp-content/uploads/2020/09/we_are_social_jai_un_pote_dans_la_com-1.jpg",
+    ratio: 1,
+  });
+
+  await prisma.createAd({
+    name: "nike",
+    company: "Nike",
+    link: "http://www.nike.com",
+    companyIcon:
+      "https://www.episod.com/wp-content/uploads/2019/04/b2b-logo-nike.jpg",
+    content:
+      "Qui n’a jamais porter de Nike dans sa vie ? Nike est sans doute la marque la plus connu et la plus appréciée dans l’industrie du sport. Des chaussures aux vêtements, du sport à la mode, de l’accessoire le plus performant à l’accessoire le plus simple, Nike a su se démarquer des autres marques et ainsi perdurer pour devenir une des marques les plus importantes à ce jour.",
+    image: "https://mixmag.fr/assets/uploads/images/_facebook/Nike.png",
+    ratio: 10,
+  });
+
   // Create two users to test the chat
 
   const A = await prisma.createUser({

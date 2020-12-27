@@ -34,6 +34,7 @@ fragment BestDebate on Debate {
   answerTwo
   image
   type
+  crowned
   owner {
     id
     certified
@@ -109,7 +110,7 @@ const Query = prismaObjectType({
       resolve: async (parent, { email, password }, { prisma }) => {
         try {
           const user = await prisma.user({ email });
-          console.log(user);
+          // console.log(user);
 
           if (!user) {
             throw new Error("Invalid credentials");
@@ -138,7 +139,7 @@ const Query = prismaObjectType({
       resolve: async (parent, args, { prisma, currentUser }) => {
         // console.log(currentUser);
         const user = await prisma.user({ id: currentUser.user.id });
-        console.log(user);
+        // console.log(user);
         return user;
       },
     });

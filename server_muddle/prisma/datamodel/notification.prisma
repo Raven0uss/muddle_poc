@@ -13,6 +13,7 @@ enum NotificationType {
   SUBCOMMENT
   LIKE
   DISLIKE
+  CROWNED
 }
 
 enum NotificationStatus {

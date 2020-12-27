@@ -34,9 +34,16 @@ const filterHomeDebates = ({ debates, following }) => {
   //   });
 
   //   return sortedDebates;
-  const sorted = debates.sort((a, b) =>
-    moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1
-  );
+  const sorted = debates.sort((a, b) => {
+    if (a.crowned && a.closed === false) {
+      if (b.crowned && b.closed === false) {
+        return moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1;
+      }
+      return -1;
+    }
+    if (b.crowned && b.closed === false) return 1;
+    return moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1;
+  });
   return sorted;
 };
 
