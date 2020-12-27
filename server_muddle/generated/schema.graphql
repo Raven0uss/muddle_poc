@@ -2304,6 +2304,7 @@ type Mutation {
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteDebate(where: DebateWhereUniqueInput!): Debate
   deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
+  deleteMessages(messagesIdPayload: String): NoValue!
   deleteMyComment(commentId: ID): Comment!
   deleteMyDebate(debateId: ID): Debate!
   deleteThisConversation(conversationId: ID): NoValue!

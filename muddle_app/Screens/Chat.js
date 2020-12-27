@@ -22,7 +22,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client";
-import { get, isEmpty } from "lodash";
+import { differenceWith, get, isEmpty } from "lodash";
 import moment from "moment";
 import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
@@ -47,7 +47,8 @@ const renderItem = (
       <TouchableOpacity
         onPress={() => {
           if (deleteMode) {
-            if (!isSelected) setSelectedList((s) => [...s, { id: item.id }]);
+            if (!isSelected)
+              setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
             else
               setSelectedList((s) => {
                 const sCpy = cloneDeep(s);
@@ -60,7 +61,7 @@ const renderItem = (
         }}
         onLongPress={() => {
           setDeleteMode(true);
-          setSelectedList((s) => [...s, { id: item.id }]);
+          setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
         }}
       >
         <View
@@ -139,7 +140,8 @@ const renderItem = (
     <TouchableOpacity
       onPress={() => {
         if (deleteMode) {
-          if (!isSelected) setSelectedList((s) => [...s, { id: item.id }]);
+          if (!isSelected)
+            setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
           else
             setSelectedList((s) => {
               const sCpy = cloneDeep(s);
@@ -152,7 +154,7 @@ const renderItem = (
       }}
       onLongPress={() => {
         setDeleteMode(true);
-        setSelectedList((s) => [...s, { id: item.id }]);
+        setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
       }}
     >
       <View
@@ -257,6 +259,7 @@ const MESSAGES_CHAT_SUB = gql`
         to {
           id
         }
+        deleted
         createdAt
       }
     }
@@ -264,15 +267,16 @@ const MESSAGES_CHAT_SUB = gql`
 `;
 
 const GET_MESSAGES = gql`
-  query($conversationId: ID!, $last: Int!, $skip: Int) {
+  query($conversationId: ID!, $last: Int!, $skip: Int, $userId: String!) {
     messages(
       last: $last
       skip: $skip
       orderBy: createdAt_DESC
-      where: { conversation: { id: $conversationId } }
+      where: { conversation: { id: $conversationId }, deleted_not: $userId }
     ) {
       id
       content
+      deleted
       from {
         id
       }
@@ -303,6 +307,14 @@ const LAST_MESSAGE_READ = gql`
   }
 `;
 
+const DELETE_MESSAGES = gql`
+  mutation($messagesIdPayload: String!) {
+    deleteMessages(messagesIdPayload: $messagesIdPayload) {
+      value
+    }
+  }
+`;
+
 const frequency = 50;
 let nbMessages = frequency;
 
@@ -328,6 +340,7 @@ const Chat = (props) => {
     variables: {
       last: nbMessages,
       conversationId: conversation.id,
+      userId: currentUser.id,
     },
     onCompleted: (response) => {
       const { messages: queryResult } = response;
@@ -357,6 +370,8 @@ const Chat = (props) => {
       userId: currentUser.id,
     },
   });
+
+  const [deleteMessages] = useMutation(DELETE_MESSAGES);
 
   useSubscription(MESSAGES_CHAT_SUB, {
     variables: {
@@ -442,6 +457,20 @@ const Chat = (props) => {
                 if (deleteMode) {
                   setDeleteMode(false);
                   if (isEmpty(selectedList)) return;
+                  setMessages((m) => {
+                    return differenceWith(
+                      m,
+                      selectedList,
+                      (a, b) => a.id === b.id
+                    );
+                  });
+                  deleteMessages({
+                    variables: {
+                      messagesIdPayload: JSON.stringify({
+                        messagesId: selectedList,
+                      }),
+                    },
+                  });
                   setSelectedList([]); // just for the moment
                 }
               }}
@@ -544,6 +573,7 @@ const Chat = (props) => {
               last: frequency,
               skip: nbMessages - frequency,
               conversationId: conversation.id,
+              userId: currentUser.id,
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { messages: moreMessages } = fetchMoreResult;

@@ -1304,6 +1304,44 @@ const Mutation = prismaObjectType({
       },
     });
 
+    t.field("deleteMessages", {
+      type: "NoValue",
+      args: {
+        messagesIdPayload: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { messagesIdPayload },
+        { prisma, currentUser }
+      ) => {
+        try {
+          const messagesIdObject = JSON.parse(messagesIdPayload);
+          const messagesId = get(messagesIdObject, "messagesId");
+          if (isNil(messagesId))
+            throw new Error("bad payload for deleteMessages");
+          console.log(messagesId);
+          await Promise.all(
+            messagesId.map(async (m) => {
+              //     const message = await prisma.message({ id: m.id });
+              if (isEmpty(m.deleted))
+                return await prisma.updateMessage({
+                  where: { id: m.id },
+                  data: {
+                    deleted: currentUser.user.id,
+                  },
+                });
+              else {
+                return await prisma.deleteMessage({ id: m.id });
+              }
+            })
+          );
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
     // t.field("blockUser", {
     //   type: "User",
     //   args: {
