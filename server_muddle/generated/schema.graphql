@@ -2222,6 +2222,7 @@ type Mutation {
   deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
   deleteMyComment(commentId: ID): Comment!
   deleteMyDebate(debateId: ID): Debate!
+  deleteThisConversation(conversationId: ID): NoValue!
   dislikeComment(commentId: ID, userId: ID): Comment!
   likeComment(commentId: ID, userId: ID): Comment!
   notifyComment(debateId: ID): NoValue!

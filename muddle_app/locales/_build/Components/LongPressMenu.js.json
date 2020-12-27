@@ -1,0 +1,18 @@
+{
+  "cancel": {
+    "origin": [
+      [
+        "Components/LongPressMenu.js",
+        34
+      ]
+    ]
+  },
+  "close": {
+    "origin": [
+      [
+        "Components/LongPressMenu.js",
+        116
+      ]
+    ]
+  }
+}

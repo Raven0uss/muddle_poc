@@ -124,6 +124,7 @@ msgstr "Date de naissance"
 msgid "blackList"
 msgstr "Utilisateurs bloqués"
 
+#: Components/LongPressMenu.js:34
 #: Components/Select.js:40
 #: Screens/CreateDebate.js:261
 msgid "cancel"
@@ -139,6 +140,7 @@ msgstr "Conditions Générales d'Utilisation"
 msgid "choice"
 msgstr "Choix"
 
+#: Components/LongPressMenu.js:116
 #: Components/Select.js:145
 msgid "close"
 msgstr "Fermer"
@@ -224,6 +226,10 @@ msgstr "Refuser"
 #: Screens/IsolateComment.js:310
 msgid "deleteComment"
 msgstr "Supprimer le commentaire"
+
+#: Screens/Conversations.js:109
+msgid "deleteConversation"
+msgstr "Supprimer la conversation"
 
 #: Components/DebateBox.js:252
 #: Screens/Debate.js:501

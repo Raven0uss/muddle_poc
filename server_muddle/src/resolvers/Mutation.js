@@ -1256,6 +1256,40 @@ const Mutation = prismaObjectType({
       },
     });
 
+    t.field("deleteThisConversation", {
+      type: "NoValue",
+      args: {
+        conversationId: idArg(),
+      },
+      resolve: async (parent, { conversationId }, { prisma }) => {
+        try {
+          const conversation = await prisma
+            .conversation({ id: conversationId })
+            .$fragment(
+              `
+              fragment GetConversationMessages on Conversation {
+                id
+                messages {
+                  id
+                }
+              }
+            `
+            );
+          if (isNil(conversation)) throw new Error("conv does not exist");
+
+          const messages = get(conversation, "messages");
+          if (isNil(messages)) throw new Error("messages are nil");
+          await Promise.all(
+            messages.map(async (m) => await prisma.deleteMessage({ id: m.id }))
+          );
+          await prisma.deleteConversation({ id: conversation.id });
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
     // t.field("blockUser", {
     //   type: "User",
     //   args: {

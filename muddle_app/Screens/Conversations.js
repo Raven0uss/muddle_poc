@@ -14,7 +14,7 @@ import {
 import Header from "../Components/Header";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import { isEmpty, isNil } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
@@ -25,6 +25,9 @@ import moment from "moment";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import getDateMessage from "../Library/getDateMessage";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import LongPressMenu from "../Components/LongPressMenu";
+import i18n from "../i18n";
+import { cloneDeep } from "@apollo/client/utilities";
 
 // messages_some: { content_not: null }
 
@@ -59,10 +62,25 @@ const GET_CONVERSATIONS = gql`
   }
 `;
 
+const DELETE_CONVERSATION = gql`
+  mutation($conversationId: ID!) {
+    deleteThisConversation(conversationId: $conversationId) {
+      value
+    }
+  }
+`;
+
 const frequency = 20;
 let nbConversations = frequency;
 
-const renderItem = ({ item }, navigation, theme, currentUser) => {
+const renderItem = (
+  { item, index },
+  navigation,
+  theme,
+  currentUser,
+  setConversations,
+  deleteConversation
+) => {
   const lastMessage = item.messages[item.messages.length - 1];
   if (isNil(lastMessage)) return null;
   const speaker = item.speakers.filter((u) => u.email !== currentUser.email);
@@ -73,81 +91,109 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
   )
     return null;
   return (
-    <TouchableOpacity
-      onPress={() => {
+    // <TouchableOpacity
+    //   onPress={() => {
+    //     navigation.push("Chat", {
+    //       conversation: item,
+    //     });
+    //   }}
+    // >
+    <LongPressMenu
+      onPressAction={() => {
         navigation.push("Chat", {
           conversation: item,
         });
       }}
-    >
-      <View
-        style={{
-          width: Dimensions.get("screen").width / 1.2,
-          height: 72,
-          borderRadius: 10,
-          backgroundColor: themeSchema[theme].backgroundColor1,
-          marginLeft: 10,
-          // marginRight: "auto",
-          alignSelf: "center",
-          marginTop: 20,
-          marginBottom: 5,
-          paddingRight: 5,
-        }}
-      >
-        <Image
-          source={{ uri: speaker[0].profilePicture }}
-          style={styles.userPicture}
-        />
-        <View style={{ marginLeft: 40, marginTop: 10 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+      list={[
+        {
+          label: i18n._("deleteConversation"),
+          value: "DELETE",
+        },
+      ]}
+      onSelect={(action) => {
+        if (action.value === "DELETE") {
+          setConversations((conv) => {
+            const conversationsCopy = cloneDeep(conv);
+            conversationsCopy.splice(index);
+            return conversationsCopy;
+          });
+          deleteConversation({
+            variables: {
+              conversationId: item.id,
+            },
+          });
+        }
+      }}
+      renderComponent={
+        <View
+          style={{
+            width: Dimensions.get("screen").width / 1.2,
+            height: 72,
+            borderRadius: 10,
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            marginLeft: 10,
+            // marginRight: "auto",
+            alignSelf: "center",
+            marginTop: 20,
+            marginBottom: 5,
+            paddingRight: 5,
+          }}
+        >
+          <Image
+            source={{ uri: speaker[0].profilePicture }}
+            style={styles.userPicture}
+          />
+          <View style={{ marginLeft: 40, marginTop: 10 }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${speaker[0].firstname} ${speaker[0].lastname}`}
+                {speaker[0].certified && <CertifiedIcon />}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: "#A3A3A3",
+                  marginLeft: 5,
+                  fontFamily: "Montserrat_300Light_Italic",
+                }}
+              >
+                {getDateMessage(lastMessage.createdAt)}
+              </Text>
+              {!lastMessage.read && lastMessage.from.id !== currentUser.id && (
+                <View
+                  style={{
+                    backgroundColor: "#F47658",
+                    borderRadius: 50,
+                    width: 10,
+                    height: 10,
+                    marginLeft: "auto",
+                    marginTop: -5,
+                    marginRight: 5,
+                  }}
+                />
+              )}
+            </View>
             <Text
+              numberOfLines={1}
               style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
+                fontSize: 12,
+                marginTop: 17,
+                fontFamily: "Montserrat_500Medium",
                 color: themeSchema[theme].colorText,
               }}
             >
-              {`${speaker[0].firstname} ${speaker[0].lastname}`}
-              {speaker[0].certified && <CertifiedIcon />}
+              {lastMessage.content}
             </Text>
-            <Text
-              style={{
-                fontSize: 10,
-                color: "#A3A3A3",
-                marginLeft: 5,
-                fontFamily: "Montserrat_300Light_Italic",
-              }}
-            >
-              {getDateMessage(lastMessage.createdAt)}
-            </Text>
-            {!lastMessage.read && lastMessage.from.id !== currentUser.id && (
-              <View
-                style={{
-                  backgroundColor: "#F47658",
-                  borderRadius: 50,
-                  width: 10,
-                  height: 10,
-                  marginLeft: "auto",
-                  marginTop: -5,
-                  marginRight: 5,
-                }}
-              />
-            )}
           </View>
-          <Text
-            numberOfLines={1}
-            style={{
-              fontSize: 12,
-              marginTop: 17,
-              fontFamily: "Montserrat_500Medium",
-              color: themeSchema[theme].colorText,
-            }}
-          >
-            {lastMessage.content}
-          </Text>
         </View>
-      </View>
-    </TouchableOpacity>
+      }
+    />
   );
 };
 
@@ -174,6 +220,8 @@ const Conversations = (props) => {
       notifyOnNetworkStatusChange: true,
     }
   );
+
+  const [deleteConversation] = useMutation(DELETE_CONVERSATION);
 
   const { navigation, route } = props;
 
@@ -268,7 +316,14 @@ const Conversations = (props) => {
             paddingRight: 15,
           }}
           renderItem={(param) =>
-            renderItem(param, navigation, theme, currentUser)
+            renderItem(
+              param,
+              navigation,
+              theme,
+              currentUser,
+              setConversations,
+              deleteConversation
+            )
           }
           keyExtractor={(item) => item.id}
           onEndReachedThreshold={0.5}

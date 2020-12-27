@@ -4344,6 +4344,7 @@ export interface NexusGenFieldTypes {
     deleteManyNotifications: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteMyComment: NexusGenRootTypes['Comment']; // Comment!
     deleteMyDebate: NexusGenRootTypes['Debate']; // Debate!
+    deleteThisConversation: NexusGenRootTypes['NoValue']; // NoValue!
     dislikeComment: NexusGenRootTypes['Comment']; // Comment!
     likeComment: NexusGenRootTypes['Comment']; // Comment!
     notifyComment: NexusGenRootTypes['NoValue']; // NoValue!
@@ -4690,6 +4691,9 @@ export interface NexusGenArgTypes {
     }
     deleteMyDebate: { // args
       debateId?: string | null; // ID
+    }
+    deleteThisConversation: { // args
+      conversationId?: string | null; // ID
     }
     dislikeComment: { // args
       commentId?: string | null; // ID
