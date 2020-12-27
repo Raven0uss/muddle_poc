@@ -28,83 +28,204 @@ import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import getDateMessage from "../Library/getDateMessage";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import { cloneDeep } from "@apollo/client/utilities";
 
-const renderItem = ({ item }, navigation, me, theme) => {
+const renderItem = (
+  { item },
+  navigation,
+  me,
+  theme,
+  selectedList,
+  setSelectedList,
+  deleteMode,
+  setDeleteMode
+) => {
+  const isSelected = selectedList.findIndex((s) => s.id === item.id) !== -1;
   const paddingMessages = 15;
   if (item.from.id === me.id)
     return (
-      <View
-        style={{
-          backgroundColor: "#F47658",
-          padding: paddingMessages,
-          paddingLeft: paddingMessages * 2,
-          paddingRight: paddingMessages * 2,
-          marginTop: 7,
-          marginBottom: 7,
-          maxWidth: Dimensions.get("screen").width / 1.5,
-          alignSelf: "flex-end",
-          borderRadius: 12,
-          borderTopRightRadius: 0,
+      <TouchableOpacity
+        onPress={() => {
+          if (deleteMode) {
+            if (!isSelected) setSelectedList((s) => [...s, { id: item.id }]);
+            else
+              setSelectedList((s) => {
+                const sCpy = cloneDeep(s);
+                const sIndex = sCpy.findIndex((s) => s.id === item.id);
+                if (sIndex === -1) return s;
+                sCpy.splice(sIndex, 1);
+                return sCpy;
+              });
+          }
+        }}
+        onLongPress={() => {
+          setDeleteMode(true);
+          setSelectedList((s) => [...s, { id: item.id }]);
         }}
       >
-        <Text
+        <View
           style={{
-            color: themeSchema[theme].colorText3,
-            fontSize: 12,
-            fontFamily: "Montserrat_500Medium",
+            flexDirection: "row",
           }}
         >
-          {item.content}
-        </Text>
-        <Text
-          style={{
-            color: themeSchema[theme].colorText2,
-            fontSize: 10,
-            alignSelf: "flex-end",
-            marginTop: 6,
-            fontFamily: "Montserrat_500Medium",
-          }}
-        >
-          {getDateMessage(item.createdAt)}
-        </Text>
-      </View>
+          <View
+            style={{
+              backgroundColor: "#F47658",
+              padding: paddingMessages,
+              paddingLeft: paddingMessages * 2,
+              paddingRight: paddingMessages * 2,
+              marginTop: 7,
+              marginBottom: 7,
+              maxWidth: Dimensions.get("screen").width / 1.5,
+              marginLeft: "auto",
+              borderRadius: 12,
+              borderTopRightRadius: 0,
+            }}
+          >
+            <Text
+              style={{
+                color: themeSchema[theme].colorText3,
+                fontSize: 12,
+                fontFamily: "Montserrat_500Medium",
+              }}
+            >
+              {item.content}
+            </Text>
+            <Text
+              style={{
+                color: themeSchema[theme].colorText2,
+                fontSize: 10,
+                marginLeft: "auto",
+                marginTop: 6,
+                fontFamily: "Montserrat_500Medium",
+              }}
+            >
+              {getDateMessage(item.createdAt)}
+            </Text>
+          </View>
+          {/* Selection */}
+          {deleteMode && (
+            <View
+              style={{
+                height: 20,
+                width: 20,
+                borderRadius: 50,
+                borderColor: themeSchema[theme].colorText,
+                borderWidth: 1,
+                marginLeft: 5,
+                backgroundColor: "#FFFFFF",
+                alignSelf: "center",
+              }}
+            >
+              <View
+                style={{
+                  height: 16,
+                  width: 16,
+                  borderRadius: 50,
+                  borderColor: themeSchema[theme].colorText,
+                  backgroundColor: isSelected ? "#F47658" : "#FFFFFF",
+                  marginTop: "auto",
+                  marginLeft: "auto",
+                  marginBottom: "auto",
+                  marginRight: "auto",
+                }}
+              />
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
     );
   return (
-    <View
-      style={{
-        backgroundColor: themeSchema[theme].backgroundColor1,
-        padding: paddingMessages,
-        paddingLeft: paddingMessages * 2,
-        paddingRight: paddingMessages * 2,
-        marginTop: 7,
-        marginBottom: 7,
-        maxWidth: Dimensions.get("screen").width / 1.5,
-        alignSelf: "flex-start",
-        borderRadius: 12,
-        borderTopLeftRadius: 0,
+    <TouchableOpacity
+      onPress={() => {
+        if (deleteMode) {
+          if (!isSelected) setSelectedList((s) => [...s, { id: item.id }]);
+          else
+            setSelectedList((s) => {
+              const sCpy = cloneDeep(s);
+              const sIndex = sCpy.findIndex((s) => s.id === item.id);
+              if (sIndex === -1) return s;
+              sCpy.splice(sIndex, 1);
+              return sCpy;
+            });
+        }
+      }}
+      onLongPress={() => {
+        setDeleteMode(true);
+        setSelectedList((s) => [...s, { id: item.id }]);
       }}
     >
-      <Text
+      <View
         style={{
-          color: themeSchema[theme].colorText,
-          fontSize: 12,
-          fontFamily: "Montserrat_500Medium",
+          flexDirection: "row",
         }}
       >
-        {item.content}
-      </Text>
-      <Text
-        style={{
-          color: "#A3A3A3",
-          fontSize: 10,
-          alignSelf: "flex-end",
-          marginTop: 6,
-          fontFamily: "Montserrat_500Medium",
-        }}
-      >
-        {getDateMessage(item.createdAt)}
-      </Text>
-    </View>
+        {/* Selection */}
+        {deleteMode && (
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: 50,
+              borderColor: themeSchema[theme].colorText,
+              borderWidth: 1,
+              marginRight: 5,
+              backgroundColor: "#FFFFFF",
+              alignSelf: "center",
+            }}
+          >
+            <View
+              style={{
+                height: 16,
+                width: 16,
+                borderRadius: 50,
+                borderColor: themeSchema[theme].colorText,
+                backgroundColor: isSelected ? "#F47658" : "#FFFFFF",
+                marginTop: "auto",
+                marginLeft: "auto",
+                marginBottom: "auto",
+                marginRight: "auto",
+              }}
+            />
+          </View>
+        )}
+        <View
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            padding: paddingMessages,
+            paddingLeft: paddingMessages * 2,
+            paddingRight: paddingMessages * 2,
+            marginTop: 7,
+            marginBottom: 7,
+            maxWidth: Dimensions.get("screen").width / 1.5,
+            alignSelf: "flex-start",
+            borderRadius: 12,
+            borderTopLeftRadius: 0,
+          }}
+        >
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              fontSize: 12,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {item.content}
+          </Text>
+          <Text
+            style={{
+              color: "#A3A3A3",
+              fontSize: 10,
+              alignSelf: "flex-end",
+              marginTop: 6,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {getDateMessage(item.createdAt)}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -193,6 +314,8 @@ const Chat = (props) => {
   const { currentUser } = React.useContext(UserContext);
   const [newMessage, setNewMessage] = React.useState("");
   const [messages, setMessages] = React.useState([]);
+  const [selectedList, setSelectedList] = React.useState([]);
+  const [deleteMode, setDeleteMode] = React.useState(false);
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [keyboardIsOpen, setKeyboardIsOpen] = React.useState(false);
   // const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -289,7 +412,12 @@ const Chat = (props) => {
       <Header
         LeftComponent={
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              if (deleteMode) {
+                setDeleteMode(false);
+                setSelectedList([]);
+              } else navigation.goBack();
+            }}
             style={{ marginTop: 3 }}
           >
             <CustomIcon name={"chevron-left"} size={38} />
@@ -302,10 +430,26 @@ const Chat = (props) => {
               width: 50,
               height: 28,
               marginTop: 8,
-              marginLeft: -32,
+              marginLeft: deleteMode ? 0 : -36,
               marginBottom: 10,
             }}
           />
+        }
+        RightComponent={
+          deleteMode ? (
+            <TouchableOpacity
+              onPress={() => {
+                if (deleteMode) {
+                  setDeleteMode(false);
+                  if (isEmpty(selectedList)) return;
+                  setSelectedList([]); // just for the moment
+                }
+              }}
+              style={{ marginTop: 5 }}
+            >
+              <CustomIcon name={"delete-forever"} size={36} />
+            </TouchableOpacity>
+          ) : null
         }
       />
       {/* Header of flatlist with profile view */}
@@ -376,7 +520,18 @@ const Chat = (props) => {
           paddingLeft: 15,
           paddingRight: 15,
         }}
-        renderItem={(param) => renderItem(param, navigation, me, theme)}
+        renderItem={(param) =>
+          renderItem(
+            param,
+            navigation,
+            me,
+            theme,
+            selectedList,
+            setSelectedList,
+            deleteMode,
+            setDeleteMode
+          )
+        }
         keyExtractor={(item) => item.id}
         inverted={true}
         onEndReachedThreshold={0.5}

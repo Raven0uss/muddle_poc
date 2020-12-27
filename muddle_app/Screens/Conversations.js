@@ -114,7 +114,7 @@ const renderItem = (
         if (action.value === "DELETE") {
           setConversations((conv) => {
             const conversationsCopy = cloneDeep(conv);
-            conversationsCopy.splice(index);
+            conversationsCopy.splice(index, 1);
             return conversationsCopy;
           });
           deleteConversation({

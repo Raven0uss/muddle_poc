@@ -178,7 +178,7 @@ const BlackList = (props) => {
                         (u) => u.id === user.id
                       );
                       const blockedCopy = JSON.parse(JSON.stringify(c.blocked));
-                      blockedCopy.splice(blockIndex);
+                      blockedCopy.splice(blockIndex, 1);
                       return {
                         ...c,
                         blocked: blockedCopy,
@@ -188,7 +188,7 @@ const BlackList = (props) => {
                       const blockIndex = c.findIndex((u) => u.id === user.id);
                       console.log(blockIndex);
                       const blockedCopy = JSON.parse(JSON.stringify(c));
-                      blockedCopy.splice(blockIndex);
+                      blockedCopy.splice(blockIndex, 1);
                       return blockedCopy;
                     });
                     unblockUser({

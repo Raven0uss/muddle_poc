@@ -371,7 +371,7 @@ const ProfileAction = (props) => {
           setCurrentUser((c) => {
             const blockIndex = c.blocked.findIndex((u) => u.id === user.id);
             const blockedCopy = JSON.parse(JSON.stringify(c.blocked));
-            blockedCopy.splice(blockIndex);
+            blockedCopy.splice(blockIndex, 1);
             return {
               ...c,
               blocked: blockedCopy,
