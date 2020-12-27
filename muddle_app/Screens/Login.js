@@ -164,6 +164,13 @@ function LoginComponent(props) {
                 toggleTheme(detectedTheme);
             }
 
+            const userLanguage = get(queryResult, "language");
+            if (userLanguage && userLanguage.toLowerCase() !== i18n.language) {
+              const detectedLanguage = userLanguage.toLowerCase();
+              if (detectedLanguage === "fr" || detectedLanguage === "en")
+                i18n.activate(detectedLanguage);
+            }
+
             setSkipGetUser(true);
             setSkipLogin(true);
 

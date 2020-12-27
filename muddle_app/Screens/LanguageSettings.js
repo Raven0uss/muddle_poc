@@ -15,6 +15,16 @@ import i18n from "../i18n";
 import { lang } from "moment";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import UserContext from "../CustomProperties/UserContext";
+import { gql, useMutation } from "@apollo/client";
+
+const UPDATE_LANGUAGE = gql`
+  mutation($userId: ID!, $language: Language!) {
+    updateUser(where: { id: $userId }, data: { language: $language }) {
+      id
+    }
+  }
+`;
 
 const languages = {
   fr: "Francais",
@@ -23,7 +33,10 @@ const languages = {
 
 const LanguageSettings = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [locale, setLocale] = React.useState(i18n.language);
+
+  const [updateLanguage] = useMutation(UPDATE_LANGUAGE);
 
   const { navigation, route } = props;
   return (
@@ -69,10 +82,18 @@ const LanguageSettings = (props) => {
                     backgroundColor: themeSchema[theme].backgroundColor1,
                   }
             }
-            onPress={() => {
-              route.params.changeLanguage(key);
-              setLocale(key);
-              i18n.activate(key);
+            onPress={async () => {
+              if (locale !== key) {
+                route.params.changeLanguage(key);
+                setLocale(key);
+                i18n.activate(key);
+                await updateLanguage({
+                  variables: {
+                    userId: currentUser.id,
+                    language: key.toUpperCase(),
+                  },
+                });
+              }
             }}
           >
             <Text
