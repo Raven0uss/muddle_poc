@@ -47,6 +47,7 @@ const GET_CURRENT_USER = gql`
       coverPicture
       language
       theme
+      role
       blocked {
         id
       }
@@ -153,6 +154,19 @@ function LoginComponent(props) {
           console.log("User has been trigger !...");
           const storeUserAndRedirect = async () => {
             const { currentUser: queryResult } = dataGetUser;
+            if (
+              queryResult.role === "ADMIN" ||
+              queryResult.role === "MODERATOR"
+            ) {
+              removeItem("token");
+              setSkipGetUser(true);
+              setSnack({
+                visible: true,
+                message: "Accès refusé",
+                type: "error",
+              });
+              return;
+            }
             setCurrentUser(queryResult);
             const token = await storeItem("user", JSON.stringify(queryResult));
             console.log("User has been stored ! :)");

@@ -30,7 +30,11 @@ const GET_USERS = gql`
       where: {
         firstname_contains: $firstname
         lastname_contains: $lastname
-        role_not: MUDDLE
+        AND: [
+          { role_not: MUDDLE }
+          { role_not: ADMIN }
+          { role_not: MODERATOR }
+        ]
       }
     ) {
       id

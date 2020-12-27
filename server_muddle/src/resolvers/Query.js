@@ -109,6 +109,7 @@ const Query = prismaObjectType({
       resolve: async (parent, { email, password }, { prisma }) => {
         try {
           const user = await prisma.user({ email });
+          console.log(user);
 
           if (!user) {
             throw new Error("Invalid credentials");
