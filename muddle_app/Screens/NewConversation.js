@@ -24,6 +24,7 @@ import strUcFirst from "../Library/strUcFirst";
 import { isEmpty, isNil } from "lodash";
 import UserContext from "../CustomProperties/UserContext";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const GET_FOLLOWERS_CONVERSATIONS = gql`
   query($email: String!) {
@@ -157,7 +158,11 @@ const NewConversation = (props) => {
       const { user: queryResult } = response;
       const { followers, following } = queryResult;
 
-      const userList = [...followers, ...following];
+      const userList = [...followers, ...following].filter(
+        (u) =>
+          isBlocked({ currentUser, userId: u.id }) === false ||
+          isBlockingMe({ currentUser, userId: u.id })
+      );
       const lookup = userList.reduce((a, e) => {
         a[e.id] = ++a[e.id] || 0;
         return a;

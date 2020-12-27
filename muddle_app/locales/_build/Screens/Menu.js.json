@@ -7,7 +7,7 @@
       ]
     ]
   },
-  "legaleMention": {
+  "blackList": {
     "origin": [
       [
         "Screens/Menu.js",
@@ -15,7 +15,7 @@
       ]
     ]
   },
-  "cgu": {
+  "legaleMention": {
     "origin": [
       [
         "Screens/Menu.js",
@@ -23,7 +23,7 @@
       ]
     ]
   },
-  "contactUs": {
+  "cgu": {
     "origin": [
       [
         "Screens/Menu.js",
@@ -31,11 +31,19 @@
       ]
     ]
   },
+  "contactUs": {
+    "origin": [
+      [
+        "Screens/Menu.js",
+        184
+      ]
+    ]
+  },
   "disconnect": {
     "origin": [
       [
         "Screens/Menu.js",
-        192
+        216
       ]
     ]
   }

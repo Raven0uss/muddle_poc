@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: 13,
+    marginTop: 0,
     marginBottom: 10, // android
     padding: 15,
   },

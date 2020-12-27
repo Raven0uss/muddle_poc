@@ -15,6 +15,7 @@ import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const Follow = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -127,44 +128,51 @@ const Follow = (props) => {
           backgroundColor: themeSchema[theme].backgroundColor2,
         }}
       >
-        {follow[vision].map((contact) => (
-          <TouchableOpacity
-            key={contact.id}
-            onPress={() => {
-              navigation.push("Profile", {
-                userId: contact.email,
-              });
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: themeSchema[theme].backgroundColor1,
-                borderRadius: 12,
-                marginTop: 5,
-                marginBottom: 5,
-                padding: 10,
-                flexDirection: "row",
-                alignItems: "center",
+        {follow[vision]
+          .filter((c) => {
+            return (
+              isBlockingMe({ currentUser, userId: c.id }) === false &&
+              isBlocked({ currentUser, userId: c.id }) === false
+            );
+          })
+          .map((contact) => (
+            <TouchableOpacity
+              key={contact.id}
+              onPress={() => {
+                navigation.push("Profile", {
+                  userId: contact.email,
+                });
               }}
             >
-              <Image
-                source={{ uri: contact.profilePicture }}
-                style={styles.userPicture}
-              />
-              <Text
+              <View
                 style={{
-                  fontFamily: "Montserrat_500Medium",
-                  marginLeft: 10,
-                  fontSize: 14,
-                  color: themeSchema[theme].colorText,
+                  backgroundColor: themeSchema[theme].backgroundColor1,
+                  borderRadius: 12,
+                  marginTop: 5,
+                  marginBottom: 5,
+                  padding: 10,
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                {`${contact.firstname} ${contact.lastname}`}
-                {contact.certified && <CertifiedIcon />}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+                <Image
+                  source={{ uri: contact.profilePicture }}
+                  style={styles.userPicture}
+                />
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_500Medium",
+                    marginLeft: 10,
+                    fontSize: 14,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${contact.firstname} ${contact.lastname}`}
+                  {contact.certified && <CertifiedIcon />}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
       </ScrollView>
     </View>
   );

@@ -35,19 +35,23 @@ msgstr "accepted your invitation for duo debate"
 msgid "accronymCGU"
 msgstr "CGU"
 
-#: Components/ProfileAction.js:263
+#: Components/ProfileAction.js:316
 msgid "actionBlock"
 msgstr "Block"
 
-#: Components/ProfileAction.js:259
+#: Components/ProfileAction.js:312
 msgid "actionContact"
 msgstr "Contact"
 
-#: Components/ProfileAction.js:255
+#: Components/ProfileAction.js:308
 msgid "actionFollow"
 msgstr "Follow"
 
-#: Components/ProfileAction.js:251
+#: Components/ProfileAction.js:297
+msgid "actionUnblock"
+msgstr "Unblock"
+
+#: Components/ProfileAction.js:304
 msgid "actionUnfollow"
 msgstr "Unfollow"
 
@@ -91,12 +95,12 @@ msgid "answerYourCommentSingular"
 msgstr "answered to your comment"
 
 #: Components/DebateBox.js:576
-#: Screens/Debate.js:485
+#: Screens/Debate.js:486
 msgid "askCloseDebate"
 msgstr "Ask to close"
 
 #: Components/DebateBox.js:583
-#: Screens/Debate.js:496
+#: Screens/Debate.js:497
 msgid "askDeleteDebate"
 msgstr "Ask to delete"
 
@@ -108,7 +112,7 @@ msgstr "ask to close this debate"
 msgid "askToDeleteThisDebate"
 msgstr "ask to delete this debate"
 
-#: Screens/DebatesFiltered.js:191
+#: Screens/DebatesFiltered.js:192
 msgid "bestDebates"
 msgstr "Best debates"
 
@@ -116,18 +120,22 @@ msgstr "Best debates"
 msgid "birthdate"
 msgstr "Birthdate"
 
+#: Screens/Menu.js:112
+msgid "blackList"
+msgstr "Blocked List"
+
 #: Components/Select.js:40
-#: Screens/CreateDebate.js:260
+#: Screens/CreateDebate.js:261
 msgid "cancel"
 msgstr "Cancel"
 
 #: Screens/Cgu.js:66
-#: Screens/Menu.js:136
+#: Screens/Menu.js:160
 msgid "cgu"
 msgstr "General Conditions of Use"
 
-#: Screens/CreateDebate.js:841
-#: Screens/CreateDebate.js:863
+#: Screens/CreateDebate.js:848
+#: Screens/CreateDebate.js:870
 msgid "choice"
 msgstr "Choice"
 
@@ -136,14 +144,14 @@ msgid "close"
 msgstr "Close"
 
 #: Components/DebateBox.js:246
-#: Screens/Debate.js:489
+#: Screens/Debate.js:490
 msgid "closeDebate"
 msgstr "Close debate"
 
 #: Components/DebateBox.js:338
 #: Components/DebateBox.js:825
-#: Screens/Debate.js:707
-#: Screens/Debate.js:1129
+#: Screens/Debate.js:715
+#: Screens/Debate.js:1137
 #: Screens/Report.js:162
 msgid "comment"
 msgstr "comment"
@@ -172,16 +180,16 @@ msgstr "Confirm"
 msgid "confirmPassword"
 msgstr "Confirm password"
 
-#: Screens/Login.js:299
+#: Screens/Login.js:305
 #: Screens/SignUp.js:289
 msgid "connect"
 msgstr "Log in"
 
-#: Screens/Menu.js:160
+#: Screens/Menu.js:184
 msgid "contactUs"
 msgstr "Contact us"
 
-#: Screens/CreateDebate.js:622
+#: Screens/CreateDebate.js:629
 msgid "days"
 msgstr "Days"
 
@@ -193,16 +201,16 @@ msgstr "{time}d ago"
 msgid "debate"
 msgstr "debate"
 
-#: Screens/CreateDebate.js:560
+#: Screens/CreateDebate.js:567
 #: Screens/CreateDuoDebate.js:231
 msgid "debateDuration"
 msgstr "Debate duration"
 
-#: Screens/CreateDebate.js:724
+#: Screens/CreateDebate.js:731
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
-#: Screens/Profile.js:753
+#: Screens/Profile.js:885
 msgid "debatesProfile"
 msgstr "Debates"
 
@@ -213,16 +221,16 @@ msgid "decline"
 msgstr "Decline"
 
 #: Components/CommentBox.js:105
-#: Screens/IsolateComment.js:309
+#: Screens/IsolateComment.js:310
 msgid "deleteComment"
 msgstr "Delete comment"
 
 #: Components/DebateBox.js:252
-#: Screens/Debate.js:500
+#: Screens/Debate.js:501
 msgid "deleteDebate"
 msgstr "Delete debate"
 
-#: Screens/CreateDebate.js:736
+#: Screens/CreateDebate.js:743
 msgid "describeDebate"
 msgstr "Describe your debate"
 
@@ -238,7 +246,7 @@ msgstr "did not like your comment"
 msgid "didntLikedCommentSingular"
 msgstr "did not like your comment"
 
-#: Screens/Menu.js:192
+#: Screens/Menu.js:216
 msgid "disconnect"
 msgstr "Log out"
 
@@ -246,11 +254,11 @@ msgstr "Log out"
 msgid "duoDebate"
 msgstr "Duo debate"
 
-#: Screens/CreateDebate.js:485
+#: Screens/CreateDebate.js:492
 msgid "duoDebateSelect"
 msgstr "Duo debate"
 
-#: Screens/DebatesFiltered.js:217
+#: Screens/DebatesFiltered.js:218
 msgid "duoDebates"
 msgstr "Duo debates"
 
@@ -258,19 +266,19 @@ msgstr "Duo debates"
 msgid "duoDebatesWon"
 msgstr "Duo debates won"
 
-#: Screens/CreateDebate.js:166
-#: Screens/Search.js:116
+#: Screens/CreateDebate.js:167
+#: Screens/Search.js:117
 #: Screens/SignUp.js:92
 msgid "firstname"
 msgstr "Firstname"
 
-#: Screens/Follow.js:94
-#: Screens/Profile.js:599
+#: Screens/Follow.js:95
+#: Screens/Profile.js:719
 msgid "followers"
 msgstr "Followers"
 
-#: Screens/Follow.js:119
-#: Screens/Profile.js:632
+#: Screens/Follow.js:120
+#: Screens/Profile.js:757
 msgid "following"
 msgstr "Followings"
 
@@ -282,7 +290,7 @@ msgstr "For all questions related to Muddles, please contact us to this mail add
 msgid "forgotPassword"
 msgstr "Forgot password"
 
-#: Screens/Login.js:259
+#: Screens/Login.js:265
 msgid "forgotPassword?"
 msgstr "Forgot your password ?"
 
@@ -302,7 +310,7 @@ msgstr "Not defined"
 msgid "gender_woman"
 msgstr "Woman"
 
-#: Screens/DebatesFiltered.js:243
+#: Screens/DebatesFiltered.js:244
 msgid "generatedDebates"
 msgstr "Generated debates"
 
@@ -310,7 +318,7 @@ msgstr "Generated debates"
 msgid "goToConnect"
 msgstr "Log in"
 
-#: Screens/Login.js:350
+#: Screens/Login.js:356
 msgid "goToSubscribe"
 msgstr "Sign in"
 
@@ -318,7 +326,7 @@ msgstr "Sign in"
 msgid "hasVote"
 msgstr "voted"
 
-#: Screens/CreateDebate.js:710
+#: Screens/CreateDebate.js:717
 msgid "hours"
 msgstr "Hours"
 
@@ -330,7 +338,7 @@ msgstr "{time}h ago"
 msgid "iAcceptThe"
 msgstr "I accept the"
 
-#: Screens/CreateDebate.js:531
+#: Screens/CreateDebate.js:538
 msgid "invitePeople"
 msgstr "Invite someone"
 
@@ -338,14 +346,14 @@ msgstr "Invite someone"
 msgid "inviteYouDuoDebate"
 msgstr "invite you to a duo debate"
 
-#: Screens/CreateDebate.js:188
-#: Screens/Search.js:138
+#: Screens/CreateDebate.js:189
+#: Screens/Search.js:139
 #: Screens/SignUp.js:110
 msgid "lastname"
 msgstr "Lastname"
 
 #: Screens/LegaleMentions.js:66
-#: Screens/Menu.js:112
+#: Screens/Menu.js:136
 msgid "legaleMention"
 msgstr "Legals Mentions and Privacy"
 
@@ -361,19 +369,19 @@ msgstr "liked your comment"
 msgid "likedCommentSingular"
 msgstr "liked your comment"
 
-#: Screens/Profile.js:369
+#: Screens/Profile.js:479
 msgid "loadingPictureMessage"
 msgstr ""
 "Uploading your picture...̣\n"
 "Please wait."
 
 #: Screens/ForgotPassword.js:50
-#: Screens/Login.js:213
+#: Screens/Login.js:219
 #: Screens/SignUp.js:130
 msgid "mailAddress"
 msgstr "E-mail"
 
-#: Screens/Profile.js:782
+#: Screens/Profile.js:921
 msgid "messagePrivateProfile"
 msgstr "This account is private."
 
@@ -381,11 +389,11 @@ msgstr "This account is private."
 msgid "minutesAgo"
 msgstr "{time} min ago"
 
-#: Components/ProfileAction.js:174
+#: Components/ProfileAction.js:219
 msgid "modifyCoverPicture"
 msgstr "Change cover"
 
-#: Components/ProfileAction.js:170
+#: Components/ProfileAction.js:215
 msgid "modifyProfilePicture"
 msgstr "Change profile picture"
 
@@ -393,11 +401,11 @@ msgstr "Change profile picture"
 msgid "moreOneWeekAgo"
 msgstr "more than one week ago"
 
-#: Screens/DebatesFiltered.js:165
+#: Screens/DebatesFiltered.js:166
 msgid "myDebates"
 msgstr "My debates"
 
-#: Screens/Login.js:348
+#: Screens/Login.js:354
 msgid "noAccount?"
 msgstr "No account yet ?"
 
@@ -429,25 +437,25 @@ msgstr "other persons"
 msgid "otherPeopleSingular"
 msgstr "another person"
 
-#: Screens/Login.js:231
+#: Screens/Login.js:237
 #: Screens/SignUp.js:153
 msgid "password"
 msgstr "Password"
 
-#: Components/ProfileAction.js:183
+#: Components/ProfileAction.js:228
 msgid "privateMode"
 msgstr "Enable private mode"
 
-#: Screens/CreateDebate.js:370
-#: Screens/CreateDebate.js:481
+#: Screens/CreateDebate.js:377
+#: Screens/CreateDebate.js:488
 msgid "publicDebateSelect"
 msgstr "Public debate"
 
-#: Components/ProfileAction.js:179
+#: Components/ProfileAction.js:224
 msgid "publicMode"
 msgstr "Disable private mode"
 
-#: Screens/CreateDebate.js:918
+#: Screens/CreateDebate.js:925
 #: Screens/CreateDuoDebate.js:344
 msgid "publish"
 msgstr "Publish"
@@ -473,13 +481,13 @@ msgid "reportA"
 msgstr "Report a"
 
 #: Components/CommentBox.js:99
-#: Screens/IsolateComment.js:303
+#: Screens/IsolateComment.js:304
 msgid "reportComment"
 msgstr "Report the comment"
 
 #: Components/DebateBox.js:240
 #: Components/DebateBox.js:569
-#: Screens/Debate.js:478
+#: Screens/Debate.js:479
 msgid "reportDebate"
 msgstr "Report the debate"
 
@@ -511,12 +519,12 @@ msgstr "Sexism"
 msgid "reportViolence"
 msgstr "Violence"
 
-#: Screens/CreateDebate.js:235
-#: Screens/Search.js:185
+#: Screens/CreateDebate.js:236
+#: Screens/Search.js:186
 msgid "search"
 msgstr "Search"
 
-#: Screens/NewConversation.js:230
+#: Screens/NewConversation.js:235
 msgid "searchContact"
 msgstr "Search a contact"
 
@@ -562,6 +570,18 @@ msgstr "Switch language"
 msgid "that"
 msgstr "this"
 
+#: Screens/BlackList.js:198
+msgid "unblockAction"
+msgstr "Unblock"
+
+#: Screens/BlackList.js:125
+msgid "unblockInstruction"
+msgstr "To remove a user from your blocklist, press the button \"Unblock\" few seconds.\nThis person will be able again to interact with you."
+
+#: Screens/BlackList.js:114
+msgid "userBlockedTitle"
+msgstr "Blocked Users"
+
 #: Components/NotificationBox.js:205
 msgid "voteOnYourDebate"
 msgstr "voted on your debate"
@@ -570,13 +590,17 @@ msgstr "voted on your debate"
 msgid "votePrivacy"
 msgstr "Votes privacy"
 
-#: Screens/Profile.js:726
+#: Screens/Profile.js:857
 msgid "votesProfile"
 msgstr "Votes"
 
 #: Library/getDateMessage.js:25
 msgid "yesterday"
 msgstr "yesterday"
+
+#: Screens/Chat.js:450
+msgid "youCantContact"
+msgstr "You can't contact this user"
 
 #: Components/InteractionBox.js:140
 msgid "youCommented"
@@ -594,24 +618,24 @@ msgstr "You liked"
 msgid "youVote"
 msgstr "You voted"
 
-#: Screens/Debate.js:1194
-#: Screens/IsolateComment.js:549
+#: Screens/Debate.js:1202
+#: Screens/IsolateComment.js:557
 msgid "yourComment"
 msgstr "Your comment"
 
-#: Screens/Profile.js:752
+#: Screens/Profile.js:884
 msgid "yourDebatesProfile"
 msgstr "My debates"
 
-#: Screens/Chat.js:441
+#: Screens/Chat.js:449
 msgid "yourMessage"
 msgstr "Your message"
 
-#: Screens/CreateDebate.js:842
+#: Screens/CreateDebate.js:849
 #: Screens/CreateDuoDebate.js:304
 msgid "yourOpinion"
 msgstr "Your opinion"
 
-#: Screens/Profile.js:725
+#: Screens/Profile.js:856
 msgid "yourVotesProfile"
 msgstr "My votes"

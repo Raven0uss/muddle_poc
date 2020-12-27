@@ -42,6 +42,7 @@ import voteDispatch from "../Library/voteDispatch";
 import idExist from "../Library/idExist";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import { NoFlickerImage } from "react-native-no-flicker-image";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const displayPercent = ({ votes, totalVotes, answer }) => {
   if (totalVotes === 0) return `0%\n${answer}`;
@@ -553,7 +554,14 @@ const Debate = (props) => {
 
       {/* )} */}
       <FlatList
-        data={comments}
+        data={comments.filter((c) => {
+          if (
+            isBlocked({ currentUser, userId: c.from.id }) ||
+            isBlockingMe({ currentUser, userId: c.from.id })
+          )
+            return false;
+          return true;
+        })}
         ref={commentsScrollViewRef}
         style={{
           ...styles.seedContainer,

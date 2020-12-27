@@ -1,0 +1,26 @@
+{
+  "userBlockedTitle": {
+    "origin": [
+      [
+        "Screens/BlackList.js",
+        114
+      ]
+    ]
+  },
+  "unblockInstruction": {
+    "origin": [
+      [
+        "Screens/BlackList.js",
+        125
+      ]
+    ]
+  },
+  "unblockAction": {
+    "origin": [
+      [
+        "Screens/BlackList.js",
+        198
+      ]
+    ]
+  }
+}

@@ -22,6 +22,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import GET_DEBATES from "../gql/getDebates";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const frequency = 6;
 let nbDebates = frequency;
@@ -256,7 +257,27 @@ const DebatesFiltered = (props) => {
         </SafeAreaView>
       ) : (
         <FlatList
-          data={debates}
+          data={debates.filter((d) => {
+            if (d.type === "DUO") {
+              if (
+                isBlocked({ currentUser, userId: d.ownerRed.id }) ||
+                isBlocked({ currentUser, userId: d.ownerBlue.id })
+              )
+                return false;
+              if (
+                isBlockingMe({ currentUser, userId: d.ownerRed.id }) ||
+                isBlockingMe({ currentUser, userId: d.ownerBlue.id })
+              )
+                return false;
+            } else {
+              if (
+                isBlockingMe({ currentUser, userId: d.owner.id }) ||
+                isBlocked({ currentUser, userId: d.owner.id })
+              )
+                return false;
+            }
+            return true;
+          })}
           // data={applyFilter({ debates, debateType })}
           style={{
             ...styles.seedContainer,

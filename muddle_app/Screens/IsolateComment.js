@@ -29,6 +29,7 @@ import hasLiked from "../Library/hasLiked";
 import { useIsFocused } from "@react-navigation/native";
 import { get, last, isEmpty } from "lodash";
 import CertifiedIcon from "../Components/CertifiedIcon";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const GET_SUBCOMMENTS = gql`
   query($commentId: ID!, $last: Int, $skip: Int) {
@@ -335,7 +336,14 @@ const IsolateComment = (props) => {
       </View>
 
       <FlatList
-        data={comments}
+        data={comments.filter((c) => {
+          if (
+            isBlocked({ currentUser, userId: c.from.id }) ||
+            isBlockingMe({ currentUser, userId: c.from.id })
+          )
+            return false;
+          return true;
+        })}
         // ref={commentsScrollViewRef}
         style={{
           ...styles.seedContainer,

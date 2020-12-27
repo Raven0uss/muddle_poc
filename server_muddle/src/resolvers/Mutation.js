@@ -1253,6 +1253,17 @@ const Mutation = prismaObjectType({
       },
     });
 
+
+    // t.field("blockUser", {
+    //   type: "User",
+    //   args: {
+    //     userId: idArg()
+    //   },
+    //   resolve: async (parent, { userId }, { prisma, currentUser }) => {
+        
+    //   }
+    // })
+
     // t.field("imageUpload", {
     //   type: "ImageURI",
     //   args: {

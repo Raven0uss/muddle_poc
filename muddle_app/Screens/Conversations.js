@@ -24,6 +24,7 @@ import { useIsFocused } from "@react-navigation/native";
 import moment from "moment";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import getDateMessage from "../Library/getDateMessage";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 // messages_some: { content_not: null }
 
@@ -66,6 +67,11 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
   if (isNil(lastMessage)) return null;
   const speaker = item.speakers.filter((u) => u.email !== currentUser.email);
   if (speaker.length === 0) return null;
+  if (
+    isBlockingMe({ currentUser, userId: speaker[0].id }) ||
+    isBlocked({ currentUser, userId: speaker[0].id })
+  )
+    return null;
   return (
     <TouchableOpacity
       onPress={() => {

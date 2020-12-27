@@ -27,6 +27,7 @@ import moment from "moment";
 import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import getDateMessage from "../Library/getDateMessage";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const renderItem = ({ item }, navigation, me, theme) => {
   const paddingMessages = 15;
@@ -437,8 +438,17 @@ const Chat = (props) => {
           }}
         >
           <TextInput
+            editable={
+              isBlockingMe({ currentUser, userId: partner.id }) === false &&
+              isBlocked({ currentUser, userId: partner.id }) === false
+            }
             multiline
-            placeholder={i18n._("yourMessage")}
+            placeholder={
+              isBlockingMe({ currentUser, userId: partner.id }) === false &&
+              isBlocked({ currentUser, userId: partner.id }) === false
+                ? i18n._("yourMessage")
+                : i18n._("youCantContact")
+            }
             value={newMessage}
             style={{
               width:

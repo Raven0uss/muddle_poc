@@ -36,6 +36,7 @@ import useEffectUpdate from "../Library/useEffectUpdate";
 import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import GET_DEBATES from "../gql/getDebates";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
@@ -290,6 +291,7 @@ const Interactions = (props) => {
       style={{
         ...styles.seedContainer,
         backgroundColor: themeSchema[theme].backgroundColor1,
+        // marginTop: 0,
       }}
       renderItem={(param) =>
         renderItem(param, navigation, userId, theme, setHomeDebates)
@@ -586,7 +588,12 @@ const Profile = (props) => {
             zIndex: 20,
           }}
           onPress={() => {
-            if (user.id === currentUser.id || !user.private)
+            if (
+              user.id === currentUser.id ||
+              (!user.private &&
+                !isBlocked({ currentUser, userId: user.id }) &&
+                !isBlockingMe({ currentUser, userId: user.id }))
+            )
               navigation.push("Trophies", {
                 userId: user.email,
                 nbDuoTrophies: user.trophies.filter((t) => t.type === "DUO")
@@ -678,7 +685,12 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  if (user.id === currentUser.id || !user.private)
+                  if (
+                    user.id === currentUser.id ||
+                    (!user.private &&
+                      !isBlocked({ currentUser, userId: user.id }) &&
+                      !isBlockingMe({ currentUser, userId: user.id }))
+                  )
                     navigation.push("Follow", {
                       follow: {
                         following: user.following,
@@ -711,7 +723,12 @@ const Profile = (props) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  if (user.id === currentUser.id || !user.private)
+                  if (
+                    user.id === currentUser.id ||
+                    (!user.private &&
+                      !isBlocked({ currentUser, userId: user.id }) &&
+                      !isBlockingMe({ currentUser, userId: user.id }))
+                  )
                     navigation.push("Follow", {
                       follow: {
                         following: user.following,
@@ -752,13 +769,15 @@ const Profile = (props) => {
             // marginLeft: 17,
           }}
         >
-          <ProfileAction
-            me={me}
-            navigation={navigation}
-            theme={theme}
-            user={user}
-            setLoadingPicture={setLoadingPicture}
-          />
+          {isBlockingMe({ userId: user.id, currentUser }) === false && (
+            <ProfileAction
+              me={me}
+              navigation={navigation}
+              theme={theme}
+              user={user}
+              setLoadingPicture={setLoadingPicture}
+            />
+          )}
         </View>
       </View>
 
@@ -782,7 +801,10 @@ const Profile = (props) => {
         onChangeText={(s) => setSearch(s)}
         // placeholderTextColor="#222"
       /> */}
-      {user.id === currentUser.id || !user.private ? (
+      {user.id === currentUser.id ||
+      (!user.private &&
+        !isBlocked({ currentUser, userId: user.id }) &&
+        !isBlockingMe({ currentUser, userId: user.id })) ? (
         <>
           <View
             style={{
@@ -800,7 +822,7 @@ const Profile = (props) => {
                 backgroundColor: themeSchema[theme].backgroundColor2,
                 height: 30,
                 borderRadius: 40,
-                marginTop: 0,
+                marginTop: -10,
                 marginBottom: 5,
                 flexDirection: "row",
                 borderWidth: 1,

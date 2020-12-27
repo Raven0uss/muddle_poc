@@ -98,6 +98,30 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
+          onPress={() => navigation.push("BlackList")}
+        >
+          <CustomIcon name="block" size={28} color="#A3A3A3" />
+          <Text
+            style={{
+              color: themeSchema[theme].colorText,
+              marginLeft: 10,
+              fontSize: 14,
+              fontFamily: "Montserrat_500Medium",
+            }}
+          >
+            {i18n._("blackList")}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: themeSchema[theme].backgroundColor1,
+            width: Dimensions.get("screen").width / 1.1,
+            marginTop: 8,
+            borderRadius: 12,
+            padding: 8,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
           onPress={() => navigation.push("LegaleMentions")}
         >
           <CustomIcon name="lock" size={28} color="#A3A3A3" />

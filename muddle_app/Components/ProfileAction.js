@@ -8,6 +8,7 @@ import { get, isEmpty, isNil } from "lodash";
 import { gql, useMutation } from "@apollo/client";
 import { pickImageAndGetUrl } from "../Library/pickImage";
 import { storeItem } from "../CustomProperties/storage";
+import { isBlocked } from "../Library/isBlock";
 
 const isFollowing = (user, currentUser) => {
   const index = user.followers.findIndex((u) => u.id === currentUser.id);
@@ -99,6 +100,12 @@ const UPDATE_PROFILE_PICTURE = gql`
       language
       profilePicture
       coverPicture
+      blocked {
+        id
+      }
+      blocking {
+        id
+      }
     }
   }
 `;
@@ -114,6 +121,34 @@ const UPDATE_COVER_PICTURE = gql`
       profilePicture
       coverPicture
       certified
+      blocked {
+        id
+      }
+      blocking {
+        id
+      }
+    }
+  }
+`;
+
+const BLOCK_USER = gql`
+  mutation($userId: ID!, $currentUserId: ID!) {
+    updateUser(
+      where: { id: $currentUserId }
+      data: { blocked: { connect: { id: $userId } } }
+    ) {
+      id
+    }
+  }
+`;
+
+const UNBLOCK_USER = gql`
+  mutation($userId: ID!, $currentUserId: ID!) {
+    updateUser(
+      where: { id: $currentUserId }
+      data: { blocked: { disconnect: { id: $userId } } }
+    ) {
+      id
     }
   }
 `;
@@ -139,6 +174,16 @@ const ProfileAction = (props) => {
       setLoadingPicture(false);
     },
   });
+
+  const [blockUser] = useMutation(BLOCK_USER, {
+    // onCompleted: () => {
+    //   navigation.reset({
+    //     index: 0,
+    //     routes: [{ name: "Home" }],
+    //   });
+    // },
+  });
+  const [unblockUser] = useMutation(UNBLOCK_USER);
 
   const [updateCoverPicture] = useMutation(UPDATE_COVER_PICTURE, {
     onCompleted: async (response) => {
@@ -245,25 +290,34 @@ const ProfileAction = (props) => {
     );
   return (
     <Select
-      list={[
-        following
-          ? {
-              label: i18n._("actionUnfollow"),
-              value: "UNFOLLOW",
-            }
-          : {
-              label: i18n._("actionFollow"),
-              value: "FOLLOW",
-            },
-        {
-          label: i18n._("actionContact"),
-          value: "CONTACT",
-        },
-        {
-          label: i18n._("actionBlock"),
-          value: "BLOCK",
-        },
-      ]}
+      list={
+        isBlocked({ currentUser, userId: user.id })
+          ? [
+              {
+                label: i18n._("actionUnblock"),
+                value: "UNBLOCK",
+              },
+            ]
+          : [
+              following
+                ? {
+                    label: i18n._("actionUnfollow"),
+                    value: "UNFOLLOW",
+                  }
+                : {
+                    label: i18n._("actionFollow"),
+                    value: "FOLLOW",
+                  },
+              {
+                label: i18n._("actionContact"),
+                value: "CONTACT",
+              },
+              {
+                label: i18n._("actionBlock"),
+                value: "BLOCK",
+              },
+            ]
+      }
       selected={null}
       placeholder=""
       onSelect={(action) => {
@@ -302,6 +356,33 @@ const ProfileAction = (props) => {
           }
         }
         if (action.value === "BLOCK") {
+          setCurrentUser((c) => ({
+            ...c,
+            blocked: [...c.blocked, { id: user.id }],
+          }));
+          blockUser({
+            variables: {
+              userId: user.id,
+              currentUserId: currentUser.id,
+            },
+          });
+        }
+        if (action.value === "UNBLOCK") {
+          setCurrentUser((c) => {
+            const blockIndex = c.blocked.findIndex((u) => u.id === user.id);
+            const blockedCopy = JSON.parse(JSON.stringify(c.blocked));
+            blockedCopy.splice(blockIndex);
+            return {
+              ...c,
+              blocked: blockedCopy,
+            };
+          });
+          unblockUser({
+            variables: {
+              userId: user.id,
+              currentUserId: currentUser.id,
+            },
+          });
         }
       }}
       renderComponent={

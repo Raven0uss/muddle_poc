@@ -31,6 +31,7 @@ import UserContext from "../CustomProperties/UserContext";
 import { get } from "lodash";
 import wait from "../Library/wait";
 import useEffectUpdate from "../Library/useEffectUpdate";
+import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -224,6 +225,9 @@ const Home = (props) => {
 
   // }, [debates]);
 
+
+  // console.log(currentUser);
+
   if (debates.length === 0 && !refreshing && loading) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
@@ -284,7 +288,27 @@ const Home = (props) => {
       />
       <FlatList
         ref={scrollViewRef}
-        data={debates}
+        data={debates.filter((d) => {
+          if (d.type === "DUO") {
+            if (
+              isBlocked({ currentUser, userId: d.ownerRed.id }) ||
+              isBlocked({ currentUser, userId: d.ownerBlue.id })
+            )
+              return false;
+            if (
+              isBlockingMe({ currentUser, userId: d.ownerRed.id }) ||
+              isBlockingMe({ currentUser, userId: d.ownerBlue.id })
+            )
+              return false;
+          } else {
+            if (
+              isBlockingMe({ currentUser, userId: d.owner.id }) ||
+              isBlocked({ currentUser, userId: d.owner.id })
+            )
+              return false;
+          }
+          return true;
+        })}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

@@ -62,6 +62,7 @@ import TrophiesScreen from "./Screens/Trophies";
 import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
 import IsolateImageScreen from "./Screens/IsolateImage";
+import BlackListScreen from "./Screens/BlackList";
 
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
@@ -234,6 +235,16 @@ export default function App() {
                 <Stack.Screen
                   name="Search"
                   component={SearchScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="BlackList"
+                  component={BlackListScreen}
                   initialParams={{
                     changeLanguage,
                   }}

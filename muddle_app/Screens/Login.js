@@ -45,6 +45,12 @@ const GET_CURRENT_USER = gql`
       language
       profilePicture
       coverPicture
+      blocked {
+        id
+      }
+      blocking {
+        id
+      }
     }
   }
 `;

@@ -122,7 +122,7 @@ const Query = prismaObjectType({
       resolve: async (parent, args, { prisma, currentUser }) => {
         // console.log(currentUser);
         const user = await prisma.user({ id: currentUser.user.id });
-        // console.log(user);
+        console.log(user);
         return user;
       },
     });
@@ -151,15 +151,31 @@ const Query = prismaObjectType({
                 },
                 read: false,
               },
-            });
+            }).$fragment(`
+          fragment GetFromMessage on Message
+          { 
+            id
+            from {
+              id
+            }
+          }`);
 
+          const blockedList = await prisma
+            .user({ id: currentUser.user.id })
+            .blocked();
           const { messages } = conversations[0];
-          // console.log(conversations);
+          // messages.filter((m) => {
+          //   const index = blockedList.findIndex((b) => b.id === m.from.id);
+          //   console.log(index);
+          // });
+
           const numberOfNewNotifications = notifications.length;
-          const numbreOfNewMessages = messages.length;
+          const numberOfNewMessages = messages.filter(
+            (m) => blockedList.findIndex((b) => b.id === m.from.id) === -1
+          ).length;
           return {
             notifications: numberOfNewNotifications,
-            messages: numbreOfNewMessages,
+            messages: numberOfNewMessages,
           };
         } catch (err) {
           throw new Error(err);

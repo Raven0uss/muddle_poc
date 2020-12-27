@@ -1,4 +1,5 @@
 import { get } from "lodash";
+import moment from "moment";
 
 const filterHomeDebates = ({ debates, following }) => {
   //   const followingListId = following.map((f) => f.id);
@@ -33,7 +34,10 @@ const filterHomeDebates = ({ debates, following }) => {
   //   });
 
   //   return sortedDebates;
-  return debates;
+  const sorted = debates.sort((a, b) =>
+    moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1
+  );
+  return sorted;
 };
 
 export default filterHomeDebates;
