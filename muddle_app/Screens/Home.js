@@ -245,7 +245,12 @@ const Home = (props) => {
 
   if (debates.length === 0 && !refreshing && loading) {
     return (
-      <SafeAreaView style={styles.loadingContainer}>
+      <SafeAreaView
+        style={{
+          ...styles.loadingContainer,
+          backgroundColor: themeSchema[theme].backgroundColor1,
+        }}
+      >
         <ActivityIndicator />
       </SafeAreaView>
     );

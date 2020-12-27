@@ -66,7 +66,7 @@ import BlackListScreen from "./Screens/BlackList";
 
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
-import { getItem } from "./CustomProperties/storage";
+import { getItem, storeItem } from "./CustomProperties/storage";
 
 const Stack = createStackNavigator();
 
@@ -114,10 +114,17 @@ export default function App() {
 
   React.useEffect(() => {
     const setStorage = async () => {
-      const element = await getItem("currentUser");
+      const element = await getItem("user");
       // console.log(element);
       if (element) {
         setCurrentUser(JSON.parse(element));
+      }
+      const elementTheme = await getItem("theme");
+      if (
+        elementTheme &&
+        (elementTheme === "light" || elementTheme === "dark")
+      ) {
+        setTheme(elementTheme);
       }
     };
 
@@ -130,7 +137,9 @@ export default function App() {
     setLanguage(lang);
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
+    if (theme === "light") await storeItem("theme", "dark");
+    if (theme === "dark") await storeItem("theme", "light");
     setTheme((t) => (t === "light" ? "dark" : "light"));
   };
 

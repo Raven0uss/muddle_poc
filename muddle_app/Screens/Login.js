@@ -24,7 +24,7 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { storeItem, removeItem, getItem } from "../CustomProperties/storage";
 import { useQuery, gql } from "@apollo/client";
-import { set } from "lodash";
+import { get, set } from "lodash";
 
 const LOGIN = gql`
   query($email: String!, $password: String!) {
@@ -45,6 +45,8 @@ const GET_CURRENT_USER = gql`
       language
       profilePicture
       coverPicture
+      language
+      theme
       blocked {
         id
       }
@@ -60,7 +62,7 @@ const GET_CURRENT_USER = gql`
 // }
 
 function LoginComponent(props) {
-  const { theme } = React.useContext(ThemeContext);
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
   const { setCurrentUser, currentUser } = React.useContext(UserContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -154,6 +156,13 @@ function LoginComponent(props) {
             setCurrentUser(queryResult);
             const token = await storeItem("user", JSON.stringify(queryResult));
             console.log("User has been stored ! :)");
+            const userTheme = get(queryResult, "theme");
+
+            if (userTheme && theme !== userTheme.toLowerCase()) {
+              const detectedTheme = userTheme.toLowerCase();
+              if (detectedTheme === "dark" || detectedTheme === "light")
+                toggleTheme(detectedTheme);
+            }
 
             setSkipGetUser(true);
             setSkipLogin(true);

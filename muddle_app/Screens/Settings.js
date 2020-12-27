@@ -15,10 +15,23 @@ import { useIsFocused } from "@react-navigation/native";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import i18n from "../i18n";
+import UserContext from "../CustomProperties/UserContext";
+import { gql, useMutation } from "@apollo/client";
+
+const UPDATE_THEME = gql`
+  mutation($userId: ID!, $theme: Theme!) {
+    updateUser(where: { id: $userId }, data: { theme: $theme }) {
+      id
+    }
+  }
+`;
 
 const Settings = (props) => {
   const { theme, toggleTheme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [refresh, setRefresh] = React.useState(true);
+
+  const [updateTheme] = useMutation(UPDATE_THEME);
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
@@ -79,7 +92,15 @@ const Settings = (props) => {
             ...styles.menuElement,
             backgroundColor: themeSchema[theme].backgroundColor1,
           }}
-          onPress={() => toggleTheme()}
+          onPress={() => {
+            toggleTheme();
+            updateTheme({
+              variables: {
+                userId: currentUser.id,
+                theme: theme === "light" ? "DARK" : "LIGHT",
+              },
+            });
+          }}
         >
           <CustomIcon name="flare" size={28} color="#F47658" />
           <Text

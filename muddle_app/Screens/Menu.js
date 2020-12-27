@@ -196,7 +196,7 @@ const Menu = (props) => {
           }}
           onPress={() => {
             removeItem("token");
-            removeItem("currentUser");
+            removeItem("user");
             setCurrentUser(null);
             navigation.reset({
               index: 0,
