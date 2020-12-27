@@ -25,6 +25,7 @@ module.exports = {
     Trophy: ['id'],
     Role: [],
     Gender: [],
+    Theme: [],
     Language: [],
     User: ['id', 'email']
   },
@@ -5642,6 +5643,22 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Theme",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "args": [],
@@ -6804,6 +6821,29 @@ module.exports = {
           },
           {
             "name": "EN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Theme",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "LIGHT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DARK",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -8343,6 +8383,62 @@ module.exports = {
                 "ofType": {
                   "kind": "ENUM",
                   "name": "Language",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_not",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "Theme",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "Theme",
                   "ofType": null
                 }
               }
@@ -14707,6 +14803,18 @@ module.exports = {
           },
           {
             "name": "language_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "theme_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "theme_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -23217,6 +23325,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -23565,6 +23683,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -23898,6 +24026,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -24241,6 +24379,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -24574,6 +24722,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -25197,6 +25355,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -25815,6 +25983,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -26428,6 +26606,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -27940,6 +28128,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -29651,6 +29849,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -30134,6 +30342,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -30602,6 +30820,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -31080,6 +31308,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -31548,6 +31786,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -32328,6 +32576,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -33103,6 +33361,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -33873,6 +34141,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -36704,6 +36982,62 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_not",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "Theme",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "Theme",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -37251,6 +37585,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -41117,6 +41461,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -48480,6 +48834,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -48979,6 +49343,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -50331,6 +50705,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -50880,6 +51264,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -51641,6 +52035,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -52014,6 +52418,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -52345,6 +52759,16 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "crowned",
             "description": null,
             "type": {
@@ -52611,6 +53035,16 @@ module.exports = {
             "type": {
               "kind": "ENUM",
               "name": "Language",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Theme",
               "ofType": null
             },
             "defaultValue": null
@@ -56142,6 +56576,22 @@ module.exports = {
               "ofType": {
                 "kind": "ENUM",
                 "name": "Language",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "theme",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Theme",
                 "ofType": null
               }
             },

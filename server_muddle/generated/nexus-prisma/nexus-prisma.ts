@@ -448,6 +448,7 @@ export interface NexusPrismaTypes {
     Role: RoleValues,
     Gender: GenderValues,
     Language: LanguageValues,
+    Theme: ThemeValues,
     DebateType: DebateTypeValues,
     ReportType: ReportTypeValues,
     ReportReason: ReportReasonValues,
@@ -1880,6 +1881,7 @@ type UserObject =
   | { name: 'coverPicture', args?: [] | false, alias?: string  } 
   | { name: 'bio', args?: [] | false, alias?: string  } 
   | { name: 'language', args?: [] | false, alias?: string  } 
+  | { name: 'theme', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
   | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
@@ -1911,6 +1913,7 @@ type UserFields =
   | 'coverPicture'
   | 'bio'
   | 'language'
+  | 'theme'
   | 'crowned'
   | 'private'
   | 'lastConnected'
@@ -2138,6 +2141,19 @@ export interface UserFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Language> | prisma.Language
+  }
+  theme: {
+    type: 'Theme'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Theme> | prisma.Theme
   }
   crowned: {
     type: 'Boolean'
@@ -7567,6 +7583,7 @@ type UserPreviousValuesObject =
   | { name: 'coverPicture', args?: [] | false, alias?: string  } 
   | { name: 'bio', args?: [] | false, alias?: string  } 
   | { name: 'language', args?: [] | false, alias?: string  } 
+  | { name: 'theme', args?: [] | false, alias?: string  } 
   | { name: 'crowned', args?: [] | false, alias?: string  } 
   | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
@@ -7587,6 +7604,7 @@ type UserPreviousValuesFields =
   | 'coverPicture'
   | 'bio'
   | 'language'
+  | 'theme'
   | 'crowned'
   | 'private'
   | 'lastConnected'
@@ -7716,6 +7734,19 @@ export interface UserPreviousValuesFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Language> | prisma.Language
+  }
+  theme: {
+    type: 'Theme'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Theme> | prisma.Theme
   }
   crowned: {
     type: 'Boolean'
@@ -8201,6 +8232,10 @@ export interface UserWhereInput {
   language_not?: prisma.Language | null
   language_in?: prisma.Language[]
   language_not_in?: prisma.Language[]
+  theme?: prisma.Theme | null
+  theme_not?: prisma.Theme | null
+  theme_in?: prisma.Theme[]
+  theme_not_in?: prisma.Theme[]
   crowned?: boolean | null
   crowned_not?: boolean | null
   private?: boolean | null
@@ -8378,6 +8413,10 @@ export type UserWhereInputInputObject =
   | { name: 'language_not', alias?: string  } 
   | { name: 'language_in', alias?: string  } 
   | { name: 'language_not_in', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
+  | { name: 'theme_not', alias?: string  } 
+  | { name: 'theme_in', alias?: string  } 
+  | { name: 'theme_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
   | { name: 'private', alias?: string  } 
@@ -9801,6 +9840,7 @@ export interface UserCreateInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -9831,6 +9871,7 @@ export type UserCreateInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -9869,6 +9910,7 @@ export interface UserCreateWithoutFollowingInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -9898,6 +9940,7 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -9935,6 +9978,7 @@ export interface UserCreateWithoutBlockingInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -9964,6 +10008,7 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10001,6 +10046,7 @@ export interface UserCreateWithoutFollowersInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10030,6 +10076,7 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10067,6 +10114,7 @@ export interface UserCreateWithoutBlockedInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10096,6 +10144,7 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10193,6 +10242,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10222,6 +10272,7 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10319,6 +10370,7 @@ export interface UserCreateWithoutDebatesInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10348,6 +10400,7 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10445,6 +10498,7 @@ export interface UserCreateWithoutDebatesRedInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10474,6 +10528,7 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -10761,6 +10816,7 @@ export interface UserCreateWithoutInteractionsInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -10790,6 +10846,7 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11128,6 +11185,7 @@ export interface UserUpdateDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11157,6 +11215,7 @@ export type UserUpdateDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11217,6 +11276,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11245,6 +11305,7 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11304,6 +11365,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11332,6 +11394,7 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11391,6 +11454,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11419,6 +11483,7 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11478,6 +11543,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11506,6 +11572,7 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11631,6 +11698,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11659,6 +11727,7 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11784,6 +11853,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11812,6 +11882,7 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -11937,6 +12008,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -11965,6 +12037,7 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -12325,6 +12398,10 @@ export interface UserScalarWhereInput {
   language_not?: prisma.Language | null
   language_in?: prisma.Language[]
   language_not_in?: prisma.Language[]
+  theme?: prisma.Theme | null
+  theme_not?: prisma.Theme | null
+  theme_in?: prisma.Theme[]
+  theme_not_in?: prisma.Theme[]
   crowned?: boolean | null
   crowned_not?: boolean | null
   private?: boolean | null
@@ -12493,6 +12570,10 @@ export type UserScalarWhereInputInputObject =
   | { name: 'language_not', alias?: string  } 
   | { name: 'language_in', alias?: string  } 
   | { name: 'language_not_in', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
+  | { name: 'theme_not', alias?: string  } 
+  | { name: 'theme_in', alias?: string  } 
+  | { name: 'theme_not_in', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'crowned_not', alias?: string  } 
   | { name: 'private', alias?: string  } 
@@ -12547,6 +12628,7 @@ export interface UserUpdateManyDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -12565,6 +12647,7 @@ export type UserUpdateManyDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -13293,6 +13376,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -13321,6 +13405,7 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -14670,6 +14755,7 @@ export interface UserCreateWithoutConversationsInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -14699,6 +14785,7 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -14767,6 +14854,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -14795,6 +14883,7 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15063,6 +15152,7 @@ export interface UserCreateWithoutNotificationsInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15092,6 +15182,7 @@ export type UserCreateWithoutNotificationsInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15170,6 +15261,7 @@ export interface UserUpdateWithoutNotificationsDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15198,6 +15290,7 @@ export type UserUpdateWithoutNotificationsDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15333,6 +15426,7 @@ export interface UserCreateWithoutTrophiesInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15362,6 +15456,7 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15417,6 +15512,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15445,6 +15541,7 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15490,6 +15587,7 @@ export interface UserUpdateInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15519,6 +15617,7 @@ export type UserUpdateInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15547,6 +15646,7 @@ export interface UserUpdateManyMutationInput {
   coverPicture?: string | null
   bio?: string | null
   language?: prisma.Language | null
+  theme?: prisma.Theme | null
   crowned?: boolean | null
   private?: boolean | null
   lastConnected?: string | null
@@ -15565,6 +15665,7 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'coverPicture', alias?: string  } 
   | { name: 'bio', alias?: string  } 
   | { name: 'language', alias?: string  } 
+  | { name: 'theme', alias?: string  } 
   | { name: 'crowned', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
@@ -15809,6 +15910,10 @@ export type LanguageValues =
   | 'FR'
   | 'EN'
   
+export type ThemeValues =
+  | 'LIGHT'
+  | 'DARK'
+  
 export type DebateTypeValues =
   | 'STANDARD'
   | 'DUO'
@@ -15887,6 +15992,8 @@ export type UserOrderByInputValues =
   | 'bio_DESC'
   | 'language_ASC'
   | 'language_DESC'
+  | 'theme_ASC'
+  | 'theme_DESC'
   | 'crowned_ASC'
   | 'crowned_DESC'
   | 'private_ASC'

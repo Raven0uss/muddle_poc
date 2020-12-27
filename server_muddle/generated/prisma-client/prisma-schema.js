@@ -3313,6 +3313,11 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
+enum Theme {
+  LIGHT
+  DARK
+}
+
 type Trophy {
   id: ID!
   user: User!
@@ -3555,6 +3560,7 @@ type User {
   coverPicture: String
   bio: String
   language: Language!
+  theme: Theme!
   crowned: Boolean!
   private: Boolean!
   lastConnected: DateTime
@@ -3593,6 +3599,7 @@ input UserCreateInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3688,6 +3695,7 @@ input UserCreateWithoutBlockedInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3717,6 +3725,7 @@ input UserCreateWithoutBlockingInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3746,6 +3755,7 @@ input UserCreateWithoutConversationsInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3775,6 +3785,7 @@ input UserCreateWithoutDebatesBlueInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3804,6 +3815,7 @@ input UserCreateWithoutDebatesInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3833,6 +3845,7 @@ input UserCreateWithoutDebatesRedInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3862,6 +3875,7 @@ input UserCreateWithoutFollowersInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3891,6 +3905,7 @@ input UserCreateWithoutFollowingInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3920,6 +3935,7 @@ input UserCreateWithoutInteractionsInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3949,6 +3965,7 @@ input UserCreateWithoutNotificationsInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -3978,6 +3995,7 @@ input UserCreateWithoutTrophiesInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4025,6 +4043,8 @@ enum UserOrderByInput {
   bio_DESC
   language_ASC
   language_DESC
+  theme_ASC
+  theme_DESC
   crowned_ASC
   crowned_DESC
   private_ASC
@@ -4051,6 +4071,7 @@ type UserPreviousValues {
   coverPicture: String
   bio: String
   language: Language!
+  theme: Theme!
   crowned: Boolean!
   private: Boolean!
   lastConnected: DateTime
@@ -4193,6 +4214,10 @@ input UserScalarWhereInput {
   language_not: Language
   language_in: [Language!]
   language_not_in: [Language!]
+  theme: Theme
+  theme_not: Theme
+  theme_in: [Theme!]
+  theme_not_in: [Theme!]
   crowned: Boolean
   crowned_not: Boolean
   private: Boolean
@@ -4255,6 +4280,7 @@ input UserUpdateDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4284,6 +4310,7 @@ input UserUpdateInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4313,6 +4340,7 @@ input UserUpdateManyDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4343,6 +4371,7 @@ input UserUpdateManyMutationInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4495,6 +4524,7 @@ input UserUpdateWithoutBlockedDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4523,6 +4553,7 @@ input UserUpdateWithoutBlockingDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4551,6 +4582,7 @@ input UserUpdateWithoutConversationsDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4579,6 +4611,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4607,6 +4640,7 @@ input UserUpdateWithoutDebatesDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4635,6 +4669,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4663,6 +4698,7 @@ input UserUpdateWithoutFollowersDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4691,6 +4727,7 @@ input UserUpdateWithoutFollowingDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4719,6 +4756,7 @@ input UserUpdateWithoutInteractionsDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4747,6 +4785,7 @@ input UserUpdateWithoutNotificationsDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -4775,6 +4814,7 @@ input UserUpdateWithoutTrophiesDataInput {
   coverPicture: String
   bio: String
   language: Language
+  theme: Theme
   crowned: Boolean
   private: Boolean
   lastConnected: DateTime
@@ -5032,6 +5072,10 @@ input UserWhereInput {
   language_not: Language
   language_in: [Language!]
   language_not_in: [Language!]
+  theme: Theme
+  theme_not: Theme
+  theme_in: [Theme!]
+  theme_not_in: [Theme!]
   crowned: Boolean
   crowned_not: Boolean
   private: Boolean

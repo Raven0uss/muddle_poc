@@ -11,6 +11,11 @@ enum Gender {
   NO_INDICATION
 }
 
+enum Theme {
+  LIGHT
+  DARK
+}
+
 enum Language {
   FR
   EN
@@ -27,9 +32,16 @@ type User {
   certified: Boolean! @default(value: false)
   gender: Gender! @default(value: NO_INDICATION)
   profilePicture: String
+    @default(
+      value: "https://cdn.image4.io/muddles/f_auto/06ec5294-5f6f-417b-8cb6-8ae2af2934b0.png"
+    )
   coverPicture: String
+    @default(
+      value: "https://cdn.image4.io/muddles/f_auto/30aa1f19-5670-47c3-bf91-9e8e9e7602ef.jpg"
+    )
   bio: String
   language: Language! @default(value: FR)
+  theme: Theme! @default(value: LIGHT)
   crowned: Boolean! @default(value: false)
   private: Boolean! @default(value: false)
   lastConnected: DateTime

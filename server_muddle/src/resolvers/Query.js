@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { flattenDeep, isNil } from "lodash";
+import { flattenDeep, isNil, get } from "lodash";
 
 import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
 import { combineResolvers } from "graphql-resolvers";
@@ -163,7 +163,8 @@ const Query = prismaObjectType({
           const blockedList = await prisma
             .user({ id: currentUser.user.id })
             .blocked();
-          const { messages } = conversations[0];
+          const messages = get(conversations, "[0].messages");
+          if (messages === undefined) throw new Error("messages is undefined");
           // messages.filter((m) => {
           //   const index = blockedList.findIndex((b) => b.id === m.from.id);
           //   console.log(index);

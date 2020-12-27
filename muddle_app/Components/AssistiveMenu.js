@@ -233,7 +233,7 @@ const AssistiveMenu = (props) => {
               viewStyle={{
                 backgroundColor: "#F47658",
                 position: "absolute",
-                borderColor: "#fff",
+                borderColor: "#ffffff",
                 borderWidth: 1,
                 // right: 0,
                 marginLeft: 25,

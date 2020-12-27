@@ -245,7 +245,7 @@ const Chat = (props) => {
       const { subscriptionData } = response;
       const payload = get(subscriptionData, "data.message.node");
       if (payload === undefined) return;
-
+      if (get(payload, "id") === undefined) return;
       setMessages((m) => [payload, ...m]);
       if (payload.to.id === currentUser.id) {
         lastMessageRead({

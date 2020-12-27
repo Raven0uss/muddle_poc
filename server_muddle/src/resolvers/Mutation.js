@@ -22,7 +22,7 @@ const exposedMutations = {
     "createNotification",
     "updateManyNotifications",
     "updateNotification",
-    "deleteManyNotifications"
+    "deleteManyNotifications",
   ],
   reportMutations: ["createReport", "updateReport"],
   trophyMutations: ["createTrophy", "updateTrophy"],
@@ -131,12 +131,13 @@ const Mutation = prismaObjectType({
       args: {
         email: stringArg(),
         password: stringArg(),
-        pseudo: stringArg(),
+        firstname: stringArg(),
+        lastname: stringArg(),
         birthdate: dateArg(),
       },
       resolve: async (
         parent,
-        { email, password, pseudo, birthdate },
+        { email, password, firstname, lastname, birthdate },
         { prisma }
       ) => {
         try {
@@ -144,7 +145,8 @@ const Mutation = prismaObjectType({
           const user = await prisma.createUser({
             email,
             password: hashedPassword,
-            pseudo,
+            firstname,
+            lastname,
             birthdate,
           });
 
@@ -1254,14 +1256,13 @@ const Mutation = prismaObjectType({
       },
     });
 
-
     // t.field("blockUser", {
     //   type: "User",
     //   args: {
     //     userId: idArg()
     //   },
     //   resolve: async (parent, { userId }, { prisma, currentUser }) => {
-        
+
     //   }
     // })
 

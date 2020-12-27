@@ -529,7 +529,7 @@ export type DebateOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type Role = "STANDARD" | "MODERATOR" | "ADMIN" | "MUDDLE";
+export type Gender = "MALE" | "FEMALE" | "NO_INDICATION";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -558,6 +558,8 @@ export type UserOrderByInput =
   | "bio_DESC"
   | "language_ASC"
   | "language_DESC"
+  | "theme_ASC"
+  | "theme_DESC"
   | "crowned_ASC"
   | "crowned_DESC"
   | "private_ASC"
@@ -663,13 +665,43 @@ export type ReportReason =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type Gender = "MALE" | "FEMALE" | "NO_INDICATION";
+export type ReportType = "DEBATE" | "COMMENT";
+
+export type TrophyOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "won_ASC"
+  | "won_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type Role = "STANDARD" | "MODERATOR" | "ADMIN" | "MUDDLE";
 
 export type Language = "FR" | "EN";
 
+export type Theme = "LIGHT" | "DARK";
+
 export type DebateType = "STANDARD" | "DUO" | "MUDDLE";
 
-export type ReportType = "DEBATE" | "COMMENT";
+export type NotificationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "userId_ASC"
+  | "userId_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "status_ASC"
+  | "status_DESC"
+  | "new_ASC"
+  | "new_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type ConversationOrderByInput =
   | "id_ASC"
@@ -706,34 +738,6 @@ export type ReportOrderByInput =
   | "reasonText_DESC"
   | "treated_ASC"
   | "treated_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type NotificationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "userId_ASC"
-  | "userId_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "status_ASC"
-  | "status_DESC"
-  | "new_ASC"
-  | "new_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type TrophyOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "won_ASC"
-  | "won_DESC"
-  | "type_ASC"
-  | "type_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -1050,6 +1054,7 @@ export interface UserUpdateDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1219,6 +1224,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1345,6 +1351,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1484,6 +1491,7 @@ export interface UserUpdateManyMutationInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1502,6 +1510,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1557,6 +1566,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1597,6 +1607,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1626,6 +1637,7 @@ export interface UserCreateWithoutTrophiesInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1745,6 +1757,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1773,6 +1786,7 @@ export interface UserUpdateWithoutNotificationsDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1874,6 +1888,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -1985,6 +2000,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -2220,6 +2236,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -2393,6 +2410,10 @@ export interface UserScalarWhereInput {
   language_not?: Maybe<Language>;
   language_in?: Maybe<Language[] | Language>;
   language_not_in?: Maybe<Language[] | Language>;
+  theme?: Maybe<Theme>;
+  theme_not?: Maybe<Theme>;
+  theme_in?: Maybe<Theme[] | Theme>;
+  theme_not_in?: Maybe<Theme[] | Theme>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
@@ -2458,6 +2479,7 @@ export interface UserUpdateManyDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -3093,6 +3115,10 @@ export interface UserWhereInput {
   language_not?: Maybe<Language>;
   language_in?: Maybe<Language[] | Language>;
   language_not_in?: Maybe<Language[] | Language>;
+  theme?: Maybe<Theme>;
+  theme_not?: Maybe<Theme>;
+  theme_in?: Maybe<Theme[] | Theme>;
+  theme_not_in?: Maybe<Theme[] | Theme>;
   crowned?: Maybe<Boolean>;
   crowned_not?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
@@ -3392,6 +3418,7 @@ export interface UserUpdateInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -3507,6 +3534,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -3892,6 +3920,7 @@ export interface UserCreateWithoutFollowingInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -3927,6 +3956,7 @@ export interface UserCreateWithoutFollowersInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4366,6 +4396,7 @@ export interface UserCreateWithoutNotificationsInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4528,6 +4559,7 @@ export interface UserCreateInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4564,6 +4596,7 @@ export interface UserCreateWithoutBlockedInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4602,6 +4635,7 @@ export interface UserCreateWithoutDebatesInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4900,6 +4934,7 @@ export interface UserCreateWithoutBlockingInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4934,6 +4969,7 @@ export interface UserCreateWithoutDebatesRedInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -4969,6 +5005,7 @@ export interface UserCreateWithoutInteractionsInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -5059,6 +5096,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -5088,6 +5126,7 @@ export interface UserCreateWithoutConversationsInput {
   coverPicture?: Maybe<String>;
   bio?: Maybe<String>;
   language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
   private?: Maybe<Boolean>;
   lastConnected?: Maybe<DateTimeInput>;
@@ -5176,6 +5215,7 @@ export interface UserPreviousValues {
   coverPicture?: String;
   bio?: String;
   language: Language;
+  theme: Theme;
   crowned: Boolean;
   private: Boolean;
   lastConnected?: DateTimeOutput;
@@ -5199,6 +5239,7 @@ export interface UserPreviousValuesPromise
   coverPicture: () => Promise<String>;
   bio: () => Promise<String>;
   language: () => Promise<Language>;
+  theme: () => Promise<Theme>;
   crowned: () => Promise<Boolean>;
   private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
@@ -5222,6 +5263,7 @@ export interface UserPreviousValuesSubscription
   coverPicture: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<Language>>;
+  theme: () => Promise<AsyncIterator<Theme>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
   private: () => Promise<AsyncIterator<Boolean>>;
   lastConnected: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -5322,6 +5364,7 @@ export interface User {
   coverPicture?: String;
   bio?: String;
   language: Language;
+  theme: Theme;
   crowned: Boolean;
   private: Boolean;
   lastConnected?: DateTimeOutput;
@@ -5343,6 +5386,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   coverPicture: () => Promise<String>;
   bio: () => Promise<String>;
   language: () => Promise<Language>;
+  theme: () => Promise<Theme>;
   crowned: () => Promise<Boolean>;
   private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
@@ -5465,6 +5509,7 @@ export interface UserSubscription
   coverPicture: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<Language>>;
+  theme: () => Promise<AsyncIterator<Theme>>;
   crowned: () => Promise<AsyncIterator<Boolean>>;
   private: () => Promise<AsyncIterator<Boolean>>;
   lastConnected: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -5587,6 +5632,7 @@ export interface UserNullablePromise
   coverPicture: () => Promise<String>;
   bio: () => Promise<String>;
   language: () => Promise<Language>;
+  theme: () => Promise<Theme>;
   crowned: () => Promise<Boolean>;
   private: () => Promise<Boolean>;
   lastConnected: () => Promise<DateTimeOutput>;
@@ -7851,6 +7897,10 @@ export const models: Model[] = [
   },
   {
     name: "Gender",
+    embedded: false
+  },
+  {
+    name: "Theme",
     embedded: false
   },
   {

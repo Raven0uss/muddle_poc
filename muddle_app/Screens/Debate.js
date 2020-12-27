@@ -363,7 +363,7 @@ const Debate = (props) => {
       // console.log(payload);
       if (payload !== undefined) {
         if (idExist(comments, payload.id)) {
-          const payloadId = payload.id;
+          const payloadId = get(payload, "id");
           const commentIndex = comments.findIndex((c) => c.id === payloadId);
           // console.log(commentIndex);
           if (commentIndex !== -1)

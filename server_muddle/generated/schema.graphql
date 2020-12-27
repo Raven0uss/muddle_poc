@@ -2228,7 +2228,7 @@ type Mutation {
   notifySubComment(commentId: ID, debateId: ID): NoValue!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
   sendVote(debateId: ID, type: String, userId: ID): Debate!
-  signUp(birthdate: DateTime, email: String, password: String, pseudo: String): Token!
+  signUp(birthdate: DateTime, email: String, firstname: String, lastname: String, password: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
   updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
@@ -2873,6 +2873,11 @@ type Subscription {
   notification(userId: String): NotificationSubPayload!
 }
 
+enum Theme {
+  DARK
+  LIGHT
+}
+
 type Token {
   token: String!
 }
@@ -3093,6 +3098,7 @@ type User {
   private: Boolean!
   profilePicture: String
   role: Role!
+  theme: Theme!
   trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]
   updatedAt: DateTime!
 }
@@ -3124,6 +3130,7 @@ input UserCreateInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3218,6 +3225,7 @@ input UserCreateWithoutBlockedInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3247,6 +3255,7 @@ input UserCreateWithoutBlockingInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3276,6 +3285,7 @@ input UserCreateWithoutConversationsInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3305,6 +3315,7 @@ input UserCreateWithoutDebatesBlueInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3334,6 +3345,7 @@ input UserCreateWithoutDebatesInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3363,6 +3375,7 @@ input UserCreateWithoutDebatesRedInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3392,6 +3405,7 @@ input UserCreateWithoutFollowersInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3421,6 +3435,7 @@ input UserCreateWithoutFollowingInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3450,6 +3465,7 @@ input UserCreateWithoutInteractionsInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3479,6 +3495,7 @@ input UserCreateWithoutNotificationsInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
 }
 
@@ -3509,6 +3526,7 @@ input UserCreateWithoutTrophiesInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
 }
 
 enum UserOrderByInput {
@@ -3546,6 +3564,8 @@ enum UserOrderByInput {
   profilePicture_DESC
   role_ASC
   role_DESC
+  theme_ASC
+  theme_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -3708,6 +3728,10 @@ input UserScalarWhereInput {
   role_in: [Role!]
   role_not: Role
   role_not_in: [Role!]
+  theme: Theme
+  theme_in: [Theme!]
+  theme_not: Theme
+  theme_not_in: [Theme!]
   updatedAt: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
@@ -3744,6 +3768,7 @@ input UserUpdateDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -3773,6 +3798,7 @@ input UserUpdateInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -3792,6 +3818,7 @@ input UserUpdateManyDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
 }
 
 input UserUpdateManyInput {
@@ -3965,6 +3992,7 @@ input UserUpdateWithoutBlockedDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -3993,6 +4021,7 @@ input UserUpdateWithoutBlockingDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4021,6 +4050,7 @@ input UserUpdateWithoutConversationsDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4049,6 +4079,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4077,6 +4108,7 @@ input UserUpdateWithoutDebatesDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4105,6 +4137,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4133,6 +4166,7 @@ input UserUpdateWithoutFollowersDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4161,6 +4195,7 @@ input UserUpdateWithoutFollowingDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4189,6 +4224,7 @@ input UserUpdateWithoutInteractionsDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4217,6 +4253,7 @@ input UserUpdateWithoutNotificationsDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
 }
 
@@ -4246,6 +4283,7 @@ input UserUpdateWithoutTrophiesDataInput {
   private: Boolean
   profilePicture: String
   role: Role
+  theme: Theme
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -4521,6 +4559,10 @@ input UserWhereInput {
   role_in: [Role!]
   role_not: Role
   role_not_in: [Role!]
+  theme: Theme
+  theme_in: [Theme!]
+  theme_not: Theme
+  theme_not_in: [Theme!]
   trophies_some: TrophyWhereInput
   updatedAt: DateTime
   updatedAt_gt: DateTime

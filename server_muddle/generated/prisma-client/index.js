@@ -85,6 +85,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Theme",
+    embedded: false
+  },
+  {
     name: "Language",
     embedded: false
   },

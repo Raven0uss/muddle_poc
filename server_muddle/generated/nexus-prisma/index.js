@@ -2432,6 +2432,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateManyInput: { // input type
@@ -2512,6 +2513,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutBlockingInput: { // input type
@@ -2540,6 +2542,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutConversationsInput: { // input type
@@ -2568,6 +2571,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutDebatesBlueInput: { // input type
@@ -2596,6 +2600,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutDebatesInput: { // input type
@@ -2624,6 +2629,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutDebatesRedInput: { // input type
@@ -2652,6 +2658,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutFollowersInput: { // input type
@@ -2680,6 +2687,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutFollowingInput: { // input type
@@ -2708,6 +2716,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutInteractionsInput: { // input type
@@ -2736,6 +2745,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutNotificationsInput: { // input type
@@ -2764,6 +2774,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
   }
   UserCreateWithoutTrophiesInput: { // input type
@@ -2793,6 +2804,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
   }
   UserScalarWhereInput: { // input type
     AND?: NexusGenInputs['UserScalarWhereInput'][] | null; // [UserScalarWhereInput!]
@@ -2952,6 +2964,10 @@ export interface NexusGenInputs {
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
     role_not_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    theme?: NexusGenEnums['Theme'] | null; // Theme
+    theme_in?: NexusGenEnums['Theme'][] | null; // [Theme!]
+    theme_not?: NexusGenEnums['Theme'] | null; // Theme
+    theme_not_in?: NexusGenEnums['Theme'][] | null; // [Theme!]
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
     updatedAt_gte?: any | null; // DateTime
@@ -2987,6 +3003,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateInput: { // input type
@@ -3015,6 +3032,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateManyDataInput: { // input type
@@ -3033,6 +3051,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
   }
   UserUpdateManyInput: { // input type
     connect?: NexusGenInputs['UserWhereUniqueInput'][] | null; // [UserWhereUniqueInput!]
@@ -3218,6 +3237,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutBlockingDataInput: { // input type
@@ -3245,6 +3265,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutConversationsDataInput: { // input type
@@ -3272,6 +3293,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutDebatesBlueDataInput: { // input type
@@ -3299,6 +3321,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutDebatesDataInput: { // input type
@@ -3326,6 +3349,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutDebatesRedDataInput: { // input type
@@ -3353,6 +3377,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutFollowersDataInput: { // input type
@@ -3380,6 +3405,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutFollowingDataInput: { // input type
@@ -3407,6 +3433,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutInteractionsDataInput: { // input type
@@ -3434,6 +3461,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutNotificationsDataInput: { // input type
@@ -3461,6 +3489,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
   }
   UserUpdateWithoutTrophiesDataInput: { // input type
@@ -3489,6 +3518,7 @@ export interface NexusGenInputs {
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
+    theme?: NexusGenEnums['Theme'] | null; // Theme
   }
   UserUpsertNestedInput: { // input type
     create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
@@ -3715,6 +3745,10 @@ export interface NexusGenInputs {
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
     role_not_in?: NexusGenEnums['Role'][] | null; // [Role!]
+    theme?: NexusGenEnums['Theme'] | null; // Theme
+    theme_in?: NexusGenEnums['Theme'][] | null; // [Theme!]
+    theme_not?: NexusGenEnums['Theme'] | null; // Theme
+    theme_not_in?: NexusGenEnums['Theme'][] | null; // [Theme!]
     trophies_some?: NexusGenInputs['TrophyWhereInput'] | null; // TrophyWhereInput
     updatedAt?: any | null; // DateTime
     updatedAt_gt?: any | null; // DateTime
@@ -3751,9 +3785,10 @@ export interface NexusGenEnums {
   ReportReason: "INSULT" | "PORNOGRAPHY" | "RACISM" | "SEXISM" | "VIOLENCE"
   ReportType: "COMMENT" | "DEBATE"
   Role: "ADMIN" | "MODERATOR" | "MUDDLE" | "STANDARD"
+  Theme: "DARK" | "LIGHT"
   TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
   TrophyType: "DUO" | "TOP_COMMENT"
-  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "theme_ASC" | "theme_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -3890,6 +3925,7 @@ export interface NexusGenRootTypes {
     private: boolean; // Boolean!
     profilePicture?: string | null; // String
     role: NexusGenEnums['Role']; // Role!
+    theme: NexusGenEnums['Theme']; // Theme!
     updatedAt: any; // DateTime!
   }
   String: string;
@@ -4179,6 +4215,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   ReportReason: NexusGenEnums['ReportReason'];
   ReportType: NexusGenEnums['ReportType'];
   Role: NexusGenEnums['Role'];
+  Theme: NexusGenEnums['Theme'];
   TrophyOrderByInput: NexusGenEnums['TrophyOrderByInput'];
   TrophyType: NexusGenEnums['TrophyType'];
   UserOrderByInput: NexusGenEnums['UserOrderByInput'];
@@ -4442,6 +4479,7 @@ export interface NexusGenFieldTypes {
     private: boolean; // Boolean!
     profilePicture: string | null; // String
     role: NexusGenEnums['Role']; // Role!
+    theme: NexusGenEnums['Theme']; // Theme!
     trophies: NexusGenRootTypes['Trophy'][] | null; // [Trophy!]
     updatedAt: any; // DateTime!
   }
@@ -4681,8 +4719,9 @@ export interface NexusGenArgTypes {
     signUp: { // args
       birthdate?: any | null; // DateTime
       email?: string | null; // String
+      firstname?: string | null; // String
+      lastname?: string | null; // String
       password?: string | null; // String
-      pseudo?: string | null; // String
     }
     updateAd: { // args
       data: NexusGenInputs['AdUpdateInput']; // AdUpdateInput!
@@ -5030,7 +5069,7 @@ export type NexusGenObjectNames = "Ad" | "AdTarget" | "BatchPayload" | "Comment"
 
 export type NexusGenInputNames = "AdCreateInput" | "AdTargetCreateInput" | "AdTargetCreateManyInput" | "AdTargetScalarWhereInput" | "AdTargetUpdateDataInput" | "AdTargetUpdateInput" | "AdTargetUpdateManyDataInput" | "AdTargetUpdateManyInput" | "AdTargetUpdateManyWithWhereNestedInput" | "AdTargetUpdateWithWhereUniqueNestedInput" | "AdTargetUpsertWithWhereUniqueNestedInput" | "AdTargetWhereInput" | "AdTargetWhereUniqueInput" | "AdUpdateInput" | "AdWhereInput" | "AdWhereUniqueInput" | "CommentCreateInput" | "CommentCreateManyInput" | "CommentCreateManyWithoutDebateInput" | "CommentCreateOneInput" | "CommentCreateOneWithoutReportsInput" | "CommentCreateWithoutDebateInput" | "CommentCreateWithoutReportsInput" | "CommentScalarWhereInput" | "CommentUpdateDataInput" | "CommentUpdateInput" | "CommentUpdateManyDataInput" | "CommentUpdateManyInput" | "CommentUpdateManyWithWhereNestedInput" | "CommentUpdateManyWithoutDebateInput" | "CommentUpdateOneInput" | "CommentUpdateOneWithoutReportsInput" | "CommentUpdateWithWhereUniqueNestedInput" | "CommentUpdateWithWhereUniqueWithoutDebateInput" | "CommentUpdateWithoutDebateDataInput" | "CommentUpdateWithoutReportsDataInput" | "CommentUpsertNestedInput" | "CommentUpsertWithWhereUniqueNestedInput" | "CommentUpsertWithWhereUniqueWithoutDebateInput" | "CommentUpsertWithoutReportsInput" | "CommentWhereInput" | "CommentWhereUniqueInput" | "ConversationCreateInput" | "ConversationCreateManyWithoutSpeakersInput" | "ConversationCreateOneWithoutMessagesInput" | "ConversationCreateWithoutMessagesInput" | "ConversationCreateWithoutSpeakersInput" | "ConversationScalarWhereInput" | "ConversationUpdateInput" | "ConversationUpdateManyWithoutSpeakersInput" | "ConversationUpdateOneRequiredWithoutMessagesInput" | "ConversationUpdateWithWhereUniqueWithoutSpeakersInput" | "ConversationUpdateWithoutMessagesDataInput" | "ConversationUpdateWithoutSpeakersDataInput" | "ConversationUpsertWithWhereUniqueWithoutSpeakersInput" | "ConversationUpsertWithoutMessagesInput" | "ConversationWhereInput" | "ConversationWhereUniqueInput" | "DebateCreateInput" | "DebateCreateManyWithoutOwnerBlueInput" | "DebateCreateManyWithoutOwnerInput" | "DebateCreateManyWithoutOwnerRedInput" | "DebateCreateOneInput" | "DebateCreateOneWithoutCommentsInput" | "DebateCreateOneWithoutInteractionsInput" | "DebateCreateOneWithoutReportsInput" | "DebateCreateWithoutCommentsInput" | "DebateCreateWithoutInteractionsInput" | "DebateCreateWithoutOwnerBlueInput" | "DebateCreateWithoutOwnerInput" | "DebateCreateWithoutOwnerRedInput" | "DebateCreateWithoutReportsInput" | "DebateScalarWhereInput" | "DebateUpdateDataInput" | "DebateUpdateInput" | "DebateUpdateManyDataInput" | "DebateUpdateManyWithWhereNestedInput" | "DebateUpdateManyWithoutOwnerBlueInput" | "DebateUpdateManyWithoutOwnerInput" | "DebateUpdateManyWithoutOwnerRedInput" | "DebateUpdateOneInput" | "DebateUpdateOneRequiredWithoutCommentsInput" | "DebateUpdateOneWithoutInteractionsInput" | "DebateUpdateOneWithoutReportsInput" | "DebateUpdateWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpdateWithWhereUniqueWithoutOwnerInput" | "DebateUpdateWithWhereUniqueWithoutOwnerRedInput" | "DebateUpdateWithoutCommentsDataInput" | "DebateUpdateWithoutInteractionsDataInput" | "DebateUpdateWithoutOwnerBlueDataInput" | "DebateUpdateWithoutOwnerDataInput" | "DebateUpdateWithoutOwnerRedDataInput" | "DebateUpdateWithoutReportsDataInput" | "DebateUpsertNestedInput" | "DebateUpsertWithWhereUniqueWithoutOwnerBlueInput" | "DebateUpsertWithWhereUniqueWithoutOwnerInput" | "DebateUpsertWithWhereUniqueWithoutOwnerRedInput" | "DebateUpsertWithoutCommentsInput" | "DebateUpsertWithoutInteractionsInput" | "DebateUpsertWithoutReportsInput" | "DebateWhereInput" | "DebateWhereUniqueInput" | "InteractionCreateInput" | "InteractionCreateManyWithoutDebateInput" | "InteractionCreateManyWithoutWhoInput" | "InteractionCreateWithoutDebateInput" | "InteractionCreateWithoutWhoInput" | "InteractionScalarWhereInput" | "InteractionUpdateInput" | "InteractionUpdateManyDataInput" | "InteractionUpdateManyWithWhereNestedInput" | "InteractionUpdateManyWithoutDebateInput" | "InteractionUpdateManyWithoutWhoInput" | "InteractionUpdateWithWhereUniqueWithoutDebateInput" | "InteractionUpdateWithWhereUniqueWithoutWhoInput" | "InteractionUpdateWithoutDebateDataInput" | "InteractionUpdateWithoutWhoDataInput" | "InteractionUpsertWithWhereUniqueWithoutDebateInput" | "InteractionUpsertWithWhereUniqueWithoutWhoInput" | "InteractionWhereInput" | "InteractionWhereUniqueInput" | "MessageCreateInput" | "MessageCreateManyWithoutConversationInput" | "MessageCreateWithoutConversationInput" | "MessageScalarWhereInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyMutationInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateManyWithoutConversationInput" | "MessageUpdateWithWhereUniqueWithoutConversationInput" | "MessageUpdateWithoutConversationDataInput" | "MessageUpsertWithWhereUniqueWithoutConversationInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "NotificationCreateInput" | "NotificationCreateManyWithoutWhoInput" | "NotificationCreateWithoutWhoInput" | "NotificationScalarWhereInput" | "NotificationUpdateInput" | "NotificationUpdateManyDataInput" | "NotificationUpdateManyMutationInput" | "NotificationUpdateManyWithWhereNestedInput" | "NotificationUpdateManyWithoutWhoInput" | "NotificationUpdateWithWhereUniqueWithoutWhoInput" | "NotificationUpdateWithoutWhoDataInput" | "NotificationUpsertWithWhereUniqueWithoutWhoInput" | "NotificationWhereInput" | "NotificationWhereUniqueInput" | "ReportCreateInput" | "ReportCreateManyWithoutCommentInput" | "ReportCreateManyWithoutDebateInput" | "ReportCreateWithoutCommentInput" | "ReportCreateWithoutDebateInput" | "ReportScalarWhereInput" | "ReportUpdateInput" | "ReportUpdateManyDataInput" | "ReportUpdateManyWithWhereNestedInput" | "ReportUpdateManyWithoutCommentInput" | "ReportUpdateManyWithoutDebateInput" | "ReportUpdateWithWhereUniqueWithoutCommentInput" | "ReportUpdateWithWhereUniqueWithoutDebateInput" | "ReportUpdateWithoutCommentDataInput" | "ReportUpdateWithoutDebateDataInput" | "ReportUpsertWithWhereUniqueWithoutCommentInput" | "ReportUpsertWithWhereUniqueWithoutDebateInput" | "ReportWhereInput" | "ReportWhereUniqueInput" | "TrophyCreateInput" | "TrophyCreateManyWithoutUserInput" | "TrophyCreateWithoutUserInput" | "TrophyScalarWhereInput" | "TrophyUpdateInput" | "TrophyUpdateManyDataInput" | "TrophyUpdateManyWithWhereNestedInput" | "TrophyUpdateManyWithoutUserInput" | "TrophyUpdateWithWhereUniqueWithoutUserInput" | "TrophyUpdateWithoutUserDataInput" | "TrophyUpsertWithWhereUniqueWithoutUserInput" | "TrophyWhereInput" | "TrophyWhereUniqueInput" | "UserCreateInput" | "UserCreateManyInput" | "UserCreateManyWithoutBlockedInput" | "UserCreateManyWithoutBlockingInput" | "UserCreateManyWithoutConversationsInput" | "UserCreateManyWithoutFollowersInput" | "UserCreateManyWithoutFollowingInput" | "UserCreateManyWithoutNotificationsInput" | "UserCreateOneInput" | "UserCreateOneWithoutDebatesBlueInput" | "UserCreateOneWithoutDebatesInput" | "UserCreateOneWithoutDebatesRedInput" | "UserCreateOneWithoutInteractionsInput" | "UserCreateOneWithoutTrophiesInput" | "UserCreateWithoutBlockedInput" | "UserCreateWithoutBlockingInput" | "UserCreateWithoutConversationsInput" | "UserCreateWithoutDebatesBlueInput" | "UserCreateWithoutDebatesInput" | "UserCreateWithoutDebatesRedInput" | "UserCreateWithoutFollowersInput" | "UserCreateWithoutFollowingInput" | "UserCreateWithoutInteractionsInput" | "UserCreateWithoutNotificationsInput" | "UserCreateWithoutTrophiesInput" | "UserScalarWhereInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyDataInput" | "UserUpdateManyInput" | "UserUpdateManyWithWhereNestedInput" | "UserUpdateManyWithoutBlockedInput" | "UserUpdateManyWithoutBlockingInput" | "UserUpdateManyWithoutConversationsInput" | "UserUpdateManyWithoutFollowersInput" | "UserUpdateManyWithoutFollowingInput" | "UserUpdateManyWithoutNotificationsInput" | "UserUpdateOneInput" | "UserUpdateOneRequiredInput" | "UserUpdateOneRequiredWithoutInteractionsInput" | "UserUpdateOneRequiredWithoutTrophiesInput" | "UserUpdateOneWithoutDebatesBlueInput" | "UserUpdateOneWithoutDebatesInput" | "UserUpdateOneWithoutDebatesRedInput" | "UserUpdateWithWhereUniqueNestedInput" | "UserUpdateWithWhereUniqueWithoutBlockedInput" | "UserUpdateWithWhereUniqueWithoutBlockingInput" | "UserUpdateWithWhereUniqueWithoutConversationsInput" | "UserUpdateWithWhereUniqueWithoutFollowersInput" | "UserUpdateWithWhereUniqueWithoutFollowingInput" | "UserUpdateWithWhereUniqueWithoutNotificationsInput" | "UserUpdateWithoutBlockedDataInput" | "UserUpdateWithoutBlockingDataInput" | "UserUpdateWithoutConversationsDataInput" | "UserUpdateWithoutDebatesBlueDataInput" | "UserUpdateWithoutDebatesDataInput" | "UserUpdateWithoutDebatesRedDataInput" | "UserUpdateWithoutFollowersDataInput" | "UserUpdateWithoutFollowingDataInput" | "UserUpdateWithoutInteractionsDataInput" | "UserUpdateWithoutNotificationsDataInput" | "UserUpdateWithoutTrophiesDataInput" | "UserUpsertNestedInput" | "UserUpsertWithWhereUniqueNestedInput" | "UserUpsertWithWhereUniqueWithoutBlockedInput" | "UserUpsertWithWhereUniqueWithoutBlockingInput" | "UserUpsertWithWhereUniqueWithoutConversationsInput" | "UserUpsertWithWhereUniqueWithoutFollowersInput" | "UserUpsertWithWhereUniqueWithoutFollowingInput" | "UserUpsertWithWhereUniqueWithoutNotificationsInput" | "UserUpsertWithoutDebatesBlueInput" | "UserUpsertWithoutDebatesInput" | "UserUpsertWithoutDebatesRedInput" | "UserUpsertWithoutInteractionsInput" | "UserUpsertWithoutTrophiesInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "AdOrderByInput" | "AdTargetOrderByInput" | "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "GenderFilter" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "NotificationOrderByInput" | "NotificationStatus" | "NotificationType" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
+export type NexusGenEnumNames = "AdOrderByInput" | "AdTargetOrderByInput" | "CommentOrderByInput" | "ConversationOrderByInput" | "DebateOrderByInput" | "DebateType" | "Gender" | "GenderFilter" | "InteractionOrderByInput" | "InteractionType" | "Language" | "MessageOrderByInput" | "NotificationOrderByInput" | "NotificationStatus" | "NotificationType" | "ReportOrderByInput" | "ReportReason" | "ReportType" | "Role" | "Theme" | "TrophyOrderByInput" | "TrophyType" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 
