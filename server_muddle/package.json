@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/index.js",
     "reseed": "cd prisma ; prisma reset --force ; prisma seed ; cd -",
-    "closeDeb": "node -r esm ./src/cronjobs/checkClosedDebate.js"
+    "cjob:closeDeb": "node -r esm ./src/cronjobs/checkClosedDebates.js",
+    "cjob:deleteUnpub": "node -r esm ./src/cronjobs/checkUnpublishedDebates.js",
+    "cjob:deleteNotif": "node -r esm ./src/cronjobs/checkOldNotifications.js"
   },
   "keywords": [],
   "author": "",
