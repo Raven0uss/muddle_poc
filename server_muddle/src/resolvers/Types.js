@@ -1,4 +1,4 @@
-import { objectType, scalarType, arg } from "nexus/dist";
+import { objectType, scalarType, arg, enumType } from "nexus/dist";
 
 import moment from "moment";
 
@@ -31,6 +31,11 @@ const Token = objectType({
     t.string("token");
   },
 });
+
+// const Gender = enumType({
+//   name: "Gender",
+//   members: ["FEMALE", "MALE", "NO_INDICATION"],
+// });
 
 const NoValue = objectType({
   name: "NoValue",

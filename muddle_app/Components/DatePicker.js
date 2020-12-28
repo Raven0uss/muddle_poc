@@ -20,13 +20,14 @@ import "moment/locale/fr";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { get } from "lodash";
 
 const { width, height } = Dimensions.get("window");
 
 const DatePicker = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const [show, setShow] = React.useState(false);
-  const { date, onDateChange, placeholder } = props;
+  const { date, onDateChange, placeholder, maximumDate } = props;
   const locale = i18n.language;
 
   moment.locale(locale);
@@ -85,13 +86,15 @@ const DatePicker = (props) => {
                 value={date || new Date()}
                 mode="date"
                 locale={locale}
-                display="default"
+                display="spinner"
                 onChange={onChange}
-                // textColor={themeSchema[theme].colorText}
+                textColor={themeSchema[theme].colorText}
                 style={{
                   backgroundColor: themeSchema[theme].backgroundColor2,
+                  // color: themeSchema[theme].colorText,
                   // alignSelf: "center",
                 }}
+                maximumDate={maximumDate}
               />
               <TouchableOpacity
                 onPress={() => {
@@ -123,6 +126,7 @@ const DatePicker = (props) => {
           locale={locale}
           display="default"
           onChange={onChange}
+          maximumDate={maximumDate}
         />
       )}
     </View>

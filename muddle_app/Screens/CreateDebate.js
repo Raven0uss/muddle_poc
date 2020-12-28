@@ -253,7 +253,7 @@ const InvitationDebate = (props) => {
                 Keyboard.dismiss();
                 setSkipFetch(false);
               }}
-              disabled={firstname.length < 3 && lastname.length < 3}
+              disabled={firstname.length === 0 && lastname.length === 0}
             >
               <Text
                 style={{

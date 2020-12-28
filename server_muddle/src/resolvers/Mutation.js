@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import { flattenDeep, get, isEmpty, isNil } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
-import { booleanArg, idArg, stringArg } from "nexus/dist";
-import { dateArg } from "./Types";
+import { arg, booleanArg, enumType, idArg, stringArg } from "nexus/dist";
+import { dateArg, Gender } from "./Types";
 
 import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 
@@ -134,24 +134,34 @@ const Mutation = prismaObjectType({
         firstname: stringArg(),
         lastname: stringArg(),
         birthdate: dateArg(),
+        gender: stringArg(),
       },
       resolve: async (
         parent,
-        { email, password, firstname, lastname, birthdate },
+        { email, password, firstname, lastname, birthdate, gender },
         { prisma }
       ) => {
+        // Have to create a temporary user and be validate with the token
         try {
           const hashedPassword = bcrypt.hashSync(password, 12);
+          let getGender = gender;
+          if (
+            gender !== "FEMALE" &&
+            gender !== "MALE" &&
+            gender !== "NO_INDICATION"
+          )
+            getGender = "NO_INDICATION";
           const user = await prisma.createUser({
             email,
             password: hashedPassword,
             firstname,
             lastname,
             birthdate,
+            gender: getGender,
           });
 
           const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
-            expiresIn: 36000,
+            expiresIn: 43200,
           });
 
           return { token };
@@ -1390,6 +1400,18 @@ const Mutation = prismaObjectType({
       },
     });
 
+    t.field("checkEmailSignup", {
+      type: "NoValue",
+      args: {
+        email: stringArg(),
+      },
+      resolve: async (parent, { email }, { prisma }) => {
+        const user = await prisma.user({ email });
+        console.log(user);
+        if (isNil(user)) return { value: 0 };
+        return { value: -1 }; // -1 already used
+      },
+    });
     // t.field("blockUser", {
     //   type: "User",
     //   args: {

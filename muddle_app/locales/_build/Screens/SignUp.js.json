@@ -1,9 +1,89 @@
 {
+  "passwordNeedNumbers": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        61
+      ]
+    ]
+  },
+  "passwordNeedLetters": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        66
+      ]
+    ]
+  },
+  "haveToAcceptCGU": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        83
+      ]
+    ]
+  },
+  "notValidEmail": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        89
+      ]
+    ]
+  },
+  "password8Char": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        94
+      ]
+    ]
+  },
+  "password30Char": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        100
+      ]
+    ]
+  },
+  "notSamePassword": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        113
+      ]
+    ]
+  },
+  "bornInFuture": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        120
+      ]
+    ]
+  },
+  "young9years": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        127
+      ]
+    ]
+  },
+  "old99years": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        136
+      ]
+    ]
+  },
   "firstname": {
     "origin": [
       [
         "Screens/SignUp.js",
-        92
+        209
       ]
     ]
   },
@@ -11,7 +91,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        110
+        227
       ]
     ]
   },
@@ -19,7 +99,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        130
+        247
       ]
     ]
   },
@@ -27,7 +107,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        153
+        270
       ]
     ]
   },
@@ -35,7 +115,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        182
+        299
       ]
     ]
   },
@@ -43,7 +123,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        200
+        317
       ]
     ]
   },
@@ -51,7 +131,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        212
+        330
       ]
     ]
   },
@@ -59,7 +139,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        216
+        334
       ]
     ]
   },
@@ -67,7 +147,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        220
+        338
       ]
     ]
   },
@@ -75,7 +155,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        225
+        343
       ]
     ]
   },
@@ -83,7 +163,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        246
+        364
       ]
     ]
   },
@@ -91,7 +171,23 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        248
+        366
+      ]
+    ]
+  },
+  "errorOccurredServer": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        393
+      ]
+    ]
+  },
+  "errorEmailAlreadyUsed": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        401
       ]
     ]
   },
@@ -99,7 +195,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        257
+        408
       ]
     ]
   },
@@ -107,7 +203,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        276
+        428
       ]
     ]
   },
@@ -115,7 +211,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        288
+        437
       ]
     ]
   },
@@ -123,7 +219,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        289
+        438
       ]
     ]
   }

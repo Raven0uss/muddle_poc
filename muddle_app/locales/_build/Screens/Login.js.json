@@ -1,4 +1,20 @@
 {
+  "invalidCredential": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        139
+      ]
+    ]
+  },
+  "accessDenied": {
+    "origin": [
+      [
+        "Screens/Login.js",
+        165
+      ]
+    ]
+  },
   "mailAddress": {
     "origin": [
       [

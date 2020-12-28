@@ -4,14 +4,10 @@
       [
         "Components/Select.js",
         40
-      ]
-    ]
-  },
-  "close": {
-    "origin": [
+      ],
       [
         "Components/Select.js",
-        145
+        156
       ]
     ]
   }

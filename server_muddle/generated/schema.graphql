@@ -2243,6 +2243,7 @@ input MessageWhereUniqueInput {
 type Mutation {
   askCloseDebate(debateId: ID, userId: String): Debate!
   askDeleteDebate(debateId: ID, userId: String): Debate!
+  checkEmailSignup(email: String): NoValue!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
@@ -2270,7 +2271,7 @@ type Mutation {
   notifySubComment(commentId: ID, debateId: ID): NoValue!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
   sendVote(debateId: ID, type: String, userId: ID): Debate!
-  signUp(birthdate: DateTime, email: String, firstname: String, lastname: String, password: String): Token!
+  signUp(birthdate: DateTime, email: String, firstname: String, gender: String, lastname: String, password: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
   updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment

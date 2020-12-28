@@ -136,7 +136,7 @@ function LoginComponent(props) {
 
           setSnack({
             visible: true,
-            message: "L'identifiant ou le mot de passe est incorrect.",
+            message: i18n._("invalidCredential"),
             type: "error",
           });
         }
@@ -162,7 +162,7 @@ function LoginComponent(props) {
               setSkipGetUser(true);
               setSnack({
                 visible: true,
-                message: "Accès refusé",
+                message: i18n._("accessDenied"),
                 type: "error",
               });
               return;

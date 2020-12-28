@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   ScrollView,
+  Keyboard,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "../Components/Icon";
 import Header from "../Components/Header";
@@ -19,7 +21,11 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
-import { isEmpty, isNil } from "lodash";
+import { get, isEmpty, isNil, isUndefined } from "lodash";
+import { Snackbar } from "react-native-paper";
+import strUcFirst from "../Library/strUcFirst";
+import moment from "moment";
+import { gql, useMutation } from "@apollo/client";
 
 const buttonIsDisable = ({
   firstname,
@@ -32,17 +38,139 @@ const buttonIsDisable = ({
   cgu,
 }) => {
   if (
+    cgu === false ||
     isEmpty(firstname) ||
     isEmpty(lastname) ||
     isEmpty(email) ||
     isEmpty(password) ||
     isEmpty(confirmPassword) ||
     isNil(birthdate) ||
-    isNil(gender) ||
-    cgu === false
+    isNil(gender)
   )
     return true;
 };
+
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+const checkPasswordStrong = (password) => {
+  if (password.search(/\d/) === -1)
+    return {
+      error: true,
+      message: i18n._("passwordNeedNumbers"),
+    };
+  if (password.search(/[a-zA-Z]/) === -1)
+    return {
+      error: true,
+      message: i18n._("passwordNeedLetters"),
+    };
+  return null;
+};
+
+const checkInputs = ({
+  firstname,
+  lastname,
+  email,
+  password,
+  confirmPassword,
+  birthdate,
+  cgu,
+}) => {
+  if (cgu === false)
+    return {
+      error: true,
+      message: i18n._("haveToAcceptCGU"),
+    };
+
+  if (validateEmail(email) === false)
+    return {
+      error: true,
+      message: i18n._("notValidEmail"),
+    };
+  if (password.length < 8 || password.length > 30) {
+    return {
+      error: true,
+      message: i18n._("password8Char"),
+    };
+  }
+  if (password.length > 30) {
+    return {
+      error: true,
+      message: i18n._("password30Char"),
+    };
+  }
+  const strong = checkPasswordStrong(password);
+  if (strong !== null) {
+    return {
+      error: true,
+      message: strong,
+    };
+  }
+  if (password !== confirmPassword) {
+    return {
+      error: true,
+      message: i18n._("notSamePassword"),
+    };
+  }
+  const checkFuture = moment().isBefore(moment(birthdate));
+  if (checkFuture) {
+    return {
+      error: true,
+      message: i18n._("bornInFuture"),
+    };
+  }
+  const check9years = moment().isBefore(moment(birthdate).add(9, "years"));
+  if (check9years) {
+    return {
+      error: true,
+      message: i18n._("young9years"),
+    };
+  }
+  const check99years = moment(birthdate).isBefore(
+    moment().subtract(99, "years")
+  );
+  if (check99years) {
+    return {
+      error: true,
+      message: i18n._("old99years"),
+    };
+  }
+  return {
+    error: false,
+  };
+};
+
+const CHECK_EMAIL_DB = gql`
+  mutation($email: String!) {
+    checkEmailSignup(email: $email) {
+      value
+    }
+  }
+`;
+
+const SIGN_UP = gql`
+  mutation(
+    $email: String!
+    $firstname: String!
+    $lastname: String!
+    $password: String!
+    $birthdate: DateTime!
+    $gender: String!
+  ) {
+    signUp(
+      email: $email
+      firstname: $firstname
+      lastname: $lastname
+      password: $password
+      birthdate: $birthdate
+      gender: $gender
+    ) {
+      token
+    }
+  }
+`;
 
 function SignUpComponent(props) {
   const { theme } = React.useContext(ThemeContext);
@@ -52,7 +180,7 @@ function SignUpComponent(props) {
     email: "",
     password: "",
     confirmPassword: "",
-    birthdate: null,
+    birthdate: moment().subtract(10, "years"),
     gender: null,
     cgu: false,
   });
@@ -65,6 +193,41 @@ function SignUpComponent(props) {
     styles.container,
     { backgroundColor: "#F47658" },
   ]);
+
+  const [snack, setSnack] = React.useState({
+    visible: false,
+    type: "success",
+    message: "",
+  });
+
+  const [checkEmailDatabase] = useMutation(CHECK_EMAIL_DB, {
+    variables: {
+      email: form.email,
+    },
+  });
+
+  const [reqSignUp, { loading }] = useMutation(SIGN_UP, {
+    onCompleted: (response) => {
+      console.log(response);
+      // Token for signup is in the answer
+      // user have validate it (mail sent) before 12 hours
+      // or account will be automatically deleted
+      navigation.navigate("Login", {
+        snackType: "success",
+        snackMessage: i18n._("succesMailSubscribe"),
+        snack: true,
+      });
+    },
+    variables: {
+      email: form.email.toLowerCase(),
+      firstname: strUcFirst(form.firstname),
+      lastname: strUcFirst(form.lastname),
+      password: form.password,
+      birthdate: form.birthdate,
+      // birthdate: moment().subtract(10, "years"),
+      gender: get(form, "gender.value", null),
+    },
+  });
 
   return (
     <View style={containerStyle}>
@@ -94,7 +257,7 @@ function SignUpComponent(props) {
                 onChangeText={(firstname) =>
                   setForm((previousState) => ({
                     ...previousState,
-                    firstname,
+                    firstname: strUcFirst(firstname),
                   }))
                 }
                 style={{
@@ -112,7 +275,7 @@ function SignUpComponent(props) {
                 onChangeText={(lastname) =>
                   setForm((previousState) => ({
                     ...previousState,
-                    lastname,
+                    lastname: strUcFirst(lastname),
                   }))
                 }
                 style={{
@@ -132,7 +295,7 @@ function SignUpComponent(props) {
               onChangeText={(email) =>
                 setForm((previousState) => ({
                   ...previousState,
-                  email,
+                  email: email.toLowerCase(),
                 }))
               }
               style={{
@@ -205,20 +368,21 @@ function SignUpComponent(props) {
                   birthdate,
                 }));
               }}
+              maximumDate={new Date()}
             />
             <Select
               list={[
                 {
                   label: i18n._("gender_woman"),
-                  value: "F",
+                  value: "FEMALE",
                 },
                 {
                   label: i18n._("gender_man"),
-                  value: "M",
+                  value: "MALE",
                 },
                 {
                   label: i18n._("gender_not_defined"),
-                  value: "ND",
+                  value: "NO_INDICATION",
                 },
               ]}
               selected={form.gender}
@@ -250,13 +414,41 @@ function SignUpComponent(props) {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => {
-                // console.log("SignUp");
-                navigation.navigate("Login", {
-                  snackType: "success",
-                  snackMessage: i18n._("succesMailSubscribe"),
-                  snack: true,
-                });
+              onPress={async () => {
+                Keyboard.dismiss();
+                const check = checkInputs(form);
+                if (check.error) {
+                  setSnack({
+                    visible: true,
+                    type: "error",
+                    message: check.message,
+                  });
+                  return;
+                }
+                const requestAnswer = await checkEmailDatabase();
+                // console.log(requestAnswer);
+                const codeRequest = get(
+                  requestAnswer,
+                  "data.checkEmailSignup.value"
+                );
+                // console.log(codeRequest);
+                if (isUndefined(codeRequest)) {
+                  setSnack({
+                    visible: true,
+                    type: "error",
+                    message: i18n._("errorOccurredServer"),
+                  });
+                  return;
+                }
+                if (codeRequest === -1) {
+                  setSnack({
+                    visible: true,
+                    type: "error",
+                    message: i18n._("errorEmailAlreadyUsed"),
+                  });
+                  return;
+                }
+                reqSignUp();
               }}
               style={{
                 ...styles.connectionButton,
@@ -266,15 +458,20 @@ function SignUpComponent(props) {
                     }
                   : {}),
               }}
+              // disabled={buttonIsDisable(form) || loading}
             >
-              <Text
-                style={{
-                  color: "#F47658",
-                  fontFamily: "Montserrat_700Bold",
-                }}
-              >
-                {i18n._("subscribe")}
-              </Text>
+              {loading ? (
+                <ActivityIndicator size={36} />
+              ) : (
+                <Text
+                  style={{
+                    color: "#F47658",
+                    fontFamily: "Montserrat_700Bold",
+                  }}
+                >
+                  {i18n._("subscribe")}
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -282,7 +479,7 @@ function SignUpComponent(props) {
       <View style={styles.noAccountBloc}>
         <TouchableWithoutFeedback
           onPress={() => navigation.goBack()}
-          disabled={buttonIsDisable(form)}
+          disabled={loading}
         >
           <Text style={styles.noAccountText}>
             {`${i18n._("alreadyMember?")} `}
@@ -290,6 +487,23 @@ function SignUpComponent(props) {
           </Text>
         </TouchableWithoutFeedback>
       </View>
+      <Snackbar
+        visible={snack.visible}
+        onDismiss={() =>
+          setSnack({
+            visible: false,
+            message: snack.message,
+            type: snack.type,
+          })
+        }
+        duration={2500}
+        style={{
+          backgroundColor: snack.type === "success" ? "#4BB543" : "#DB0F13",
+          borderRadius: 10,
+        }}
+      >
+        {snack.message}
+      </Snackbar>
     </View>
   );
 }
