@@ -40,6 +40,20 @@ import GET_DEBATES from "../gql/getDebates";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
 import isFollowing from "../Library/isFollowing";
 
+const formatFollow = (nb) => {
+  if (nb < 1000) return `${nb}`;
+  if (nb >= 1000 && nb < 1000000) {
+    const k = parseFloat(`${nb / 1000}`).toFixed(1);
+    return `${k}k`;
+  } else if (nb >= 1000000 && nb < 1000000000) {
+    const m = parseFloat(`${nb / 1000000}`).toFixed(1);
+    return `${m}M`;
+  } else if (nb >= 1000000000) {
+    const mrd = parseFloat(`${nb / 1000000000}`).toFixed(1);
+    return `${mrd} Mrd`;
+  }
+};
+
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
     user(where: { email: $userId }) {
@@ -759,7 +773,7 @@ const Profile = (props) => {
                       color: themeSchema[theme].colorText,
                     }}
                   >
-                    {user.followers.length}
+                    {formatFollow(user.followers.length)}
                   </Text>
                   <Text
                     style={{
@@ -797,7 +811,7 @@ const Profile = (props) => {
                       color: themeSchema[theme].colorText,
                     }}
                   >
-                    {user.following.length}
+                    {formatFollow(user.following.length)}
                   </Text>
                   <Text
                     style={{
