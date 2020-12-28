@@ -136,9 +136,9 @@ async function main() {
     role: "MUDDLE",
     private: true,
     coverPicture:
-      "https://image.freepik.com/vecteurs-libre/fond-texture-blanc-elegant_23-2148431731.jpg",
+      "https://cdn.image4.io/muddles-app/f_auto/1ea72fb6-2c06-4f1b-bdab-228993f8c99d.jpg",
     profilePicture:
-      "https://cdn.image4.io/muddles/f_auto/541fcf81-ff63-407e-a39f-88f1cf7f1ddf.png",
+      "https://cdn.image4.io/muddles-app/f_auto/1c911f32-4c4d-45ad-b4a7-2ea9756ff533.png",
   });
 
   // Create muddle debates

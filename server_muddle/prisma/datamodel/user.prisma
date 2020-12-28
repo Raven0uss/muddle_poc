@@ -33,11 +33,11 @@ type User {
   gender: Gender! @default(value: NO_INDICATION)
   profilePicture: String
     @default(
-      value: "https://cdn.image4.io/muddles/f_auto/06ec5294-5f6f-417b-8cb6-8ae2af2934b0.png"
+      value: "https://cdn.image4.io/muddles-app/f_auto/da368e47-49c0-44da-b2c9-51138de90cfe.png"
     )
   coverPicture: String
     @default(
-      value: "https://cdn.image4.io/muddles/f_auto/30aa1f19-5670-47c3-bf91-9e8e9e7602ef.jpg"
+      value: "https://cdn.image4.io/muddles-app/f_auto/72a1b743-fb8d-48ac-a909-c0eb4d71b4e4.jpg"
     )
   bio: String
   language: Language! @default(value: FR)

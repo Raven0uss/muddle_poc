@@ -228,7 +228,7 @@ const Home = (props) => {
   useQuery(GET_ADS, {
     onCompleted: (response) => {
       const { ads: queryResponse } = response;
-      console.log(response);
+      // console.log(response);
       setAds(queryResponse);
     },
     fetchPolicy: "cache-and-network",
