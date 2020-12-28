@@ -99,7 +99,7 @@ const AssistiveMenu = (props) => {
     if (deploy === true) {
       timer = setTimeout(() => {
         if (deploy) onDeploy(200);
-      }, 5000);
+      }, 3000);
     } else {
       if (timer !== undefined) clearTimeout(timer);
     }
