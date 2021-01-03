@@ -150,6 +150,22 @@ const UNBLOCK_USER = gql`
   }
 `;
 
+const NOTIF_FOLLOW = gql`
+  mutation($userId: String!, $currentUserId: ID!) {
+    createNotification(
+      data: {
+        who: { connect: { id: $currentUserId } }
+        userId: $userId
+        type: FOLLOW
+        status: INFORMATION
+        new: true
+      }
+    ) {
+      id
+    }
+  }
+`;
+
 const ProfileAction = (props) => {
   const { currentUser, setCurrentUser } = React.useContext(UserContext);
   const { navigation, me, theme, user, setLoadingPicture } = props;
@@ -159,8 +175,19 @@ const ProfileAction = (props) => {
   );
   const [privateAccount, setPrivateAccount] = React.useState(isPrivate(user));
 
+  const [reqNotificationFollow] = useMutation(NOTIF_FOLLOW);
+
   const [setPrivate] = useMutation(SET_PRIVATE);
-  const [reqFollow] = useMutation(FOLLOW);
+  const [reqFollow] = useMutation(FOLLOW, {
+    onCompleted: () => {
+      reqNotificationFollow({
+        variables: {
+          userId: user.id,
+          currentUserId: currentUser.id,
+        },
+      });
+    },
+  });
   const [reqUnfollow] = useMutation(UNFOLLOW);
 
   const [updateProfilePicture] = useMutation(UPDATE_PROFILE_PICTURE, {

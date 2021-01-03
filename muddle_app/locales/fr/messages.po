@@ -35,7 +35,7 @@ msgstr "a accepté votre invitation au débat"
 msgid "accessDenied"
 msgstr "Accès refusé"
 
-#: Screens/SignUp.js:366
+#: Screens/SignUp.js:412
 msgid "accronymCGU"
 msgstr "CGU"
 
@@ -74,7 +74,7 @@ msgstr "Ne plus suivre"
 #~ msgid "ago"
 #~ msgstr "il y a {time}"
 
-#: Screens/SignUp.js:437
+#: Screens/SignUp.js:485
 msgid "alreadyMember?"
 msgstr "Déjà inscrit ?"
 
@@ -82,7 +82,7 @@ msgstr "Déjà inscrit ?"
 #: Components/NotificationBox.js:894
 #: Components/NotificationBox.js:989
 #: Components/NotificationBox.js:1424
-#: Components/NotificationBox.js:1518
+#: Components/NotificationBox.js:1519
 msgid "and"
 msgstr "et"
 
@@ -120,7 +120,7 @@ msgstr "a demandé de supprimer ce débat"
 msgid "bestDebates"
 msgstr "Les meilleurs débats"
 
-#: Screens/SignUp.js:317
+#: Screens/SignUp.js:363
 msgid "birthdate"
 msgstr "Date de naissance"
 
@@ -128,7 +128,7 @@ msgstr "Date de naissance"
 msgid "blackList"
 msgstr "Utilisateurs bloqués"
 
-#: Screens/SignUp.js:120
+#: Screens/SignUp.js:121
 msgid "bornInFuture"
 msgstr "Seriez-vous né dans le futur par hasard ?"
 
@@ -182,16 +182,16 @@ msgstr "a commenté"
 msgid "commentsWon"
 msgstr "Commentaires remportés"
 
-#: Components/DatePicker.js:112
+#: Components/DatePicker.js:114
 msgid "confirm"
 msgstr "Valider"
 
-#: Screens/SignUp.js:299
+#: Screens/SignUp.js:345
 msgid "confirmPassword"
 msgstr "Confirmation mot de passe"
 
 #: Screens/Login.js:335
-#: Screens/SignUp.js:438
+#: Screens/SignUp.js:486
 msgid "connect"
 msgstr "Se connecter"
 
@@ -199,7 +199,7 @@ msgstr "Se connecter"
 msgid "contactUs"
 msgstr "Nous contacter"
 
-#: Components/NotificationBox.js:1636
+#: Components/NotificationBox.js:1708
 msgid "crownDescription"
 msgstr "La couronne vous donne le privilège de créer un débat visible en premier dans le fil d'actualité de tout les utilisateurs. Vous avez 24H pour l'utiliser, mais n'oubliez pas : \"Un grand pouvoir implique de grandes responsabilités\"."
 
@@ -260,11 +260,11 @@ msgstr "Décrivez votre débat"
 msgid "didntLiked"
 msgstr "n'a pas aimé"
 
-#: Components/NotificationBox.js:1541
+#: Components/NotificationBox.js:1542
 msgid "didntLikedCommentPlural"
 msgstr "n'ont pas aimé votre commentaire"
 
-#: Components/NotificationBox.js:1542
+#: Components/NotificationBox.js:1543
 msgid "didntLikedCommentSingular"
 msgstr "n'a pas aimé votre commentaire"
 
@@ -296,17 +296,17 @@ msgstr "Débats en duo remportés"
 msgid "enableCrown"
 msgstr "Activer la couronne"
 
-#: Screens/SignUp.js:401
+#: Screens/SignUp.js:447
 msgid "errorEmailAlreadyUsed"
 msgstr "L'adresse email saisie est déjà enregistrée."
 
-#: Screens/SignUp.js:393
+#: Screens/SignUp.js:439
 msgid "errorOccurredServer"
 msgstr "Une erreur est survenue avec le serveur. Veuillez réessayer plus tard."
 
 #: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
-#: Screens/SignUp.js:209
+#: Screens/SignUp.js:255
 msgid "firstname"
 msgstr "Prénom"
 
@@ -320,6 +320,10 @@ msgstr "Abonnés"
 msgid "following"
 msgstr "Abonnements"
 
+#: Components/NotificationBox.js:1624
+msgid "followingYou"
+msgstr "vous suit"
+
 #: Screens/ContactUs.js:63
 msgid "forAllQuestionsContact"
 msgstr "Pour toutes questions relatives à Muddles, veuillez nous contacter à l'adresse suivante :"
@@ -332,19 +336,19 @@ msgstr "Mot de passe oublié"
 msgid "forgotPassword?"
 msgstr "Mot de passe oublié ?"
 
-#: Screens/SignUp.js:343
+#: Screens/SignUp.js:389
 msgid "gender"
 msgstr "Genre"
 
-#: Screens/SignUp.js:334
+#: Screens/SignUp.js:380
 msgid "gender_man"
 msgstr "Homme"
 
-#: Screens/SignUp.js:338
+#: Screens/SignUp.js:384
 msgid "gender_not_defined"
 msgstr "Non défini"
 
-#: Screens/SignUp.js:330
+#: Screens/SignUp.js:376
 msgid "gender_woman"
 msgstr "Femme"
 
@@ -364,7 +368,7 @@ msgstr "S'inscrire"
 msgid "hasVote"
 msgstr "a voté"
 
-#: Screens/SignUp.js:83
+#: Screens/SignUp.js:84
 msgid "haveToAcceptCGU"
 msgstr "Vous devez accepter les CGU."
 
@@ -376,7 +380,7 @@ msgstr "Heures"
 msgid "hoursAgo"
 msgstr "il y a {time}h"
 
-#: Screens/SignUp.js:364
+#: Screens/SignUp.js:410
 msgid "iAcceptThe"
 msgstr "J'accepte les"
 
@@ -394,7 +398,7 @@ msgstr "vous invite à un débat en duo"
 
 #: Screens/CreateDebate.js:217
 #: Screens/Search.js:143
-#: Screens/SignUp.js:227
+#: Screens/SignUp.js:273
 msgid "lastname"
 msgstr "Nom"
 
@@ -423,7 +427,7 @@ msgstr ""
 
 #: Screens/ForgotPassword.js:50
 #: Screens/Login.js:249
-#: Screens/SignUp.js:247
+#: Screens/SignUp.js:293
 msgid "mailAddress"
 msgstr "Adresse e-mail"
 
@@ -459,11 +463,11 @@ msgstr "Mes débats"
 msgid "noAccount?"
 msgstr "Pas de compte ?"
 
-#: Screens/SignUp.js:113
+#: Screens/SignUp.js:114
 msgid "notSamePassword"
 msgstr "Les mots de passe saisis ne sont pas identiques."
 
-#: Screens/SignUp.js:89
+#: Screens/SignUp.js:90
 msgid "notValidEmail"
 msgstr "L'email saisi est invalide."
 
@@ -471,7 +475,7 @@ msgstr "L'email saisi est invalide."
 msgid "nowAgo"
 msgstr "à l'instant"
 
-#: Screens/SignUp.js:136
+#: Screens/SignUp.js:137
 msgid "old99years"
 msgstr "L'âge maximum pour s'inscrire est de 99 ans."
 
@@ -487,7 +491,7 @@ msgstr "autre(s) réponse(s)"
 #: Components/NotificationBox.js:896
 #: Components/NotificationBox.js:991
 #: Components/NotificationBox.js:1426
-#: Components/NotificationBox.js:1520
+#: Components/NotificationBox.js:1521
 msgid "otherPeoplePlural"
 msgstr "autres personnes"
 
@@ -495,28 +499,28 @@ msgstr "autres personnes"
 #: Components/NotificationBox.js:897
 #: Components/NotificationBox.js:992
 #: Components/NotificationBox.js:1427
-#: Components/NotificationBox.js:1521
+#: Components/NotificationBox.js:1522
 msgid "otherPeopleSingular"
 msgstr "autre personne"
 
 #: Screens/Login.js:267
-#: Screens/SignUp.js:270
+#: Screens/SignUp.js:316
 msgid "password"
 msgstr "Mot de passe"
 
-#: Screens/SignUp.js:100
+#: Screens/SignUp.js:101
 msgid "password30Char"
 msgstr "La taille maximum du mot de passe est de 30 caractères."
 
-#: Screens/SignUp.js:94
+#: Screens/SignUp.js:95
 msgid "password8Char"
 msgstr "La taille minimum du mot de passe est de 8 caractères."
 
-#: Screens/SignUp.js:66
+#: Screens/SignUp.js:67
 msgid "passwordNeedLetters"
 msgstr "Votre mot de passe doit contenir au moins une lettre."
 
-#: Screens/SignUp.js:61
+#: Screens/SignUp.js:62
 msgid "passwordNeedNumbers"
 msgstr "Votre mot de passe doit contenir au moins un chiffre."
 
@@ -624,7 +628,7 @@ msgstr "Passer en mode sombre"
 msgid "selectLightTheme"
 msgstr "Passer en mode clair"
 
-#: Components/NotificationBox.js:1623
+#: Components/NotificationBox.js:1695
 msgid "sendYouCrown"
 msgstr "vous a remis une couronne"
 
@@ -636,11 +640,11 @@ msgstr "Paramètres"
 msgid "sponsorised"
 msgstr "Sponsorisé"
 
-#: Screens/SignUp.js:428
+#: Screens/SignUp.js:472
 msgid "subscribe"
 msgstr "S'inscrire"
 
-#: Screens/SignUp.js:408
+#: Screens/SignUp.js:217
 msgid "succesMailSubscribe"
 msgstr "Un mail vous a été envoyé afin de valider votre inscription."
 
@@ -707,7 +711,7 @@ msgstr "Vous avez aimé"
 msgid "youVote"
 msgstr "Vous avez voté"
 
-#: Screens/SignUp.js:127
+#: Screens/SignUp.js:128
 msgid "young9years"
 msgstr "L'âge minimum pour s'inscrire est de 9 ans."
 

@@ -14,6 +14,7 @@ enum NotificationType {
   LIKE
   DISLIKE
   CROWNED
+  FOLLOW
 }
 
 enum NotificationStatus {
@@ -26,7 +27,7 @@ enum NotificationStatus {
 type Notification {
   id: ID! @id
   who: [User!]! @relation(link: INLINE, name: "NotificationUser")
-  userId: String! 
+  userId: String!
   type: NotificationType!
   status: NotificationStatus!
   new: Boolean!

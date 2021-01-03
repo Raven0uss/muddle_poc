@@ -3,7 +3,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        61
+        62
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        66
+        67
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        83
+        84
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        89
+        90
       ]
     ]
   },
@@ -35,7 +35,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        94
+        95
       ]
     ]
   },
@@ -43,7 +43,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        100
+        101
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        113
+        114
       ]
     ]
   },
@@ -59,7 +59,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        120
+        121
       ]
     ]
   },
@@ -67,7 +67,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        127
+        128
       ]
     ]
   },
@@ -75,119 +75,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        136
-      ]
-    ]
-  },
-  "firstname": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        209
-      ]
-    ]
-  },
-  "lastname": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        227
-      ]
-    ]
-  },
-  "mailAddress": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        247
-      ]
-    ]
-  },
-  "password": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        270
-      ]
-    ]
-  },
-  "confirmPassword": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        299
-      ]
-    ]
-  },
-  "birthdate": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        317
-      ]
-    ]
-  },
-  "gender_woman": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        330
-      ]
-    ]
-  },
-  "gender_man": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        334
-      ]
-    ]
-  },
-  "gender_not_defined": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        338
-      ]
-    ]
-  },
-  "gender": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        343
-      ]
-    ]
-  },
-  "iAcceptThe": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        364
-      ]
-    ]
-  },
-  "accronymCGU": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        366
-      ]
-    ]
-  },
-  "errorOccurredServer": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        393
-      ]
-    ]
-  },
-  "errorEmailAlreadyUsed": {
-    "origin": [
-      [
-        "Screens/SignUp.js",
-        401
+        137
       ]
     ]
   },
@@ -195,7 +83,119 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        408
+        217
+      ]
+    ]
+  },
+  "firstname": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        255
+      ]
+    ]
+  },
+  "lastname": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        273
+      ]
+    ]
+  },
+  "mailAddress": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        293
+      ]
+    ]
+  },
+  "password": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        316
+      ]
+    ]
+  },
+  "confirmPassword": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        345
+      ]
+    ]
+  },
+  "birthdate": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        363
+      ]
+    ]
+  },
+  "gender_woman": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        376
+      ]
+    ]
+  },
+  "gender_man": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        380
+      ]
+    ]
+  },
+  "gender_not_defined": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        384
+      ]
+    ]
+  },
+  "gender": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        389
+      ]
+    ]
+  },
+  "iAcceptThe": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        410
+      ]
+    ]
+  },
+  "accronymCGU": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        412
+      ]
+    ]
+  },
+  "errorOccurredServer": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        439
+      ]
+    ]
+  },
+  "errorEmailAlreadyUsed": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        447
       ]
     ]
   },
@@ -203,7 +203,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        428
+        472
       ]
     ]
   },
@@ -211,7 +211,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        437
+        485
       ]
     ]
   },
@@ -219,7 +219,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        438
+        486
       ]
     ]
   }
