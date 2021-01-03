@@ -1,0 +1,35 @@
+port: PRISMA_PORT
+databases:
+  default:
+    connector: mongo
+    database: db_muddle
+    uri: PRISMA_DB_URI
+
+
+
+endpoint: http://localhost:4466
+datamodel:
+  - ./datamodel/ad.prisma
+  - ./datamodel/adTarget.prisma
+  - ./datamodel/comment.prisma
+  - ./datamodel/conversation.prisma
+  - ./datamodel/debate.prisma
+  - ./datamodel/interaction.prisma
+  - ./datamodel/message.prisma
+  - ./datamodel/notification.prisma
+  - ./datamodel/report.prisma
+  - ./datamodel/trophy.prisma
+  - ./datamodel/user.prisma
+databaseType: document
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+
+seed:
+  run: node ./seed.js
+
+hooks:
+  post-deploy:
+    - prisma generate
+    - npx nexus-prisma-generate --js --client ./prisma/generated/prisma-client --output ./prisma/generated/nexus-prisma

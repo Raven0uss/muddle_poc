@@ -1,6 +1,0 @@
-port: PRISMA_PORT
-databases:
-  default:
-    connector: mongo
-    database: db_muddle
-    uri: PRISMA_DB_URI
