@@ -1,4 +1,4 @@
-endpoint: http://localhost:4466
+endpoint: http://172.17.0.3:4466 # Have to set value of container IP
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma

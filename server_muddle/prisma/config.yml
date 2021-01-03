@@ -7,7 +7,7 @@ databases:
 
 
 
-endpoint: http://localhost:4466
+endpoint: http://localhost:4466 # Have to set value of container IP
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma

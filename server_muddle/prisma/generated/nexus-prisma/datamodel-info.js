@@ -30,7 +30,7 @@ module.exports = {
     User: ['id', 'email']
   },
   embeddedTypes: [],
-  clientPath: 'prisma\\generated\\prisma-client',
+  clientPath: 'prisma/generated/prisma-client',
   schema: {
   "__schema": {
     "queryType": {
