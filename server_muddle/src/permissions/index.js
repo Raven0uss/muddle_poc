@@ -1,5 +1,4 @@
-import { shield, and, or, not } from "graphql-shield";
-import { isAuthenticated } from "./rules";
+import { shield } from "graphql-shield";
 
 export default shield(
   {

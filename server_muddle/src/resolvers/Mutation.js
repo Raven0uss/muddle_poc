@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 import { flattenDeep, get, isEmpty, isNil } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
-import { arg, booleanArg, enumType, idArg, stringArg } from "nexus/dist";
-import { dateArg, Gender } from "./Types";
+import { booleanArg, idArg, stringArg } from "nexus/dist";
+import { dateArg } from "./Types";
 
 import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 

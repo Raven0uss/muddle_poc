@@ -1,0 +1,8 @@
+*
+!src
+!prisma
+!image4ionodeSDK
+!package.json
+!package-lock.json
+!.env*
+!.babelrc

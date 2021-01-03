@@ -1,7 +1,5 @@
 require("dotenv").config();
-// import express from "express";
 
-import bodyParser from "body-parser";
 import { GraphQLServer } from "graphql-yoga";
 import { prisma } from "../prisma/generated/prisma-client";
 
