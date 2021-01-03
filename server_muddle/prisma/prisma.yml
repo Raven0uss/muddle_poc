@@ -23,4 +23,4 @@ seed:
 hooks:
   post-deploy:
     - prisma generate
-    - npx nexus-prisma-generate --js --client ./generated/prisma-client --output ./generated/nexus-prisma
+    - npx nexus-prisma-generate --js --client ./prisma/generated/prisma-client --output ./prisma/generated/nexus-prisma
