@@ -1,9 +1,7 @@
 require("dotenv").config();
-// import express from "express";
 
-import bodyParser from "body-parser";
 import { GraphQLServer } from "graphql-yoga";
-import { prisma } from "../generated/prisma-client";
+import { prisma } from "../prisma/generated/prisma-client";
 
 import permissions from "./permissions";
 import schema from "./schema";
@@ -34,7 +32,7 @@ const server = new GraphQLServer({
   },
 });
 
-server.express.post("/getImage", upload.single("test"), async function(
+server.express.post("/getImage", upload.single("test"), async function (
   req,
   res,
   next

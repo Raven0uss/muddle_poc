@@ -1,4 +1,13 @@
-endpoint: http://52.47.56.241:4466 # Have to set value of container IP
+port: PRISMA_PORT
+databases:
+  default:
+    connector: mongo
+    database: db_muddle
+    uri: PRISMA_DB_URI
+
+
+
+endpoint: http://localhost:4466 # Have to set value of container IP
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma

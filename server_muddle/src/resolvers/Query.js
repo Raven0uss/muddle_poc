@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { flattenDeep, isNil, get } from "lodash";
 
-import { prismaObjectType, makePrismaSchema } from "nexus-prisma";
-import { combineResolvers } from "graphql-resolvers";
+import { prismaObjectType } from "nexus-prisma";
 import { idArg, intArg, stringArg } from "nexus/dist";
 
 import filterHomeDebates from "../algorithms/filterHomeDebates";

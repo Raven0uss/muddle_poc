@@ -1,4 +1,4 @@
-import { objectType, scalarType, arg, enumType } from "nexus/dist";
+import { objectType, scalarType, arg } from "nexus/dist";
 
 import moment from "moment";
 

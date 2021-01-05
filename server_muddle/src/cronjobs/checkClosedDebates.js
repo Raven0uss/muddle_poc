@@ -1,4 +1,4 @@
-import { prisma } from "../../generated/prisma-client";
+import { prisma } from "../../prisma/generated/prisma-client";
 import moment from "moment";
 
 const fragmentGetAllComments = `

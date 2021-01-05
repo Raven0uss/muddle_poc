@@ -1,8 +1,8 @@
 import { makePrismaSchema } from "nexus-prisma";
 
 import resolvers from "./resolvers";
-import datamodelInfo from "../generated/nexus-prisma/datamodel-info";
-import { prisma } from "../generated/prisma-client";
+import datamodelInfo from "../prisma/generated/nexus-prisma/datamodel-info";
+import { prisma } from "../prisma/generated/prisma-client";
 
 import * as path from "path";
 
@@ -15,7 +15,7 @@ export default makePrismaSchema({
   },
 
   outputs: {
-    schema: path.join(__dirname, "../generated/schema.graphql"),
-    typegen: path.join(__dirname, "../generated/nexus-prisma/index.js"),
+    schema: path.join(__dirname, "../prisma/generated/schema.graphql"),
+    typegen: path.join(__dirname, "../prisma/generated/nexus-prisma/index.js"),
   },
 });
