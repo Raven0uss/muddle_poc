@@ -31,7 +31,7 @@ msgstr "a accepté la suppression de l'un de vos débats en duo"
 msgid "acceptYourInvitation"
 msgstr "a accepté votre invitation au débat"
 
-#: Screens/Login.js:165
+#: Screens/Login.js:166
 msgid "accessDenied"
 msgstr "Accès refusé"
 
@@ -39,23 +39,23 @@ msgstr "Accès refusé"
 msgid "accronymCGU"
 msgstr "CGU"
 
-#: Components/ProfileAction.js:313
+#: Components/ProfileAction.js:340
 msgid "actionBlock"
 msgstr "Bloquer"
 
-#: Components/ProfileAction.js:309
+#: Components/ProfileAction.js:336
 msgid "actionContact"
 msgstr "Contacter"
 
-#: Components/ProfileAction.js:305
+#: Components/ProfileAction.js:332
 msgid "actionFollow"
 msgstr "Suivre"
 
-#: Components/ProfileAction.js:294
+#: Components/ProfileAction.js:321
 msgid "actionUnblock"
 msgstr "Débloquer"
 
-#: Components/ProfileAction.js:301
+#: Components/ProfileAction.js:328
 msgid "actionUnfollow"
 msgstr "Ne plus suivre"
 
@@ -162,7 +162,7 @@ msgstr "Clore le débat"
 #: Components/DebateBox.js:865
 #: Screens/Debate.js:751
 #: Screens/Debate.js:1173
-#: Screens/Report.js:162
+#: Screens/Report.js:166
 msgid "comment"
 msgstr "commentaire"
 
@@ -190,7 +190,7 @@ msgstr "Valider"
 msgid "confirmPassword"
 msgstr "Confirmation mot de passe"
 
-#: Screens/Login.js:335
+#: Screens/Login.js:336
 #: Screens/SignUp.js:486
 msgid "connect"
 msgstr "Se connecter"
@@ -198,6 +198,10 @@ msgstr "Se connecter"
 #: Screens/Menu.js:184
 msgid "contactUs"
 msgstr "Nous contacter"
+
+#: Screens/Login.js:399
+msgid "contactUsNow"
+msgstr "Contactez-nous !"
 
 #: Components/NotificationBox.js:1708
 msgid "crownDescription"
@@ -215,7 +219,7 @@ msgstr "Jours"
 msgid "daysAgo"
 msgstr "il y a {time}j"
 
-#: Screens/Report.js:162
+#: Screens/Report.js:166
 msgid "debate"
 msgstr "débat"
 
@@ -310,12 +314,12 @@ msgstr "Une erreur est survenue avec le serveur. Veuillez réessayer plus tard."
 msgid "firstname"
 msgstr "Prénom"
 
-#: Screens/Follow.js:95
+#: Screens/Follow.js:97
 #: Screens/Profile.js:785
 msgid "followers"
 msgstr "Abonnés"
 
-#: Screens/Follow.js:120
+#: Screens/Follow.js:122
 #: Screens/Profile.js:823
 msgid "following"
 msgstr "Abonnements"
@@ -332,7 +336,7 @@ msgstr "Pour toutes questions relatives à Muddles, veuillez nous contacter à l
 msgid "forgotPassword"
 msgstr "Mot de passe oublié"
 
-#: Screens/Login.js:295
+#: Screens/Login.js:296
 msgid "forgotPassword?"
 msgstr "Mot de passe oublié ?"
 
@@ -360,7 +364,7 @@ msgstr "Les débats générés"
 msgid "goToConnect"
 msgstr "S'identifier"
 
-#: Screens/Login.js:386
+#: Screens/Login.js:387
 msgid "goToSubscribe"
 msgstr "S'inscrire"
 
@@ -384,7 +388,7 @@ msgstr "il y a {time}h"
 msgid "iAcceptThe"
 msgstr "J'accepte les"
 
-#: Screens/Login.js:139
+#: Screens/Login.js:140
 msgid "invalidCredential"
 msgstr "L'identifiant ou le mot de passe est incorrect."
 
@@ -426,7 +430,7 @@ msgstr ""
 "Veuillez patienter."
 
 #: Screens/ForgotPassword.js:50
-#: Screens/Login.js:249
+#: Screens/Login.js:250
 #: Screens/SignUp.js:293
 msgid "mailAddress"
 msgstr "Adresse e-mail"
@@ -439,11 +443,11 @@ msgstr "Ce compte est privé"
 msgid "minutesAgo"
 msgstr "il y a {time} min"
 
-#: Components/ProfileAction.js:216
+#: Components/ProfileAction.js:243
 msgid "modifyCoverPicture"
 msgstr "Modifier votre couverture"
 
-#: Components/ProfileAction.js:212
+#: Components/ProfileAction.js:239
 msgid "modifyProfilePicture"
 msgstr "Modifier votre photo"
 
@@ -459,7 +463,11 @@ msgstr "Équipe Muddles - Compte Officiel"
 msgid "myDebates"
 msgstr "Mes débats"
 
-#: Screens/Login.js:384
+#: Screens/Login.js:397
+msgid "needContact?"
+msgstr "Besoin de renseignements ?"
+
+#: Screens/Login.js:385
 msgid "noAccount?"
 msgstr "Pas de compte ?"
 
@@ -503,7 +511,7 @@ msgstr "autres personnes"
 msgid "otherPeopleSingular"
 msgstr "autre personne"
 
-#: Screens/Login.js:267
+#: Screens/Login.js:268
 #: Screens/SignUp.js:316
 msgid "password"
 msgstr "Mot de passe"
@@ -524,7 +532,7 @@ msgstr "Votre mot de passe doit contenir au moins une lettre."
 msgid "passwordNeedNumbers"
 msgstr "Votre mot de passe doit contenir au moins un chiffre."
 
-#: Components/ProfileAction.js:225
+#: Components/ProfileAction.js:252
 msgid "privateMode"
 msgstr "Passer en mode privé"
 
@@ -534,7 +542,7 @@ msgstr "Passer en mode privé"
 msgid "publicDebateSelect"
 msgstr "Débat publique"
 
-#: Components/ProfileAction.js:221
+#: Components/ProfileAction.js:248
 msgid "publicMode"
 msgstr "Passer en mode publique"
 
@@ -555,11 +563,11 @@ msgstr "a rejeté la suppression du débat"
 msgid "rejectYourInvitation"
 msgstr "a rejeté votre invitation pour un débat en duo"
 
-#: Screens/Report.js:247
+#: Screens/Report.js:255
 msgid "report"
 msgstr "Signaler"
 
-#: Screens/Report.js:161
+#: Screens/Report.js:165
 msgid "reportA"
 msgstr "Signaler un"
 
@@ -574,31 +582,31 @@ msgstr "Signaler le commentaire"
 msgid "reportDebate"
 msgstr "Signaler le débat"
 
-#: Screens/Report.js:203
+#: Screens/Report.js:207
 msgid "reportGiveMoreReason"
 msgstr "Donner plus de détails afin de traiter votre demande.."
 
-#: Screens/Report.js:168
+#: Screens/Report.js:172
 msgid "reportInjury"
 msgstr "Propos injurieux"
 
-#: Screens/Report.js:184
+#: Screens/Report.js:188
 msgid "reportPorn"
 msgstr "Contenu pornographique"
 
-#: Screens/Report.js:172
+#: Screens/Report.js:176
 msgid "reportRacism"
 msgstr "Propos racistes"
 
-#: Screens/Report.js:189
+#: Screens/Report.js:193
 msgid "reportSelectReason"
 msgstr "Sélectionner un motif"
 
-#: Screens/Report.js:176
+#: Screens/Report.js:180
 msgid "reportSexism"
 msgstr "Propos sexistes"
 
-#: Screens/Report.js:180
+#: Screens/Report.js:184
 msgid "reportViolence"
 msgstr "Contenu violent"
 

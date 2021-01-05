@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
   ActivityIndicator,
+  Linking,
 } from "react-native";
 import Icon from "../Components/Icon";
 import Header from "../Components/Header";
@@ -378,12 +379,24 @@ function LoginComponent(props) {
           </TouchableOpacity> */}
         </View>
       </KeyboardAvoidingView>
-      <View style={styles.noAccountBloc}>
+      <View style={{ ...styles.noAccountBloc, marginBottom: 10 }}>
         <TouchableWithoutFeedback onPress={() => navigation.push("SignUp")}>
           <Text style={styles.noAccountText}>
             {i18n._("noAccount?")}{" "}
             <Text style={styles.subscriptionLink}>
               {i18n._("goToSubscribe")}
+            </Text>
+          </Text>
+        </TouchableWithoutFeedback>
+      </View>
+      <View style={{ ...styles.noAccountBloc }}>
+        <TouchableWithoutFeedback
+          onPress={() => Linking.openURL("mailto:contact@muddles.fr")}
+        >
+          <Text style={{ ...styles.noAccountText, fontSize: 10 }}>
+            {i18n._("needContact?")}{" "}
+            <Text style={styles.subscriptionLink}>
+              {i18n._("contactUsNow")}
             </Text>
           </Text>
         </TouchableWithoutFeedback>

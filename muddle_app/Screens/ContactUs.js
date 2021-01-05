@@ -7,6 +7,7 @@ import {
   TextInput,
   Dimensions,
   Text,
+  Linking,
 } from "react-native";
 import Header from "../Components/Header";
 import { ScrollView } from "react-native-gesture-handler";
@@ -62,7 +63,9 @@ const ContactUs = (props) => {
           >
             {i18n._("forAllQuestionsContact")}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("mailto:contact@muddles.fr")}
+          >
             <Text
               style={{
                 textAlign: "center",

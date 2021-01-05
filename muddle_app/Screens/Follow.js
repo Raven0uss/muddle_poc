@@ -16,9 +16,11 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
+import UserContext from "../CustomProperties/UserContext";
 
 const Follow = (props) => {
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = React.useContext(UserContext);
   const [vision, setVision] = React.useState(props.route.params.selected);
 
   const { navigation, route } = props;

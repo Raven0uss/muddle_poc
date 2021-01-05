@@ -18,6 +18,8 @@ import Select from "../Components/Select";
 import i18n from "../i18n";
 import { gql, useMutation } from "@apollo/client";
 import UserContext from "../CustomProperties/UserContext";
+import ThemeContext from "../CustomProperties/ThemeContext";
+import themeSchema from "../CustomProperties/Theme";
 
 const SEND_REPORT_DEBATE = gql`
   mutation(
@@ -96,6 +98,7 @@ const sendReport = async ({
 
 const Report = (props) => {
   const { currentUser } = React.useContext(UserContext);
+  const { theme } = React.useContext(ThemeContext);
   const [form, setForm] = React.useState({
     reason: null,
     reasonText: "",
@@ -141,7 +144,7 @@ const Report = (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: "#F7F7F7",
+          backgroundColor: themeSchema[theme].backgroundColor1,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           paddingLeft: 15,
@@ -156,6 +159,7 @@ const Report = (props) => {
               marginBottom: 30,
               alignSelf: "center",
               fontFamily: "Montserrat_700Bold",
+              color: themeSchema[theme].colorText,
             }}
           >
             {`${i18n._("reportA")} ${
@@ -209,9 +213,13 @@ const Report = (props) => {
                   reasonText,
                 });
             }}
-            style={styles.input}
+            style={{
+              ...styles.input,
+              backgroundColor: themeSchema[theme].backgroundColor2,
+              color: themeSchema[theme].colorText,
+            }}
             keyboardType="default"
-            placeholderTextColor="#222"
+            placeholderTextColor={themeSchema[theme].colorText}
             multiline
             textAlignVertical="top"
           />
