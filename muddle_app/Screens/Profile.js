@@ -60,7 +60,7 @@ const calculateTrophyPoints = (trophies) => {
     if (t.type === "DUO") points += 10;
     else points += 5;
   });
-  return points;
+  return formatFollow(points);
 };
 
 const GET_USER = gql`
