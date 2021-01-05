@@ -54,6 +54,15 @@ const formatFollow = (nb) => {
   }
 };
 
+const calculateTrophyPoints = (trophies) => {
+  let points = 0;
+  trophies.map((t) => {
+    if (t.type === "DUO") points += 10;
+    else points += 5;
+  });
+  return points;
+};
+
 const GET_USER = gql`
   query($userId: String!, $currentUserId: ID!) {
     user(where: { email: $userId }) {
@@ -633,7 +642,7 @@ const Profile = (props) => {
                 color: themeSchema[theme].colorText,
               }}
             >
-              {user.trophies.length}
+              {calculateTrophyPoints(user.trophies)}
             </Text>
             <Image
               source={{
