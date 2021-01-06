@@ -1,0 +1,13 @@
+type TmpUser {
+  id: ID! @id
+  token: String! @unique
+  firstname: String!
+  lastname: String!
+  email: String! @unique
+  password: String!
+  birthdate: DateTime!
+  role: Role! @default(value: STANDARD)
+  gender: Gender! @default(value: NO_INDICATION)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

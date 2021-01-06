@@ -60,6 +60,10 @@ export interface NexusPrismaTypes {
       UserConnection: UserConnectionObject
       UserEdge: UserEdgeObject
       AggregateUser: AggregateUserObject
+      TmpUser: TmpUserObject
+      TmpUserConnection: TmpUserConnectionObject
+      TmpUserEdge: TmpUserEdgeObject
+      AggregateTmpUser: AggregateTmpUserObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -85,6 +89,8 @@ export interface NexusPrismaTypes {
       TrophyPreviousValues: TrophyPreviousValuesObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
       UserPreviousValues: UserPreviousValuesObject
+      TmpUserSubscriptionPayload: TmpUserSubscriptionPayloadObject
+      TmpUserPreviousValues: TmpUserPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -133,6 +139,10 @@ export interface NexusPrismaTypes {
       UserConnection: UserConnectionFieldDetails
       UserEdge: UserEdgeFieldDetails
       AggregateUser: AggregateUserFieldDetails
+      TmpUser: TmpUserFieldDetails
+      TmpUserConnection: TmpUserConnectionFieldDetails
+      TmpUserEdge: TmpUserEdgeFieldDetails
+      AggregateTmpUser: AggregateTmpUserFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -158,6 +168,8 @@ export interface NexusPrismaTypes {
       TrophyPreviousValues: TrophyPreviousValuesFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
       UserPreviousValues: UserPreviousValuesFieldDetails
+      TmpUserSubscriptionPayload: TmpUserSubscriptionPayloadFieldDetails
+      TmpUserPreviousValues: TmpUserPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -184,6 +196,8 @@ export interface NexusPrismaTypes {
       ReportWhereUniqueInput: ReportWhereUniqueInputInputObject
       TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      TmpUserWhereUniqueInput: TmpUserWhereUniqueInputInputObject
+      TmpUserWhereInput: TmpUserWhereInputInputObject
       AdCreateInput: AdCreateInputInputObject
       AdUpdateInput: AdUpdateInputInputObject
       AdUpdateManyMutationInput: AdUpdateManyMutationInputInputObject
@@ -425,6 +439,9 @@ export interface NexusPrismaTypes {
       TrophyUpdateManyMutationInput: TrophyUpdateManyMutationInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      TmpUserCreateInput: TmpUserCreateInputInputObject
+      TmpUserUpdateInput: TmpUserUpdateInputInputObject
+      TmpUserUpdateManyMutationInput: TmpUserUpdateManyMutationInputInputObject
       AdSubscriptionWhereInput: AdSubscriptionWhereInputInputObject
       AdTargetSubscriptionWhereInput: AdTargetSubscriptionWhereInputInputObject
       CommentSubscriptionWhereInput: CommentSubscriptionWhereInputInputObject
@@ -436,6 +453,7 @@ export interface NexusPrismaTypes {
       ReportSubscriptionWhereInput: ReportSubscriptionWhereInputInputObject
       TrophySubscriptionWhereInput: TrophySubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
+      TmpUserSubscriptionWhereInput: TmpUserSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
@@ -463,6 +481,7 @@ export interface NexusPrismaTypes {
     TrophyOrderByInput: TrophyOrderByInputValues,
     ConversationOrderByInput: ConversationOrderByInputValues,
     MessageOrderByInput: MessageOrderByInputValues,
+    TmpUserOrderByInput: TmpUserOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -504,6 +523,9 @@ type QueryObject =
   | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
   | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
   | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tmpUser', args?: QueryTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'tmpUsers', args?: QueryTmpUsersArgs[] | false, alias?: string  } 
+  | { name: 'tmpUsersConnection', args?: QueryTmpUsersConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'ad'
@@ -539,6 +561,9 @@ type QueryFields =
   | 'user'
   | 'users'
   | 'usersConnection'
+  | 'tmpUser'
+  | 'tmpUsers'
+  | 'tmpUsersConnection'
 
 
 type QueryAdArgs =
@@ -732,6 +757,24 @@ type QueryUsersArgs =
   | 'first'
   | 'last'
 type QueryUsersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTmpUserArgs =
+  | 'where'
+type QueryTmpUsersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTmpUsersConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -1170,6 +1213,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserConnection> | prisma.UserConnection
+  }
+  tmpUser: {
+    type: 'TmpUser'
+    args: Record<QueryTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TmpUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser | null> | prisma.TmpUser | null
+  }
+  tmpUsers: {
+    type: 'TmpUser'
+    args: Record<QueryTmpUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TmpUserWhereInput | null, orderBy?: prisma.TmpUserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser[]> | prisma.TmpUser[]
+  }
+  tmpUsersConnection: {
+    type: 'TmpUserConnection'
+    args: Record<QueryTmpUsersConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TmpUserWhereInput | null, orderBy?: prisma.TmpUserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUserConnection> | prisma.TmpUserConnection
   }
 }
   
@@ -4659,6 +4741,266 @@ export interface AggregateUserFieldDetails {
 }
   
 
+// Types for TmpUser
+
+type TmpUserObject =
+  | TmpUserFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'token', args?: [] | false, alias?: string  } 
+  | { name: 'firstname', args?: [] | false, alias?: string  } 
+  | { name: 'lastname', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'birthdate', args?: [] | false, alias?: string  } 
+  | { name: 'role', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type TmpUserFields =
+  | 'id'
+  | 'token'
+  | 'firstname'
+  | 'lastname'
+  | 'email'
+  | 'password'
+  | 'birthdate'
+  | 'role'
+  | 'gender'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface TmpUserFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  token: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  firstname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  birthdate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  role: {
+    type: 'Role'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUser">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Role> | prisma.Role
+  }
+  gender: {
+    type: 'Gender'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUser">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Gender> | prisma.Gender
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TmpUserConnection
+
+type TmpUserConnectionObject =
+  | TmpUserConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TmpUserConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TmpUserConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TmpUserEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUserEdge[]> | prisma.TmpUserEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTmpUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTmpUser> | prisma.AggregateTmpUser
+  }
+}
+  
+
+// Types for TmpUserEdge
+
+type TmpUserEdgeObject =
+  | TmpUserEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TmpUserEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TmpUserEdgeFieldDetails {
+  node: {
+    type: 'TmpUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser> | prisma.TmpUser
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTmpUser
+
+type AggregateTmpUserObject =
+  | AggregateTmpUserFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTmpUserFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTmpUserFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -4729,6 +5071,12 @@ type MutationObject =
   | { name: 'upsertUser', args?: MutationUpsertUserArgs[] | false, alias?: string  } 
   | { name: 'deleteUser', args?: MutationDeleteUserArgs[] | false, alias?: string  } 
   | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
+  | { name: 'createTmpUser', args?: MutationCreateTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'updateTmpUser', args?: MutationUpdateTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTmpUsers', args?: MutationUpdateManyTmpUsersArgs[] | false, alias?: string  } 
+  | { name: 'upsertTmpUser', args?: MutationUpsertTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteTmpUser', args?: MutationDeleteTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTmpUsers', args?: MutationDeleteManyTmpUsersArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createAd'
@@ -4797,6 +5145,12 @@ type MutationFields =
   | 'upsertUser'
   | 'deleteUser'
   | 'deleteManyUsers'
+  | 'createTmpUser'
+  | 'updateTmpUser'
+  | 'updateManyTmpUsers'
+  | 'upsertTmpUser'
+  | 'deleteTmpUser'
+  | 'deleteManyTmpUsers'
 
 
 type MutationCreateAdArgs =
@@ -4974,6 +5328,22 @@ type MutationUpsertUserArgs =
 type MutationDeleteUserArgs =
   | 'where'
 type MutationDeleteManyUsersArgs =
+  | 'where'
+type MutationCreateTmpUserArgs =
+  | 'data'
+type MutationUpdateTmpUserArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTmpUsersArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTmpUserArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTmpUserArgs =
+  | 'where'
+type MutationDeleteManyTmpUsersArgs =
   | 'where'
   
 
@@ -5836,6 +6206,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createTmpUser: {
+    type: 'TmpUser'
+    args: Record<MutationCreateTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TmpUserCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser> | prisma.TmpUser
+  }
+  updateTmpUser: {
+    type: 'TmpUser'
+    args: Record<MutationUpdateTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TmpUserUpdateInput, where: TmpUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser | null> | prisma.TmpUser | null
+  }
+  updateManyTmpUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTmpUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TmpUserUpdateManyMutationInput, where?: TmpUserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTmpUser: {
+    type: 'TmpUser'
+    args: Record<MutationUpsertTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TmpUserWhereUniqueInput, create: TmpUserCreateInput, update: TmpUserUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser> | prisma.TmpUser
+  }
+  deleteTmpUser: {
+    type: 'TmpUser'
+    args: Record<MutationDeleteTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TmpUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser | null> | prisma.TmpUser | null
+  }
+  deleteManyTmpUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTmpUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TmpUserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -5879,6 +6327,7 @@ type SubscriptionObject =
   | { name: 'report', args?: SubscriptionReportArgs[] | false, alias?: string  } 
   | { name: 'trophy', args?: SubscriptionTrophyArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
+  | { name: 'tmpUser', args?: SubscriptionTmpUserArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'ad'
@@ -5892,6 +6341,7 @@ type SubscriptionFields =
   | 'report'
   | 'trophy'
   | 'user'
+  | 'tmpUser'
 
 
 type SubscriptionAdArgs =
@@ -5915,6 +6365,8 @@ type SubscriptionReportArgs =
 type SubscriptionTrophyArgs =
   | 'where'
 type SubscriptionUserArgs =
+  | 'where'
+type SubscriptionTmpUserArgs =
   | 'where'
   
 
@@ -6061,6 +6513,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
+  tmpUser: {
+    type: 'TmpUserSubscriptionPayload'
+    args: Record<SubscriptionTmpUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TmpUserSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUserSubscriptionPayload | null> | prisma.TmpUserSubscriptionPayload | null
   }
 }
   
@@ -7975,6 +8440,211 @@ export interface UserPreviousValuesFieldDetails {
 }
   
 
+// Types for TmpUserSubscriptionPayload
+
+type TmpUserSubscriptionPayloadObject =
+  | TmpUserSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TmpUserSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TmpUserSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TmpUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TmpUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUser | null> | prisma.TmpUser | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TmpUserPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TmpUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TmpUserPreviousValues | null> | prisma.TmpUserPreviousValues | null
+  }
+}
+  
+
+// Types for TmpUserPreviousValues
+
+type TmpUserPreviousValuesObject =
+  | TmpUserPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'token', args?: [] | false, alias?: string  } 
+  | { name: 'firstname', args?: [] | false, alias?: string  } 
+  | { name: 'lastname', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'birthdate', args?: [] | false, alias?: string  } 
+  | { name: 'role', args?: [] | false, alias?: string  } 
+  | { name: 'gender', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type TmpUserPreviousValuesFields =
+  | 'id'
+  | 'token'
+  | 'firstname'
+  | 'lastname'
+  | 'email'
+  | 'password'
+  | 'birthdate'
+  | 'role'
+  | 'gender'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface TmpUserPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  token: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  firstname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  lastname: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  birthdate: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  role: {
+    type: 'Role'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Role> | prisma.Role
+  }
+  gender: {
+    type: 'Gender'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TmpUserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Gender> | prisma.Gender
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 
 export interface AdWhereUniqueInput {
   id?: string | null
@@ -9855,6 +10525,256 @@ export type UserWhereUniqueInputInputObject =
   | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'email', alias?: string  } 
+  
+export interface TmpUserWhereUniqueInput {
+  id?: string | null
+  token?: string | null
+  email?: string | null
+}
+export type TmpUserWhereUniqueInputInputObject =
+  | Extract<keyof TmpUserWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'token', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  
+export interface TmpUserWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  token?: string | null
+  token_not?: string | null
+  token_in?: string[]
+  token_not_in?: string[]
+  token_lt?: string | null
+  token_lte?: string | null
+  token_gt?: string | null
+  token_gte?: string | null
+  token_contains?: string | null
+  token_not_contains?: string | null
+  token_starts_with?: string | null
+  token_not_starts_with?: string | null
+  token_ends_with?: string | null
+  token_not_ends_with?: string | null
+  firstname?: string | null
+  firstname_not?: string | null
+  firstname_in?: string[]
+  firstname_not_in?: string[]
+  firstname_lt?: string | null
+  firstname_lte?: string | null
+  firstname_gt?: string | null
+  firstname_gte?: string | null
+  firstname_contains?: string | null
+  firstname_not_contains?: string | null
+  firstname_starts_with?: string | null
+  firstname_not_starts_with?: string | null
+  firstname_ends_with?: string | null
+  firstname_not_ends_with?: string | null
+  lastname?: string | null
+  lastname_not?: string | null
+  lastname_in?: string[]
+  lastname_not_in?: string[]
+  lastname_lt?: string | null
+  lastname_lte?: string | null
+  lastname_gt?: string | null
+  lastname_gte?: string | null
+  lastname_contains?: string | null
+  lastname_not_contains?: string | null
+  lastname_starts_with?: string | null
+  lastname_not_starts_with?: string | null
+  lastname_ends_with?: string | null
+  lastname_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
+  birthdate?: string | null
+  birthdate_not?: string | null
+  birthdate_in?: string[]
+  birthdate_not_in?: string[]
+  birthdate_lt?: string | null
+  birthdate_lte?: string | null
+  birthdate_gt?: string | null
+  birthdate_gte?: string | null
+  role?: prisma.Role | null
+  role_not?: prisma.Role | null
+  role_in?: prisma.Role[]
+  role_not_in?: prisma.Role[]
+  gender?: prisma.Gender | null
+  gender_not?: prisma.Gender | null
+  gender_in?: prisma.Gender[]
+  gender_not_in?: prisma.Gender[]
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: TmpUserWhereInput[]
+}
+export type TmpUserWhereInputInputObject =
+  | Extract<keyof TmpUserWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'token', alias?: string  } 
+  | { name: 'token_not', alias?: string  } 
+  | { name: 'token_in', alias?: string  } 
+  | { name: 'token_not_in', alias?: string  } 
+  | { name: 'token_lt', alias?: string  } 
+  | { name: 'token_lte', alias?: string  } 
+  | { name: 'token_gt', alias?: string  } 
+  | { name: 'token_gte', alias?: string  } 
+  | { name: 'token_contains', alias?: string  } 
+  | { name: 'token_not_contains', alias?: string  } 
+  | { name: 'token_starts_with', alias?: string  } 
+  | { name: 'token_not_starts_with', alias?: string  } 
+  | { name: 'token_ends_with', alias?: string  } 
+  | { name: 'token_not_ends_with', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'firstname_not', alias?: string  } 
+  | { name: 'firstname_in', alias?: string  } 
+  | { name: 'firstname_not_in', alias?: string  } 
+  | { name: 'firstname_lt', alias?: string  } 
+  | { name: 'firstname_lte', alias?: string  } 
+  | { name: 'firstname_gt', alias?: string  } 
+  | { name: 'firstname_gte', alias?: string  } 
+  | { name: 'firstname_contains', alias?: string  } 
+  | { name: 'firstname_not_contains', alias?: string  } 
+  | { name: 'firstname_starts_with', alias?: string  } 
+  | { name: 'firstname_not_starts_with', alias?: string  } 
+  | { name: 'firstname_ends_with', alias?: string  } 
+  | { name: 'firstname_not_ends_with', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'lastname_not', alias?: string  } 
+  | { name: 'lastname_in', alias?: string  } 
+  | { name: 'lastname_not_in', alias?: string  } 
+  | { name: 'lastname_lt', alias?: string  } 
+  | { name: 'lastname_lte', alias?: string  } 
+  | { name: 'lastname_gt', alias?: string  } 
+  | { name: 'lastname_gte', alias?: string  } 
+  | { name: 'lastname_contains', alias?: string  } 
+  | { name: 'lastname_not_contains', alias?: string  } 
+  | { name: 'lastname_starts_with', alias?: string  } 
+  | { name: 'lastname_not_starts_with', alias?: string  } 
+  | { name: 'lastname_ends_with', alias?: string  } 
+  | { name: 'lastname_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'birthdate_not', alias?: string  } 
+  | { name: 'birthdate_in', alias?: string  } 
+  | { name: 'birthdate_not_in', alias?: string  } 
+  | { name: 'birthdate_lt', alias?: string  } 
+  | { name: 'birthdate_lte', alias?: string  } 
+  | { name: 'birthdate_gt', alias?: string  } 
+  | { name: 'birthdate_gte', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'role_not', alias?: string  } 
+  | { name: 'role_in', alias?: string  } 
+  | { name: 'role_not_in', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  | { name: 'gender_not', alias?: string  } 
+  | { name: 'gender_in', alias?: string  } 
+  | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
   
 export interface AdCreateInput {
   id?: string | null
@@ -16143,6 +17063,71 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'mailStatus', alias?: string  } 
   | { name: 'mailErrors', alias?: string  } 
   
+export interface TmpUserCreateInput {
+  id?: string | null
+  token?: string
+  firstname?: string
+  lastname?: string
+  email?: string
+  password?: string
+  birthdate?: string
+  role?: prisma.Role | null
+  gender?: prisma.Gender | null
+}
+export type TmpUserCreateInputInputObject =
+  | Extract<keyof TmpUserCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'token', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  
+export interface TmpUserUpdateInput {
+  token?: string | null
+  firstname?: string | null
+  lastname?: string | null
+  email?: string | null
+  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  gender?: prisma.Gender | null
+}
+export type TmpUserUpdateInputInputObject =
+  | Extract<keyof TmpUserUpdateInput, string>
+  | { name: 'token', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  
+export interface TmpUserUpdateManyMutationInput {
+  token?: string | null
+  firstname?: string | null
+  lastname?: string | null
+  email?: string | null
+  password?: string | null
+  birthdate?: string | null
+  role?: prisma.Role | null
+  gender?: prisma.Gender | null
+}
+export type TmpUserUpdateManyMutationInputInputObject =
+  | Extract<keyof TmpUserUpdateManyMutationInput, string>
+  | { name: 'token', alias?: string  } 
+  | { name: 'firstname', alias?: string  } 
+  | { name: 'lastname', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'birthdate', alias?: string  } 
+  | { name: 'role', alias?: string  } 
+  | { name: 'gender', alias?: string  } 
+  
 export interface AdSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -16330,6 +17315,23 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface TmpUserSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TmpUserWhereInput | null
+  AND?: TmpUserSubscriptionWhereInput[]
+}
+export type TmpUserSubscriptionWhereInputInputObject =
+  | Extract<keyof TmpUserSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 
 export type AdOrderByInputValues =
   | 'id_ASC'
@@ -16436,6 +17438,7 @@ export type NotificationTypeValues =
   | 'LIKE'
   | 'DISLIKE'
   | 'CROWNED'
+  | 'FOLLOW'
   
 export type NotificationStatusValues =
   | 'ACCEPTED'
@@ -16608,6 +17611,30 @@ export type MessageOrderByInputValues =
   | 'read_DESC'
   | 'deleted_ASC'
   | 'deleted_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TmpUserOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'token_ASC'
+  | 'token_DESC'
+  | 'firstname_ASC'
+  | 'firstname_DESC'
+  | 'lastname_ASC'
+  | 'lastname_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
+  | 'birthdate_ASC'
+  | 'birthdate_DESC'
+  | 'role_ASC'
+  | 'role_DESC'
+  | 'gender_ASC'
+  | 'gender_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

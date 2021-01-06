@@ -445,6 +445,10 @@ type AggregateReport {
   count: Int!
 }
 
+type AggregateTmpUser {
+  count: Int!
+}
+
 type AggregateTrophy {
   count: Int!
 }
@@ -2633,6 +2637,12 @@ type Mutation {
   upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
   deleteReport(where: ReportWhereUniqueInput!): Report
   deleteManyReports(where: ReportWhereInput): BatchPayload!
+  createTmpUser(data: TmpUserCreateInput!): TmpUser!
+  updateTmpUser(data: TmpUserUpdateInput!, where: TmpUserWhereUniqueInput!): TmpUser
+  updateManyTmpUsers(data: TmpUserUpdateManyMutationInput!, where: TmpUserWhereInput): BatchPayload!
+  upsertTmpUser(where: TmpUserWhereUniqueInput!, create: TmpUserCreateInput!, update: TmpUserUpdateInput!): TmpUser!
+  deleteTmpUser(where: TmpUserWhereUniqueInput!): TmpUser
+  deleteManyTmpUsers(where: TmpUserWhereInput): BatchPayload!
   createTrophy(data: TrophyCreateInput!): Trophy!
   updateTrophy(data: TrophyUpdateInput!, where: TrophyWhereUniqueInput!): Trophy
   updateManyTrophies(data: TrophyUpdateManyMutationInput!, where: TrophyWhereInput): BatchPayload!
@@ -2833,6 +2843,7 @@ enum NotificationType {
   LIKE
   DISLIKE
   CROWNED
+  FOLLOW
 }
 
 input NotificationUpdateInput {
@@ -2996,6 +3007,9 @@ type Query {
   report(where: ReportWhereUniqueInput!): Report
   reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
   reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
+  tmpUser(where: TmpUserWhereUniqueInput!): TmpUser
+  tmpUsers(where: TmpUserWhereInput, orderBy: TmpUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TmpUser]!
+  tmpUsersConnection(where: TmpUserWhereInput, orderBy: TmpUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TmpUserConnection!
   trophy(where: TrophyWhereUniqueInput!): Trophy
   trophies(where: TrophyWhereInput, orderBy: TrophyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Trophy]!
   trophiesConnection(where: TrophyWhereInput, orderBy: TrophyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrophyConnection!
@@ -3369,6 +3383,7 @@ type Subscription {
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
   report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
+  tmpUser(where: TmpUserSubscriptionWhereInput): TmpUserSubscriptionPayload
   trophy(where: TrophySubscriptionWhereInput): TrophySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -3376,6 +3391,246 @@ type Subscription {
 enum Theme {
   LIGHT
   DARK
+}
+
+type TmpUser {
+  id: ID!
+  token: String!
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
+  birthdate: DateTime!
+  role: Role!
+  gender: Gender!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TmpUserConnection {
+  pageInfo: PageInfo!
+  edges: [TmpUserEdge]!
+  aggregate: AggregateTmpUser!
+}
+
+input TmpUserCreateInput {
+  id: ID
+  token: String!
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
+  birthdate: DateTime!
+  role: Role
+  gender: Gender
+}
+
+type TmpUserEdge {
+  node: TmpUser!
+  cursor: String!
+}
+
+enum TmpUserOrderByInput {
+  id_ASC
+  id_DESC
+  token_ASC
+  token_DESC
+  firstname_ASC
+  firstname_DESC
+  lastname_ASC
+  lastname_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  birthdate_ASC
+  birthdate_DESC
+  role_ASC
+  role_DESC
+  gender_ASC
+  gender_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type TmpUserPreviousValues {
+  id: ID!
+  token: String!
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
+  birthdate: DateTime!
+  role: Role!
+  gender: Gender!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TmpUserSubscriptionPayload {
+  mutation: MutationType!
+  node: TmpUser
+  updatedFields: [String!]
+  previousValues: TmpUserPreviousValues
+}
+
+input TmpUserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TmpUserWhereInput
+  AND: [TmpUserSubscriptionWhereInput!]
+}
+
+input TmpUserUpdateInput {
+  token: String
+  firstname: String
+  lastname: String
+  email: String
+  password: String
+  birthdate: DateTime
+  role: Role
+  gender: Gender
+}
+
+input TmpUserUpdateManyMutationInput {
+  token: String
+  firstname: String
+  lastname: String
+  email: String
+  password: String
+  birthdate: DateTime
+  role: Role
+  gender: Gender
+}
+
+input TmpUserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  token: String
+  token_not: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_lt: String
+  token_lte: String
+  token_gt: String
+  token_gte: String
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  firstname: String
+  firstname_not: String
+  firstname_in: [String!]
+  firstname_not_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_contains: String
+  firstname_not_contains: String
+  firstname_starts_with: String
+  firstname_not_starts_with: String
+  firstname_ends_with: String
+  firstname_not_ends_with: String
+  lastname: String
+  lastname_not: String
+  lastname_in: [String!]
+  lastname_not_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_contains: String
+  lastname_not_contains: String
+  lastname_starts_with: String
+  lastname_not_starts_with: String
+  lastname_ends_with: String
+  lastname_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  birthdate: DateTime
+  birthdate_not: DateTime
+  birthdate_in: [DateTime!]
+  birthdate_not_in: [DateTime!]
+  birthdate_lt: DateTime
+  birthdate_lte: DateTime
+  birthdate_gt: DateTime
+  birthdate_gte: DateTime
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
+  gender: Gender
+  gender_not: Gender
+  gender_in: [Gender!]
+  gender_not_in: [Gender!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [TmpUserWhereInput!]
+}
+
+input TmpUserWhereUniqueInput {
+  id: ID
+  token: String
+  email: String
 }
 
 type Trophy {

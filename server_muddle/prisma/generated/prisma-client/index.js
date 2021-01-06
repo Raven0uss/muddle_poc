@@ -99,11 +99,15 @@ var models = [
   {
     name: "User",
     embedded: false
+  },
+  {
+    name: "TmpUser",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://52.47.56.241:4466`
+  endpoint: `http://localhost:4466`
 });
 exports.prisma = new exports.Prisma();

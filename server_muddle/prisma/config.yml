@@ -5,8 +5,6 @@ databases:
     database: db_muddle
     uri: PRISMA_DB_URI
 
-
-
 endpoint: http://localhost:4466 # Have to set value of container IP
 datamodel:
   - ./datamodel/ad.prisma
@@ -20,6 +18,7 @@ datamodel:
   - ./datamodel/report.prisma
   - ./datamodel/trophy.prisma
   - ./datamodel/user.prisma
+  - ./datamodel/tmpUser.prisma
 databaseType: document
 
 generate:

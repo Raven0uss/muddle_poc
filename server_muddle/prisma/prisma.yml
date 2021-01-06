@@ -1,4 +1,5 @@
-endpoint: http://52.47.56.241:4466 # Have to set value of container IP
+# endpoint: http://52.47.56.241:4466 # Have to set value of container IP
+endpoint: http://localhost:4466 # Have to set value of container IP
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma
@@ -11,6 +12,7 @@ datamodel:
   - ./datamodel/report.prisma
   - ./datamodel/trophy.prisma
   - ./datamodel/user.prisma
+  - ./datamodel/tmpUser.prisma
 databaseType: document
 
 generate:

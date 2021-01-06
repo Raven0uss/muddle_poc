@@ -55,7 +55,7 @@ const emailHeader = ``;
 const emailFooter = `<hr size="1" color="black">
     <div display:"flex" justify-content="space-between">
       <span style="font-family:arial;color:olive;display:inline-block;margin-top:8px;margin-left:4px;">
-      by <a href="https://www.muddle.fr/">Muddle</a></span>
+      by <a href="https://www.muddles.fr/">Muddles</a></span>
       <span style="font-family:arial;color:gray;float:right;margin-top:8px;">Keep in touch via <a href="https://twitter.com/Muddle">Twitter</a></span>
     </div>`;
 
@@ -93,7 +93,7 @@ export async function sendMailNoReply({
       to,
     });
     subject = `[DEBUG] ${subject} [For ${to.join(",")}]`;
-    to = "tech@muddle.fr";
+    to = "tech@muddles.fr";
   } else {
     log.info(`Sending "${subject}"`, { to });
   }

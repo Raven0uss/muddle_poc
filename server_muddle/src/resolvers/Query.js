@@ -22,6 +22,7 @@ const exposedQueries = {
   reportQueries: ["report", "reports"],
   trophyQueries: ["trophy", "trophies"],
   userQueries: ["users", "user"],
+  tmpUserQueries: ["tmpUsers", "tmpUser"],
 };
 
 // Fragments
