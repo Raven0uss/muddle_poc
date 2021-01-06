@@ -2292,6 +2292,11 @@ enum Language {
 
 scalar Long
 
+enum MailStatus {
+  HEALTHY
+  BLOCKED
+}
+
 type Message {
   id: ID!
   content: String!
@@ -3631,6 +3636,8 @@ type User {
   trophies(where: TrophyWhereInput, orderBy: TrophyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Trophy!]
   conversations(where: ConversationWhereInput, orderBy: ConversationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Conversation!]
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
+  mailStatus: MailStatus!
+  mailErrors: [Int!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3671,6 +3678,12 @@ input UserCreateInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
+}
+
+input UserCreatemailErrorsInput {
+  set: [Int!]
 }
 
 input UserCreateManyInput {
@@ -3767,6 +3780,8 @@ input UserCreateWithoutBlockedInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutBlockingInput {
@@ -3798,6 +3813,8 @@ input UserCreateWithoutBlockingInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutConversationsInput {
@@ -3829,6 +3846,8 @@ input UserCreateWithoutConversationsInput {
   notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutDebatesBlueInput {
@@ -3860,6 +3879,8 @@ input UserCreateWithoutDebatesBlueInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutDebatesInput {
@@ -3891,6 +3912,8 @@ input UserCreateWithoutDebatesInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutDebatesRedInput {
@@ -3922,6 +3945,8 @@ input UserCreateWithoutDebatesRedInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutFollowersInput {
@@ -3953,6 +3978,8 @@ input UserCreateWithoutFollowersInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutFollowingInput {
@@ -3984,6 +4011,8 @@ input UserCreateWithoutFollowingInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutInteractionsInput {
@@ -4015,6 +4044,8 @@ input UserCreateWithoutInteractionsInput {
   notifications: NotificationCreateManyWithoutWhoInput
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutNotificationsInput {
@@ -4046,6 +4077,8 @@ input UserCreateWithoutNotificationsInput {
   trophies: TrophyCreateManyWithoutUserInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 input UserCreateWithoutTrophiesInput {
@@ -4077,6 +4110,8 @@ input UserCreateWithoutTrophiesInput {
   notifications: NotificationCreateManyWithoutWhoInput
   conversations: ConversationCreateManyWithoutSpeakersInput
   interactions: InteractionCreateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserCreatemailErrorsInput
 }
 
 type UserEdge {
@@ -4121,6 +4156,8 @@ enum UserOrderByInput {
   private_DESC
   lastConnected_ASC
   lastConnected_DESC
+  mailStatus_ASC
+  mailStatus_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -4146,6 +4183,8 @@ type UserPreviousValues {
   crownedDate: DateTime
   private: Boolean!
   lastConnected: DateTime
+  mailStatus: MailStatus!
+  mailErrors: [Int!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -4309,6 +4348,10 @@ input UserScalarWhereInput {
   lastConnected_lte: DateTime
   lastConnected_gt: DateTime
   lastConnected_gte: DateTime
+  mailStatus: MailStatus
+  mailStatus_not: MailStatus
+  mailStatus_in: [MailStatus!]
+  mailStatus_not_in: [MailStatus!]
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -4375,6 +4418,8 @@ input UserUpdateDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateInput {
@@ -4406,6 +4451,12 @@ input UserUpdateInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
+}
+
+input UserUpdatemailErrorsInput {
+  set: [Int!]
 }
 
 input UserUpdateManyDataInput {
@@ -4426,6 +4477,8 @@ input UserUpdateManyDataInput {
   crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateManyInput {
@@ -4458,6 +4511,8 @@ input UserUpdateManyMutationInput {
   crownedDate: DateTime
   private: Boolean
   lastConnected: DateTime
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateManyWithoutBlockedInput {
@@ -4622,6 +4677,8 @@ input UserUpdateWithoutBlockedDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutBlockingDataInput {
@@ -4652,6 +4709,8 @@ input UserUpdateWithoutBlockingDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutConversationsDataInput {
@@ -4682,6 +4741,8 @@ input UserUpdateWithoutConversationsDataInput {
   notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutDebatesBlueDataInput {
@@ -4712,6 +4773,8 @@ input UserUpdateWithoutDebatesBlueDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutDebatesDataInput {
@@ -4742,6 +4805,8 @@ input UserUpdateWithoutDebatesDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutDebatesRedDataInput {
@@ -4772,6 +4837,8 @@ input UserUpdateWithoutDebatesRedDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutFollowersDataInput {
@@ -4802,6 +4869,8 @@ input UserUpdateWithoutFollowersDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutFollowingDataInput {
@@ -4832,6 +4901,8 @@ input UserUpdateWithoutFollowingDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutInteractionsDataInput {
@@ -4862,6 +4933,8 @@ input UserUpdateWithoutInteractionsDataInput {
   notifications: NotificationUpdateManyWithoutWhoInput
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutNotificationsDataInput {
@@ -4892,6 +4965,8 @@ input UserUpdateWithoutNotificationsDataInput {
   trophies: TrophyUpdateManyWithoutUserInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithoutTrophiesDataInput {
@@ -4922,6 +4997,8 @@ input UserUpdateWithoutTrophiesDataInput {
   notifications: NotificationUpdateManyWithoutWhoInput
   conversations: ConversationUpdateManyWithoutSpeakersInput
   interactions: InteractionUpdateManyWithoutWhoInput
+  mailStatus: MailStatus
+  mailErrors: UserUpdatemailErrorsInput
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -5201,6 +5278,10 @@ input UserWhereInput {
   trophies_some: TrophyWhereInput
   conversations_some: ConversationWhereInput
   interactions_some: InteractionWhereInput
+  mailStatus: MailStatus
+  mailStatus_not: MailStatus
+  mailStatus_in: [MailStatus!]
+  mailStatus_not_in: [MailStatus!]
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

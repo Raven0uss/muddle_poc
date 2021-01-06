@@ -1,3 +1,6 @@
+import { prisma } from "../../prisma/generated/prisma-client";
+import { difference } from "lodash";
+
 const envToBool = (key) => {
   const envVar = process.env[key];
   if (!envVar) {
@@ -67,7 +70,23 @@ export async function sendMailNoReply({
     to = [to];
   }
 
-  // TODO: Add security system => email flag (ex: bounce ...)
+  const blockedUsers = await prisma.users({
+    where: {
+      mailStatus: "BLOCKED",
+      email_in: to,
+    },
+  });
+  const verifiedEmailAddress = difference(to, blockedUsers);
+  if (!verifiedEmailAddress.length) {
+    console.log(
+      `Cancel mail sending, invalid email address for: "${subject}"`,
+      {
+        blockedUsers,
+      }
+    );
+    return;
+  }
+  to = verifiedEmailAddress;
 
   if (!smtpProd) {
     log.info(`Sending (redirected to muddle-tech) "${subject}"`, {

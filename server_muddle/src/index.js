@@ -65,6 +65,95 @@ server.express.post("/getImage", upload.single("test"), async function (
   }
 });
 
+server.express.post("/sns/email/error-notification", async function (
+  req,
+  res,
+  next
+) {
+  try {
+    log.info("SNS Email Notification content", req.body, req.headers);
+    const msg = JSON.parse(req.body.Message);
+
+    if (msg.notificationType === "Delivery") {
+      const users = await prisma.users({
+        where: {
+          email_in: msg.delivery.recipients,
+        },
+      });
+
+      await Promise.all(
+        users
+          .filter((u) => u.mailErrors.length > 0)
+          .map((u) =>
+            prisma.updateUser({
+              where: { id: u.id },
+              data: {
+                mailErrors: u.mailErrors - 1,
+              },
+            })
+          )
+      );
+    } else if (msg.notificationType === "Bounce") {
+      const mails = msg.bounce.bouncedRecipients.map((b) => b.emailAddress);
+
+      const users = await prisma.users({
+        where: {
+          email_in: mails,
+        },
+      });
+
+      const isSoft =
+        msg.bounce.bounceType === "Undetermined" ||
+        msg.bounce.bounceType === "Transient";
+
+      if (users.length === mails.length) {
+        log.info(`SNS Receive email to flag (soft: ${isSoft}`, mails);
+      } else {
+        log.error(
+          "SNS Receive email to flag, but some are not found in database",
+          mails
+        );
+      }
+
+      if (isSoft) {
+        await Promise.all(
+          users
+            .filter((u) => u.mailStatus !== "BLOCKED")
+            .map((u) => {
+              const data = {
+                mailErrors: u.mailErrors + 1,
+              };
+              if (data.mailErrors >= 3) {
+                log.info(`SNS block user ${u.id}`);
+                data.mailStatus = "BLOCKED";
+              }
+
+              return prisma.updateUser({
+                where: { id: u.id },
+                data,
+              });
+            })
+        );
+      } else if (msg.bounce.bounceType === "Permanent") {
+        await Promise.all(
+          users.map((u) =>
+            prisma.updateUser({
+              where: { id: u.id },
+              data: {
+                mailStatus: "BLOCKED",
+              },
+            })
+          )
+        );
+      }
+    }
+
+    res.status(200).json();
+  } catch (err) {
+    res.status(500).send("Try catch triggered.");
+  }
+});
+
 server.start({ port: 4000 }, () => {
   console.log("App running on http://localhost:4000");
 });

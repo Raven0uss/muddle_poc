@@ -93,6 +93,10 @@ var models = [
     embedded: false
   },
   {
+    name: "MailStatus",
+    embedded: false
+  },
+  {
     name: "User",
     embedded: false
   }

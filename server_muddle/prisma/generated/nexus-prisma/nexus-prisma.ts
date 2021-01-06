@@ -235,6 +235,7 @@ export interface NexusPrismaTypes {
       ConversationCreateWithoutSpeakersInput: ConversationCreateWithoutSpeakersInputInputObject
       MessageCreateManyWithoutConversationInput: MessageCreateManyWithoutConversationInputInputObject
       MessageCreateWithoutConversationInput: MessageCreateWithoutConversationInputInputObject
+      UserCreatemailErrorsInput: UserCreatemailErrorsInputInputObject
       CommentCreateManyInput: CommentCreateManyInputInputObject
       ReportCreateManyWithoutDebateInput: ReportCreateManyWithoutDebateInputInputObject
       ReportCreateWithoutDebateInput: ReportCreateWithoutDebateInputInputObject
@@ -290,6 +291,7 @@ export interface NexusPrismaTypes {
       UserScalarWhereInput: UserScalarWhereInputInputObject
       UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
       UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
+      UserUpdatemailErrorsInput: UserUpdatemailErrorsInputInputObject
       ReportUpdateManyWithoutCommentInput: ReportUpdateManyWithoutCommentInputInputObject
       ReportUpdateWithWhereUniqueWithoutCommentInput: ReportUpdateWithWhereUniqueWithoutCommentInputInputObject
       ReportUpdateWithoutCommentDataInput: ReportUpdateWithoutCommentDataInputInputObject
@@ -451,6 +453,7 @@ export interface NexusPrismaTypes {
     NotificationType: NotificationTypeValues,
     NotificationStatus: NotificationStatusValues,
     TrophyType: TrophyTypeValues,
+    MailStatus: MailStatusValues,
     UserOrderByInput: UserOrderByInputValues,
     DebateOrderByInput: DebateOrderByInputValues,
     CommentOrderByInput: CommentOrderByInputValues,
@@ -1910,6 +1913,8 @@ type UserObject =
   | { name: 'trophies', args?: UserTrophiesArgs[] | false, alias?: string  } 
   | { name: 'conversations', args?: UserConversationsArgs[] | false, alias?: string  } 
   | { name: 'interactions', args?: UserInteractionsArgs[] | false, alias?: string  } 
+  | { name: 'mailStatus', args?: [] | false, alias?: string  } 
+  | { name: 'mailErrors', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -1943,6 +1948,8 @@ type UserFields =
   | 'trophies'
   | 'conversations'
   | 'interactions'
+  | 'mailStatus'
+  | 'mailErrors'
   | 'createdAt'
   | 'updatedAt'
 
@@ -2344,6 +2351,27 @@ export interface UserFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Interaction[]> | prisma.Interaction[]
+  }
+  mailStatus: {
+    type: 'MailStatus'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MailStatus> | prisma.MailStatus
+  }
+  mailErrors: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
   }
   createdAt: {
     type: 'DateTime'
@@ -7709,6 +7737,8 @@ type UserPreviousValuesObject =
   | { name: 'crownedDate', args?: [] | false, alias?: string  } 
   | { name: 'private', args?: [] | false, alias?: string  } 
   | { name: 'lastConnected', args?: [] | false, alias?: string  } 
+  | { name: 'mailStatus', args?: [] | false, alias?: string  } 
+  | { name: 'mailErrors', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -7731,6 +7761,8 @@ type UserPreviousValuesFields =
   | 'crownedDate'
   | 'private'
   | 'lastConnected'
+  | 'mailStatus'
+  | 'mailErrors'
   | 'createdAt'
   | 'updatedAt'
 
@@ -7901,6 +7933,27 @@ export interface UserPreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: true
+    resolve: undefined
+  }
+  mailStatus: {
+    type: 'MailStatus'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MailStatus> | prisma.MailStatus
+  }
+  mailErrors: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: true
+    nullable: false
     resolve: undefined
   }
   createdAt: {
@@ -8508,6 +8561,10 @@ export interface UserWhereInput {
   trophies_some?: TrophyWhereInput | null
   conversations_some?: ConversationWhereInput | null
   interactions_some?: InteractionWhereInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailStatus_not?: prisma.MailStatus | null
+  mailStatus_in?: prisma.MailStatus[]
+  mailStatus_not_in?: prisma.MailStatus[]
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -8697,6 +8754,10 @@ export type UserWhereInputInputObject =
   | { name: 'trophies_some', alias?: string  } 
   | { name: 'conversations_some', alias?: string  } 
   | { name: 'interactions_some', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailStatus_not', alias?: string  } 
+  | { name: 'mailStatus_in', alias?: string  } 
+  | { name: 'mailStatus_not_in', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -9963,6 +10024,8 @@ export interface UserCreateInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
@@ -9995,6 +10058,8 @@ export type UserCreateInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserCreateManyWithoutFollowingInput {
   create?: UserCreateWithoutFollowingInput[]
@@ -10034,6 +10099,8 @@ export interface UserCreateWithoutFollowingInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutFollowingInputInputObject =
   | Extract<keyof UserCreateWithoutFollowingInput, string>
@@ -10065,6 +10132,8 @@ export type UserCreateWithoutFollowingInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserCreateManyWithoutBlockingInput {
   create?: UserCreateWithoutBlockingInput[]
@@ -10104,6 +10173,8 @@ export interface UserCreateWithoutBlockingInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutBlockingInputInputObject =
   | Extract<keyof UserCreateWithoutBlockingInput, string>
@@ -10135,6 +10206,8 @@ export type UserCreateWithoutBlockingInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserCreateManyWithoutFollowersInput {
   create?: UserCreateWithoutFollowersInput[]
@@ -10174,6 +10247,8 @@ export interface UserCreateWithoutFollowersInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutFollowersInputInputObject =
   | Extract<keyof UserCreateWithoutFollowersInput, string>
@@ -10205,6 +10280,8 @@ export type UserCreateWithoutFollowersInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserCreateManyWithoutBlockedInput {
   create?: UserCreateWithoutBlockedInput[]
@@ -10244,6 +10321,8 @@ export interface UserCreateWithoutBlockedInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutBlockedInputInputObject =
   | Extract<keyof UserCreateWithoutBlockedInput, string>
@@ -10275,6 +10354,8 @@ export type UserCreateWithoutBlockedInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateCreateManyWithoutOwnerInput {
   create?: DebateCreateWithoutOwnerInput[]
@@ -10374,6 +10455,8 @@ export interface UserCreateWithoutDebatesBlueInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutDebatesBlueInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesBlueInput, string>
@@ -10405,6 +10488,8 @@ export type UserCreateWithoutDebatesBlueInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateCreateManyWithoutOwnerRedInput {
   create?: DebateCreateWithoutOwnerRedInput[]
@@ -10504,6 +10589,8 @@ export interface UserCreateWithoutDebatesInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutDebatesInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesInput, string>
@@ -10535,6 +10622,8 @@ export type UserCreateWithoutDebatesInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateCreateManyWithoutOwnerBlueInput {
   create?: DebateCreateWithoutOwnerBlueInput[]
@@ -10634,6 +10723,8 @@ export interface UserCreateWithoutDebatesRedInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutDebatesRedInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesRedInput, string>
@@ -10665,6 +10756,8 @@ export type UserCreateWithoutDebatesRedInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface NotificationCreateManyWithoutWhoInput {
   create?: NotificationCreateWithoutWhoInput[]
@@ -10954,6 +11047,8 @@ export interface UserCreateWithoutInteractionsInput {
   notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutInteractionsInputInputObject =
   | Extract<keyof UserCreateWithoutInteractionsInput, string>
@@ -10985,6 +11080,8 @@ export type UserCreateWithoutInteractionsInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface TrophyCreateManyWithoutUserInput {
   create?: TrophyCreateWithoutUserInput[]
@@ -11055,6 +11152,13 @@ export type MessageCreateWithoutConversationInputInputObject =
   | { name: 'from', alias?: string  } 
   | { name: 'read', alias?: string  } 
   | { name: 'deleted', alias?: string  } 
+  
+export interface UserCreatemailErrorsInput {
+  set?: number[]
+}
+export type UserCreatemailErrorsInputInputObject =
+  | Extract<keyof UserCreatemailErrorsInput, string>
+  | { name: 'set', alias?: string  } 
   
 export interface CommentCreateManyInput {
   create?: CommentCreateInput[]
@@ -11330,6 +11434,8 @@ export interface UserUpdateDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateDataInputInputObject =
   | Extract<keyof UserUpdateDataInput, string>
@@ -11361,6 +11467,8 @@ export type UserUpdateDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpdateManyWithoutFollowingInput {
   create?: UserCreateWithoutFollowingInput[]
@@ -11422,6 +11530,8 @@ export interface UserUpdateWithoutFollowingDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutFollowingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowingDataInput, string>
@@ -11452,6 +11562,8 @@ export type UserUpdateWithoutFollowingDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpdateManyWithoutBlockingInput {
   create?: UserCreateWithoutBlockingInput[]
@@ -11513,6 +11625,8 @@ export interface UserUpdateWithoutBlockingDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutBlockingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockingDataInput, string>
@@ -11543,6 +11657,8 @@ export type UserUpdateWithoutBlockingDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpdateManyWithoutFollowersInput {
   create?: UserCreateWithoutFollowersInput[]
@@ -11604,6 +11720,8 @@ export interface UserUpdateWithoutFollowersDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutFollowersDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowersDataInput, string>
@@ -11634,6 +11752,8 @@ export type UserUpdateWithoutFollowersDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpdateManyWithoutBlockedInput {
   create?: UserCreateWithoutBlockedInput[]
@@ -11695,6 +11815,8 @@ export interface UserUpdateWithoutBlockedDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutBlockedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockedDataInput, string>
@@ -11725,6 +11847,8 @@ export type UserUpdateWithoutBlockedDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateUpdateManyWithoutOwnerInput {
   create?: DebateCreateWithoutOwnerInput[]
@@ -11852,6 +11976,8 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesBlueDataInput, string>
@@ -11882,6 +12008,8 @@ export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateUpdateManyWithoutOwnerRedInput {
   create?: DebateCreateWithoutOwnerRedInput[]
@@ -12009,6 +12137,8 @@ export interface UserUpdateWithoutDebatesDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutDebatesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesDataInput, string>
@@ -12039,6 +12169,8 @@ export type UserUpdateWithoutDebatesDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface DebateUpdateManyWithoutOwnerBlueInput {
   create?: DebateCreateWithoutOwnerBlueInput[]
@@ -12166,6 +12298,8 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesRedDataInput, string>
@@ -12196,6 +12330,8 @@ export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface NotificationUpdateManyWithoutWhoInput {
   create?: NotificationCreateWithoutWhoInput[]
@@ -12567,6 +12703,10 @@ export interface UserScalarWhereInput {
   lastConnected_lte?: string | null
   lastConnected_gt?: string | null
   lastConnected_gte?: string | null
+  mailStatus?: prisma.MailStatus | null
+  mailStatus_not?: prisma.MailStatus | null
+  mailStatus_in?: prisma.MailStatus[]
+  mailStatus_not_in?: prisma.MailStatus[]
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -12747,6 +12887,10 @@ export type UserScalarWhereInputInputObject =
   | { name: 'lastConnected_lte', alias?: string  } 
   | { name: 'lastConnected_gt', alias?: string  } 
   | { name: 'lastConnected_gte', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailStatus_not', alias?: string  } 
+  | { name: 'mailStatus_in', alias?: string  } 
+  | { name: 'mailStatus_not_in', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -12794,6 +12938,8 @@ export interface UserUpdateManyDataInput {
   crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateManyDataInputInputObject =
   | Extract<keyof UserUpdateManyDataInput, string>
@@ -12814,6 +12960,15 @@ export type UserUpdateManyDataInputInputObject =
   | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
+  
+export interface UserUpdatemailErrorsInput {
+  set?: number[]
+}
+export type UserUpdatemailErrorsInputInputObject =
+  | Extract<keyof UserUpdatemailErrorsInput, string>
+  | { name: 'set', alias?: string  } 
   
 export interface ReportUpdateManyWithoutCommentInput {
   create?: ReportCreateWithoutCommentInput[]
@@ -13554,6 +13709,8 @@ export interface UserUpdateWithoutInteractionsDataInput {
   notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutInteractionsDataInput, string>
@@ -13584,6 +13741,8 @@ export type UserUpdateWithoutInteractionsDataInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface TrophyUpdateManyWithoutUserInput {
   create?: TrophyCreateWithoutUserInput[]
@@ -15017,6 +15176,8 @@ export interface UserCreateWithoutConversationsInput {
   notifications?: NotificationCreateManyWithoutWhoInput | null
   trophies?: TrophyCreateManyWithoutUserInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutConversationsInputInputObject =
   | Extract<keyof UserCreateWithoutConversationsInput, string>
@@ -15048,6 +15209,8 @@ export type UserCreateWithoutConversationsInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface ConversationUpdateInput {
   speakers?: UserUpdateManyWithoutConversationsInput | null
@@ -15120,6 +15283,8 @@ export interface UserUpdateWithoutConversationsDataInput {
   notifications?: NotificationUpdateManyWithoutWhoInput | null
   trophies?: TrophyUpdateManyWithoutUserInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutConversationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutConversationsDataInput, string>
@@ -15150,6 +15315,8 @@ export type UserUpdateWithoutConversationsDataInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'trophies', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpsertWithWhereUniqueWithoutConversationsInput {
   where?: UserWhereUniqueInput
@@ -15437,6 +15604,8 @@ export interface UserCreateWithoutNotificationsInput {
   trophies?: TrophyCreateManyWithoutUserInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutNotificationsInputInputObject =
   | Extract<keyof UserCreateWithoutNotificationsInput, string>
@@ -15468,6 +15637,8 @@ export type UserCreateWithoutNotificationsInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface NotificationUpdateInput {
   who?: UserUpdateManyWithoutNotificationsInput | null
@@ -15548,6 +15719,8 @@ export interface UserUpdateWithoutNotificationsDataInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutNotificationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutNotificationsDataInput, string>
@@ -15578,6 +15751,8 @@ export type UserUpdateWithoutNotificationsDataInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpsertWithWhereUniqueWithoutNotificationsInput {
   where?: UserWhereUniqueInput
@@ -15715,6 +15890,8 @@ export interface UserCreateWithoutTrophiesInput {
   notifications?: NotificationCreateManyWithoutWhoInput | null
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   interactions?: InteractionCreateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserCreatemailErrorsInput | null
 }
 export type UserCreateWithoutTrophiesInputInputObject =
   | Extract<keyof UserCreateWithoutTrophiesInput, string>
@@ -15746,6 +15923,8 @@ export type UserCreateWithoutTrophiesInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface TrophyUpdateInput {
   user?: UserUpdateOneRequiredWithoutTrophiesInput | null
@@ -15803,6 +15982,8 @@ export interface UserUpdateWithoutTrophiesDataInput {
   notifications?: NotificationUpdateManyWithoutWhoInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateWithoutTrophiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutTrophiesDataInput, string>
@@ -15833,6 +16014,8 @@ export type UserUpdateWithoutTrophiesDataInputInputObject =
   | { name: 'notifications', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpsertWithoutTrophiesInput {
   update?: UserUpdateWithoutTrophiesDataInput
@@ -15881,6 +16064,8 @@ export interface UserUpdateInput {
   trophies?: TrophyUpdateManyWithoutUserInput | null
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   interactions?: InteractionUpdateManyWithoutWhoInput | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
@@ -15912,6 +16097,8 @@ export type UserUpdateInputInputObject =
   | { name: 'trophies', alias?: string  } 
   | { name: 'conversations', alias?: string  } 
   | { name: 'interactions', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   firstname?: string | null
@@ -15931,6 +16118,8 @@ export interface UserUpdateManyMutationInput {
   crownedDate?: string | null
   private?: boolean | null
   lastConnected?: string | null
+  mailStatus?: prisma.MailStatus | null
+  mailErrors?: UserUpdatemailErrorsInput | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
@@ -15951,6 +16140,8 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'crownedDate', alias?: string  } 
   | { name: 'private', alias?: string  } 
   | { name: 'lastConnected', alias?: string  } 
+  | { name: 'mailStatus', alias?: string  } 
+  | { name: 'mailErrors', alias?: string  } 
   
 export interface AdSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -16256,6 +16447,10 @@ export type TrophyTypeValues =
   | 'DUO'
   | 'TOP_COMMENT'
   
+export type MailStatusValues =
+  | 'HEALTHY'
+  | 'BLOCKED'
+  
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
@@ -16293,6 +16488,8 @@ export type UserOrderByInputValues =
   | 'private_DESC'
   | 'lastConnected_ASC'
   | 'lastConnected_DESC'
+  | 'mailStatus_ASC'
+  | 'mailStatus_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
