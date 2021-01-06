@@ -27,6 +27,7 @@ module.exports = {
     Gender: [],
     Theme: [],
     Language: [],
+    MailStatus: [],
     User: ['id', 'email']
   },
   embeddedTypes: [],
@@ -7347,6 +7348,46 @@ module.exports = {
             "deprecationReason": null
           },
           {
+            "name": "mailStatus",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "MailStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -9427,6 +9468,62 @@ module.exports = {
               "kind": "INPUT_OBJECT",
               "name": "InteractionWhereInput",
               "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_not",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MailStatus",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MailStatus",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null
           },
@@ -15702,6 +15799,29 @@ module.exports = {
       },
       {
         "kind": "ENUM",
+        "name": "MailStatus",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "HEALTHY",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BLOCKED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "UserOrderByInput",
         "description": null,
         "fields": null,
@@ -15920,6 +16040,18 @@ module.exports = {
           },
           {
             "name": "lastConnected_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mailStatus_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mailStatus_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -23483,6 +23615,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -23838,6 +23990,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionCreateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -24199,6 +24371,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -24557,6 +24749,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -24912,6 +25124,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionCreateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -25553,6 +25785,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -26191,6 +26443,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -26826,6 +27098,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionCreateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -28361,6 +28653,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -28693,6 +29005,35 @@ module.exports = {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreatemailErrorsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null
           }
@@ -30117,6 +30458,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -30607,6 +30968,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionUpdateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -31103,6 +31484,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -31596,6 +31997,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -32086,6 +32507,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionUpdateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -32884,6 +33325,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -33679,6 +34140,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -34471,6 +34952,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionUpdateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -37460,6 +37961,62 @@ module.exports = {
             "defaultValue": null
           },
           {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_not",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MailStatus",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MailStatus",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -37922,6 +38479,55 @@ module.exports = {
               "kind": "SCALAR",
               "name": "DateTime",
               "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpdatemailErrorsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null
           }
@@ -41907,6 +42513,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ConversationUpdateManyWithoutSpeakersInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -49718,6 +50344,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -50249,6 +50895,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionUpdateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -51690,6 +52356,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -52261,6 +52947,26 @@ module.exports = {
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "InteractionUpdateManyWithoutWhoInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -53040,6 +53746,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -53433,6 +54159,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -53794,6 +54540,26 @@ module.exports = {
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -53972,6 +54738,26 @@ module.exports = {
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "MailStatus",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdatemailErrorsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -57631,6 +58417,46 @@ module.exports = {
               "kind": "SCALAR",
               "name": "DateTime",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mailStatus",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "MailStatus",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mailErrors",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

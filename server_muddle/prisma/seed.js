@@ -1,6 +1,6 @@
 const faker = require("faker");
 const bcrypt = require("bcrypt");
-const { prisma } = require("../generated/prisma-client");
+const { prisma } = require("./generated/prisma-client");
 const { userProfile, userCover } = require("./images");
 
 function shuffleArray(originArray) {

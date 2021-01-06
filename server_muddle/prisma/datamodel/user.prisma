@@ -21,6 +21,11 @@ enum Language {
   EN
 }
 
+enum MailStatus {
+  HEALTHY
+  BLOCKED
+}
+
 type User {
   id: ID! @id
   firstname: String!
@@ -57,6 +62,8 @@ type User {
   trophies: [Trophy]
   conversations: [Conversation]
   interactions: [Interaction]
+  mailStatus: MailStatus! @default(value: HEALTHY)
+  mailErrors: [Int!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
