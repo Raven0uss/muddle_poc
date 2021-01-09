@@ -1990,6 +1990,11 @@ enum Language {
 
 scalar Long
 
+enum MailStatus {
+  BLOCKED
+  HEALTHY
+}
+
 type Message {
   content: String!
   conversation: Conversation!
@@ -2256,6 +2261,7 @@ type Mutation {
   createNotification(data: NotificationCreateInput!): Notification!
   createPublicDebate(answerOne: String, answerTwo: String, content: String, crowned: Boolean, image: String, timelimit: String): Debate!
   createReport(data: ReportCreateInput!): Report!
+  createTmpUser(data: TmpUserCreateInput!): TmpUser!
   createTrophy(data: TrophyCreateInput!): Trophy!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteDebate(where: DebateWhereUniqueInput!): Debate
@@ -2285,6 +2291,7 @@ type Mutation {
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
   updateTrophy(data: TrophyUpdateInput!, where: TrophyWhereUniqueInput!): Trophy
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  validateUser(token: String): User!
 }
 
 type NewNotifications {
@@ -2429,6 +2436,7 @@ enum NotificationType {
   CROWNED
   DELETE_DEBATE
   DISLIKE
+  FOLLOW
   INVITATION_DUO
   LIKE
   REJECT_CLOSE_DEBATE
@@ -2594,6 +2602,8 @@ type Query {
   report(where: ReportWhereUniqueInput!): Report
   reports(after: String, before: String, first: Int, last: Int, orderBy: ReportOrderByInput, skip: Int, where: ReportWhereInput): [Report!]!
   signIn(email: String, password: String): Token!
+  tmpUser(where: TmpUserWhereUniqueInput!): TmpUser
+  tmpUsers(after: String, before: String, first: Int, last: Int, orderBy: TmpUserOrderByInput, skip: Int, where: TmpUserWhereInput): [TmpUser!]!
   trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]!
   trophy(where: TrophyWhereUniqueInput!): Trophy
   user(where: UserWhereUniqueInput!): User
@@ -2922,6 +2932,164 @@ enum Theme {
   LIGHT
 }
 
+type TmpUser {
+  birthdate: DateTime!
+  createdAt: DateTime!
+  email: String!
+  firstname: String!
+  gender: Gender!
+  id: ID!
+  lastname: String!
+  password: String!
+  role: Role!
+  updatedAt: DateTime!
+}
+
+input TmpUserCreateInput {
+  birthdate: DateTime!
+  email: String!
+  firstname: String!
+  gender: Gender
+  id: ID
+  lastname: String!
+  password: String!
+  role: Role
+}
+
+enum TmpUserOrderByInput {
+  birthdate_ASC
+  birthdate_DESC
+  createdAt_ASC
+  createdAt_DESC
+  email_ASC
+  email_DESC
+  firstname_ASC
+  firstname_DESC
+  gender_ASC
+  gender_DESC
+  id_ASC
+  id_DESC
+  lastname_ASC
+  lastname_DESC
+  password_ASC
+  password_DESC
+  role_ASC
+  role_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input TmpUserWhereInput {
+  AND: [TmpUserWhereInput!]
+  birthdate: DateTime
+  birthdate_gt: DateTime
+  birthdate_gte: DateTime
+  birthdate_in: [DateTime!]
+  birthdate_lt: DateTime
+  birthdate_lte: DateTime
+  birthdate_not: DateTime
+  birthdate_not_in: [DateTime!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  email: String
+  email_contains: String
+  email_ends_with: String
+  email_gt: String
+  email_gte: String
+  email_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_not: String
+  email_not_contains: String
+  email_not_ends_with: String
+  email_not_in: [String!]
+  email_not_starts_with: String
+  email_starts_with: String
+  firstname: String
+  firstname_contains: String
+  firstname_ends_with: String
+  firstname_gt: String
+  firstname_gte: String
+  firstname_in: [String!]
+  firstname_lt: String
+  firstname_lte: String
+  firstname_not: String
+  firstname_not_contains: String
+  firstname_not_ends_with: String
+  firstname_not_in: [String!]
+  firstname_not_starts_with: String
+  firstname_starts_with: String
+  gender: Gender
+  gender_in: [Gender!]
+  gender_not: Gender
+  gender_not_in: [Gender!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  lastname: String
+  lastname_contains: String
+  lastname_ends_with: String
+  lastname_gt: String
+  lastname_gte: String
+  lastname_in: [String!]
+  lastname_lt: String
+  lastname_lte: String
+  lastname_not: String
+  lastname_not_contains: String
+  lastname_not_ends_with: String
+  lastname_not_in: [String!]
+  lastname_not_starts_with: String
+  lastname_starts_with: String
+  password: String
+  password_contains: String
+  password_ends_with: String
+  password_gt: String
+  password_gte: String
+  password_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_not: String
+  password_not_contains: String
+  password_not_ends_with: String
+  password_not_in: [String!]
+  password_not_starts_with: String
+  password_starts_with: String
+  role: Role
+  role_in: [Role!]
+  role_not: Role
+  role_not_in: [Role!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
+input TmpUserWhereUniqueInput {
+  email: String
+  id: ID
+}
+
 type Token {
   token: String!
 }
@@ -3138,6 +3306,8 @@ type User {
   language: Language!
   lastConnected: DateTime
   lastname: String!
+  mailErrors: [Int!]!
+  mailStatus: MailStatus!
   notifications(after: String, before: String, first: Int, last: Int, orderBy: NotificationOrderByInput, skip: Int, where: NotificationWhereInput): [Notification!]
   password: String!
   private: Boolean!
@@ -3171,6 +3341,8 @@ input UserCreateInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3178,6 +3350,10 @@ input UserCreateInput {
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
+}
+
+input UserCreatemailErrorsInput {
+  set: [Int!]
 }
 
 input UserCreateManyInput {
@@ -3267,6 +3443,8 @@ input UserCreateWithoutBlockedInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3298,6 +3476,8 @@ input UserCreateWithoutBlockingInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3329,6 +3509,8 @@ input UserCreateWithoutConversationsInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3360,6 +3542,8 @@ input UserCreateWithoutDebatesBlueInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3391,6 +3575,8 @@ input UserCreateWithoutDebatesInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3422,6 +3608,8 @@ input UserCreateWithoutDebatesRedInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3453,6 +3641,8 @@ input UserCreateWithoutFollowersInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3484,6 +3674,8 @@ input UserCreateWithoutFollowingInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3515,6 +3707,8 @@ input UserCreateWithoutInteractionsInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3547,6 +3741,8 @@ input UserCreateWithoutNotificationsInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   password: String!
   private: Boolean
   profilePicture: String
@@ -3578,6 +3774,8 @@ input UserCreateWithoutTrophiesInput {
   language: Language
   lastConnected: DateTime
   lastname: String!
+  mailErrors: UserCreatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationCreateManyWithoutWhoInput
   password: String!
   private: Boolean
@@ -3615,6 +3813,8 @@ enum UserOrderByInput {
   lastConnected_DESC
   lastname_ASC
   lastname_DESC
+  mailStatus_ASC
+  mailStatus_DESC
   password_ASC
   password_DESC
   private_ASC
@@ -3759,6 +3959,10 @@ input UserScalarWhereInput {
   lastname_not_in: [String!]
   lastname_not_starts_with: String
   lastname_starts_with: String
+  mailStatus: MailStatus
+  mailStatus_in: [MailStatus!]
+  mailStatus_not: MailStatus
+  mailStatus_not_in: [MailStatus!]
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   password: String
@@ -3831,6 +4035,8 @@ input UserUpdateDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -3862,6 +4068,8 @@ input UserUpdateInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -3869,6 +4077,10 @@ input UserUpdateInput {
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
+}
+
+input UserUpdatemailErrorsInput {
+  set: [Int!]
 }
 
 input UserUpdateManyDataInput {
@@ -3884,6 +4096,8 @@ input UserUpdateManyDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   password: String
   private: Boolean
   profilePicture: String
@@ -4058,6 +4272,8 @@ input UserUpdateWithoutBlockedDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4088,6 +4304,8 @@ input UserUpdateWithoutBlockingDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4118,6 +4336,8 @@ input UserUpdateWithoutConversationsDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4148,6 +4368,8 @@ input UserUpdateWithoutDebatesBlueDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4178,6 +4400,8 @@ input UserUpdateWithoutDebatesDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4208,6 +4432,8 @@ input UserUpdateWithoutDebatesRedDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4238,6 +4464,8 @@ input UserUpdateWithoutFollowersDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4268,6 +4496,8 @@ input UserUpdateWithoutFollowingDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4298,6 +4528,8 @@ input UserUpdateWithoutInteractionsDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4329,6 +4561,8 @@ input UserUpdateWithoutNotificationsDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   password: String
   private: Boolean
   profilePicture: String
@@ -4359,6 +4593,8 @@ input UserUpdateWithoutTrophiesDataInput {
   language: Language
   lastConnected: DateTime
   lastname: String
+  mailErrors: UserUpdatemailErrorsInput
+  mailStatus: MailStatus
   notifications: NotificationUpdateManyWithoutWhoInput
   password: String
   private: Boolean
@@ -4613,6 +4849,10 @@ input UserWhereInput {
   lastname_not_in: [String!]
   lastname_not_starts_with: String
   lastname_starts_with: String
+  mailStatus: MailStatus
+  mailStatus_in: [MailStatus!]
+  mailStatus_not: MailStatus
+  mailStatus_not_in: [MailStatus!]
   notifications_some: NotificationWhereInput
   password: String
   password_contains: String

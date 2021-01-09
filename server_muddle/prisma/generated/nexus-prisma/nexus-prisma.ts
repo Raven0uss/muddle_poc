@@ -4746,7 +4746,6 @@ export interface AggregateUserFieldDetails {
 type TmpUserObject =
   | TmpUserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'token', args?: [] | false, alias?: string  } 
   | { name: 'firstname', args?: [] | false, alias?: string  } 
   | { name: 'lastname', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
@@ -4759,7 +4758,6 @@ type TmpUserObject =
 
 type TmpUserFields =
   | 'id'
-  | 'token'
   | 'firstname'
   | 'lastname'
   | 'email'
@@ -4777,14 +4775,6 @@ type TmpUserFields =
 export interface TmpUserFieldDetails {
   id: {
     type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  token: {
-    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -8515,7 +8505,6 @@ export interface TmpUserSubscriptionPayloadFieldDetails {
 type TmpUserPreviousValuesObject =
   | TmpUserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'token', args?: [] | false, alias?: string  } 
   | { name: 'firstname', args?: [] | false, alias?: string  } 
   | { name: 'lastname', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
@@ -8528,7 +8517,6 @@ type TmpUserPreviousValuesObject =
 
 type TmpUserPreviousValuesFields =
   | 'id'
-  | 'token'
   | 'firstname'
   | 'lastname'
   | 'email'
@@ -8546,14 +8534,6 @@ type TmpUserPreviousValuesFields =
 export interface TmpUserPreviousValuesFieldDetails {
   id: {
     type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  token: {
-    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -10528,13 +10508,11 @@ export type UserWhereUniqueInputInputObject =
   
 export interface TmpUserWhereUniqueInput {
   id?: string | null
-  token?: string | null
   email?: string | null
 }
 export type TmpUserWhereUniqueInputInputObject =
   | Extract<keyof TmpUserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'token', alias?: string  } 
   | { name: 'email', alias?: string  } 
   
 export interface TmpUserWhereInput {
@@ -10552,20 +10530,6 @@ export interface TmpUserWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  token?: string | null
-  token_not?: string | null
-  token_in?: string[]
-  token_not_in?: string[]
-  token_lt?: string | null
-  token_lte?: string | null
-  token_gt?: string | null
-  token_gte?: string | null
-  token_contains?: string | null
-  token_not_contains?: string | null
-  token_starts_with?: string | null
-  token_not_starts_with?: string | null
-  token_ends_with?: string | null
-  token_not_ends_with?: string | null
   firstname?: string | null
   firstname_not?: string | null
   firstname_in?: string[]
@@ -10672,20 +10636,6 @@ export type TmpUserWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'token', alias?: string  } 
-  | { name: 'token_not', alias?: string  } 
-  | { name: 'token_in', alias?: string  } 
-  | { name: 'token_not_in', alias?: string  } 
-  | { name: 'token_lt', alias?: string  } 
-  | { name: 'token_lte', alias?: string  } 
-  | { name: 'token_gt', alias?: string  } 
-  | { name: 'token_gte', alias?: string  } 
-  | { name: 'token_contains', alias?: string  } 
-  | { name: 'token_not_contains', alias?: string  } 
-  | { name: 'token_starts_with', alias?: string  } 
-  | { name: 'token_not_starts_with', alias?: string  } 
-  | { name: 'token_ends_with', alias?: string  } 
-  | { name: 'token_not_ends_with', alias?: string  } 
   | { name: 'firstname', alias?: string  } 
   | { name: 'firstname_not', alias?: string  } 
   | { name: 'firstname_in', alias?: string  } 
@@ -17065,7 +17015,6 @@ export type UserUpdateManyMutationInputInputObject =
   
 export interface TmpUserCreateInput {
   id?: string | null
-  token?: string
   firstname?: string
   lastname?: string
   email?: string
@@ -17077,7 +17026,6 @@ export interface TmpUserCreateInput {
 export type TmpUserCreateInputInputObject =
   | Extract<keyof TmpUserCreateInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'token', alias?: string  } 
   | { name: 'firstname', alias?: string  } 
   | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
@@ -17087,7 +17035,6 @@ export type TmpUserCreateInputInputObject =
   | { name: 'gender', alias?: string  } 
   
 export interface TmpUserUpdateInput {
-  token?: string | null
   firstname?: string | null
   lastname?: string | null
   email?: string | null
@@ -17098,7 +17045,6 @@ export interface TmpUserUpdateInput {
 }
 export type TmpUserUpdateInputInputObject =
   | Extract<keyof TmpUserUpdateInput, string>
-  | { name: 'token', alias?: string  } 
   | { name: 'firstname', alias?: string  } 
   | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
@@ -17108,7 +17054,6 @@ export type TmpUserUpdateInputInputObject =
   | { name: 'gender', alias?: string  } 
   
 export interface TmpUserUpdateManyMutationInput {
-  token?: string | null
   firstname?: string | null
   lastname?: string | null
   email?: string | null
@@ -17119,7 +17064,6 @@ export interface TmpUserUpdateManyMutationInput {
 }
 export type TmpUserUpdateManyMutationInputInputObject =
   | Extract<keyof TmpUserUpdateManyMutationInput, string>
-  | { name: 'token', alias?: string  } 
   | { name: 'firstname', alias?: string  } 
   | { name: 'lastname', alias?: string  } 
   | { name: 'email', alias?: string  } 
@@ -17619,8 +17563,6 @@ export type MessageOrderByInputValues =
 export type TmpUserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'token_ASC'
-  | 'token_DESC'
   | 'firstname_ASC'
   | 'firstname_DESC'
   | 'lastname_ASC'

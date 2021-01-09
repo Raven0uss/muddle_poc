@@ -553,8 +553,6 @@ export type GenderFilter = "MALE" | "FEMALE" | "ALL";
 export type TmpUserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "token_ASC"
-  | "token_DESC"
   | "firstname_ASC"
   | "firstname_DESC"
   | "lastname_ASC"
@@ -1965,7 +1963,6 @@ export interface UserUpdateOneWithoutDebatesBlueInput {
 }
 
 export interface TmpUserUpdateManyMutationInput {
-  token?: Maybe<String>;
   firstname?: Maybe<String>;
   lastname?: Maybe<String>;
   email?: Maybe<String>;
@@ -2009,7 +2006,6 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
 
 export interface TmpUserCreateInput {
   id?: Maybe<ID_Input>;
-  token: String;
   firstname: String;
   lastname: String;
   email: String;
@@ -3853,7 +3849,6 @@ export interface TrophyUpdateManyDataInput {
 
 export type TmpUserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  token?: Maybe<String>;
   email?: Maybe<String>;
 }>;
 
@@ -5182,20 +5177,6 @@ export interface TmpUserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  token?: Maybe<String>;
-  token_not?: Maybe<String>;
-  token_in?: Maybe<String[] | String>;
-  token_not_in?: Maybe<String[] | String>;
-  token_lt?: Maybe<String>;
-  token_lte?: Maybe<String>;
-  token_gt?: Maybe<String>;
-  token_gte?: Maybe<String>;
-  token_contains?: Maybe<String>;
-  token_not_contains?: Maybe<String>;
-  token_starts_with?: Maybe<String>;
-  token_not_starts_with?: Maybe<String>;
-  token_ends_with?: Maybe<String>;
-  token_not_ends_with?: Maybe<String>;
   firstname?: Maybe<String>;
   firstname_not?: Maybe<String>;
   firstname_in?: Maybe<String[] | String>;
@@ -5403,7 +5384,6 @@ export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
 }
 
 export interface TmpUserUpdateInput {
-  token?: Maybe<String>;
   firstname?: Maybe<String>;
   lastname?: Maybe<String>;
   email?: Maybe<String>;
@@ -6592,7 +6572,6 @@ export interface AdSubscriptionPayloadSubscription
 
 export interface TmpUser {
   id: ID_Output;
-  token: String;
   firstname: String;
   lastname: String;
   email: String;
@@ -6606,7 +6585,6 @@ export interface TmpUser {
 
 export interface TmpUserPromise extends Promise<TmpUser>, Fragmentable {
   id: () => Promise<ID_Output>;
-  token: () => Promise<String>;
   firstname: () => Promise<String>;
   lastname: () => Promise<String>;
   email: () => Promise<String>;
@@ -6622,7 +6600,6 @@ export interface TmpUserSubscription
   extends Promise<AsyncIterator<TmpUser>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  token: () => Promise<AsyncIterator<String>>;
   firstname: () => Promise<AsyncIterator<String>>;
   lastname: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
@@ -6638,7 +6615,6 @@ export interface TmpUserNullablePromise
   extends Promise<TmpUser | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  token: () => Promise<String>;
   firstname: () => Promise<String>;
   lastname: () => Promise<String>;
   email: () => Promise<String>;
@@ -8196,7 +8172,6 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface TmpUserPreviousValues {
   id: ID_Output;
-  token: String;
   firstname: String;
   lastname: String;
   email: String;
@@ -8212,7 +8187,6 @@ export interface TmpUserPreviousValuesPromise
   extends Promise<TmpUserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  token: () => Promise<String>;
   firstname: () => Promise<String>;
   lastname: () => Promise<String>;
   email: () => Promise<String>;
@@ -8228,7 +8202,6 @@ export interface TmpUserPreviousValuesSubscription
   extends Promise<AsyncIterator<TmpUserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  token: () => Promise<AsyncIterator<String>>;
   firstname: () => Promise<AsyncIterator<String>>;
   lastname: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;

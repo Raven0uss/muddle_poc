@@ -142,9 +142,15 @@ const Mutation = prismaObjectType({
         { email, password, firstname, lastname, birthdate, gender },
         { prisma }
       ) => {
-        // Have to create a temporary user and be validate with the token
         try {
           const hashedPassword = bcrypt.hashSync(password, 12);
+          const checkUserExist = await prisma.user({ email });
+          if (!isNil(checkUserExist)) throw new Error("User already member.");
+
+          const checkTmpUserExist = await prisma.tmpUser({ email });
+          if (!isNil(checkTmpUserExist))
+            throw new Error("Tmp User already member.");
+
           let getGender = gender;
           if (
             gender !== "FEMALE" &&
@@ -166,13 +172,13 @@ const Mutation = prismaObjectType({
           });
 
           // Send email here with token link
-          const html = `<p>${token}</p>`;
-          const mailResponse = await sendMailNoReplyWithHeaderAndFooter(
-            email, // user mail
-            "Validation token", // to change oc
-            html,
-            null // attachments, nullable ?
-          );
+          // const html = `<p>${token}</p>`;
+          // const mailResponse = await sendMailNoReplyWithHeaderAndFooter(
+          //   email, // user mail
+          //   "Validation token", // to change oc
+          //   html,
+          //   null // attachments, nullable ?
+          // );
           return { token };
         } catch (error) {
           throw new Error(error);
@@ -189,7 +195,11 @@ const Mutation = prismaObjectType({
       },
       resolve: async (parent, { token }, { prisma }) => {
         try {
-          const decodedUser = jwt.decode(token, process.env.JWT_SECRET_KEY);
+          const decodedUser = get(
+            jwt.decode(token, process.env.JWT_SECRET_KEY),
+            "user"
+          );
+          if (isNil(decodedUser)) throw new Error("Not a good token");
           if (
             "email" in decodedUser &&
             "password" in decodedUser &&
@@ -204,10 +214,16 @@ const Mutation = prismaObjectType({
             }
             const tmpUser = await prisma.tmpUser({ email: decodedUser.email });
             if (isNil(tmpUser) || get(tmpUser, "id") === undefined) {
-              new Error("Not a good token");
+              throw new Error("Not a good token");
             }
-            console.log(decodedUser);
-            const validateUser = await prisma.createUser(decodedUser);
+            const validateUser = await prisma.createUser({
+              email: decodedUser.email,
+              password: decodedUser.password,
+              firstname: decodedUser.firstname,
+              lastname: decodedUser.lastname,
+              birthdate: decodedUser.birthdate,
+              gender: decodedUser.gender,
+            });
             await prisma.deleteTmpUser({ id: tmpUser.id });
             return validateUser;
           } else throw new Error("Not a good token");

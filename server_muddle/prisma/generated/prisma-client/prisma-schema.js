@@ -3395,7 +3395,6 @@ enum Theme {
 
 type TmpUser {
   id: ID!
-  token: String!
   firstname: String!
   lastname: String!
   email: String!
@@ -3415,7 +3414,6 @@ type TmpUserConnection {
 
 input TmpUserCreateInput {
   id: ID
-  token: String!
   firstname: String!
   lastname: String!
   email: String!
@@ -3433,8 +3431,6 @@ type TmpUserEdge {
 enum TmpUserOrderByInput {
   id_ASC
   id_DESC
-  token_ASC
-  token_DESC
   firstname_ASC
   firstname_DESC
   lastname_ASC
@@ -3457,7 +3453,6 @@ enum TmpUserOrderByInput {
 
 type TmpUserPreviousValues {
   id: ID!
-  token: String!
   firstname: String!
   lastname: String!
   email: String!
@@ -3486,7 +3481,6 @@ input TmpUserSubscriptionWhereInput {
 }
 
 input TmpUserUpdateInput {
-  token: String
   firstname: String
   lastname: String
   email: String
@@ -3497,7 +3491,6 @@ input TmpUserUpdateInput {
 }
 
 input TmpUserUpdateManyMutationInput {
-  token: String
   firstname: String
   lastname: String
   email: String
@@ -3522,20 +3515,6 @@ input TmpUserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  token: String
-  token_not: String
-  token_in: [String!]
-  token_not_in: [String!]
-  token_lt: String
-  token_lte: String
-  token_gt: String
-  token_gte: String
-  token_contains: String
-  token_not_contains: String
-  token_starts_with: String
-  token_not_starts_with: String
-  token_ends_with: String
-  token_not_ends_with: String
   firstname: String
   firstname_not: String
   firstname_in: [String!]
@@ -3629,7 +3608,6 @@ input TmpUserWhereInput {
 
 input TmpUserWhereUniqueInput {
   id: ID
-  token: String
   email: String
 }
 

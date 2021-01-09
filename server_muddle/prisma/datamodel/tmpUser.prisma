@@ -1,6 +1,5 @@
 type TmpUser {
   id: ID! @id
-  token: String! @unique
   firstname: String!
   lastname: String!
   email: String! @unique
