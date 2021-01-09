@@ -538,6 +538,14 @@ const Mutation = prismaObjectType({
               type: "DUO",
               debate: { connect: { id: debate.id } },
             });
+            await prisma.createNotification({
+              who: { connect: { id: winnerId } },
+              userId: winnerId,
+              type: "WON_DEBATE",
+              status: "INFORMATION",
+              new: true,
+              debate: { connect: { id: debate.id } },
+            });
           } else {
             const debateComments = await prisma
               .debate({
@@ -567,7 +575,14 @@ const Mutation = prismaObjectType({
               debate: { connect: { id: debate.id } },
               comment: { connect: { id: topCommentId.comment } },
             });
-
+            await prisma.createNotification({
+              who: { connect: { id: topCommentId.user } },
+              userId: topCommentId.user,
+              type: "TOP_COMMENT",
+              status: "INFORMATION",
+              new: true,
+              comment: { connect: { id: topCommentId.comment } },
+            });
             // Don't use this feature or have to implement remove topComment when deleteComment
             // const updatedDebate = await prisma.updateDebate({
             //   where: { id: debate.id },

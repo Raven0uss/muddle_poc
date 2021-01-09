@@ -232,7 +232,7 @@ msgstr "Debate duration"
 msgid "debateLimitationDurationMessage"
 msgstr "The duration maximum for a debate is 9 days and 23 hours."
 
-#: Screens/Profile.js:962
+#: Screens/Profile.js:971
 msgid "debatesProfile"
 msgstr "Debates"
 
@@ -315,12 +315,12 @@ msgid "firstname"
 msgstr "Firstname"
 
 #: Screens/Follow.js:97
-#: Screens/Profile.js:785
+#: Screens/Profile.js:794
 msgid "followers"
 msgstr "Followers"
 
 #: Screens/Follow.js:122
-#: Screens/Profile.js:823
+#: Screens/Profile.js:832
 msgid "following"
 msgstr "Followings"
 
@@ -328,7 +328,7 @@ msgstr "Followings"
 msgid "followingYou"
 msgstr "is following you"
 
-#: Screens/ContactUs.js:63
+#: Screens/ContactUs.js:64
 msgid "forAllQuestionsContact"
 msgstr "For all questions related to Muddles, please contact us to this mail address :"
 
@@ -423,7 +423,7 @@ msgstr "liked your comment"
 msgid "likedCommentSingular"
 msgstr "liked your comment"
 
-#: Screens/Profile.js:497
+#: Screens/Profile.js:506
 msgid "loadingPictureMessage"
 msgstr ""
 "Uploading your picture...̣\n"
@@ -435,7 +435,7 @@ msgstr ""
 msgid "mailAddress"
 msgstr "E-mail"
 
-#: Screens/Profile.js:999
+#: Screens/Profile.js:1008
 msgid "messagePrivateProfile"
 msgstr "This account is private."
 
@@ -455,7 +455,7 @@ msgstr "Change profile picture"
 msgid "moreOneWeekAgo"
 msgstr "more than one week ago"
 
-#: Screens/Profile.js:739
+#: Screens/Profile.js:748
 msgid "muddleAccountDesc"
 msgstr "Muddles Team - Official Account"
 
@@ -669,6 +669,10 @@ msgstr "Switch language"
 msgid "that"
 msgstr "this"
 
+#: Components/NotificationBox.js:1777
+msgid "topCommentNotification"
+msgstr "Your comment on a debate has been selected as the best. As a reward for your popularity, you earned 5 points"
+
 #: Screens/BlackList.js:208
 msgid "unblockAction"
 msgstr "Unblock"
@@ -691,9 +695,13 @@ msgstr "voted on your debate"
 msgid "votePrivacy"
 msgstr "Votes privacy"
 
-#: Screens/Profile.js:934
+#: Screens/Profile.js:943
 msgid "votesProfile"
 msgstr "Votes"
+
+#: Components/NotificationBox.js:1858
+msgid "wonDebateNotification"
+msgstr "Well done, you won a duo debate ! As a reward for your victory, you earned 10 points"
 
 #: Library/getDateMessage.js:25
 msgid "yesterday"
@@ -728,7 +736,7 @@ msgstr "The minimum age to subscribe is 9 years old."
 msgid "yourComment"
 msgstr "Your comment"
 
-#: Screens/Profile.js:961
+#: Screens/Profile.js:970
 msgid "yourDebatesProfile"
 msgstr "My debates"
 
@@ -741,6 +749,6 @@ msgstr "Your message"
 msgid "yourOpinion"
 msgstr "Your opinion"
 
-#: Screens/Profile.js:933
+#: Screens/Profile.js:942
 msgid "yourVotesProfile"
 msgstr "My votes"

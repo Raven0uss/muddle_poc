@@ -63,6 +63,14 @@ const main = async () => {
           type: "DUO",
           debate: { connect: { id: debate.id } },
         });
+        await prisma.createNotification({
+          who: { connect: { id: winnerId } },
+          userId: winnerId,
+          type: "WON_DEBATE",
+          status: "INFORMATION",
+          new: true,
+          debate: { connect: { id: d.id } },
+        });
         trophiesDuo++;
       } else {
         const debateComments = await prisma
@@ -91,6 +99,14 @@ const main = async () => {
           won: true,
           type: "TOP_COMMENT",
           debate: { connect: { id: debate.id } },
+          comment: { connect: { id: topCommentId.comment } },
+        });
+        await prisma.createNotification({
+          who: { connect: { id: topCommentId.user } },
+          userId: topCommentId.user,
+          type: "TOP_COMMENT",
+          status: "INFORMATION",
+          new: true,
           comment: { connect: { id: topCommentId.comment } },
         });
         trophiesTopComment++;

@@ -270,5 +270,21 @@
         1708
       ]
     ]
+  },
+  "topCommentNotification": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1777
+      ]
+    ]
+  },
+  "wonDebateNotification": {
+    "origin": [
+      [
+        "Components/NotificationBox.js",
+        1858
+      ]
+    ]
   }
 }
