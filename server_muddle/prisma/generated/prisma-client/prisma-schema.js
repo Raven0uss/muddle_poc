@@ -2844,6 +2844,8 @@ enum NotificationType {
   DISLIKE
   CROWNED
   FOLLOW
+  TOP_COMMENT
+  WON_DEBATE
 }
 
 input NotificationUpdateInput {

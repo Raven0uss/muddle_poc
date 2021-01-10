@@ -32,7 +32,7 @@ module.exports = {
     TmpUser: ['id', 'email']
   },
   embeddedTypes: [],
-  clientPath: 'prisma/generated/prisma-client',
+  clientPath: 'prisma\\generated\\prisma-client',
   schema: {
   "__schema": {
     "queryType": {
@@ -14169,6 +14169,18 @@ module.exports = {
           },
           {
             "name": "FOLLOW",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TOP_COMMENT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WON_DEBATE",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

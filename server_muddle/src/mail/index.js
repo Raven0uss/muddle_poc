@@ -131,7 +131,7 @@ export async function sendMailNoReplyWithHeaderAndFooter(
     });
   } catch (e) {
     res = e;
-    log.error(e);
+    console.error(e);
   }
   return res;
 }

@@ -17383,6 +17383,8 @@ export type NotificationTypeValues =
   | 'DISLIKE'
   | 'CROWNED'
   | 'FOLLOW'
+  | 'TOP_COMMENT'
+  | 'WON_DEBATE'
   
 export type NotificationStatusValues =
   | 'ACCEPTED'
