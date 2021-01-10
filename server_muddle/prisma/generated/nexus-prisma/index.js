@@ -4638,6 +4638,7 @@ export interface NexusGenFieldTypes {
     notifyComment: NexusGenRootTypes['NoValue']; // NoValue!
     notifySubComment: NexusGenRootTypes['NoValue']; // NoValue!
     publishDuoDebate: NexusGenRootTypes['Debate']; // Debate!
+    sendMail: NexusGenRootTypes['NoValue']; // NoValue!
     sendVote: NexusGenRootTypes['Debate']; // Debate!
     signUp: NexusGenRootTypes['Token']; // Token!
     updateAd: NexusGenRootTypes['Ad'] | null; // Ad

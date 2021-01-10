@@ -17,6 +17,7 @@ import fs from "fs";
 const upload = multer({ dest: "uploads/" });
 const img4io_apiKey = process.env.IMG4IO_API_KEY;
 const img4io_apiSecret = process.env.IMG4IO_API_SECRET;
+// console.log(img4io_apiKey);
 
 const server = new GraphQLServer({
   schema,
@@ -32,7 +33,7 @@ const server = new GraphQLServer({
   },
 });
 
-server.express.post("/getImage", upload.single("test"), async function (
+server.express.post("/getImage", upload.single("test"), async function(
   req,
   res,
   next
@@ -65,7 +66,7 @@ server.express.post("/getImage", upload.single("test"), async function (
   }
 });
 
-server.express.post("/sns/email/error-notification", async function (
+server.express.post("/sns/email/error-notification", async function(
   req,
   res,
   next

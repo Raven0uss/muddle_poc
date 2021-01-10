@@ -8,6 +8,7 @@ import { booleanArg, idArg, stringArg } from "nexus/dist";
 import { dateArg } from "./Types";
 
 import timelimitToDateTime from "../algorithms/timelimitToDateTime";
+import { sendMailNoReplyWithHeaderAndFooter } from "../mail/index";
 
 // Mutations
 const exposedMutations = {
@@ -125,6 +126,26 @@ const Mutation = prismaObjectType({
   name: "Mutation",
   definition(t) {
     t.prismaFields(flattenDeep(Object.values(exposedMutations).map((m) => m)));
+
+    // testSendMail
+    t.field("sendMail", {
+      type: "NoValue",
+      args: {},
+      resolve: async (parent, args, ctx) => {
+        try {
+          const html = `<p>wesh alors</p>`;
+          const mailResponse = await sendMailNoReplyWithHeaderAndFooter(
+            "pro.muddles@gmail.com", // user mail
+            "Wesh alors", // to change oc
+            html
+          );
+          console.log(mailResponse);
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
 
     // signUp
     t.field("signUp", {

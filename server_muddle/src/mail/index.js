@@ -1,5 +1,9 @@
+require("dotenv").config();
+
 import { prisma } from "../../prisma/generated/prisma-client";
 import { difference } from "lodash";
+import { createTransport } from "nodemailer";
+import htmlToText from "html-to-text";
 
 const envToBool = (key) => {
   const envVar = process.env[key];
@@ -89,17 +93,17 @@ export async function sendMailNoReply({
   to = verifiedEmailAddress;
 
   if (!smtpProd) {
-    log.info(`Sending (redirected to muddle-tech) "${subject}"`, {
+    console.log(`Sending (redirected to muddle-tech) "${subject}"`, {
       to,
     });
     subject = `[DEBUG] ${subject} [For ${to.join(",")}]`;
-    to = "tech@muddles.fr";
+    to = "pro.muddles@gmail.com";
   } else {
-    log.info(`Sending "${subject}"`, { to });
+    console.log(`Sending "${subject}"`, { to });
   }
 
   return transporter.sendMail({
-    from: `"TODO" <todo@todo.todo>`, // TODO: set email name & adress name
+    from: `"Muddles" <noreply@muddles.fr>`, // TODO: set email name & adress name
     to,
     subject,
     text,

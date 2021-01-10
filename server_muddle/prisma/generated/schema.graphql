@@ -2276,6 +2276,7 @@ type Mutation {
   notifyComment(debateId: ID): NoValue!
   notifySubComment(commentId: ID, debateId: ID): NoValue!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
+  sendMail: NoValue!
   sendVote(debateId: ID, type: String, userId: ID): Debate!
   signUp(birthdate: DateTime, email: String, firstname: String, gender: String, lastname: String, password: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
