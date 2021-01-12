@@ -64,7 +64,7 @@ const AccountManagement = (props) => {
           paddingTop: 20,
         }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             backgroundColor: themeSchema[theme].backgroundColor1,
             width: Dimensions.get("screen").width / 1.1,
@@ -87,7 +87,7 @@ const AccountManagement = (props) => {
           >
             {i18n._("changeEmail")}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={{
             backgroundColor: themeSchema[theme].backgroundColor1,
