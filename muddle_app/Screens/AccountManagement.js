@@ -18,7 +18,7 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { removeItem } from "../CustomProperties/storage";
 
-const Menu = (props) => {
+const AccountManagement = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const { setCurrentUser } = React.useContext(UserContext);
   const [refresh, setRefresh] = React.useState(true);
@@ -74,9 +74,9 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("Settings")}
+          onPress={() => navigation.push("ChangeEmail")}
         >
-          <CustomIcon name="settings" size={28} color="#A3A3A3" />
+          <CustomIcon name="email" size={28} color="#A3A3A3" />
           <Text
             style={{
               color: themeSchema[theme].colorText,
@@ -85,7 +85,7 @@ const Menu = (props) => {
               fontFamily: "Montserrat_500Medium",
             }}
           >
-            {i18n._("settings")}
+            {i18n._("changeEmail")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -98,9 +98,9 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("AccountManagement")}
+          onPress={() => navigation.push("ChangePassword")}
         >
-          <CustomIcon name="person" size={28} color="#A3A3A3" />
+          <CustomIcon name="lock-open" size={28} color="#A3A3A3" />
           <Text
             style={{
               color: themeSchema[theme].colorText,
@@ -109,7 +109,7 @@ const Menu = (props) => {
               fontFamily: "Montserrat_500Medium",
             }}
           >
-            {i18n._("accountManagement")}
+            {i18n._("changePassword")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -122,9 +122,9 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("LegaleMentions")}
+          onPress={() => navigation.push("NotificationsManagement")}
         >
-          <CustomIcon name="lock" size={28} color="#A3A3A3" />
+          <CustomIcon name="notifications-active" size={28} color="#A3A3A3" />
           <Text
             style={{
               color: themeSchema[theme].colorText,
@@ -133,7 +133,7 @@ const Menu = (props) => {
               fontFamily: "Montserrat_500Medium",
             }}
           >
-            {i18n._("legaleMention")}
+            {i18n._("manageNotifications")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -146,9 +146,9 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("Cgu")}
+          onPress={() => navigation.push("BlackList")}
         >
-          <CustomIcon name="description" size={28} color="#A3A3A3" />
+          <CustomIcon name="block" size={28} color="#A3A3A3" />
           <Text
             style={{
               color: themeSchema[theme].colorText,
@@ -157,7 +157,7 @@ const Menu = (props) => {
               fontFamily: "Montserrat_500Medium",
             }}
           >
-            {i18n._("cgu")}
+            {i18n._("blackList")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -170,50 +170,18 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("ContactUs")}
+          onPress={() => navigation.push("DeleteAccount")}
         >
-          <CustomIcon name="chat" size={28} color="#A3A3A3" />
+          <CustomIcon name="delete-forever" size={28} color="#A3A3A3" />
           <Text
             style={{
-              color: themeSchema[theme].colorText,
+              color: "red",
               marginLeft: 10,
               fontSize: 14,
               fontFamily: "Montserrat_500Medium",
             }}
           >
-            {i18n._("contactUs")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            width: Dimensions.get("screen").width / 1.1,
-            marginTop: 8,
-            borderRadius: 12,
-            padding: 8,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-          onPress={() => {
-            removeItem("token");
-            removeItem("user");
-            setCurrentUser(null);
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "Login" }],
-            });
-          }}
-        >
-          <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />
-          <Text
-            style={{
-              color: themeSchema[theme].colorText,
-              marginLeft: 10,
-              fontSize: 14,
-              fontFamily: "Montserrat_500Medium",
-            }}
-          >
-            {i18n._("disconnect")}
+            {i18n._("deleteAccount")}
           </Text>
         </TouchableOpacity>
       </ScrollView>
@@ -250,4 +218,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Menu;
+export default AccountManagement;

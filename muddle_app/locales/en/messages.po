@@ -35,6 +35,10 @@ msgstr "accepted your invitation for duo debate"
 msgid "accessDenied"
 msgstr "Access denied."
 
+#: Screens/Menu.js:112
+msgid "accountManagement"
+msgstr "Account Management"
+
 #: Screens/SignUp.js:412
 msgid "accronymCGU"
 msgstr "CGU"
@@ -124,7 +128,7 @@ msgstr "Best debates"
 msgid "birthdate"
 msgstr "Birthdate"
 
-#: Screens/Menu.js:112
+#: Screens/AccountManagement.js:160
 msgid "blackList"
 msgstr "Blocked List"
 
@@ -143,6 +147,14 @@ msgstr "Cancel"
 #: Screens/Menu.js:160
 msgid "cgu"
 msgstr "General Conditions of Use"
+
+#: Screens/AccountManagement.js:88
+msgid "changeEmail"
+msgstr "Modify my email address"
+
+#: Screens/AccountManagement.js:112
+msgid "changePassword"
+msgstr "Modify my password"
 
 #: Screens/CreateDebate.js:998
 #: Screens/CreateDebate.js:1020
@@ -241,6 +253,10 @@ msgstr "Debates"
 #: Components/NotificationBox.js:1365
 msgid "decline"
 msgstr "Decline"
+
+#: Screens/AccountManagement.js:184
+msgid "deleteAccount"
+msgstr "Delete my account"
 
 #: Components/CommentBox.js:105
 #: Screens/IsolateComment.js:310
@@ -434,6 +450,10 @@ msgstr ""
 #: Screens/SignUp.js:293
 msgid "mailAddress"
 msgstr "E-mail"
+
+#: Screens/AccountManagement.js:136
+msgid "manageNotifications"
+msgstr "Manage notifications"
 
 #: Screens/Profile.js:1008
 msgid "messagePrivateProfile"

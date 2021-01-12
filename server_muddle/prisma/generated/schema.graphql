@@ -2444,7 +2444,9 @@ enum NotificationType {
   REJECT_DELETE_DEBATE
   REJECT_DUO
   SUBCOMMENT
+  TOP_COMMENT
   VOTE
+  WON_DEBATE
 }
 
 input NotificationUpdateInput {

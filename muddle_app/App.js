@@ -63,6 +63,7 @@ import IsolateCommentScreen from "./Screens/IsolateComment";
 import ReportScreen from "./Screens/Report";
 import IsolateImageScreen from "./Screens/IsolateImage";
 import BlackListScreen from "./Screens/BlackList";
+import AccountManagementScreen from "./Screens/AccountManagement";
 
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
@@ -398,6 +399,16 @@ export default function App() {
                 <Stack.Screen
                   name="Menu"
                   component={MenuScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AccountManagement"
+                  component={AccountManagementScreen}
                   initialParams={{
                     changeLanguage,
                   }}

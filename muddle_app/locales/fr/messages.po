@@ -35,6 +35,10 @@ msgstr "a accepté votre invitation au débat"
 msgid "accessDenied"
 msgstr "Accès refusé"
 
+#: Screens/Menu.js:112
+msgid "accountManagement"
+msgstr "Gestion de compte"
+
 #: Screens/SignUp.js:412
 msgid "accronymCGU"
 msgstr "CGU"
@@ -124,7 +128,7 @@ msgstr "Les meilleurs débats"
 msgid "birthdate"
 msgstr "Date de naissance"
 
-#: Screens/Menu.js:112
+#: Screens/AccountManagement.js:160
 msgid "blackList"
 msgstr "Utilisateurs bloqués"
 
@@ -143,6 +147,14 @@ msgstr "Annuler"
 #: Screens/Menu.js:160
 msgid "cgu"
 msgstr "Conditions Générales d'Utilisation"
+
+#: Screens/AccountManagement.js:88
+msgid "changeEmail"
+msgstr "Modifier mon adresse e-mail"
+
+#: Screens/AccountManagement.js:112
+msgid "changePassword"
+msgstr "Modifier mon mot de passe"
 
 #: Screens/CreateDebate.js:998
 #: Screens/CreateDebate.js:1020
@@ -241,6 +253,10 @@ msgstr "Débats"
 #: Components/NotificationBox.js:1365
 msgid "decline"
 msgstr "Refuser"
+
+#: Screens/AccountManagement.js:184
+msgid "deleteAccount"
+msgstr "Supprimer mon compte"
 
 #: Components/CommentBox.js:105
 #: Screens/IsolateComment.js:310
@@ -434,6 +450,10 @@ msgstr ""
 #: Screens/SignUp.js:293
 msgid "mailAddress"
 msgstr "Adresse e-mail"
+
+#: Screens/AccountManagement.js:136
+msgid "manageNotifications"
+msgstr "Gérer les notifications"
 
 #: Screens/Profile.js:1008
 msgid "messagePrivateProfile"

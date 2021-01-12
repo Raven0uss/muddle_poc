@@ -7,7 +7,7 @@
       ]
     ]
   },
-  "blackList": {
+  "accountManagement": {
     "origin": [
       [
         "Screens/Menu.js",

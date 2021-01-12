@@ -1,0 +1,42 @@
+{
+  "changeEmail": {
+    "origin": [
+      [
+        "Screens/AccountManagement.js",
+        88
+      ]
+    ]
+  },
+  "changePassword": {
+    "origin": [
+      [
+        "Screens/AccountManagement.js",
+        112
+      ]
+    ]
+  },
+  "manageNotifications": {
+    "origin": [
+      [
+        "Screens/AccountManagement.js",
+        136
+      ]
+    ]
+  },
+  "blackList": {
+    "origin": [
+      [
+        "Screens/AccountManagement.js",
+        160
+      ]
+    ]
+  },
+  "deleteAccount": {
+    "origin": [
+      [
+        "Screens/AccountManagement.js",
+        184
+      ]
+    ]
+  }
+}
