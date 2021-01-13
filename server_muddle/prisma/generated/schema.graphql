@@ -2248,7 +2248,9 @@ input MessageWhereUniqueInput {
 type Mutation {
   askCloseDebate(debateId: ID, userId: String): Debate!
   askDeleteDebate(debateId: ID, userId: String): Debate!
+  changePassword(newPassword: String, userId: ID): NoValue!
   checkEmailSignup(email: String): NoValue!
+  checkPasswordOk(currentPassword: String, userId: ID): NoValue!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!

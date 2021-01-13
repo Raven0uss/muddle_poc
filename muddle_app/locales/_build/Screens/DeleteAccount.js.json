@@ -1,0 +1,42 @@
+{
+  "passwordAccountNotSame": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        64
+      ]
+    ]
+  },
+  "deleteAccountTitle": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        119
+      ]
+    ]
+  },
+  "deleteAccountInstruction": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        131
+      ]
+    ]
+  },
+  "currentPassword": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        140
+      ]
+    ]
+  },
+  "deleteAccountButton": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        196
+      ]
+    ]
+  }
+}

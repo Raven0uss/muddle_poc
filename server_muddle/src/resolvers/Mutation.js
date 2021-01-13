@@ -1514,6 +1514,53 @@ const Mutation = prismaObjectType({
         return { value: -1 }; // -1 already used
       },
     });
+
+    t.field("checkPasswordOk", {
+      type: "NoValue",
+      args: {
+        userId: idArg(),
+        currentPassword: stringArg(),
+      },
+      resolve: async (parent, { userId, currentPassword }, { prisma }) => {
+        const user = await prisma.user({ id: userId });
+        if (isNil(user)) {
+          return { value: -1 }; // user doesnt exist
+        }
+        const userPasswordHash = get(user, "password");
+        if (isNil(user)) {
+          return { value: -1 }; // user doesnt exist
+        }
+        if (bcrypt.compareSync(currentPassword, userPasswordHash) === false)
+          return { value: -1 };
+        return { value: 0 };
+      },
+    });
+
+    t.field("changePassword", {
+      type: "NoValue",
+      args: {
+        userId: idArg(),
+        newPassword: stringArg(),
+      },
+      resolve: async (parent, { userId, newPassword }, { prisma }) => {
+        console.log(newPassword);
+        const user = await prisma.user({ id: userId });
+        if (isNil(user)) {
+          return { value: -1 }; // user doesnt exist
+        }
+        const hashedPassword = bcrypt.hashSync(newPassword, 12);
+        const updatedUser = await prisma.updateUser({
+          where: {
+            id: userId,
+          },
+          data: {
+            password: hashedPassword,
+          },
+        });
+        return { value: 0 };
+      },
+    });
+
     // t.field("blockUser", {
     //   type: "User",
     //   args: {

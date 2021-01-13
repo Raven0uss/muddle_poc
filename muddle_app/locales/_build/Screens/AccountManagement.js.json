@@ -1,12 +1,4 @@
 {
-  "changeEmail": {
-    "origin": [
-      [
-        "Screens/AccountManagement.js",
-        88
-      ]
-    ]
-  },
   "changePassword": {
     "origin": [
       [

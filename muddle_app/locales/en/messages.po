@@ -149,12 +149,20 @@ msgid "cgu"
 msgstr "General Conditions of Use"
 
 #: Screens/AccountManagement.js:88
-msgid "changeEmail"
-msgstr "Modify my email address"
+#~ msgid "changeEmail"
+#~ msgstr "Modify my email address"
 
 #: Screens/AccountManagement.js:112
 msgid "changePassword"
 msgstr "Modify my password"
+
+#: Screens/ChangePassword.js:321
+msgid "changePasswordButton"
+msgstr "Change my password"
+
+#: Screens/ChangePassword.js:200
+msgid "changePasswordTitle"
+msgstr "Password modification"
 
 #: Screens/CreateDebate.js:998
 #: Screens/CreateDebate.js:1020
@@ -198,11 +206,15 @@ msgstr "Comments won"
 msgid "confirm"
 msgstr "Confirm"
 
+#: Screens/ChangePassword.js:261
+msgid "confirmNewPassword"
+msgstr "New password confirmation"
+
 #: Screens/SignUp.js:345
 msgid "confirmPassword"
 msgstr "Confirm password"
 
-#: Screens/Login.js:336
+#: Screens/Login.js:337
 #: Screens/SignUp.js:486
 msgid "connect"
 msgstr "Log in"
@@ -211,7 +223,7 @@ msgstr "Log in"
 msgid "contactUs"
 msgstr "Contact us"
 
-#: Screens/Login.js:399
+#: Screens/Login.js:400
 msgid "contactUsNow"
 msgstr "Contact us !"
 
@@ -222,6 +234,11 @@ msgstr "The crown give you the priviledge to create a debate visible on top of t
 #: Screens/DebatesFiltered.js:271
 msgid "crownedDebates"
 msgstr "Crowned debates"
+
+#: Screens/ChangePassword.js:209
+#: Screens/DeleteAccount.js:140
+msgid "currentPassword"
+msgstr "Current password"
 
 #: Screens/CreateDebate.js:758
 msgid "days"
@@ -256,6 +273,20 @@ msgstr "Decline"
 
 #: Screens/AccountManagement.js:184
 msgid "deleteAccount"
+msgstr "Delete my account"
+
+#: Screens/DeleteAccount.js:196
+msgid "deleteAccountButton"
+msgstr "Delete my account"
+
+#: Screens/DeleteAccount.js:131
+msgid "deleteAccountInstruction"
+msgstr ""
+"To delete your account, type your current password and press the button for few seconds.\n\n"
+"Remember, this action is permanent. All the data relatives to your account will be removed from our database."
+
+#: Screens/DeleteAccount.js:119
+msgid "deleteAccountTitle"
 msgstr "Delete my account"
 
 #: Components/CommentBox.js:105
@@ -352,7 +383,7 @@ msgstr "For all questions related to Muddles, please contact us to this mail add
 msgid "forgotPassword"
 msgstr "Forgot password"
 
-#: Screens/Login.js:296
+#: Screens/Login.js:297
 msgid "forgotPassword?"
 msgstr "Forgot your password ?"
 
@@ -380,7 +411,7 @@ msgstr "Generated debates"
 msgid "goToConnect"
 msgstr "Log in"
 
-#: Screens/Login.js:387
+#: Screens/Login.js:388
 msgid "goToSubscribe"
 msgstr "Sign in"
 
@@ -446,7 +477,7 @@ msgstr ""
 "Please wait."
 
 #: Screens/ForgotPassword.js:50
-#: Screens/Login.js:250
+#: Screens/Login.js:251
 #: Screens/SignUp.js:293
 msgid "mailAddress"
 msgstr "E-mail"
@@ -483,14 +514,19 @@ msgstr "Muddles Team - Official Account"
 msgid "myDebates"
 msgstr "My debates"
 
-#: Screens/Login.js:397
+#: Screens/Login.js:398
 msgid "needContact?"
 msgstr "Need to talk ?"
 
-#: Screens/Login.js:385
+#: Screens/ChangePassword.js:240
+msgid "newPassword"
+msgstr "New password"
+
+#: Screens/Login.js:386
 msgid "noAccount?"
 msgstr "No account yet ?"
 
+#: Screens/ChangePassword.js:44
 #: Screens/SignUp.js:114
 msgid "notSamePassword"
 msgstr "The both passwords doesn't match."
@@ -531,23 +567,32 @@ msgstr "other persons"
 msgid "otherPeopleSingular"
 msgstr "another person"
 
-#: Screens/Login.js:268
+#: Screens/Login.js:269
 #: Screens/SignUp.js:316
 msgid "password"
 msgstr "Password"
 
+#: Screens/ChangePassword.js:55
 #: Screens/SignUp.js:101
 msgid "password30Char"
 msgstr "The maximum length for a password is 30 characters"
 
+#: Screens/ChangePassword.js:49
 #: Screens/SignUp.js:95
 msgid "password8Char"
 msgstr "The minimum length for a password is 8 characters"
 
+#: Screens/ChangePassword.js:149
+#: Screens/DeleteAccount.js:64
+msgid "passwordAccountNotSame"
+msgstr "The password of your account is not matching."
+
+#: Screens/ChangePassword.js:35
 #: Screens/SignUp.js:67
 msgid "passwordNeedLetters"
 msgstr "Your password need to contain at least one letter."
 
+#: Screens/ChangePassword.js:30
 #: Screens/SignUp.js:62
 msgid "passwordNeedNumbers"
 msgstr "Your password need to contain at least one digit."
@@ -630,6 +675,10 @@ msgstr "Sexism"
 msgid "reportViolence"
 msgstr "Violence"
 
+#: Screens/ChangePassword.js:290
+msgid "sameCurrentNewPassword"
+msgstr "The new password have to be different from your previous one."
+
 #: Screens/CreateDebate.js:264
 #: Screens/Search.js:190
 msgid "search"
@@ -675,6 +724,10 @@ msgstr "Sign in"
 #: Screens/SignUp.js:217
 msgid "succesMailSubscribe"
 msgstr "A mail to confirm your subscribtion has been sent."
+
+#: Screens/ChangePassword.js:119
+msgid "succesModifyPassword"
+msgstr "Your password has been changed. Please, sign in back."
 
 #: Screens/ForgotPassword.js:65
 msgid "successMessage_MailSendForgotPassword"

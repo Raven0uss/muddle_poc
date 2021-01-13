@@ -222,6 +222,7 @@ function LoginComponent(props) {
       type: params.snackType,
       message: params.snackMessage,
     });
+    if (params.refreshUser) setCurrentUser(null);
   }, [props.route.params]);
 
   const containerStyle = StyleSheet.flatten([

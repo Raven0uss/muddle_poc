@@ -4610,7 +4610,9 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     askCloseDebate: NexusGenRootTypes['Debate']; // Debate!
     askDeleteDebate: NexusGenRootTypes['Debate']; // Debate!
+    changePassword: NexusGenRootTypes['NoValue']; // NoValue!
     checkEmailSignup: NexusGenRootTypes['NoValue']; // NoValue!
+    checkPasswordOk: NexusGenRootTypes['NoValue']; // NoValue!
     closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
     createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
@@ -4926,8 +4928,16 @@ export interface NexusGenArgTypes {
       debateId?: string | null; // ID
       userId?: string | null; // String
     }
+    changePassword: { // args
+      newPassword?: string | null; // String
+      userId?: string | null; // ID
+    }
     checkEmailSignup: { // args
       email?: string | null; // String
+    }
+    checkPasswordOk: { // args
+      currentPassword?: string | null; // String
+      userId?: string | null; // ID
     }
     closeMyDebate: { // args
       debateId?: string | null; // ID

@@ -64,6 +64,9 @@ import ReportScreen from "./Screens/Report";
 import IsolateImageScreen from "./Screens/IsolateImage";
 import BlackListScreen from "./Screens/BlackList";
 import AccountManagementScreen from "./Screens/AccountManagement";
+import ChangePasswordScreen from "./Screens/ChangePassword";
+import DeleteAccountScreen from "./Screens/DeleteAccount";
+import NotificationsManagementScreen from "./Screens/NotificationsManagement";
 
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform } from "react-native";
@@ -416,6 +419,37 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
+                <Stack.Screen
+                  name="ChangePassword"
+                  component={ChangePasswordScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="DeleteAccount"
+                  component={DeleteAccountScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="NotificationsManagement"
+                  component={NotificationsManagementScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+
                 <Stack.Screen
                   name="Settings"
                   component={SettingsScreen}
