@@ -34,6 +34,7 @@ function filterData(currentData, filterDate) {
   if (filterDate === "year") index = 365;
   while (index >= 0) {
     const key = moment().subtract(index, "days").format("DD/MM/YYYY");
+    console.log(key);
     if (key in objectData === false) {
       filterData.push(createData(key, 0));
     } else {
@@ -48,6 +49,7 @@ const GET_CONNECTED_STATS = gql`
   query {
     connecteds {
       id
+      date
       connections {
         id
       }
@@ -92,7 +94,10 @@ export default function Chart() {
   const theme = useTheme();
 
   const { data: dataStatistiques, loading, error } = useQuery(
-    GET_CONNECTED_STATS
+    GET_CONNECTED_STATS,
+    {
+      fetchPolicy: "cache-and-network",
+    }
   );
 
   moment.locale("fr");
@@ -100,9 +105,14 @@ export default function Chart() {
   if (error) return <div>Oops, une erreur est survenue</div>;
   const dataNotFiltered = dataStatistiques.connecteds
     .filter((d) => moment().diff(d.date, "days") <= 7)
-    .map((d) =>
-      createData(moment(d.date).format("DD/MM/YYYY"), d.connections.length)
-    );
+    .map((d) => {
+      console.log(d);
+      return createData(
+        moment(d.date).format("DD/MM/YYYY"),
+        d.connections.length
+      );
+    });
+  console.log(dataNotFiltered);
   let data = dataNotFiltered;
   if (dataNotFiltered.length < 7)
     data = filterData(dataNotFiltered, filterDate);

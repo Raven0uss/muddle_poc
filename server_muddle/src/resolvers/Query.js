@@ -432,7 +432,7 @@ const Query = prismaObjectType({
 
           let connectedToday = 0;
 
-          var m = moment().utcOffset(0);
+          var m = moment();
           m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
           m.toISOString();
           m.format();

@@ -132,8 +132,7 @@ const Debates = (props) => {
   } = useQuery(GET_DEBATES);
 
   if (loadingDebates) return <div>Chargement...</div>;
-  if (errorDebates)
-    return <div>Oops, une erreur est survenue</div>;
+  if (errorDebates) return <div>Oops, une erreur est survenue</div>;
 
   const { debates } = debatesData;
 
@@ -162,11 +161,14 @@ const Debates = (props) => {
               <h3>Débats</h3>
               <h4>Filtres :</h4>
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  Rechercher : <input></input>
-                </Grid>
-                <Grid item xs={6}>
-                  En tant que : <select></select>
+                <Grid item xs={12}>
+                  Rechercher :{" "}
+                  <select>
+                    <option value="content">Le débat contient</option>
+                    <option value="user">Créé par</option>
+                    <option value="vote">Choix de vote contient</option>
+                  </select>{" "}
+                  <input placeholder="Votre recherche..."></input>
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
@@ -230,10 +232,25 @@ const Debates = (props) => {
               </Grid>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  Trier par : <select></select>
+                  Trier par :{" "}
+                  <select>
+                    <option value="date_DESC">
+                      Du plus récent au plus ancien
+                    </option>
+                    <option value="date_ASC">
+                      Du plus ancien au plus récent
+                    </option>
+                    <option value="popularity">Par popularité</option>
+                    <option value="votes">Par nombre de votes</option>
+                    <option value="comments">Par nombre de commentaires</option>
+                  </select>
                 </Grid>
                 <Grid item xs={6}>
-                  Nombre de résultats par page : <select></select>
+                  Nombre de résultats par page :{" "}
+                  <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                  </select>
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
@@ -348,6 +365,13 @@ const Debates = (props) => {
                   )}
                   <br />
                   {debate.content}
+                  {debate.image !== null && debate.image.length > 0 && (
+                    <img
+                      src={debate.image}
+                      alt={debate.image}
+                      style={{ width: 400 }}
+                    />
+                  )}
                   <br />
                   <br />
                   <Grid container spacing={3}>
@@ -355,6 +379,9 @@ const Debates = (props) => {
                       <button>Clore le débat</button>
                       <br />
                       <button>Supprimer le débat</button>
+                      {debate.type === "DUO" && (
+                        <button>Bannir les deux utilisateurs</button>
+                      )}
                     </Grid>
                     {debate.type === "STANDARD" && (
                       <Grid item xs={4}>
