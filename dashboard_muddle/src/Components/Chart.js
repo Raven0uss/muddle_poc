@@ -108,7 +108,7 @@ export default function Chart() {
     data = filterData(dataNotFiltered, filterDate);
   return (
     <React.Fragment>
-      <div style={{ marginBottom: 10 }}>
+      <div style={{ marginBottom: 20, paddingLeft: 5 }}>
         <h3>
           {moment().format("DD MMMM YYYY")} -{" "}
           {filterDate === "week"
@@ -117,7 +117,7 @@ export default function Chart() {
             ? "Mois"
             : "Année"}
         </h3>
-        {/* <h4>Statistiques par semaine</h4> */}
+
         <Grid container spacing={3}>
           <button
             style={{ marginLeft: 3, marginRight: 3 }}
@@ -142,6 +142,14 @@ export default function Chart() {
           </button>
         </Grid>
       </div>
+      <hr
+        style={{
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderColor: "#ececec",
+          width: "100%",
+        }}
+      />
       <ResponsiveContainer>
         <LineChart
           data={data}

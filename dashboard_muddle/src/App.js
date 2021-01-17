@@ -6,6 +6,7 @@ import Dashboard from "./Components/Dashboard";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./apollo";
 // import moment from "moment";
+require("typeface-montserrat");
 
 function App() {
   return (

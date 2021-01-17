@@ -20,6 +20,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ProfileIcon from "@material-ui/icons/AccountBox";
 import CreateAdIcon from "@material-ui/icons/AddToQueue";
 import CreateUserIcon from "@material-ui/icons/PersonAdd";
+import ReportIcon from "@material-ui/icons/Report";
+
 import Chart from "./Chart";
 import DebateStats from "./DebateStats";
 import UserStats from "./UserStats";
@@ -47,12 +49,15 @@ import CreateUser from "../Pages/CreateUser";
 
 import logoMenu from "../logo_menu.png";
 
+import "../App.css";
+import Reports from "../Pages/Reports";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -134,7 +139,10 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: 0,
   },
   fixedHeight: {
-    height: 300,
+    height: 350,
+  },
+  listItem: {
+    fontSize: "200px !important",
   },
 }));
 
@@ -233,44 +241,130 @@ export default function Dashboard() {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary="Accueil" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Accueil
+                </span>
+              </ListItemText>
             </ListItem>
             <ListItem button onClick={() => setPath("debates")}>
               <ListItemIcon>
                 <GavelIcon />
               </ListItemIcon>
-              <ListItemText primary="Gestion des debats" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Gestion des débats
+                </span>
+              </ListItemText>
+            </ListItem>
+            <ListItem button onClick={() => setPath("reports")}>
+              <ListItemIcon>
+                <ReportIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Signalements
+                </span>
+              </ListItemText>
             </ListItem>
             <ListItem button onClick={() => setPath("users")}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="Utilisateurs" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Utilisateurs
+                </span>
+              </ListItemText>
             </ListItem>
             <ListItem button onClick={() => setPath("ads")}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
-              <ListItemText primary="Publicites" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Publicités
+                </span>
+              </ListItemText>
             </ListItem>
             <hr />
             <ListItem button onClick={() => setPath("createDebate")}>
               <ListItemIcon>
                 <LibraryAddIcon />
               </ListItemIcon>
-              <ListItemText primary="Nouveau debat" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Nouveau débat
+                </span>
+              </ListItemText>
             </ListItem>
             <ListItem button onClick={() => setPath("createAd")}>
               <ListItemIcon>
                 <CreateAdIcon />
               </ListItemIcon>
-              <ListItemText primary="Nouvelle publicite" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Nouvelle publicité
+                </span>
+              </ListItemText>
             </ListItem>
             <ListItem button onClick={() => setPath("createUser")}>
               <ListItemIcon>
                 <CreateUserIcon />
               </ListItemIcon>
-              <ListItemText primary="Nouvel utilisateur" />
+              <ListItemText>
+                <span
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: 12,
+                    fontWeight: "600",
+                  }}
+                >
+                  Nouvel utilisateur
+                </span>
+              </ListItemText>
             </ListItem>
           </div>
         </List>
@@ -279,6 +373,7 @@ export default function Dashboard() {
 
       {path === "home" && <Home />}
       {path === "debates" && <Debates />}
+      {path === "reports" && <Reports />}
       {path === "users" && <Users />}
       {path === "ads" && <Ads />}
       {path === "createAd" && <CreateAd />}

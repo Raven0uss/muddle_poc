@@ -2,9 +2,18 @@
   text-align: center;
 }
 
+p, h3 {
+  font-family: "Montserrat" !important;
+  font-weight: "bold" !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.MuiTypography-body1 {
+  color: "red !important";
 }
 
 @media (prefers-reduced-motion: no-preference) {

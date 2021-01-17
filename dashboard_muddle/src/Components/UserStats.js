@@ -22,56 +22,152 @@ export default function UserStats(props) {
 
   return (
     <React.Fragment>
-      <Typography component="p" variant="h6">
+      <Typography
+        component="p"
+        variant="h6"
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: 12,
+        }}
+      >
         Connexions en temps réel
       </Typography>
-      <Typography component="p" variant="h4">
+      <Typography
+        component="p"
+        variant="h4"
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: 22,
+          fontWeight: "600",
+        }}
+      >
         {connectedToday}
       </Typography>
-
-      <Typography component="p" variant="h6">
-        Repartition
+      <hr
+        style={{
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderColor: "#ececec",
+          width: "100%",
+        }}
+      />
+      <Typography
+        component="p"
+        variant="h6"
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: 12,
+        }}
+      >
+        Répartition
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <Typography component="p" variant="h4">
+          <Typography
+            component="p"
+            variant="h4"
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 22,
+              fontWeight: "600",
+            }}
+          >
             {repartitions.male}%
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography component="p" variant="h4">
+          <Typography
+            component="p"
+            variant="h4"
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 22,
+              fontWeight: "600",
+            }}
+          >
             {repartitions.female}%
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography component="p" variant="h4">
+          <Typography
+            component="p"
+            variant="h4"
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 22,
+              fontWeight: "600",
+            }}
+          >
             {repartitions.nd}%
           </Typography>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={4}>
-          <Typography color="textSecondary" className={classes.depositContext}>
+          <Typography
+            color="textSecondary"
+            className={classes.depositContext}
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 12,
+            }}
+          >
             hommes
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography color="textSecondary" className={classes.depositContext}>
+          <Typography
+            color="textSecondary"
+            className={classes.depositContext}
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 12,
+            }}
+          >
             femmes
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Typography color="textSecondary" className={classes.depositContext}>
+          <Typography
+            color="textSecondary"
+            className={classes.depositContext}
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: 12,
+            }}
+          >
             non défini
           </Typography>
         </Grid>
       </Grid>
-
-      <Typography component="p" variant="h6">
+      <hr
+        style={{
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderColor: "#ececec",
+          width: "100%",
+        }}
+      />
+      <Typography
+        component="p"
+        variant="h6"
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: 12,
+        }}
+      >
         Age moyen
       </Typography>
-      <Typography component="p" variant="h4">
-        {ageAverage}
+      <Typography
+        component="p"
+        variant="h4"
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: 22,
+          fontWeight: "600",
+        }}
+      >
+        {ageAverage} ans
       </Typography>
     </React.Fragment>
   );

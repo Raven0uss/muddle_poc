@@ -45,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     boxShadow: "inherit !important",
     borderWidth: 0,
+    borderRadius: 14,
   },
   fixedHeight: {
-    height: 300,
+    height: 450,
   },
 }));
 
