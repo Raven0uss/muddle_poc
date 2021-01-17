@@ -18,6 +18,8 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ProfileIcon from "@material-ui/icons/AccountBox";
+import CreateAdIcon from "@material-ui/icons/AddToQueue";
+import CreateUserIcon from "@material-ui/icons/PersonAdd";
 import Chart from "./Chart";
 import DebateStats from "./DebateStats";
 import UserStats from "./UserStats";
@@ -36,6 +38,12 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 
 import Home from "../Pages/Home";
+import Debates from "../Pages/Debates";
+import Users from "../Pages/Users";
+import Ads from "../Pages/Ads";
+import CreateAd from "../Pages/CreateAd";
+import CreateDebate from "../Pages/CreateDebate";
+import CreateUser from "../Pages/CreateUser";
 
 const drawerWidth = 240;
 
@@ -239,9 +247,15 @@ export default function Dashboard() {
             </ListItem>
             <ListItem button onClick={() => setPath("createAd")}>
               <ListItemIcon>
-                <LibraryAddIcon />
+                <CreateAdIcon />
               </ListItemIcon>
               <ListItemText primary="Nouvelle publicite" />
+            </ListItem>
+            <ListItem button onClick={() => setPath("createUser")}>
+              <ListItemIcon>
+                <CreateUserIcon />
+              </ListItemIcon>
+              <ListItemText primary="Nouvel utilisateur" />
             </ListItem>
           </div>
         </List>
@@ -249,11 +263,12 @@ export default function Dashboard() {
       </Drawer>
 
       {path === "home" && <Home />}
-      {path === "debates"}
-      {path === "users"}
-      {path === "ads"}
-      {path === "createAd"}
-      {path === "createDebate"}
+      {path === "debates" && <Debates />}
+      {path === "users" && <Users />}
+      {path === "ads" && <Ads />}
+      {path === "createAd" && <CreateAd />}
+      {path === "createDebate" && <CreateDebate />}
+      {path === "createUser" && <CreateUser />}
     </div>
   );
 }

@@ -68,7 +68,7 @@ const GET_MAIN_STATS = gql`
 const Home = (props) => {
   const { data, loading, error } = useQuery(GET_MAIN_STATS, {
     onCompleted: (result) => {
-      console.log(result);
+    //   console.log(result);
     },
     fetchPolicy: "cache-and-network",
   });

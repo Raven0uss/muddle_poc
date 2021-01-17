@@ -8,7 +8,6 @@ export const GRAPHQL_API_URL = "localhost:4000";
 
 const customFetch = (uri, options) => {
   return fetch(uri, options).then((response) => {
-    console.log("test");
     if (response.status >= 400) {
       // or handle 500 errors
       if (response.status === 429) {

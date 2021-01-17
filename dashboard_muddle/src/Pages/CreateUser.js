@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateDebate = (props) => {
+const CreateUser = (props) => {
   const classes = useStyles();
 
   return (
@@ -39,4 +39,4 @@ const CreateDebate = (props) => {
   );
 };
 
-export default CreateDebate;
+export default CreateUser;
