@@ -19,12 +19,14 @@ export interface Exists {
   ad: (where?: AdWhereInput) => Promise<boolean>;
   adTarget: (where?: AdTargetWhereInput) => Promise<boolean>;
   comment: (where?: CommentWhereInput) => Promise<boolean>;
+  connected: (where?: ConnectedWhereInput) => Promise<boolean>;
   conversation: (where?: ConversationWhereInput) => Promise<boolean>;
   debate: (where?: DebateWhereInput) => Promise<boolean>;
   interaction: (where?: InteractionWhereInput) => Promise<boolean>;
   message: (where?: MessageWhereInput) => Promise<boolean>;
   notification: (where?: NotificationWhereInput) => Promise<boolean>;
   report: (where?: ReportWhereInput) => Promise<boolean>;
+  statistique: (where?: StatistiqueWhereInput) => Promise<boolean>;
   tmpUser: (where?: TmpUserWhereInput) => Promise<boolean>;
   trophy: (where?: TrophyWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -106,6 +108,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CommentConnectionPromise;
+  connected: (where: ConnectedWhereUniqueInput) => ConnectedNullablePromise;
+  connecteds: (args?: {
+    where?: ConnectedWhereInput;
+    orderBy?: ConnectedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Connected>;
+  connectedsConnection: (args?: {
+    where?: ConnectedWhereInput;
+    orderBy?: ConnectedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ConnectedConnectionPromise;
   conversation: (
     where: ConversationWhereUniqueInput
   ) => ConversationNullablePromise;
@@ -226,6 +247,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ReportConnectionPromise;
+  statistique: (
+    where: StatistiqueWhereUniqueInput
+  ) => StatistiqueNullablePromise;
+  statistiques: (args?: {
+    where?: StatistiqueWhereInput;
+    orderBy?: StatistiqueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Statistique>;
+  statistiquesConnection: (args?: {
+    where?: StatistiqueWhereInput;
+    orderBy?: StatistiqueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => StatistiqueConnectionPromise;
   tmpUser: (where: TmpUserWhereUniqueInput) => TmpUserNullablePromise;
   tmpUsers: (args?: {
     where?: TmpUserWhereInput;
@@ -337,6 +379,22 @@ export interface Prisma {
   }) => CommentPromise;
   deleteComment: (where: CommentWhereUniqueInput) => CommentPromise;
   deleteManyComments: (where?: CommentWhereInput) => BatchPayloadPromise;
+  createConnected: (data: ConnectedCreateInput) => ConnectedPromise;
+  updateConnected: (args: {
+    data: ConnectedUpdateInput;
+    where: ConnectedWhereUniqueInput;
+  }) => ConnectedPromise;
+  updateManyConnecteds: (args: {
+    data: ConnectedUpdateManyMutationInput;
+    where?: ConnectedWhereInput;
+  }) => BatchPayloadPromise;
+  upsertConnected: (args: {
+    where: ConnectedWhereUniqueInput;
+    create: ConnectedCreateInput;
+    update: ConnectedUpdateInput;
+  }) => ConnectedPromise;
+  deleteConnected: (where: ConnectedWhereUniqueInput) => ConnectedPromise;
+  deleteManyConnecteds: (where?: ConnectedWhereInput) => BatchPayloadPromise;
   createConversation: (data: ConversationCreateInput) => ConversationPromise;
   updateConversation: (args: {
     data: ConversationUpdateInput;
@@ -443,6 +501,20 @@ export interface Prisma {
   }) => ReportPromise;
   deleteReport: (where: ReportWhereUniqueInput) => ReportPromise;
   deleteManyReports: (where?: ReportWhereInput) => BatchPayloadPromise;
+  createStatistique: (data: StatistiqueCreateInput) => StatistiquePromise;
+  updateStatistique: (args: {
+    data: StatistiqueUpdateInput;
+    where: StatistiqueWhereUniqueInput;
+  }) => StatistiquePromise;
+  upsertStatistique: (args: {
+    where: StatistiqueWhereUniqueInput;
+    create: StatistiqueCreateInput;
+    update: StatistiqueUpdateInput;
+  }) => StatistiquePromise;
+  deleteStatistique: (where: StatistiqueWhereUniqueInput) => StatistiquePromise;
+  deleteManyStatistiques: (
+    where?: StatistiqueWhereInput
+  ) => BatchPayloadPromise;
   createTmpUser: (data: TmpUserCreateInput) => TmpUserPromise;
   updateTmpUser: (args: {
     data: TmpUserUpdateInput;
@@ -507,6 +579,9 @@ export interface Subscription {
   comment: (
     where?: CommentSubscriptionWhereInput
   ) => CommentSubscriptionPayloadSubscription;
+  connected: (
+    where?: ConnectedSubscriptionWhereInput
+  ) => ConnectedSubscriptionPayloadSubscription;
   conversation: (
     where?: ConversationSubscriptionWhereInput
   ) => ConversationSubscriptionPayloadSubscription;
@@ -525,6 +600,9 @@ export interface Subscription {
   report: (
     where?: ReportSubscriptionWhereInput
   ) => ReportSubscriptionPayloadSubscription;
+  statistique: (
+    where?: StatistiqueSubscriptionWhereInput
+  ) => StatistiqueSubscriptionPayloadSubscription;
   tmpUser: (
     where?: TmpUserSubscriptionWhereInput
   ) => TmpUserSubscriptionPayloadSubscription;
@@ -544,11 +622,53 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type MailStatus = "HEALTHY" | "BLOCKED";
-
-export type Theme = "LIGHT" | "DARK";
-
 export type GenderFilter = "MALE" | "FEMALE" | "ALL";
+
+export type DebateType = "STANDARD" | "DUO" | "MUDDLE";
+
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "firstname_ASC"
+  | "firstname_DESC"
+  | "lastname_ASC"
+  | "lastname_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "password_ASC"
+  | "password_DESC"
+  | "birthdate_ASC"
+  | "birthdate_DESC"
+  | "role_ASC"
+  | "role_DESC"
+  | "certified_ASC"
+  | "certified_DESC"
+  | "gender_ASC"
+  | "gender_DESC"
+  | "profilePicture_ASC"
+  | "profilePicture_DESC"
+  | "coverPicture_ASC"
+  | "coverPicture_DESC"
+  | "bio_ASC"
+  | "bio_DESC"
+  | "language_ASC"
+  | "language_DESC"
+  | "theme_ASC"
+  | "theme_DESC"
+  | "crowned_ASC"
+  | "crowned_DESC"
+  | "crownedDate_ASC"
+  | "crownedDate_DESC"
+  | "private_ASC"
+  | "private_DESC"
+  | "lastConnected_ASC"
+  | "lastConnected_DESC"
+  | "mailStatus_ASC"
+  | "mailStatus_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type TmpUserOrderByInput =
   | "id_ASC"
@@ -572,18 +692,6 @@ export type TmpUserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type TrophyType = "DUO" | "TOP_COMMENT";
-
-export type ConversationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "deleted_ASC"
-  | "deleted_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type AdTargetOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -600,17 +708,37 @@ export type AdTargetOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type NotificationOrderByInput =
+export type ConnectedOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "userId_ASC"
-  | "userId_DESC"
+  | "date_ASC"
+  | "date_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type MailStatus = "HEALTHY" | "BLOCKED";
+
+export type ConversationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "deleted_ASC"
+  | "deleted_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type TrophyType = "DUO" | "TOP_COMMENT";
+
+export type TrophyOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "won_ASC"
+  | "won_DESC"
   | "type_ASC"
   | "type_DESC"
-  | "status_ASC"
-  | "status_DESC"
-  | "new_ASC"
-  | "new_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -673,49 +801,7 @@ export type InteractionType =
   | "BLUE_VOTE"
   | "RED_VOTE";
 
-export type UserOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "firstname_ASC"
-  | "firstname_DESC"
-  | "lastname_ASC"
-  | "lastname_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "birthdate_ASC"
-  | "birthdate_DESC"
-  | "role_ASC"
-  | "role_DESC"
-  | "certified_ASC"
-  | "certified_DESC"
-  | "gender_ASC"
-  | "gender_DESC"
-  | "profilePicture_ASC"
-  | "profilePicture_DESC"
-  | "coverPicture_ASC"
-  | "coverPicture_DESC"
-  | "bio_ASC"
-  | "bio_DESC"
-  | "language_ASC"
-  | "language_DESC"
-  | "theme_ASC"
-  | "theme_DESC"
-  | "crowned_ASC"
-  | "crowned_DESC"
-  | "crownedDate_ASC"
-  | "crownedDate_DESC"
-  | "private_ASC"
-  | "private_DESC"
-  | "lastConnected_ASC"
-  | "lastConnected_DESC"
-  | "mailStatus_ASC"
-  | "mailStatus_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type ReportReason =
   | "INSULT"
@@ -738,7 +824,47 @@ export type MessageOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type Role = "STANDARD" | "MODERATOR" | "ADMIN" | "MUDDLE";
+
+export type NotificationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "userId_ASC"
+  | "userId_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "status_ASC"
+  | "status_DESC"
+  | "new_ASC"
+  | "new_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type ReportType = "DEBATE" | "COMMENT";
+
+export type Theme = "LIGHT" | "DARK";
+
+export type Language = "FR" | "EN";
+
+export type Gender = "MALE" | "FEMALE" | "NO_INDICATION";
+
+export type ReportOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "reason_ASC"
+  | "reason_DESC"
+  | "reasonText_ASC"
+  | "reasonText_DESC"
+  | "treated_ASC"
+  | "treated_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type AdOrderByInput =
   | "id_ASC"
@@ -764,43 +890,13 @@ export type AdOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type Language = "FR" | "EN";
-
-export type Gender = "MALE" | "FEMALE" | "NO_INDICATION";
-
-export type Role = "STANDARD" | "MODERATOR" | "ADMIN" | "MUDDLE";
-
-export type DebateType = "STANDARD" | "DUO" | "MUDDLE";
-
-export type ReportOrderByInput =
+export type StatistiqueOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "reason_ASC"
-  | "reason_DESC"
-  | "reasonText_ASC"
-  | "reasonText_DESC"
-  | "treated_ASC"
-  | "treated_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
-
-export type TrophyOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "won_ASC"
-  | "won_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type DebateOrderByInput =
   | "id_ASC"
@@ -829,6 +925,1297 @@ export type DebateOrderByInput =
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
+
+export interface DebateUpdateWithoutOwnerBlueDataInput {
+  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
+  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export type AdWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface DebateWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  owner?: Maybe<UserWhereInput>;
+  ownerBlue?: Maybe<UserWhereInput>;
+  ownerRed?: Maybe<UserWhereInput>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimit_not?: Maybe<DateTimeInput>;
+  timelimit_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timelimit_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timelimit_lt?: Maybe<DateTimeInput>;
+  timelimit_lte?: Maybe<DateTimeInput>;
+  timelimit_gt?: Maybe<DateTimeInput>;
+  timelimit_gte?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  timelimitString_not?: Maybe<String>;
+  timelimitString_in?: Maybe<String[] | String>;
+  timelimitString_not_in?: Maybe<String[] | String>;
+  timelimitString_lt?: Maybe<String>;
+  timelimitString_lte?: Maybe<String>;
+  timelimitString_gt?: Maybe<String>;
+  timelimitString_gte?: Maybe<String>;
+  timelimitString_contains?: Maybe<String>;
+  timelimitString_not_contains?: Maybe<String>;
+  timelimitString_starts_with?: Maybe<String>;
+  timelimitString_not_starts_with?: Maybe<String>;
+  timelimitString_ends_with?: Maybe<String>;
+  timelimitString_not_ends_with?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  type_not?: Maybe<DebateType>;
+  type_in?: Maybe<DebateType[] | DebateType>;
+  type_not_in?: Maybe<DebateType[] | DebateType>;
+  comments_some?: Maybe<CommentWhereInput>;
+  topComment?: Maybe<CommentWhereInput>;
+  reports_some?: Maybe<ReportWhereInput>;
+  positives_some?: Maybe<UserWhereInput>;
+  negatives_some?: Maybe<UserWhereInput>;
+  redVotes_some?: Maybe<UserWhereInput>;
+  blueVotes_some?: Maybe<UserWhereInput>;
+  winner?: Maybe<UserWhereInput>;
+  loser?: Maybe<UserWhereInput>;
+  closed?: Maybe<Boolean>;
+  closed_not?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  crowned_not?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  interactions_some?: Maybe<InteractionWhereInput>;
+  answerOne?: Maybe<String>;
+  answerOne_not?: Maybe<String>;
+  answerOne_in?: Maybe<String[] | String>;
+  answerOne_not_in?: Maybe<String[] | String>;
+  answerOne_lt?: Maybe<String>;
+  answerOne_lte?: Maybe<String>;
+  answerOne_gt?: Maybe<String>;
+  answerOne_gte?: Maybe<String>;
+  answerOne_contains?: Maybe<String>;
+  answerOne_not_contains?: Maybe<String>;
+  answerOne_starts_with?: Maybe<String>;
+  answerOne_not_starts_with?: Maybe<String>;
+  answerOne_ends_with?: Maybe<String>;
+  answerOne_not_ends_with?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  answerTwo_not?: Maybe<String>;
+  answerTwo_in?: Maybe<String[] | String>;
+  answerTwo_not_in?: Maybe<String[] | String>;
+  answerTwo_lt?: Maybe<String>;
+  answerTwo_lte?: Maybe<String>;
+  answerTwo_gt?: Maybe<String>;
+  answerTwo_gte?: Maybe<String>;
+  answerTwo_contains?: Maybe<String>;
+  answerTwo_not_contains?: Maybe<String>;
+  answerTwo_starts_with?: Maybe<String>;
+  answerTwo_not_starts_with?: Maybe<String>;
+  answerTwo_ends_with?: Maybe<String>;
+  answerTwo_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<DebateWhereInput[] | DebateWhereInput>;
+}
+
+export interface UserUpdateManyDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface ReportWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  from?: Maybe<UserWhereInput>;
+  to?: Maybe<UserWhereInput>;
+  type?: Maybe<ReportType>;
+  type_not?: Maybe<ReportType>;
+  type_in?: Maybe<ReportType[] | ReportType>;
+  type_not_in?: Maybe<ReportType[] | ReportType>;
+  reason?: Maybe<ReportReason>;
+  reason_not?: Maybe<ReportReason>;
+  reason_in?: Maybe<ReportReason[] | ReportReason>;
+  reason_not_in?: Maybe<ReportReason[] | ReportReason>;
+  reasonText?: Maybe<String>;
+  reasonText_not?: Maybe<String>;
+  reasonText_in?: Maybe<String[] | String>;
+  reasonText_not_in?: Maybe<String[] | String>;
+  reasonText_lt?: Maybe<String>;
+  reasonText_lte?: Maybe<String>;
+  reasonText_gt?: Maybe<String>;
+  reasonText_gte?: Maybe<String>;
+  reasonText_contains?: Maybe<String>;
+  reasonText_not_contains?: Maybe<String>;
+  reasonText_starts_with?: Maybe<String>;
+  reasonText_not_starts_with?: Maybe<String>;
+  reasonText_ends_with?: Maybe<String>;
+  reasonText_not_ends_with?: Maybe<String>;
+  debate?: Maybe<DebateWhereInput>;
+  comment?: Maybe<CommentWhereInput>;
+  treated?: Maybe<Boolean>;
+  treated_not?: Maybe<Boolean>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ReportWhereInput[] | ReportWhereInput>;
+}
+
+export interface DebateCreateWithoutInteractionsInput {
+  id?: Maybe<ID_Input>;
+  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
+  content: String;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type: DebateType;
+  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentCreateOneInput>;
+  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
+  positives?: Maybe<UserCreateManyInput>;
+  negatives?: Maybe<UserCreateManyInput>;
+  redVotes?: Maybe<UserCreateManyInput>;
+  blueVotes?: Maybe<UserCreateManyInput>;
+  winner?: Maybe<UserCreateOneInput>;
+  loser?: Maybe<UserCreateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface ConversationUpdateManyMutationInput {
+  deleted?: Maybe<String>;
+}
+
+export interface CommentUpdateInput {
+  from?: Maybe<UserUpdateOneRequiredInput>;
+  content?: Maybe<String>;
+  likes?: Maybe<UserUpdateManyInput>;
+  dislikes?: Maybe<UserUpdateManyInput>;
+  reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
+  debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
+  comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
+}
+
+export interface UserUpdatemailErrorsInput {
+  set?: Maybe<Int[] | Int>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface NotificationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  who_some?: Maybe<UserWhereInput>;
+  userId?: Maybe<String>;
+  userId_not?: Maybe<String>;
+  userId_in?: Maybe<String[] | String>;
+  userId_not_in?: Maybe<String[] | String>;
+  userId_lt?: Maybe<String>;
+  userId_lte?: Maybe<String>;
+  userId_gt?: Maybe<String>;
+  userId_gte?: Maybe<String>;
+  userId_contains?: Maybe<String>;
+  userId_not_contains?: Maybe<String>;
+  userId_starts_with?: Maybe<String>;
+  userId_not_starts_with?: Maybe<String>;
+  userId_ends_with?: Maybe<String>;
+  userId_not_ends_with?: Maybe<String>;
+  type?: Maybe<NotificationType>;
+  type_not?: Maybe<NotificationType>;
+  type_in?: Maybe<NotificationType[] | NotificationType>;
+  type_not_in?: Maybe<NotificationType[] | NotificationType>;
+  status?: Maybe<NotificationStatus>;
+  status_not?: Maybe<NotificationStatus>;
+  status_in?: Maybe<NotificationStatus[] | NotificationStatus>;
+  status_not_in?: Maybe<NotificationStatus[] | NotificationStatus>;
+  new?: Maybe<Boolean>;
+  new_not?: Maybe<Boolean>;
+  debate?: Maybe<DebateWhereInput>;
+  comment?: Maybe<CommentWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<NotificationWhereInput[] | NotificationWhereInput>;
+}
+
+export interface UserUpdateDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface TrophySubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TrophyWhereInput>;
+  AND?: Maybe<TrophySubscriptionWhereInput[] | TrophySubscriptionWhereInput>;
+}
+
+export interface UserUpdateManyWithoutFollowingInput {
+  create?: Maybe<
+    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutFollowingInput[]
+    | UserUpdateWithWhereUniqueWithoutFollowingInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutFollowingInput[]
+    | UserUpsertWithWhereUniqueWithoutFollowingInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface TmpUserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TmpUserWhereInput>;
+  AND?: Maybe<TmpUserSubscriptionWhereInput[] | TmpUserSubscriptionWhereInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutFollowingDataInput;
+}
+
+export interface MessageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
+  to?: Maybe<UserWhereInput>;
+  from?: Maybe<UserWhereInput>;
+  read?: Maybe<Boolean>;
+  read_not?: Maybe<Boolean>;
+  conversation?: Maybe<ConversationWhereInput>;
+  deleted?: Maybe<String>;
+  deleted_not?: Maybe<String>;
+  deleted_in?: Maybe<String[] | String>;
+  deleted_not_in?: Maybe<String[] | String>;
+  deleted_lt?: Maybe<String>;
+  deleted_lte?: Maybe<String>;
+  deleted_gt?: Maybe<String>;
+  deleted_gte?: Maybe<String>;
+  deleted_contains?: Maybe<String>;
+  deleted_not_contains?: Maybe<String>;
+  deleted_starts_with?: Maybe<String>;
+  deleted_not_starts_with?: Maybe<String>;
+  deleted_ends_with?: Maybe<String>;
+  deleted_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<MessageWhereInput[] | MessageWhereInput>;
+}
+
+export interface UserUpdateWithoutFollowingDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface AdTargetWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  gender?: Maybe<GenderFilter>;
+  gender_not?: Maybe<GenderFilter>;
+  gender_in?: Maybe<GenderFilter[] | GenderFilter>;
+  gender_not_in?: Maybe<GenderFilter[] | GenderFilter>;
+  birthdateMin?: Maybe<DateTimeInput>;
+  birthdateMin_not?: Maybe<DateTimeInput>;
+  birthdateMin_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdateMin_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdateMin_lt?: Maybe<DateTimeInput>;
+  birthdateMin_lte?: Maybe<DateTimeInput>;
+  birthdateMin_gt?: Maybe<DateTimeInput>;
+  birthdateMin_gte?: Maybe<DateTimeInput>;
+  birthdateMax?: Maybe<DateTimeInput>;
+  birthdateMax_not?: Maybe<DateTimeInput>;
+  birthdateMax_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdateMax_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdateMax_lt?: Maybe<DateTimeInput>;
+  birthdateMax_lte?: Maybe<DateTimeInput>;
+  birthdateMax_gt?: Maybe<DateTimeInput>;
+  birthdateMax_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<AdTargetWhereInput[] | AdTargetWhereInput>;
+}
+
+export interface UserUpdateManyWithoutBlockingInput {
+  create?: Maybe<
+    UserCreateWithoutBlockingInput[] | UserCreateWithoutBlockingInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutBlockingInput[]
+    | UserUpdateWithWhereUniqueWithoutBlockingInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutBlockingInput[]
+    | UserUpsertWithWhereUniqueWithoutBlockingInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface NotificationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<NotificationWhereInput>;
+  AND?: Maybe<
+    NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
+  >;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutBlockingInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutBlockingDataInput;
+}
+
+export interface MessageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MessageWhereInput>;
+  AND?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
+}
+
+export interface UserUpdateWithoutBlockingDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface DebateSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DebateWhereInput>;
+  AND?: Maybe<DebateSubscriptionWhereInput[] | DebateSubscriptionWhereInput>;
+}
+
+export interface UserUpdateManyWithoutFollowersInput {
+  create?: Maybe<
+    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutFollowersInput[]
+    | UserUpdateWithWhereUniqueWithoutFollowersInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutFollowersInput[]
+    | UserUpsertWithWhereUniqueWithoutFollowersInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ConnectedSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ConnectedWhereInput>;
+  AND?: Maybe<
+    ConnectedSubscriptionWhereInput[] | ConnectedSubscriptionWhereInput
+  >;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutFollowersDataInput;
+}
+
+export interface AdTargetSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<AdTargetWhereInput>;
+  AND?: Maybe<
+    AdTargetSubscriptionWhereInput[] | AdTargetSubscriptionWhereInput
+  >;
+}
+
+export interface UserUpdateWithoutFollowersDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface AdWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  company?: Maybe<String>;
+  company_not?: Maybe<String>;
+  company_in?: Maybe<String[] | String>;
+  company_not_in?: Maybe<String[] | String>;
+  company_lt?: Maybe<String>;
+  company_lte?: Maybe<String>;
+  company_gt?: Maybe<String>;
+  company_gte?: Maybe<String>;
+  company_contains?: Maybe<String>;
+  company_not_contains?: Maybe<String>;
+  company_starts_with?: Maybe<String>;
+  company_not_starts_with?: Maybe<String>;
+  company_ends_with?: Maybe<String>;
+  company_not_ends_with?: Maybe<String>;
+  companyIcon?: Maybe<String>;
+  companyIcon_not?: Maybe<String>;
+  companyIcon_in?: Maybe<String[] | String>;
+  companyIcon_not_in?: Maybe<String[] | String>;
+  companyIcon_lt?: Maybe<String>;
+  companyIcon_lte?: Maybe<String>;
+  companyIcon_gt?: Maybe<String>;
+  companyIcon_gte?: Maybe<String>;
+  companyIcon_contains?: Maybe<String>;
+  companyIcon_not_contains?: Maybe<String>;
+  companyIcon_starts_with?: Maybe<String>;
+  companyIcon_not_starts_with?: Maybe<String>;
+  companyIcon_ends_with?: Maybe<String>;
+  companyIcon_not_ends_with?: Maybe<String>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
+  link?: Maybe<String>;
+  link_not?: Maybe<String>;
+  link_in?: Maybe<String[] | String>;
+  link_not_in?: Maybe<String[] | String>;
+  link_lt?: Maybe<String>;
+  link_lte?: Maybe<String>;
+  link_gt?: Maybe<String>;
+  link_gte?: Maybe<String>;
+  link_contains?: Maybe<String>;
+  link_not_contains?: Maybe<String>;
+  link_starts_with?: Maybe<String>;
+  link_not_starts_with?: Maybe<String>;
+  link_ends_with?: Maybe<String>;
+  link_not_ends_with?: Maybe<String>;
+  active?: Maybe<Boolean>;
+  active_not?: Maybe<Boolean>;
+  ratio?: Maybe<Int>;
+  ratio_not?: Maybe<Int>;
+  ratio_in?: Maybe<Int[] | Int>;
+  ratio_not_in?: Maybe<Int[] | Int>;
+  ratio_lt?: Maybe<Int>;
+  ratio_lte?: Maybe<Int>;
+  ratio_gt?: Maybe<Int>;
+  ratio_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<AdWhereInput[] | AdWhereInput>;
+}
+
+export interface UserUpdateManyWithoutBlockedInput {
+  create?: Maybe<
+    UserCreateWithoutBlockedInput[] | UserCreateWithoutBlockedInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutBlockedInput[]
+    | UserUpdateWithWhereUniqueWithoutBlockedInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutBlockedInput[]
+    | UserUpsertWithWhereUniqueWithoutBlockedInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface UserUpdateInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutBlockedInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutBlockedDataInput;
+}
+
+export interface UserUpsertWithoutTrophiesInput {
+  update: UserUpdateWithoutTrophiesDataInput;
+  create: UserCreateWithoutTrophiesInput;
+}
+
+export interface UserUpdateWithoutBlockedDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutTrophiesInput {
+  create?: Maybe<UserCreateWithoutTrophiesInput>;
+  update?: Maybe<UserUpdateWithoutTrophiesDataInput>;
+  upsert?: Maybe<UserUpsertWithoutTrophiesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface DebateUpdateManyWithoutOwnerInput {
+  create?: Maybe<
+    DebateCreateWithoutOwnerInput[] | DebateCreateWithoutOwnerInput
+  >;
+  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  update?: Maybe<
+    | DebateUpdateWithWhereUniqueWithoutOwnerInput[]
+    | DebateUpdateWithWhereUniqueWithoutOwnerInput
+  >;
+  upsert?: Maybe<
+    | DebateUpsertWithWhereUniqueWithoutOwnerInput[]
+    | DebateUpsertWithWhereUniqueWithoutOwnerInput
+  >;
+  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
+  updateMany?: Maybe<
+    | DebateUpdateManyWithWhereNestedInput[]
+    | DebateUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface TrophyUpdateInput {
+  user?: Maybe<UserUpdateOneRequiredWithoutTrophiesInput>;
+  won?: Maybe<Boolean>;
+  type?: Maybe<TrophyType>;
+  debate?: Maybe<DebateUpdateOneInput>;
+  comment?: Maybe<CommentUpdateOneInput>;
+}
+
+export interface DebateUpdateWithWhereUniqueWithoutOwnerInput {
+  where: DebateWhereUniqueInput;
+  data: DebateUpdateWithoutOwnerDataInput;
+}
+
+export interface UserCreateWithoutTrophiesInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface DebateUpdateWithoutOwnerDataInput {
+  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface TrophyCreateInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneWithoutTrophiesInput;
+  won: Boolean;
+  type?: Maybe<TrophyType>;
+  debate?: Maybe<DebateCreateOneInput>;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface UserUpdateOneWithoutDebatesBlueInput {
+  create?: Maybe<UserCreateWithoutDebatesBlueInput>;
+  update?: Maybe<UserUpdateWithoutDebatesBlueDataInput>;
+  upsert?: Maybe<UserUpsertWithoutDebatesBlueInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export type ConversationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserUpdateWithoutDebatesBlueDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface TmpUserCreateInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  gender?: Maybe<Gender>;
+}
+
+export interface DebateUpdateManyWithoutOwnerRedInput {
+  create?: Maybe<
+    DebateCreateWithoutOwnerRedInput[] | DebateCreateWithoutOwnerRedInput
+  >;
+  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  update?: Maybe<
+    | DebateUpdateWithWhereUniqueWithoutOwnerRedInput[]
+    | DebateUpdateWithWhereUniqueWithoutOwnerRedInput
+  >;
+  upsert?: Maybe<
+    | DebateUpsertWithWhereUniqueWithoutOwnerRedInput[]
+    | DebateUpsertWithWhereUniqueWithoutOwnerRedInput
+  >;
+  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
+  updateMany?: Maybe<
+    | DebateUpdateManyWithWhereNestedInput[]
+    | DebateUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type DebateWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface DebateUpdateWithWhereUniqueWithoutOwnerRedInput {
+  where: DebateWhereUniqueInput;
+  data: DebateUpdateWithoutOwnerRedDataInput;
+}
+
+export interface ConnectedScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ConnectedScalarWhereInput[] | ConnectedScalarWhereInput>;
+  OR?: Maybe<ConnectedScalarWhereInput[] | ConnectedScalarWhereInput>;
+  NOT?: Maybe<ConnectedScalarWhereInput[] | ConnectedScalarWhereInput>;
+}
+
+export interface DebateUpdateWithoutOwnerRedDataInput {
+  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export type InteractionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserUpdateOneWithoutDebatesInput {
+  create?: Maybe<UserCreateWithoutDebatesInput>;
+  update?: Maybe<UserUpdateWithoutDebatesDataInput>;
+  upsert?: Maybe<UserUpsertWithoutDebatesInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface ConnectedUpdateWithWhereUniqueNestedInput {
+  where: ConnectedWhereUniqueInput;
+  data: ConnectedUpdateDataInput;
+}
 
 export interface UserUpdateWithoutDebatesDataInput {
   firstname?: Maybe<String>;
@@ -862,9 +2249,331 @@ export interface UserUpdateWithoutDebatesDataInput {
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
 }
 
-export type AdWhereUniqueInput = AtLeastOne<{
+export type MessageWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  name?: Maybe<String>;
+}>;
+
+export interface DebateUpdateManyWithoutOwnerBlueInput {
+  create?: Maybe<
+    DebateCreateWithoutOwnerBlueInput[] | DebateCreateWithoutOwnerBlueInput
+  >;
+  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  update?: Maybe<
+    | DebateUpdateWithWhereUniqueWithoutOwnerBlueInput[]
+    | DebateUpdateWithWhereUniqueWithoutOwnerBlueInput
+  >;
+  upsert?: Maybe<
+    | DebateUpsertWithWhereUniqueWithoutOwnerBlueInput[]
+    | DebateUpsertWithWhereUniqueWithoutOwnerBlueInput
+  >;
+  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
+  updateMany?: Maybe<
+    | DebateUpdateManyWithWhereNestedInput[]
+    | DebateUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ConnectedCreateManyInput {
+  create?: Maybe<ConnectedCreateInput[] | ConnectedCreateInput>;
+  connect?: Maybe<ConnectedWhereUniqueInput[] | ConnectedWhereUniqueInput>;
+}
+
+export interface DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
+  where: DebateWhereUniqueInput;
+  data: DebateUpdateWithoutOwnerBlueDataInput;
+}
+
+export type NotificationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface DebateUpdateInput {
+  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface ReportUpdateInput {
+  from?: Maybe<UserUpdateOneInput>;
+  to?: Maybe<UserUpdateOneInput>;
+  type?: Maybe<ReportType>;
+  reason?: Maybe<ReportReason>;
+  reasonText?: Maybe<String>;
+  debate?: Maybe<DebateUpdateOneWithoutReportsInput>;
+  comment?: Maybe<CommentUpdateOneWithoutReportsInput>;
+  treated?: Maybe<Boolean>;
+}
+
+export interface UserUpdateOneWithoutDebatesRedInput {
+  create?: Maybe<UserCreateWithoutDebatesRedInput>;
+  update?: Maybe<UserUpdateWithoutDebatesRedDataInput>;
+  upsert?: Maybe<UserUpsertWithoutDebatesRedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export type ReportWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserUpdateWithoutDebatesRedDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutNotificationsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutNotificationsDataInput;
+  create: UserCreateWithoutNotificationsInput;
+}
+
+export interface NotificationUpdateManyWithoutWhoInput {
+  create?: Maybe<
+    NotificationCreateWithoutWhoInput[] | NotificationCreateWithoutWhoInput
+  >;
+  delete?: Maybe<NotificationWhereUniqueInput[] | NotificationWhereUniqueInput>;
+  connect?: Maybe<
+    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  >;
+  set?: Maybe<NotificationWhereUniqueInput[] | NotificationWhereUniqueInput>;
+  disconnect?: Maybe<
+    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  >;
+  update?: Maybe<
+    | NotificationUpdateWithWhereUniqueWithoutWhoInput[]
+    | NotificationUpdateWithWhereUniqueWithoutWhoInput
+  >;
+  upsert?: Maybe<
+    | NotificationUpsertWithWhereUniqueWithoutWhoInput[]
+    | NotificationUpsertWithWhereUniqueWithoutWhoInput
+  >;
+  deleteMany?: Maybe<
+    NotificationScalarWhereInput[] | NotificationScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | NotificationUpdateManyWithWhereNestedInput[]
+    | NotificationUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type StatistiqueWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface NotificationUpdateWithWhereUniqueWithoutWhoInput {
+  where: NotificationWhereUniqueInput;
+  data: NotificationUpdateWithoutWhoDataInput;
+}
+
+export interface StatistiqueWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  connected_some?: Maybe<ConnectedWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<StatistiqueWhereInput[] | StatistiqueWhereInput>;
+}
+
+export interface NotificationUpdateWithoutWhoDataInput {
+  userId?: Maybe<String>;
+  type?: Maybe<NotificationType>;
+  status?: Maybe<NotificationStatus>;
+  new?: Maybe<Boolean>;
+  debate?: Maybe<DebateUpdateOneInput>;
+  comment?: Maybe<CommentUpdateOneInput>;
+}
+
+export interface NotificationUpdateInput {
+  who?: Maybe<UserUpdateManyWithoutNotificationsInput>;
+  userId?: Maybe<String>;
+  type?: Maybe<NotificationType>;
+  status?: Maybe<NotificationStatus>;
+  new?: Maybe<Boolean>;
+  debate?: Maybe<DebateUpdateOneInput>;
+  comment?: Maybe<CommentUpdateOneInput>;
+}
+
+export interface DebateUpdateOneInput {
+  create?: Maybe<DebateCreateInput>;
+  update?: Maybe<DebateUpdateDataInput>;
+  upsert?: Maybe<DebateUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<DebateWhereUniqueInput>;
+}
+
+export interface UserCreateManyWithoutNotificationsInput {
+  create?: Maybe<
+    UserCreateWithoutNotificationsInput[] | UserCreateWithoutNotificationsInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface DebateUpdateDataInput {
+  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface NotificationCreateInput {
+  id?: Maybe<ID_Input>;
+  who?: Maybe<UserCreateManyWithoutNotificationsInput>;
+  userId: String;
+  type: NotificationType;
+  status: NotificationStatus;
+  new: Boolean;
+  debate?: Maybe<DebateCreateOneInput>;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface CommentUpdateManyWithoutDebateInput {
+  create?: Maybe<
+    CommentCreateWithoutDebateInput[] | CommentCreateWithoutDebateInput
+  >;
+  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  update?: Maybe<
+    | CommentUpdateWithWhereUniqueWithoutDebateInput[]
+    | CommentUpdateWithWhereUniqueWithoutDebateInput
+  >;
+  upsert?: Maybe<
+    | CommentUpsertWithWhereUniqueWithoutDebateInput[]
+    | CommentUpsertWithWhereUniqueWithoutDebateInput
+  >;
+  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+  updateMany?: Maybe<
+    | CommentUpdateManyWithWhereNestedInput[]
+    | CommentUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface MessageUpdateManyMutationInput {
+  content?: Maybe<String>;
+  read?: Maybe<Boolean>;
+  deleted?: Maybe<String>;
+}
+
+export interface CommentUpdateWithWhereUniqueWithoutDebateInput {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutDebateDataInput;
+}
+
+export interface ConversationUpdateWithoutMessagesDataInput {
+  speakers?: Maybe<UserUpdateManyWithoutConversationsInput>;
+  deleted?: Maybe<String>;
+}
+
+export interface CommentUpdateWithoutDebateDataInput {
+  from?: Maybe<UserUpdateOneRequiredInput>;
+  content?: Maybe<String>;
+  likes?: Maybe<UserUpdateManyInput>;
+  dislikes?: Maybe<UserUpdateManyInput>;
+  reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
+  comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
+}
+
+export type TrophyWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
 }>;
 
 export interface UserUpdateManyInput {
@@ -885,6 +2594,291 @@ export interface UserUpdateManyInput {
   updateMany?: Maybe<
     UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
   >;
+}
+
+export interface ConversationCreateWithoutMessagesInput {
+  id?: Maybe<ID_Input>;
+  speakers?: Maybe<UserCreateManyWithoutConversationsInput>;
+  deleted?: Maybe<String>;
+}
+
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateDataInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface InteractionUpdateManyMutationInput {
+  type?: Maybe<InteractionType>;
+}
+
+export interface UserScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  firstname?: Maybe<String>;
+  firstname_not?: Maybe<String>;
+  firstname_in?: Maybe<String[] | String>;
+  firstname_not_in?: Maybe<String[] | String>;
+  firstname_lt?: Maybe<String>;
+  firstname_lte?: Maybe<String>;
+  firstname_gt?: Maybe<String>;
+  firstname_gte?: Maybe<String>;
+  firstname_contains?: Maybe<String>;
+  firstname_not_contains?: Maybe<String>;
+  firstname_starts_with?: Maybe<String>;
+  firstname_not_starts_with?: Maybe<String>;
+  firstname_ends_with?: Maybe<String>;
+  firstname_not_ends_with?: Maybe<String>;
+  lastname?: Maybe<String>;
+  lastname_not?: Maybe<String>;
+  lastname_in?: Maybe<String[] | String>;
+  lastname_not_in?: Maybe<String[] | String>;
+  lastname_lt?: Maybe<String>;
+  lastname_lte?: Maybe<String>;
+  lastname_gt?: Maybe<String>;
+  lastname_gte?: Maybe<String>;
+  lastname_contains?: Maybe<String>;
+  lastname_not_contains?: Maybe<String>;
+  lastname_starts_with?: Maybe<String>;
+  lastname_not_starts_with?: Maybe<String>;
+  lastname_ends_with?: Maybe<String>;
+  lastname_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  birthdate_not?: Maybe<DateTimeInput>;
+  birthdate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthdate_lt?: Maybe<DateTimeInput>;
+  birthdate_lte?: Maybe<DateTimeInput>;
+  birthdate_gt?: Maybe<DateTimeInput>;
+  birthdate_gte?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  role_not?: Maybe<Role>;
+  role_in?: Maybe<Role[] | Role>;
+  role_not_in?: Maybe<Role[] | Role>;
+  certified?: Maybe<Boolean>;
+  certified_not?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  gender_not?: Maybe<Gender>;
+  gender_in?: Maybe<Gender[] | Gender>;
+  gender_not_in?: Maybe<Gender[] | Gender>;
+  profilePicture?: Maybe<String>;
+  profilePicture_not?: Maybe<String>;
+  profilePicture_in?: Maybe<String[] | String>;
+  profilePicture_not_in?: Maybe<String[] | String>;
+  profilePicture_lt?: Maybe<String>;
+  profilePicture_lte?: Maybe<String>;
+  profilePicture_gt?: Maybe<String>;
+  profilePicture_gte?: Maybe<String>;
+  profilePicture_contains?: Maybe<String>;
+  profilePicture_not_contains?: Maybe<String>;
+  profilePicture_starts_with?: Maybe<String>;
+  profilePicture_not_starts_with?: Maybe<String>;
+  profilePicture_ends_with?: Maybe<String>;
+  profilePicture_not_ends_with?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  coverPicture_not?: Maybe<String>;
+  coverPicture_in?: Maybe<String[] | String>;
+  coverPicture_not_in?: Maybe<String[] | String>;
+  coverPicture_lt?: Maybe<String>;
+  coverPicture_lte?: Maybe<String>;
+  coverPicture_gt?: Maybe<String>;
+  coverPicture_gte?: Maybe<String>;
+  coverPicture_contains?: Maybe<String>;
+  coverPicture_not_contains?: Maybe<String>;
+  coverPicture_starts_with?: Maybe<String>;
+  coverPicture_not_starts_with?: Maybe<String>;
+  coverPicture_ends_with?: Maybe<String>;
+  coverPicture_not_ends_with?: Maybe<String>;
+  bio?: Maybe<String>;
+  bio_not?: Maybe<String>;
+  bio_in?: Maybe<String[] | String>;
+  bio_not_in?: Maybe<String[] | String>;
+  bio_lt?: Maybe<String>;
+  bio_lte?: Maybe<String>;
+  bio_gt?: Maybe<String>;
+  bio_gte?: Maybe<String>;
+  bio_contains?: Maybe<String>;
+  bio_not_contains?: Maybe<String>;
+  bio_starts_with?: Maybe<String>;
+  bio_not_starts_with?: Maybe<String>;
+  bio_ends_with?: Maybe<String>;
+  bio_not_ends_with?: Maybe<String>;
+  language?: Maybe<Language>;
+  language_not?: Maybe<Language>;
+  language_in?: Maybe<Language[] | Language>;
+  language_not_in?: Maybe<Language[] | Language>;
+  theme?: Maybe<Theme>;
+  theme_not?: Maybe<Theme>;
+  theme_in?: Maybe<Theme[] | Theme>;
+  theme_not_in?: Maybe<Theme[] | Theme>;
+  crowned?: Maybe<Boolean>;
+  crowned_not?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  crownedDate_not?: Maybe<DateTimeInput>;
+  crownedDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  crownedDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  crownedDate_lt?: Maybe<DateTimeInput>;
+  crownedDate_lte?: Maybe<DateTimeInput>;
+  crownedDate_gt?: Maybe<DateTimeInput>;
+  crownedDate_gte?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  private_not?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  lastConnected_not?: Maybe<DateTimeInput>;
+  lastConnected_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  lastConnected_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  lastConnected_lt?: Maybe<DateTimeInput>;
+  lastConnected_lte?: Maybe<DateTimeInput>;
+  lastConnected_gt?: Maybe<DateTimeInput>;
+  lastConnected_gte?: Maybe<DateTimeInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailStatus_not?: Maybe<MailStatus>;
+  mailStatus_in?: Maybe<MailStatus[] | MailStatus>;
+  mailStatus_not_in?: Maybe<MailStatus[] | MailStatus>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  OR?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+}
+
+export interface AdUpdateInput {
+  name?: Maybe<String>;
+  company?: Maybe<String>;
+  companyIcon?: Maybe<String>;
+  content?: Maybe<String>;
+  image?: Maybe<String>;
+  link?: Maybe<String>;
+  active?: Maybe<Boolean>;
+  ratio?: Maybe<Int>;
+}
+
+export interface CommentWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  from?: Maybe<UserWhereInput>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
+  likes_some?: Maybe<UserWhereInput>;
+  dislikes_some?: Maybe<UserWhereInput>;
+  reports_some?: Maybe<ReportWhereInput>;
+  debate?: Maybe<DebateWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  comments_some?: Maybe<CommentWhereInput>;
+  nested?: Maybe<Boolean>;
+  nested_not?: Maybe<Boolean>;
+  AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+}
+
+export interface InteractionCreateInput {
+  id?: Maybe<ID_Input>;
+  type: InteractionType;
+  who: UserCreateOneWithoutInteractionsInput;
+  debate?: Maybe<DebateCreateOneWithoutInteractionsInput>;
+  comment?: Maybe<CommentCreateOneInput>;
 }
 
 export interface UserWhereInput {
@@ -1080,113 +3074,12 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface CommentUpdateInput {
-  from?: Maybe<UserUpdateOneRequiredInput>;
-  content?: Maybe<String>;
-  likes?: Maybe<UserUpdateManyInput>;
-  dislikes?: Maybe<UserUpdateManyInput>;
-  reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
-  debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
-  comments?: Maybe<CommentUpdateManyInput>;
-  nested?: Maybe<Boolean>;
-}
-
-export interface UserUpdateManyWithoutConversationsInput {
-  create?: Maybe<
-    UserCreateWithoutConversationsInput[] | UserCreateWithoutConversationsInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutConversationsInput[]
-    | UserUpdateWithWhereUniqueWithoutConversationsInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutConversationsInput[]
-    | UserUpsertWithWhereUniqueWithoutConversationsInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
-}
-
-export interface UserUpdateDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface UserUpdateManyWithoutFollowingInput {
-  create?: Maybe<
-    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutFollowingInput[]
-    | UserUpdateWithWhereUniqueWithoutFollowingInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutFollowingInput[]
-    | UserUpsertWithWhereUniqueWithoutFollowingInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
+export interface AdTargetCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  gender?: Maybe<GenderFilter>;
+  birthdateMin: DateTimeInput;
+  birthdateMax: DateTimeInput;
 }
 
 export interface InteractionWhereInput {
@@ -1230,1729 +3123,11 @@ export interface InteractionWhereInput {
   AND?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
 }
 
-export interface UserUpdateWithWhereUniqueWithoutFollowingInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutFollowingDataInput;
-}
-
-export interface NotificationWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  who_some?: Maybe<UserWhereInput>;
-  userId?: Maybe<String>;
-  userId_not?: Maybe<String>;
-  userId_in?: Maybe<String[] | String>;
-  userId_not_in?: Maybe<String[] | String>;
-  userId_lt?: Maybe<String>;
-  userId_lte?: Maybe<String>;
-  userId_gt?: Maybe<String>;
-  userId_gte?: Maybe<String>;
-  userId_contains?: Maybe<String>;
-  userId_not_contains?: Maybe<String>;
-  userId_starts_with?: Maybe<String>;
-  userId_not_starts_with?: Maybe<String>;
-  userId_ends_with?: Maybe<String>;
-  userId_not_ends_with?: Maybe<String>;
-  type?: Maybe<NotificationType>;
-  type_not?: Maybe<NotificationType>;
-  type_in?: Maybe<NotificationType[] | NotificationType>;
-  type_not_in?: Maybe<NotificationType[] | NotificationType>;
-  status?: Maybe<NotificationStatus>;
-  status_not?: Maybe<NotificationStatus>;
-  status_in?: Maybe<NotificationStatus[] | NotificationStatus>;
-  status_not_in?: Maybe<NotificationStatus[] | NotificationStatus>;
-  new?: Maybe<Boolean>;
-  new_not?: Maybe<Boolean>;
-  debate?: Maybe<DebateWhereInput>;
-  comment?: Maybe<CommentWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<NotificationWhereInput[] | NotificationWhereInput>;
-}
-
-export interface UserUpdateWithoutFollowingDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface ReportSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ReportWhereInput>;
-  AND?: Maybe<ReportSubscriptionWhereInput[] | ReportSubscriptionWhereInput>;
-}
-
-export interface UserUpdateManyWithoutBlockingInput {
-  create?: Maybe<
-    UserCreateWithoutBlockingInput[] | UserCreateWithoutBlockingInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutBlockingInput[]
-    | UserUpdateWithWhereUniqueWithoutBlockingInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutBlockingInput[]
-    | UserUpsertWithWhereUniqueWithoutBlockingInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface AdTargetWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  gender?: Maybe<GenderFilter>;
-  gender_not?: Maybe<GenderFilter>;
-  gender_in?: Maybe<GenderFilter[] | GenderFilter>;
-  gender_not_in?: Maybe<GenderFilter[] | GenderFilter>;
-  birthdateMin?: Maybe<DateTimeInput>;
-  birthdateMin_not?: Maybe<DateTimeInput>;
-  birthdateMin_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdateMin_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdateMin_lt?: Maybe<DateTimeInput>;
-  birthdateMin_lte?: Maybe<DateTimeInput>;
-  birthdateMin_gt?: Maybe<DateTimeInput>;
-  birthdateMin_gte?: Maybe<DateTimeInput>;
-  birthdateMax?: Maybe<DateTimeInput>;
-  birthdateMax_not?: Maybe<DateTimeInput>;
-  birthdateMax_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdateMax_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdateMax_lt?: Maybe<DateTimeInput>;
-  birthdateMax_lte?: Maybe<DateTimeInput>;
-  birthdateMax_gt?: Maybe<DateTimeInput>;
-  birthdateMax_gte?: Maybe<DateTimeInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<AdTargetWhereInput[] | AdTargetWhereInput>;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutBlockingInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutBlockingDataInput;
-}
-
-export interface MessageWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
-  to?: Maybe<UserWhereInput>;
-  from?: Maybe<UserWhereInput>;
-  read?: Maybe<Boolean>;
-  read_not?: Maybe<Boolean>;
-  conversation?: Maybe<ConversationWhereInput>;
-  deleted?: Maybe<String>;
-  deleted_not?: Maybe<String>;
-  deleted_in?: Maybe<String[] | String>;
-  deleted_not_in?: Maybe<String[] | String>;
-  deleted_lt?: Maybe<String>;
-  deleted_lte?: Maybe<String>;
-  deleted_gt?: Maybe<String>;
-  deleted_gte?: Maybe<String>;
-  deleted_contains?: Maybe<String>;
-  deleted_not_contains?: Maybe<String>;
-  deleted_starts_with?: Maybe<String>;
-  deleted_not_starts_with?: Maybe<String>;
-  deleted_ends_with?: Maybe<String>;
-  deleted_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<MessageWhereInput[] | MessageWhereInput>;
-}
-
-export interface UserUpdateWithoutBlockingDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export type AdTargetWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  name?: Maybe<String>;
-}>;
-
-export interface UserUpdateManyWithoutFollowersInput {
-  create?: Maybe<
-    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutFollowersInput[]
-    | UserUpdateWithWhereUniqueWithoutFollowersInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutFollowersInput[]
-    | UserUpsertWithWhereUniqueWithoutFollowersInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface InteractionSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<InteractionWhereInput>;
-  AND?: Maybe<
-    InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
-  >;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutFollowersInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutFollowersDataInput;
-}
-
-export interface ConversationSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ConversationWhereInput>;
-  AND?: Maybe<
-    ConversationSubscriptionWhereInput[] | ConversationSubscriptionWhereInput
-  >;
-}
-
-export interface UserUpdateWithoutFollowersDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface AdTargetSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<AdTargetWhereInput>;
-  AND?: Maybe<
-    AdTargetSubscriptionWhereInput[] | AdTargetSubscriptionWhereInput
-  >;
-}
-
-export interface UserUpdateManyWithoutBlockedInput {
-  create?: Maybe<
-    UserCreateWithoutBlockedInput[] | UserCreateWithoutBlockedInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutBlockedInput[]
-    | UserUpdateWithWhereUniqueWithoutBlockedInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutBlockedInput[]
-    | UserUpsertWithWhereUniqueWithoutBlockedInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface AdWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  company?: Maybe<String>;
-  company_not?: Maybe<String>;
-  company_in?: Maybe<String[] | String>;
-  company_not_in?: Maybe<String[] | String>;
-  company_lt?: Maybe<String>;
-  company_lte?: Maybe<String>;
-  company_gt?: Maybe<String>;
-  company_gte?: Maybe<String>;
-  company_contains?: Maybe<String>;
-  company_not_contains?: Maybe<String>;
-  company_starts_with?: Maybe<String>;
-  company_not_starts_with?: Maybe<String>;
-  company_ends_with?: Maybe<String>;
-  company_not_ends_with?: Maybe<String>;
-  companyIcon?: Maybe<String>;
-  companyIcon_not?: Maybe<String>;
-  companyIcon_in?: Maybe<String[] | String>;
-  companyIcon_not_in?: Maybe<String[] | String>;
-  companyIcon_lt?: Maybe<String>;
-  companyIcon_lte?: Maybe<String>;
-  companyIcon_gt?: Maybe<String>;
-  companyIcon_gte?: Maybe<String>;
-  companyIcon_contains?: Maybe<String>;
-  companyIcon_not_contains?: Maybe<String>;
-  companyIcon_starts_with?: Maybe<String>;
-  companyIcon_not_starts_with?: Maybe<String>;
-  companyIcon_ends_with?: Maybe<String>;
-  companyIcon_not_ends_with?: Maybe<String>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
-  image?: Maybe<String>;
-  image_not?: Maybe<String>;
-  image_in?: Maybe<String[] | String>;
-  image_not_in?: Maybe<String[] | String>;
-  image_lt?: Maybe<String>;
-  image_lte?: Maybe<String>;
-  image_gt?: Maybe<String>;
-  image_gte?: Maybe<String>;
-  image_contains?: Maybe<String>;
-  image_not_contains?: Maybe<String>;
-  image_starts_with?: Maybe<String>;
-  image_not_starts_with?: Maybe<String>;
-  image_ends_with?: Maybe<String>;
-  image_not_ends_with?: Maybe<String>;
-  link?: Maybe<String>;
-  link_not?: Maybe<String>;
-  link_in?: Maybe<String[] | String>;
-  link_not_in?: Maybe<String[] | String>;
-  link_lt?: Maybe<String>;
-  link_lte?: Maybe<String>;
-  link_gt?: Maybe<String>;
-  link_gte?: Maybe<String>;
-  link_contains?: Maybe<String>;
-  link_not_contains?: Maybe<String>;
-  link_starts_with?: Maybe<String>;
-  link_not_starts_with?: Maybe<String>;
-  link_ends_with?: Maybe<String>;
-  link_not_ends_with?: Maybe<String>;
-  active?: Maybe<Boolean>;
-  active_not?: Maybe<Boolean>;
-  ratio?: Maybe<Int>;
-  ratio_not?: Maybe<Int>;
-  ratio_in?: Maybe<Int[] | Int>;
-  ratio_not_in?: Maybe<Int[] | Int>;
-  ratio_lt?: Maybe<Int>;
-  ratio_lte?: Maybe<Int>;
-  ratio_gt?: Maybe<Int>;
-  ratio_gte?: Maybe<Int>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<AdWhereInput[] | AdWhereInput>;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutBlockedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutBlockedDataInput;
-}
-
-export interface UserUpdateInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface UserUpdateWithoutBlockedDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface UserUpsertWithoutTrophiesInput {
-  update: UserUpdateWithoutTrophiesDataInput;
-  create: UserCreateWithoutTrophiesInput;
-}
-
-export interface DebateUpdateManyWithoutOwnerInput {
-  create?: Maybe<
-    DebateCreateWithoutOwnerInput[] | DebateCreateWithoutOwnerInput
-  >;
-  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  update?: Maybe<
-    | DebateUpdateWithWhereUniqueWithoutOwnerInput[]
-    | DebateUpdateWithWhereUniqueWithoutOwnerInput
-  >;
-  upsert?: Maybe<
-    | DebateUpsertWithWhereUniqueWithoutOwnerInput[]
-    | DebateUpsertWithWhereUniqueWithoutOwnerInput
-  >;
-  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
-  updateMany?: Maybe<
-    | DebateUpdateManyWithWhereNestedInput[]
-    | DebateUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpdateOneRequiredWithoutTrophiesInput {
-  create?: Maybe<UserCreateWithoutTrophiesInput>;
-  update?: Maybe<UserUpdateWithoutTrophiesDataInput>;
-  upsert?: Maybe<UserUpsertWithoutTrophiesInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface DebateUpdateWithWhereUniqueWithoutOwnerInput {
-  where: DebateWhereUniqueInput;
-  data: DebateUpdateWithoutOwnerDataInput;
-}
-
-export interface UserCreateWithoutTrophiesInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface DebateUpdateWithoutOwnerDataInput {
-  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface TrophyCreateInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneWithoutTrophiesInput;
-  won: Boolean;
-  type?: Maybe<TrophyType>;
-  debate?: Maybe<DebateCreateOneInput>;
-  comment?: Maybe<CommentCreateOneInput>;
-}
-
-export interface UserUpdateOneWithoutDebatesBlueInput {
-  create?: Maybe<UserCreateWithoutDebatesBlueInput>;
-  update?: Maybe<UserUpdateWithoutDebatesBlueDataInput>;
-  upsert?: Maybe<UserUpsertWithoutDebatesBlueInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface TmpUserUpdateManyMutationInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  gender?: Maybe<Gender>;
-}
-
-export interface UserUpdateWithoutDebatesBlueDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface TmpUserCreateInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  gender?: Maybe<Gender>;
-}
-
-export interface DebateUpdateManyWithoutOwnerRedInput {
-  create?: Maybe<
-    DebateCreateWithoutOwnerRedInput[] | DebateCreateWithoutOwnerRedInput
-  >;
-  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  update?: Maybe<
-    | DebateUpdateWithWhereUniqueWithoutOwnerRedInput[]
-    | DebateUpdateWithWhereUniqueWithoutOwnerRedInput
-  >;
-  upsert?: Maybe<
-    | DebateUpsertWithWhereUniqueWithoutOwnerRedInput[]
-    | DebateUpsertWithWhereUniqueWithoutOwnerRedInput
-  >;
-  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
-  updateMany?: Maybe<
-    | DebateUpdateManyWithWhereNestedInput[]
-    | DebateUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ReportUpdateManyMutationInput {
-  type?: Maybe<ReportType>;
-  reason?: Maybe<ReportReason>;
-  reasonText?: Maybe<String>;
-  treated?: Maybe<Boolean>;
-}
-
-export interface DebateUpdateWithWhereUniqueWithoutOwnerRedInput {
-  where: DebateWhereUniqueInput;
-  data: DebateUpdateWithoutOwnerRedDataInput;
-}
-
-export interface ReportCreateInput {
-  id?: Maybe<ID_Input>;
-  from?: Maybe<UserCreateOneInput>;
-  to?: Maybe<UserCreateOneInput>;
-  type: ReportType;
-  reason: ReportReason;
-  reasonText?: Maybe<String>;
-  debate?: Maybe<DebateCreateOneWithoutReportsInput>;
-  comment?: Maybe<CommentCreateOneWithoutReportsInput>;
-  treated?: Maybe<Boolean>;
-}
-
-export interface DebateUpdateWithoutOwnerRedDataInput {
-  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface NotificationUpdateManyMutationInput {
-  userId?: Maybe<String>;
-  type?: Maybe<NotificationType>;
-  status?: Maybe<NotificationStatus>;
-  new?: Maybe<Boolean>;
-}
-
-export interface UserUpdateOneWithoutDebatesInput {
-  create?: Maybe<UserCreateWithoutDebatesInput>;
-  update?: Maybe<UserUpdateWithoutDebatesDataInput>;
-  upsert?: Maybe<UserUpsertWithoutDebatesInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutNotificationsDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutConversationsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutConversationsDataInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutNotificationsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutNotificationsDataInput;
-}
-
-export interface DebateUpdateManyWithoutOwnerBlueInput {
-  create?: Maybe<
-    DebateCreateWithoutOwnerBlueInput[] | DebateCreateWithoutOwnerBlueInput
-  >;
-  delete?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  set?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  disconnect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
-  update?: Maybe<
-    | DebateUpdateWithWhereUniqueWithoutOwnerBlueInput[]
-    | DebateUpdateWithWhereUniqueWithoutOwnerBlueInput
-  >;
-  upsert?: Maybe<
-    | DebateUpsertWithWhereUniqueWithoutOwnerBlueInput[]
-    | DebateUpsertWithWhereUniqueWithoutOwnerBlueInput
-  >;
-  deleteMany?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
-  updateMany?: Maybe<
-    | DebateUpdateManyWithWhereNestedInput[]
-    | DebateUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface NotificationUpdateInput {
-  who?: Maybe<UserUpdateManyWithoutNotificationsInput>;
-  userId?: Maybe<String>;
-  type?: Maybe<NotificationType>;
-  status?: Maybe<NotificationStatus>;
-  new?: Maybe<Boolean>;
-  debate?: Maybe<DebateUpdateOneInput>;
-  comment?: Maybe<CommentUpdateOneInput>;
-}
-
-export interface DebateUpdateWithWhereUniqueWithoutOwnerBlueInput {
-  where: DebateWhereUniqueInput;
-  data: DebateUpdateWithoutOwnerBlueDataInput;
-}
-
-export interface UserCreateWithoutNotificationsInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface DebateUpdateWithoutOwnerBlueDataInput {
-  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
-  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface NotificationCreateInput {
-  id?: Maybe<ID_Input>;
-  who?: Maybe<UserCreateManyWithoutNotificationsInput>;
-  userId: String;
-  type: NotificationType;
-  status: NotificationStatus;
-  new: Boolean;
-  debate?: Maybe<DebateCreateOneInput>;
-  comment?: Maybe<CommentCreateOneInput>;
-}
-
-export interface UserUpdateOneWithoutDebatesRedInput {
-  create?: Maybe<UserCreateWithoutDebatesRedInput>;
-  update?: Maybe<UserUpdateWithoutDebatesRedDataInput>;
-  upsert?: Maybe<UserUpsertWithoutDebatesRedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface MessageUpdateManyMutationInput {
-  content?: Maybe<String>;
-  read?: Maybe<Boolean>;
-  deleted?: Maybe<String>;
-}
-
-export interface UserUpdateWithoutDebatesRedDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
-  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface ConversationUpdateWithoutMessagesDataInput {
-  speakers?: Maybe<UserUpdateManyWithoutConversationsInput>;
-  deleted?: Maybe<String>;
-}
-
-export interface NotificationUpdateManyWithoutWhoInput {
-  create?: Maybe<
-    NotificationCreateWithoutWhoInput[] | NotificationCreateWithoutWhoInput
-  >;
-  delete?: Maybe<NotificationWhereUniqueInput[] | NotificationWhereUniqueInput>;
-  connect?: Maybe<
-    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  >;
-  set?: Maybe<NotificationWhereUniqueInput[] | NotificationWhereUniqueInput>;
-  disconnect?: Maybe<
-    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  >;
-  update?: Maybe<
-    | NotificationUpdateWithWhereUniqueWithoutWhoInput[]
-    | NotificationUpdateWithWhereUniqueWithoutWhoInput
-  >;
-  upsert?: Maybe<
-    | NotificationUpsertWithWhereUniqueWithoutWhoInput[]
-    | NotificationUpsertWithWhereUniqueWithoutWhoInput
-  >;
-  deleteMany?: Maybe<
-    NotificationScalarWhereInput[] | NotificationScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | NotificationUpdateManyWithWhereNestedInput[]
-    | NotificationUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ConversationUpdateOneRequiredWithoutMessagesInput {
-  create?: Maybe<ConversationCreateWithoutMessagesInput>;
-  update?: Maybe<ConversationUpdateWithoutMessagesDataInput>;
-  upsert?: Maybe<ConversationUpsertWithoutMessagesInput>;
-  connect?: Maybe<ConversationWhereUniqueInput>;
-}
-
-export interface NotificationUpdateWithWhereUniqueWithoutWhoInput {
-  where: NotificationWhereUniqueInput;
-  data: NotificationUpdateWithoutWhoDataInput;
-}
-
-export interface MessageUpdateInput {
-  content?: Maybe<String>;
-  to?: Maybe<UserUpdateOneRequiredInput>;
-  from?: Maybe<UserUpdateOneRequiredInput>;
-  read?: Maybe<Boolean>;
-  conversation?: Maybe<ConversationUpdateOneRequiredWithoutMessagesInput>;
-  deleted?: Maybe<String>;
-}
-
-export interface NotificationUpdateWithoutWhoDataInput {
-  userId?: Maybe<String>;
-  type?: Maybe<NotificationType>;
-  status?: Maybe<NotificationStatus>;
-  new?: Maybe<Boolean>;
-  debate?: Maybe<DebateUpdateOneInput>;
-  comment?: Maybe<CommentUpdateOneInput>;
-}
-
-export interface ConversationCreateOneWithoutMessagesInput {
-  create?: Maybe<ConversationCreateWithoutMessagesInput>;
-  connect?: Maybe<ConversationWhereUniqueInput>;
-}
-
-export interface DebateUpdateOneInput {
-  create?: Maybe<DebateCreateInput>;
-  update?: Maybe<DebateUpdateDataInput>;
-  upsert?: Maybe<DebateUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<DebateWhereUniqueInput>;
-}
-
-export type TrophyWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface DebateUpdateDataInput {
-  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface InteractionUpdateInput {
-  type?: Maybe<InteractionType>;
-  who?: Maybe<UserUpdateOneRequiredWithoutInteractionsInput>;
-  debate?: Maybe<DebateUpdateOneWithoutInteractionsInput>;
-  comment?: Maybe<CommentUpdateOneInput>;
-}
-
-export interface CommentUpdateManyWithoutDebateInput {
-  create?: Maybe<
-    CommentCreateWithoutDebateInput[] | CommentCreateWithoutDebateInput
-  >;
-  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  update?: Maybe<
-    | CommentUpdateWithWhereUniqueWithoutDebateInput[]
-    | CommentUpdateWithWhereUniqueWithoutDebateInput
-  >;
-  upsert?: Maybe<
-    | CommentUpsertWithWhereUniqueWithoutDebateInput[]
-    | CommentUpsertWithWhereUniqueWithoutDebateInput
-  >;
-  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-  updateMany?: Maybe<
-    | CommentUpdateManyWithWhereNestedInput[]
-    | CommentUpdateManyWithWhereNestedInput
-  >;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface CommentUpdateWithWhereUniqueWithoutDebateInput {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateWithoutDebateDataInput;
-}
-
-export interface DebateUpdateInput {
-  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionUpdateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface CommentUpdateWithoutDebateDataInput {
-  from?: Maybe<UserUpdateOneRequiredInput>;
-  content?: Maybe<String>;
-  likes?: Maybe<UserUpdateManyInput>;
-  dislikes?: Maybe<UserUpdateManyInput>;
-  reports?: Maybe<ReportUpdateManyWithoutCommentInput>;
-  comments?: Maybe<CommentUpdateManyInput>;
-  nested?: Maybe<Boolean>;
-}
-
-export interface AdUpdateInput {
-  name?: Maybe<String>;
-  company?: Maybe<String>;
-  companyIcon?: Maybe<String>;
-  content?: Maybe<String>;
-  image?: Maybe<String>;
-  link?: Maybe<String>;
-  active?: Maybe<Boolean>;
-  ratio?: Maybe<Int>;
-}
-
-export interface DebateWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  owner?: Maybe<UserWhereInput>;
-  ownerBlue?: Maybe<UserWhereInput>;
-  ownerRed?: Maybe<UserWhereInput>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimit_not?: Maybe<DateTimeInput>;
-  timelimit_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  timelimit_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  timelimit_lt?: Maybe<DateTimeInput>;
-  timelimit_lte?: Maybe<DateTimeInput>;
-  timelimit_gt?: Maybe<DateTimeInput>;
-  timelimit_gte?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  timelimitString_not?: Maybe<String>;
-  timelimitString_in?: Maybe<String[] | String>;
-  timelimitString_not_in?: Maybe<String[] | String>;
-  timelimitString_lt?: Maybe<String>;
-  timelimitString_lte?: Maybe<String>;
-  timelimitString_gt?: Maybe<String>;
-  timelimitString_gte?: Maybe<String>;
-  timelimitString_contains?: Maybe<String>;
-  timelimitString_not_contains?: Maybe<String>;
-  timelimitString_starts_with?: Maybe<String>;
-  timelimitString_not_starts_with?: Maybe<String>;
-  timelimitString_ends_with?: Maybe<String>;
-  timelimitString_not_ends_with?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  type_not?: Maybe<DebateType>;
-  type_in?: Maybe<DebateType[] | DebateType>;
-  type_not_in?: Maybe<DebateType[] | DebateType>;
-  comments_some?: Maybe<CommentWhereInput>;
-  topComment?: Maybe<CommentWhereInput>;
-  reports_some?: Maybe<ReportWhereInput>;
-  positives_some?: Maybe<UserWhereInput>;
-  negatives_some?: Maybe<UserWhereInput>;
-  redVotes_some?: Maybe<UserWhereInput>;
-  blueVotes_some?: Maybe<UserWhereInput>;
-  winner?: Maybe<UserWhereInput>;
-  loser?: Maybe<UserWhereInput>;
-  closed?: Maybe<Boolean>;
-  closed_not?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  crowned_not?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  published_not?: Maybe<Boolean>;
-  interactions_some?: Maybe<InteractionWhereInput>;
-  answerOne?: Maybe<String>;
-  answerOne_not?: Maybe<String>;
-  answerOne_in?: Maybe<String[] | String>;
-  answerOne_not_in?: Maybe<String[] | String>;
-  answerOne_lt?: Maybe<String>;
-  answerOne_lte?: Maybe<String>;
-  answerOne_gt?: Maybe<String>;
-  answerOne_gte?: Maybe<String>;
-  answerOne_contains?: Maybe<String>;
-  answerOne_not_contains?: Maybe<String>;
-  answerOne_starts_with?: Maybe<String>;
-  answerOne_not_starts_with?: Maybe<String>;
-  answerOne_ends_with?: Maybe<String>;
-  answerOne_not_ends_with?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  answerTwo_not?: Maybe<String>;
-  answerTwo_in?: Maybe<String[] | String>;
-  answerTwo_not_in?: Maybe<String[] | String>;
-  answerTwo_lt?: Maybe<String>;
-  answerTwo_lte?: Maybe<String>;
-  answerTwo_gt?: Maybe<String>;
-  answerTwo_gte?: Maybe<String>;
-  answerTwo_contains?: Maybe<String>;
-  answerTwo_not_contains?: Maybe<String>;
-  answerTwo_starts_with?: Maybe<String>;
-  answerTwo_not_starts_with?: Maybe<String>;
-  answerTwo_ends_with?: Maybe<String>;
-  answerTwo_not_ends_with?: Maybe<String>;
-  image?: Maybe<String>;
-  image_not?: Maybe<String>;
-  image_in?: Maybe<String[] | String>;
-  image_not_in?: Maybe<String[] | String>;
-  image_lt?: Maybe<String>;
-  image_lte?: Maybe<String>;
-  image_gt?: Maybe<String>;
-  image_gte?: Maybe<String>;
-  image_contains?: Maybe<String>;
-  image_not_contains?: Maybe<String>;
-  image_starts_with?: Maybe<String>;
-  image_not_starts_with?: Maybe<String>;
-  image_ends_with?: Maybe<String>;
-  image_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<DebateWhereInput[] | DebateWhereInput>;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutConversationsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutConversationsDataInput;
-  create: UserCreateWithoutConversationsInput;
-}
-
-export interface CommentWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  from?: Maybe<UserWhereInput>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
-  likes_some?: Maybe<UserWhereInput>;
-  dislikes_some?: Maybe<UserWhereInput>;
-  reports_some?: Maybe<ReportWhereInput>;
-  debate?: Maybe<DebateWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  comments_some?: Maybe<CommentWhereInput>;
-  nested?: Maybe<Boolean>;
-  nested_not?: Maybe<Boolean>;
-  AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
-}
-
-export interface AdTargetCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  gender?: Maybe<GenderFilter>;
-  birthdateMin: DateTimeInput;
-  birthdateMax: DateTimeInput;
-}
-
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
 export interface AdTargetUpdateManyMutationInput {
   name?: Maybe<String>;
   gender?: Maybe<GenderFilter>;
   birthdateMin?: Maybe<DateTimeInput>;
   birthdateMax?: Maybe<DateTimeInput>;
-}
-
-export interface UserScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  firstname?: Maybe<String>;
-  firstname_not?: Maybe<String>;
-  firstname_in?: Maybe<String[] | String>;
-  firstname_not_in?: Maybe<String[] | String>;
-  firstname_lt?: Maybe<String>;
-  firstname_lte?: Maybe<String>;
-  firstname_gt?: Maybe<String>;
-  firstname_gte?: Maybe<String>;
-  firstname_contains?: Maybe<String>;
-  firstname_not_contains?: Maybe<String>;
-  firstname_starts_with?: Maybe<String>;
-  firstname_not_starts_with?: Maybe<String>;
-  firstname_ends_with?: Maybe<String>;
-  firstname_not_ends_with?: Maybe<String>;
-  lastname?: Maybe<String>;
-  lastname_not?: Maybe<String>;
-  lastname_in?: Maybe<String[] | String>;
-  lastname_not_in?: Maybe<String[] | String>;
-  lastname_lt?: Maybe<String>;
-  lastname_lte?: Maybe<String>;
-  lastname_gt?: Maybe<String>;
-  lastname_gte?: Maybe<String>;
-  lastname_contains?: Maybe<String>;
-  lastname_not_contains?: Maybe<String>;
-  lastname_starts_with?: Maybe<String>;
-  lastname_not_starts_with?: Maybe<String>;
-  lastname_ends_with?: Maybe<String>;
-  lastname_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  birthdate_not?: Maybe<DateTimeInput>;
-  birthdate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  birthdate_lt?: Maybe<DateTimeInput>;
-  birthdate_lte?: Maybe<DateTimeInput>;
-  birthdate_gt?: Maybe<DateTimeInput>;
-  birthdate_gte?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  role_not?: Maybe<Role>;
-  role_in?: Maybe<Role[] | Role>;
-  role_not_in?: Maybe<Role[] | Role>;
-  certified?: Maybe<Boolean>;
-  certified_not?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  gender_not?: Maybe<Gender>;
-  gender_in?: Maybe<Gender[] | Gender>;
-  gender_not_in?: Maybe<Gender[] | Gender>;
-  profilePicture?: Maybe<String>;
-  profilePicture_not?: Maybe<String>;
-  profilePicture_in?: Maybe<String[] | String>;
-  profilePicture_not_in?: Maybe<String[] | String>;
-  profilePicture_lt?: Maybe<String>;
-  profilePicture_lte?: Maybe<String>;
-  profilePicture_gt?: Maybe<String>;
-  profilePicture_gte?: Maybe<String>;
-  profilePicture_contains?: Maybe<String>;
-  profilePicture_not_contains?: Maybe<String>;
-  profilePicture_starts_with?: Maybe<String>;
-  profilePicture_not_starts_with?: Maybe<String>;
-  profilePicture_ends_with?: Maybe<String>;
-  profilePicture_not_ends_with?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  coverPicture_not?: Maybe<String>;
-  coverPicture_in?: Maybe<String[] | String>;
-  coverPicture_not_in?: Maybe<String[] | String>;
-  coverPicture_lt?: Maybe<String>;
-  coverPicture_lte?: Maybe<String>;
-  coverPicture_gt?: Maybe<String>;
-  coverPicture_gte?: Maybe<String>;
-  coverPicture_contains?: Maybe<String>;
-  coverPicture_not_contains?: Maybe<String>;
-  coverPicture_starts_with?: Maybe<String>;
-  coverPicture_not_starts_with?: Maybe<String>;
-  coverPicture_ends_with?: Maybe<String>;
-  coverPicture_not_ends_with?: Maybe<String>;
-  bio?: Maybe<String>;
-  bio_not?: Maybe<String>;
-  bio_in?: Maybe<String[] | String>;
-  bio_not_in?: Maybe<String[] | String>;
-  bio_lt?: Maybe<String>;
-  bio_lte?: Maybe<String>;
-  bio_gt?: Maybe<String>;
-  bio_gte?: Maybe<String>;
-  bio_contains?: Maybe<String>;
-  bio_not_contains?: Maybe<String>;
-  bio_starts_with?: Maybe<String>;
-  bio_not_starts_with?: Maybe<String>;
-  bio_ends_with?: Maybe<String>;
-  bio_not_ends_with?: Maybe<String>;
-  language?: Maybe<Language>;
-  language_not?: Maybe<Language>;
-  language_in?: Maybe<Language[] | Language>;
-  language_not_in?: Maybe<Language[] | Language>;
-  theme?: Maybe<Theme>;
-  theme_not?: Maybe<Theme>;
-  theme_in?: Maybe<Theme[] | Theme>;
-  theme_not_in?: Maybe<Theme[] | Theme>;
-  crowned?: Maybe<Boolean>;
-  crowned_not?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  crownedDate_not?: Maybe<DateTimeInput>;
-  crownedDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  crownedDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  crownedDate_lt?: Maybe<DateTimeInput>;
-  crownedDate_lte?: Maybe<DateTimeInput>;
-  crownedDate_gt?: Maybe<DateTimeInput>;
-  crownedDate_gte?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  private_not?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  lastConnected_not?: Maybe<DateTimeInput>;
-  lastConnected_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  lastConnected_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  lastConnected_lt?: Maybe<DateTimeInput>;
-  lastConnected_lte?: Maybe<DateTimeInput>;
-  lastConnected_gt?: Maybe<DateTimeInput>;
-  lastConnected_gte?: Maybe<DateTimeInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailStatus_not?: Maybe<MailStatus>;
-  mailStatus_in?: Maybe<MailStatus[] | MailStatus>;
-  mailStatus_not_in?: Maybe<MailStatus[] | MailStatus>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  OR?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-}
-
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
-}
-
-export interface UserCreateManyWithoutFollowingInput {
-  create?: Maybe<
-    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface UserUpdateManyDataInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface UserCreateManyWithoutBlockingInput {
-  create?: Maybe<
-    UserCreateWithoutBlockingInput[] | UserCreateWithoutBlockingInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface UserUpdatemailErrorsInput {
-  set?: Maybe<Int[] | Int>;
-}
-
-export interface UserCreateManyWithoutFollowersInput {
-  create?: Maybe<
-    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
 export interface ReportUpdateManyWithoutCommentInput {
@@ -2978,11 +3153,9 @@ export interface ReportUpdateManyWithoutCommentInput {
   >;
 }
 
-export interface UserCreateManyWithoutBlockedInput {
-  create?: Maybe<
-    UserCreateWithoutBlockedInput[] | UserCreateWithoutBlockedInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface ReportUpdateWithWhereUniqueWithoutCommentInput {
@@ -2990,11 +3163,11 @@ export interface ReportUpdateWithWhereUniqueWithoutCommentInput {
   data: ReportUpdateWithoutCommentDataInput;
 }
 
-export interface DebateCreateManyWithoutOwnerInput {
+export interface UserCreateManyWithoutFollowingInput {
   create?: Maybe<
-    DebateCreateWithoutOwnerInput[] | DebateCreateWithoutOwnerInput
+    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
   >;
-  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
 export interface ReportUpdateWithoutCommentDataInput {
@@ -3007,9 +3180,11 @@ export interface ReportUpdateWithoutCommentDataInput {
   treated?: Maybe<Boolean>;
 }
 
-export interface UserCreateOneWithoutDebatesBlueInput {
-  create?: Maybe<UserCreateWithoutDebatesBlueInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface UserCreateManyWithoutBlockingInput {
+  create?: Maybe<
+    UserCreateWithoutBlockingInput[] | UserCreateWithoutBlockingInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
 export interface UserUpdateOneInput {
@@ -3021,11 +3196,11 @@ export interface UserUpdateOneInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface DebateCreateManyWithoutOwnerRedInput {
+export interface UserCreateManyWithoutFollowersInput {
   create?: Maybe<
-    DebateCreateWithoutOwnerRedInput[] | DebateCreateWithoutOwnerRedInput
+    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
   >;
-  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
 export interface UserUpsertNestedInput {
@@ -3033,9 +3208,11 @@ export interface UserUpsertNestedInput {
   create: UserCreateInput;
 }
 
-export interface UserCreateOneWithoutDebatesInput {
-  create?: Maybe<UserCreateWithoutDebatesInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface UserCreateManyWithoutBlockedInput {
+  create?: Maybe<
+    UserCreateWithoutBlockedInput[] | UserCreateWithoutBlockedInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
 export interface DebateUpdateOneWithoutReportsInput {
@@ -3047,9 +3224,9 @@ export interface DebateUpdateOneWithoutReportsInput {
   connect?: Maybe<DebateWhereUniqueInput>;
 }
 
-export interface DebateCreateManyWithoutOwnerBlueInput {
+export interface DebateCreateManyWithoutOwnerInput {
   create?: Maybe<
-    DebateCreateWithoutOwnerBlueInput[] | DebateCreateWithoutOwnerBlueInput
+    DebateCreateWithoutOwnerInput[] | DebateCreateWithoutOwnerInput
   >;
   connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
 }
@@ -3079,8 +3256,8 @@ export interface DebateUpdateWithoutReportsDataInput {
   image?: Maybe<String>;
 }
 
-export interface UserCreateOneWithoutDebatesRedInput {
-  create?: Maybe<UserCreateWithoutDebatesRedInput>;
+export interface UserCreateOneWithoutDebatesBlueInput {
+  create?: Maybe<UserCreateWithoutDebatesBlueInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
@@ -3093,13 +3270,11 @@ export interface CommentUpdateOneInput {
   connect?: Maybe<CommentWhereUniqueInput>;
 }
 
-export interface NotificationCreateManyWithoutWhoInput {
+export interface DebateCreateManyWithoutOwnerRedInput {
   create?: Maybe<
-    NotificationCreateWithoutWhoInput[] | NotificationCreateWithoutWhoInput
+    DebateCreateWithoutOwnerRedInput[] | DebateCreateWithoutOwnerRedInput
   >;
-  connect?: Maybe<
-    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  >;
+  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
 }
 
 export interface CommentUpdateDataInput {
@@ -3113,9 +3288,9 @@ export interface CommentUpdateDataInput {
   nested?: Maybe<Boolean>;
 }
 
-export interface DebateCreateOneInput {
-  create?: Maybe<DebateCreateInput>;
-  connect?: Maybe<DebateWhereUniqueInput>;
+export interface UserCreateOneWithoutDebatesInput {
+  create?: Maybe<UserCreateWithoutDebatesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface DebateUpdateOneRequiredWithoutCommentsInput {
@@ -3125,11 +3300,11 @@ export interface DebateUpdateOneRequiredWithoutCommentsInput {
   connect?: Maybe<DebateWhereUniqueInput>;
 }
 
-export interface CommentCreateManyWithoutDebateInput {
+export interface DebateCreateManyWithoutOwnerBlueInput {
   create?: Maybe<
-    CommentCreateWithoutDebateInput[] | CommentCreateWithoutDebateInput
+    DebateCreateWithoutOwnerBlueInput[] | DebateCreateWithoutOwnerBlueInput
   >;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  connect?: Maybe<DebateWhereUniqueInput[] | DebateWhereUniqueInput>;
 }
 
 export interface DebateUpdateWithoutCommentsDataInput {
@@ -3157,9 +3332,9 @@ export interface DebateUpdateWithoutCommentsDataInput {
   image?: Maybe<String>;
 }
 
-export interface UserCreateManyInput {
-  create?: Maybe<UserCreateInput[] | UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+export interface UserCreateOneWithoutDebatesRedInput {
+  create?: Maybe<UserCreateWithoutDebatesRedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface ReportUpdateManyWithoutDebateInput {
@@ -3185,6 +3360,66 @@ export interface ReportUpdateManyWithoutDebateInput {
   >;
 }
 
+export interface NotificationCreateManyWithoutWhoInput {
+  create?: Maybe<
+    NotificationCreateWithoutWhoInput[] | NotificationCreateWithoutWhoInput
+  >;
+  connect?: Maybe<
+    NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  >;
+}
+
+export interface ReportUpdateWithWhereUniqueWithoutDebateInput {
+  where: ReportWhereUniqueInput;
+  data: ReportUpdateWithoutDebateDataInput;
+}
+
+export interface DebateCreateOneInput {
+  create?: Maybe<DebateCreateInput>;
+  connect?: Maybe<DebateWhereUniqueInput>;
+}
+
+export interface ReportUpdateWithoutDebateDataInput {
+  from?: Maybe<UserUpdateOneInput>;
+  to?: Maybe<UserUpdateOneInput>;
+  type?: Maybe<ReportType>;
+  reason?: Maybe<ReportReason>;
+  reasonText?: Maybe<String>;
+  comment?: Maybe<CommentUpdateOneWithoutReportsInput>;
+  treated?: Maybe<Boolean>;
+}
+
+export interface CommentCreateManyWithoutDebateInput {
+  create?: Maybe<
+    CommentCreateWithoutDebateInput[] | CommentCreateWithoutDebateInput
+  >;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+}
+
+export interface CommentUpdateOneWithoutReportsInput {
+  create?: Maybe<CommentCreateWithoutReportsInput>;
+  update?: Maybe<CommentUpdateWithoutReportsDataInput>;
+  upsert?: Maybe<CommentUpsertWithoutReportsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+}
+
+export interface UserCreateManyInput {
+  create?: Maybe<UserCreateInput[] | UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface CommentUpdateWithoutReportsDataInput {
+  from?: Maybe<UserUpdateOneRequiredInput>;
+  content?: Maybe<String>;
+  likes?: Maybe<UserUpdateManyInput>;
+  dislikes?: Maybe<UserUpdateManyInput>;
+  debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
+  comments?: Maybe<CommentUpdateManyInput>;
+  nested?: Maybe<Boolean>;
+}
+
 export interface ReportCreateWithoutCommentInput {
   id?: Maybe<ID_Input>;
   from?: Maybe<UserCreateOneInput>;
@@ -3196,9 +3431,25 @@ export interface ReportCreateWithoutCommentInput {
   treated?: Maybe<Boolean>;
 }
 
-export interface ReportUpdateWithWhereUniqueWithoutDebateInput {
-  where: ReportWhereUniqueInput;
-  data: ReportUpdateWithoutDebateDataInput;
+export interface CommentUpdateManyInput {
+  create?: Maybe<CommentCreateInput[] | CommentCreateInput>;
+  update?: Maybe<
+    | CommentUpdateWithWhereUniqueNestedInput[]
+    | CommentUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | CommentUpsertWithWhereUniqueNestedInput[]
+    | CommentUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+  updateMany?: Maybe<
+    | CommentUpdateManyWithWhereNestedInput[]
+    | CommentUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface DebateCreateWithoutReportsInput {
@@ -3227,14 +3478,9 @@ export interface DebateCreateWithoutReportsInput {
   image?: Maybe<String>;
 }
 
-export interface ReportUpdateWithoutDebateDataInput {
-  from?: Maybe<UserUpdateOneInput>;
-  to?: Maybe<UserUpdateOneInput>;
-  type?: Maybe<ReportType>;
-  reason?: Maybe<ReportReason>;
-  reasonText?: Maybe<String>;
-  comment?: Maybe<CommentUpdateOneWithoutReportsInput>;
-  treated?: Maybe<Boolean>;
+export interface CommentUpdateWithWhereUniqueNestedInput {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateDataInput;
 }
 
 export interface InteractionCreateManyWithoutDebateInput {
@@ -3244,87 +3490,15 @@ export interface InteractionCreateManyWithoutDebateInput {
   connect?: Maybe<InteractionWhereUniqueInput[] | InteractionWhereUniqueInput>;
 }
 
-export interface CommentUpdateOneWithoutReportsInput {
-  create?: Maybe<CommentCreateWithoutReportsInput>;
-  update?: Maybe<CommentUpdateWithoutReportsDataInput>;
-  upsert?: Maybe<CommentUpsertWithoutReportsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<CommentWhereUniqueInput>;
-}
-
-export interface UserCreateOneWithoutInteractionsInput {
-  create?: Maybe<UserCreateWithoutInteractionsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface CommentUpdateWithoutReportsDataInput {
-  from?: Maybe<UserUpdateOneRequiredInput>;
-  content?: Maybe<String>;
-  likes?: Maybe<UserUpdateManyInput>;
-  dislikes?: Maybe<UserUpdateManyInput>;
-  debate?: Maybe<DebateUpdateOneRequiredWithoutCommentsInput>;
-  comments?: Maybe<CommentUpdateManyInput>;
-  nested?: Maybe<Boolean>;
-}
-
-export interface TrophyCreateManyWithoutUserInput {
-  create?: Maybe<TrophyCreateWithoutUserInput[] | TrophyCreateWithoutUserInput>;
-  connect?: Maybe<TrophyWhereUniqueInput[] | TrophyWhereUniqueInput>;
-}
-
-export interface CommentUpdateManyInput {
-  create?: Maybe<CommentCreateInput[] | CommentCreateInput>;
-  update?: Maybe<
-    | CommentUpdateWithWhereUniqueNestedInput[]
-    | CommentUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | CommentUpsertWithWhereUniqueNestedInput[]
-    | CommentUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-  updateMany?: Maybe<
-    | CommentUpdateManyWithWhereNestedInput[]
-    | CommentUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ConversationCreateManyWithoutSpeakersInput {
-  create?: Maybe<
-    | ConversationCreateWithoutSpeakersInput[]
-    | ConversationCreateWithoutSpeakersInput
-  >;
-  connect?: Maybe<
-    ConversationWhereUniqueInput[] | ConversationWhereUniqueInput
-  >;
-}
-
-export interface CommentUpdateWithWhereUniqueNestedInput {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateDataInput;
-}
-
-export interface MessageCreateManyWithoutConversationInput {
-  create?: Maybe<
-    | MessageCreateWithoutConversationInput[]
-    | MessageCreateWithoutConversationInput
-  >;
-  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
-}
-
 export interface CommentUpsertWithWhereUniqueNestedInput {
   where: CommentWhereUniqueInput;
   update: CommentUpdateDataInput;
   create: CommentCreateInput;
 }
 
-export interface UserCreatemailErrorsInput {
-  set?: Maybe<Int[] | Int>;
+export interface UserCreateOneWithoutInteractionsInput {
+  create?: Maybe<UserCreateWithoutInteractionsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface CommentScalarWhereInput {
@@ -3379,11 +3553,9 @@ export interface CommentScalarWhereInput {
   NOT?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
 }
 
-export interface ReportCreateManyWithoutDebateInput {
-  create?: Maybe<
-    ReportCreateWithoutDebateInput[] | ReportCreateWithoutDebateInput
-  >;
-  connect?: Maybe<ReportWhereUniqueInput[] | ReportWhereUniqueInput>;
+export interface TrophyCreateManyWithoutUserInput {
+  create?: Maybe<TrophyCreateWithoutUserInput[] | TrophyCreateWithoutUserInput>;
+  connect?: Maybe<TrophyWhereUniqueInput[] | TrophyWhereUniqueInput>;
 }
 
 export interface CommentUpdateManyWithWhereNestedInput {
@@ -3391,9 +3563,14 @@ export interface CommentUpdateManyWithWhereNestedInput {
   data: CommentUpdateManyDataInput;
 }
 
-export interface CommentCreateOneWithoutReportsInput {
-  create?: Maybe<CommentCreateWithoutReportsInput>;
-  connect?: Maybe<CommentWhereUniqueInput>;
+export interface ConversationCreateManyWithoutSpeakersInput {
+  create?: Maybe<
+    | ConversationCreateWithoutSpeakersInput[]
+    | ConversationCreateWithoutSpeakersInput
+  >;
+  connect?: Maybe<
+    ConversationWhereUniqueInput[] | ConversationWhereUniqueInput
+  >;
 }
 
 export interface CommentUpdateManyDataInput {
@@ -3401,9 +3578,12 @@ export interface CommentUpdateManyDataInput {
   nested?: Maybe<Boolean>;
 }
 
-export interface DebateCreateOneWithoutCommentsInput {
-  create?: Maybe<DebateCreateWithoutCommentsInput>;
-  connect?: Maybe<DebateWhereUniqueInput>;
+export interface MessageCreateManyWithoutConversationInput {
+  create?: Maybe<
+    | MessageCreateWithoutConversationInput[]
+    | MessageCreateWithoutConversationInput
+  >;
+  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
 }
 
 export interface CommentUpsertWithoutReportsInput {
@@ -3411,11 +3591,8 @@ export interface CommentUpsertWithoutReportsInput {
   create: CommentCreateWithoutReportsInput;
 }
 
-export interface InteractionCreateManyWithoutWhoInput {
-  create?: Maybe<
-    InteractionCreateWithoutWhoInput[] | InteractionCreateWithoutWhoInput
-  >;
-  connect?: Maybe<InteractionWhereUniqueInput[] | InteractionWhereUniqueInput>;
+export interface UserCreatemailErrorsInput {
+  set?: Maybe<Int[] | Int>;
 }
 
 export interface ReportUpsertWithWhereUniqueWithoutDebateInput {
@@ -3424,9 +3601,11 @@ export interface ReportUpsertWithWhereUniqueWithoutDebateInput {
   create: ReportCreateWithoutDebateInput;
 }
 
-export interface DebateCreateOneWithoutInteractionsInput {
-  create?: Maybe<DebateCreateWithoutInteractionsInput>;
-  connect?: Maybe<DebateWhereUniqueInput>;
+export interface ReportCreateManyWithoutDebateInput {
+  create?: Maybe<
+    ReportCreateWithoutDebateInput[] | ReportCreateWithoutDebateInput
+  >;
+  connect?: Maybe<ReportWhereUniqueInput[] | ReportWhereUniqueInput>;
 }
 
 export interface ReportScalarWhereInput {
@@ -3489,66 +3668,9 @@ export interface ReportScalarWhereInput {
   NOT?: Maybe<ReportScalarWhereInput[] | ReportScalarWhereInput>;
 }
 
-export interface ReportWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  from?: Maybe<UserWhereInput>;
-  to?: Maybe<UserWhereInput>;
-  type?: Maybe<ReportType>;
-  type_not?: Maybe<ReportType>;
-  type_in?: Maybe<ReportType[] | ReportType>;
-  type_not_in?: Maybe<ReportType[] | ReportType>;
-  reason?: Maybe<ReportReason>;
-  reason_not?: Maybe<ReportReason>;
-  reason_in?: Maybe<ReportReason[] | ReportReason>;
-  reason_not_in?: Maybe<ReportReason[] | ReportReason>;
-  reasonText?: Maybe<String>;
-  reasonText_not?: Maybe<String>;
-  reasonText_in?: Maybe<String[] | String>;
-  reasonText_not_in?: Maybe<String[] | String>;
-  reasonText_lt?: Maybe<String>;
-  reasonText_lte?: Maybe<String>;
-  reasonText_gt?: Maybe<String>;
-  reasonText_gte?: Maybe<String>;
-  reasonText_contains?: Maybe<String>;
-  reasonText_not_contains?: Maybe<String>;
-  reasonText_starts_with?: Maybe<String>;
-  reasonText_not_starts_with?: Maybe<String>;
-  reasonText_ends_with?: Maybe<String>;
-  reasonText_not_ends_with?: Maybe<String>;
-  debate?: Maybe<DebateWhereInput>;
-  comment?: Maybe<CommentWhereInput>;
-  treated?: Maybe<Boolean>;
-  treated_not?: Maybe<Boolean>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ReportWhereInput[] | ReportWhereInput>;
+export interface CommentCreateOneWithoutReportsInput {
+  create?: Maybe<CommentCreateWithoutReportsInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
 }
 
 export interface ReportUpdateManyWithWhereNestedInput {
@@ -3556,13 +3678,9 @@ export interface ReportUpdateManyWithWhereNestedInput {
   data: ReportUpdateManyDataInput;
 }
 
-export interface TrophySubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TrophyWhereInput>;
-  AND?: Maybe<TrophySubscriptionWhereInput[] | TrophySubscriptionWhereInput>;
+export interface DebateCreateOneWithoutCommentsInput {
+  create?: Maybe<DebateCreateWithoutCommentsInput>;
+  connect?: Maybe<DebateWhereUniqueInput>;
 }
 
 export interface ReportUpdateManyDataInput {
@@ -3572,47 +3690,11 @@ export interface ReportUpdateManyDataInput {
   treated?: Maybe<Boolean>;
 }
 
-export interface TrophyWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  user?: Maybe<UserWhereInput>;
-  won?: Maybe<Boolean>;
-  won_not?: Maybe<Boolean>;
-  type?: Maybe<TrophyType>;
-  type_not?: Maybe<TrophyType>;
-  type_in?: Maybe<TrophyType[] | TrophyType>;
-  type_not_in?: Maybe<TrophyType[] | TrophyType>;
-  debate?: Maybe<DebateWhereInput>;
-  comment?: Maybe<CommentWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<TrophyWhereInput[] | TrophyWhereInput>;
+export interface InteractionCreateManyWithoutWhoInput {
+  create?: Maybe<
+    InteractionCreateWithoutWhoInput[] | InteractionCreateWithoutWhoInput
+  >;
+  connect?: Maybe<InteractionWhereUniqueInput[] | InteractionWhereUniqueInput>;
 }
 
 export interface InteractionUpdateManyWithoutDebateInput {
@@ -3642,15 +3724,9 @@ export interface InteractionUpdateManyWithoutDebateInput {
   >;
 }
 
-export interface NotificationSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<NotificationWhereInput>;
-  AND?: Maybe<
-    NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
-  >;
+export interface DebateCreateOneWithoutInteractionsInput {
+  create?: Maybe<DebateCreateWithoutInteractionsInput>;
+  connect?: Maybe<DebateWhereUniqueInput>;
 }
 
 export interface InteractionUpdateWithWhereUniqueWithoutDebateInput {
@@ -3658,14 +3734,9 @@ export interface InteractionUpdateWithWhereUniqueWithoutDebateInput {
   data: InteractionUpdateWithoutDebateDataInput;
 }
 
-export interface DebateSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<DebateWhereInput>;
-  AND?: Maybe<DebateSubscriptionWhereInput[] | DebateSubscriptionWhereInput>;
-}
+export type CommentWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export interface InteractionUpdateWithoutDebateDataInput {
   type?: Maybe<InteractionType>;
@@ -3673,13 +3744,54 @@ export interface InteractionUpdateWithoutDebateDataInput {
   comment?: Maybe<CommentUpdateOneInput>;
 }
 
-export interface AdSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<AdWhereInput>;
-  AND?: Maybe<AdSubscriptionWhereInput[] | AdSubscriptionWhereInput>;
+export interface ConversationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  speakers_some?: Maybe<UserWhereInput>;
+  messages_some?: Maybe<MessageWhereInput>;
+  deleted?: Maybe<String>;
+  deleted_not?: Maybe<String>;
+  deleted_in?: Maybe<String[] | String>;
+  deleted_not_in?: Maybe<String[] | String>;
+  deleted_lt?: Maybe<String>;
+  deleted_lte?: Maybe<String>;
+  deleted_gt?: Maybe<String>;
+  deleted_gte?: Maybe<String>;
+  deleted_contains?: Maybe<String>;
+  deleted_not_contains?: Maybe<String>;
+  deleted_starts_with?: Maybe<String>;
+  deleted_not_starts_with?: Maybe<String>;
+  deleted_ends_with?: Maybe<String>;
+  deleted_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ConversationWhereInput[] | ConversationWhereInput>;
 }
 
 export interface UserUpdateOneRequiredWithoutInteractionsInput {
@@ -3689,9 +3801,13 @@ export interface UserUpdateOneRequiredWithoutInteractionsInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface TrophyUpdateManyMutationInput {
-  won?: Maybe<Boolean>;
-  type?: Maybe<TrophyType>;
+export interface ReportSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ReportWhereInput>;
+  AND?: Maybe<ReportSubscriptionWhereInput[] | ReportSubscriptionWhereInput>;
 }
 
 export interface UserUpdateWithoutInteractionsDataInput {
@@ -3726,12 +3842,15 @@ export interface UserUpdateWithoutInteractionsDataInput {
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
 }
 
-export interface TrophyUpdateInput {
-  user?: Maybe<UserUpdateOneRequiredWithoutTrophiesInput>;
-  won?: Maybe<Boolean>;
-  type?: Maybe<TrophyType>;
-  debate?: Maybe<DebateUpdateOneInput>;
-  comment?: Maybe<CommentUpdateOneInput>;
+export interface InteractionSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<InteractionWhereInput>;
+  AND?: Maybe<
+    InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
+  >;
 }
 
 export interface TrophyUpdateManyWithoutUserInput {
@@ -3755,18 +3874,41 @@ export interface TrophyUpdateManyWithoutUserInput {
   >;
 }
 
-export type ConversationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface CommentSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CommentWhereInput>;
+  AND?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
+}
 
 export interface TrophyUpdateWithWhereUniqueWithoutUserInput {
   where: TrophyWhereUniqueInput;
   data: TrophyUpdateWithoutUserDataInput;
 }
 
-export type DebateWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface UserUpdateManyMutationInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
 
 export interface TrophyUpdateWithoutUserDataInput {
   won?: Maybe<Boolean>;
@@ -3775,9 +3917,37 @@ export interface TrophyUpdateWithoutUserDataInput {
   comment?: Maybe<CommentUpdateOneInput>;
 }
 
-export type InteractionWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface UserUpdateWithoutTrophiesDataInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserUpdateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserUpdateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
 
 export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
   where: TrophyWhereUniqueInput;
@@ -3785,9 +3955,48 @@ export interface TrophyUpsertWithWhereUniqueWithoutUserInput {
   create: TrophyCreateWithoutUserInput;
 }
 
-export type MessageWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface ConnectedWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  connections_some?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ConnectedWhereInput[] | ConnectedWhereInput>;
+}
 
 export interface TrophyScalarWhereInput {
   id?: Maybe<ID_Input>;
@@ -3831,28 +4040,35 @@ export interface TrophyScalarWhereInput {
   NOT?: Maybe<TrophyScalarWhereInput[] | TrophyScalarWhereInput>;
 }
 
-export type NotificationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface TmpUserUpdateManyMutationInput {
+  firstname?: Maybe<String>;
+  lastname?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  birthdate?: Maybe<DateTimeInput>;
+  role?: Maybe<Role>;
+  gender?: Maybe<Gender>;
+}
 
 export interface TrophyUpdateManyWithWhereNestedInput {
   where: TrophyScalarWhereInput;
   data: TrophyUpdateManyDataInput;
 }
 
-export type ReportWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface ConnectedUpdateManyDataInput {
+  date?: Maybe<DateTimeInput>;
+}
 
 export interface TrophyUpdateManyDataInput {
   won?: Maybe<Boolean>;
   type?: Maybe<TrophyType>;
 }
 
-export type TmpUserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
+export interface ConnectedUpsertWithWhereUniqueNestedInput {
+  where: ConnectedWhereUniqueInput;
+  update: ConnectedUpdateDataInput;
+  create: ConnectedCreateInput;
+}
 
 export interface ConversationUpdateManyWithoutSpeakersInput {
   create?: Maybe<
@@ -3884,10 +4100,25 @@ export interface ConversationUpdateManyWithoutSpeakersInput {
   >;
 }
 
-export interface ConversationCreateWithoutMessagesInput {
-  id?: Maybe<ID_Input>;
-  speakers?: Maybe<UserCreateManyWithoutConversationsInput>;
-  deleted?: Maybe<String>;
+export interface ConnectedUpdateManyInput {
+  create?: Maybe<ConnectedCreateInput[] | ConnectedCreateInput>;
+  update?: Maybe<
+    | ConnectedUpdateWithWhereUniqueNestedInput[]
+    | ConnectedUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ConnectedUpsertWithWhereUniqueNestedInput[]
+    | ConnectedUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ConnectedWhereUniqueInput[] | ConnectedWhereUniqueInput>;
+  connect?: Maybe<ConnectedWhereUniqueInput[] | ConnectedWhereUniqueInput>;
+  set?: Maybe<ConnectedWhereUniqueInput[] | ConnectedWhereUniqueInput>;
+  disconnect?: Maybe<ConnectedWhereUniqueInput[] | ConnectedWhereUniqueInput>;
+  deleteMany?: Maybe<ConnectedScalarWhereInput[] | ConnectedScalarWhereInput>;
+  updateMany?: Maybe<
+    | ConnectedUpdateManyWithWhereNestedInput[]
+    | ConnectedUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
@@ -3895,8 +4126,9 @@ export interface ConversationUpdateWithWhereUniqueWithoutSpeakersInput {
   data: ConversationUpdateWithoutSpeakersDataInput;
 }
 
-export interface InteractionUpdateManyMutationInput {
-  type?: Maybe<InteractionType>;
+export interface StatistiqueCreateInput {
+  id?: Maybe<ID_Input>;
+  connected?: Maybe<ConnectedCreateManyInput>;
 }
 
 export interface ConversationUpdateWithoutSpeakersDataInput {
@@ -3904,17 +4136,16 @@ export interface ConversationUpdateWithoutSpeakersDataInput {
   deleted?: Maybe<String>;
 }
 
-export interface DebateUpdateManyMutationInput {
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
+export interface ReportCreateInput {
+  id?: Maybe<ID_Input>;
+  from?: Maybe<UserCreateOneInput>;
+  to?: Maybe<UserCreateOneInput>;
+  type: ReportType;
+  reason: ReportReason;
+  reasonText?: Maybe<String>;
+  debate?: Maybe<DebateCreateOneWithoutReportsInput>;
+  comment?: Maybe<CommentCreateOneWithoutReportsInput>;
+  treated?: Maybe<Boolean>;
 }
 
 export interface MessageUpdateManyWithoutConversationInput {
@@ -3941,24 +4172,7 @@ export interface MessageUpdateManyWithoutConversationInput {
   >;
 }
 
-export interface AdCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  company: String;
-  companyIcon: String;
-  content: String;
-  image: String;
-  link?: Maybe<String>;
-  active?: Maybe<Boolean>;
-  ratio?: Maybe<Int>;
-}
-
-export interface MessageUpdateWithWhereUniqueWithoutConversationInput {
-  where: MessageWhereUniqueInput;
-  data: MessageUpdateWithoutConversationDataInput;
-}
-
-export interface UserUpdateWithoutConversationsDataInput {
+export interface UserUpdateWithoutNotificationsDataInput {
   firstname?: Maybe<String>;
   lastname?: Maybe<String>;
   email?: Maybe<String>;
@@ -3983,11 +4197,38 @@ export interface UserUpdateWithoutConversationsDataInput {
   debates?: Maybe<DebateUpdateManyWithoutOwnerInput>;
   debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
   debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
   trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+}
+
+export interface MessageUpdateWithWhereUniqueWithoutConversationInput {
+  where: MessageWhereUniqueInput;
+  data: MessageUpdateWithoutConversationDataInput;
+}
+
+export interface UserUpdateManyWithoutNotificationsInput {
+  create?: Maybe<
+    UserCreateWithoutNotificationsInput[] | UserCreateWithoutNotificationsInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutNotificationsInput[]
+    | UserUpdateWithWhereUniqueWithoutNotificationsInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutNotificationsInput[]
+    | UserUpsertWithWhereUniqueWithoutNotificationsInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface MessageUpdateWithoutConversationDataInput {
@@ -3998,17 +4239,10 @@ export interface MessageUpdateWithoutConversationDataInput {
   deleted?: Maybe<String>;
 }
 
-export interface CommentCreateInput {
-  id?: Maybe<ID_Input>;
-  from: UserCreateOneInput;
-  content: String;
-  likes?: Maybe<UserCreateManyInput>;
-  dislikes?: Maybe<UserCreateManyInput>;
-  reports?: Maybe<ReportCreateManyWithoutCommentInput>;
-  debate: DebateCreateOneWithoutCommentsInput;
-  comments?: Maybe<CommentCreateManyInput>;
-  nested?: Maybe<Boolean>;
-}
+export type TmpUserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
 
 export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   where: MessageWhereUniqueInput;
@@ -4016,37 +4250,9 @@ export interface MessageUpsertWithWhereUniqueWithoutConversationInput {
   create: MessageCreateWithoutConversationInput;
 }
 
-export interface UserCreateWithoutFollowingInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+export interface ConversationUpsertWithoutMessagesInput {
+  update: ConversationUpdateWithoutMessagesDataInput;
+  create: ConversationCreateWithoutMessagesInput;
 }
 
 export interface MessageScalarWhereInput {
@@ -4115,37 +4321,13 @@ export interface MessageScalarWhereInput {
   NOT?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
 }
 
-export interface UserCreateWithoutFollowersInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+export interface MessageUpdateInput {
+  content?: Maybe<String>;
+  to?: Maybe<UserUpdateOneRequiredInput>;
+  from?: Maybe<UserUpdateOneRequiredInput>;
+  read?: Maybe<Boolean>;
+  conversation?: Maybe<ConversationUpdateOneRequiredWithoutMessagesInput>;
+  deleted?: Maybe<String>;
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
@@ -4153,30 +4335,14 @@ export interface MessageUpdateManyWithWhereNestedInput {
   data: MessageUpdateManyDataInput;
 }
 
-export interface DebateCreateWithoutOwnerInput {
+export interface MessageCreateInput {
   id?: Maybe<ID_Input>;
-  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
   content: String;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type: DebateType;
-  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentCreateOneInput>;
-  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
-  positives?: Maybe<UserCreateManyInput>;
-  negatives?: Maybe<UserCreateManyInput>;
-  redVotes?: Maybe<UserCreateManyInput>;
-  blueVotes?: Maybe<UserCreateManyInput>;
-  winner?: Maybe<UserCreateOneInput>;
-  loser?: Maybe<UserCreateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
+  to: UserCreateOneInput;
+  from: UserCreateOneInput;
+  read: Boolean;
+  conversation: ConversationCreateOneWithoutMessagesInput;
+  deleted?: Maybe<String>;
 }
 
 export interface MessageUpdateManyDataInput {
@@ -4185,30 +4351,16 @@ export interface MessageUpdateManyDataInput {
   deleted?: Maybe<String>;
 }
 
-export interface DebateCreateWithoutOwnerRedInput {
+export interface AdCreateInput {
   id?: Maybe<ID_Input>;
-  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
+  name: String;
+  company: String;
+  companyIcon: String;
   content: String;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type: DebateType;
-  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentCreateOneInput>;
-  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
-  positives?: Maybe<UserCreateManyInput>;
-  negatives?: Maybe<UserCreateManyInput>;
-  redVotes?: Maybe<UserCreateManyInput>;
-  blueVotes?: Maybe<UserCreateManyInput>;
-  winner?: Maybe<UserCreateOneInput>;
-  loser?: Maybe<UserCreateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
+  image: String;
+  link?: Maybe<String>;
+  active?: Maybe<Boolean>;
+  ratio?: Maybe<Int>;
 }
 
 export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
@@ -4217,27 +4369,14 @@ export interface ConversationUpsertWithWhereUniqueWithoutSpeakersInput {
   create: ConversationCreateWithoutSpeakersInput;
 }
 
-export interface DebateCreateWithoutOwnerBlueInput {
-  id?: Maybe<ID_Input>;
-  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
-  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
-  content: String;
+export interface DebateUpdateManyMutationInput {
+  content?: Maybe<String>;
   timelimit?: Maybe<DateTimeInput>;
   timelimitString?: Maybe<String>;
-  type: DebateType;
-  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentCreateOneInput>;
-  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
-  positives?: Maybe<UserCreateManyInput>;
-  negatives?: Maybe<UserCreateManyInput>;
-  redVotes?: Maybe<UserCreateManyInput>;
-  blueVotes?: Maybe<UserCreateManyInput>;
-  winner?: Maybe<UserCreateOneInput>;
-  loser?: Maybe<UserCreateOneInput>;
+  type?: Maybe<DebateType>;
   closed?: Maybe<Boolean>;
   crowned?: Maybe<Boolean>;
   published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
   answerOne?: Maybe<String>;
   answerTwo?: Maybe<String>;
   image?: Maybe<String>;
@@ -4293,14 +4432,16 @@ export interface ConversationScalarWhereInput {
   NOT?: Maybe<ConversationScalarWhereInput[] | ConversationScalarWhereInput>;
 }
 
-export interface NotificationCreateWithoutWhoInput {
+export interface CommentCreateInput {
   id?: Maybe<ID_Input>;
-  userId: String;
-  type: NotificationType;
-  status: NotificationStatus;
-  new: Boolean;
-  debate?: Maybe<DebateCreateOneInput>;
-  comment?: Maybe<CommentCreateOneInput>;
+  from: UserCreateOneInput;
+  content: String;
+  likes?: Maybe<UserCreateManyInput>;
+  dislikes?: Maybe<UserCreateManyInput>;
+  reports?: Maybe<ReportCreateManyWithoutCommentInput>;
+  debate: DebateCreateOneWithoutCommentsInput;
+  comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
 }
 
 export interface ConversationUpdateManyWithWhereNestedInput {
@@ -4308,24 +4449,74 @@ export interface ConversationUpdateManyWithWhereNestedInput {
   data: ConversationUpdateManyDataInput;
 }
 
-export interface CommentCreateWithoutDebateInput {
+export interface UserCreateWithoutFollowingInput {
   id?: Maybe<ID_Input>;
-  from: UserCreateOneInput;
-  content: String;
-  likes?: Maybe<UserCreateManyInput>;
-  dislikes?: Maybe<UserCreateManyInput>;
-  reports?: Maybe<ReportCreateManyWithoutCommentInput>;
-  comments?: Maybe<CommentCreateManyInput>;
-  nested?: Maybe<Boolean>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
 }
 
 export interface ConversationUpdateManyDataInput {
   deleted?: Maybe<String>;
 }
 
-export interface DebateCreateOneWithoutReportsInput {
-  create?: Maybe<DebateCreateWithoutReportsInput>;
-  connect?: Maybe<DebateWhereUniqueInput>;
+export interface UserCreateWithoutFollowersInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
 }
 
 export interface UserUpsertWithoutInteractionsInput {
@@ -4333,11 +4524,30 @@ export interface UserUpsertWithoutInteractionsInput {
   create: UserCreateWithoutInteractionsInput;
 }
 
-export interface InteractionCreateWithoutDebateInput {
+export interface DebateCreateWithoutOwnerInput {
   id?: Maybe<ID_Input>;
-  type: InteractionType;
-  who: UserCreateOneWithoutInteractionsInput;
-  comment?: Maybe<CommentCreateOneInput>;
+  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
+  content: String;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type: DebateType;
+  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentCreateOneInput>;
+  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
+  positives?: Maybe<UserCreateManyInput>;
+  negatives?: Maybe<UserCreateManyInput>;
+  redVotes?: Maybe<UserCreateManyInput>;
+  blueVotes?: Maybe<UserCreateManyInput>;
+  winner?: Maybe<UserCreateOneInput>;
+  loser?: Maybe<UserCreateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface InteractionUpsertWithWhereUniqueWithoutDebateInput {
@@ -4346,12 +4556,30 @@ export interface InteractionUpsertWithWhereUniqueWithoutDebateInput {
   create: InteractionCreateWithoutDebateInput;
 }
 
-export interface TrophyCreateWithoutUserInput {
+export interface DebateCreateWithoutOwnerRedInput {
   id?: Maybe<ID_Input>;
-  won: Boolean;
-  type?: Maybe<TrophyType>;
-  debate?: Maybe<DebateCreateOneInput>;
-  comment?: Maybe<CommentCreateOneInput>;
+  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
+  content: String;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type: DebateType;
+  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentCreateOneInput>;
+  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
+  positives?: Maybe<UserCreateManyInput>;
+  negatives?: Maybe<UserCreateManyInput>;
+  redVotes?: Maybe<UserCreateManyInput>;
+  blueVotes?: Maybe<UserCreateManyInput>;
+  winner?: Maybe<UserCreateOneInput>;
+  loser?: Maybe<UserCreateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface InteractionScalarWhereInput {
@@ -4394,6 +4622,103 @@ export interface InteractionScalarWhereInput {
   NOT?: Maybe<InteractionScalarWhereInput[] | InteractionScalarWhereInput>;
 }
 
+export interface DebateCreateWithoutOwnerBlueInput {
+  id?: Maybe<ID_Input>;
+  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
+  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
+  content: String;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type: DebateType;
+  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentCreateOneInput>;
+  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
+  positives?: Maybe<UserCreateManyInput>;
+  negatives?: Maybe<UserCreateManyInput>;
+  redVotes?: Maybe<UserCreateManyInput>;
+  blueVotes?: Maybe<UserCreateManyInput>;
+  winner?: Maybe<UserCreateOneInput>;
+  loser?: Maybe<UserCreateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface InteractionUpdateManyWithWhereNestedInput {
+  where: InteractionScalarWhereInput;
+  data: InteractionUpdateManyDataInput;
+}
+
+export interface NotificationCreateWithoutWhoInput {
+  id?: Maybe<ID_Input>;
+  userId: String;
+  type: NotificationType;
+  status: NotificationStatus;
+  new: Boolean;
+  debate?: Maybe<DebateCreateOneInput>;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface InteractionUpdateManyDataInput {
+  type?: Maybe<InteractionType>;
+}
+
+export interface CommentCreateWithoutDebateInput {
+  id?: Maybe<ID_Input>;
+  from: UserCreateOneInput;
+  content: String;
+  likes?: Maybe<UserCreateManyInput>;
+  dislikes?: Maybe<UserCreateManyInput>;
+  reports?: Maybe<ReportCreateManyWithoutCommentInput>;
+  comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
+}
+
+export interface DebateUpsertWithoutCommentsInput {
+  update: DebateUpdateWithoutCommentsDataInput;
+  create: DebateCreateWithoutCommentsInput;
+}
+
+export interface DebateCreateOneWithoutReportsInput {
+  create?: Maybe<DebateCreateWithoutReportsInput>;
+  connect?: Maybe<DebateWhereUniqueInput>;
+}
+
+export interface CommentUpsertNestedInput {
+  update: CommentUpdateDataInput;
+  create: CommentCreateInput;
+}
+
+export interface InteractionCreateWithoutDebateInput {
+  id?: Maybe<ID_Input>;
+  type: InteractionType;
+  who: UserCreateOneWithoutInteractionsInput;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface DebateUpsertWithoutReportsInput {
+  update: DebateUpdateWithoutReportsDataInput;
+  create: DebateCreateWithoutReportsInput;
+}
+
+export interface TrophyCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  won: Boolean;
+  type?: Maybe<TrophyType>;
+  debate?: Maybe<DebateCreateOneInput>;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface ReportUpsertWithWhereUniqueWithoutCommentInput {
+  where: ReportWhereUniqueInput;
+  update: ReportUpdateWithoutCommentDataInput;
+  create: ReportCreateWithoutCommentInput;
+}
+
 export interface MessageCreateWithoutConversationInput {
   id?: Maybe<ID_Input>;
   content: String;
@@ -4403,9 +4728,10 @@ export interface MessageCreateWithoutConversationInput {
   deleted?: Maybe<String>;
 }
 
-export interface InteractionUpdateManyWithWhereNestedInput {
-  where: InteractionScalarWhereInput;
-  data: InteractionUpdateManyDataInput;
+export interface CommentUpsertWithWhereUniqueWithoutDebateInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutDebateDataInput;
+  create: CommentCreateWithoutDebateInput;
 }
 
 export interface ReportCreateWithoutDebateInput {
@@ -4419,8 +4745,9 @@ export interface ReportCreateWithoutDebateInput {
   treated?: Maybe<Boolean>;
 }
 
-export interface InteractionUpdateManyDataInput {
-  type?: Maybe<InteractionType>;
+export interface DebateUpsertNestedInput {
+  update: DebateUpdateDataInput;
+  create: DebateCreateInput;
 }
 
 export interface DebateCreateWithoutCommentsInput {
@@ -4449,146 +4776,19 @@ export interface DebateCreateWithoutCommentsInput {
   image?: Maybe<String>;
 }
 
-export interface DebateUpsertWithoutCommentsInput {
-  update: DebateUpdateWithoutCommentsDataInput;
-  create: DebateCreateWithoutCommentsInput;
-}
-
-export interface DebateCreateWithoutInteractionsInput {
-  id?: Maybe<ID_Input>;
-  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
-  content: String;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type: DebateType;
-  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentCreateOneInput>;
-  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
-  positives?: Maybe<UserCreateManyInput>;
-  negatives?: Maybe<UserCreateManyInput>;
-  redVotes?: Maybe<UserCreateManyInput>;
-  blueVotes?: Maybe<UserCreateManyInput>;
-  winner?: Maybe<UserCreateOneInput>;
-  loser?: Maybe<UserCreateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface CommentUpsertNestedInput {
-  update: CommentUpdateDataInput;
-  create: CommentCreateInput;
-}
-
-export interface TmpUserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TmpUserWhereInput>;
-  AND?: Maybe<TmpUserSubscriptionWhereInput[] | TmpUserSubscriptionWhereInput>;
-}
-
-export interface DebateUpsertWithoutReportsInput {
-  update: DebateUpdateWithoutReportsDataInput;
-  create: DebateCreateWithoutReportsInput;
-}
-
-export interface MessageSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MessageWhereInput>;
-  AND?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
-}
-
-export interface ReportUpsertWithWhereUniqueWithoutCommentInput {
-  where: ReportWhereUniqueInput;
-  update: ReportUpdateWithoutCommentDataInput;
-  create: ReportCreateWithoutCommentInput;
-}
-
-export interface UserUpdateManyMutationInput {
-  firstname?: Maybe<String>;
-  lastname?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  birthdate?: Maybe<DateTimeInput>;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserUpdatemailErrorsInput>;
-}
-
-export interface CommentUpsertWithWhereUniqueWithoutDebateInput {
-  where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutDebateDataInput;
-  create: CommentCreateWithoutDebateInput;
-}
-
-export interface UserCreateOneWithoutTrophiesInput {
-  create?: Maybe<UserCreateWithoutTrophiesInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface DebateUpsertNestedInput {
-  update: DebateUpdateDataInput;
-  create: DebateCreateInput;
-}
-
-export interface ReportUpdateInput {
-  from?: Maybe<UserUpdateOneInput>;
-  to?: Maybe<UserUpdateOneInput>;
-  type?: Maybe<ReportType>;
-  reason?: Maybe<ReportReason>;
-  reasonText?: Maybe<String>;
-  debate?: Maybe<DebateUpdateOneWithoutReportsInput>;
-  comment?: Maybe<CommentUpdateOneWithoutReportsInput>;
-  treated?: Maybe<Boolean>;
-}
-
 export interface NotificationUpsertWithWhereUniqueWithoutWhoInput {
   where: NotificationWhereUniqueInput;
   update: NotificationUpdateWithoutWhoDataInput;
   create: NotificationCreateWithoutWhoInput;
 }
 
-export interface UserUpdateManyWithoutNotificationsInput {
-  create?: Maybe<
-    UserCreateWithoutNotificationsInput[] | UserCreateWithoutNotificationsInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutNotificationsInput[]
-    | UserUpdateWithWhereUniqueWithoutNotificationsInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutNotificationsInput[]
-    | UserUpsertWithWhereUniqueWithoutNotificationsInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
 export interface NotificationScalarWhereInput {
@@ -4651,9 +4851,15 @@ export interface NotificationScalarWhereInput {
   NOT?: Maybe<NotificationScalarWhereInput[] | NotificationScalarWhereInput>;
 }
 
-export interface ConversationUpsertWithoutMessagesInput {
-  update: ConversationUpdateWithoutMessagesDataInput;
-  create: ConversationCreateWithoutMessagesInput;
+export interface StatistiqueSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<StatistiqueWhereInput>;
+  AND?: Maybe<
+    StatistiqueSubscriptionWhereInput[] | StatistiqueSubscriptionWhereInput
+  >;
 }
 
 export interface NotificationUpdateManyWithWhereNestedInput {
@@ -4661,14 +4867,15 @@ export interface NotificationUpdateManyWithWhereNestedInput {
   data: NotificationUpdateManyDataInput;
 }
 
-export interface MessageCreateInput {
-  id?: Maybe<ID_Input>;
-  content: String;
-  to: UserCreateOneInput;
-  from: UserCreateOneInput;
-  read: Boolean;
-  conversation: ConversationCreateOneWithoutMessagesInput;
-  deleted?: Maybe<String>;
+export interface ConversationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ConversationWhereInput>;
+  AND?: Maybe<
+    ConversationSubscriptionWhereInput[] | ConversationSubscriptionWhereInput
+  >;
 }
 
 export interface NotificationUpdateManyDataInput {
@@ -4678,8 +4885,9 @@ export interface NotificationUpdateManyDataInput {
   new?: Maybe<Boolean>;
 }
 
-export interface ConversationUpdateManyMutationInput {
-  deleted?: Maybe<String>;
+export interface TrophyUpdateManyMutationInput {
+  won?: Maybe<Boolean>;
+  type?: Maybe<TrophyType>;
 }
 
 export interface InteractionUpdateManyWithoutWhoInput {
@@ -4709,6 +4917,135 @@ export interface InteractionUpdateManyWithoutWhoInput {
   >;
 }
 
+export interface UserCreateOneWithoutTrophiesInput {
+  create?: Maybe<UserCreateWithoutTrophiesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface InteractionUpdateWithWhereUniqueWithoutWhoInput {
+  where: InteractionWhereUniqueInput;
+  data: InteractionUpdateWithoutWhoDataInput;
+}
+
+export interface ConnectedUpdateManyWithWhereNestedInput {
+  where: ConnectedScalarWhereInput;
+  data: ConnectedUpdateManyDataInput;
+}
+
+export interface InteractionUpdateWithoutWhoDataInput {
+  type?: Maybe<InteractionType>;
+  debate?: Maybe<DebateUpdateOneWithoutInteractionsInput>;
+  comment?: Maybe<CommentUpdateOneInput>;
+}
+
+export interface StatistiqueUpdateInput {
+  connected?: Maybe<ConnectedUpdateManyInput>;
+}
+
+export interface DebateUpdateOneWithoutInteractionsInput {
+  create?: Maybe<DebateCreateWithoutInteractionsInput>;
+  update?: Maybe<DebateUpdateWithoutInteractionsDataInput>;
+  upsert?: Maybe<DebateUpsertWithoutInteractionsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<DebateWhereUniqueInput>;
+}
+
+export interface NotificationUpdateManyMutationInput {
+  userId?: Maybe<String>;
+  type?: Maybe<NotificationType>;
+  status?: Maybe<NotificationStatus>;
+  new?: Maybe<Boolean>;
+}
+
+export interface DebateUpdateWithoutInteractionsDataInput {
+  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentUpdateOneInput>;
+  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
+  positives?: Maybe<UserUpdateManyInput>;
+  negatives?: Maybe<UserUpdateManyInput>;
+  redVotes?: Maybe<UserUpdateManyInput>;
+  blueVotes?: Maybe<UserUpdateManyInput>;
+  winner?: Maybe<UserUpdateOneInput>;
+  loser?: Maybe<UserUpdateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface UserCreateWithoutNotificationsInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface DebateUpsertWithoutInteractionsInput {
+  update: DebateUpdateWithoutInteractionsDataInput;
+  create: DebateCreateWithoutInteractionsInput;
+}
+
+export interface ConversationUpdateOneRequiredWithoutMessagesInput {
+  create?: Maybe<ConversationCreateWithoutMessagesInput>;
+  update?: Maybe<ConversationUpdateWithoutMessagesDataInput>;
+  upsert?: Maybe<ConversationUpsertWithoutMessagesInput>;
+  connect?: Maybe<ConversationWhereUniqueInput>;
+}
+
+export interface InteractionUpsertWithWhereUniqueWithoutWhoInput {
+  where: InteractionWhereUniqueInput;
+  update: InteractionUpdateWithoutWhoDataInput;
+  create: InteractionCreateWithoutWhoInput;
+}
+
+export interface InteractionUpdateInput {
+  type?: Maybe<InteractionType>;
+  who?: Maybe<UserUpdateOneRequiredWithoutInteractionsInput>;
+  debate?: Maybe<DebateUpdateOneWithoutInteractionsInput>;
+  comment?: Maybe<CommentUpdateOneInput>;
+}
+
+export interface UserUpsertWithoutDebatesRedInput {
+  update: UserUpdateWithoutDebatesRedDataInput;
+  create: UserCreateWithoutDebatesRedInput;
+}
+
 export interface AdTargetUpdateInput {
   name?: Maybe<String>;
   gender?: Maybe<GenderFilter>;
@@ -4716,9 +5053,10 @@ export interface AdTargetUpdateInput {
   birthdateMax?: Maybe<DateTimeInput>;
 }
 
-export interface InteractionUpdateWithWhereUniqueWithoutWhoInput {
-  where: InteractionWhereUniqueInput;
-  data: InteractionUpdateWithoutWhoDataInput;
+export interface DebateUpsertWithWhereUniqueWithoutOwnerBlueInput {
+  where: DebateWhereUniqueInput;
+  update: DebateUpdateWithoutOwnerBlueDataInput;
+  create: DebateCreateWithoutOwnerBlueInput;
 }
 
 export interface UserCreateWithoutBlockingInput {
@@ -4752,236 +5090,6 @@ export interface UserCreateWithoutBlockingInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface InteractionUpdateWithoutWhoDataInput {
-  type?: Maybe<InteractionType>;
-  debate?: Maybe<DebateUpdateOneWithoutInteractionsInput>;
-  comment?: Maybe<CommentUpdateOneInput>;
-}
-
-export interface UserCreateWithoutDebatesBlueInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface DebateUpdateOneWithoutInteractionsInput {
-  create?: Maybe<DebateCreateWithoutInteractionsInput>;
-  update?: Maybe<DebateUpdateWithoutInteractionsDataInput>;
-  upsert?: Maybe<DebateUpsertWithoutInteractionsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<DebateWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutDebatesRedInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface DebateUpdateWithoutInteractionsDataInput {
-  owner?: Maybe<UserUpdateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserUpdateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserUpdateOneWithoutDebatesRedInput>;
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  comments?: Maybe<CommentUpdateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentUpdateOneInput>;
-  reports?: Maybe<ReportUpdateManyWithoutDebateInput>;
-  positives?: Maybe<UserUpdateManyInput>;
-  negatives?: Maybe<UserUpdateManyInput>;
-  redVotes?: Maybe<UserUpdateManyInput>;
-  blueVotes?: Maybe<UserUpdateManyInput>;
-  winner?: Maybe<UserUpdateOneInput>;
-  loser?: Maybe<UserUpdateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface ReportCreateManyWithoutCommentInput {
-  create?: Maybe<
-    ReportCreateWithoutCommentInput[] | ReportCreateWithoutCommentInput
-  >;
-  connect?: Maybe<ReportWhereUniqueInput[] | ReportWhereUniqueInput>;
-}
-
-export interface DebateUpsertWithoutInteractionsInput {
-  update: DebateUpdateWithoutInteractionsDataInput;
-  create: DebateCreateWithoutInteractionsInput;
-}
-
-export interface UserCreateWithoutInteractionsInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface InteractionUpsertWithWhereUniqueWithoutWhoInput {
-  where: InteractionWhereUniqueInput;
-  update: InteractionUpdateWithoutWhoDataInput;
-  create: InteractionCreateWithoutWhoInput;
-}
-
-export interface CommentCreateManyInput {
-  create?: Maybe<CommentCreateInput[] | CommentCreateInput>;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-}
-
-export interface UserUpsertWithoutDebatesRedInput {
-  update: UserUpdateWithoutDebatesRedDataInput;
-  create: UserCreateWithoutDebatesRedInput;
-}
-
-export interface InteractionCreateWithoutWhoInput {
-  id?: Maybe<ID_Input>;
-  type: InteractionType;
-  debate?: Maybe<DebateCreateOneWithoutInteractionsInput>;
-  comment?: Maybe<CommentCreateOneInput>;
-}
-
-export interface DebateUpsertWithWhereUniqueWithoutOwnerBlueInput {
-  where: DebateWhereUniqueInput;
-  update: DebateUpdateWithoutOwnerBlueDataInput;
-  create: DebateCreateWithoutOwnerBlueInput;
-}
-
-export interface ConversationWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  speakers_some?: Maybe<UserWhereInput>;
-  messages_some?: Maybe<MessageWhereInput>;
-  deleted?: Maybe<String>;
-  deleted_not?: Maybe<String>;
-  deleted_in?: Maybe<String[] | String>;
-  deleted_not_in?: Maybe<String[] | String>;
-  deleted_lt?: Maybe<String>;
-  deleted_lte?: Maybe<String>;
-  deleted_gt?: Maybe<String>;
-  deleted_gte?: Maybe<String>;
-  deleted_contains?: Maybe<String>;
-  deleted_not_contains?: Maybe<String>;
-  deleted_starts_with?: Maybe<String>;
-  deleted_not_starts_with?: Maybe<String>;
-  deleted_ends_with?: Maybe<String>;
-  deleted_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ConversationWhereInput[] | ConversationWhereInput>;
 }
 
 export interface DebateScalarWhereInput {
@@ -5108,7 +5216,429 @@ export interface DebateScalarWhereInput {
   NOT?: Maybe<DebateScalarWhereInput[] | DebateScalarWhereInput>;
 }
 
-export interface UserUpdateWithoutTrophiesDataInput {
+export interface UserCreateWithoutDebatesBlueInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface DebateUpdateManyWithWhereNestedInput {
+  where: DebateScalarWhereInput;
+  data: DebateUpdateManyDataInput;
+}
+
+export interface UserCreateWithoutDebatesRedInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface DebateUpdateManyDataInput {
+  content?: Maybe<String>;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type?: Maybe<DebateType>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface ReportCreateManyWithoutCommentInput {
+  create?: Maybe<
+    ReportCreateWithoutCommentInput[] | ReportCreateWithoutCommentInput
+  >;
+  connect?: Maybe<ReportWhereUniqueInput[] | ReportWhereUniqueInput>;
+}
+
+export interface UserUpsertWithoutDebatesInput {
+  update: UserUpdateWithoutDebatesDataInput;
+  create: UserCreateWithoutDebatesInput;
+}
+
+export interface UserCreateWithoutInteractionsInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface DebateUpsertWithWhereUniqueWithoutOwnerRedInput {
+  where: DebateWhereUniqueInput;
+  update: DebateUpdateWithoutOwnerRedDataInput;
+  create: DebateCreateWithoutOwnerRedInput;
+}
+
+export interface CommentCreateManyInput {
+  create?: Maybe<CommentCreateInput[] | CommentCreateInput>;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+}
+
+export interface UserUpsertWithoutDebatesBlueInput {
+  update: UserUpdateWithoutDebatesBlueDataInput;
+  create: UserCreateWithoutDebatesBlueInput;
+}
+
+export interface InteractionCreateWithoutWhoInput {
+  id?: Maybe<ID_Input>;
+  type: InteractionType;
+  debate?: Maybe<DebateCreateOneWithoutInteractionsInput>;
+  comment?: Maybe<CommentCreateOneInput>;
+}
+
+export interface DebateUpsertWithWhereUniqueWithoutOwnerInput {
+  where: DebateWhereUniqueInput;
+  update: DebateUpdateWithoutOwnerDataInput;
+  create: DebateCreateWithoutOwnerInput;
+}
+
+export type AdTargetWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
+
+export interface UserUpsertWithWhereUniqueWithoutBlockedInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutBlockedDataInput;
+  create: UserCreateWithoutBlockedInput;
+}
+
+export type ConnectedWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFollowersDataInput;
+  create: UserCreateWithoutFollowersInput;
+}
+
+export interface ConnectedUpdateDataInput {
+  date?: Maybe<DateTimeInput>;
+  connections?: Maybe<UserUpdateManyInput>;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutBlockingInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutBlockingDataInput;
+  create: UserCreateWithoutBlockingInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutNotificationsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutNotificationsDataInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFollowingDataInput;
+  create: UserCreateWithoutFollowingInput;
+}
+
+export interface ConversationCreateOneWithoutMessagesInput {
+  create?: Maybe<ConversationCreateWithoutMessagesInput>;
+  connect?: Maybe<ConversationWhereUniqueInput>;
+}
+
+export interface CommentUpdateManyMutationInput {
+  content?: Maybe<String>;
+  nested?: Maybe<Boolean>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface ConnectedCreateInput {
+  id?: Maybe<ID_Input>;
+  date: DateTimeInput;
+  connections?: Maybe<UserCreateManyInput>;
+}
+
+export interface UserCreateWithoutDebatesInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface ConnectedUpdateInput {
+  date?: Maybe<DateTimeInput>;
+  connections?: Maybe<UserUpdateManyInput>;
+}
+
+export interface CommentCreateOneInput {
+  create?: Maybe<CommentCreateInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+}
+
+export interface ConnectedUpdateManyMutationInput {
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface CommentCreateWithoutReportsInput {
+  id?: Maybe<ID_Input>;
+  from: UserCreateOneInput;
+  content: String;
+  likes?: Maybe<UserCreateManyInput>;
+  dislikes?: Maybe<UserCreateManyInput>;
+  debate: DebateCreateOneWithoutCommentsInput;
+  comments?: Maybe<CommentCreateManyInput>;
+  nested?: Maybe<Boolean>;
+}
+
+export interface ConversationCreateInput {
+  id?: Maybe<ID_Input>;
+  speakers?: Maybe<UserCreateManyWithoutConversationsInput>;
+  messages?: Maybe<MessageCreateManyWithoutConversationInput>;
+  deleted?: Maybe<String>;
+}
+
+export interface AdSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<AdWhereInput>;
+  AND?: Maybe<AdSubscriptionWhereInput[] | AdSubscriptionWhereInput>;
+}
+
+export interface UserCreateManyWithoutConversationsInput {
+  create?: Maybe<
+    UserCreateWithoutConversationsInput[] | UserCreateWithoutConversationsInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface ReportUpdateManyMutationInput {
+  type?: Maybe<ReportType>;
+  reason?: Maybe<ReportReason>;
+  reasonText?: Maybe<String>;
+  treated?: Maybe<Boolean>;
+}
+
+export interface UserCreateWithoutConversationsInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
+  crowned?: Maybe<Boolean>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
+}
+
+export interface AdUpdateManyMutationInput {
+  name?: Maybe<String>;
+  company?: Maybe<String>;
+  companyIcon?: Maybe<String>;
+  content?: Maybe<String>;
+  image?: Maybe<String>;
+  link?: Maybe<String>;
+  active?: Maybe<Boolean>;
+  ratio?: Maybe<Int>;
+}
+
+export interface ConversationUpdateInput {
+  speakers?: Maybe<UserUpdateManyWithoutConversationsInput>;
+  messages?: Maybe<MessageUpdateManyWithoutConversationInput>;
+  deleted?: Maybe<String>;
+}
+
+export interface DebateCreateInput {
+  id?: Maybe<ID_Input>;
+  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
+  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
+  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
+  content: String;
+  timelimit?: Maybe<DateTimeInput>;
+  timelimitString?: Maybe<String>;
+  type: DebateType;
+  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
+  topComment?: Maybe<CommentCreateOneInput>;
+  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
+  positives?: Maybe<UserCreateManyInput>;
+  negatives?: Maybe<UserCreateManyInput>;
+  redVotes?: Maybe<UserCreateManyInput>;
+  blueVotes?: Maybe<UserCreateManyInput>;
+  winner?: Maybe<UserCreateOneInput>;
+  loser?: Maybe<UserCreateOneInput>;
+  closed?: Maybe<Boolean>;
+  crowned?: Maybe<Boolean>;
+  published?: Maybe<Boolean>;
+  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
+  answerOne?: Maybe<String>;
+  answerTwo?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutConversationsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutConversationsDataInput;
+  create: UserCreateWithoutConversationsInput;
+}
+
+export interface UserUpdateWithoutConversationsDataInput {
   firstname?: Maybe<String>;
   lastname?: Maybe<String>;
   email?: Maybe<String>;
@@ -5134,34 +5664,76 @@ export interface UserUpdateWithoutTrophiesDataInput {
   debatesBlue?: Maybe<DebateUpdateManyWithoutOwnerBlueInput>;
   debatesRed?: Maybe<DebateUpdateManyWithoutOwnerRedInput>;
   notifications?: Maybe<NotificationUpdateManyWithoutWhoInput>;
-  conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
+  trophies?: Maybe<TrophyUpdateManyWithoutUserInput>;
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
 }
 
-export interface DebateUpdateManyWithWhereNestedInput {
-  where: DebateScalarWhereInput;
-  data: DebateUpdateManyDataInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutNotificationsInput {
+export interface UserUpdateWithWhereUniqueWithoutConversationsInput {
   where: UserWhereUniqueInput;
-  update: UserUpdateWithoutNotificationsDataInput;
-  create: UserCreateWithoutNotificationsInput;
+  data: UserUpdateWithoutConversationsDataInput;
 }
 
-export interface DebateUpdateManyDataInput {
-  content?: Maybe<String>;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type?: Maybe<DebateType>;
-  closed?: Maybe<Boolean>;
+export interface UserUpdateManyWithoutConversationsInput {
+  create?: Maybe<
+    UserCreateWithoutConversationsInput[] | UserCreateWithoutConversationsInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutConversationsInput[]
+    | UserUpdateWithWhereUniqueWithoutConversationsInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutConversationsInput[]
+    | UserUpsertWithWhereUniqueWithoutConversationsInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ConversationCreateWithoutSpeakersInput {
+  id?: Maybe<ID_Input>;
+  messages?: Maybe<MessageCreateManyWithoutConversationInput>;
+  deleted?: Maybe<String>;
+}
+
+export interface UserCreateWithoutBlockedInput {
+  id?: Maybe<ID_Input>;
+  firstname: String;
+  lastname: String;
+  email: String;
+  password: String;
+  birthdate: DateTimeInput;
+  role?: Maybe<Role>;
+  certified?: Maybe<Boolean>;
+  gender?: Maybe<Gender>;
+  profilePicture?: Maybe<String>;
+  coverPicture?: Maybe<String>;
+  bio?: Maybe<String>;
+  language?: Maybe<Language>;
+  theme?: Maybe<Theme>;
   crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
+  crownedDate?: Maybe<DateTimeInput>;
+  private?: Maybe<Boolean>;
+  lastConnected?: Maybe<DateTimeInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
+  following?: Maybe<UserCreateManyWithoutFollowersInput>;
+  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
+  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
+  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
+  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
+  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
+  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
+  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
+  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
+  mailStatus?: Maybe<MailStatus>;
+  mailErrors?: Maybe<UserCreatemailErrorsInput>;
 }
 
 export interface TmpUserWhereInput {
@@ -5270,121 +5842,6 @@ export interface TmpUserWhereInput {
   AND?: Maybe<TmpUserWhereInput[] | TmpUserWhereInput>;
 }
 
-export interface UserUpsertWithoutDebatesInput {
-  update: UserUpdateWithoutDebatesDataInput;
-  create: UserCreateWithoutDebatesInput;
-}
-
-export interface AdUpdateManyMutationInput {
-  name?: Maybe<String>;
-  company?: Maybe<String>;
-  companyIcon?: Maybe<String>;
-  content?: Maybe<String>;
-  image?: Maybe<String>;
-  link?: Maybe<String>;
-  active?: Maybe<Boolean>;
-  ratio?: Maybe<Int>;
-}
-
-export interface DebateUpsertWithWhereUniqueWithoutOwnerRedInput {
-  where: DebateWhereUniqueInput;
-  update: DebateUpdateWithoutOwnerRedDataInput;
-  create: DebateCreateWithoutOwnerRedInput;
-}
-
-export interface UserCreateWithoutBlockedInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface UserUpsertWithoutDebatesBlueInput {
-  update: UserUpdateWithoutDebatesBlueDataInput;
-  create: UserCreateWithoutDebatesBlueInput;
-}
-
-export interface DebateCreateInput {
-  id?: Maybe<ID_Input>;
-  owner?: Maybe<UserCreateOneWithoutDebatesInput>;
-  ownerBlue?: Maybe<UserCreateOneWithoutDebatesBlueInput>;
-  ownerRed?: Maybe<UserCreateOneWithoutDebatesRedInput>;
-  content: String;
-  timelimit?: Maybe<DateTimeInput>;
-  timelimitString?: Maybe<String>;
-  type: DebateType;
-  comments?: Maybe<CommentCreateManyWithoutDebateInput>;
-  topComment?: Maybe<CommentCreateOneInput>;
-  reports?: Maybe<ReportCreateManyWithoutDebateInput>;
-  positives?: Maybe<UserCreateManyInput>;
-  negatives?: Maybe<UserCreateManyInput>;
-  redVotes?: Maybe<UserCreateManyInput>;
-  blueVotes?: Maybe<UserCreateManyInput>;
-  winner?: Maybe<UserCreateOneInput>;
-  loser?: Maybe<UserCreateOneInput>;
-  closed?: Maybe<Boolean>;
-  crowned?: Maybe<Boolean>;
-  published?: Maybe<Boolean>;
-  interactions?: Maybe<InteractionCreateManyWithoutDebateInput>;
-  answerOne?: Maybe<String>;
-  answerTwo?: Maybe<String>;
-  image?: Maybe<String>;
-}
-
-export interface DebateUpsertWithWhereUniqueWithoutOwnerInput {
-  where: DebateWhereUniqueInput;
-  update: DebateUpdateWithoutOwnerDataInput;
-  create: DebateCreateWithoutOwnerInput;
-}
-
-export interface ConversationCreateWithoutSpeakersInput {
-  id?: Maybe<ID_Input>;
-  messages?: Maybe<MessageCreateManyWithoutConversationInput>;
-  deleted?: Maybe<String>;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutBlockedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutBlockedDataInput;
-  create: UserCreateWithoutBlockedInput;
-}
-
-export type CommentWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutFollowersDataInput;
-  create: UserCreateWithoutFollowersInput;
-}
-
 export interface TmpUserUpdateInput {
   firstname?: Maybe<String>;
   lastname?: Maybe<String>;
@@ -5395,181 +5852,47 @@ export interface TmpUserUpdateInput {
   gender?: Maybe<Gender>;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutBlockingInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutBlockingDataInput;
-  create: UserCreateWithoutBlockingInput;
-}
-
-export interface InteractionCreateInput {
+export interface TrophyWhereInput {
   id?: Maybe<ID_Input>;
-  type: InteractionType;
-  who: UserCreateOneWithoutInteractionsInput;
-  debate?: Maybe<DebateCreateOneWithoutInteractionsInput>;
-  comment?: Maybe<CommentCreateOneInput>;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutFollowingInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutFollowingDataInput;
-  create: UserCreateWithoutFollowingInput;
-}
-
-export interface UserCreateWithoutDebatesInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface CommentUpdateManyMutationInput {
-  content?: Maybe<String>;
-  nested?: Maybe<Boolean>;
-}
-
-export interface CommentCreateWithoutReportsInput {
-  id?: Maybe<ID_Input>;
-  from: UserCreateOneInput;
-  content: String;
-  likes?: Maybe<UserCreateManyInput>;
-  dislikes?: Maybe<UserCreateManyInput>;
-  debate: DebateCreateOneWithoutCommentsInput;
-  comments?: Maybe<CommentCreateManyInput>;
-  nested?: Maybe<Boolean>;
-}
-
-export interface ConversationUpdateInput {
-  speakers?: Maybe<UserUpdateManyWithoutConversationsInput>;
-  messages?: Maybe<MessageUpdateManyWithoutConversationInput>;
-  deleted?: Maybe<String>;
-}
-
-export interface UserCreateWithoutConversationsInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface UserCreateManyWithoutConversationsInput {
-  create?: Maybe<
-    UserCreateWithoutConversationsInput[] | UserCreateWithoutConversationsInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface ConversationCreateInput {
-  id?: Maybe<ID_Input>;
-  speakers?: Maybe<UserCreateManyWithoutConversationsInput>;
-  messages?: Maybe<MessageCreateManyWithoutConversationInput>;
-  deleted?: Maybe<String>;
-}
-
-export interface CommentSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CommentWhereInput>;
-  AND?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
-}
-
-export interface CommentCreateOneInput {
-  create?: Maybe<CommentCreateInput>;
-  connect?: Maybe<CommentWhereUniqueInput>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  firstname: String;
-  lastname: String;
-  email: String;
-  password: String;
-  birthdate: DateTimeInput;
-  role?: Maybe<Role>;
-  certified?: Maybe<Boolean>;
-  gender?: Maybe<Gender>;
-  profilePicture?: Maybe<String>;
-  coverPicture?: Maybe<String>;
-  bio?: Maybe<String>;
-  language?: Maybe<Language>;
-  theme?: Maybe<Theme>;
-  crowned?: Maybe<Boolean>;
-  crownedDate?: Maybe<DateTimeInput>;
-  private?: Maybe<Boolean>;
-  lastConnected?: Maybe<DateTimeInput>;
-  followers?: Maybe<UserCreateManyWithoutFollowingInput>;
-  following?: Maybe<UserCreateManyWithoutFollowersInput>;
-  blocked?: Maybe<UserCreateManyWithoutBlockingInput>;
-  blocking?: Maybe<UserCreateManyWithoutBlockedInput>;
-  debates?: Maybe<DebateCreateManyWithoutOwnerInput>;
-  debatesBlue?: Maybe<DebateCreateManyWithoutOwnerBlueInput>;
-  debatesRed?: Maybe<DebateCreateManyWithoutOwnerRedInput>;
-  notifications?: Maybe<NotificationCreateManyWithoutWhoInput>;
-  trophies?: Maybe<TrophyCreateManyWithoutUserInput>;
-  conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
-  interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
-  mailStatus?: Maybe<MailStatus>;
-  mailErrors?: Maybe<UserCreatemailErrorsInput>;
-}
-
-export interface UserCreateManyWithoutNotificationsInput {
-  create?: Maybe<
-    UserCreateWithoutNotificationsInput[] | UserCreateWithoutNotificationsInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  user?: Maybe<UserWhereInput>;
+  won?: Maybe<Boolean>;
+  won_not?: Maybe<Boolean>;
+  type?: Maybe<TrophyType>;
+  type_not?: Maybe<TrophyType>;
+  type_in?: Maybe<TrophyType[] | TrophyType>;
+  type_not_in?: Maybe<TrophyType[] | TrophyType>;
+  debate?: Maybe<DebateWhereInput>;
+  comment?: Maybe<CommentWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<TrophyWhereInput[] | TrophyWhereInput>;
 }
 
 export interface NodeNode {
@@ -5655,47 +5978,51 @@ export interface UserPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface Trophy {
+export interface Message {
   id: ID_Output;
-  won: Boolean;
-  type?: TrophyType;
+  content: String;
+  read: Boolean;
+  deleted?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface TrophyPromise extends Promise<Trophy>, Fragmentable {
+export interface MessagePromise extends Promise<Message>, Fragmentable {
   id: () => Promise<ID_Output>;
-  user: <T = UserPromise>() => T;
-  won: () => Promise<Boolean>;
-  type: () => Promise<TrophyType>;
-  debate: <T = DebatePromise>() => T;
-  comment: <T = CommentPromise>() => T;
+  content: () => Promise<String>;
+  to: <T = UserPromise>() => T;
+  from: <T = UserPromise>() => T;
+  read: () => Promise<Boolean>;
+  conversation: <T = ConversationPromise>() => T;
+  deleted: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TrophySubscription
-  extends Promise<AsyncIterator<Trophy>>,
+export interface MessageSubscription
+  extends Promise<AsyncIterator<Message>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  user: <T = UserSubscription>() => T;
-  won: () => Promise<AsyncIterator<Boolean>>;
-  type: () => Promise<AsyncIterator<TrophyType>>;
-  debate: <T = DebateSubscription>() => T;
-  comment: <T = CommentSubscription>() => T;
+  content: () => Promise<AsyncIterator<String>>;
+  to: <T = UserSubscription>() => T;
+  from: <T = UserSubscription>() => T;
+  read: () => Promise<AsyncIterator<Boolean>>;
+  conversation: <T = ConversationSubscription>() => T;
+  deleted: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface TrophyNullablePromise
-  extends Promise<Trophy | null>,
+export interface MessageNullablePromise
+  extends Promise<Message | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  user: <T = UserPromise>() => T;
-  won: () => Promise<Boolean>;
-  type: () => Promise<TrophyType>;
-  debate: <T = DebatePromise>() => T;
-  comment: <T = CommentPromise>() => T;
+  content: () => Promise<String>;
+  to: <T = UserPromise>() => T;
+  from: <T = UserPromise>() => T;
+  read: () => Promise<Boolean>;
+  conversation: <T = ConversationPromise>() => T;
+  deleted: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -6101,154 +6428,25 @@ export interface UserNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface Comment {
-  id: ID_Output;
-  content: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  nested: Boolean;
+export interface CommentConnection {
+  pageInfo: PageInfo;
+  edges: CommentEdge[];
 }
 
-export interface CommentPromise extends Promise<Comment>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  from: <T = UserPromise>() => T;
-  content: () => Promise<String>;
-  likes: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  dislikes: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reports: <T = FragmentableArray<Report>>(args?: {
-    where?: ReportWhereInput;
-    orderBy?: ReportOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  debate: <T = DebatePromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  comments: <T = FragmentableArray<Comment>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  nested: () => Promise<Boolean>;
-}
-
-export interface CommentSubscription
-  extends Promise<AsyncIterator<Comment>>,
+export interface CommentConnectionPromise
+  extends Promise<CommentConnection>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  from: <T = UserSubscription>() => T;
-  content: () => Promise<AsyncIterator<String>>;
-  likes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  dislikes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reports: <T = Promise<AsyncIterator<ReportSubscription>>>(args?: {
-    where?: ReportWhereInput;
-    orderBy?: ReportOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  debate: <T = DebateSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  nested: () => Promise<AsyncIterator<Boolean>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CommentEdge>>() => T;
+  aggregate: <T = AggregateCommentPromise>() => T;
 }
 
-export interface CommentNullablePromise
-  extends Promise<Comment | null>,
+export interface CommentConnectionSubscription
+  extends Promise<AsyncIterator<CommentConnection>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  from: <T = UserPromise>() => T;
-  content: () => Promise<String>;
-  likes: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  dislikes: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reports: <T = FragmentableArray<Report>>(args?: {
-    where?: ReportWhereInput;
-    orderBy?: ReportOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  debate: <T = DebatePromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  comments: <T = FragmentableArray<Comment>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  nested: () => Promise<Boolean>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCommentSubscription>() => T;
 }
 
 export interface AggregateAdTarget {
@@ -6348,21 +6546,18 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface Notification {
+export interface Conversation {
   id: ID_Output;
-  userId: String;
-  type: NotificationType;
-  status: NotificationStatus;
-  new: Boolean;
+  deleted?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface NotificationPromise
-  extends Promise<Notification>,
+export interface ConversationPromise
+  extends Promise<Conversation>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  who: <T = FragmentableArray<User>>(args?: {
+  speakers: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;
     skip?: Int;
@@ -6371,21 +6566,25 @@ export interface NotificationPromise
     first?: Int;
     last?: Int;
   }) => T;
-  userId: () => Promise<String>;
-  type: () => Promise<NotificationType>;
-  status: () => Promise<NotificationStatus>;
-  new: () => Promise<Boolean>;
-  debate: <T = DebatePromise>() => T;
-  comment: <T = CommentPromise>() => T;
+  messages: <T = FragmentableArray<Message>>(args?: {
+    where?: MessageWhereInput;
+    orderBy?: MessageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  deleted: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface NotificationSubscription
-  extends Promise<AsyncIterator<Notification>>,
+export interface ConversationSubscription
+  extends Promise<AsyncIterator<Conversation>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  who: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+  speakers: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;
     skip?: Int;
@@ -6394,21 +6593,25 @@ export interface NotificationSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  userId: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<NotificationType>>;
-  status: () => Promise<AsyncIterator<NotificationStatus>>;
-  new: () => Promise<AsyncIterator<Boolean>>;
-  debate: <T = DebateSubscription>() => T;
-  comment: <T = CommentSubscription>() => T;
+  messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
+    where?: MessageWhereInput;
+    orderBy?: MessageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  deleted: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface NotificationNullablePromise
-  extends Promise<Notification | null>,
+export interface ConversationNullablePromise
+  extends Promise<Conversation | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  who: <T = FragmentableArray<User>>(args?: {
+  speakers: <T = FragmentableArray<User>>(args?: {
     where?: UserWhereInput;
     orderBy?: UserOrderByInput;
     skip?: Int;
@@ -6417,12 +6620,16 @@ export interface NotificationNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  userId: () => Promise<String>;
-  type: () => Promise<NotificationType>;
-  status: () => Promise<NotificationStatus>;
-  new: () => Promise<Boolean>;
-  debate: <T = DebatePromise>() => T;
-  comment: <T = CommentPromise>() => T;
+  messages: <T = FragmentableArray<Message>>(args?: {
+    where?: MessageWhereInput;
+    orderBy?: MessageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  deleted: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -6444,41 +6651,45 @@ export interface TrophyEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Interaction {
+export interface Trophy {
   id: ID_Output;
-  type: InteractionType;
+  won: Boolean;
+  type?: TrophyType;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
+export interface TrophyPromise extends Promise<Trophy>, Fragmentable {
   id: () => Promise<ID_Output>;
-  type: () => Promise<InteractionType>;
-  who: <T = UserPromise>() => T;
+  user: <T = UserPromise>() => T;
+  won: () => Promise<Boolean>;
+  type: () => Promise<TrophyType>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface InteractionSubscription
-  extends Promise<AsyncIterator<Interaction>>,
+export interface TrophySubscription
+  extends Promise<AsyncIterator<Trophy>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  type: () => Promise<AsyncIterator<InteractionType>>;
-  who: <T = UserSubscription>() => T;
+  user: <T = UserSubscription>() => T;
+  won: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<TrophyType>>;
   debate: <T = DebateSubscription>() => T;
   comment: <T = CommentSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface InteractionNullablePromise
-  extends Promise<Interaction | null>,
+export interface TrophyNullablePromise
+  extends Promise<Trophy | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  type: () => Promise<InteractionType>;
-  who: <T = UserPromise>() => T;
+  user: <T = UserPromise>() => T;
+  won: () => Promise<Boolean>;
+  type: () => Promise<TrophyType>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -6674,20 +6885,22 @@ export interface AdPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ReportEdge {
-  node: Report;
+export interface StatistiqueEdge {
+  node: Statistique;
   cursor: String;
 }
 
-export interface ReportEdgePromise extends Promise<ReportEdge>, Fragmentable {
-  node: <T = ReportPromise>() => T;
+export interface StatistiqueEdgePromise
+  extends Promise<StatistiqueEdge>,
+    Fragmentable {
+  node: <T = StatistiquePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface ReportEdgeSubscription
-  extends Promise<AsyncIterator<ReportEdge>>,
+export interface StatistiqueEdgeSubscription
+  extends Promise<AsyncIterator<StatistiqueEdge>>,
     Fragmentable {
-  node: <T = ReportSubscription>() => T;
+  node: <T = StatistiqueSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -6712,20 +6925,29 @@ export interface AdConnectionSubscription
   aggregate: <T = AggregateAdSubscription>() => T;
 }
 
-export interface AggregateNotification {
-  count: Int;
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
 }
 
-export interface AggregateNotificationPromise
-  extends Promise<AggregateNotification>,
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
 }
 
-export interface AggregateNotificationSubscription
-  extends Promise<AsyncIterator<AggregateNotification>>,
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
 export interface AdTargetSubscriptionPayload {
@@ -6753,25 +6975,20 @@ export interface AdTargetSubscriptionPayloadSubscription
   previousValues: <T = AdTargetPreviousValuesSubscription>() => T;
 }
 
-export interface NotificationConnection {
-  pageInfo: PageInfo;
-  edges: NotificationEdge[];
+export interface AggregateReport {
+  count: Int;
 }
 
-export interface NotificationConnectionPromise
-  extends Promise<NotificationConnection>,
+export interface AggregateReportPromise
+  extends Promise<AggregateReport>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<NotificationEdge>>() => T;
-  aggregate: <T = AggregateNotificationPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface NotificationConnectionSubscription
-  extends Promise<AsyncIterator<NotificationConnection>>,
+export interface AggregateReportSubscription
+  extends Promise<AsyncIterator<AggregateReport>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<NotificationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateNotificationSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface AdTargetPreviousValues {
@@ -6808,93 +7025,123 @@ export interface AdTargetPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface MessageEdge {
-  node: Message;
-  cursor: String;
+export interface ReportConnection {
+  pageInfo: PageInfo;
+  edges: ReportEdge[];
 }
 
-export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
-  node: <T = MessagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MessageEdgeSubscription
-  extends Promise<AsyncIterator<MessageEdge>>,
+export interface ReportConnectionPromise
+  extends Promise<ReportConnection>,
     Fragmentable {
-  node: <T = MessageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ReportEdge>>() => T;
+  aggregate: <T = AggregateReportPromise>() => T;
 }
 
-export interface Report {
+export interface ReportConnectionSubscription
+  extends Promise<AsyncIterator<ReportConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ReportEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateReportSubscription>() => T;
+}
+
+export interface Notification {
   id: ID_Output;
-  type: ReportType;
-  reason: ReportReason;
-  reasonText?: String;
-  treated: Boolean;
+  userId: String;
+  type: NotificationType;
+  status: NotificationStatus;
+  new: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface ReportPromise extends Promise<Report>, Fragmentable {
+export interface NotificationPromise
+  extends Promise<Notification>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  from: <T = UserPromise>() => T;
-  to: <T = UserPromise>() => T;
-  type: () => Promise<ReportType>;
-  reason: () => Promise<ReportReason>;
-  reasonText: () => Promise<String>;
+  who: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  userId: () => Promise<String>;
+  type: () => Promise<NotificationType>;
+  status: () => Promise<NotificationStatus>;
+  new: () => Promise<Boolean>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
-  treated: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface ReportSubscription
-  extends Promise<AsyncIterator<Report>>,
+export interface NotificationSubscription
+  extends Promise<AsyncIterator<Notification>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  from: <T = UserSubscription>() => T;
-  to: <T = UserSubscription>() => T;
-  type: () => Promise<AsyncIterator<ReportType>>;
-  reason: () => Promise<AsyncIterator<ReportReason>>;
-  reasonText: () => Promise<AsyncIterator<String>>;
+  who: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  userId: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<NotificationType>>;
+  status: () => Promise<AsyncIterator<NotificationStatus>>;
+  new: () => Promise<AsyncIterator<Boolean>>;
   debate: <T = DebateSubscription>() => T;
   comment: <T = CommentSubscription>() => T;
-  treated: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ReportNullablePromise
-  extends Promise<Report | null>,
+export interface NotificationNullablePromise
+  extends Promise<Notification | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  from: <T = UserPromise>() => T;
-  to: <T = UserPromise>() => T;
-  type: () => Promise<ReportType>;
-  reason: () => Promise<ReportReason>;
-  reasonText: () => Promise<String>;
+  who: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  userId: () => Promise<String>;
+  type: () => Promise<NotificationType>;
+  status: () => Promise<NotificationStatus>;
+  new: () => Promise<Boolean>;
   debate: <T = DebatePromise>() => T;
   comment: <T = CommentPromise>() => T;
-  treated: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface AggregateInteraction {
-  count: Int;
+export interface NotificationEdge {
+  node: Notification;
+  cursor: String;
 }
 
-export interface AggregateInteractionPromise
-  extends Promise<AggregateInteraction>,
+export interface NotificationEdgePromise
+  extends Promise<NotificationEdge>,
     Fragmentable {
-  count: () => Promise<Int>;
+  node: <T = NotificationPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateInteractionSubscription
-  extends Promise<AsyncIterator<AggregateInteraction>>,
+export interface NotificationEdgeSubscription
+  extends Promise<AsyncIterator<NotificationEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = NotificationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface CommentSubscriptionPayload {
@@ -6922,25 +7169,20 @@ export interface CommentSubscriptionPayloadSubscription
   previousValues: <T = CommentPreviousValuesSubscription>() => T;
 }
 
-export interface InteractionConnection {
-  pageInfo: PageInfo;
-  edges: InteractionEdge[];
+export interface AggregateMessage {
+  count: Int;
 }
 
-export interface InteractionConnectionPromise
-  extends Promise<InteractionConnection>,
+export interface AggregateMessagePromise
+  extends Promise<AggregateMessage>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<InteractionEdge>>() => T;
-  aggregate: <T = AggregateInteractionPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface InteractionConnectionSubscription
-  extends Promise<AsyncIterator<InteractionConnection>>,
+export interface AggregateMessageSubscription
+  extends Promise<AsyncIterator<AggregateMessage>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<InteractionEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateInteractionSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface CommentPreviousValues {
@@ -6971,21 +7213,25 @@ export interface CommentPreviousValuesSubscription
   nested: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface DebateEdge {
-  node: Debate;
-  cursor: String;
+export interface MessageConnection {
+  pageInfo: PageInfo;
+  edges: MessageEdge[];
 }
 
-export interface DebateEdgePromise extends Promise<DebateEdge>, Fragmentable {
-  node: <T = DebatePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface DebateEdgeSubscription
-  extends Promise<AsyncIterator<DebateEdge>>,
+export interface MessageConnectionPromise
+  extends Promise<MessageConnection>,
     Fragmentable {
-  node: <T = DebateSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MessageEdge>>() => T;
+  aggregate: <T = AggregateMessagePromise>() => T;
+}
+
+export interface MessageConnectionSubscription
+  extends Promise<AsyncIterator<MessageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMessageSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -7011,20 +7257,170 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateConversation {
+export interface InteractionEdge {
+  node: Interaction;
+  cursor: String;
+}
+
+export interface InteractionEdgePromise
+  extends Promise<InteractionEdge>,
+    Fragmentable {
+  node: <T = InteractionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface InteractionEdgeSubscription
+  extends Promise<AsyncIterator<InteractionEdge>>,
+    Fragmentable {
+  node: <T = InteractionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ConnectedSubscriptionPayload {
+  mutation: MutationType;
+  node: Connected;
+  updatedFields: String[];
+  previousValues: ConnectedPreviousValues;
+}
+
+export interface ConnectedSubscriptionPayloadPromise
+  extends Promise<ConnectedSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ConnectedPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ConnectedPreviousValuesPromise>() => T;
+}
+
+export interface ConnectedSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ConnectedSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ConnectedSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ConnectedPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateDebate {
   count: Int;
 }
 
-export interface AggregateConversationPromise
-  extends Promise<AggregateConversation>,
+export interface AggregateDebatePromise
+  extends Promise<AggregateDebate>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateConversationSubscription
-  extends Promise<AsyncIterator<AggregateConversation>>,
+export interface AggregateDebateSubscription
+  extends Promise<AsyncIterator<AggregateDebate>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ConnectedPreviousValues {
+  id: ID_Output;
+  date: DateTimeOutput;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ConnectedPreviousValuesPromise
+  extends Promise<ConnectedPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  date: () => Promise<DateTimeOutput>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ConnectedPreviousValuesSubscription
+  extends Promise<AsyncIterator<ConnectedPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface DebateConnection {
+  pageInfo: PageInfo;
+  edges: DebateEdge[];
+}
+
+export interface DebateConnectionPromise
+  extends Promise<DebateConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DebateEdge>>() => T;
+  aggregate: <T = AggregateDebatePromise>() => T;
+}
+
+export interface DebateConnectionSubscription
+  extends Promise<AsyncIterator<DebateConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DebateEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDebateSubscription>() => T;
+}
+
+export interface Interaction {
+  id: ID_Output;
+  type: InteractionType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  type: () => Promise<InteractionType>;
+  who: <T = UserPromise>() => T;
+  debate: <T = DebatePromise>() => T;
+  comment: <T = CommentPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface InteractionSubscription
+  extends Promise<AsyncIterator<Interaction>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  type: () => Promise<AsyncIterator<InteractionType>>;
+  who: <T = UserSubscription>() => T;
+  debate: <T = DebateSubscription>() => T;
+  comment: <T = CommentSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface InteractionNullablePromise
+  extends Promise<Interaction | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  type: () => Promise<InteractionType>;
+  who: <T = UserPromise>() => T;
+  debate: <T = DebatePromise>() => T;
+  comment: <T = CommentPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ConversationEdge {
+  node: Conversation;
+  cursor: String;
+}
+
+export interface ConversationEdgePromise
+  extends Promise<ConversationEdge>,
+    Fragmentable {
+  node: <T = ConversationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ConversationEdgeSubscription
+  extends Promise<AsyncIterator<ConversationEdge>>,
+    Fragmentable {
+  node: <T = ConversationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ConversationSubscriptionPayload {
@@ -7052,25 +7448,20 @@ export interface ConversationSubscriptionPayloadSubscription
   previousValues: <T = ConversationPreviousValuesSubscription>() => T;
 }
 
-export interface ConversationConnection {
-  pageInfo: PageInfo;
-  edges: ConversationEdge[];
+export interface AggregateConnected {
+  count: Int;
 }
 
-export interface ConversationConnectionPromise
-  extends Promise<ConversationConnection>,
+export interface AggregateConnectedPromise
+  extends Promise<AggregateConnected>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ConversationEdge>>() => T;
-  aggregate: <T = AggregateConversationPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface ConversationConnectionSubscription
-  extends Promise<AsyncIterator<ConversationConnection>>,
+export interface AggregateConnectedSubscription
+  extends Promise<AsyncIterator<AggregateConnected>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ConversationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateConversationSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ConversationPreviousValues {
@@ -7098,21 +7489,25 @@ export interface ConversationPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface CommentEdge {
-  node: Comment;
-  cursor: String;
+export interface ConnectedConnection {
+  pageInfo: PageInfo;
+  edges: ConnectedEdge[];
 }
 
-export interface CommentEdgePromise extends Promise<CommentEdge>, Fragmentable {
-  node: <T = CommentPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CommentEdgeSubscription
-  extends Promise<AsyncIterator<CommentEdge>>,
+export interface ConnectedConnectionPromise
+  extends Promise<ConnectedConnection>,
     Fragmentable {
-  node: <T = CommentSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ConnectedEdge>>() => T;
+  aggregate: <T = AggregateConnectedPromise>() => T;
+}
+
+export interface ConnectedConnectionSubscription
+  extends Promise<AsyncIterator<ConnectedConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ConnectedEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateConnectedSubscription>() => T;
 }
 
 export interface AdEdge {
@@ -7132,51 +7527,61 @@ export interface AdEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Message {
+export interface Connected {
   id: ID_Output;
-  content: String;
-  read: Boolean;
-  deleted?: String;
+  date: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface MessagePromise extends Promise<Message>, Fragmentable {
+export interface ConnectedPromise extends Promise<Connected>, Fragmentable {
   id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  to: <T = UserPromise>() => T;
-  from: <T = UserPromise>() => T;
-  read: () => Promise<Boolean>;
-  conversation: <T = ConversationPromise>() => T;
-  deleted: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  connections: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface MessageSubscription
-  extends Promise<AsyncIterator<Message>>,
+export interface ConnectedSubscription
+  extends Promise<AsyncIterator<Connected>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  content: () => Promise<AsyncIterator<String>>;
-  to: <T = UserSubscription>() => T;
-  from: <T = UserSubscription>() => T;
-  read: () => Promise<AsyncIterator<Boolean>>;
-  conversation: <T = ConversationSubscription>() => T;
-  deleted: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  connections: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface MessageNullablePromise
-  extends Promise<Message | null>,
+export interface ConnectedNullablePromise
+  extends Promise<Connected | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  to: <T = UserPromise>() => T;
-  from: <T = UserPromise>() => T;
-  read: () => Promise<Boolean>;
-  conversation: <T = ConversationPromise>() => T;
-  deleted: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  connections: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -7206,92 +7611,21 @@ export interface DebateSubscriptionPayloadSubscription
   previousValues: <T = DebatePreviousValuesSubscription>() => T;
 }
 
-export interface Conversation {
-  id: ID_Output;
-  deleted?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+export interface CommentEdge {
+  node: Comment;
+  cursor: String;
 }
 
-export interface ConversationPromise
-  extends Promise<Conversation>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  speakers: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  messages: <T = FragmentableArray<Message>>(args?: {
-    where?: MessageWhereInput;
-    orderBy?: MessageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  deleted: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+export interface CommentEdgePromise extends Promise<CommentEdge>, Fragmentable {
+  node: <T = CommentPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface ConversationSubscription
-  extends Promise<AsyncIterator<Conversation>>,
+export interface CommentEdgeSubscription
+  extends Promise<AsyncIterator<CommentEdge>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  speakers: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  messages: <T = Promise<AsyncIterator<MessageSubscription>>>(args?: {
-    where?: MessageWhereInput;
-    orderBy?: MessageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  deleted: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface ConversationNullablePromise
-  extends Promise<Conversation | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  speakers: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  messages: <T = FragmentableArray<Message>>(args?: {
-    where?: MessageWhereInput;
-    orderBy?: MessageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  deleted: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+  node: <T = CommentSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface DebatePreviousValues {
@@ -7360,6 +7694,324 @@ export interface AggregateTrophySubscription
   extends Promise<AsyncIterator<AggregateTrophy>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Report {
+  id: ID_Output;
+  type: ReportType;
+  reason: ReportReason;
+  reasonText?: String;
+  treated: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ReportPromise extends Promise<Report>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  from: <T = UserPromise>() => T;
+  to: <T = UserPromise>() => T;
+  type: () => Promise<ReportType>;
+  reason: () => Promise<ReportReason>;
+  reasonText: () => Promise<String>;
+  debate: <T = DebatePromise>() => T;
+  comment: <T = CommentPromise>() => T;
+  treated: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ReportSubscription
+  extends Promise<AsyncIterator<Report>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  from: <T = UserSubscription>() => T;
+  to: <T = UserSubscription>() => T;
+  type: () => Promise<AsyncIterator<ReportType>>;
+  reason: () => Promise<AsyncIterator<ReportReason>>;
+  reasonText: () => Promise<AsyncIterator<String>>;
+  debate: <T = DebateSubscription>() => T;
+  comment: <T = CommentSubscription>() => T;
+  treated: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ReportNullablePromise
+  extends Promise<Report | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  from: <T = UserPromise>() => T;
+  to: <T = UserPromise>() => T;
+  type: () => Promise<ReportType>;
+  reason: () => Promise<ReportReason>;
+  reasonText: () => Promise<String>;
+  debate: <T = DebatePromise>() => T;
+  comment: <T = CommentPromise>() => T;
+  treated: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TmpUserEdge {
+  node: TmpUser;
+  cursor: String;
+}
+
+export interface TmpUserEdgePromise extends Promise<TmpUserEdge>, Fragmentable {
+  node: <T = TmpUserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TmpUserEdgeSubscription
+  extends Promise<AsyncIterator<TmpUserEdge>>,
+    Fragmentable {
+  node: <T = TmpUserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface InteractionSubscriptionPayload {
+  mutation: MutationType;
+  node: Interaction;
+  updatedFields: String[];
+  previousValues: InteractionPreviousValues;
+}
+
+export interface InteractionSubscriptionPayloadPromise
+  extends Promise<InteractionSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = InteractionPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = InteractionPreviousValuesPromise>() => T;
+}
+
+export interface InteractionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<InteractionSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = InteractionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = InteractionPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateStatistique {
+  count: Int;
+}
+
+export interface AggregateStatistiquePromise
+  extends Promise<AggregateStatistique>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateStatistiqueSubscription
+  extends Promise<AsyncIterator<AggregateStatistique>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface InteractionPreviousValues {
+  id: ID_Output;
+  type: InteractionType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface InteractionPreviousValuesPromise
+  extends Promise<InteractionPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  type: () => Promise<InteractionType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface InteractionPreviousValuesSubscription
+  extends Promise<AsyncIterator<InteractionPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  type: () => Promise<AsyncIterator<InteractionType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface Statistique {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface StatistiquePromise extends Promise<Statistique>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  connected: <T = FragmentableArray<Connected>>(args?: {
+    where?: ConnectedWhereInput;
+    orderBy?: ConnectedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StatistiqueSubscription
+  extends Promise<AsyncIterator<Statistique>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  connected: <T = Promise<AsyncIterator<ConnectedSubscription>>>(args?: {
+    where?: ConnectedWhereInput;
+    orderBy?: ConnectedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface StatistiqueNullablePromise
+  extends Promise<Statistique | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  connected: <T = FragmentableArray<Connected>>(args?: {
+    where?: ConnectedWhereInput;
+    orderBy?: ConnectedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface AggregateAd {
+  count: Int;
+}
+
+export interface AggregateAdPromise extends Promise<AggregateAd>, Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAdSubscription
+  extends Promise<AsyncIterator<AggregateAd>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateNotification {
+  count: Int;
+}
+
+export interface AggregateNotificationPromise
+  extends Promise<AggregateNotification>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateNotificationSubscription
+  extends Promise<AsyncIterator<AggregateNotification>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MessageSubscriptionPayload {
+  mutation: MutationType;
+  node: Message;
+  updatedFields: String[];
+  previousValues: MessagePreviousValues;
+}
+
+export interface MessageSubscriptionPayloadPromise
+  extends Promise<MessageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MessagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MessagePreviousValuesPromise>() => T;
+}
+
+export interface MessageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MessageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MessageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MessagePreviousValuesSubscription>() => T;
+}
+
+export interface MessageEdge {
+  node: Message;
+  cursor: String;
+}
+
+export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
+  node: <T = MessagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MessageEdgeSubscription
+  extends Promise<AsyncIterator<MessageEdge>>,
+    Fragmentable {
+  node: <T = MessageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MessagePreviousValues {
+  id: ID_Output;
+  content: String;
+  read: Boolean;
+  deleted?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MessagePreviousValuesPromise
+  extends Promise<MessagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  read: () => Promise<Boolean>;
+  deleted: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MessagePreviousValuesSubscription
+  extends Promise<AsyncIterator<MessagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+  read: () => Promise<AsyncIterator<Boolean>>;
+  deleted: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface InteractionConnection {
+  pageInfo: PageInfo;
+  edges: InteractionEdge[];
+}
+
+export interface InteractionConnectionPromise
+  extends Promise<InteractionConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<InteractionEdge>>() => T;
+  aggregate: <T = AggregateInteractionPromise>() => T;
+}
+
+export interface InteractionConnectionSubscription
+  extends Promise<AsyncIterator<InteractionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<InteractionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateInteractionSubscription>() => T;
 }
 
 export interface Debate {
@@ -7637,232 +8289,114 @@ export interface DebateNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TmpUserEdge {
-  node: TmpUser;
-  cursor: String;
-}
-
-export interface TmpUserEdgePromise extends Promise<TmpUserEdge>, Fragmentable {
-  node: <T = TmpUserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TmpUserEdgeSubscription
-  extends Promise<AsyncIterator<TmpUserEdge>>,
-    Fragmentable {
-  node: <T = TmpUserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface InteractionSubscriptionPayload {
-  mutation: MutationType;
-  node: Interaction;
-  updatedFields: String[];
-  previousValues: InteractionPreviousValues;
-}
-
-export interface InteractionSubscriptionPayloadPromise
-  extends Promise<InteractionSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = InteractionPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = InteractionPreviousValuesPromise>() => T;
-}
-
-export interface InteractionSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<InteractionSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = InteractionSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = InteractionPreviousValuesSubscription>() => T;
-}
-
-export interface AggregateReport {
+export interface AggregateConversation {
   count: Int;
 }
 
-export interface AggregateReportPromise
-  extends Promise<AggregateReport>,
+export interface AggregateConversationPromise
+  extends Promise<AggregateConversation>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateReportSubscription
-  extends Promise<AsyncIterator<AggregateReport>>,
+export interface AggregateConversationSubscription
+  extends Promise<AsyncIterator<AggregateConversation>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface InteractionPreviousValues {
-  id: ID_Output;
-  type: InteractionType;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface InteractionPreviousValuesPromise
-  extends Promise<InteractionPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  type: () => Promise<InteractionType>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface InteractionPreviousValuesSubscription
-  extends Promise<AsyncIterator<InteractionPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  type: () => Promise<AsyncIterator<InteractionType>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface NotificationEdge {
+export interface NotificationSubscriptionPayload {
+  mutation: MutationType;
   node: Notification;
+  updatedFields: String[];
+  previousValues: NotificationPreviousValues;
+}
+
+export interface NotificationSubscriptionPayloadPromise
+  extends Promise<NotificationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = NotificationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = NotificationPreviousValuesPromise>() => T;
+}
+
+export interface NotificationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<NotificationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = NotificationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = NotificationPreviousValuesSubscription>() => T;
+}
+
+export interface ConnectedEdge {
+  node: Connected;
   cursor: String;
 }
 
-export interface NotificationEdgePromise
-  extends Promise<NotificationEdge>,
+export interface ConnectedEdgePromise
+  extends Promise<ConnectedEdge>,
     Fragmentable {
-  node: <T = NotificationPromise>() => T;
+  node: <T = ConnectedPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface NotificationEdgeSubscription
-  extends Promise<AsyncIterator<NotificationEdge>>,
+export interface ConnectedEdgeSubscription
+  extends Promise<AsyncIterator<ConnectedEdge>>,
     Fragmentable {
-  node: <T = NotificationSubscription>() => T;
+  node: <T = ConnectedSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateAd {
-  count: Int;
-}
-
-export interface AggregateAdPromise extends Promise<AggregateAd>, Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateAdSubscription
-  extends Promise<AsyncIterator<AggregateAd>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: MessageEdge[];
-}
-
-export interface MessageConnectionPromise
-  extends Promise<MessageConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MessageEdge>>() => T;
-  aggregate: <T = AggregateMessagePromise>() => T;
-}
-
-export interface MessageConnectionSubscription
-  extends Promise<AsyncIterator<MessageConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMessageSubscription>() => T;
-}
-
-export interface MessageSubscriptionPayload {
-  mutation: MutationType;
-  node: Message;
-  updatedFields: String[];
-  previousValues: MessagePreviousValues;
-}
-
-export interface MessageSubscriptionPayloadPromise
-  extends Promise<MessageSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MessagePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MessagePreviousValuesPromise>() => T;
-}
-
-export interface MessageSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MessageSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MessageSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MessagePreviousValuesSubscription>() => T;
-}
-
-export interface AggregateDebate {
-  count: Int;
-}
-
-export interface AggregateDebatePromise
-  extends Promise<AggregateDebate>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateDebateSubscription
-  extends Promise<AsyncIterator<AggregateDebate>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface MessagePreviousValues {
+export interface NotificationPreviousValues {
   id: ID_Output;
-  content: String;
-  read: Boolean;
-  deleted?: String;
+  userId: String;
+  type: NotificationType;
+  status: NotificationStatus;
+  new: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface MessagePreviousValuesPromise
-  extends Promise<MessagePreviousValues>,
+export interface NotificationPreviousValuesPromise
+  extends Promise<NotificationPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  read: () => Promise<Boolean>;
-  deleted: () => Promise<String>;
+  userId: () => Promise<String>;
+  type: () => Promise<NotificationType>;
+  status: () => Promise<NotificationStatus>;
+  new: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface MessagePreviousValuesSubscription
-  extends Promise<AsyncIterator<MessagePreviousValues>>,
+export interface NotificationPreviousValuesSubscription
+  extends Promise<AsyncIterator<NotificationPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  content: () => Promise<AsyncIterator<String>>;
-  read: () => Promise<AsyncIterator<Boolean>>;
-  deleted: () => Promise<AsyncIterator<String>>;
+  userId: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<NotificationType>>;
+  status: () => Promise<AsyncIterator<NotificationStatus>>;
+  new: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ConversationEdge {
-  node: Conversation;
-  cursor: String;
+export interface AggregateComment {
+  count: Int;
 }
 
-export interface ConversationEdgePromise
-  extends Promise<ConversationEdge>,
+export interface AggregateCommentPromise
+  extends Promise<AggregateComment>,
     Fragmentable {
-  node: <T = ConversationPromise>() => T;
-  cursor: () => Promise<String>;
+  count: () => Promise<Int>;
 }
 
-export interface ConversationEdgeSubscription
-  extends Promise<AsyncIterator<ConversationEdge>>,
+export interface AggregateCommentSubscription
+  extends Promise<AsyncIterator<AggregateComment>>,
     Fragmentable {
-  node: <T = ConversationSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface AdTarget {
@@ -7909,101 +8443,339 @@ export interface AdTargetNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface CommentConnection {
+export interface TrophyConnection {
   pageInfo: PageInfo;
-  edges: CommentEdge[];
+  edges: TrophyEdge[];
 }
 
-export interface CommentConnectionPromise
-  extends Promise<CommentConnection>,
+export interface TrophyConnectionPromise
+  extends Promise<TrophyConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CommentEdge>>() => T;
-  aggregate: <T = AggregateCommentPromise>() => T;
+  edges: <T = FragmentableArray<TrophyEdge>>() => T;
+  aggregate: <T = AggregateTrophyPromise>() => T;
 }
 
-export interface CommentConnectionSubscription
-  extends Promise<AsyncIterator<CommentConnection>>,
+export interface TrophyConnectionSubscription
+  extends Promise<AsyncIterator<TrophyConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCommentSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TrophyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTrophySubscription>() => T;
 }
 
-export interface NotificationSubscriptionPayload {
+export interface ReportSubscriptionPayload {
   mutation: MutationType;
-  node: Notification;
+  node: Report;
   updatedFields: String[];
-  previousValues: NotificationPreviousValues;
+  previousValues: ReportPreviousValues;
 }
 
-export interface NotificationSubscriptionPayloadPromise
-  extends Promise<NotificationSubscriptionPayload>,
+export interface ReportSubscriptionPayloadPromise
+  extends Promise<ReportSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = NotificationPromise>() => T;
+  node: <T = ReportPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = NotificationPreviousValuesPromise>() => T;
+  previousValues: <T = ReportPreviousValuesPromise>() => T;
 }
 
-export interface NotificationSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<NotificationSubscriptionPayload>>,
+export interface ReportSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ReportSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = NotificationSubscription>() => T;
+  node: <T = ReportSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = NotificationPreviousValuesSubscription>() => T;
+  previousValues: <T = ReportPreviousValuesSubscription>() => T;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
+export interface StatistiqueConnection {
+  pageInfo: PageInfo;
+  edges: StatistiqueEdge[];
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface StatistiqueConnectionPromise
+  extends Promise<StatistiqueConnection>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<StatistiqueEdge>>() => T;
+  aggregate: <T = AggregateStatistiquePromise>() => T;
 }
 
-export interface NotificationPreviousValues {
+export interface StatistiqueConnectionSubscription
+  extends Promise<AsyncIterator<StatistiqueConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<StatistiqueEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateStatistiqueSubscription>() => T;
+}
+
+export interface ReportPreviousValues {
   id: ID_Output;
-  userId: String;
-  type: NotificationType;
-  status: NotificationStatus;
-  new: Boolean;
+  type: ReportType;
+  reason: ReportReason;
+  reasonText?: String;
+  treated: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface NotificationPreviousValuesPromise
-  extends Promise<NotificationPreviousValues>,
+export interface ReportPreviousValuesPromise
+  extends Promise<ReportPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  userId: () => Promise<String>;
-  type: () => Promise<NotificationType>;
-  status: () => Promise<NotificationStatus>;
-  new: () => Promise<Boolean>;
+  type: () => Promise<ReportType>;
+  reason: () => Promise<ReportReason>;
+  reasonText: () => Promise<String>;
+  treated: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface NotificationPreviousValuesSubscription
-  extends Promise<AsyncIterator<NotificationPreviousValues>>,
+export interface ReportPreviousValuesSubscription
+  extends Promise<AsyncIterator<ReportPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  userId: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<NotificationType>>;
-  status: () => Promise<AsyncIterator<NotificationStatus>>;
-  new: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<ReportType>>;
+  reason: () => Promise<AsyncIterator<ReportReason>>;
+  reasonText: () => Promise<AsyncIterator<String>>;
+  treated: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface NotificationConnection {
+  pageInfo: PageInfo;
+  edges: NotificationEdge[];
+}
+
+export interface NotificationConnectionPromise
+  extends Promise<NotificationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<NotificationEdge>>() => T;
+  aggregate: <T = AggregateNotificationPromise>() => T;
+}
+
+export interface NotificationConnectionSubscription
+  extends Promise<AsyncIterator<NotificationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<NotificationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateNotificationSubscription>() => T;
+}
+
+export interface AdTargetConnection {
+  pageInfo: PageInfo;
+  edges: AdTargetEdge[];
+}
+
+export interface AdTargetConnectionPromise
+  extends Promise<AdTargetConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AdTargetEdge>>() => T;
+  aggregate: <T = AggregateAdTargetPromise>() => T;
+}
+
+export interface AdTargetConnectionSubscription
+  extends Promise<AsyncIterator<AdTargetConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AdTargetEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAdTargetSubscription>() => T;
+}
+
+export interface DebateEdge {
+  node: Debate;
+  cursor: String;
+}
+
+export interface DebateEdgePromise extends Promise<DebateEdge>, Fragmentable {
+  node: <T = DebatePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DebateEdgeSubscription
+  extends Promise<AsyncIterator<DebateEdge>>,
+    Fragmentable {
+  node: <T = DebateSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface StatistiqueSubscriptionPayload {
+  mutation: MutationType;
+  node: Statistique;
+  updatedFields: String[];
+  previousValues: StatistiquePreviousValues;
+}
+
+export interface StatistiqueSubscriptionPayloadPromise
+  extends Promise<StatistiqueSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = StatistiquePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = StatistiquePreviousValuesPromise>() => T;
+}
+
+export interface StatistiqueSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<StatistiqueSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = StatistiqueSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = StatistiquePreviousValuesSubscription>() => T;
+}
+
+export interface Comment {
+  id: ID_Output;
+  content: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  nested: Boolean;
+}
+
+export interface CommentPromise extends Promise<Comment>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  from: <T = UserPromise>() => T;
+  content: () => Promise<String>;
+  likes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  dislikes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  reports: <T = FragmentableArray<Report>>(args?: {
+    where?: ReportWhereInput;
+    orderBy?: ReportOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  debate: <T = DebatePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  nested: () => Promise<Boolean>;
+}
+
+export interface CommentSubscription
+  extends Promise<AsyncIterator<Comment>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  from: <T = UserSubscription>() => T;
+  content: () => Promise<AsyncIterator<String>>;
+  likes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  dislikes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  reports: <T = Promise<AsyncIterator<ReportSubscription>>>(args?: {
+    where?: ReportWhereInput;
+    orderBy?: ReportOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  debate: <T = DebateSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  nested: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface CommentNullablePromise
+  extends Promise<Comment | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  from: <T = UserPromise>() => T;
+  content: () => Promise<String>;
+  likes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  dislikes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  reports: <T = FragmentableArray<Report>>(args?: {
+    where?: ReportWhereInput;
+    orderBy?: ReportOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  debate: <T = DebatePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  nested: () => Promise<Boolean>;
 }
 
 export interface Ad {
@@ -8062,114 +8834,6 @@ export interface AdNullablePromise extends Promise<Ad | null>, Fragmentable {
   ratio: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface AdTargetConnection {
-  pageInfo: PageInfo;
-  edges: AdTargetEdge[];
-}
-
-export interface AdTargetConnectionPromise
-  extends Promise<AdTargetConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AdTargetEdge>>() => T;
-  aggregate: <T = AggregateAdTargetPromise>() => T;
-}
-
-export interface AdTargetConnectionSubscription
-  extends Promise<AsyncIterator<AdTargetConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AdTargetEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAdTargetSubscription>() => T;
-}
-
-export interface AggregateMessage {
-  count: Int;
-}
-
-export interface AggregateMessagePromise
-  extends Promise<AggregateMessage>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMessageSubscription
-  extends Promise<AsyncIterator<AggregateMessage>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ReportSubscriptionPayload {
-  mutation: MutationType;
-  node: Report;
-  updatedFields: String[];
-  previousValues: ReportPreviousValues;
-}
-
-export interface ReportSubscriptionPayloadPromise
-  extends Promise<ReportSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ReportPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ReportPreviousValuesPromise>() => T;
-}
-
-export interface ReportSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ReportSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ReportSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ReportPreviousValuesSubscription>() => T;
-}
-
-export interface DebateConnection {
-  pageInfo: PageInfo;
-  edges: DebateEdge[];
-}
-
-export interface DebateConnectionPromise
-  extends Promise<DebateConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<DebateEdge>>() => T;
-  aggregate: <T = AggregateDebatePromise>() => T;
-}
-
-export interface DebateConnectionSubscription
-  extends Promise<AsyncIterator<DebateConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<DebateEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateDebateSubscription>() => T;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
 export interface TmpUserPreviousValues {
@@ -8259,115 +8923,97 @@ export interface AdTargetEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ReportPreviousValues {
+export interface StatistiquePreviousValues {
   id: ID_Output;
-  type: ReportType;
-  reason: ReportReason;
-  reasonText?: String;
-  treated: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface ReportPreviousValuesPromise
-  extends Promise<ReportPreviousValues>,
+export interface StatistiquePreviousValuesPromise
+  extends Promise<StatistiquePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  type: () => Promise<ReportType>;
-  reason: () => Promise<ReportReason>;
-  reasonText: () => Promise<String>;
-  treated: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface ReportPreviousValuesSubscription
-  extends Promise<AsyncIterator<ReportPreviousValues>>,
+export interface StatistiquePreviousValuesSubscription
+  extends Promise<AsyncIterator<StatistiquePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  type: () => Promise<AsyncIterator<ReportType>>;
-  reason: () => Promise<AsyncIterator<ReportReason>>;
-  reasonText: () => Promise<AsyncIterator<String>>;
-  treated: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface TrophyConnection {
-  pageInfo: PageInfo;
-  edges: TrophyEdge[];
+export interface ReportEdge {
+  node: Report;
+  cursor: String;
 }
 
-export interface TrophyConnectionPromise
-  extends Promise<TrophyConnection>,
+export interface ReportEdgePromise extends Promise<ReportEdge>, Fragmentable {
+  node: <T = ReportPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ReportEdgeSubscription
+  extends Promise<AsyncIterator<ReportEdge>>,
+    Fragmentable {
+  node: <T = ReportSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ConversationConnection {
+  pageInfo: PageInfo;
+  edges: ConversationEdge[];
+}
+
+export interface ConversationConnectionPromise
+  extends Promise<ConversationConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TrophyEdge>>() => T;
-  aggregate: <T = AggregateTrophyPromise>() => T;
+  edges: <T = FragmentableArray<ConversationEdge>>() => T;
+  aggregate: <T = AggregateConversationPromise>() => T;
 }
 
-export interface TrophyConnectionSubscription
-  extends Promise<AsyncIterator<TrophyConnection>>,
+export interface ConversationConnectionSubscription
+  extends Promise<AsyncIterator<ConversationConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TrophyEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTrophySubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ConversationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateConversationSubscription>() => T;
 }
 
-export interface AggregateComment {
+export interface AggregateInteraction {
   count: Int;
 }
 
-export interface AggregateCommentPromise
-  extends Promise<AggregateComment>,
+export interface AggregateInteractionPromise
+  extends Promise<AggregateInteraction>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateCommentSubscription
-  extends Promise<AsyncIterator<AggregateComment>>,
+export interface AggregateInteractionSubscription
+  extends Promise<AsyncIterator<AggregateInteraction>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface InteractionEdge {
-  node: Interaction;
-  cursor: String;
-}
-
-export interface InteractionEdgePromise
-  extends Promise<InteractionEdge>,
-    Fragmentable {
-  node: <T = InteractionPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface InteractionEdgeSubscription
-  extends Promise<AsyncIterator<InteractionEdge>>,
-    Fragmentable {
-  node: <T = InteractionSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ReportConnection {
-  pageInfo: PageInfo;
-  edges: ReportEdge[];
-}
-
-export interface ReportConnectionPromise
-  extends Promise<ReportConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ReportEdge>>() => T;
-  aggregate: <T = AggregateReportPromise>() => T;
-}
-
-export interface ReportConnectionSubscription
-  extends Promise<AsyncIterator<ReportConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ReportEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateReportSubscription>() => T;
 }
 
 /*
@@ -8470,6 +9116,14 @@ export const models: Model[] = [
   },
   {
     name: "Report",
+    embedded: false
+  },
+  {
+    name: "Connected",
+    embedded: false
+  },
+  {
+    name: "Statistique",
     embedded: false
   },
   {

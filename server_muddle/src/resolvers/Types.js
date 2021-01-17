@@ -44,6 +44,19 @@ const NoValue = objectType({
   },
 });
 
+const MainStats = objectType({
+  name: "MainStats",
+  definition(t) {
+    t.int("debates");
+    t.int("comments");
+    t.int("malePercentage");
+    t.int("femalePercentage");
+    t.int("notDefinedPercentage");
+    t.int("ageAverage");
+    t.int("connectedToday");
+  },
+});
+
 // const ImageURI = objectType({
 //   name: "ImageURI",
 //   definition(t) {
@@ -108,6 +121,7 @@ export { dateArg };
 export default {
   Token,
   NoValue,
+  MainStats,
   // ImageURI,
   NewNotifications,
   DateScalar,

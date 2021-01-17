@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { flattenDeep, isNil, get } from "lodash";
+import { flattenDeep, isNil, get, isEmpty } from "lodash";
 
 import { prismaObjectType } from "nexus-prisma";
 import { idArg, intArg, stringArg } from "nexus/dist";
@@ -14,6 +14,7 @@ const exposedQueries = {
   adQueries: ["ad", "ads"],
   adTargetQueries: ["adTarget", "adTargets"],
   commentQueries: ["comment", "comments"],
+  connectedQueries: ["connecteds"],
   conversationQueries: ["conversation", "conversations"],
   interactionQueries: ["interaction", "interactions"],
   debateQueries: ["debate", "debates"],
@@ -124,6 +125,52 @@ const Query = prismaObjectType({
           }
 
           const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY);
+
+          var m = moment().utcOffset(0);
+          m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+          m.toISOString();
+          m.format();
+
+          const today = m;
+
+          const getDate = await prisma.connecteds({
+            where: {
+              date: new Date(m),
+            },
+          });
+
+          if (isEmpty(getDate)) {
+            await prisma.createConnected({
+              date: today,
+              connections: {
+                connect: {
+                  id: user.id,
+                },
+              },
+            });
+          } else {
+            const users = await prisma
+              .connected({ id: getDate[0].id })
+              .connections();
+            console.log(users);
+            if (isNil(users)) throw new Error("error");
+            if (
+              users.findIndex((u) => {
+                u.id === user.id;
+              }) === -1
+            ) {
+              await prisma.updateConnected({
+                where: { id: getDate[0].id },
+                data: {
+                  connections: {
+                    connect: {
+                      email: "userA",
+                    },
+                  },
+                },
+              });
+            }
+          }
 
           return { token };
         } catch (error) {
@@ -343,6 +390,77 @@ const Query = prismaObjectType({
           const firstProps = isNil(first) ? 0 : first;
           if (firstProps === 0) return bestDebates.slice(skipProps);
           return bestDebates.slice(skipProps, skipProps + firstProps);
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("mainStats", {
+      type: "MainStats",
+      resolve: async (parent, args, { prisma }) => {
+        try {
+          const debates = await prisma.debates();
+          const comments = await prisma.comments();
+
+          const users = await prisma.users();
+          const nbUsers = users.length;
+
+          const malePercentage = Math.round(
+            (users.filter((u) => u.gender === "MALE").length / nbUsers) * 100
+          );
+          const femalePercentage = Math.round(
+            (users.filter((u) => u.gender === "FEMALE").length / nbUsers) * 100
+          );
+          const notDefinedPercentage = Math.round(
+            (users.filter((u) => u.gender === "NO_INDICATION").length /
+              nbUsers) *
+              100
+          );
+
+          const ageAverage = (() => {
+            let average = 0;
+            users.map((u) => {
+              if (u.role !== "STANDARD") return;
+              const birthdate = u.birthdate;
+              const age = moment.duration(moment().diff(birthdate)).years();
+              if (isNil(age) || age <= 0 || age >= 100) return;
+              average = (average + age) / 2;
+            });
+            return Math.round(average);
+          })();
+
+          let connectedToday = 0;
+
+          var m = moment().utcOffset(0);
+          m.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+          m.toISOString();
+          m.format();
+
+          const today = m;
+
+          const getDate = await prisma.connecteds({
+            where: {
+              date: new Date(m),
+            },
+          });
+
+          if (isEmpty(getDate) === false) {
+            const connections = await prisma
+              .connected({ id: getDate[0].id })
+              .connections();
+            connectedToday = connections.length;
+          }
+
+          return {
+            debates: debates.length,
+            comments: comments.length,
+            malePercentage,
+            femalePercentage,
+            notDefinedPercentage,
+            ageAverage,
+            connectedToday,
+          };
         } catch (err) {
           throw new Error(err);
         }

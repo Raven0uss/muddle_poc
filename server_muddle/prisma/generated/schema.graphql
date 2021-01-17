@@ -640,6 +640,68 @@ input CommentWhereUniqueInput {
   id: ID
 }
 
+type Connected {
+  connections(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]
+  createdAt: DateTime!
+  date: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+enum ConnectedOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  date_ASC
+  date_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input ConnectedWhereInput {
+  AND: [ConnectedWhereInput!]
+  connections_some: UserWhereInput
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_in: [DateTime!]
+  date: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  date_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_not: DateTime
+  date_not_in: [DateTime!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_in: [DateTime!]
+}
+
 type Conversation {
   createdAt: DateTime!
   deleted: String
@@ -1995,6 +2057,16 @@ enum MailStatus {
   HEALTHY
 }
 
+type MainStats {
+  ageAverage: Int!
+  comments: Int!
+  connectedToday: Int!
+  debates: Int!
+  femalePercentage: Int!
+  malePercentage: Int!
+  notDefinedPercentage: Int!
+}
+
 type Message {
   content: String!
   conversation: Conversation!
@@ -2589,6 +2661,7 @@ type Query {
   bestDebates(first: Int, skip: Int): [Debate!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, skip: Int, where: CommentWhereInput): [Comment!]!
+  connecteds(after: String, before: String, first: Int, last: Int, orderBy: ConnectedOrderByInput, skip: Int, where: ConnectedWhereInput): [Connected!]!
   conversation(where: ConversationWhereUniqueInput!): Conversation
   conversations(after: String, before: String, first: Int, last: Int, orderBy: ConversationOrderByInput, skip: Int, where: ConversationWhereInput): [Conversation!]!
   currentUser: User!
@@ -2597,6 +2670,7 @@ type Query {
   homeDebates(first: Int, skip: Int): [Debate!]!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(after: String, before: String, first: Int, last: Int, orderBy: InteractionOrderByInput, skip: Int, where: InteractionWhereInput): [Interaction!]!
+  mainStats: MainStats!
   message(where: MessageWhereUniqueInput!): Message
   messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
   myDebates(first: Int, skip: Int): [Debate!]!

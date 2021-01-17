@@ -54,6 +54,14 @@ export interface NexusPrismaTypes {
       ReportConnection: ReportConnectionObject
       ReportEdge: ReportEdgeObject
       AggregateReport: AggregateReportObject
+      Connected: ConnectedObject
+      ConnectedConnection: ConnectedConnectionObject
+      ConnectedEdge: ConnectedEdgeObject
+      AggregateConnected: AggregateConnectedObject
+      Statistique: StatistiqueObject
+      StatistiqueConnection: StatistiqueConnectionObject
+      StatistiqueEdge: StatistiqueEdgeObject
+      AggregateStatistique: AggregateStatistiqueObject
       TrophyConnection: TrophyConnectionObject
       TrophyEdge: TrophyEdgeObject
       AggregateTrophy: AggregateTrophyObject
@@ -85,6 +93,10 @@ export interface NexusPrismaTypes {
       NotificationPreviousValues: NotificationPreviousValuesObject
       ReportSubscriptionPayload: ReportSubscriptionPayloadObject
       ReportPreviousValues: ReportPreviousValuesObject
+      ConnectedSubscriptionPayload: ConnectedSubscriptionPayloadObject
+      ConnectedPreviousValues: ConnectedPreviousValuesObject
+      StatistiqueSubscriptionPayload: StatistiqueSubscriptionPayloadObject
+      StatistiquePreviousValues: StatistiquePreviousValuesObject
       TrophySubscriptionPayload: TrophySubscriptionPayloadObject
       TrophyPreviousValues: TrophyPreviousValuesObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
@@ -133,6 +145,14 @@ export interface NexusPrismaTypes {
       ReportConnection: ReportConnectionFieldDetails
       ReportEdge: ReportEdgeFieldDetails
       AggregateReport: AggregateReportFieldDetails
+      Connected: ConnectedFieldDetails
+      ConnectedConnection: ConnectedConnectionFieldDetails
+      ConnectedEdge: ConnectedEdgeFieldDetails
+      AggregateConnected: AggregateConnectedFieldDetails
+      Statistique: StatistiqueFieldDetails
+      StatistiqueConnection: StatistiqueConnectionFieldDetails
+      StatistiqueEdge: StatistiqueEdgeFieldDetails
+      AggregateStatistique: AggregateStatistiqueFieldDetails
       TrophyConnection: TrophyConnectionFieldDetails
       TrophyEdge: TrophyEdgeFieldDetails
       AggregateTrophy: AggregateTrophyFieldDetails
@@ -164,6 +184,10 @@ export interface NexusPrismaTypes {
       NotificationPreviousValues: NotificationPreviousValuesFieldDetails
       ReportSubscriptionPayload: ReportSubscriptionPayloadFieldDetails
       ReportPreviousValues: ReportPreviousValuesFieldDetails
+      ConnectedSubscriptionPayload: ConnectedSubscriptionPayloadFieldDetails
+      ConnectedPreviousValues: ConnectedPreviousValuesFieldDetails
+      StatistiqueSubscriptionPayload: StatistiqueSubscriptionPayloadFieldDetails
+      StatistiquePreviousValues: StatistiquePreviousValuesFieldDetails
       TrophySubscriptionPayload: TrophySubscriptionPayloadFieldDetails
       TrophyPreviousValues: TrophyPreviousValuesFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
@@ -194,6 +218,10 @@ export interface NexusPrismaTypes {
       MessageWhereUniqueInput: MessageWhereUniqueInputInputObject
       NotificationWhereUniqueInput: NotificationWhereUniqueInputInputObject
       ReportWhereUniqueInput: ReportWhereUniqueInputInputObject
+      ConnectedWhereUniqueInput: ConnectedWhereUniqueInputInputObject
+      ConnectedWhereInput: ConnectedWhereInputInputObject
+      StatistiqueWhereUniqueInput: StatistiqueWhereUniqueInputInputObject
+      StatistiqueWhereInput: StatistiqueWhereInputInputObject
       TrophyWhereUniqueInput: TrophyWhereUniqueInputInputObject
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
       TmpUserWhereUniqueInput: TmpUserWhereUniqueInputInputObject
@@ -429,6 +457,19 @@ export interface NexusPrismaTypes {
       ReportCreateInput: ReportCreateInputInputObject
       ReportUpdateInput: ReportUpdateInputInputObject
       ReportUpdateManyMutationInput: ReportUpdateManyMutationInputInputObject
+      ConnectedCreateInput: ConnectedCreateInputInputObject
+      ConnectedUpdateInput: ConnectedUpdateInputInputObject
+      ConnectedUpdateManyMutationInput: ConnectedUpdateManyMutationInputInputObject
+      StatistiqueCreateInput: StatistiqueCreateInputInputObject
+      ConnectedCreateManyInput: ConnectedCreateManyInputInputObject
+      StatistiqueUpdateInput: StatistiqueUpdateInputInputObject
+      ConnectedUpdateManyInput: ConnectedUpdateManyInputInputObject
+      ConnectedUpdateWithWhereUniqueNestedInput: ConnectedUpdateWithWhereUniqueNestedInputInputObject
+      ConnectedUpdateDataInput: ConnectedUpdateDataInputInputObject
+      ConnectedUpsertWithWhereUniqueNestedInput: ConnectedUpsertWithWhereUniqueNestedInputInputObject
+      ConnectedScalarWhereInput: ConnectedScalarWhereInputInputObject
+      ConnectedUpdateManyWithWhereNestedInput: ConnectedUpdateManyWithWhereNestedInputInputObject
+      ConnectedUpdateManyDataInput: ConnectedUpdateManyDataInputInputObject
       TrophyCreateInput: TrophyCreateInputInputObject
       UserCreateOneWithoutTrophiesInput: UserCreateOneWithoutTrophiesInputInputObject
       UserCreateWithoutTrophiesInput: UserCreateWithoutTrophiesInputInputObject
@@ -451,6 +492,8 @@ export interface NexusPrismaTypes {
       MessageSubscriptionWhereInput: MessageSubscriptionWhereInputInputObject
       NotificationSubscriptionWhereInput: NotificationSubscriptionWhereInputInputObject
       ReportSubscriptionWhereInput: ReportSubscriptionWhereInputInputObject
+      ConnectedSubscriptionWhereInput: ConnectedSubscriptionWhereInputInputObject
+      StatistiqueSubscriptionWhereInput: StatistiqueSubscriptionWhereInputInputObject
       TrophySubscriptionWhereInput: TrophySubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       TmpUserSubscriptionWhereInput: TmpUserSubscriptionWhereInputInputObject
@@ -481,6 +524,8 @@ export interface NexusPrismaTypes {
     TrophyOrderByInput: TrophyOrderByInputValues,
     ConversationOrderByInput: ConversationOrderByInputValues,
     MessageOrderByInput: MessageOrderByInputValues,
+    ConnectedOrderByInput: ConnectedOrderByInputValues,
+    StatistiqueOrderByInput: StatistiqueOrderByInputValues,
     TmpUserOrderByInput: TmpUserOrderByInputValues,
     MutationType: MutationTypeValues,
   }
@@ -517,6 +562,12 @@ type QueryObject =
   | { name: 'report', args?: QueryReportArgs[] | false, alias?: string  } 
   | { name: 'reports', args?: QueryReportsArgs[] | false, alias?: string  } 
   | { name: 'reportsConnection', args?: QueryReportsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'connected', args?: QueryConnectedArgs[] | false, alias?: string  } 
+  | { name: 'connecteds', args?: QueryConnectedsArgs[] | false, alias?: string  } 
+  | { name: 'connectedsConnection', args?: QueryConnectedsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'statistique', args?: QueryStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'statistiques', args?: QueryStatistiquesArgs[] | false, alias?: string  } 
+  | { name: 'statistiquesConnection', args?: QueryStatistiquesConnectionArgs[] | false, alias?: string  } 
   | { name: 'trophy', args?: QueryTrophyArgs[] | false, alias?: string  } 
   | { name: 'trophies', args?: QueryTrophiesArgs[] | false, alias?: string  } 
   | { name: 'trophiesConnection', args?: QueryTrophiesConnectionArgs[] | false, alias?: string  } 
@@ -555,6 +606,12 @@ type QueryFields =
   | 'report'
   | 'reports'
   | 'reportsConnection'
+  | 'connected'
+  | 'connecteds'
+  | 'connectedsConnection'
+  | 'statistique'
+  | 'statistiques'
+  | 'statistiquesConnection'
   | 'trophy'
   | 'trophies'
   | 'trophiesConnection'
@@ -721,6 +778,42 @@ type QueryReportsArgs =
   | 'first'
   | 'last'
 type QueryReportsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryConnectedArgs =
+  | 'where'
+type QueryConnectedsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryConnectedsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryStatistiqueArgs =
+  | 'where'
+type QueryStatistiquesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryStatistiquesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -1135,6 +1228,84 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.ReportConnection> | prisma.ReportConnection
+  }
+  connected: {
+    type: 'Connected'
+    args: Record<QueryConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ConnectedWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected | null> | prisma.Connected | null
+  }
+  connecteds: {
+    type: 'Connected'
+    args: Record<QueryConnectedsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ConnectedWhereInput | null, orderBy?: prisma.ConnectedOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected[]> | prisma.Connected[]
+  }
+  connectedsConnection: {
+    type: 'ConnectedConnection'
+    args: Record<QueryConnectedsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ConnectedWhereInput | null, orderBy?: prisma.ConnectedOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConnectedConnection> | prisma.ConnectedConnection
+  }
+  statistique: {
+    type: 'Statistique'
+    args: Record<QueryStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: StatistiqueWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique | null> | prisma.Statistique | null
+  }
+  statistiques: {
+    type: 'Statistique'
+    args: Record<QueryStatistiquesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: StatistiqueWhereInput | null, orderBy?: prisma.StatistiqueOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique[]> | prisma.Statistique[]
+  }
+  statistiquesConnection: {
+    type: 'StatistiqueConnection'
+    args: Record<QueryStatistiquesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: StatistiqueWhereInput | null, orderBy?: prisma.StatistiqueOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.StatistiqueConnection> | prisma.StatistiqueConnection
   }
   trophy: {
     type: 'Trophy'
@@ -4491,6 +4662,400 @@ export interface AggregateReportFieldDetails {
 }
   
 
+// Types for Connected
+
+type ConnectedObject =
+  | ConnectedFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'connections', args?: ConnectedConnectionsArgs[] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ConnectedFields =
+  | 'id'
+  | 'date'
+  | 'connections'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type ConnectedConnectionsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface ConnectedFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  connections: {
+    type: 'User'
+    args: Record<ConnectedConnectionsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Connected">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ConnectedConnection
+
+type ConnectedConnectionObject =
+  | ConnectedConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ConnectedConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ConnectedConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConnectedConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ConnectedEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConnectedConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConnectedEdge[]> | prisma.ConnectedEdge[]
+  }
+  aggregate: {
+    type: 'AggregateConnected'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConnectedConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateConnected> | prisma.AggregateConnected
+  }
+}
+  
+
+// Types for ConnectedEdge
+
+type ConnectedEdgeObject =
+  | ConnectedEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ConnectedEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ConnectedEdgeFieldDetails {
+  node: {
+    type: 'Connected'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConnectedEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected> | prisma.Connected
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateConnected
+
+type AggregateConnectedObject =
+  | AggregateConnectedFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateConnectedFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateConnectedFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Statistique
+
+type StatistiqueObject =
+  | StatistiqueFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'connected', args?: StatistiqueConnectedArgs[] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type StatistiqueFields =
+  | 'id'
+  | 'connected'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+type StatistiqueConnectedArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface StatistiqueFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  connected: {
+    type: 'Connected'
+    args: Record<StatistiqueConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Statistique">,
+      args: { where?: ConnectedWhereInput | null, orderBy?: prisma.ConnectedOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected[]> | prisma.Connected[]
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for StatistiqueConnection
+
+type StatistiqueConnectionObject =
+  | StatistiqueConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type StatistiqueConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface StatistiqueConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"StatistiqueConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'StatistiqueEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"StatistiqueConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.StatistiqueEdge[]> | prisma.StatistiqueEdge[]
+  }
+  aggregate: {
+    type: 'AggregateStatistique'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"StatistiqueConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateStatistique> | prisma.AggregateStatistique
+  }
+}
+  
+
+// Types for StatistiqueEdge
+
+type StatistiqueEdgeObject =
+  | StatistiqueEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type StatistiqueEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface StatistiqueEdgeFieldDetails {
+  node: {
+    type: 'Statistique'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"StatistiqueEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique> | prisma.Statistique
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateStatistique
+
+type AggregateStatistiqueObject =
+  | AggregateStatistiqueFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateStatistiqueFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateStatistiqueFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for TrophyConnection
 
 type TrophyConnectionObject =
@@ -5049,6 +5614,17 @@ type MutationObject =
   | { name: 'upsertReport', args?: MutationUpsertReportArgs[] | false, alias?: string  } 
   | { name: 'deleteReport', args?: MutationDeleteReportArgs[] | false, alias?: string  } 
   | { name: 'deleteManyReports', args?: MutationDeleteManyReportsArgs[] | false, alias?: string  } 
+  | { name: 'createConnected', args?: MutationCreateConnectedArgs[] | false, alias?: string  } 
+  | { name: 'updateConnected', args?: MutationUpdateConnectedArgs[] | false, alias?: string  } 
+  | { name: 'updateManyConnecteds', args?: MutationUpdateManyConnectedsArgs[] | false, alias?: string  } 
+  | { name: 'upsertConnected', args?: MutationUpsertConnectedArgs[] | false, alias?: string  } 
+  | { name: 'deleteConnected', args?: MutationDeleteConnectedArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyConnecteds', args?: MutationDeleteManyConnectedsArgs[] | false, alias?: string  } 
+  | { name: 'createStatistique', args?: MutationCreateStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'updateStatistique', args?: MutationUpdateStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'upsertStatistique', args?: MutationUpsertStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'deleteStatistique', args?: MutationDeleteStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyStatistiques', args?: MutationDeleteManyStatistiquesArgs[] | false, alias?: string  } 
   | { name: 'createTrophy', args?: MutationCreateTrophyArgs[] | false, alias?: string  } 
   | { name: 'updateTrophy', args?: MutationUpdateTrophyArgs[] | false, alias?: string  } 
   | { name: 'updateManyTrophies', args?: MutationUpdateManyTrophiesArgs[] | false, alias?: string  } 
@@ -5123,6 +5699,17 @@ type MutationFields =
   | 'upsertReport'
   | 'deleteReport'
   | 'deleteManyReports'
+  | 'createConnected'
+  | 'updateConnected'
+  | 'updateManyConnecteds'
+  | 'upsertConnected'
+  | 'deleteConnected'
+  | 'deleteManyConnecteds'
+  | 'createStatistique'
+  | 'updateStatistique'
+  | 'upsertStatistique'
+  | 'deleteStatistique'
+  | 'deleteManyStatistiques'
   | 'createTrophy'
   | 'updateTrophy'
   | 'updateManyTrophies'
@@ -5286,6 +5873,35 @@ type MutationUpsertReportArgs =
 type MutationDeleteReportArgs =
   | 'where'
 type MutationDeleteManyReportsArgs =
+  | 'where'
+type MutationCreateConnectedArgs =
+  | 'data'
+type MutationUpdateConnectedArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyConnectedsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertConnectedArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteConnectedArgs =
+  | 'where'
+type MutationDeleteManyConnectedsArgs =
+  | 'where'
+type MutationCreateStatistiqueArgs =
+  | 'data'
+type MutationUpdateStatistiqueArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertStatistiqueArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteStatistiqueArgs =
+  | 'where'
+type MutationDeleteManyStatistiquesArgs =
   | 'where'
 type MutationCreateTrophyArgs =
   | 'data'
@@ -6040,6 +6656,149 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createConnected: {
+    type: 'Connected'
+    args: Record<MutationCreateConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConnectedCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected> | prisma.Connected
+  }
+  updateConnected: {
+    type: 'Connected'
+    args: Record<MutationUpdateConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConnectedUpdateInput, where: ConnectedWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected | null> | prisma.Connected | null
+  }
+  updateManyConnecteds: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyConnectedsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ConnectedUpdateManyMutationInput, where?: ConnectedWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertConnected: {
+    type: 'Connected'
+    args: Record<MutationUpsertConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ConnectedWhereUniqueInput, create: ConnectedCreateInput, update: ConnectedUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected> | prisma.Connected
+  }
+  deleteConnected: {
+    type: 'Connected'
+    args: Record<MutationDeleteConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ConnectedWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected | null> | prisma.Connected | null
+  }
+  deleteManyConnecteds: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyConnectedsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ConnectedWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createStatistique: {
+    type: 'Statistique'
+    args: Record<MutationCreateStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: StatistiqueCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique> | prisma.Statistique
+  }
+  updateStatistique: {
+    type: 'Statistique'
+    args: Record<MutationUpdateStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: StatistiqueUpdateInput, where: StatistiqueWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique | null> | prisma.Statistique | null
+  }
+  upsertStatistique: {
+    type: 'Statistique'
+    args: Record<MutationUpsertStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: StatistiqueWhereUniqueInput, create: StatistiqueCreateInput, update: StatistiqueUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique> | prisma.Statistique
+  }
+  deleteStatistique: {
+    type: 'Statistique'
+    args: Record<MutationDeleteStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: StatistiqueWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique | null> | prisma.Statistique | null
+  }
+  deleteManyStatistiques: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyStatistiquesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: StatistiqueWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createTrophy: {
     type: 'Trophy'
     args: Record<MutationCreateTrophyArgs, core.NexusArgDef<string>>
@@ -6315,6 +7074,8 @@ type SubscriptionObject =
   | { name: 'message', args?: SubscriptionMessageArgs[] | false, alias?: string  } 
   | { name: 'notification', args?: SubscriptionNotificationArgs[] | false, alias?: string  } 
   | { name: 'report', args?: SubscriptionReportArgs[] | false, alias?: string  } 
+  | { name: 'connected', args?: SubscriptionConnectedArgs[] | false, alias?: string  } 
+  | { name: 'statistique', args?: SubscriptionStatistiqueArgs[] | false, alias?: string  } 
   | { name: 'trophy', args?: SubscriptionTrophyArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'tmpUser', args?: SubscriptionTmpUserArgs[] | false, alias?: string  } 
@@ -6329,6 +7090,8 @@ type SubscriptionFields =
   | 'message'
   | 'notification'
   | 'report'
+  | 'connected'
+  | 'statistique'
   | 'trophy'
   | 'user'
   | 'tmpUser'
@@ -6351,6 +7114,10 @@ type SubscriptionMessageArgs =
 type SubscriptionNotificationArgs =
   | 'where'
 type SubscriptionReportArgs =
+  | 'where'
+type SubscriptionConnectedArgs =
+  | 'where'
+type SubscriptionStatistiqueArgs =
   | 'where'
 type SubscriptionTrophyArgs =
   | 'where'
@@ -6477,6 +7244,32 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.ReportSubscriptionPayload | null> | prisma.ReportSubscriptionPayload | null
+  }
+  connected: {
+    type: 'ConnectedSubscriptionPayload'
+    args: Record<SubscriptionConnectedArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ConnectedSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConnectedSubscriptionPayload | null> | prisma.ConnectedSubscriptionPayload | null
+  }
+  statistique: {
+    type: 'StatistiqueSubscriptionPayload'
+    args: Record<SubscriptionStatistiqueArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: StatistiqueSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.StatistiqueSubscriptionPayload | null> | prisma.StatistiqueSubscriptionPayload | null
   }
   trophy: {
     type: 'TrophySubscriptionPayload'
@@ -7935,6 +8728,246 @@ export interface ReportPreviousValuesFieldDetails {
   }
   treated: {
     type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ConnectedSubscriptionPayload
+
+type ConnectedSubscriptionPayloadObject =
+  | ConnectedSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ConnectedSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ConnectedSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ConnectedSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Connected'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ConnectedSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Connected | null> | prisma.Connected | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ConnectedPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ConnectedSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ConnectedPreviousValues | null> | prisma.ConnectedPreviousValues | null
+  }
+}
+  
+
+// Types for ConnectedPreviousValues
+
+type ConnectedPreviousValuesObject =
+  | ConnectedPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type ConnectedPreviousValuesFields =
+  | 'id'
+  | 'date'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface ConnectedPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for StatistiqueSubscriptionPayload
+
+type StatistiqueSubscriptionPayloadObject =
+  | StatistiqueSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type StatistiqueSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface StatistiqueSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"StatistiqueSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Statistique'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"StatistiqueSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Statistique | null> | prisma.Statistique | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'StatistiquePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"StatistiqueSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.StatistiquePreviousValues | null> | prisma.StatistiquePreviousValues | null
+  }
+}
+  
+
+// Types for StatistiquePreviousValues
+
+type StatistiquePreviousValuesObject =
+  | StatistiquePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type StatistiquePreviousValuesFields =
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface StatistiquePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
     args: {}
     description: string
     list: undefined
@@ -10489,6 +11522,174 @@ export interface ReportWhereUniqueInput {
 export type ReportWhereUniqueInputInputObject =
   | Extract<keyof ReportWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  
+export interface ConnectedWhereUniqueInput {
+  id?: string | null
+}
+export type ConnectedWhereUniqueInputInputObject =
+  | Extract<keyof ConnectedWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface ConnectedWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  connections_some?: UserWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ConnectedWhereInput[]
+}
+export type ConnectedWhereInputInputObject =
+  | Extract<keyof ConnectedWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'connections_some', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface StatistiqueWhereUniqueInput {
+  id?: string | null
+}
+export type StatistiqueWhereUniqueInputInputObject =
+  | Extract<keyof StatistiqueWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface StatistiqueWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  connected_some?: ConnectedWhereInput | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: StatistiqueWhereInput[]
+}
+export type StatistiqueWhereInputInputObject =
+  | Extract<keyof StatistiqueWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'connected_some', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
   
 export interface TrophyWhereUniqueInput {
   id?: string | null
@@ -16705,6 +17906,213 @@ export type ReportUpdateManyMutationInputInputObject =
   | { name: 'reasonText', alias?: string  } 
   | { name: 'treated', alias?: string  } 
   
+export interface ConnectedCreateInput {
+  id?: string | null
+  date?: string
+  connections?: UserCreateManyInput | null
+}
+export type ConnectedCreateInputInputObject =
+  | Extract<keyof ConnectedCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'connections', alias?: string  } 
+  
+export interface ConnectedUpdateInput {
+  date?: string | null
+  connections?: UserUpdateManyInput | null
+}
+export type ConnectedUpdateInputInputObject =
+  | Extract<keyof ConnectedUpdateInput, string>
+  | { name: 'date', alias?: string  } 
+  | { name: 'connections', alias?: string  } 
+  
+export interface ConnectedUpdateManyMutationInput {
+  date?: string | null
+}
+export type ConnectedUpdateManyMutationInputInputObject =
+  | Extract<keyof ConnectedUpdateManyMutationInput, string>
+  | { name: 'date', alias?: string  } 
+  
+export interface StatistiqueCreateInput {
+  id?: string | null
+  connected?: ConnectedCreateManyInput | null
+}
+export type StatistiqueCreateInputInputObject =
+  | Extract<keyof StatistiqueCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'connected', alias?: string  } 
+  
+export interface ConnectedCreateManyInput {
+  create?: ConnectedCreateInput[]
+  connect?: ConnectedWhereUniqueInput[]
+}
+export type ConnectedCreateManyInputInputObject =
+  | Extract<keyof ConnectedCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface StatistiqueUpdateInput {
+  connected?: ConnectedUpdateManyInput | null
+}
+export type StatistiqueUpdateInputInputObject =
+  | Extract<keyof StatistiqueUpdateInput, string>
+  | { name: 'connected', alias?: string  } 
+  
+export interface ConnectedUpdateManyInput {
+  create?: ConnectedCreateInput[]
+  update?: ConnectedUpdateWithWhereUniqueNestedInput[]
+  upsert?: ConnectedUpsertWithWhereUniqueNestedInput[]
+  delete?: ConnectedWhereUniqueInput[]
+  connect?: ConnectedWhereUniqueInput[]
+  set?: ConnectedWhereUniqueInput[]
+  disconnect?: ConnectedWhereUniqueInput[]
+  deleteMany?: ConnectedScalarWhereInput[]
+  updateMany?: ConnectedUpdateManyWithWhereNestedInput[]
+}
+export type ConnectedUpdateManyInputInputObject =
+  | Extract<keyof ConnectedUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface ConnectedUpdateWithWhereUniqueNestedInput {
+  where?: ConnectedWhereUniqueInput
+  data?: ConnectedUpdateDataInput
+}
+export type ConnectedUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof ConnectedUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ConnectedUpdateDataInput {
+  date?: string | null
+  connections?: UserUpdateManyInput | null
+}
+export type ConnectedUpdateDataInputInputObject =
+  | Extract<keyof ConnectedUpdateDataInput, string>
+  | { name: 'date', alias?: string  } 
+  | { name: 'connections', alias?: string  } 
+  
+export interface ConnectedUpsertWithWhereUniqueNestedInput {
+  where?: ConnectedWhereUniqueInput
+  update?: ConnectedUpdateDataInput
+  create?: ConnectedCreateInput
+}
+export type ConnectedUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof ConnectedUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ConnectedScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: ConnectedScalarWhereInput[]
+  OR?: ConnectedScalarWhereInput[]
+  NOT?: ConnectedScalarWhereInput[]
+}
+export type ConnectedScalarWhereInputInputObject =
+  | Extract<keyof ConnectedScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ConnectedUpdateManyWithWhereNestedInput {
+  where?: ConnectedScalarWhereInput
+  data?: ConnectedUpdateManyDataInput
+}
+export type ConnectedUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof ConnectedUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ConnectedUpdateManyDataInput {
+  date?: string | null
+}
+export type ConnectedUpdateManyDataInputInputObject =
+  | Extract<keyof ConnectedUpdateManyDataInput, string>
+  | { name: 'date', alias?: string  } 
+  
 export interface TrophyCreateInput {
   id?: string | null
   user?: UserCreateOneWithoutTrophiesInput
@@ -17225,6 +18633,40 @@ export type ReportSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface ConnectedSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ConnectedWhereInput | null
+  AND?: ConnectedSubscriptionWhereInput[]
+}
+export type ConnectedSubscriptionWhereInputInputObject =
+  | Extract<keyof ConnectedSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface StatistiqueSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: StatistiqueWhereInput | null
+  AND?: StatistiqueSubscriptionWhereInput[]
+}
+export type StatistiqueSubscriptionWhereInputInputObject =
+  | Extract<keyof StatistiqueSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface TrophySubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -17557,6 +18999,24 @@ export type MessageOrderByInputValues =
   | 'read_DESC'
   | 'deleted_ASC'
   | 'deleted_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type ConnectedOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type StatistiqueOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

@@ -1,0 +1,14 @@
+type Connected {
+  id: ID! @id
+  date: DateTime!
+  connections: [User] @relation(link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Statistique {
+  id: ID! @id
+  connected: [Connected] @relation(link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

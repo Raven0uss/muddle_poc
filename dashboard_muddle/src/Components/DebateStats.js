@@ -14,22 +14,26 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits() {
+export default function DebateStats(props) {
   const classes = useStyles();
+  const { debates, comments } = props;
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Typography component="p" variant="h6">
+        Debats
+      </Typography>
       <Typography component="p" variant="h4">
-        $3,024.00
+        {debates}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        en ligne
       </Typography>
-      <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
-      </div>
+      <Typography component="p" variant="h6">
+        Commentaires
+      </Typography>
+      <Typography component="p" variant="h4">
+        {comments}
+      </Typography>
     </React.Fragment>
   );
 }

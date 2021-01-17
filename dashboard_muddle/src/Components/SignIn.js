@@ -52,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#F47658dd",
     },
     padding: 10,
+    width: "50%",
+    marginLeft: "auto",
   },
 }));
 
@@ -60,69 +62,53 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography
+      <div
+        style={{
+          flex: 1,
+          alignItems: "center",
+          marginTop: "50%",
+        }}
+      >
+        <Typography>Muddles</Typography>
+        <TextField
           style={{
-            color: "#f7f7f7",
-            fontFamily: "Arial",
+            backgroundColor: "#ffffff",
+            borderRadius: 5,
           }}
-          component="h1"
-          variant="h3"
-        >
-          Muddles
-        </Typography>
-        <Typography
+          variant="filled"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Adresse mail"
+          name="email"
+          autoComplete="email"
+          autoFocus
+        />
+        <TextField
           style={{
-            color: "#f7f7f7",
-            fontFamily: "Arial",
+            backgroundColor: "#ffffff",
+            borderRadius: 5,
           }}
-          component="h1"
-          variant="h5"
+          variant="filled"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Mot de passe"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
         >
-          Dashboard
-        </Typography>
-        <form className={classes.form}>
-          <TextField
-            style={{
-              backgroundColor: "#ffffff",
-              borderRadius: 5,
-            }}
-            variant="filled"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Adresse mail"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            style={{
-              backgroundColor: "#ffffff",
-              borderRadius: 5,
-            }}
-            variant="filled"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Mot de passe"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Se connecter
-          </Button>
-        </form>
+          Se connecter
+        </Button>
       </div>
       <Box mt={8}>
         <Copyright />

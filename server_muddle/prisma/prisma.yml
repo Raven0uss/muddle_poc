@@ -10,6 +10,7 @@ datamodel:
   - ./datamodel/message.prisma
   - ./datamodel/notification.prisma
   - ./datamodel/report.prisma
+  - ./datamodel/statistique.prisma
   - ./datamodel/trophy.prisma
   - ./datamodel/user.prisma
   - ./datamodel/tmpUser.prisma

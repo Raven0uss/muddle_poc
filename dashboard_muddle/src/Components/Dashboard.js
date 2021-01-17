@@ -17,22 +17,36 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import ProfileIcon from "@material-ui/icons/AccountBox";
 import Chart from "./Chart";
-import Deposits from "./Deposits";
+import DebateStats from "./DebateStats";
+import UserStats from "./UserStats";
 import Orders from "./Orders";
+
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+
+import HomeIcon from "@material-ui/icons/Home";
+import GavelIcon from "@material-ui/icons/Gavel";
+import PeopleIcon from "@material-ui/icons/People";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+
+import Home from "../Pages/Home";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "#333333",
+    backgroundColor: "#fff",
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
-    backgroundColor: "#F47658",
+    backgroundColor: "#f5f5f5",
   },
   toolbarIcon: {
     display: "flex",
@@ -57,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
+    color: "#000000",
     marginRight: 36,
   },
   menuButtonHidden: {
@@ -64,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "#000000",
   },
   drawerPaper: {
     position: "relative",
@@ -73,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    backgroundColor: "#F47658",
+    backgroundColor: "#f5f5f5",
   },
   drawerPaperClose: {
     overflowX: "hidden",
@@ -91,25 +107,31 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: "100vh",
     overflow: "auto",
+    backgroundColor: "#f5f5f5",
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    margin: 0,
+    // backgroundColor: "#FFF",
   },
   paper: {
     padding: theme.spacing(2),
     display: "flex",
-    overflow: "auto",
+    // overflow: "auto",
     flexDirection: "column",
+    boxShadow: "inherit !important",
+    borderWidth: 0,
   },
   fixedHeight: {
-    height: 240,
+    height: 300,
   },
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [path, setPath] = React.useState("home");
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -147,11 +169,17 @@ export default function Dashboard() {
           >
             Muddles
           </Typography>
-          {/* <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton> */}
+          <IconButton color="#000">
+            <span
+              style={{
+                fontSize: 12,
+                marginRight: 5,
+              }}
+            >
+              Sid-Ahmed
+            </span>
+            <ProfileIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -165,7 +193,7 @@ export default function Dashboard() {
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon
               style={{
-                color: "#FFFFFF",
+                color: "#000000",
               }}
             />
           </IconButton>
@@ -176,36 +204,56 @@ export default function Dashboard() {
             backgroundColor: "#FFFFFF",
           }}
         >
-          {mainListItems}
+          {/* Menu */}
+          <div>
+            <ListItem button onClick={() => setPath("home")}>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Accueil" />
+            </ListItem>
+            <ListItem button onClick={() => setPath("debates")}>
+              <ListItemIcon>
+                <GavelIcon />
+              </ListItemIcon>
+              <ListItemText primary="Gestion des debats" />
+            </ListItem>
+            <ListItem button onClick={() => setPath("users")}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Utilisateurs" />
+            </ListItem>
+            <ListItem button onClick={() => setPath("ads")}>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Publicites" />
+            </ListItem>
+            <hr />
+            <ListItem button onClick={() => setPath("createDebate")}>
+              <ListItemIcon>
+                <LibraryAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Nouveau debat" />
+            </ListItem>
+            <ListItem button onClick={() => setPath("createAd")}>
+              <ListItemIcon>
+                <LibraryAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Nouvelle publicite" />
+            </ListItem>
+          </div>
         </List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
+
+      {path === "home" && <Home />}
+      {path === "debates"}
+      {path === "users"}
+      {path === "ads"}
+      {path === "createAd"}
+      {path === "createDebate"}
     </div>
   );
 }

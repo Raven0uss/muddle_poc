@@ -421,6 +421,10 @@ type AggregateComment {
   count: Int!
 }
 
+type AggregateConnected {
+  count: Int!
+}
+
 type AggregateConversation {
   count: Int!
 }
@@ -442,6 +446,10 @@ type AggregateNotification {
 }
 
 type AggregateReport {
+  count: Int!
+}
+
+type AggregateStatistique {
   count: Int!
 }
 
@@ -817,6 +825,207 @@ input CommentWhereInput {
 }
 
 input CommentWhereUniqueInput {
+  id: ID
+}
+
+type Connected {
+  id: ID!
+  date: DateTime!
+  connections(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ConnectedConnection {
+  pageInfo: PageInfo!
+  edges: [ConnectedEdge]!
+  aggregate: AggregateConnected!
+}
+
+input ConnectedCreateInput {
+  id: ID
+  date: DateTime!
+  connections: UserCreateManyInput
+}
+
+input ConnectedCreateManyInput {
+  create: [ConnectedCreateInput!]
+  connect: [ConnectedWhereUniqueInput!]
+}
+
+type ConnectedEdge {
+  node: Connected!
+  cursor: String!
+}
+
+enum ConnectedOrderByInput {
+  id_ASC
+  id_DESC
+  date_ASC
+  date_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ConnectedPreviousValues {
+  id: ID!
+  date: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ConnectedScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ConnectedScalarWhereInput!]
+  OR: [ConnectedScalarWhereInput!]
+  NOT: [ConnectedScalarWhereInput!]
+}
+
+type ConnectedSubscriptionPayload {
+  mutation: MutationType!
+  node: Connected
+  updatedFields: [String!]
+  previousValues: ConnectedPreviousValues
+}
+
+input ConnectedSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ConnectedWhereInput
+  AND: [ConnectedSubscriptionWhereInput!]
+}
+
+input ConnectedUpdateDataInput {
+  date: DateTime
+  connections: UserUpdateManyInput
+}
+
+input ConnectedUpdateInput {
+  date: DateTime
+  connections: UserUpdateManyInput
+}
+
+input ConnectedUpdateManyDataInput {
+  date: DateTime
+}
+
+input ConnectedUpdateManyInput {
+  create: [ConnectedCreateInput!]
+  update: [ConnectedUpdateWithWhereUniqueNestedInput!]
+  upsert: [ConnectedUpsertWithWhereUniqueNestedInput!]
+  delete: [ConnectedWhereUniqueInput!]
+  connect: [ConnectedWhereUniqueInput!]
+  set: [ConnectedWhereUniqueInput!]
+  disconnect: [ConnectedWhereUniqueInput!]
+  deleteMany: [ConnectedScalarWhereInput!]
+  updateMany: [ConnectedUpdateManyWithWhereNestedInput!]
+}
+
+input ConnectedUpdateManyMutationInput {
+  date: DateTime
+}
+
+input ConnectedUpdateManyWithWhereNestedInput {
+  where: ConnectedScalarWhereInput!
+  data: ConnectedUpdateManyDataInput!
+}
+
+input ConnectedUpdateWithWhereUniqueNestedInput {
+  where: ConnectedWhereUniqueInput!
+  data: ConnectedUpdateDataInput!
+}
+
+input ConnectedUpsertWithWhereUniqueNestedInput {
+  where: ConnectedWhereUniqueInput!
+  update: ConnectedUpdateDataInput!
+  create: ConnectedCreateInput!
+}
+
+input ConnectedWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  connections_some: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ConnectedWhereInput!]
+}
+
+input ConnectedWhereUniqueInput {
   id: ID
 }
 
@@ -2601,6 +2810,12 @@ type Mutation {
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createConnected(data: ConnectedCreateInput!): Connected!
+  updateConnected(data: ConnectedUpdateInput!, where: ConnectedWhereUniqueInput!): Connected
+  updateManyConnecteds(data: ConnectedUpdateManyMutationInput!, where: ConnectedWhereInput): BatchPayload!
+  upsertConnected(where: ConnectedWhereUniqueInput!, create: ConnectedCreateInput!, update: ConnectedUpdateInput!): Connected!
+  deleteConnected(where: ConnectedWhereUniqueInput!): Connected
+  deleteManyConnecteds(where: ConnectedWhereInput): BatchPayload!
   createConversation(data: ConversationCreateInput!): Conversation!
   updateConversation(data: ConversationUpdateInput!, where: ConversationWhereUniqueInput!): Conversation
   updateManyConversations(data: ConversationUpdateManyMutationInput!, where: ConversationWhereInput): BatchPayload!
@@ -2637,6 +2852,11 @@ type Mutation {
   upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
   deleteReport(where: ReportWhereUniqueInput!): Report
   deleteManyReports(where: ReportWhereInput): BatchPayload!
+  createStatistique(data: StatistiqueCreateInput!): Statistique!
+  updateStatistique(data: StatistiqueUpdateInput!, where: StatistiqueWhereUniqueInput!): Statistique
+  upsertStatistique(where: StatistiqueWhereUniqueInput!, create: StatistiqueCreateInput!, update: StatistiqueUpdateInput!): Statistique!
+  deleteStatistique(where: StatistiqueWhereUniqueInput!): Statistique
+  deleteManyStatistiques(where: StatistiqueWhereInput): BatchPayload!
   createTmpUser(data: TmpUserCreateInput!): TmpUser!
   updateTmpUser(data: TmpUserUpdateInput!, where: TmpUserWhereUniqueInput!): TmpUser
   updateManyTmpUsers(data: TmpUserUpdateManyMutationInput!, where: TmpUserWhereInput): BatchPayload!
@@ -2991,6 +3211,9 @@ type Query {
   comment(where: CommentWhereUniqueInput!): Comment
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  connected(where: ConnectedWhereUniqueInput!): Connected
+  connecteds(where: ConnectedWhereInput, orderBy: ConnectedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Connected]!
+  connectedsConnection(where: ConnectedWhereInput, orderBy: ConnectedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectedConnection!
   conversation(where: ConversationWhereUniqueInput!): Conversation
   conversations(where: ConversationWhereInput, orderBy: ConversationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Conversation]!
   conversationsConnection(where: ConversationWhereInput, orderBy: ConversationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConversationConnection!
@@ -3009,6 +3232,9 @@ type Query {
   report(where: ReportWhereUniqueInput!): Report
   reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
   reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
+  statistique(where: StatistiqueWhereUniqueInput!): Statistique
+  statistiques(where: StatistiqueWhereInput, orderBy: StatistiqueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Statistique]!
+  statistiquesConnection(where: StatistiqueWhereInput, orderBy: StatistiqueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatistiqueConnection!
   tmpUser(where: TmpUserWhereUniqueInput!): TmpUser
   tmpUsers(where: TmpUserWhereInput, orderBy: TmpUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TmpUser]!
   tmpUsersConnection(where: TmpUserWhereInput, orderBy: TmpUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TmpUserConnection!
@@ -3375,16 +3601,115 @@ enum Role {
   MUDDLE
 }
 
+type Statistique {
+  id: ID!
+  connected(where: ConnectedWhereInput, orderBy: ConnectedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Connected!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type StatistiqueConnection {
+  pageInfo: PageInfo!
+  edges: [StatistiqueEdge]!
+  aggregate: AggregateStatistique!
+}
+
+input StatistiqueCreateInput {
+  id: ID
+  connected: ConnectedCreateManyInput
+}
+
+type StatistiqueEdge {
+  node: Statistique!
+  cursor: String!
+}
+
+enum StatistiqueOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type StatistiquePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type StatistiqueSubscriptionPayload {
+  mutation: MutationType!
+  node: Statistique
+  updatedFields: [String!]
+  previousValues: StatistiquePreviousValues
+}
+
+input StatistiqueSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: StatistiqueWhereInput
+  AND: [StatistiqueSubscriptionWhereInput!]
+}
+
+input StatistiqueUpdateInput {
+  connected: ConnectedUpdateManyInput
+}
+
+input StatistiqueWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  connected_some: ConnectedWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [StatistiqueWhereInput!]
+}
+
+input StatistiqueWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
   ad(where: AdSubscriptionWhereInput): AdSubscriptionPayload
   adTarget(where: AdTargetSubscriptionWhereInput): AdTargetSubscriptionPayload
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  connected(where: ConnectedSubscriptionWhereInput): ConnectedSubscriptionPayload
   conversation(where: ConversationSubscriptionWhereInput): ConversationSubscriptionPayload
   debate(where: DebateSubscriptionWhereInput): DebateSubscriptionPayload
   interaction(where: InteractionSubscriptionWhereInput): InteractionSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
   report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
+  statistique(where: StatistiqueSubscriptionWhereInput): StatistiqueSubscriptionPayload
   tmpUser(where: TmpUserSubscriptionWhereInput): TmpUserSubscriptionPayload
   trophy(where: TrophySubscriptionWhereInput): TrophySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

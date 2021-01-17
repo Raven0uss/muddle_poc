@@ -69,6 +69,14 @@ var models = [
     embedded: false
   },
   {
+    name: "Connected",
+    embedded: false
+  },
+  {
+    name: "Statistique",
+    embedded: false
+  },
+  {
     name: "TrophyType",
     embedded: false
   },
