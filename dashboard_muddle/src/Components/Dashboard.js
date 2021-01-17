@@ -45,6 +45,8 @@ import CreateAd from "../Pages/CreateAd";
 import CreateDebate from "../Pages/CreateDebate";
 import CreateUser from "../Pages/CreateUser";
 
+import logoMenu from "../logo_menu.png";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -175,7 +177,13 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Muddles
+            {open === false && (
+              <img
+                src={logoMenu}
+                alt="Muddles"
+                style={{ width: 130, marginTop: 10 }}
+              />
+            )}
           </Typography>
           <IconButton color="#000">
             <span
@@ -198,6 +206,13 @@ export default function Dashboard() {
         open={open}
       >
         <div className={classes.toolbarIcon}>
+          {open === true && (
+            <img
+              src={logoMenu}
+              alt="Muddles"
+              style={{ width: 130, marginRight: "auto" }}
+            />
+          )}
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon
               style={{

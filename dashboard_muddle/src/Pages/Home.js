@@ -68,7 +68,7 @@ const GET_MAIN_STATS = gql`
 const Home = (props) => {
   const { data, loading, error } = useQuery(GET_MAIN_STATS, {
     onCompleted: (result) => {
-    //   console.log(result);
+      //   console.log(result);
     },
     fetchPolicy: "cache-and-network",
   });
@@ -81,10 +81,10 @@ const Home = (props) => {
     return (
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        Loading...
+        Chargement...
       </main>
     );
-  if (error) return <div>An error occured with server</div>;
+  if (error) return <div>Oops, une erreur est survenue</div>;
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />

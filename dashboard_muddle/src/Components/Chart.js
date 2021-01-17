@@ -96,8 +96,8 @@ export default function Chart() {
   );
 
   moment.locale("fr");
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>An error occured with server</div>;
+  if (loading) return <div>Chargement...</div>;
+  if (error) return <div>Oops, une erreur est survenue</div>;
   const dataNotFiltered = dataStatistiques.connecteds
     .filter((d) => moment().diff(d.date, "days") <= 7)
     .map((d) =>
