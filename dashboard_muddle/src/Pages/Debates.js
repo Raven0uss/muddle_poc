@@ -263,6 +263,14 @@ const Debates = (props) => {
               </Grid>
             </div>
             <br />
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <button>Page précédente</button>
+                <span style={{ marginLeft: 5, marginRight: 5 }}>Page 1</span>
+                <button>Page suivante</button>
+              </Grid>
+            </Grid>
             {debates.map((debate) => {
               const nbVotes =
                 debate.positives.length +
@@ -420,10 +428,27 @@ const Debates = (props) => {
                 </Paper>
               );
             })}
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <button>Page précédente</button>
+                <span style={{ marginLeft: 5, marginRight: 5 }}>Page 1</span>
+                <button>Page suivante</button>
+              </Grid>
+            </Grid>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper></Paper>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          style={{
+            overflowY: "scroll",
+            height: window.innerHeight - 100,
+          }}
+        >
+          <Paper>
+              
+          </Paper>
         </Grid>
       </Grid>
     </main>
