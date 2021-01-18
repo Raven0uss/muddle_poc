@@ -1491,6 +1491,21 @@ const Mutation = prismaObjectType({
             status: "INFORMATION",
             new: true,
           });
+
+          const statistiques = await prisma.statistiques();
+          if (isEmpty(statistiques)) {
+            const newStatistiques = await prisma.createStatistique({
+              crowns: 1,
+            });
+          } else {
+            await prisma.updateStatistique({
+              where: { id: statistiques[0].id },
+              data: {
+                crowns: statistiques[0].crowns + 1,
+              },
+            });
+          }
+
           return updatedUser;
         } catch (err) {
           throw new Error(err);

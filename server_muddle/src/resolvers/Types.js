@@ -57,6 +57,15 @@ const MainStats = objectType({
   },
 });
 
+const AccountStats = objectType({
+  name: "AccountStats",
+  definition(t) {
+    t.int("accounts");
+    t.int("certified");
+    t.int("crowns");
+  },
+});
+
 // const ImageURI = objectType({
 //   name: "ImageURI",
 //   definition(t) {
@@ -122,6 +131,7 @@ export default {
   Token,
   NoValue,
   MainStats,
+  AccountStats,
   // ImageURI,
   NewNotifications,
   DateScalar,

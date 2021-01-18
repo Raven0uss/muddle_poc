@@ -470,6 +470,7 @@ export interface NexusPrismaTypes {
       ConnectedScalarWhereInput: ConnectedScalarWhereInputInputObject
       ConnectedUpdateManyWithWhereNestedInput: ConnectedUpdateManyWithWhereNestedInputInputObject
       ConnectedUpdateManyDataInput: ConnectedUpdateManyDataInputInputObject
+      StatistiqueUpdateManyMutationInput: StatistiqueUpdateManyMutationInputInputObject
       TrophyCreateInput: TrophyCreateInputInputObject
       UserCreateOneWithoutTrophiesInput: UserCreateOneWithoutTrophiesInputInputObject
       UserCreateWithoutTrophiesInput: UserCreateWithoutTrophiesInputInputObject
@@ -4870,12 +4871,14 @@ type StatistiqueObject =
   | StatistiqueFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'connected', args?: StatistiqueConnectedArgs[] | false, alias?: string  } 
+  | { name: 'crowns', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type StatistiqueFields =
   | 'id'
   | 'connected'
+  | 'crowns'
   | 'createdAt'
   | 'updatedAt'
 
@@ -4911,6 +4914,14 @@ export interface StatistiqueFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Connected[]> | prisma.Connected[]
+  }
+  crowns: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
   createdAt: {
     type: 'DateTime'
@@ -5622,6 +5633,7 @@ type MutationObject =
   | { name: 'deleteManyConnecteds', args?: MutationDeleteManyConnectedsArgs[] | false, alias?: string  } 
   | { name: 'createStatistique', args?: MutationCreateStatistiqueArgs[] | false, alias?: string  } 
   | { name: 'updateStatistique', args?: MutationUpdateStatistiqueArgs[] | false, alias?: string  } 
+  | { name: 'updateManyStatistiques', args?: MutationUpdateManyStatistiquesArgs[] | false, alias?: string  } 
   | { name: 'upsertStatistique', args?: MutationUpsertStatistiqueArgs[] | false, alias?: string  } 
   | { name: 'deleteStatistique', args?: MutationDeleteStatistiqueArgs[] | false, alias?: string  } 
   | { name: 'deleteManyStatistiques', args?: MutationDeleteManyStatistiquesArgs[] | false, alias?: string  } 
@@ -5707,6 +5719,7 @@ type MutationFields =
   | 'deleteManyConnecteds'
   | 'createStatistique'
   | 'updateStatistique'
+  | 'updateManyStatistiques'
   | 'upsertStatistique'
   | 'deleteStatistique'
   | 'deleteManyStatistiques'
@@ -5893,6 +5906,9 @@ type MutationDeleteManyConnectedsArgs =
 type MutationCreateStatistiqueArgs =
   | 'data'
 type MutationUpdateStatistiqueArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyStatistiquesArgs =
   | 'data'
   | 'where'
 type MutationUpsertStatistiqueArgs =
@@ -6759,6 +6775,19 @@ export interface MutationFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Statistique | null> | prisma.Statistique | null
+  }
+  updateManyStatistiques: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyStatistiquesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: StatistiqueUpdateManyMutationInput, where?: StatistiqueWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
   upsertStatistique: {
     type: 'Statistique'
@@ -8953,11 +8982,13 @@ export interface StatistiqueSubscriptionPayloadFieldDetails {
 type StatistiquePreviousValuesObject =
   | StatistiquePreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'crowns', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
 type StatistiquePreviousValuesFields =
   | 'id'
+  | 'crowns'
   | 'createdAt'
   | 'updatedAt'
 
@@ -8968,6 +8999,14 @@ type StatistiquePreviousValuesFields =
 export interface StatistiquePreviousValuesFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  crowns: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -11638,6 +11677,14 @@ export interface StatistiqueWhereInput {
   id_ends_with?: string | null
   id_not_ends_with?: string | null
   connected_some?: ConnectedWhereInput | null
+  crowns?: number | null
+  crowns_not?: number | null
+  crowns_in?: number[]
+  crowns_not_in?: number[]
+  crowns_lt?: number | null
+  crowns_lte?: number | null
+  crowns_gt?: number | null
+  crowns_gte?: number | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -11673,6 +11720,14 @@ export type StatistiqueWhereInputInputObject =
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
   | { name: 'connected_some', alias?: string  } 
+  | { name: 'crowns', alias?: string  } 
+  | { name: 'crowns_not', alias?: string  } 
+  | { name: 'crowns_in', alias?: string  } 
+  | { name: 'crowns_not_in', alias?: string  } 
+  | { name: 'crowns_lt', alias?: string  } 
+  | { name: 'crowns_lte', alias?: string  } 
+  | { name: 'crowns_gt', alias?: string  } 
+  | { name: 'crowns_gte', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -17936,11 +17991,13 @@ export type ConnectedUpdateManyMutationInputInputObject =
 export interface StatistiqueCreateInput {
   id?: string | null
   connected?: ConnectedCreateManyInput | null
+  crowns?: number | null
 }
 export type StatistiqueCreateInputInputObject =
   | Extract<keyof StatistiqueCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'connected', alias?: string  } 
+  | { name: 'crowns', alias?: string  } 
   
 export interface ConnectedCreateManyInput {
   create?: ConnectedCreateInput[]
@@ -17953,10 +18010,12 @@ export type ConnectedCreateManyInputInputObject =
   
 export interface StatistiqueUpdateInput {
   connected?: ConnectedUpdateManyInput | null
+  crowns?: number | null
 }
 export type StatistiqueUpdateInputInputObject =
   | Extract<keyof StatistiqueUpdateInput, string>
   | { name: 'connected', alias?: string  } 
+  | { name: 'crowns', alias?: string  } 
   
 export interface ConnectedUpdateManyInput {
   create?: ConnectedCreateInput[]
@@ -18112,6 +18171,13 @@ export interface ConnectedUpdateManyDataInput {
 export type ConnectedUpdateManyDataInputInputObject =
   | Extract<keyof ConnectedUpdateManyDataInput, string>
   | { name: 'date', alias?: string  } 
+  
+export interface StatistiqueUpdateManyMutationInput {
+  crowns?: number | null
+}
+export type StatistiqueUpdateManyMutationInputInputObject =
+  | Extract<keyof StatistiqueUpdateManyMutationInput, string>
+  | { name: 'crowns', alias?: string  } 
   
 export interface TrophyCreateInput {
   id?: string | null
@@ -19017,6 +19083,8 @@ export type ConnectedOrderByInputValues =
 export type StatistiqueOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'crowns_ASC'
+  | 'crowns_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

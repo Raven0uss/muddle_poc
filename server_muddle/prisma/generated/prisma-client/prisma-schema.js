@@ -2854,6 +2854,7 @@ type Mutation {
   deleteManyReports(where: ReportWhereInput): BatchPayload!
   createStatistique(data: StatistiqueCreateInput!): Statistique!
   updateStatistique(data: StatistiqueUpdateInput!, where: StatistiqueWhereUniqueInput!): Statistique
+  updateManyStatistiques(data: StatistiqueUpdateManyMutationInput!, where: StatistiqueWhereInput): BatchPayload!
   upsertStatistique(where: StatistiqueWhereUniqueInput!, create: StatistiqueCreateInput!, update: StatistiqueUpdateInput!): Statistique!
   deleteStatistique(where: StatistiqueWhereUniqueInput!): Statistique
   deleteManyStatistiques(where: StatistiqueWhereInput): BatchPayload!
@@ -3604,6 +3605,7 @@ enum Role {
 type Statistique {
   id: ID!
   connected(where: ConnectedWhereInput, orderBy: ConnectedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Connected!]
+  crowns: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3617,6 +3619,7 @@ type StatistiqueConnection {
 input StatistiqueCreateInput {
   id: ID
   connected: ConnectedCreateManyInput
+  crowns: Int
 }
 
 type StatistiqueEdge {
@@ -3627,6 +3630,8 @@ type StatistiqueEdge {
 enum StatistiqueOrderByInput {
   id_ASC
   id_DESC
+  crowns_ASC
+  crowns_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -3635,6 +3640,7 @@ enum StatistiqueOrderByInput {
 
 type StatistiquePreviousValues {
   id: ID!
+  crowns: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3657,6 +3663,11 @@ input StatistiqueSubscriptionWhereInput {
 
 input StatistiqueUpdateInput {
   connected: ConnectedUpdateManyInput
+  crowns: Int
+}
+
+input StatistiqueUpdateManyMutationInput {
+  crowns: Int
 }
 
 input StatistiqueWhereInput {
@@ -3675,6 +3686,14 @@ input StatistiqueWhereInput {
   id_ends_with: ID
   id_not_ends_with: ID
   connected_some: ConnectedWhereInput
+  crowns: Int
+  crowns_not: Int
+  crowns_in: [Int!]
+  crowns_not_in: [Int!]
+  crowns_lt: Int
+  crowns_lte: Int
+  crowns_gt: Int
+  crowns_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

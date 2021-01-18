@@ -21,6 +21,7 @@ const exposedQueries = {
   messageQueries: ["message", "messages"],
   notificationQueries: ["notification", "notifications"],
   reportQueries: ["report", "reports"],
+  statistiqueQueries: ["statistiques"],
   trophyQueries: ["trophy", "trophies"],
   userQueries: ["users", "user"],
   tmpUserQueries: ["tmpUsers", "tmpUser"],
@@ -460,6 +461,31 @@ const Query = prismaObjectType({
             notDefinedPercentage,
             ageAverage,
             connectedToday,
+          };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("accountStats", {
+      type: "AccountStats",
+      resolve: async (parent, args, { prisma }) => {
+        try {
+          const users = await prisma.users();
+          const certified = users.filter((u) => u.certified);
+
+          let crowns = 0;
+
+          const statistiques = await prisma.statistiques();
+          if (isEmpty(statistiques) === false) {
+            crowns = statistiques[0].crowns;
+          }
+
+          return {
+            accounts: users.length,
+            certified: certified.length,
+            crowns,
           };
         } catch (err) {
           throw new Error(err);

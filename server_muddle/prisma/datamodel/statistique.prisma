@@ -9,6 +9,7 @@ type Connected {
 type Statistique {
   id: ID! @id
   connected: [Connected] @relation(link: INLINE)
+  crowns: Int! @default(value: 0)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

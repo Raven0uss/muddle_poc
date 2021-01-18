@@ -4,7 +4,7 @@ import { split, ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/link-context";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-export const GRAPHQL_API_URL = "localhost:4000";
+export const GRAPHQL_API_URL = "6e921ca77ec9.ngrok.io";
 
 const customFetch = (uri, options) => {
   return fetch(uri, options).then((response) => {
