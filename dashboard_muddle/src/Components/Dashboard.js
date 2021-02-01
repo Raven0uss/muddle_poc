@@ -219,6 +219,17 @@ export default function Dashboard() {
     } else {
       history.replace("/");
     }
+    const interval = setInterval(() => {
+      if (token) {
+        checkToken({ variables: { token } });
+      } else {
+        history.replace("/");
+      }
+    }, 10000);
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, []);
 
   if (user === null) return null;

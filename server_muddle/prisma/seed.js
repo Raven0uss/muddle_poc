@@ -158,6 +158,23 @@ async function main() {
       "https://cdn.image4.io/muddles-app/f_auto/1c911f32-4c4d-45ad-b4a7-2ea9756ff533.png",
   });
 
+  // Create admin account
+
+  await prisma.createUser({
+    email: "moderator",
+    password: bcrypt.hashSync("test", 12),
+    firstname: "Modo",
+    lastname: "Modo",
+    birthdate: faker.date.past(),
+    certified: true,
+    role: "MODERATOR",
+    private: true,
+    coverPicture:
+      "https://cdn.image4.io/muddles-app/f_auto/1ea72fb6-2c06-4f1b-bdab-228993f8c99d.jpg",
+    profilePicture:
+      "https://cdn.image4.io/muddles-app/f_auto/1c911f32-4c4d-45ad-b4a7-2ea9756ff533.png",
+  });
+
   // Create muddle debates
   for (let index = 0; index < 10; index++) {
     await prisma.createDebate({

@@ -1793,7 +1793,7 @@ const Mutation = prismaObjectType({
             return { token: 0 };
           }
           const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
-            expiresIn: 7200,
+            expiresIn: "1d",
           });
           return { token };
         } catch (err) {
