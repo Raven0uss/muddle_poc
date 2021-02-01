@@ -256,6 +256,63 @@ const Mutation = prismaObjectType({
       },
     });
 
+    t.field("createNewUser", {
+      type: "User",
+      args: {
+        email: stringArg(),
+        password: stringArg(),
+        firstname: stringArg(),
+        lastname: stringArg(),
+        birthdate: dateArg(),
+        gender: stringArg(),
+        role: stringArg(),
+        certified: booleanArg(),
+        private: booleanArg(),
+        profilePicture: stringArg(),
+        coverPicture: stringArg(),
+      },
+      resolve: async (parent, args, { prisma }) => {
+        try {
+          const user = await prisma.createUser({
+            email: args.email,
+            password: args.password,
+            firstname: args.firstname,
+            lastname: args.lastname,
+            birthdate: args.birthdate,
+            gender: args.gender,
+            role: args.role,
+            certified: args.certified,
+            private: args.certified,
+          });
+          if (
+            isEmpty(args.profilePicture) === false &&
+            isNil(args.profilePicture) === false
+          ) {
+            await prisma.updateUser({
+              where: { id: user.id },
+              data: {
+                profilePicture: args.profilePicture,
+              },
+            });
+          }
+          if (
+            isEmpty(args.coverPicture) === false &&
+            isNil(args.coverPicture) === false
+          ) {
+            await prisma.updateUser({
+              where: { id: user.id },
+              data: {
+                coverPicture: args.coverPicture,
+              },
+            });
+          }
+          return user;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
     t.field("createPublicDebate", {
       type: "Debate",
       args: {

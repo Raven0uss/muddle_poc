@@ -4760,6 +4760,7 @@ export interface NexusGenFieldTypes {
     createInteraction: NexusGenRootTypes['Interaction']; // Interaction!
     createInvitationDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     createMessage: NexusGenRootTypes['Message']; // Message!
+    createNewUser: NexusGenRootTypes['User']; // User!
     createNotification: NexusGenRootTypes['Notification']; // Notification!
     createPublicDebate: NexusGenRootTypes['Debate']; // Debate!
     createReport: NexusGenRootTypes['Report']; // Report!
@@ -5144,6 +5145,19 @@ export interface NexusGenArgTypes {
     }
     createMessage: { // args
       data: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
+    }
+    createNewUser: { // args
+      birthdate?: any | null; // DateTime
+      certified?: boolean | null; // Boolean
+      coverPicture?: string | null; // String
+      email?: string | null; // String
+      firstname?: string | null; // String
+      gender?: string | null; // String
+      lastname?: string | null; // String
+      password?: string | null; // String
+      private?: boolean | null; // Boolean
+      profilePicture?: string | null; // String
+      role?: string | null; // String
     }
     createNotification: { // args
       data: NexusGenInputs['NotificationCreateInput']; // NotificationCreateInput!

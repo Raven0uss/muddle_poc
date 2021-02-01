@@ -2339,6 +2339,7 @@ type Mutation {
   createInteraction(data: InteractionCreateInput!): Interaction!
   createInvitationDuoDebate(answerOne: String, content: String, image: String, timelimit: String, user: ID): Debate!
   createMessage(data: MessageCreateInput!): Message!
+  createNewUser(birthdate: DateTime, certified: Boolean, coverPicture: String, email: String, firstname: String, gender: String, lastname: String, password: String, private: Boolean, profilePicture: String, role: String): User!
   createNotification(data: NotificationCreateInput!): Notification!
   createPublicDebate(answerOne: String, answerTwo: String, content: String, crowned: Boolean, image: String, timelimit: String): Debate!
   createReport(data: ReportCreateInput!): Report!
