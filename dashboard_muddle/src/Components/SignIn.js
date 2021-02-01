@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { get } from "lodash";
+import logoMenu from "../logo_menu.png";
 
 function Copyright() {
   return (
@@ -103,7 +104,10 @@ export default function SignIn() {
           marginTop: "50%",
         }}
       >
-        <Typography>Muddles</Typography>
+        <div>
+          <img src={logoMenu} style={{ width: 300 }} />
+          <b>Professionel</b>
+        </div>
         <TextField
           style={{
             backgroundColor: "#ffffff",

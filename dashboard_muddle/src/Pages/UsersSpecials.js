@@ -104,6 +104,33 @@ const CHANGE_PASSWORD = gql`
   }
 `;
 
+const CHANGE_EMAIL = gql`
+  mutation($userId: ID!, $email: String!) {
+    updateUser(where: { id: $userId }, data: { email: $email }) {
+      id
+    }
+  }
+`;
+
+const CHANGE_PROFILE = gql`
+  mutation($userId: ID!, $profilePicture: String!) {
+    updateUser(
+      where: { id: $userId }
+      data: { profilePicture: $profilePicture }
+    ) {
+      id
+    }
+  }
+`;
+
+const CHANGE_COVER = gql`
+  mutation($userId: ID!, $coverPicture: String!) {
+    updateUser(where: { id: $userId }, data: { coverPicture: $coverPicture }) {
+      id
+    }
+  }
+`;
+
 const frequency = 10;
 
 const SpecialUsers = (props) => {
@@ -139,6 +166,25 @@ const SpecialUsers = (props) => {
       setPage((page) => page - 1);
     },
   });
+  const [changeEmail] = useMutation(CHANGE_EMAIL, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [changeProfile] = useMutation(CHANGE_PROFILE, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [changeCover] = useMutation(CHANGE_COVER, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+
   const [blockMail] = useMutation(BLOCK_MAIL, {
     onCompleted: () => {
       setPage((page) => page + 1);
@@ -297,6 +343,45 @@ const SpecialUsers = (props) => {
                     }}
                   >
                     Changer le mot de passe
+                  </button>
+                </Grid>
+                <Grid item xs={3}>
+                  <button
+                    onClick={async () => {
+                      var email = prompt("Entrez le nouvel email");
+                      if (email !== null)
+                        await changeEmail({
+                          variables: { email, userId: user.id },
+                        });
+                    }}
+                  >
+                    Changer l'email
+                  </button>
+                </Grid>
+                <Grid item xs={3}>
+                  <button
+                    onClick={async () => {
+                      var profilePicture = prompt("Entrez le lien de la photo");
+                      if (profilePicture !== null)
+                        await changeProfile({
+                          variables: { profilePicture, userId: user.id },
+                        });
+                    }}
+                  >
+                    Changer la photo de profil
+                  </button>
+                </Grid>
+                <Grid item xs={3}>
+                  <button
+                    onClick={async () => {
+                      var coverPicture = prompt("Entrez de la couverture");
+                      if (coverPicture !== null)
+                        await changeCover({
+                          variables: { coverPicture, userId: user.id },
+                        });
+                    }}
+                  >
+                    Changer la photo de couverture
                   </button>
                 </Grid>
               </Grid>
