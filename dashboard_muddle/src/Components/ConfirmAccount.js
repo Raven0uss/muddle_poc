@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { get, isEmpty, isNil } from "lodash";
 import React from "react";
 import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
+import logoMenu from "../logo_menu.png";
 
 function useQueryParams() {
   return new URLSearchParams(useLocation().search);
@@ -49,23 +50,60 @@ const ConfirmAccount = () => {
 
   if (loading) {
     return (
-      <>
-        <div>En cours de validation...</div>
-      </>
+      <div
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          flexDirection: "column",
+        }}
+      >
+        <img src={logoMenu} style={{ width: 300, marginBottom: 50 }} />
+
+        <h3>Chargement... 🤔</h3>
+      </div>
     );
   }
   if (success === false) {
     return (
-      <>
-        <div>Token invalide</div>
-      </>
+      <div
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          flexDirection: "column",
+        }}
+      >
+        <img src={logoMenu} style={{ width: 300, marginBottom: 50 }} />
+
+        <h3>Oops, ce lien n'est pas valide ! 🥺</h3>
+      </div>
     );
   }
   return (
-    <>
-      <div>Votre compte a été validé avec succès !</div>
-      <div>Your account has been validated with success !</div>
-    </>
+    <div
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        width: "100%",
+        height: "100%",
+        flexDirection: "column",
+      }}
+    >
+      <img src={logoMenu} style={{ width: 300, marginBottom: 50 }} />
+
+      <h3 style={{ color: "green" }}>
+        Votre compte a été validé avec succès ! 😉
+      </h3>
+    </div>
   );
 };
 

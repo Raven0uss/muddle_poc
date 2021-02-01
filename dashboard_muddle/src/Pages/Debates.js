@@ -431,28 +431,94 @@ const Debates = (props) => {
                     >
                       Voir les commentaires
                     </button>
+                    <br />
+                    <br />
                     <div>Nombre de votes : {nbVotes}</div>
+                    <br />
                     {debate.type === "DUO" ? (
                       <>
                         <div>
                           Proposition de {debate.ownerBlue.firstname}{" "}
                           {debate.ownerBlue.lastname} : {debate.answerOne} -
-                          Votes : {debate.positives.length} soit{" "}
+                          Votes : {debate.blueVotes.length} soit{" "}
                           {nbVotes === 0
                             ? 0
                             : Math.round(
-                                (debate.positives.length / nbVotes) * 100
+                                (debate.blueVotes.length / nbVotes) * 100
+                              )}
+                          % <br />
+                          Hommes :{" "}
+                          {debate.blueVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.blueVotes.filter(
+                                  (p) => p.gender === "MALE"
+                                ).length /
+                                  debate.blueVotes.length) *
+                                  100
+                              )}
+                          %, Femmes :{" "}
+                          {debate.blueVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.blueVotes.filter(
+                                  (p) => p.gender === "FEMALE"
+                                ).length /
+                                  debate.blueVotes.length) *
+                                  100
+                              )}
+                          %, Non défini :{" "}
+                          {debate.blueVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.blueVotes.filter(
+                                  (p) => p.gender === "NO_INDICATION"
+                                ).length /
+                                  debate.blueVotes.length) *
+                                  100
                               )}
                           %
                         </div>
+                        <br />
                         <div>
                           Proposition de {debate.ownerRed.firstname}{" "}
                           {debate.ownerRed.lastname} : {debate.answerTwo} -
-                          Votes : {debate.negatives.length} soit{" "}
+                          Votes : {debate.redVotes.length} soit{" "}
                           {nbVotes === 0
                             ? 0
                             : Math.round(
-                                (debate.negatives.length / nbVotes) * 100
+                                (debate.redVotes.length / nbVotes) * 100
+                              )}
+                          %<br />
+                          Hommes :{" "}
+                          {debate.redVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.redVotes.filter(
+                                  (p) => p.gender === "MALE"
+                                ).length /
+                                  debate.redVotes.length) *
+                                  100
+                              )}
+                          %, Femmes :{" "}
+                          {debate.redVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.redVotes.filter(
+                                  (p) => p.gender === "FEMALE"
+                                ).length /
+                                  debate.redVotes.length) *
+                                  100
+                              )}
+                          %, Non défini :{" "}
+                          {debate.redVotes.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.redVotes.filter(
+                                  (p) => p.gender === "NO_INDICATION"
+                                ).length /
+                                  debate.redVotes.length) *
+                                  100
                               )}
                           %
                         </div>
@@ -468,7 +534,40 @@ const Debates = (props) => {
                                 (debate.positives.length / nbVotes) * 100
                               )}
                           %
+                          <br />
+                          Hommes :{" "}
+                          {debate.positives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.positives.filter(
+                                  (p) => p.gender === "MALE"
+                                ).length /
+                                  debate.positives.length) *
+                                  100
+                              )}
+                          %, Femmes :{" "}
+                          {debate.positives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.positives.filter(
+                                  (p) => p.gender === "FEMALE"
+                                ).length /
+                                  debate.positives.length) *
+                                  100
+                              )}
+                          %, Non défini :{" "}
+                          {debate.positives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.positives.filter(
+                                  (p) => p.gender === "NO_INDICATION"
+                                ).length /
+                                  debate.positives.length) *
+                                  100
+                              )}
+                          %
                         </div>
+                        <br />
                         <div>
                           Choix 2 : {debate.answerTwo} - Votes :{" "}
                           {debate.negatives.length} soit{" "}
@@ -476,6 +575,38 @@ const Debates = (props) => {
                             ? 0
                             : Math.round(
                                 (debate.negatives.length / nbVotes) * 100
+                              )}
+                          %
+                          <br />
+                          Hommes :{" "}
+                          {debate.negatives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.negatives.filter(
+                                  (p) => p.gender === "MALE"
+                                ).length /
+                                  debate.negatives.length) *
+                                  100
+                              )}
+                          %, Femmes :{" "}
+                          {debate.negatives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.negatives.filter(
+                                  (p) => p.gender === "FEMALE"
+                                ).length /
+                                  debate.negatives.length) *
+                                  100
+                              )}
+                          %, Non défini :{" "}
+                          {debate.negatives.length === 0
+                            ? 0
+                            : Math.round(
+                                (debate.negatives.filter(
+                                  (p) => p.gender === "NO_INDICATION"
+                                ).length /
+                                  debate.negatives.length) *
+                                  100
                               )}
                           %
                         </div>

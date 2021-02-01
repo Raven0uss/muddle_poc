@@ -96,15 +96,19 @@ const debateFragment = gql`
     }
     positives {
       id
+      gender
     }
     negatives {
       id
+      gender
     }
     redVotes {
       id
+      gender
     }
     blueVotes {
       id
+      gender
     }
     answerOne
     answerTwo
