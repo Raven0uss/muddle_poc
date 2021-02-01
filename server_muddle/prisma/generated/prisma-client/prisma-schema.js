@@ -416,6 +416,10 @@ type AggregateAdTarget {
   count: Int!
 }
 
+type AggregateBanUser {
+  count: Int!
+}
+
 type AggregateComment {
   count: Int!
 }
@@ -462,6 +466,124 @@ type AggregateTrophy {
 
 type AggregateUser {
   count: Int!
+}
+
+type BanUser {
+  id: ID!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type BanUserConnection {
+  pageInfo: PageInfo!
+  edges: [BanUserEdge]!
+  aggregate: AggregateBanUser!
+}
+
+input BanUserCreateInput {
+  id: ID
+  email: String!
+}
+
+type BanUserEdge {
+  node: BanUser!
+  cursor: String!
+}
+
+enum BanUserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type BanUserPreviousValues {
+  id: ID!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type BanUserSubscriptionPayload {
+  mutation: MutationType!
+  node: BanUser
+  updatedFields: [String!]
+  previousValues: BanUserPreviousValues
+}
+
+input BanUserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BanUserWhereInput
+  AND: [BanUserSubscriptionWhereInput!]
+}
+
+input BanUserUpdateInput {
+  email: String
+}
+
+input BanUserUpdateManyMutationInput {
+  email: String
+}
+
+input BanUserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [BanUserWhereInput!]
+}
+
+input BanUserWhereUniqueInput {
+  id: ID
+  email: String
 }
 
 type BatchPayload {
@@ -2803,6 +2925,12 @@ type Mutation {
   upsertAdTarget(where: AdTargetWhereUniqueInput!, create: AdTargetCreateInput!, update: AdTargetUpdateInput!): AdTarget!
   deleteAdTarget(where: AdTargetWhereUniqueInput!): AdTarget
   deleteManyAdTargets(where: AdTargetWhereInput): BatchPayload!
+  createBanUser(data: BanUserCreateInput!): BanUser!
+  updateBanUser(data: BanUserUpdateInput!, where: BanUserWhereUniqueInput!): BanUser
+  updateManyBanUsers(data: BanUserUpdateManyMutationInput!, where: BanUserWhereInput): BatchPayload!
+  upsertBanUser(where: BanUserWhereUniqueInput!, create: BanUserCreateInput!, update: BanUserUpdateInput!): BanUser!
+  deleteBanUser(where: BanUserWhereUniqueInput!): BanUser
+  deleteManyBanUsers(where: BanUserWhereInput): BatchPayload!
   createComment(data: CommentCreateInput!): Comment!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
@@ -3208,6 +3336,9 @@ type Query {
   adTarget(where: AdTargetWhereUniqueInput!): AdTarget
   adTargets(where: AdTargetWhereInput, orderBy: AdTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdTarget]!
   adTargetsConnection(where: AdTargetWhereInput, orderBy: AdTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdTargetConnection!
+  banUser(where: BanUserWhereUniqueInput!): BanUser
+  banUsers(where: BanUserWhereInput, orderBy: BanUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BanUser]!
+  banUsersConnection(where: BanUserWhereInput, orderBy: BanUserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BanUserConnection!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
@@ -3719,6 +3850,7 @@ input StatistiqueWhereUniqueInput {
 type Subscription {
   ad(where: AdSubscriptionWhereInput): AdSubscriptionPayload
   adTarget(where: AdTargetSubscriptionWhereInput): AdTargetSubscriptionPayload
+  banUser(where: BanUserSubscriptionWhereInput): BanUserSubscriptionPayload
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   connected(where: ConnectedSubscriptionWhereInput): ConnectedSubscriptionPayload
   conversation(where: ConversationSubscriptionWhereInput): ConversationSubscriptionPayload

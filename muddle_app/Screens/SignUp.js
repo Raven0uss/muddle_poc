@@ -448,6 +448,14 @@ function SignUpComponent(props) {
                   });
                   return;
                 }
+                if (codeRequest === -2) {
+                  setSnack({
+                    visible: true,
+                    type: "error",
+                    message: i18n._("errorUserBanned"),
+                  });
+                  return;
+                }
                 reqSignUp();
               }}
               style={{

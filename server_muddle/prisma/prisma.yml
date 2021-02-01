@@ -14,6 +14,7 @@ datamodel:
   - ./datamodel/trophy.prisma
   - ./datamodel/user.prisma
   - ./datamodel/tmpUser.prisma
+  - ./datamodel/banUser.prisma
 databaseType: document
 
 generate:

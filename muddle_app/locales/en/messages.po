@@ -78,7 +78,7 @@ msgstr "Unfollow"
 #~ msgid "ago"
 #~ msgstr "{time} ago"
 
-#: Screens/SignUp.js:485
+#: Screens/SignUp.js:493
 msgid "alreadyMember?"
 msgstr "Already member ?"
 
@@ -215,7 +215,7 @@ msgid "confirmPassword"
 msgstr "Confirm password"
 
 #: Screens/Login.js:337
-#: Screens/SignUp.js:486
+#: Screens/SignUp.js:494
 msgid "connect"
 msgstr "Log in"
 
@@ -282,7 +282,8 @@ msgstr "Delete my account"
 #: Screens/DeleteAccount.js:131
 msgid "deleteAccountInstruction"
 msgstr ""
-"To delete your account, type your current password and press the button for few seconds.\n\n"
+"To delete your account, type your current password and press the button for few seconds.\n"
+"\n"
 "Remember, this action is permanent. All the data relatives to your account will be removed from our database."
 
 #: Screens/DeleteAccount.js:119
@@ -354,6 +355,10 @@ msgstr "This email is already used."
 #: Screens/SignUp.js:439
 msgid "errorOccurredServer"
 msgstr "An error has occurred with the server. Please retry later."
+
+#: Screens/SignUp.js:455
+msgid "errorUserBanned"
+msgstr "You have been banned from our services."
 
 #: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
@@ -717,7 +722,7 @@ msgstr "Settings"
 msgid "sponsorised"
 msgstr "Sponsorised"
 
-#: Screens/SignUp.js:472
+#: Screens/SignUp.js:480
 msgid "subscribe"
 msgstr "Sign in"
 

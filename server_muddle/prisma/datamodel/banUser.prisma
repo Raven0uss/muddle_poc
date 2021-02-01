@@ -1,0 +1,6 @@
+type BanUser {
+    id: ID! @id
+    email: String! @unique
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime @updatedAt
+}

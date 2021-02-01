@@ -78,7 +78,7 @@ msgstr "Ne plus suivre"
 #~ msgid "ago"
 #~ msgstr "il y a {time}"
 
-#: Screens/SignUp.js:485
+#: Screens/SignUp.js:493
 msgid "alreadyMember?"
 msgstr "Déjà inscrit ?"
 
@@ -215,7 +215,7 @@ msgid "confirmPassword"
 msgstr "Confirmation mot de passe"
 
 #: Screens/Login.js:337
-#: Screens/SignUp.js:486
+#: Screens/SignUp.js:494
 msgid "connect"
 msgstr "Se connecter"
 
@@ -354,6 +354,10 @@ msgstr "L'adresse email saisie est déjà enregistrée."
 #: Screens/SignUp.js:439
 msgid "errorOccurredServer"
 msgstr "Une erreur est survenue avec le serveur. Veuillez réessayer plus tard."
+
+#: Screens/SignUp.js:455
+msgid "errorUserBanned"
+msgstr "Vous avez été banni de nos services."
 
 #: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
@@ -717,7 +721,7 @@ msgstr "Paramètres"
 msgid "sponsorised"
 msgstr "Sponsorisé"
 
-#: Screens/SignUp.js:472
+#: Screens/SignUp.js:480
 msgid "subscribe"
 msgstr "S'inscrire"
 

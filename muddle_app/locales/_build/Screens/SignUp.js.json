@@ -199,11 +199,19 @@
       ]
     ]
   },
+  "errorUserBanned": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        455
+      ]
+    ]
+  },
   "subscribe": {
     "origin": [
       [
         "Screens/SignUp.js",
-        472
+        480
       ]
     ]
   },
@@ -211,7 +219,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        485
+        493
       ]
     ]
   },
@@ -219,7 +227,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        486
+        494
       ]
     ]
   }

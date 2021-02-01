@@ -72,6 +72,10 @@ export interface NexusPrismaTypes {
       TmpUserConnection: TmpUserConnectionObject
       TmpUserEdge: TmpUserEdgeObject
       AggregateTmpUser: AggregateTmpUserObject
+      BanUser: BanUserObject
+      BanUserConnection: BanUserConnectionObject
+      BanUserEdge: BanUserEdgeObject
+      AggregateBanUser: AggregateBanUserObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -103,6 +107,8 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesObject
       TmpUserSubscriptionPayload: TmpUserSubscriptionPayloadObject
       TmpUserPreviousValues: TmpUserPreviousValuesObject
+      BanUserSubscriptionPayload: BanUserSubscriptionPayloadObject
+      BanUserPreviousValues: BanUserPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -163,6 +169,10 @@ export interface NexusPrismaTypes {
       TmpUserConnection: TmpUserConnectionFieldDetails
       TmpUserEdge: TmpUserEdgeFieldDetails
       AggregateTmpUser: AggregateTmpUserFieldDetails
+      BanUser: BanUserFieldDetails
+      BanUserConnection: BanUserConnectionFieldDetails
+      BanUserEdge: BanUserEdgeFieldDetails
+      AggregateBanUser: AggregateBanUserFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -194,6 +204,8 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesFieldDetails
       TmpUserSubscriptionPayload: TmpUserSubscriptionPayloadFieldDetails
       TmpUserPreviousValues: TmpUserPreviousValuesFieldDetails
+      BanUserSubscriptionPayload: BanUserSubscriptionPayloadFieldDetails
+      BanUserPreviousValues: BanUserPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -226,6 +238,8 @@ export interface NexusPrismaTypes {
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
       TmpUserWhereUniqueInput: TmpUserWhereUniqueInputInputObject
       TmpUserWhereInput: TmpUserWhereInputInputObject
+      BanUserWhereUniqueInput: BanUserWhereUniqueInputInputObject
+      BanUserWhereInput: BanUserWhereInputInputObject
       AdCreateInput: AdCreateInputInputObject
       AdUpdateInput: AdUpdateInputInputObject
       AdUpdateManyMutationInput: AdUpdateManyMutationInputInputObject
@@ -484,6 +498,9 @@ export interface NexusPrismaTypes {
       TmpUserCreateInput: TmpUserCreateInputInputObject
       TmpUserUpdateInput: TmpUserUpdateInputInputObject
       TmpUserUpdateManyMutationInput: TmpUserUpdateManyMutationInputInputObject
+      BanUserCreateInput: BanUserCreateInputInputObject
+      BanUserUpdateInput: BanUserUpdateInputInputObject
+      BanUserUpdateManyMutationInput: BanUserUpdateManyMutationInputInputObject
       AdSubscriptionWhereInput: AdSubscriptionWhereInputInputObject
       AdTargetSubscriptionWhereInput: AdTargetSubscriptionWhereInputInputObject
       CommentSubscriptionWhereInput: CommentSubscriptionWhereInputInputObject
@@ -498,6 +515,7 @@ export interface NexusPrismaTypes {
       TrophySubscriptionWhereInput: TrophySubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       TmpUserSubscriptionWhereInput: TmpUserSubscriptionWhereInputInputObject
+      BanUserSubscriptionWhereInput: BanUserSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
@@ -528,6 +546,7 @@ export interface NexusPrismaTypes {
     ConnectedOrderByInput: ConnectedOrderByInputValues,
     StatistiqueOrderByInput: StatistiqueOrderByInputValues,
     TmpUserOrderByInput: TmpUserOrderByInputValues,
+    BanUserOrderByInput: BanUserOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -578,6 +597,9 @@ type QueryObject =
   | { name: 'tmpUser', args?: QueryTmpUserArgs[] | false, alias?: string  } 
   | { name: 'tmpUsers', args?: QueryTmpUsersArgs[] | false, alias?: string  } 
   | { name: 'tmpUsersConnection', args?: QueryTmpUsersConnectionArgs[] | false, alias?: string  } 
+  | { name: 'banUser', args?: QueryBanUserArgs[] | false, alias?: string  } 
+  | { name: 'banUsers', args?: QueryBanUsersArgs[] | false, alias?: string  } 
+  | { name: 'banUsersConnection', args?: QueryBanUsersConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'ad'
@@ -622,6 +644,9 @@ type QueryFields =
   | 'tmpUser'
   | 'tmpUsers'
   | 'tmpUsersConnection'
+  | 'banUser'
+  | 'banUsers'
+  | 'banUsersConnection'
 
 
 type QueryAdArgs =
@@ -869,6 +894,24 @@ type QueryTmpUsersArgs =
   | 'first'
   | 'last'
 type QueryTmpUsersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryBanUserArgs =
+  | 'where'
+type QueryBanUsersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryBanUsersConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -1424,6 +1467,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TmpUserConnection> | prisma.TmpUserConnection
+  }
+  banUser: {
+    type: 'BanUser'
+    args: Record<QueryBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: BanUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser | null> | prisma.BanUser | null
+  }
+  banUsers: {
+    type: 'BanUser'
+    args: Record<QueryBanUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: BanUserWhereInput | null, orderBy?: prisma.BanUserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser[]> | prisma.BanUser[]
+  }
+  banUsersConnection: {
+    type: 'BanUserConnection'
+    args: Record<QueryBanUsersConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: BanUserWhereInput | null, orderBy?: prisma.BanUserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUserConnection> | prisma.BanUserConnection
   }
 }
   
@@ -5567,6 +5649,186 @@ export interface AggregateTmpUserFieldDetails {
 }
   
 
+// Types for BanUser
+
+type BanUserObject =
+  | BanUserFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type BanUserFields =
+  | 'id'
+  | 'email'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface BanUserFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for BanUserConnection
+
+type BanUserConnectionObject =
+  | BanUserConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type BanUserConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface BanUserConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"BanUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'BanUserEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"BanUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUserEdge[]> | prisma.BanUserEdge[]
+  }
+  aggregate: {
+    type: 'AggregateBanUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"BanUserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateBanUser> | prisma.AggregateBanUser
+  }
+}
+  
+
+// Types for BanUserEdge
+
+type BanUserEdgeObject =
+  | BanUserEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type BanUserEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface BanUserEdgeFieldDetails {
+  node: {
+    type: 'BanUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"BanUserEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser> | prisma.BanUser
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateBanUser
+
+type AggregateBanUserObject =
+  | AggregateBanUserFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateBanUserFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateBanUserFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -5655,6 +5917,12 @@ type MutationObject =
   | { name: 'upsertTmpUser', args?: MutationUpsertTmpUserArgs[] | false, alias?: string  } 
   | { name: 'deleteTmpUser', args?: MutationDeleteTmpUserArgs[] | false, alias?: string  } 
   | { name: 'deleteManyTmpUsers', args?: MutationDeleteManyTmpUsersArgs[] | false, alias?: string  } 
+  | { name: 'createBanUser', args?: MutationCreateBanUserArgs[] | false, alias?: string  } 
+  | { name: 'updateBanUser', args?: MutationUpdateBanUserArgs[] | false, alias?: string  } 
+  | { name: 'updateManyBanUsers', args?: MutationUpdateManyBanUsersArgs[] | false, alias?: string  } 
+  | { name: 'upsertBanUser', args?: MutationUpsertBanUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteBanUser', args?: MutationDeleteBanUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyBanUsers', args?: MutationDeleteManyBanUsersArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createAd'
@@ -5741,6 +6009,12 @@ type MutationFields =
   | 'upsertTmpUser'
   | 'deleteTmpUser'
   | 'deleteManyTmpUsers'
+  | 'createBanUser'
+  | 'updateBanUser'
+  | 'updateManyBanUsers'
+  | 'upsertBanUser'
+  | 'deleteBanUser'
+  | 'deleteManyBanUsers'
 
 
 type MutationCreateAdArgs =
@@ -5966,6 +6240,22 @@ type MutationUpsertTmpUserArgs =
 type MutationDeleteTmpUserArgs =
   | 'where'
 type MutationDeleteManyTmpUsersArgs =
+  | 'where'
+type MutationCreateBanUserArgs =
+  | 'data'
+type MutationUpdateBanUserArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyBanUsersArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertBanUserArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteBanUserArgs =
+  | 'where'
+type MutationDeleteManyBanUsersArgs =
   | 'where'
   
 
@@ -7062,6 +7352,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createBanUser: {
+    type: 'BanUser'
+    args: Record<MutationCreateBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: BanUserCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser> | prisma.BanUser
+  }
+  updateBanUser: {
+    type: 'BanUser'
+    args: Record<MutationUpdateBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: BanUserUpdateInput, where: BanUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser | null> | prisma.BanUser | null
+  }
+  updateManyBanUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyBanUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: BanUserUpdateManyMutationInput, where?: BanUserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertBanUser: {
+    type: 'BanUser'
+    args: Record<MutationUpsertBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: BanUserWhereUniqueInput, create: BanUserCreateInput, update: BanUserUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser> | prisma.BanUser
+  }
+  deleteBanUser: {
+    type: 'BanUser'
+    args: Record<MutationDeleteBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: BanUserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser | null> | prisma.BanUser | null
+  }
+  deleteManyBanUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyBanUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: BanUserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -7108,6 +7476,7 @@ type SubscriptionObject =
   | { name: 'trophy', args?: SubscriptionTrophyArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'tmpUser', args?: SubscriptionTmpUserArgs[] | false, alias?: string  } 
+  | { name: 'banUser', args?: SubscriptionBanUserArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'ad'
@@ -7124,6 +7493,7 @@ type SubscriptionFields =
   | 'trophy'
   | 'user'
   | 'tmpUser'
+  | 'banUser'
 
 
 type SubscriptionAdArgs =
@@ -7153,6 +7523,8 @@ type SubscriptionTrophyArgs =
 type SubscriptionUserArgs =
   | 'where'
 type SubscriptionTmpUserArgs =
+  | 'where'
+type SubscriptionBanUserArgs =
   | 'where'
   
 
@@ -7338,6 +7710,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TmpUserSubscriptionPayload | null> | prisma.TmpUserSubscriptionPayload | null
+  }
+  banUser: {
+    type: 'BanUserSubscriptionPayload'
+    args: Record<SubscriptionBanUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: BanUserSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUserSubscriptionPayload | null> | prisma.BanUserSubscriptionPayload | null
   }
 }
   
@@ -9697,6 +10082,131 @@ export interface TmpUserPreviousValuesFieldDetails {
 }
   
 
+// Types for BanUserSubscriptionPayload
+
+type BanUserSubscriptionPayloadObject =
+  | BanUserSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type BanUserSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface BanUserSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"BanUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'BanUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"BanUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUser | null> | prisma.BanUser | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'BanUserPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"BanUserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BanUserPreviousValues | null> | prisma.BanUserPreviousValues | null
+  }
+}
+  
+
+// Types for BanUserPreviousValues
+
+type BanUserPreviousValuesObject =
+  | BanUserPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'createdAt', args?: [] | false, alias?: string  } 
+  | { name: 'updatedAt', args?: [] | false, alias?: string  } 
+
+type BanUserPreviousValuesFields =
+  | 'id'
+  | 'email'
+  | 'createdAt'
+  | 'updatedAt'
+
+
+
+  
+
+export interface BanUserPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  createdAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  updatedAt: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
 
 export interface AdWhereUniqueInput {
   id?: string | null
@@ -11962,6 +12472,110 @@ export type TmpUserWhereInputInputObject =
   | { name: 'gender_not', alias?: string  } 
   | { name: 'gender_in', alias?: string  } 
   | { name: 'gender_not_in', alias?: string  } 
+  | { name: 'createdAt', alias?: string  } 
+  | { name: 'createdAt_not', alias?: string  } 
+  | { name: 'createdAt_in', alias?: string  } 
+  | { name: 'createdAt_not_in', alias?: string  } 
+  | { name: 'createdAt_lt', alias?: string  } 
+  | { name: 'createdAt_lte', alias?: string  } 
+  | { name: 'createdAt_gt', alias?: string  } 
+  | { name: 'createdAt_gte', alias?: string  } 
+  | { name: 'updatedAt', alias?: string  } 
+  | { name: 'updatedAt_not', alias?: string  } 
+  | { name: 'updatedAt_in', alias?: string  } 
+  | { name: 'updatedAt_not_in', alias?: string  } 
+  | { name: 'updatedAt_lt', alias?: string  } 
+  | { name: 'updatedAt_lte', alias?: string  } 
+  | { name: 'updatedAt_gt', alias?: string  } 
+  | { name: 'updatedAt_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface BanUserWhereUniqueInput {
+  id?: string | null
+  email?: string | null
+}
+export type BanUserWhereUniqueInputInputObject =
+  | Extract<keyof BanUserWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  
+export interface BanUserWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  createdAt?: string | null
+  createdAt_not?: string | null
+  createdAt_in?: string[]
+  createdAt_not_in?: string[]
+  createdAt_lt?: string | null
+  createdAt_lte?: string | null
+  createdAt_gt?: string | null
+  createdAt_gte?: string | null
+  updatedAt?: string | null
+  updatedAt_not?: string | null
+  updatedAt_in?: string[]
+  updatedAt_not_in?: string[]
+  updatedAt_lt?: string | null
+  updatedAt_lte?: string | null
+  updatedAt_gt?: string | null
+  updatedAt_gte?: string | null
+  AND?: BanUserWhereInput[]
+}
+export type BanUserWhereInputInputObject =
+  | Extract<keyof BanUserWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -18544,6 +19158,29 @@ export type TmpUserUpdateManyMutationInputInputObject =
   | { name: 'role', alias?: string  } 
   | { name: 'gender', alias?: string  } 
   
+export interface BanUserCreateInput {
+  id?: string | null
+  email?: string
+}
+export type BanUserCreateInputInputObject =
+  | Extract<keyof BanUserCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  
+export interface BanUserUpdateInput {
+  email?: string | null
+}
+export type BanUserUpdateInputInputObject =
+  | Extract<keyof BanUserUpdateInput, string>
+  | { name: 'email', alias?: string  } 
+  
+export interface BanUserUpdateManyMutationInput {
+  email?: string | null
+}
+export type BanUserUpdateManyMutationInputInputObject =
+  | Extract<keyof BanUserUpdateManyMutationInput, string>
+  | { name: 'email', alias?: string  } 
+  
 export interface AdSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -18775,6 +19412,23 @@ export interface TmpUserSubscriptionWhereInput {
 }
 export type TmpUserSubscriptionWhereInputInputObject =
   | Extract<keyof TmpUserSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface BanUserSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: BanUserWhereInput | null
+  AND?: BanUserSubscriptionWhereInput[]
+}
+export type BanUserSubscriptionWhereInputInputObject =
+  | Extract<keyof BanUserSubscriptionWhereInput, string>
   | { name: 'mutation_in', alias?: string  } 
   | { name: 'updatedFields_contains', alias?: string  } 
   | { name: 'updatedFields_contains_every', alias?: string  } 
@@ -19105,6 +19759,16 @@ export type TmpUserOrderByInputValues =
   | 'role_DESC'
   | 'gender_ASC'
   | 'gender_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type BanUserOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

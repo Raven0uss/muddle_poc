@@ -166,6 +166,9 @@ const Mutation = prismaObjectType({
         { prisma }
       ) => {
         try {
+          const checkUserBanned = await prisma.banUser({ email });
+          if (!isNil(checkUserBanned)) throw new Error("User banned.");
+
           const hashedPassword = bcrypt.hashSync(password, 12);
           const checkUserExist = await prisma.user({ email });
           if (!isNil(checkUserExist)) throw new Error("User already member.");
@@ -273,6 +276,9 @@ const Mutation = prismaObjectType({
       },
       resolve: async (parent, args, { prisma }) => {
         try {
+          const checkUserBanned = await prisma.banUser({ email: args.email });
+          if (!isNil(checkUserBanned)) throw new Error("User banned.");
+
           const user = await prisma.createUser({
             email: args.email,
             password: args.password,
@@ -1579,6 +1585,8 @@ const Mutation = prismaObjectType({
       },
       resolve: async (parent, { email }, { prisma }) => {
         const user = await prisma.user({ email });
+        const isBanned = await prisma.banUser({ email });
+        if (isNil(isBanned) === false) return { value: -2 }; // banned
         console.log(user);
         if (isNil(user)) {
           const tmpUser = await prisma.tmpUser({ email });
@@ -1763,7 +1771,9 @@ const Mutation = prismaObjectType({
             });
 
             if (banned) {
-              console.log("Bannir");
+              await prisma.createBanUser({
+                email: user.email,
+              });
             }
             await prisma.deleteUser({ id: userId });
             return { value: 0 };
