@@ -106,7 +106,7 @@ export default function SignIn() {
       >
         <div>
           <img src={logoMenu} style={{ width: 250 }} />
-          <b>Professionel</b>
+          <b>Professionnel</b>
         </div>
         <TextField
           style={{
