@@ -137,6 +137,17 @@ export default function SignIn() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyPress={async (e) => {
+            setError(false);
+            console.log(e.key);
+            if (e.key === "Enter")
+              await logIn({
+                variables: {
+                  email,
+                  password,
+                },
+              });
+          }}
         />
         {error && <p style={{ color: "red" }}>Identifiants incorrects</p>}
         <Button
