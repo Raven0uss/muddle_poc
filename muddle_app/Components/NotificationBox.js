@@ -1693,7 +1693,7 @@ const NotificationBox = (props) => {
                 }}
               >
                 {`${i18n._("sendYouCrown")} ${getTimeSpent(
-                  notification.updatedAt
+                  notification.createdAt
                 )}`}
               </Text>
             </View>

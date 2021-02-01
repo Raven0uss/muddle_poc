@@ -30,7 +30,7 @@ export default function UserStats(props) {
           fontSize: 12,
         }}
       >
-        Connexions en temps réel
+        Connexions aujourd'hui
       </Typography>
       <Typography
         component="p"

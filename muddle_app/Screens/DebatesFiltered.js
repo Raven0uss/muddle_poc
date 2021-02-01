@@ -285,6 +285,7 @@ const DebatesFiltered = (props) => {
       ) : (
         <FlatList
           data={debates.filter((d) => {
+            if (d.type === "MUDDLE") return true;
             if (d.type === "DUO") {
               if (
                 currentUser.id === d.ownerRed.id ||

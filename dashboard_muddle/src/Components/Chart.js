@@ -104,7 +104,11 @@ export default function Chart() {
   if (loading) return <div>Chargement...</div>;
   if (error) return <div>Oops, une erreur est survenue</div>;
   const dataNotFiltered = dataStatistiques.connecteds
-    .filter((d) => moment().diff(d.date, "days") <= 7)
+    .filter((d) => {
+      if (filterDate === "week") return moment().diff(d.date, "days") <= 7;
+      if (filterDate === "month") return moment().diff(d.date, "days") <= 31;
+      if (filterDate === "year") return moment().diff(d.date, "days") <= 365;
+    })
     .map((d) => {
       console.log(d);
       return createData(

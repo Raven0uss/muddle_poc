@@ -5,6 +5,10 @@ import SignIn from "./Components/SignIn";
 import Dashboard from "./Components/Dashboard";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./apollo";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ConfirmAccount from "./Components/ConfirmAccount";
+import ForgotPassword from "./Components/ForgotPassword";
+
 // import moment from "moment";
 require("typeface-montserrat");
 
@@ -19,8 +23,23 @@ function App() {
           backgroundColor: "#f5f5f5",
         }}
       >
-        {/* <SignIn /> */}
-        <Dashboard />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+
+            <Route path="/confirm">
+              <ConfirmAccount />
+            </Route>
+            <Route path="/forgot">
+              <ForgotPassword />
+            </Route>
+            <Route path="/">
+              <SignIn />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     </ApolloProvider>
   );

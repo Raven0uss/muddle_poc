@@ -27,7 +27,9 @@ const GET_ACCOUNT_STATS = gql`
 
 export default function AccountStats(props) {
   const classes = useStyles();
-  const { data, loading, error } = useQuery(GET_ACCOUNT_STATS);
+  const { data, loading, error } = useQuery(GET_ACCOUNT_STATS, {
+    fetchPolicy: "cache-and-network",
+  });
 
   if (loading) return <div>Chargement...</div>;
   if (error) return <div>Une erreur est survenue</div>;

@@ -1,10 +1,12 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { Grid, Paper } from "@material-ui/core";
 import moment from "moment";
-import { isNil, get } from "lodash";
+import { isNil, get, cloneDeep } from "lodash";
+import askSure from "../askSure";
+import getDebates from "../gql/getDebates";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -33,134 +35,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GET_DEBATES = gql`
-  query($first: Int!, $skip: Int!) {
-    debates(orderBy: createdAt_DESC, first: $first, skip: $skip) {
+const CLOSE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    closeMyDebate(debateId: $debateId) {
       id
-      type
-      content
-      comments {
-        id
-        content
-        from {
-          id
-          firstname
-          lastname
-          email
-        }
-        likes {
-          id
-        }
-        dislikes {
-          id
-        }
-        reports {
-          id
-          from {
-            id
-            firstname
-            lastname
-            email
-          }
-          to {
-            id
-            firstname
-            lastname
-            email
-          }
-          type
-          reasonText
-          comment {
-            id
-            content
-            from {
-              id
-              firstname
-              lastname
-              email
-            }
-          }
-          debate {
-            id
-            type
-            content
-            image
-            owner {
-              id
-              firstname
-              lastname
-              email
-            }
-            ownerRed {
-              id
-              firstname
-              lastname
-              email
-            }
-            ownerBlue {
-              id
-              firstname
-              lastname
-              email
-            }
-            answerOne
-            answerTwo
-          }
-          treated
-        }
-        createdAt
-      }
-      owner {
-        id
-        firstname
-        lastname
-        email
-      }
-      ownerBlue {
-        id
-        firstname
-        lastname
-        email
-      }
-      ownerRed {
-        id
-        firstname
-        lastname
-        email
-      }
-      positives {
-        id
-      }
-      negatives {
-        id
-      }
-      redVotes {
-        id
-      }
-      blueVotes {
-        id
-      }
-      answerOne
-      answerTwo
-      crowned
-      image
-      reports {
-        id
-        treated
-      }
-      createdAt
-      closed
-      published
-      timelimit
-      image
-      crowned
     }
   }
 `;
 
-const GET_REPORTS = gql`
-  query {
-    reports(orderBy: createdAt_DESC) {
+const DELETE_DEBATE = gql`
+  mutation($debateId: ID!) {
+    deleteMyDebate(debateId: $debateId) {
+      id
+    }
+  }
+`;
+
+const BAN_USER = gql`
+  mutation($userId: ID!) {
+    deleteThisUser(userId: $userId, banned: true) {
+      value
+    }
+  }
+`;
+
+const DELETE_COMMENT = gql`
+  mutation($commentId: ID!) {
+    deleteMyComment(commentId: $commentId) {
+      id
+    }
+  }
+`;
+
+const CANCEL_REPORT = gql`
+  mutation($reportId: ID!) {
+    deleteReport(where: { id: $reportId }) {
       id
     }
   }
@@ -193,6 +102,13 @@ const getDebateType = (type) => {
 
 const frequency = 5;
 
+const defaultFilter = {
+  status: "all",
+  type: "all",
+  reports: "all",
+  order: "createdAt_DESC",
+};
+
 const Debates = (props) => {
   const classes = useStyles();
 
@@ -205,23 +121,65 @@ const Debates = (props) => {
 
   const [filterOpen, setFilterOpen] = React.useState(false);
   const [filterCommentOpen, setFilterCommentOpen] = React.useState(false);
-  const [filterReportOpen, setFilterReportOpen] = React.useState(false);
+  // const [filterReportOpen, setFilterReportOpen] = React.useState(false);
+
+  const [search, setSearch] = React.useState("");
+  const [filterSearch, setFilterSearch] = React.useState("content");
+  // const [orderBy, setOrderBy] = React.useState("content");
 
   const {
     data: debatesData,
     loading: loadingDebates,
     error: errorDebates,
     fetchMore,
-  } = useQuery(GET_DEBATES, {
+    refetch,
+  } = useQuery(getDebates(filterSearch), {
     variables: {
       first: frequency,
       skip: frequency * (page - 1),
+      search,
     },
     onCompleted: (response) => {
       const debatesQuery = get(response, "debates", []);
       setDebates(debatesQuery);
     },
     fetchPolicy: "cache-and-network",
+  });
+
+  const [closeDebate] = useMutation(CLOSE_DEBATE, {
+    onCompleted: () => {
+      // refetch();
+      setComments(null);
+      setReports(null);
+    },
+  });
+
+  const [deleteDebate] = useMutation(DELETE_DEBATE, {
+    onCompleted: () => {
+      setComments(null);
+      setReports(null);
+    },
+  });
+
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
+    onCompleted: () => {
+      // setComments(null);
+      setReports(null);
+    },
+  });
+
+  const [banUser] = useMutation(BAN_USER, {
+    onCompleted: () => {
+      setComments(null);
+      setReports(null);
+    },
+  });
+
+  const [cancelReport] = useMutation(CANCEL_REPORT, {
+    onCompleted: () => {
+      setComments(null);
+      setReports(null);
+    },
   });
 
   const changePage = async (direction) => {
@@ -263,15 +221,19 @@ const Debates = (props) => {
                   Rechercher :{" "}
                   <select>
                     <option value="content">Le débat contient</option>
-                    <option value="user">Créé par</option>
-                    <option value="vote">Choix de vote contient</option>
+                    {/* <option value="user">Créé par</option>
+                    <option value="vote">Choix de vote contient</option> */}
                   </select>{" "}
-                  <input placeholder="Votre recherche..."></input>{" "}
-                  <button>Rechercher</button>
+                  <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Votre recherche..."
+                  ></input>{" "}
+                  {/* <button>Rechercher</button> */}
                 </Grid>
               </Grid>
               <br />
-              <button onClick={() => setFilterOpen((b) => !b)}>
+              {/* <button onClick={() => setFilterOpen((b) => !b)}>
                 {filterOpen ? "Cacher les filtres" : "Afficher les filtres"}
               </button>
               <br />
@@ -368,7 +330,7 @@ const Debates = (props) => {
                     </Grid>
                   </Grid>
                 </Paper>
-              )}
+              )}*/}
             </div>
             <br />
             <br />
@@ -433,13 +395,13 @@ const Debates = (props) => {
                         <div>
                           Nombre de signalement : {debate.reports.length}
                         </div>
-                        <div>
+                        {/* <div>
                           Nombre de signalement non-résolus :{" "}
                           {
                             debate.reports.filter((r) => r.treated === false)
                               .length
                           }
-                        </div>
+                        </div> */}
                         <button
                           onClick={() => {
                             setComments(null);
@@ -533,41 +495,138 @@ const Debates = (props) => {
                     <Grid container spacing={3}>
                       <Grid item xs={4}>
                         {debate.closed === false && (
-                          <button>Clore le débat</button>
+                          <button
+                            onClick={() =>
+                              askSure(
+                                "Êtes-vous sûr de clore ce débat ?",
+                                async () => {
+                                  await closeDebate({
+                                    variables: {
+                                      debateId: debate.id,
+                                    },
+                                  });
+                                  refetch();
+                                }
+                              )
+                            }
+                          >
+                            Clore le débat
+                          </button>
                         )}
                         <br />
-                        <button>Supprimer le débat</button>
+                        <button
+                          onClick={() =>
+                            askSure(
+                              "Êtes-vous sûr de supprimer ce débat ?",
+                              async () => {
+                                await deleteDebate({
+                                  variables: {
+                                    debateId: debate.id,
+                                  },
+                                });
+                                refetch();
+                              }
+                            )
+                          }
+                        >
+                          Supprimer le débat
+                        </button>
                         {debate.type === "DUO" && (
-                          <button>Bannir les deux utilisateurs</button>
+                          <button
+                            onClick={() =>
+                              askSure(
+                                `Êtes-vous sûr de bannir les deux utilisateurs ?`,
+                                async () => {
+                                  await banUser({
+                                    variables: {
+                                      userId: debate.ownerBlue.id,
+                                    },
+                                  });
+                                  await banUser({
+                                    variables: {
+                                      userId: debate.ownerRed.id,
+                                    },
+                                  });
+                                  refetch();
+                                }
+                              )
+                            }
+                          >
+                            Bannir les deux utilisateurs
+                          </button>
                         )}
                       </Grid>
                       {debate.type === "STANDARD" && (
                         <Grid item xs={4}>
-                          <button>Voir la fiche utilisateur</button>
-                          <br />
-                          <button>Bannir l'utilisateur</button>
+                          {/* <button>Voir la fiche utilisateur</button> */}
+                          {/* <br /> */}
+                          <button
+                            onClick={() =>
+                              askSure(
+                                `Êtes-vous sûr de bannir cet utilisateur ?`,
+                                async () => {
+                                  await banUser({
+                                    variables: {
+                                      userId: debate.owner.id,
+                                    },
+                                  });
+                                  refetch();
+                                }
+                              )
+                            }
+                          >
+                            Bannir l'utilisateur
+                          </button>
                         </Grid>
                       )}
                       {debate.type === "DUO" && (
                         <>
                           <Grid item xs={4}>
-                            <button>
+                            {/* <button>
                               Voir la fiche de {debate.ownerRed.firstname}{" "}
                               {debate.ownerRed.lastname}
-                            </button>
-                            <br />
-                            <button>
+                            </button> */}
+                            {/* <br /> */}
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr de bannir cet utilisateur ?`,
+                                  async () => {
+                                    await banUser({
+                                      variables: {
+                                        userId: debate.ownerRed.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
                               Bannir {debate.ownerRed.firstname}{" "}
                               {debate.ownerRed.lastname}
                             </button>
                           </Grid>
                           <Grid item xs={4}>
-                            <button>
+                            {/* <button>
                               Voir la fiche de {debate.ownerBlue.firstname}{" "}
                               {debate.ownerBlue.lastname}
-                            </button>
-                            <br />
-                            <button>
+                            </button> */}
+                            {/* <br /> */}
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr de bannir cet utilisateur ?`,
+                                  async () => {
+                                    await banUser({
+                                      variables: {
+                                        userId: debate.ownerBlue.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
                               Bannir {debate.ownerBlue.firstname}{" "}
                               {debate.ownerBlue.lastname}
                             </button>
@@ -620,54 +679,6 @@ const Debates = (props) => {
               <div style={{ marginLeft: 10 }}>
                 <button onClick={() => setReports(null)}>Fermer</button>
                 <h3>Signalements</h3>
-                <br />
-                <button onClick={() => setFilterReportOpen((b) => !b)}>
-                  {filterReportOpen
-                    ? "Cacher les filtres"
-                    : "Afficher les filtres"}
-                </button>
-                <br />
-                {filterReportOpen && (
-                  <Paper
-                    style={{
-                      padding: 10,
-                    }}
-                  >
-                    <Grid container spacing={3}>
-                      <Grid item xs={2}>
-                        Traités :
-                      </Grid>
-                      <Grid item xs={2}>
-                        <input type="checkbox"></input> Tous
-                      </Grid>
-                      <Grid item xs={2}>
-                        <input type="checkbox"></input> Oui
-                      </Grid>
-                      <Grid item xs={2}>
-                        <input type="checkbox"></input> Non
-                      </Grid>
-                    </Grid>
-                    <Grid container spacing={3}>
-                      <Grid item xs={6}>
-                        Trier par :{" "}
-                        <select>
-                          <option value="date_DESC">
-                            Du plus récent au plus ancien
-                          </option>
-                          <option value="date_ASC">
-                            Du plus ancien au plus récent
-                          </option>
-                        </select>
-                      </Grid>
-                    </Grid>
-                    <br />
-                    <Grid container spacing={3}>
-                      <Grid item xs={6}>
-                        <button>Appliquer les changements</button>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                )}
               </div>
               <br />
               <br />
@@ -701,6 +712,69 @@ const Debates = (props) => {
                         </div>
                         <div>Commentaire signalé :</div>
                         <div>{report.comment.content}</div>
+                        <br />
+                        <Grid container spacing={3}>
+                          <Grid item xs={3}>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr de supprimer ce commentaire ?`,
+                                  async () => {
+                                    await deleteComment({
+                                      variables: {
+                                        commentId: report.comment.id,
+                                      },
+                                    });
+                                    refetch();
+                                    setComments(null);
+                                    setReports(null);
+                                  }
+                                )
+                              }
+                            >
+                              Supprimer le commentaire
+                            </button>
+                            <br />
+                          </Grid>
+                          <Grid item xs={3}>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr d'annuler ce signalement ?`,
+                                  async () => {
+                                    await cancelReport({
+                                      variables: {
+                                        reportId: report.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
+                              Annuler le signalement
+                            </button>
+                          </Grid>
+                          <Grid item xs={3}>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr de bannir cet utilisateur ?`,
+                                  async () => {
+                                    await banUser({
+                                      variables: {
+                                        userId: report.comment.from.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
+                              Bannir l'utilisateur
+                            </button>
+                          </Grid>
+                        </Grid>
                       </>
                     )}
                     {report.type === "DEBATE" && (
@@ -729,24 +803,104 @@ const Debates = (props) => {
                         <br />
                         <Grid container spacing={3}>
                           <Grid item xs={3}>
-                            <button>Supprimer le débat</button>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  "Êtes-vous sûr de supprimer ce débat ?",
+                                  async () => {
+                                    await deleteDebate({
+                                      variables: {
+                                        debateId: report.debate.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
+                              Supprimer le débat
+                            </button>
                             <br />
-                            <button>Clore le débat</button>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  "Êtes-vous sûr de clore ce débat ?",
+                                  async () => {
+                                    await closeDebate({
+                                      variables: {
+                                        debateId: report.debate.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
+                              Clore le débat
+                            </button>
                           </Grid>
                           <Grid item xs={3}>
-                            <button>Annuler le signalement</button>
+                            <button
+                              onClick={() =>
+                                askSure(
+                                  `Êtes-vous sûr d'annuler ce signalement ?`,
+                                  async () => {
+                                    await cancelReport({
+                                      variables: {
+                                        reportId: report.id,
+                                      },
+                                    });
+                                    refetch();
+                                  }
+                                )
+                              }
+                            >
+                              Annuler le signalement
+                            </button>
                           </Grid>
                           <Grid item xs={3}>
                             {report.debate.type === "DUO" ? (
-                              <button>Bannir les utilisateurs</button>
+                              <button
+                                onClick={() =>
+                                  askSure(
+                                    `Êtes-vous sûr de bannir les deux utilisateurs ?`,
+                                    async () => {
+                                      await banUser({
+                                        variables: {
+                                          userId: report.debate.ownerBlue.id,
+                                        },
+                                      });
+                                      await banUser({
+                                        variables: {
+                                          userId: report.debate.ownerRed.id,
+                                        },
+                                      });
+                                      refetch();
+                                    }
+                                  )
+                                }
+                              >
+                                Bannir les utilisateurs
+                              </button>
                             ) : (
-                              <button>Bannir l'utilisateur</button>
+                              <button
+                                onClick={() =>
+                                  askSure(
+                                    `Êtes-vous sûr de bannir cet utilisateur ?`,
+                                    async () => {
+                                      await banUser({
+                                        variables: {
+                                          userId: report.debate.owner.id,
+                                        },
+                                      });
+                                      refetch();
+                                    }
+                                  )
+                                }
+                              >
+                                Bannir l'utilisateur
+                              </button>
                             )}
-                            <br />
-
-                            <button>
-                              Bannir la personne ayant signalé le débat
-                            </button>
                           </Grid>
                         </Grid>
                       </>
@@ -771,7 +925,7 @@ const Debates = (props) => {
               <div style={{ marginLeft: 10 }}>
                 <button onClick={() => setComments(null)}>Fermer</button>
                 <h3>Commentaires</h3>
-                <Grid container spacing={3}>
+                {/* <Grid container spacing={3}>
                   <Grid item xs={12}>
                     Rechercher :{" "}
                     <select>
@@ -787,9 +941,9 @@ const Debates = (props) => {
                   {filterCommentOpen
                     ? "Cacher les filtres"
                     : "Afficher les filtres"}
-                </button>
+                </button> */}
                 <br />
-                {filterCommentOpen && (
+                {/* {filterCommentOpen && (
                   <Paper
                     style={{
                       padding: 10,
@@ -831,11 +985,11 @@ const Debates = (props) => {
                       </Grid>
                     </Grid>
                   </Paper>
-                )}
+                )} */}
               </div>
               <br />
               <br />
-              {comments.map((comment) => {
+              {comments.map((comment, index) => {
                 return (
                   <Paper
                     style={{
@@ -858,15 +1012,15 @@ const Debates = (props) => {
                     </div>
                     <br />
                     <div>Nombre de signalements : {comment.reports.length}</div>
-                    <div>
+                    {/* <div>
                       Nombre de signalements non-résolus :{" "}
                       {
                         comment.reports.filter((r) => r.treated === false)
                           .length
                       }
-                    </div>
+                    </div> */}
                     <button
-                      onClick={() => setReports(comments.reports)}
+                      onClick={() => setReports(comment.reports)}
                       disabled={comment.reports.length === 0}
                     >
                       Voir les signalements
@@ -878,7 +1032,28 @@ const Debates = (props) => {
                     <br />
                     <div>{comment.content}</div>
                     <br />
-                    <button>Supprimer le commentaire</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          `Êtes-vous sûr de supprimer ce commentaire ?`,
+                          async () => {
+                            await deleteComment({
+                              variables: {
+                                commentId: comment.id,
+                              },
+                            });
+                            refetch();
+                            setComments((cs) => {
+                              const csCopy = cloneDeep(cs);
+                              csCopy.splice(index, 1);
+                              return csCopy;
+                            });
+                          }
+                        )
+                      }
+                    >
+                      Supprimer le commentaire
+                    </button>
                   </Paper>
                 );
               })}

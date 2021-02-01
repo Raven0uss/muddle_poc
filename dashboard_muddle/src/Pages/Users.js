@@ -1,11 +1,13 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { get } from "lodash";
 import { Grid, Paper } from "@material-ui/core";
 import moment from "moment";
 import AccountStats from "../Components/AccountStats";
+import askSure from "../askSure";
+import getUsers from "../gql/getUsers";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -34,40 +36,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GET_USERS = gql`
-  query($first: Int!, $skip: Int!) {
-    users(where: { role: STANDARD }, first: $first, skip: $skip) {
+const BAN_USER = gql`
+  mutation($userId: ID!) {
+    deleteThisUser(userId: $userId, banned: true) {
+      value
+    }
+  }
+`;
+
+const CERTIF_USER = gql`
+  mutation($userId: ID!) {
+    updateUser(where: { id: $userId }, data: { certified: true }) {
       id
-      firstname
-      lastname
-      email
-      birthdate
-      role
-      gender
-      certified
-      profilePicture
-      crowned
-      private
-      debates {
-        id
-      }
-      trophies {
-        id
-      }
-      mailStatus
-      followers {
-        id
-      }
-      following {
-        id
-      }
-      blocked {
-        id
-      }
-      blocking {
-        id
-      }
-      createdAt
+    }
+  }
+`;
+
+const REMOVE_CERTIF = gql`
+  mutation($userId: ID!) {
+    updateUser(where: { id: $userId }, data: { certified: false }) {
+      id
+    }
+  }
+`;
+
+const CROWN_USER = gql`
+  mutation($userId: ID!) {
+    giveCrown(userId: $userId) {
+      id
+    }
+  }
+`;
+
+const REMOVE_CROWN = gql`
+  mutation($userId: ID!) {
+    updateUser(
+      where: { id: $userId }
+      data: { crowned: false, crownedDate: null }
+    ) {
+      id
+    }
+  }
+`;
+
+const BLOCK_MAIL = gql`
+  mutation($userId: ID!) {
+    updateUser(where: { id: $userId }, data: { mailStatus: BLOCKED }) {
+      id
+    }
+  }
+`;
+
+const UNBLOCK_MAIL = gql`
+  mutation($userId: ID!) {
+    updateUser(where: { id: $userId }, data: { mailStatus: HEALTHY }) {
+      id
     }
   }
 `;
@@ -80,18 +103,24 @@ const Users = (props) => {
 
   const [page, setPage] = React.useState(1);
 
-  const { loading, error, fetchMore } = useQuery(GET_USERS, {
-    variables: {
-      first: frequency,
-      skip: frequency * (page - 1),
-    },
-    onCompleted: (response) => {
-      const usersQuery = get(response, "users", []);
+  const [search, setSearch] = React.useState("");
+  const [searchFilter, setSearchFilter] = React.useState("email");
 
-      setUsers(usersQuery);
-    },
-    fetchPolicy: "cache-and-network",
-  });
+  const { loading, error, fetchMore, refetch } = useQuery(
+    getUsers(searchFilter),
+    {
+      variables: {
+        first: frequency,
+        skip: frequency * (page - 1),
+        search,
+      },
+      onCompleted: (response) => {
+        const usersQuery = get(response, "users", []);
+        setUsers(usersQuery);
+      },
+      fetchPolicy: "no-cache",
+    }
+  );
 
   const changePage = async (direction) => {
     setPage((p) => {
@@ -100,6 +129,49 @@ const Users = (props) => {
       return newPage;
     });
   };
+
+  const [banUser] = useMutation(BAN_USER, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [certifUser] = useMutation(CERTIF_USER, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [removeCertif] = useMutation(REMOVE_CERTIF, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [crownUser] = useMutation(CROWN_USER, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [removeCrown] = useMutation(REMOVE_CROWN, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [blockMail] = useMutation(BLOCK_MAIL, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [unblockMail] = useMutation(UNBLOCK_MAIL, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
 
   return (
     <main className={classes.content}>
@@ -113,7 +185,40 @@ const Users = (props) => {
         <div>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <Paper>Filtres</Paper>
+              <Paper
+                style={{
+                  padding: 10,
+                  borderRadius: 14,
+                }}
+              >
+                <h4>Filtres</h4>
+                {/* <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    Afficher :{" "}
+                    <select>
+                      <option value="all">Tous</option>
+                      <option value="crown">Couronnes</option>
+                      <option value="certified">Certifiés</option>
+                      <option value="emailBlocked">Emails bloqués</option>
+                    </select>
+                  </Grid>
+                </Grid> */}
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    Rechercher :{" "}
+                    <select onChange={(e) => setSearchFilter(e.target.value)}>
+                      <option value="email">Email contient</option>
+                      <option value="firstname">Prénom</option>
+                      <option value="lastname">Nom</option>
+                    </select>{" "}
+                    <input
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Votre recherche..."
+                    ></input>{" "}
+                  </Grid>
+                </Grid>
+              </Paper>
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper
@@ -181,10 +286,13 @@ const Users = (props) => {
                   Role : {user.role}
                 </Grid>
                 <Grid item xs={3}>
-                  Certifié : {user.certified ? "Oui" : "Non"}
+                  Email : {user.email}
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
+                <Grid item xs={3}>
+                  Certifié : {user.certified ? "Oui" : "Non"}
+                </Grid>
                 <Grid item xs={3}>
                   Couronne: {user.crowned ? "Oui" : "Non"}
                 </Grid>
@@ -229,25 +337,137 @@ const Users = (props) => {
               <Grid container spacing={3}>
                 <Grid item xs={3}>
                   {user.certified === false ? (
-                    <button>Donner la certification</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous certifier cet utilisateur ? ",
+                          async () => {
+                            await certifUser({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Donner la certification
+                    </button>
                   ) : (
-                    <button>Enlever la certification</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous enlever la certification de cet utilisateur ? ",
+                          async () => {
+                            await removeCertif({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Enlever la certification
+                    </button>
                   )}
                   {user.crowned === false ? (
-                    <button>Donner la couronne</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous donner la couronne à cet utilisateur ? ",
+                          async () => {
+                            await crownUser({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Donner la couronne
+                    </button>
                   ) : (
-                    <button>Enlever la couronne</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous retirer la couronne à cet utilisateur ? ",
+                          async () => {
+                            await removeCrown({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Enlever la couronne
+                    </button>
                   )}
                 </Grid>
                 <Grid item xs={3}>
                   {user.mailStatus === "HEALTHY" ? (
-                    <button>Bloquer les mails</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous bloquer les mails pour cet utilisateur ? ",
+                          async () => {
+                            await blockMail({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Bloquer les mails
+                    </button>
                   ) : (
-                    <button>Débloquer les mails</button>
+                    <button
+                      onClick={() =>
+                        askSure(
+                          "Voulez-vous autoriser les mails pour cet utilisateur ? ",
+                          async () => {
+                            await unblockMail({
+                              variables: {
+                                userId: user.id,
+                              },
+                            });
+                            refetch();
+                          }
+                        )
+                      }
+                    >
+                      Débloquer les mails
+                    </button>
                   )}
                 </Grid>
                 <Grid item xs={3}>
-                  <button>Bannir l'utilisateur</button>
+                  <button
+                    onClick={() =>
+                      askSure(
+                        "Voulez-vous bannir cet utilisateur ? ",
+                        async () => {
+                          await banUser({
+                            variables: {
+                              userId: user.id,
+                            },
+                          });
+                          refetch();
+                        }
+                      )
+                    }
+                  >
+                    Bannir l'utilisateur
+                  </button>
                 </Grid>
               </Grid>
             </Paper>

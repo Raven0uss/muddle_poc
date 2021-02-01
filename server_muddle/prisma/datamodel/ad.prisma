@@ -1,6 +1,6 @@
 type Ad {
   id: ID! @id
-  name: String! @unique
+  name: String!
   company: String!
   companyIcon: String!
   content: String!

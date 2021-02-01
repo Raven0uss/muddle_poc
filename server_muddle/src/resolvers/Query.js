@@ -442,7 +442,7 @@ const Query = prismaObjectType({
 
           const getDate = await prisma.connecteds({
             where: {
-              date: new Date(m),
+              date_gte: new Date(m),
             },
           });
 

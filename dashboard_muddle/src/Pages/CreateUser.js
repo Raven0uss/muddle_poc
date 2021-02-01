@@ -1,6 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -35,6 +36,7 @@ const CreateUser = (props) => {
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
+
     </main>
   );
 };

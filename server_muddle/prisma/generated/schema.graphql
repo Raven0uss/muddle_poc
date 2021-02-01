@@ -315,7 +315,6 @@ input AdWhereInput {
 
 input AdWhereUniqueInput {
   id: ID
-  name: String
 }
 
 type BatchPayload {
@@ -2329,12 +2328,14 @@ type Mutation {
   changePassword(newPassword: String, userId: ID): NoValue!
   checkEmailSignup(email: String): NoValue!
   checkPasswordOk(currentPassword: String, userId: ID): NoValue!
+  checkTokenDashboard(token: String): User!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
   createComment(data: CommentCreateInput!): Comment!
   createConversation(data: ConversationCreateInput!): Conversation!
   createDebate(data: DebateCreateInput!): Debate!
+  createGeneratedDebate(answerOne: String, answerTwo: String, content: String, days: String, hours: String, image: String): Debate!
   createInteraction(data: InteractionCreateInput!): Interaction!
   createInvitationDuoDebate(answerOne: String, content: String, image: String, timelimit: String, user: ID): Debate!
   createMessage(data: MessageCreateInput!): Message!
@@ -2343,13 +2344,16 @@ type Mutation {
   createReport(data: ReportCreateInput!): Report!
   createTmpUser(data: TmpUserCreateInput!): TmpUser!
   createTrophy(data: TrophyCreateInput!): Trophy!
+  deleteAd(where: AdWhereUniqueInput!): Ad
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteDebate(where: DebateWhereUniqueInput!): Debate
   deleteManyNotifications(where: NotificationWhereInput): BatchPayload!
   deleteMessages(messagesIdPayload: String): NoValue!
   deleteMyComment(commentId: ID): Comment!
   deleteMyDebate(debateId: ID): Debate!
+  deleteReport(where: ReportWhereUniqueInput!): Report
   deleteThisConversation(conversationId: ID): NoValue!
+  deleteThisUser(banned: Boolean, userId: ID): NoValue!
   dislikeComment(commentId: ID, userId: ID): Comment!
   giveCrown(userId: ID): User!
   likeComment(commentId: ID, userId: ID): Comment!
@@ -2358,6 +2362,7 @@ type Mutation {
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
   sendMail: NoValue!
   sendVote(debateId: ID, type: String, userId: ID): Debate!
+  signInDashboard(email: String, password: String): Token!
   signUp(birthdate: DateTime, email: String, firstname: String, gender: String, lastname: String, password: String): Token!
   updateAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
   updateAdTarget(data: AdTargetUpdateInput!, where: AdTargetWhereUniqueInput!): AdTarget

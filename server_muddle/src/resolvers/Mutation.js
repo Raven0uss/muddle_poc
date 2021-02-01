@@ -10,9 +10,11 @@ import { dateArg } from "./Types";
 import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 import { sendMailNoReplyWithHeaderAndFooter } from "../mail/index";
 
+import moment from "moment";
+
 // Mutations
 const exposedMutations = {
-  adMutations: ["createAd", "updateAd"],
+  adMutations: ["createAd", "updateAd", "deleteAd"],
   adTargetMutations: ["createAdTarget", "updateAdTarget"],
   commentMutations: ["createComment", "updateComment", "deleteComment"],
   conversationMutations: ["createConversation", "updateConversation"],
@@ -25,7 +27,7 @@ const exposedMutations = {
     "updateNotification",
     "deleteManyNotifications",
   ],
-  reportMutations: ["createReport", "updateReport"],
+  reportMutations: ["createReport", "updateReport", "deleteReport"],
   trophyMutations: ["createTrophy", "updateTrophy"],
   userMutations: ["updateUser"],
   tmpUserMutations: ["createTmpUser"],
@@ -1558,7 +1560,7 @@ const Mutation = prismaObjectType({
         newPassword: stringArg(),
       },
       resolve: async (parent, { userId, newPassword }, { prisma }) => {
-        console.log(newPassword);
+        // console.log(newPassword);
         const user = await prisma.user({ id: userId });
         if (isNil(user)) {
           return { value: -1 }; // user doesnt exist
@@ -1573,6 +1575,245 @@ const Mutation = prismaObjectType({
           },
         });
         return { value: 0 };
+      },
+    });
+
+    t.field("deleteThisUser", {
+      type: "NoValue",
+      args: {
+        userId: idArg(),
+        banned: booleanArg(),
+      },
+      resolve: async (parent, { userId, banned }, { prisma }) => {
+        try {
+          const user = await prisma.user({ id: userId });
+          if (user !== null) {
+            const notifications = await prisma
+              .user({ id: userId })
+              .notifications();
+            const trophies = await prisma.user({ id: userId }).trophies();
+            const interactions = await prisma
+              .user({ id: userId })
+              .interactions();
+            const conversations = await prisma
+              .user({ id: userId })
+              .conversations();
+            const comments = await prisma.comments({
+              where: {
+                from: {
+                  id: user.id,
+                },
+              },
+            });
+            const debatesUser = await prisma.user({ id: userId }).debates();
+            const debates = await prisma.debates({
+              where: {
+                owner: {
+                  id: userId,
+                },
+              },
+            });
+            const debatesRed = await prisma.debates({
+              where: {
+                ownerRed: {
+                  id: userId,
+                },
+              },
+            });
+            const debatesBlue = await prisma.debates({
+              where: {
+                ownerBlue: {
+                  id: userId,
+                },
+              },
+            });
+
+            // Delete Notifications
+            notifications.map(async (notification) => {
+              await prisma.deleteNotification({ id: notification.id });
+            });
+            // Delete Trophies
+            trophies.map(async (trophy) => {
+              await prisma.deleteTrophy({ id: trophy.id });
+            });
+            // Delete Interactions
+            interactions.map(async (interaction) => {
+              await prisma.deleteNotification({ id: interaction.id });
+            });
+
+            // Delete Conversations
+            await Promise.all(
+              conversations.map(async (conversation) => {
+                const messages = await prisma
+                  .conversation({ id: conversation.id })
+                  .messages();
+                await Promise.all(
+                  messages.map(async (message) => {
+                    return await prisma.deleteMessage({ id: message.id });
+                  })
+                );
+              })
+            );
+
+            conversations.map(async (conversation) => {
+              await prisma.deleteConversations({ id: conversation.id });
+            });
+
+            // Delete Comments
+            comments.map(async (comment) => {
+              await prisma.deleteComment({ id: comment.id });
+            });
+
+            // Delete Debate
+            const allDebates = [
+              ...debates,
+              ...debatesRed,
+              ...debatesBlue,
+              ...debatesUser,
+            ];
+
+            await Promise.all(
+              allDebates.map(async (debate) => {
+                const thisDebate = await prisma.debate({ id: debate.id });
+                if (thisDebate === null) return;
+
+                const debateComments = await prisma
+                  .debate({ id: debate.id })
+                  .comments();
+
+                const reports = await prisma.reports({
+                  where: {
+                    debate: {
+                      id: debate.id,
+                    },
+                  },
+                });
+
+                reports.map(async (report) => {
+                  await prisma.deleteReport({ id: report.id });
+                });
+
+                await Promise.all(
+                  debateComments.map(async (comment) => {
+                    return await prisma.deleteComment({ id: comment.id });
+                  })
+                );
+              })
+            );
+
+            allDebates.map(async (debate) => {
+              await prisma.deleteDebate({ id: debate.id });
+            });
+
+            if (banned) {
+              console.log("Bannir");
+            }
+            await prisma.deleteUser({ id: userId });
+            return { value: 0 };
+          } else {
+            return { value: -1 };
+          }
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("createGeneratedDebate", {
+      type: "Debate",
+      args: {
+        days: stringArg(),
+        hours: stringArg(),
+        content: stringArg(),
+        image: stringArg(),
+        answerOne: stringArg(),
+        answerTwo: stringArg(),
+      },
+      resolve: async (
+        parent,
+        { days, hours, content, image, answerOne, answerTwo },
+        { prisma }
+      ) => {
+        try {
+          const muddleAccount = await prisma.users({
+            where: {
+              role: "MUDDLE",
+            },
+          });
+          if (isNil(muddleAccount)) throw new Error("error");
+          const muddleAccountSelected = muddleAccount[0];
+          if (isNil(muddleAccountSelected)) throw new Error("error");
+
+          const duration = moment()
+            .add(parseInt(days, 10), "days")
+            .add(parseInt(hours, 10), "hours");
+
+          const debate = await prisma.createDebate({
+            owner: {
+              connect: {
+                id: muddleAccountSelected.id,
+              },
+            },
+            timelimit: duration,
+            content,
+            image: isEmpty(image.replace(/\s/g, "")) ? null : image,
+            answerOne,
+            answerTwo,
+            type: "MUDDLE",
+          });
+          return debate;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("signInDashboard", {
+      type: "Token",
+      args: {
+        email: stringArg(),
+        password: stringArg(),
+      },
+      resolve: async (parent, { email, password }, { prisma }) => {
+        try {
+          const user = await prisma.user({ email });
+          // console.log(user);
+
+          console.log(user);
+          if (!user) {
+            return { token: 0 };
+          }
+          const passwordMatch = bcrypt.compareSync(password, user.password);
+
+          // console.log(password);
+          if (!passwordMatch) {
+            return { token: 0 };
+          }
+          if (user.role !== "ADMIN" && user.role !== "MODERATOR") {
+            return { token: 0 };
+          }
+          const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
+            expiresIn: 7200,
+          });
+          return { token };
+        } catch (err) {
+          throw new Error("Invalid credentials");
+        }
+      },
+    });
+
+    t.field("checkTokenDashboard", {
+      type: "User",
+      args: {
+        token: stringArg(),
+      },
+      resolve: async (parent, { token }, { prisma }) => {
+        const user = await jwt.decode(token, process.env.JWT_SECRET_KEY);
+        if (Date.now() >= user.exp * 1000) {
+          return { id: 0, role: "STANDARD" };
+        }
+        const userQuery = await prisma.user({ id: user.user.id });
+        return userQuery;
       },
     });
 

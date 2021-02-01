@@ -406,7 +406,6 @@ input AdWhereInput {
 
 input AdWhereUniqueInput {
   id: ID
-  name: String
 }
 
 type AggregateAd {

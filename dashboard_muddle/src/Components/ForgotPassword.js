@@ -12,9 +12,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
-import { get } from "lodash";
 
 function Copyright() {
   return (
@@ -60,39 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LOG_IN = gql`
-  mutation($email: String!, $password: String!) {
-    signInDashboard(email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-export default function SignIn() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  const [error, setError] = React.useState(false);
-
-  const history = useHistory();
+function ForgotPassword() {
   const classes = useStyles();
-
-  const [logIn] = useMutation(LOG_IN, {
-    onCompleted: (response) => {
-      const token = get(response, "signInDashboard.token", "0");
-
-      if (token === "0") {
-        setError(true);
-        return;
-      }
-      localStorage.setItem("token", token);
-      history.replace("/dashboard");
-    },
-  });
-
-  React.useEffect(() => {
-    if (localStorage.getItem("token")) history.replace("/dashboard");
-  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -103,7 +69,6 @@ export default function SignIn() {
           marginTop: "50%",
         }}
       >
-        <Typography>Muddles</Typography>
         <TextField
           style={{
             backgroundColor: "#ffffff",
@@ -113,49 +78,48 @@ export default function SignIn() {
           margin="normal"
           required
           fullWidth
-          id="email"
-          label="Adresse mail"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: 5,
-          }}
-          variant="filled"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Mot de passe"
+          id="currentPassword"
+          name="currentPassword"
+          label="Mot de passe / Password"
           type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          autoFocus
         />
-        {error && <p style={{ color: "red" }}>Identifiants incorrects</p>}
+        <TextField
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: 5,
+          }}
+          variant="filled"
+          margin="normal"
+          required
+          fullWidth
+          name="newPassword"
+          id="newPassword"
+          label="Nouveau mot de passe / New password"
+          type="password"
+        />
+        <TextField
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: 5,
+          }}
+          variant="filled"
+          margin="normal"
+          required
+          fullWidth
+          name="newPassword"
+          id="newPassword"
+          label="Confirmer nouveau mot de passe / Confirm new password"
+          type="password"
+        />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={async () => {
-            setError(false);
-            await logIn({
-              variables: {
-                email,
-                password,
-              },
-            });
-          }}
         >
-          Se connecter
+          Sauvegarder / Save
         </Button>
       </div>
       <Box mt={8}>
@@ -164,3 +128,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default ForgotPassword;

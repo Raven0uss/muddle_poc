@@ -9700,12 +9700,10 @@ export interface TmpUserPreviousValuesFieldDetails {
 
 export interface AdWhereUniqueInput {
   id?: string | null
-  name?: string | null
 }
 export type AdWhereUniqueInputInputObject =
   | Extract<keyof AdWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
   
 export interface AdWhereInput {
   id?: string | null

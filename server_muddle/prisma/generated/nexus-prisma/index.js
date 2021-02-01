@@ -250,7 +250,6 @@ export interface NexusGenInputs {
   }
   AdWhereUniqueInput: { // input type
     id?: string | null; // ID
-    name?: string | null; // String
   }
   CommentCreateInput: { // input type
     comments?: NexusGenInputs['CommentCreateManyInput'] | null; // CommentCreateManyInput
@@ -4750,12 +4749,14 @@ export interface NexusGenFieldTypes {
     changePassword: NexusGenRootTypes['NoValue']; // NoValue!
     checkEmailSignup: NexusGenRootTypes['NoValue']; // NoValue!
     checkPasswordOk: NexusGenRootTypes['NoValue']; // NoValue!
+    checkTokenDashboard: NexusGenRootTypes['User']; // User!
     closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
     createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
     createComment: NexusGenRootTypes['Comment']; // Comment!
     createConversation: NexusGenRootTypes['Conversation']; // Conversation!
     createDebate: NexusGenRootTypes['Debate']; // Debate!
+    createGeneratedDebate: NexusGenRootTypes['Debate']; // Debate!
     createInteraction: NexusGenRootTypes['Interaction']; // Interaction!
     createInvitationDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     createMessage: NexusGenRootTypes['Message']; // Message!
@@ -4764,13 +4765,16 @@ export interface NexusGenFieldTypes {
     createReport: NexusGenRootTypes['Report']; // Report!
     createTmpUser: NexusGenRootTypes['TmpUser']; // TmpUser!
     createTrophy: NexusGenRootTypes['Trophy']; // Trophy!
+    deleteAd: NexusGenRootTypes['Ad'] | null; // Ad
     deleteComment: NexusGenRootTypes['Comment'] | null; // Comment
     deleteDebate: NexusGenRootTypes['Debate'] | null; // Debate
     deleteManyNotifications: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteMessages: NexusGenRootTypes['NoValue']; // NoValue!
     deleteMyComment: NexusGenRootTypes['Comment']; // Comment!
     deleteMyDebate: NexusGenRootTypes['Debate']; // Debate!
+    deleteReport: NexusGenRootTypes['Report'] | null; // Report
     deleteThisConversation: NexusGenRootTypes['NoValue']; // NoValue!
+    deleteThisUser: NexusGenRootTypes['NoValue']; // NoValue!
     dislikeComment: NexusGenRootTypes['Comment']; // Comment!
     giveCrown: NexusGenRootTypes['User']; // User!
     likeComment: NexusGenRootTypes['Comment']; // Comment!
@@ -4779,6 +4783,7 @@ export interface NexusGenFieldTypes {
     publishDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     sendMail: NexusGenRootTypes['NoValue']; // NoValue!
     sendVote: NexusGenRootTypes['Debate']; // Debate!
+    signInDashboard: NexusGenRootTypes['Token']; // Token!
     signUp: NexusGenRootTypes['Token']; // Token!
     updateAd: NexusGenRootTypes['Ad'] | null; // Ad
     updateAdTarget: NexusGenRootTypes['AdTarget'] | null; // AdTarget
@@ -5098,6 +5103,9 @@ export interface NexusGenArgTypes {
       currentPassword?: string | null; // String
       userId?: string | null; // ID
     }
+    checkTokenDashboard: { // args
+      token?: string | null; // String
+    }
     closeMyDebate: { // args
       debateId?: string | null; // ID
     }
@@ -5115,6 +5123,14 @@ export interface NexusGenArgTypes {
     }
     createDebate: { // args
       data: NexusGenInputs['DebateCreateInput']; // DebateCreateInput!
+    }
+    createGeneratedDebate: { // args
+      answerOne?: string | null; // String
+      answerTwo?: string | null; // String
+      content?: string | null; // String
+      days?: string | null; // String
+      hours?: string | null; // String
+      image?: string | null; // String
     }
     createInteraction: { // args
       data: NexusGenInputs['InteractionCreateInput']; // InteractionCreateInput!
@@ -5149,6 +5165,9 @@ export interface NexusGenArgTypes {
     createTrophy: { // args
       data: NexusGenInputs['TrophyCreateInput']; // TrophyCreateInput!
     }
+    deleteAd: { // args
+      where: NexusGenInputs['AdWhereUniqueInput']; // AdWhereUniqueInput!
+    }
     deleteComment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
@@ -5167,8 +5186,15 @@ export interface NexusGenArgTypes {
     deleteMyDebate: { // args
       debateId?: string | null; // ID
     }
+    deleteReport: { // args
+      where: NexusGenInputs['ReportWhereUniqueInput']; // ReportWhereUniqueInput!
+    }
     deleteThisConversation: { // args
       conversationId?: string | null; // ID
+    }
+    deleteThisUser: { // args
+      banned?: boolean | null; // Boolean
+      userId?: string | null; // ID
     }
     dislikeComment: { // args
       commentId?: string | null; // ID
@@ -5197,6 +5223,10 @@ export interface NexusGenArgTypes {
       debateId?: string | null; // ID
       type?: string | null; // String
       userId?: string | null; // ID
+    }
+    signInDashboard: { // args
+      email?: string | null; // String
+      password?: string | null; // String
     }
     signUp: { // args
       birthdate?: any | null; // DateTime
