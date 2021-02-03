@@ -290,6 +290,7 @@ const Home = (props) => {
     const managePushNotificationToken = async () => {
       console.log("managePushNotification");
       const pushToken = await registerForPushNotificationsAsync();
+      console.log(pushToken);
       if (pushToken !== null) {
         await refreshPushToken({
           variables: {

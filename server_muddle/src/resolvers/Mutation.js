@@ -266,6 +266,52 @@ const Mutation = prismaObjectType({
       },
     });
 
+    t.field("forgotPassword", {
+      type: "Token",
+      args: {
+        email: stringArg(),
+      },
+      resolve: async (parent, { email }, { prisma }) => {
+        try {
+          const user = await prisma.user({ email });
+          if (isNil(user)) throw new Error("invalid user");
+
+          const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
+            expiresIn: 7200,
+          });
+
+          // send forgot mail here
+          console.log(token);
+
+          return { token };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("checkTokenForgotPassword", {
+      type: "User",
+      args: {
+        token: stringArg(),
+      },
+      resolve: async (parent, { token }, { prisma }) => {
+        try {
+          const user = await jwt.decode(token, process.env.JWT_SECRET_KEY);
+          if (isNil(user)) return { id: 0, email: "" };
+
+          if (Date.now() >= user.exp * 7200) {
+            return { id: 0, email: "" };
+          }
+          const userQuery = await prisma.user({ id: user.user.id });
+          return { id: userQuery.id, email: userQuery.email };
+        } catch (err) {
+          console.error(err);
+          return { id: 0, email: "" };
+        }
+      },
+    });
+
     t.field("createNewUser", {
       type: "User",
       args: {
@@ -415,7 +461,9 @@ const Mutation = prismaObjectType({
               pushToken: userObject.pushToken,
               type: "invitationDuo",
               language: userObject.language,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
             })
           );
 
@@ -763,7 +811,9 @@ const Mutation = prismaObjectType({
               type: "closeDebate",
               language: user.language,
               debate: debate.content,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
             })
           );
 
@@ -810,7 +860,9 @@ const Mutation = prismaObjectType({
               type: "deleteDebate",
               language: user.language,
               debate: debate.content,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
             })
           );
 
@@ -887,7 +939,9 @@ const Mutation = prismaObjectType({
               type: "like",
               language: user.language,
               comment: comment.content,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
             })
           );
 
@@ -986,7 +1040,9 @@ const Mutation = prismaObjectType({
               type: "dislike",
               language: user.language,
               comment: comment.content,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
             })
           );
 
@@ -1071,7 +1127,9 @@ const Mutation = prismaObjectType({
                 type: "vote",
                 language: owner.language,
                 debate: debate.content,
-                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                user: `${currentUser.user.firstname} ${
+                  currentUser.user.lastname
+                }`,
               })
             );
           }
@@ -1144,7 +1202,9 @@ const Mutation = prismaObjectType({
                   type: "vote",
                   language: ownerRed.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
               sendPushNotification(
@@ -1153,7 +1213,9 @@ const Mutation = prismaObjectType({
                   type: "vote",
                   language: ownerBlue.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1337,7 +1399,9 @@ const Mutation = prismaObjectType({
                   type: "comment",
                   language: ownerRed.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1369,7 +1433,9 @@ const Mutation = prismaObjectType({
                   type: "comment",
                   language: ownerBlue.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1411,7 +1477,9 @@ const Mutation = prismaObjectType({
                 type: "comment",
                 language: owner.language,
                 debate: debate.content,
-                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                user: `${currentUser.user.firstname} ${
+                  currentUser.user.lastname
+                }`,
               })
             );
           }
@@ -1486,7 +1554,9 @@ const Mutation = prismaObjectType({
                   type: "comment",
                   language: ownerRed.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1520,7 +1590,9 @@ const Mutation = prismaObjectType({
                   type: "comment",
                   language: ownerBlue.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1561,7 +1633,9 @@ const Mutation = prismaObjectType({
                   type: "comment",
                   language: owner.language,
                   debate: debate.content,
-                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                  user: `${currentUser.user.firstname} ${
+                    currentUser.user.lastname
+                  }`,
                 })
               );
             }
@@ -1610,7 +1684,9 @@ const Mutation = prismaObjectType({
                 type: "comment",
                 language: commentOwner.language,
                 comment: comment.content,
-                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                user: `${currentUser.user.firstname} ${
+                  currentUser.user.lastname
+                }`,
               })
             );
           }
@@ -1783,16 +1859,21 @@ const Mutation = prismaObjectType({
         email: stringArg(),
       },
       resolve: async (parent, { email }, { prisma }) => {
-        const user = await prisma.user({ email });
-        const isBanned = await prisma.banUser({ email });
-        if (isNil(isBanned) === false) return { value: -2 }; // banned
-        console.log(user);
-        if (isNil(user)) {
-          const tmpUser = await prisma.tmpUser({ email });
-          console.log(tmpUser);
-          if (isNil(tmpUser)) return { value: 0 };
+        try {
+          const user = await prisma.user({ email });
+          const isBanned = await prisma.banUser({ email });
+          if (isNil(isBanned) === false) return { value: -2 }; // banned
+          console.log(user);
+          if (isNil(user)) {
+            const tmpUser = await prisma.tmpUser({ email });
+            console.log(tmpUser);
+            if (isNil(tmpUser)) return { value: 0 };
+          }
+          return { value: -1 }; // -1 already used
+        } catch (err) {
+          console.error(err);
+          return { value: -1 }; // -1 already used
         }
-        return { value: -1 }; // -1 already used
       },
     });
 
@@ -1803,17 +1884,22 @@ const Mutation = prismaObjectType({
         currentPassword: stringArg(),
       },
       resolve: async (parent, { userId, currentPassword }, { prisma }) => {
-        const user = await prisma.user({ id: userId });
-        if (isNil(user)) {
-          return { value: -1 }; // user doesnt exist
-        }
-        const userPasswordHash = get(user, "password");
-        if (isNil(user)) {
-          return { value: -1 }; // user doesnt exist
-        }
-        if (bcrypt.compareSync(currentPassword, userPasswordHash) === false)
+        try {
+          const user = await prisma.user({ id: userId });
+          if (isNil(user)) {
+            return { value: -1 }; // user doesnt exist
+          }
+          const userPasswordHash = get(user, "password");
+          if (isNil(user)) {
+            return { value: -1 }; // user doesnt exist
+          }
+          if (bcrypt.compareSync(currentPassword, userPasswordHash) === false)
+            return { value: -1 };
+          return { value: 0 };
+        } catch (err) {
+          console.log(err);
           return { value: -1 };
-        return { value: 0 };
+        }
       },
     });
 
@@ -1824,21 +1910,25 @@ const Mutation = prismaObjectType({
         newPassword: stringArg(),
       },
       resolve: async (parent, { userId, newPassword }, { prisma }) => {
-        // console.log(newPassword);
-        const user = await prisma.user({ id: userId });
-        if (isNil(user)) {
-          return { value: -1 }; // user doesnt exist
+        try {
+          const user = await prisma.user({ id: userId });
+          if (isNil(user)) {
+            return { value: -1 }; // user doesnt exist
+          }
+          const hashedPassword = bcrypt.hashSync(newPassword, 12);
+          const updatedUser = await prisma.updateUser({
+            where: {
+              id: userId,
+            },
+            data: {
+              password: hashedPassword,
+            },
+          });
+          return { value: 0 };
+        } catch (err) {
+          console.log(err);
+          return { value: -1 };
         }
-        const hashedPassword = bcrypt.hashSync(newPassword, 12);
-        const updatedUser = await prisma.updateUser({
-          where: {
-            id: userId,
-          },
-          data: {
-            password: hashedPassword,
-          },
-        });
-        return { value: 0 };
       },
     });
 
@@ -2074,12 +2164,19 @@ const Mutation = prismaObjectType({
         token: stringArg(),
       },
       resolve: async (parent, { token }, { prisma }) => {
-        const user = await jwt.decode(token, process.env.JWT_SECRET_KEY);
-        if (Date.now() >= user.exp * 1000) {
+        try {
+          const user = await jwt.decode(token, process.env.JWT_SECRET_KEY);
+          if (isNil(user)) return { id: 0, role: "STANDARD" };
+
+          if (Date.now() >= user.exp * 1000) {
+            return { id: 0, role: "STANDARD" };
+          }
+          const userQuery = await prisma.user({ id: user.user.id });
+          return userQuery;
+        } catch (err) {
+          console.error(err);
           return { id: 0, role: "STANDARD" };
         }
-        const userQuery = await prisma.user({ id: user.user.id });
-        return userQuery;
       },
     });
 
@@ -2124,7 +2221,9 @@ const Mutation = prismaObjectType({
               pushToken: to.pushToken,
               type: "message",
               language: to.language,
-              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              user: `${currentUser.user.firstname} ${
+                currentUser.user.lastname
+              }`,
               message,
             })
           );
@@ -2133,6 +2232,7 @@ const Mutation = prismaObjectType({
         }
       },
     });
+
 
     // t.field("blockUser", {
     //   type: "User",

@@ -10,16 +10,53 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
+  Keyboard,
 } from "react-native";
 import Header from "../Components/Header";
 import LangSelect from "../Components/LangMiniature";
 import { muddle } from "../CustomProperties/IconsBase64";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import { gql, useMutation } from "@apollo/client";
+import { Snackbar } from "react-native-paper";
+
+const FORGOT_PASSWORD = gql`
+  mutation($email: String!) {
+    forgotPassword(email: $email) {
+      token
+    }
+  }
+`;
 
 function ForgotPasswordComponent(props) {
   const { theme } = React.useContext(ThemeContext);
   const [email, setEmail] = React.useState("");
+
+  const [snack, setSnack] = React.useState({
+    visible: false,
+    type: "error",
+    message: "",
+  });
+
+  const [forgotPassword, { loading, error }] = useMutation(FORGOT_PASSWORD, {
+    variables: {
+      email,
+    },
+    onCompleted: () => {
+      navigation.navigate("Login", {
+        snackType: "success",
+        snackMessage: i18n._("successMessage_MailSendForgotPassword"),
+        snack: true,
+      });
+    },
+    onError: () => {
+      setSnack({
+        visible: true,
+        type: "error",
+        message: i18n._("errorMessage_MailDoesntExist"),
+      });
+    },
+  });
 
   const { navigation, route } = props;
   // const { colors } = props.theme;
@@ -58,13 +95,9 @@ function ForgotPasswordComponent(props) {
             placeholderTextColor={themeSchema[theme].colorText}
           />
           <TouchableOpacity
-            onPress={() => {
-              console.log("Connection");
-              navigation.navigate("Login", {
-                snackType: "success",
-                snackMessage: i18n._("successMessage_MailSendForgotPassword"),
-                snack: true,
-              });
+            onPress={async () => {
+              Keyboard.dismiss();
+              await forgotPassword();
             }}
             style={styles.connectionButton}
           >
@@ -86,6 +119,23 @@ function ForgotPasswordComponent(props) {
           </Text>
         </TouchableWithoutFeedback>
       </View>
+      <Snackbar
+        visible={snack.visible}
+        onDismiss={() =>
+          setSnack({
+            visible: false,
+            message: snack.message,
+            type: snack.type,
+          })
+        }
+        duration={2500}
+        style={{
+          backgroundColor: snack.type === "success" ? "#4BB543" : "#DB0F13",
+          borderRadius: 10,
+        }}
+      >
+        {snack.message}
+      </Snackbar>
     </View>
   );
 }

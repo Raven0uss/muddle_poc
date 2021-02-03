@@ -4806,6 +4806,7 @@ export interface NexusGenFieldTypes {
     checkPasswordOk: NexusGenRootTypes['NoValue']; // NoValue!
     checkPushToken: NexusGenRootTypes['User']; // User!
     checkTokenDashboard: NexusGenRootTypes['User']; // User!
+    checkTokenForgotPassword: NexusGenRootTypes['User']; // User!
     closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
     createAdTarget: NexusGenRootTypes['AdTarget']; // AdTarget!
@@ -4833,6 +4834,7 @@ export interface NexusGenFieldTypes {
     deleteThisConversation: NexusGenRootTypes['NoValue']; // NoValue!
     deleteThisUser: NexusGenRootTypes['NoValue']; // NoValue!
     dislikeComment: NexusGenRootTypes['Comment']; // Comment!
+    forgotPassword: NexusGenRootTypes['Token']; // Token!
     giveCrown: NexusGenRootTypes['User']; // User!
     likeComment: NexusGenRootTypes['Comment']; // Comment!
     notifyComment: NexusGenRootTypes['NoValue']; // NoValue!
@@ -5169,6 +5171,9 @@ export interface NexusGenArgTypes {
     checkTokenDashboard: { // args
       token?: string | null; // String
     }
+    checkTokenForgotPassword: { // args
+      token?: string | null; // String
+    }
     closeMyDebate: { // args
       debateId?: string | null; // ID
     }
@@ -5275,6 +5280,9 @@ export interface NexusGenArgTypes {
     dislikeComment: { // args
       commentId?: string | null; // ID
       userId?: string | null; // ID
+    }
+    forgotPassword: { // args
+      email?: string | null; // String
     }
     giveCrown: { // args
       userId?: string | null; // ID

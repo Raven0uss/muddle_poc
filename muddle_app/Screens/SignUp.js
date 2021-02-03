@@ -103,10 +103,7 @@ const checkInputs = ({
   }
   const strong = checkPasswordStrong(password);
   if (strong !== null) {
-    return {
-      error: true,
-      message: strong,
-    };
+    return strong;
   }
   if (password !== confirmPassword) {
     return {

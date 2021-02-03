@@ -2330,6 +2330,7 @@ type Mutation {
   checkPasswordOk(currentPassword: String, userId: ID): NoValue!
   checkPushToken(pushToken: String, userId: ID): User!
   checkTokenDashboard(token: String): User!
+  checkTokenForgotPassword(token: String): User!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
   createAdTarget(data: AdTargetCreateInput!): AdTarget!
@@ -2357,6 +2358,7 @@ type Mutation {
   deleteThisConversation(conversationId: ID): NoValue!
   deleteThisUser(banned: Boolean, userId: ID): NoValue!
   dislikeComment(commentId: ID, userId: ID): Comment!
+  forgotPassword(email: String): Token!
   giveCrown(userId: ID): User!
   likeComment(commentId: ID, userId: ID): Comment!
   notifyComment(debateId: ID): NoValue!

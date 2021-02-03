@@ -8,6 +8,7 @@ import { idArg, intArg, stringArg } from "nexus/dist";
 
 import filterHomeDebates from "../algorithms/filterHomeDebates";
 import moment from "moment";
+import { clearApplicationBadges } from "../pushNotifications";
 
 // Queries
 const exposedQueries = {
@@ -239,6 +240,11 @@ const Query = prismaObjectType({
           const numberOfNewMessages = messages.filter(
             (m) => blockedList.findIndex((b) => b.id === m.from.id) === -1
           ).length;
+
+          if (numberOfNewNotifications + numberOfNewMessages === 0) {
+            const user = await prisma.user({ id: currentUser.user.id });
+            clearApplicationBadges({ pushToken: user.pushToken });
+          }
           return {
             notifications: numberOfNewNotifications,
             messages: numberOfNewMessages,
