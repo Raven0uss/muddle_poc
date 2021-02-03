@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { ApolloProvider } from "@apollo/client";
-import { ActivityIndicator } from "react-native";
+import { ApolloProvider, gql } from "@apollo/client";
+import { ActivityIndicator, Platform } from "react-native";
 import { apolloClient } from "./apollo";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -69,7 +69,7 @@ import DeleteAccountScreen from "./Screens/DeleteAccount";
 import NotificationsManagementScreen from "./Screens/NotificationsManagement";
 
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Platform } from "react-native";
+
 import { getItem, storeItem } from "./CustomProperties/storage";
 
 const Stack = createStackNavigator();

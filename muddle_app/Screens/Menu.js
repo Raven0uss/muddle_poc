@@ -17,16 +17,39 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { removeItem } from "../CustomProperties/storage";
+import { useMutation, gql } from "@apollo/client";
+
+const DELETE_PUSH_TOKEN = gql`
+  mutation($userId: ID!) {
+    updateUser(where: { id: $userId }, data: { pushToken: null }) {
+      id
+    }
+  }
+`;
 
 const Menu = (props) => {
   const { theme } = React.useContext(ThemeContext);
-  const { setCurrentUser } = React.useContext(UserContext);
+  const { currentUser, setCurrentUser } = React.useContext(UserContext);
   const [refresh, setRefresh] = React.useState(true);
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
     setRefresh(true);
   }, [isFocused]);
+
+  const [deletePushToken] = useMutation(DELETE_PUSH_TOKEN, {
+    variables: {
+      userId: currentUser.id,
+    },
+    onCompleted: () => {
+      removeItem("token");
+      removeItem("user");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+    },
+  });
 
   const { navigation, route } = props;
 
@@ -194,14 +217,8 @@ const Menu = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => {
-            removeItem("token");
-            removeItem("user");
-            setCurrentUser(null);
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "Login" }],
-            });
+          onPress={async () => {
+            await deletePushToken();
           }}
         >
           <CustomIcon name="exit-to-app" size={28} color="#A3A3A3" />

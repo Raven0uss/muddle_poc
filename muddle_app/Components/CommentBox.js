@@ -11,6 +11,20 @@ import hasLiked from "../Library/hasLiked";
 // import { useIsFocused } from "@react-navigation/native";
 import CertifiedIcon from "./CertifiedIcon";
 
+const formatLike = (nb) => {
+  if (nb < 1000) return `${nb}`;
+  if (nb >= 1000 && nb < 1000000) {
+    const k = parseFloat(`${nb / 1000}`).toFixed(1);
+    return `${k}k`;
+  } else if (nb >= 1000000 && nb < 1000000000) {
+    const m = parseFloat(`${nb / 1000000}`).toFixed(1);
+    return `${m}M`;
+  } else if (nb >= 1000000000) {
+    const mrd = parseFloat(`${nb / 1000000000}`).toFixed(1);
+    return `${mrd} Mrd`;
+  }
+};
+
 const DELETE_COMMENT = gql`
   mutation($commentId: ID!) {
     deleteMyComment(commentId: $commentId) {
@@ -26,6 +40,9 @@ const CommentBox = (props) => {
   const [liked, setLiked] = React.useState(
     hasLiked({ ...comment, currentUser })
   );
+
+  const [likes, setLikes] = React.useState(comment.likes.length);
+  const [dislikes, setDislikes] = React.useState(comment.dislikes.length);
   // console.log(comment.comments === undefined);
 
   const [likeComment] = useMutation(LIKE_COMMENT(liked), {
@@ -168,6 +185,8 @@ const CommentBox = (props) => {
       >
         <TouchableOpacity
           onPress={async () => {
+            if (liked === "dislike") setDislikes((d) => d - 1);
+            setLikes((l) => l + 1);
             setLiked("like");
             // setComment();
             await likeComment({
@@ -177,6 +196,7 @@ const CommentBox = (props) => {
               },
             });
           }}
+          style={{ flexDirection: "row" }}
           disabled={liked === "like"}
         >
           <CustomIcon
@@ -186,10 +206,23 @@ const CommentBox = (props) => {
             viewBcolor={liked === "like" ? "#F47658" : "transparent"}
             viewRadius={liked === "like" ? 100 : 0}
           />
+          <Text
+            style={{
+              marginLeft: 5,
+              fontFamily: "Montserrat_500Medium",
+              fontSize: 12,
+              marginTop: 2,
+              color: "#F47658",
+            }}
+          >
+            {formatLike(likes)}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={async () => {
+            if (liked === "like") setLikes((l) => l - 1);
             setLiked("dislike");
+            setDislikes((d) => d + 1);
             await dislikeComment({
               variables: {
                 userId: currentUser.id,
@@ -198,7 +231,7 @@ const CommentBox = (props) => {
             });
             // setLiked("dislike");
           }}
-          style={{ marginLeft: 22 }}
+          style={{ marginLeft: 22, flexDirection: "row" }}
           disabled={liked === "dislike"}
         >
           <CustomIcon
@@ -215,6 +248,17 @@ const CommentBox = (props) => {
             }
             viewRadius={liked === "dislike" ? 100 : 0}
           />
+          <Text
+            style={{
+              marginLeft: 5,
+              fontFamily: "Montserrat_500Medium",
+              fontSize: 12,
+              marginTop: 2,
+              color: themeSchema[theme].colorText,
+            }}
+          >
+            {formatLike(dislikes)}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

@@ -11,6 +11,8 @@ import timelimitToDateTime from "../algorithms/timelimitToDateTime";
 import { sendMailNoReplyWithHeaderAndFooter } from "../mail/index";
 
 import moment from "moment";
+import { sendPushNotification } from "../pushNotifications";
+import getPushNotificationObject from "../pushNotifications/messagesNotifications";
 
 // Mutations
 const exposedMutations = {
@@ -36,8 +38,10 @@ const exposedMutations = {
 const fragmentGetAllComments = `
   fragment GetAllComments on Debate  {
     id
+    content
     comments {
       id
+      content
       from {
         id
       }
@@ -51,6 +55,7 @@ const fragmentGetAllComments = `
 const fragmentGetSingleComment = `
   fragment GetAllComments on Comment  {
     id
+    content
     from {
       id
     }
@@ -103,6 +108,7 @@ const fragmentDebateOwner = `
   fragment GetDebateOwner on Debate {
     id
     type
+    content
     owner {
       id
     }
@@ -118,6 +124,7 @@ const fragmentDebateOwner = `
 const fragmentCommentFrom = `
   fragment GetCommentFrom on Comment {
     id
+    comment
     from {
       id
     }
@@ -401,6 +408,17 @@ const Mutation = prismaObjectType({
             new: true,
           });
 
+          const userObject = await prisma.user({ id: user });
+
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: userObject.pushToken,
+              type: "invitationDuo",
+              language: userObject.language,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+            })
+          );
+
           return newDebate;
         } catch (err) {
           throw new Error(err);
@@ -632,6 +650,16 @@ const Mutation = prismaObjectType({
               new: true,
               debate: { connect: { id: debate.id } },
             });
+
+            const winner = await prisma.user({ id: winnerId });
+
+            sendPushNotification(
+              getPushNotificationObject({
+                pushToken: winner.pushToken,
+                type: "wonDebateDuo",
+                language: winner.language,
+              })
+            );
           } else {
             const debateComments = await prisma
               .debate({
@@ -669,6 +697,16 @@ const Mutation = prismaObjectType({
               new: true,
               comment: { connect: { id: topCommentId.comment } },
             });
+
+            const topCommentUser = await prisma.user({ id: topCommentId.user });
+
+            sendPushNotification(
+              getPushNotificationObject({
+                pushToken: topCommentUser.pushToken,
+                type: "wonDebateComment",
+                language: topCommentUser.language,
+              })
+            );
             // Don't use this feature or have to implement remove topComment when deleteComment
             // const updatedDebate = await prisma.updateDebate({
             //   where: { id: debate.id },
@@ -715,6 +753,20 @@ const Mutation = prismaObjectType({
             debate: { connect: { id: debateId } },
           });
 
+          const user = await prisma.user({
+            id: userId,
+          });
+
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: user.pushToken,
+              type: "closeDebate",
+              language: user.language,
+              debate: debate.content,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+            })
+          );
+
           return debate;
         } catch (err) {
           throw new Error(err);
@@ -750,6 +802,17 @@ const Mutation = prismaObjectType({
             status: "PENDING",
             debate: { connect: { id: debateId } },
           });
+
+          const user = await prisma.user({ id: userId });
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: user.pushToken,
+              type: "deleteDebate",
+              language: user.language,
+              debate: debate.content,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+            })
+          );
 
           return debate;
         } catch (err) {
@@ -816,6 +879,17 @@ const Mutation = prismaObjectType({
                 },
               });
             }
+
+          const user = await prisma.user({ id: comment.from.id });
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: user.pushToken,
+              type: "like",
+              language: user.language,
+              comment: comment.content,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+            })
+          );
 
           if (dislikeIndex !== -1) {
             const updatedComment = await prisma.updateComment({
@@ -905,6 +979,17 @@ const Mutation = prismaObjectType({
               });
             }
 
+          const user = await prisma.user({ id: comment.from.id });
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: user.pushToken,
+              type: "dislike",
+              language: user.language,
+              comment: comment.content,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+            })
+          );
+
           if (likeIndex !== -1) {
             const updatedComment = await prisma.updateComment({
               where: { id: commentId },
@@ -978,6 +1063,17 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+
+            const owner = await prisma.user({ id: debate.owner.id });
+            sendPushNotification(
+              getPushNotificationObject({
+                pushToken: owner.pushToken,
+                type: "vote",
+                language: owner.language,
+                debate: debate.content,
+                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              })
+            );
           }
 
           if (type === "blue" || type === "red") {
@@ -1039,6 +1135,27 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+
+              const ownerRed = await prisma.user({ id: debate.ownerRed.id });
+              const ownerBlue = await prisma.user({ id: debate.ownerBlue.id });
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerRed.pushToken,
+                  type: "vote",
+                  language: ownerRed.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerBlue.pushToken,
+                  type: "vote",
+                  language: ownerBlue.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
           }
 
@@ -1189,6 +1306,9 @@ const Mutation = prismaObjectType({
               },
             });
 
+            const ownerRed = await prisma.user({ id: debate.ownerRed.id });
+            const ownerBlue = await prisma.user({ id: debate.ownerBlue.id });
+
             if (debate.ownerRed.id !== currentUser.user.id) {
               if (isEmpty(notificationsRed)) {
                 await prisma.createNotification({
@@ -1210,6 +1330,16 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerRed.pushToken,
+                  type: "comment",
+                  language: ownerRed.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
 
             if (debate.ownerBlue.id !== currentUser.user.id) {
@@ -1233,6 +1363,15 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerBlue.pushToken,
+                  type: "comment",
+                  language: ownerBlue.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
           } else {
             const notifications = await prisma.notifications({
@@ -1265,6 +1404,16 @@ const Mutation = prismaObjectType({
                 });
               }
             }
+            const owner = await prisma.user({ id: debate.owner.id });
+            sendPushNotification(
+              getPushNotificationObject({
+                pushToken: owner.pushToken,
+                type: "comment",
+                language: owner.language,
+                debate: debate.content,
+                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              })
+            );
           }
           return { value: 0 };
         } catch (err) {
@@ -1329,6 +1478,17 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+
+              const ownerRed = await prisma.user({ id: debate.ownerRed.id });
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerRed.pushToken,
+                  type: "comment",
+                  language: ownerRed.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
 
             if (debate.ownerBlue.id !== currentUser.user.id) {
@@ -1352,6 +1512,17 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+
+              const ownerBlue = await prisma.user({ id: debate.ownerBlue.id });
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: ownerBlue.pushToken,
+                  type: "comment",
+                  language: ownerBlue.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
           } else {
             const notifications = await prisma.notifications({
@@ -1383,6 +1554,16 @@ const Mutation = prismaObjectType({
                   },
                 });
               }
+              const owner = await prisma.user({ id: debate.owner.id });
+              sendPushNotification(
+                getPushNotificationObject({
+                  pushToken: owner.pushToken,
+                  type: "comment",
+                  language: owner.language,
+                  debate: debate.content,
+                  user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+                })
+              );
             }
           }
 
@@ -1422,6 +1603,16 @@ const Mutation = prismaObjectType({
                 },
               });
             }
+            const commentOwner = await prisma.user({ id: comment.from.id });
+            sendPushNotification(
+              getPushNotificationObject({
+                pushToken: commentOwner.pushToken,
+                type: "comment",
+                language: commentOwner.language,
+                comment: comment.content,
+                user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              })
+            );
           }
 
           return { value: 0 };
@@ -1556,6 +1747,14 @@ const Mutation = prismaObjectType({
             status: "INFORMATION",
             new: true,
           });
+
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: updatedUser.pushToken,
+              type: "crown",
+              language: updatedUser.language,
+            })
+          );
 
           const statistiques = await prisma.statistiques();
           if (isEmpty(statistiques)) {
@@ -1881,6 +2080,57 @@ const Mutation = prismaObjectType({
         }
         const userQuery = await prisma.user({ id: user.user.id });
         return userQuery;
+      },
+    });
+
+    t.field("checkPushToken", {
+      type: "User",
+      args: {
+        pushToken: stringArg(),
+        userId: idArg(),
+      },
+      resolve: async (parent, { pushToken, userId }, { prisma }) => {
+        try {
+          const user = await prisma.user({ id: userId });
+          const currentPushToken = get(user, "pushToken");
+          if (currentPushToken !== pushToken) {
+            const updatedUser = await prisma.updateUser({
+              where: { id: userId },
+              data: {
+                pushToken,
+              },
+            });
+            return updatedUser;
+          } else {
+            return user;
+          }
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
+
+    t.field("notifyMessage", {
+      type: "NoValue",
+      args: {
+        userId: idArg(),
+        message: stringArg(),
+      },
+      resolve: async (parent, { userId, message }, { prisma, currentUser }) => {
+        try {
+          const to = await prisma.user({ id: userId });
+          sendPushNotification(
+            getPushNotificationObject({
+              pushToken: to.pushToken,
+              type: "message",
+              language: to.language,
+              user: `${currentUser.user.firstname} ${currentUser.user.lastname}`,
+              message,
+            })
+          );
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     });
 

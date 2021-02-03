@@ -2328,6 +2328,7 @@ type Mutation {
   changePassword(newPassword: String, userId: ID): NoValue!
   checkEmailSignup(email: String): NoValue!
   checkPasswordOk(currentPassword: String, userId: ID): NoValue!
+  checkPushToken(pushToken: String, userId: ID): User!
   checkTokenDashboard(token: String): User!
   closeMyDebate(debateId: ID): Debate!
   createAd(data: AdCreateInput!): Ad!
@@ -2359,6 +2360,7 @@ type Mutation {
   giveCrown(userId: ID): User!
   likeComment(commentId: ID, userId: ID): Comment!
   notifyComment(debateId: ID): NoValue!
+  notifyMessage(message: String, userId: ID): NoValue!
   notifySubComment(commentId: ID, debateId: ID): NoValue!
   publishDuoDebate(answerTwo: String, debateId: ID, timelimit: String): Debate!
   sendMail: NoValue!
@@ -3467,6 +3469,7 @@ type User {
   password: String!
   private: Boolean!
   profilePicture: String
+  pushToken: String
   role: Role!
   theme: Theme!
   trophies(after: String, before: String, first: Int, last: Int, orderBy: TrophyOrderByInput, skip: Int, where: TrophyWhereInput): [Trophy!]
@@ -3502,6 +3505,7 @@ input UserCreateInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3604,6 +3608,7 @@ input UserCreateWithoutBlockedInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3637,6 +3642,7 @@ input UserCreateWithoutBlockingInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3670,6 +3676,7 @@ input UserCreateWithoutConversationsInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3703,6 +3710,7 @@ input UserCreateWithoutDebatesBlueInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3736,6 +3744,7 @@ input UserCreateWithoutDebatesInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3769,6 +3778,7 @@ input UserCreateWithoutDebatesRedInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3802,6 +3812,7 @@ input UserCreateWithoutFollowersInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3835,6 +3846,7 @@ input UserCreateWithoutFollowingInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3868,6 +3880,7 @@ input UserCreateWithoutInteractionsInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3901,6 +3914,7 @@ input UserCreateWithoutNotificationsInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyCreateManyWithoutUserInput
@@ -3935,6 +3949,7 @@ input UserCreateWithoutTrophiesInput {
   password: String!
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
 }
@@ -3976,6 +3991,8 @@ enum UserOrderByInput {
   private_DESC
   profilePicture_ASC
   profilePicture_DESC
+  pushToken_ASC
+  pushToken_DESC
   role_ASC
   role_DESC
   theme_ASC
@@ -4150,6 +4167,20 @@ input UserScalarWhereInput {
   profilePicture_not_in: [String!]
   profilePicture_not_starts_with: String
   profilePicture_starts_with: String
+  pushToken: String
+  pushToken_contains: String
+  pushToken_ends_with: String
+  pushToken_gt: String
+  pushToken_gte: String
+  pushToken_in: [String!]
+  pushToken_lt: String
+  pushToken_lte: String
+  pushToken_not: String
+  pushToken_not_contains: String
+  pushToken_not_ends_with: String
+  pushToken_not_in: [String!]
+  pushToken_not_starts_with: String
+  pushToken_starts_with: String
   role: Role
   role_in: [Role!]
   role_not: Role
@@ -4196,6 +4227,7 @@ input UserUpdateDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4229,6 +4261,7 @@ input UserUpdateInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4256,6 +4289,7 @@ input UserUpdateManyDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
 }
@@ -4433,6 +4467,7 @@ input UserUpdateWithoutBlockedDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4465,6 +4500,7 @@ input UserUpdateWithoutBlockingDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4497,6 +4533,7 @@ input UserUpdateWithoutConversationsDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4529,6 +4566,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4561,6 +4599,7 @@ input UserUpdateWithoutDebatesDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4593,6 +4632,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4625,6 +4665,7 @@ input UserUpdateWithoutFollowersDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4657,6 +4698,7 @@ input UserUpdateWithoutFollowingDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4689,6 +4731,7 @@ input UserUpdateWithoutInteractionsDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4721,6 +4764,7 @@ input UserUpdateWithoutNotificationsDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
   trophies: TrophyUpdateManyWithoutUserInput
@@ -4754,6 +4798,7 @@ input UserUpdateWithoutTrophiesDataInput {
   password: String
   private: Boolean
   profilePicture: String
+  pushToken: String
   role: Role
   theme: Theme
 }
@@ -5039,6 +5084,20 @@ input UserWhereInput {
   profilePicture_not_in: [String!]
   profilePicture_not_starts_with: String
   profilePicture_starts_with: String
+  pushToken: String
+  pushToken_contains: String
+  pushToken_ends_with: String
+  pushToken_gt: String
+  pushToken_gte: String
+  pushToken_in: [String!]
+  pushToken_lt: String
+  pushToken_lte: String
+  pushToken_not: String
+  pushToken_not_contains: String
+  pushToken_not_ends_with: String
+  pushToken_not_in: [String!]
+  pushToken_not_starts_with: String
+  pushToken_starts_with: String
   role: Role
   role_in: [Role!]
   role_not: Role

@@ -148,6 +148,20 @@ const renderItem = ({ item }, navigation, theme, currentUser) => {
 //   );
 // };
 
+const formatLike = (nb) => {
+  if (nb < 1000) return `${nb}`;
+  if (nb >= 1000 && nb < 1000000) {
+    const k = parseFloat(`${nb / 1000}`).toFixed(1);
+    return `${k}k`;
+  } else if (nb >= 1000000 && nb < 1000000000) {
+    const m = parseFloat(`${nb / 1000000}`).toFixed(1);
+    return `${m}M`;
+  } else if (nb >= 1000000000) {
+    const mrd = parseFloat(`${nb / 1000000000}`).toFixed(1);
+    return `${mrd} Mrd`;
+  }
+};
+
 const frequency = 10;
 let nbComments = frequency;
 
@@ -157,9 +171,13 @@ const IsolateComment = (props) => {
 
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
+
   const [liked, setLiked] = React.useState(
     hasLiked({ ...comment, currentUser })
   );
+  const [likes, setLikes] = React.useState(comment.likes.length);
+  const [dislikes, setDislikes] = React.useState(comment.dislikes.length);
+
   const [comments, setComments] = React.useState([]);
   const [newComment, setNewComment] = React.useState("");
   // const [notify, setNotify] = React.useState(false);
@@ -458,11 +476,14 @@ const IsolateComment = (props) => {
               >
                 <TouchableOpacity
                   onPress={async () => {
-                    await likeComment();
+                    if (liked === "dislike") setDislikes((d) => d - 1);
+                    setLikes((l) => l + 1);
                     setLiked("like");
+                    await likeComment();
                     // setNotify(true);
                   }}
                   disabled={liked === "like"}
+                  style={{ flexDirection: "row" }}
                 >
                   <CustomIcon
                     name="sentiment-satisfied"
@@ -475,14 +496,27 @@ const IsolateComment = (props) => {
                     viewBcolor={liked === "like" ? "#F47658" : "transparent"}
                     viewRadius={liked === "like" ? 100 : 0}
                   />
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      fontFamily: "Montserrat_500Medium",
+                      fontSize: 12,
+                      marginTop: 2,
+                      color: "#F47658",
+                    }}
+                  >
+                    {formatLike(likes)}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={async () => {
+                    if (liked === "like") setLikes((l) => l - 1);
+                    setDislikes((d) => d + 1);
                     setLiked("dislike");
                     await dislikeComment();
                     // setNotify(true);
                   }}
-                  style={{ marginLeft: 22 }}
+                  style={{ marginLeft: 22, flexDirection: "row" }}
                   disabled={liked === "dislike"}
                 >
                   <CustomIcon
@@ -501,6 +535,17 @@ const IsolateComment = (props) => {
                     }
                     viewRadius={liked === "dislike" ? 100 : 0}
                   />
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      fontFamily: "Montserrat_500Medium",
+                      fontSize: 12,
+                      marginTop: 2,
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {formatLike(dislikes)}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

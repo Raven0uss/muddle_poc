@@ -55,6 +55,7 @@ const GET_CURRENT_USER = gql`
       blocking {
         id
       }
+      pushToken
     }
   }
 `;

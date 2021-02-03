@@ -20,11 +20,12 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
 import { useIsFocused } from "@react-navigation/native";
+import moment from "moment";
 
 const GET_NOTIFICATIONS = gql`
   query($first: Int!, $skip: Int, $userId: String!) {
     notifications(
-      orderBy: updatedAt_DESC
+      orderBy: createdAt_DESC
       first: $first
       skip: $skip
       where: { userId: $userId }

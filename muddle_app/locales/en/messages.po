@@ -236,7 +236,7 @@ msgid "crownedDebates"
 msgstr "Crowned debates"
 
 #: Screens/ChangePassword.js:209
-#: Screens/DeleteAccount.js:140
+#: Screens/DeleteAccount.js:175
 msgid "currentPassword"
 msgstr "Current password"
 
@@ -275,18 +275,18 @@ msgstr "Decline"
 msgid "deleteAccount"
 msgstr "Delete my account"
 
-#: Screens/DeleteAccount.js:196
+#: Screens/DeleteAccount.js:231
 msgid "deleteAccountButton"
 msgstr "Delete my account"
 
-#: Screens/DeleteAccount.js:131
+#: Screens/DeleteAccount.js:166
 msgid "deleteAccountInstruction"
 msgstr ""
 "To delete your account, type your current password and press the button for few seconds.\n"
 "\n"
 "Remember, this action is permanent. All the data relatives to your account will be removed from our database."
 
-#: Screens/DeleteAccount.js:119
+#: Screens/DeleteAccount.js:154
 msgid "deleteAccountTitle"
 msgstr "Delete my account"
 
@@ -588,7 +588,7 @@ msgid "password8Char"
 msgstr "The minimum length for a password is 8 characters"
 
 #: Screens/ChangePassword.js:149
-#: Screens/DeleteAccount.js:64
+#: Screens/DeleteAccount.js:99
 msgid "passwordAccountNotSame"
 msgstr "The password of your account is not matching."
 
@@ -734,6 +734,10 @@ msgstr "A mail to confirm your subscribtion has been sent."
 msgid "succesModifyPassword"
 msgstr "Your password has been changed. Please, sign in back."
 
+#: Screens/DeleteAccount.js:70
+msgid "successAccountDeleted"
+msgstr "Your account and all your data has been deleted from our services."
+
 #: Screens/ForgotPassword.js:65
 msgid "successMessage_MailSendForgotPassword"
 msgstr "A mail to recover your account has been sent."
@@ -806,8 +810,8 @@ msgid "youVote"
 msgstr "You voted"
 
 #: Screens/SignUp.js:128
-msgid "young9years"
-msgstr "The minimum age to subscribe is 9 years old."
+msgid "young18years"
+msgstr "The minimum age to subscribe is 18 years old."
 
 #: Screens/Debate.js:1238
 #: Screens/IsolateComment.js:557

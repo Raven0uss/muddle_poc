@@ -153,7 +153,7 @@ const Query = prismaObjectType({
             const users = await prisma
               .connected({ id: getDate[0].id })
               .connections();
-            console.log(users);
+            // console.log(users);
             if (isNil(users)) throw new Error("error");
             if (
               users.findIndex((u) => {
@@ -165,7 +165,7 @@ const Query = prismaObjectType({
                 data: {
                   connections: {
                     connect: {
-                      email: "userA",
+                      email,
                     },
                   },
                 },

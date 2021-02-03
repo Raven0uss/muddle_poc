@@ -17,9 +17,9 @@ import {
 import Header from "../Components/Header";
 import { debates_logo, muddle } from "../CustomProperties/IconsBase64";
 import DebateBox from "../Components/DebateBox";
-import { useQuery, gql, useSubscription } from "@apollo/client";
+import { useQuery, gql, useSubscription, useMutation } from "@apollo/client";
 import AssistiveMenu from "../Components/AssistiveMenu";
-import { flatten, isEmpty, last, get } from "lodash";
+import { flatten, isEmpty, last, get, isNil } from "lodash";
 import CreateDebateButton from "../Components/CreateDebateButton";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
@@ -29,6 +29,9 @@ import useEffectUpdate from "../Library/useEffectUpdate";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
 import isFollowing from "../Library/isFollowing";
 import AdBox from "../Components/AdBox";
+
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 
 const GET_DEBATES = gql`
   query($first: Int!, $skip: Int) {
@@ -146,6 +149,42 @@ const GET_ADS = gql`
   }
 `;
 
+const REFRESH_PUSH_TOKEN = gql`
+  mutation($userId: ID!, $pushToken: String!) {
+    checkPushToken(userId: $userId, pushToken: $pushToken) {
+      id
+    }
+  }
+`;
+
+async function registerForPushNotificationsAsync() {
+  console.log("test");
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== "granted") {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+
+  console.log(finalStatus);
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== "granted") {
+    return null;
+  }
+
+  // Get the token that uniquely identifies this device
+  const pushNotificiationToken = await Notifications.getExpoPushTokenAsync();
+  console.log(pushNotificiationToken);
+  return pushNotificiationToken;
+}
+
 const frequency = 20;
 let nbDebates = frequency;
 
@@ -196,7 +235,7 @@ const renderItem = (
 
 const Home = (props) => {
   const { theme } = React.useContext(ThemeContext);
-  const { currentUser } = React.useContext(UserContext);
+  const { currentUser, setCurrentUser } = React.useContext(UserContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -234,6 +273,36 @@ const Home = (props) => {
     fetchPolicy: "cache-and-network",
   });
   const scrollViewRef = React.useRef(null);
+
+  const [refreshPushToken] = useMutation(REFRESH_PUSH_TOKEN, {
+    onCompleted: (response) => {
+      const newPushToken = get(response, "checkPushToken.pushToken");
+      if (!isNil(newPushToken)) {
+        setCurrentUser((cu) => ({
+          ...cu,
+          pushToken: newPushToken,
+        }));
+      }
+    },
+  });
+
+  React.useEffect(() => {
+    const managePushNotificationToken = async () => {
+      console.log("managePushNotification");
+      const pushToken = await registerForPushNotificationsAsync();
+      if (pushToken !== null) {
+        await refreshPushToken({
+          variables: {
+            userId: currentUser.id,
+            pushToken,
+          },
+        });
+      }
+    };
+
+    console.log("useEffect");
+    managePushNotificationToken();
+  }, []);
 
   const onRefresh = React.useCallback(async () => {
     nbDebates = frequency;

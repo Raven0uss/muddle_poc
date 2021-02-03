@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "648825304020",
+    "project_id": "muddles-36378",
+    "storage_bucket": "muddles-36378.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648825304020:android:7335fc0e76435a6a6edc41",
+        "android_client_info": {
+          "package_name": "com.muddles.muddles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648825304020-pn9dar05an7bomgjekumuiputp2ml9cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZXq56Q7qMUJmASfZ5xW0JE6PjDbds160"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648825304020-pn9dar05an7bomgjekumuiputp2ml9cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

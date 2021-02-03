@@ -2664,6 +2664,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2748,6 +2749,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2780,6 +2782,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2812,6 +2815,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2844,6 +2848,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2876,6 +2881,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2908,6 +2914,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2940,6 +2947,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -2972,6 +2980,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -3004,6 +3013,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -3036,6 +3046,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyCreateManyWithoutUserInput'] | null; // TrophyCreateManyWithoutUserInput
@@ -3069,6 +3080,7 @@ export interface NexusGenInputs {
     password: string; // String!
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
   }
@@ -3241,6 +3253,20 @@ export interface NexusGenInputs {
     profilePicture_not_in?: string[] | null; // [String!]
     profilePicture_not_starts_with?: string | null; // String
     profilePicture_starts_with?: string | null; // String
+    pushToken?: string | null; // String
+    pushToken_contains?: string | null; // String
+    pushToken_ends_with?: string | null; // String
+    pushToken_gt?: string | null; // String
+    pushToken_gte?: string | null; // String
+    pushToken_in?: string[] | null; // [String!]
+    pushToken_lt?: string | null; // String
+    pushToken_lte?: string | null; // String
+    pushToken_not?: string | null; // String
+    pushToken_not_contains?: string | null; // String
+    pushToken_not_ends_with?: string | null; // String
+    pushToken_not_in?: string[] | null; // [String!]
+    pushToken_not_starts_with?: string | null; // String
+    pushToken_starts_with?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
@@ -3286,6 +3312,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3318,6 +3345,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3340,6 +3368,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
   }
@@ -3529,6 +3558,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3560,6 +3590,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3591,6 +3622,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3622,6 +3654,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3653,6 +3686,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3684,6 +3718,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3715,6 +3750,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3746,6 +3782,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3777,6 +3814,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3808,6 +3846,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
     trophies?: NexusGenInputs['TrophyUpdateManyWithoutUserInput'] | null; // TrophyUpdateManyWithoutUserInput
@@ -3840,6 +3879,7 @@ export interface NexusGenInputs {
     password?: string | null; // String
     private?: boolean | null; // Boolean
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     theme?: NexusGenEnums['Theme'] | null; // Theme
   }
@@ -4079,6 +4119,20 @@ export interface NexusGenInputs {
     profilePicture_not_in?: string[] | null; // [String!]
     profilePicture_not_starts_with?: string | null; // String
     profilePicture_starts_with?: string | null; // String
+    pushToken?: string | null; // String
+    pushToken_contains?: string | null; // String
+    pushToken_ends_with?: string | null; // String
+    pushToken_gt?: string | null; // String
+    pushToken_gte?: string | null; // String
+    pushToken_in?: string[] | null; // [String!]
+    pushToken_lt?: string | null; // String
+    pushToken_lte?: string | null; // String
+    pushToken_not?: string | null; // String
+    pushToken_not_contains?: string | null; // String
+    pushToken_not_ends_with?: string | null; // String
+    pushToken_not_in?: string[] | null; // [String!]
+    pushToken_not_starts_with?: string | null; // String
+    pushToken_starts_with?: string | null; // String
     role?: NexusGenEnums['Role'] | null; // Role
     role_in?: NexusGenEnums['Role'][] | null; // [Role!]
     role_not?: NexusGenEnums['Role'] | null; // Role
@@ -4130,7 +4184,7 @@ export interface NexusGenEnums {
   TmpUserOrderByInput: "birthdate_ASC" | "birthdate_DESC" | "createdAt_ASC" | "createdAt_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "lastname_ASC" | "lastname_DESC" | "password_ASC" | "password_DESC" | "role_ASC" | "role_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   TrophyOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "type_ASC" | "type_DESC" | "updatedAt_ASC" | "updatedAt_DESC" | "won_ASC" | "won_DESC"
   TrophyType: "DUO" | "TOP_COMMENT"
-  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "crownedDate_ASC" | "crownedDate_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "mailStatus_ASC" | "mailStatus_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "role_ASC" | "role_DESC" | "theme_ASC" | "theme_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "bio_ASC" | "bio_DESC" | "birthdate_ASC" | "birthdate_DESC" | "certified_ASC" | "certified_DESC" | "coverPicture_ASC" | "coverPicture_DESC" | "createdAt_ASC" | "createdAt_DESC" | "crowned_ASC" | "crowned_DESC" | "crownedDate_ASC" | "crownedDate_DESC" | "email_ASC" | "email_DESC" | "firstname_ASC" | "firstname_DESC" | "gender_ASC" | "gender_DESC" | "id_ASC" | "id_DESC" | "language_ASC" | "language_DESC" | "lastConnected_ASC" | "lastConnected_DESC" | "lastname_ASC" | "lastname_DESC" | "mailStatus_ASC" | "mailStatus_DESC" | "password_ASC" | "password_DESC" | "private_ASC" | "private_DESC" | "profilePicture_ASC" | "profilePicture_DESC" | "pushToken_ASC" | "pushToken_DESC" | "role_ASC" | "role_DESC" | "theme_ASC" | "theme_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -4313,6 +4367,7 @@ export interface NexusGenRootTypes {
     password: string; // String!
     private: boolean; // Boolean!
     profilePicture?: string | null; // String
+    pushToken?: string | null; // String
     role: NexusGenEnums['Role']; // Role!
     theme: NexusGenEnums['Theme']; // Theme!
     updatedAt: any; // DateTime!
@@ -4749,6 +4804,7 @@ export interface NexusGenFieldTypes {
     changePassword: NexusGenRootTypes['NoValue']; // NoValue!
     checkEmailSignup: NexusGenRootTypes['NoValue']; // NoValue!
     checkPasswordOk: NexusGenRootTypes['NoValue']; // NoValue!
+    checkPushToken: NexusGenRootTypes['User']; // User!
     checkTokenDashboard: NexusGenRootTypes['User']; // User!
     closeMyDebate: NexusGenRootTypes['Debate']; // Debate!
     createAd: NexusGenRootTypes['Ad']; // Ad!
@@ -4780,6 +4836,7 @@ export interface NexusGenFieldTypes {
     giveCrown: NexusGenRootTypes['User']; // User!
     likeComment: NexusGenRootTypes['Comment']; // Comment!
     notifyComment: NexusGenRootTypes['NoValue']; // NoValue!
+    notifyMessage: NexusGenRootTypes['NoValue']; // NoValue!
     notifySubComment: NexusGenRootTypes['NoValue']; // NoValue!
     publishDuoDebate: NexusGenRootTypes['Debate']; // Debate!
     sendMail: NexusGenRootTypes['NoValue']; // NoValue!
@@ -4942,6 +4999,7 @@ export interface NexusGenFieldTypes {
     password: string; // String!
     private: boolean; // Boolean!
     profilePicture: string | null; // String
+    pushToken: string | null; // String
     role: NexusGenEnums['Role']; // Role!
     theme: NexusGenEnums['Theme']; // Theme!
     trophies: NexusGenRootTypes['Trophy'][] | null; // [Trophy!]
@@ -5104,6 +5162,10 @@ export interface NexusGenArgTypes {
       currentPassword?: string | null; // String
       userId?: string | null; // ID
     }
+    checkPushToken: { // args
+      pushToken?: string | null; // String
+      userId?: string | null; // ID
+    }
     checkTokenDashboard: { // args
       token?: string | null; // String
     }
@@ -5223,6 +5285,10 @@ export interface NexusGenArgTypes {
     }
     notifyComment: { // args
       debateId?: string | null; // ID
+    }
+    notifyMessage: { // args
+      message?: string | null; // String
+      userId?: string | null; // ID
     }
     notifySubComment: { // args
       commentId?: string | null; // ID

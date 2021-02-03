@@ -1,9 +1,17 @@
 {
+  "successAccountDeleted": {
+    "origin": [
+      [
+        "Screens/DeleteAccount.js",
+        70
+      ]
+    ]
+  },
   "passwordAccountNotSame": {
     "origin": [
       [
         "Screens/DeleteAccount.js",
-        64
+        99
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "Screens/DeleteAccount.js",
-        119
+        154
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "Screens/DeleteAccount.js",
-        131
+        166
       ]
     ]
   },
@@ -27,7 +35,7 @@
     "origin": [
       [
         "Screens/DeleteAccount.js",
-        140
+        175
       ]
     ]
   },
@@ -35,7 +43,7 @@
     "origin": [
       [
         "Screens/DeleteAccount.js",
-        196
+        231
       ]
     ]
   }

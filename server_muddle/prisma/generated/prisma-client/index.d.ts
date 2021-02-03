@@ -704,6 +704,8 @@ export type UserOrderByInput =
   | "lastConnected_DESC"
   | "mailStatus_ASC"
   | "mailStatus_DESC"
+  | "pushToken_ASC"
+  | "pushToken_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -1011,6 +1013,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export type AdWhereUniqueInput = AtLeastOne<{
@@ -1058,6 +1061,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface CommentCreateOneWithoutReportsInput {
@@ -1604,6 +1608,7 @@ export interface UserUpdateDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface AdTargetWhereInput {
@@ -1751,6 +1756,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface CommentSubscriptionWhereInput {
@@ -1820,6 +1826,7 @@ export interface UserUpdateManyMutationInput {
   lastConnected?: Maybe<DateTimeInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserUpdateWithoutBlockingDataInput {
@@ -1852,6 +1859,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface AdWhereInput {
@@ -2051,6 +2059,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserCreateWithoutTrophiesInput {
@@ -2084,6 +2093,7 @@ export interface UserCreateWithoutTrophiesInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserUpdateManyWithoutBlockedInput {
@@ -2157,6 +2167,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface TmpUserUpdateInput {
@@ -2279,6 +2290,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export type InteractionWhereUniqueInput = AtLeastOne<{
@@ -2460,6 +2472,7 @@ export interface UserUpdateWithoutNotificationsDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface DebateUpdateWithoutOwnerBlueDataInput {
@@ -2573,6 +2586,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserCreateWithoutNotificationsInput {
@@ -2606,6 +2620,7 @@ export interface UserCreateWithoutNotificationsInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface NotificationUpdateManyWithoutWhoInput {
@@ -3001,6 +3016,20 @@ export interface UserScalarWhereInput {
   mailStatus_not?: Maybe<MailStatus>;
   mailStatus_in?: Maybe<MailStatus[] | MailStatus>;
   mailStatus_not_in?: Maybe<MailStatus[] | MailStatus>;
+  pushToken?: Maybe<String>;
+  pushToken_not?: Maybe<String>;
+  pushToken_in?: Maybe<String[] | String>;
+  pushToken_not_in?: Maybe<String[] | String>;
+  pushToken_lt?: Maybe<String>;
+  pushToken_lte?: Maybe<String>;
+  pushToken_gt?: Maybe<String>;
+  pushToken_gte?: Maybe<String>;
+  pushToken_contains?: Maybe<String>;
+  pushToken_not_contains?: Maybe<String>;
+  pushToken_starts_with?: Maybe<String>;
+  pushToken_not_starts_with?: Maybe<String>;
+  pushToken_ends_with?: Maybe<String>;
+  pushToken_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -3058,6 +3087,7 @@ export interface UserUpdateManyDataInput {
   lastConnected?: Maybe<DateTimeInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface CommentCreateInput {
@@ -3108,6 +3138,7 @@ export interface UserCreateInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface ReportUpdateManyWithoutCommentInput {
@@ -3164,6 +3195,7 @@ export interface UserCreateWithoutFollowingInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface ReportUpdateWithWhereUniqueWithoutCommentInput {
@@ -3202,6 +3234,7 @@ export interface UserCreateWithoutBlockingInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface ReportUpdateWithoutCommentDataInput {
@@ -3245,6 +3278,7 @@ export interface UserCreateWithoutFollowersInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserUpdateOneInput {
@@ -3287,6 +3321,7 @@ export interface UserCreateWithoutBlockedInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface UserUpsertNestedInput {
@@ -3360,6 +3395,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface DebateUpdateWithoutReportsDataInput {
@@ -3453,6 +3489,7 @@ export interface UserCreateWithoutDebatesInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface CommentUpdateDataInput {
@@ -3530,6 +3567,7 @@ export interface UserCreateWithoutDebatesRedInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface DebateUpdateWithoutCommentsDataInput {
@@ -3743,6 +3781,7 @@ export interface UserCreateWithoutInteractionsInput {
   conversations?: Maybe<ConversationCreateManyWithoutSpeakersInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface CommentUpsertWithWhereUniqueNestedInput {
@@ -4151,6 +4190,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   conversations?: Maybe<ConversationUpdateManyWithoutSpeakersInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface TrophyUpdateInput {
@@ -4976,6 +5016,20 @@ export interface UserWhereInput {
   mailStatus_not?: Maybe<MailStatus>;
   mailStatus_in?: Maybe<MailStatus[] | MailStatus>;
   mailStatus_not_in?: Maybe<MailStatus[] | MailStatus>;
+  pushToken?: Maybe<String>;
+  pushToken_not?: Maybe<String>;
+  pushToken_in?: Maybe<String[] | String>;
+  pushToken_not_in?: Maybe<String[] | String>;
+  pushToken_lt?: Maybe<String>;
+  pushToken_lte?: Maybe<String>;
+  pushToken_gt?: Maybe<String>;
+  pushToken_gte?: Maybe<String>;
+  pushToken_contains?: Maybe<String>;
+  pushToken_not_contains?: Maybe<String>;
+  pushToken_starts_with?: Maybe<String>;
+  pushToken_not_starts_with?: Maybe<String>;
+  pushToken_ends_with?: Maybe<String>;
+  pushToken_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -5077,6 +5131,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface NotificationScalarWhereInput {
@@ -5751,6 +5806,7 @@ export interface UserUpdateInput {
   interactions?: Maybe<InteractionUpdateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserUpdatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface ConnectedUpdateInput {
@@ -5914,6 +5970,7 @@ export interface UserCreateWithoutConversationsInput {
   interactions?: Maybe<InteractionCreateManyWithoutWhoInput>;
   mailStatus?: Maybe<MailStatus>;
   mailErrors?: Maybe<UserCreatemailErrorsInput>;
+  pushToken?: Maybe<String>;
 }
 
 export interface StatistiqueUpdateManyMutationInput {
@@ -6063,6 +6120,7 @@ export interface UserPreviousValues {
   lastConnected?: DateTimeOutput;
   mailStatus: MailStatus;
   mailErrors: Int[];
+  pushToken?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -6090,6 +6148,7 @@ export interface UserPreviousValuesPromise
   lastConnected: () => Promise<DateTimeOutput>;
   mailStatus: () => Promise<MailStatus>;
   mailErrors: () => Promise<Int[]>;
+  pushToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -6117,6 +6176,7 @@ export interface UserPreviousValuesSubscription
   lastConnected: () => Promise<AsyncIterator<DateTimeOutput>>;
   mailStatus: () => Promise<AsyncIterator<MailStatus>>;
   mailErrors: () => Promise<AsyncIterator<Int[]>>;
+  pushToken: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -6230,6 +6290,7 @@ export interface User {
   lastConnected?: DateTimeOutput;
   mailStatus: MailStatus;
   mailErrors: Int[];
+  pushToken?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -6354,6 +6415,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   }) => T;
   mailStatus: () => Promise<MailStatus>;
   mailErrors: () => Promise<Int[]>;
+  pushToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -6480,6 +6542,7 @@ export interface UserSubscription
   }) => T;
   mailStatus: () => Promise<AsyncIterator<MailStatus>>;
   mailErrors: () => Promise<AsyncIterator<Int[]>>;
+  pushToken: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -6606,6 +6669,7 @@ export interface UserNullablePromise
   }) => T;
   mailStatus: () => Promise<MailStatus>;
   mailErrors: () => Promise<Int[]>;
+  pushToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }

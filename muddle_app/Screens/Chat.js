@@ -48,7 +48,10 @@ const renderItem = (
         onPress={() => {
           if (deleteMode) {
             if (!isSelected)
-              setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
+              setSelectedList((s) => [
+                ...s,
+                { id: item.id, deleted: item.deleted },
+              ]);
             else
               setSelectedList((s) => {
                 const sCpy = cloneDeep(s);
@@ -61,7 +64,10 @@ const renderItem = (
         }}
         onLongPress={() => {
           setDeleteMode(true);
-          setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
+          setSelectedList((s) => [
+            ...s,
+            { id: item.id, deleted: item.deleted },
+          ]);
         }}
       >
         <View
@@ -141,7 +147,10 @@ const renderItem = (
       onPress={() => {
         if (deleteMode) {
           if (!isSelected)
-            setSelectedList((s) => [...s, { id: item.id, deleted: item.deleted }]);
+            setSelectedList((s) => [
+              ...s,
+              { id: item.id, deleted: item.deleted },
+            ]);
           else
             setSelectedList((s) => {
               const sCpy = cloneDeep(s);
@@ -243,6 +252,7 @@ const SEND_MESSAGE = gql`
       }
     ) {
       id
+      content
     }
   }
 `;
@@ -315,6 +325,14 @@ const DELETE_MESSAGES = gql`
   }
 `;
 
+const NOTIFY_MESSAGE = gql`
+  mutation($userId: ID!, $message: String!) {
+    notifyMessage(userId: $userId, message: $message) {
+      value
+    }
+  }
+`;
+
 const frequency = 50;
 let nbMessages = frequency;
 
@@ -351,6 +369,8 @@ const Chat = (props) => {
     fetchPolicy: "cache-and-network",
   });
 
+  const [notifyMessage] = useMutation(NOTIFY_MESSAGE);
+
   const [sendMessage] = useMutation(SEND_MESSAGE, {
     variables: {
       to: partner.id,
@@ -358,8 +378,15 @@ const Chat = (props) => {
       content: newMessage,
       conversation: conversation.id,
     },
-    onCompleted: (response) => {
-      console.log(response);
+    onCompleted: async (response) => {
+      const messageContent = get(response, "createMessage.content", null);
+      if (messageContent !== null)
+        await notifyMessage({
+          variables: {
+            userId: partner.id,
+            message: messageContent,
+          },
+        });
     },
   });
 

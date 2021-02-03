@@ -121,11 +121,11 @@ const checkInputs = ({
       message: i18n._("bornInFuture"),
     };
   }
-  const check9years = moment().isBefore(moment(birthdate).add(9, "years"));
+  const check9years = moment().isBefore(moment(birthdate).add(18, "years"));
   if (check9years) {
     return {
       error: true,
-      message: i18n._("young9years"),
+      message: i18n._("young18years"),
     };
   }
   const check99years = moment(birthdate).isBefore(
@@ -180,7 +180,8 @@ function SignUpComponent(props) {
     email: "",
     password: "",
     confirmPassword: "",
-    birthdate: moment().subtract(10, "years"),
+    birthdate: null,
+    // birthdate: moment().subtract(18, "years"),
     gender: null,
     cgu: false,
   });
@@ -252,7 +253,7 @@ function SignUpComponent(props) {
               }}
             >
               <TextInput
-                placeholder={i18n._("firstname")}
+                placeholder={i18n._("firstname") + " *"}
                 value={form.firstname}
                 onChangeText={(firstname) =>
                   setForm((previousState) => ({
@@ -270,7 +271,7 @@ function SignUpComponent(props) {
                 placeholderTextColor={themeSchema[theme].colorText}
               />
               <TextInput
-                placeholder={i18n._("lastname")}
+                placeholder={i18n._("lastname") + " *"}
                 value={form.lastname}
                 onChangeText={(lastname) =>
                   setForm((previousState) => ({
@@ -290,7 +291,7 @@ function SignUpComponent(props) {
             </View>
 
             <TextInput
-              placeholder={i18n._("mailAddress")}
+              placeholder={i18n._("mailAddress") + " *"}
               value={form.email}
               onChangeText={(email) =>
                 setForm((previousState) => ({
@@ -313,7 +314,7 @@ function SignUpComponent(props) {
               }}
             >
               <TextInput
-                placeholder={i18n._("password")}
+                placeholder={i18n._("password") + " *"}
                 value={form.password}
                 onChangeText={(password) =>
                   setForm((previousState) => ({
@@ -342,7 +343,7 @@ function SignUpComponent(props) {
               </View>
             </View>
             <TextInput
-              placeholder={i18n._("confirmPassword")}
+              placeholder={i18n._("confirmPassword") + " *"}
               value={form.confirmPassword}
               onChangeText={(confirmPassword) =>
                 setForm((previousState) => ({
@@ -360,7 +361,7 @@ function SignUpComponent(props) {
               secureTextEntry={!visibility}
             />
             <DatePicker
-              placeholder={i18n._("birthdate")}
+              placeholder={i18n._("birthdate") + " *"}
               date={form.birthdate}
               onDateChange={(birthdate) => {
                 setForm((previousState) => ({
@@ -386,7 +387,7 @@ function SignUpComponent(props) {
                 },
               ]}
               selected={form.gender}
-              placeholder={i18n._("gender")}
+              placeholder={i18n._("gender") + " *"}
               onSelect={(gender) =>
                 setForm({
                   ...form,
@@ -411,6 +412,7 @@ function SignUpComponent(props) {
                 <Text style={styles.subscriptionLink}>
                   {i18n._("accronymCGU")}
                 </Text>
+                {" *"}
               </Text>
             </View>
             <TouchableOpacity

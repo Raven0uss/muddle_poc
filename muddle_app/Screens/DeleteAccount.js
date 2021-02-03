@@ -32,6 +32,14 @@ const CHECK_PASSWORD_DATABASE = gql`
   }
 `;
 
+const DELETE_ACCOUNT = gql`
+  mutation($userId: ID!) {
+    deleteThisUser(userId: $userId, banned: false) {
+      value
+    }
+  }
+`;
+
 const DeleteAccount = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const { currentUser, setCurrentUser } = React.useContext(UserContext);
@@ -50,6 +58,28 @@ const DeleteAccount = (props) => {
     setRefresh(true);
   }, [isFocused]);
 
+  const [deleteAccount] = useMutation(DELETE_ACCOUNT, {
+    onCompleted: () => {
+      removeItem("token");
+      removeItem("user");
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "Login",
+            params: {
+              snackType: "success",
+              snackMessage: i18n._("successAccountDeleted"),
+              snack: true,
+              refreshUser: true,
+            },
+          },
+        ],
+      });
+      setCurrentUser(null);
+    },
+  });
+
   const [checkPasswordDatabase, { loading: loadingCheck }] = useMutation(
     CHECK_PASSWORD_DATABASE,
     {
@@ -57,6 +87,11 @@ const DeleteAccount = (props) => {
         const { checkPasswordOk } = response;
         const isSame = get(checkPasswordOk, "value", -1) === 0;
         if (isSame) {
+          await deleteAccount({
+            variables: {
+              userId: currentUser.id,
+            },
+          });
         } else {
           setSnack({
             visible: true,
