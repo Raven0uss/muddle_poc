@@ -404,13 +404,17 @@ function SignUpComponent(props) {
                 outColor={themeSchema[theme].backgroundColor2}
                 value={form.cgu}
               />
-              <Text style={styles.cguText}>
-                {`${i18n._("iAcceptThe")} `}
-                <Text style={styles.subscriptionLink}>
-                  {i18n._("accronymCGU")}
+              <TouchableOpacity
+                onPress={() => navigation.push("MergedLegalDocuments")}
+              >
+                <Text style={styles.cguText}>
+                  {`${i18n._("iAcceptThe")} `}
+                  <Text style={styles.subscriptionLink}>
+                    {i18n._("accronymCGU")}
+                  </Text>
+                  {" *"}
                 </Text>
-                {" *"}
-              </Text>
+              </TouchableOpacity>
             </View>
             <TouchableOpacity
               onPress={async () => {

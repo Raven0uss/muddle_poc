@@ -9,11 +9,14 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
+import i18n from "../i18n";
 import { muddle } from "../CustomProperties/IconsBase64";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+import PDFReader from "rn-pdf-reader-js";
+
+import { privacy } from "../CustomProperties/LegalDocuments64";
 
 const VotesPrivacy = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -43,15 +46,11 @@ const VotesPrivacy = (props) => {
           />
         }
       />
-      <ScrollView
-        style={{
-          backgroundColor: themeSchema[theme].backgroundColor2,
-          paddingLeft: 15,
-          paddingRight: 15,
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
+      <PDFReader
+        source={{
+          base64: "data:application/pdf;base64," + privacy[i18n.language],
         }}
-      ></ScrollView>
+      />
     </View>
   );
 };

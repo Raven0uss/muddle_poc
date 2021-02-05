@@ -38,6 +38,7 @@ import TestScreen from "./Screens/Test";
 import LoginScreen from "./Screens/Login";
 import SignUpScreen from "./Screens/SignUp";
 import ForgotPasswordScreen from "./Screens/ForgotPassword";
+import MergedLegalDocumentsScreen from "./Screens/MergedLegalDocuments";
 
 import HomeScreen from "./Screens/Home";
 import MenuScreen from "./Screens/Menu";
@@ -208,6 +209,16 @@ export default function App() {
                 <Stack.Screen
                   name="ForgotPassword"
                   component={ForgotPasswordScreen}
+                  initialParams={{
+                    changeLanguage,
+                  }}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="MergedLegalDocuments"
+                  component={MergedLegalDocumentsScreen}
                   initialParams={{
                     changeLanguage,
                   }}

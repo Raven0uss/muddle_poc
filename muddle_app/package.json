@@ -34,7 +34,9 @@
     "react-native-screens": "~2.10.1",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "0.13.13",
+    "react-native-webview": "^11.2.1",
     "recyclerlistview": "^3.0.0",
+    "rn-pdf-reader-js": "^4.1.1",
     "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {

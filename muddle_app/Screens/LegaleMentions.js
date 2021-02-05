@@ -9,12 +9,15 @@ import {
   Text,
 } from "react-native";
 import Header from "../Components/Header";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomIcon from "../Components/Icon";
 import { muddle } from "../CustomProperties/IconsBase64";
 import i18n from "../i18n";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
+
+import PDFReader from "rn-pdf-reader-js";
+
+import { legalmentions } from "../CustomProperties/LegalDocuments64";
 
 const LegaleMentions = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -44,29 +47,11 @@ const LegaleMentions = (props) => {
           />
         }
       />
-      <ScrollView
-        style={{
-          backgroundColor: themeSchema[theme].backgroundColor2,
-          paddingLeft: 15,
-          paddingRight: 15,
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
+      <PDFReader
+        source={{
+          base64: "data:application/pdf;base64," + legalmentions[i18n.language],
         }}
-      >
-        <View style={{ justifyContent: "center", marginTop: 30 }}>
-          <Text
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-              fontSize: 16,
-              fontFamily: "Montserrat_700Bold",
-              color: themeSchema[theme].colorText,
-            }}
-          >
-            {i18n._("legaleMention")}
-          </Text>
-        </View>
-      </ScrollView>
+      />
     </View>
   );
 };
