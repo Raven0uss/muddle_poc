@@ -13,6 +13,8 @@ import { sendMailNoReplyWithHeaderAndFooter } from "../mail/index";
 import moment from "moment";
 import { sendPushNotification } from "../pushNotifications";
 import getPushNotificationObject from "../pushNotifications/messagesNotifications";
+import html_validationAccount from "../mail/html/validationAccount";
+import html_forgotPassword from "../mail/html/forgotPassword";
 
 // Mutations
 const exposedMutations = {
@@ -212,6 +214,19 @@ const Mutation = prismaObjectType({
           //   html,
           //   null // attachments, nullable ?
           // );
+
+          const html = html_validationAccount({
+            firstname,
+            lastname,
+            token,
+          });
+
+          await sendMailNoReplyWithHeaderAndFooter(
+            email,
+            "Validation de mon compte", // to change oc
+            html
+          );
+
           return { token };
         } catch (error) {
           throw new Error(error);
@@ -281,6 +296,16 @@ const Mutation = prismaObjectType({
           });
 
           // send forgot mail here
+          const html = html_forgotPassword({
+            token,
+          });
+
+          await sendMailNoReplyWithHeaderAndFooter(
+            email,
+            "Oubli de mon mot de passe", // to change oc
+            html
+          );
+
           console.log(token);
 
           return { token };
@@ -2232,7 +2257,6 @@ const Mutation = prismaObjectType({
         }
       },
     });
-
 
     // t.field("blockUser", {
     //   type: "User",
