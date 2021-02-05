@@ -93,7 +93,13 @@ const NOTIFY_REJECT_DUO = gql`
 
 const NotificationBox = (props) => {
   const [status, setStatus] = React.useState(props.notification.status);
-  const { notification, theme, navigation, currentUser } = props;
+  const {
+    notification,
+    theme,
+    navigation,
+    currentUser,
+    setHomeDebates,
+  } = props;
 
   const [notifyDebateAction] = useMutation(NOTIFY_DEBATE);
   const [notifyDebateDelete] = useMutation(NOTIFY_DELETE_DEBATE);
@@ -131,1748 +137,1945 @@ const NotificationBox = (props) => {
   switch (notification.type) {
     case "VOTE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[notification.who.length - 1].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri:
+                  notification.who[notification.who.length - 1].profilePicture,
               }}
-            >
-              {`${notification.who[notification.who.length - 1].firstname} ${
-                notification.who[notification.who.length - 1].lastname
-              }${
-                notification.who.length > 1
-                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
-                      notification.who.length - 1 > 1
-                        ? i18n._("otherPeoplePlural")
-                        : i18n._("otherPeopleSingular")
-                    }`
-                  : ""
-              }`}
-            </Text>
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[notification.who.length - 1].firstname} ${
+                  notification.who[notification.who.length - 1].lastname
+                }${
+                  notification.who.length > 1
+                    ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                        notification.who.length - 1 > 1
+                          ? i18n._("otherPeoplePlural")
+                          : i18n._("otherPeopleSingular")
+                      }`
+                    : ""
+                }`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("voteOnYourDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("voteOnYourDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "INVITATION_DUO":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("CreateDuoDebate", {
+              debate: notification.debate,
+              notificationId: notification.id,
+              updateNotification,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("inviteYouDuoDebate")}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
               </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-around",
-              }}
-            >
-              <TouchableOpacity
+              <View
                 style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "ACCEPTED"
-                      ? "#F47658"
-                      : themeSchema[theme].backgroundColor2,
-                  width: 100,
-                  borderRadius: 12,
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
-                onPress={() => {
-                  navigation.push("CreateDuoDebate", {
-                    debate: notification.debate,
-                    notificationId: notification.id,
-                    updateNotification,
-                  });
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
                 }}
               >
                 <Text
                   style={{
+                    fontSize: 11,
                     fontFamily: "Montserrat_500Medium",
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {`${i18n._("accept")}`}
+                  {`${i18n._("inviteYouDuoDebate")}`}
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </View>
+              <View
                 style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "DECLINED"
-                      ? themeSchema[theme].colorText
-                      : themeSchema[theme].colorText3,
-                  width: 100,
-                  borderRadius: 12,
+                  flexDirection: "row",
+                  marginTop: 10,
+                  justifyContent: "space-around",
                 }}
-                onPress={async () => {
-                  // HERE SEND REQUEST TO DELETE DUO DEBATE
-                  setStatus("DECLINED");
-                  updateNotification({
-                    variables: {
-                      notificationId: notification.id,
-                      status: "DECLINED",
-                    },
-                  });
-                  await notifyRejectDuo({
-                    variables: {
-                      userId: notification.who[0].id,
-                      currentUserId: currentUser.id,
-                    },
-                  });
-                  deleteDebateDuo({
-                    variables: { debateId: notification.debate.id },
-                  });
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
               >
-                <Text
+                <TouchableOpacity
                   style={{
-                    color:
-                      status === "DECLINED"
-                        ? themeSchema[theme].colorText3
-                        : themeSchema[theme].colorText,
-                    fontFamily: "Montserrat_500Medium",
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "ACCEPTED"
+                        ? "#F47658"
+                        : themeSchema[theme].backgroundColor2,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                  onPress={() => {
+                    navigation.push("CreateDuoDebate", {
+                      debate: notification.debate,
+                      notificationId: notification.id,
+                      updateNotification,
+                    });
                   }}
                 >
-                  {`${i18n._("decline")}`}
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_500Medium",
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {`${i18n._("accept")}`}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  onPress={async () => {
+                    // HERE SEND REQUEST TO DELETE DUO DEBATE
+                    setStatus("DECLINED");
+                    updateNotification({
+                      variables: {
+                        notificationId: notification.id,
+                        status: "DECLINED",
+                      },
+                    });
+                    await notifyRejectDuo({
+                      variables: {
+                        userId: notification.who[0].id,
+                        currentUserId: currentUser.id,
+                      },
+                    });
+                    deleteDebateDuo({
+                      variables: { debateId: notification.debate.id },
+                    });
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                >
+                  <Text
+                    style={{
+                      color:
+                        status === "DECLINED"
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {`${i18n._("decline")}`}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "ACCEPT_DUO":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("acceptYourInvitation")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("acceptYourInvitation")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "REJECT_DUO":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Profile", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              userId: notification.who[0].email,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("rejectYourInvitation")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
               </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("rejectYourInvitation")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "ACCEPT_CLOSE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("acceptCloseDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("acceptCloseDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "REJECT_CLOSE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("rejectCloseDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("rejectCloseDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "ACCEPT_DELETE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Profile", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              userId: notification.who[0].email,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("acceptDeleteDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
               </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("acceptDeleteDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "REJECT_DELETE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("rejectDeleteDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("rejectDeleteDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "COMMENT":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[notification.who.length - 1].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri:
+                  notification.who[notification.who.length - 1].profilePicture,
               }}
-            >
-              {`${notification.who[notification.who.length - 1].firstname} ${
-                notification.who[notification.who.length - 1].lastname
-              }${
-                notification.who.length > 1
-                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
-                      notification.who.length - 1 > 1
-                        ? i18n._("otherPeoplePlural")
-                        : i18n._("otherPeopleSingular")
-                    }`
-                  : ""
-              }`}
-            </Text>
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[notification.who.length - 1].firstname} ${
+                  notification.who[notification.who.length - 1].lastname
+                }${
+                  notification.who.length > 1
+                    ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                        notification.who.length - 1 > 1
+                          ? i18n._("otherPeoplePlural")
+                          : i18n._("otherPeopleSingular")
+                      }`
+                    : ""
+                }`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${
+                    notification.who.length > 1
+                      ? i18n._("commentYourDebatePlural")
+                      : i18n._("commentYourDebateSingular")
+                  } ${getTimeSpent(notification.updatedAt)}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${
-                  notification.who.length > 1
-                    ? i18n._("commentYourDebatePlural")
-                    : i18n._("commentYourDebateSingular")
-                } ${getTimeSpent(notification.updatedAt)}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "SUBCOMMENT":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateComment", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              comment: notification.comment,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[notification.who.length - 1].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri:
+                  notification.who[notification.who.length - 1].profilePicture,
               }}
-            >
-              {`${notification.who[notification.who.length - 1].firstname} ${
-                notification.who[notification.who.length - 1].lastname
-              }${
-                notification.who.length > 1
-                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
-                      notification.who.length - 1 > 1
-                        ? i18n._("otherPeoplePlural")
-                        : i18n._("otherPeopleSingular")
-                    }`
-                  : ""
-              }`}
-            </Text>
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[notification.who.length - 1].firstname} ${
+                  notification.who[notification.who.length - 1].lastname
+                }${
+                  notification.who.length > 1
+                    ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                        notification.who.length - 1 > 1
+                          ? i18n._("otherPeoplePlural")
+                          : i18n._("otherPeopleSingular")
+                      }`
+                    : ""
+                }`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${
+                    notification.who.length > 1
+                      ? i18n._("answerYourCommentPlural")
+                      : i18n._("answerYourCommentSingular")
+                  } ${getTimeSpent(notification.updatedAt)}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${
-                  notification.who.length > 1
-                    ? i18n._("answerYourCommentPlural")
-                    : i18n._("answerYourCommentSingular")
-                } ${getTimeSpent(notification.updatedAt)}`}
+                {notification.comment.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.comment.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "CLOSE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {` ${i18n._("askToCloseThisDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
               </Text>
-            </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-around",
-              }}
-            >
-              <TouchableOpacity
+              <View
                 style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "ACCEPTED"
-                      ? "#F47658"
-                      : themeSchema[theme].backgroundColor2,
-                  width: 100,
-                  borderRadius: 12,
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
-                onPress={() => {
-                  setStatus("ACCEPTED");
-                  updateNotification({
-                    variables: {
-                      notificationId: notification.id,
-                      status: "ACCEPTED",
-                    },
-                  });
-                  closeDebate({
-                    variables: {
-                      debateId: notification.debate.id,
-                    },
-                  });
+                  flexDirection: "row",
+                  marginTop: 10,
                 }}
               >
                 <Text
                   style={{
+                    fontSize: 11,
                     fontFamily: "Montserrat_500Medium",
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {`${i18n._("accept")}`}
+                  {` ${i18n._("askToCloseThisDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </View>
+              <Text
+                numberOfLines={3}
                 style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "DECLINED"
-                      ? themeSchema[theme].colorText
-                      : themeSchema[theme].colorText3,
-                  width: 100,
-                  borderRadius: 12,
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
-                onPress={() => {
-                  // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
-                  setStatus("DECLINED");
-                  updateNotification({
-                    variables: {
-                      notificationId: notification.id,
-                      status: "DECLINED",
-                    },
-                  });
-                  notifyDebateAction({
-                    variables: {
-                      userId: notification.who[0].id,
-                      currentUserId: currentUser.id,
-                      debateId: notification.debate.id,
-                      type: "REJECT_CLOSE_DEBATE",
-                    },
-                  });
+                  fontSize: 12,
+                  marginTop: 5,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
                 }}
               >
-                <Text
+                {notification.debate.content}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  justifyContent: "space-around",
+                }}
+              >
+                <TouchableOpacity
                   style={{
-                    color:
-                      status === "DECLINED"
-                        ? themeSchema[theme].colorText3
-                        : themeSchema[theme].colorText,
-                    fontFamily: "Montserrat_500Medium",
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "ACCEPTED"
+                        ? "#F47658"
+                        : themeSchema[theme].backgroundColor2,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                  onPress={() => {
+                    setStatus("ACCEPTED");
+                    updateNotification({
+                      variables: {
+                        notificationId: notification.id,
+                        status: "ACCEPTED",
+                      },
+                    });
+                    closeDebate({
+                      variables: {
+                        debateId: notification.debate.id,
+                      },
+                    });
                   }}
                 >
-                  {`${i18n._("decline")}`}
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_500Medium",
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {`${i18n._("accept")}`}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                  onPress={() => {
+                    // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
+                    setStatus("DECLINED");
+                    updateNotification({
+                      variables: {
+                        notificationId: notification.id,
+                        status: "DECLINED",
+                      },
+                    });
+                    notifyDebateAction({
+                      variables: {
+                        userId: notification.who[0].id,
+                        currentUserId: currentUser.id,
+                        debateId: notification.debate.id,
+                        type: "REJECT_CLOSE_DEBATE",
+                      },
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        status === "DECLINED"
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {`${i18n._("decline")}`}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "DELETE_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Debate", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {` ${i18n._("askToDeleteThisDebate")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
               </Text>
-            </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-around",
-              }}
-            >
-              <TouchableOpacity
+              <View
                 style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "ACCEPTED"
-                      ? "#F47658"
-                      : themeSchema[theme].backgroundColor2,
-                  width: 100,
-                  borderRadius: 12,
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
-                onPress={() => {
-                  setStatus("ACCEPTED");
-                  updateNotification({
-                    variables: {
-                      notificationId: notification.id,
-                      status: "ACCEPTED",
-                    },
-                  });
-                  deleteDebate({
-                    variables: {
-                      debateId: notification.debate.id,
-                    },
-                  });
+                  flexDirection: "row",
+                  marginTop: 10,
                 }}
               >
                 <Text
                   style={{
+                    fontSize: 11,
                     fontFamily: "Montserrat_500Medium",
                     color: themeSchema[theme].colorText,
                   }}
                 >
-                  {`${i18n._("accept")}`}
+                  {` ${i18n._("askToDeleteThisDebate")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  height: 36,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor:
-                    status === "DECLINED"
-                      ? themeSchema[theme].colorText
-                      : themeSchema[theme].colorText3,
-                  width: 100,
-                  borderRadius: 12,
-                }}
-                disabled={status === "DECLINED" || status === "ACCEPTED"}
-                onPress={() => {
-                  // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
-                  setStatus("DECLINED");
-                  updateNotification({
-                    variables: {
-                      notificationId: notification.id,
-                      status: "DECLINED",
-                    },
-                  });
-                  notifyDebateAction({
-                    variables: {
-                      userId: notification.who[0].id,
-                      currentUserId: currentUser.id,
-                      debateId: notification.debate.id,
-                      type: "REJECT_DELETE_DEBATE",
-                    },
-                  });
-                }}
-              >
-                <Text
-                  style={{
-                    color:
-                      status === "DECLINED"
-                        ? themeSchema[theme].colorText3
-                        : themeSchema[theme].colorText,
-                    fontFamily: "Montserrat_500Medium",
-                  }}
-                >
-                  {`${i18n._("decline")}`}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      );
-    case "LIKE":
-      return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
-          }}
-        >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[notification.who.length - 1].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
-          <View
-            style={{
-              marginLeft: 20,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[notification.who.length - 1].firstname} ${
-                notification.who[notification.who.length - 1].lastname
-              }${
-                notification.who.length > 1
-                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
-                      notification.who.length - 1 > 1
-                        ? i18n._("otherPeoplePlural")
-                        : i18n._("otherPeopleSingular")
-                    }`
-                  : ""
-              }`}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 10,
-              }}
-            >
+              </View>
               <Text
+                numberOfLines={3}
                 style={{
-                  fontSize: 11,
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${
-                  notification.who.length > 1
-                    ? i18n._("likedCommentPlural")
-                    : i18n._("likedCommentSingular")
-                } ${getTimeSpent(notification.updatedAt)}`}
+                {notification.debate.content}
               </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  justifyContent: "space-around",
+                }}
+              >
+                <TouchableOpacity
+                  style={{
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "ACCEPTED"
+                        ? "#F47658"
+                        : themeSchema[theme].backgroundColor2,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                  onPress={() => {
+                    setStatus("ACCEPTED");
+                    updateNotification({
+                      variables: {
+                        notificationId: notification.id,
+                        status: "ACCEPTED",
+                      },
+                    });
+                    deleteDebate({
+                      variables: {
+                        debateId: notification.debate.id,
+                      },
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_500Medium",
+                      color: themeSchema[theme].colorText,
+                    }}
+                  >
+                    {`${i18n._("accept")}`}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    height: 36,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor:
+                      status === "DECLINED"
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                    width: 100,
+                    borderRadius: 12,
+                  }}
+                  disabled={status === "DECLINED" || status === "ACCEPTED"}
+                  onPress={() => {
+                    // HERE JUST SEND REQUEST TO UPDATE NOTIFICATION STATUS
+                    setStatus("DECLINED");
+                    updateNotification({
+                      variables: {
+                        notificationId: notification.id,
+                        status: "DECLINED",
+                      },
+                    });
+                    notifyDebateAction({
+                      variables: {
+                        userId: notification.who[0].id,
+                        currentUserId: currentUser.id,
+                        debateId: notification.debate.id,
+                        type: "REJECT_DELETE_DEBATE",
+                      },
+                    });
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        status === "DECLINED"
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {`${i18n._("decline")}`}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <Text
-              numberOfLines={3}
+          </View>
+        </TouchableOpacity>
+      );
+    case "LIKE":
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateComment", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              comment: notification.comment,
+            });
+          }}
+        >
+          <View
+            style={{
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
+            }}
+          >
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri:
+                  notification.who[notification.who.length - 1].profilePicture,
+              }}
+              style={styles.userPicture}
+            />
+            <View
               style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
-              {notification.comment.content}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[notification.who.length - 1].firstname} ${
+                  notification.who[notification.who.length - 1].lastname
+                }${
+                  notification.who.length > 1
+                    ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                        notification.who.length - 1 > 1
+                          ? i18n._("otherPeoplePlural")
+                          : i18n._("otherPeopleSingular")
+                      }`
+                    : ""
+                }`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${
+                    notification.who.length > 1
+                      ? i18n._("likedCommentPlural")
+                      : i18n._("likedCommentSingular")
+                  } ${getTimeSpent(notification.updatedAt)}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
+                  fontFamily: "Montserrat_500Medium",
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {notification.comment.content}
+              </Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
 
     case "DISLIKE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateComment", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              comment: notification.comment,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[notification.who.length - 1].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri:
+                  notification.who[notification.who.length - 1].profilePicture,
               }}
-            >
-              {`${notification.who[notification.who.length - 1].firstname} ${
-                notification.who[notification.who.length - 1].lastname
-              }${
-                notification.who.length > 1
-                  ? ` ${i18n._("and")} ${notification.who.length - 1} ${
-                      notification.who.length - 1 > 1
-                        ? i18n._("otherPeoplePlural")
-                        : i18n._("otherPeopleSingular")
-                    }`
-                  : ""
-              }`}
-            </Text>
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[notification.who.length - 1].firstname} ${
+                  notification.who[notification.who.length - 1].lastname
+                }${
+                  notification.who.length > 1
+                    ? ` ${i18n._("and")} ${notification.who.length - 1} ${
+                        notification.who.length - 1 > 1
+                          ? i18n._("otherPeoplePlural")
+                          : i18n._("otherPeopleSingular")
+                      }`
+                    : ""
+                }`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${
+                    notification.who.length > 1
+                      ? i18n._("didntLikedCommentPlural")
+                      : i18n._("didntLikedCommentSingular")
+                  } ${getTimeSpent(notification.updatedAt)}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${
-                  notification.who.length > 1
-                    ? i18n._("didntLikedCommentPlural")
-                    : i18n._("didntLikedCommentSingular")
-                } ${getTimeSpent(notification.updatedAt)}`}
+                {notification.comment.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.comment.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "FOLLOW":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("Profile", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              userId: notification.who[0].email,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: "Montserrat_500Medium",
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("followingYou")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
               </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("followingYou")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "CROWNED":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("CreateDebate");
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("sendYouCrown")} ${getTimeSpent(
+                    notification.createdAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("sendYouCrown")} ${getTimeSpent(
-                  notification.createdAt
-                )}`}
+                {i18n._("crownDescription")}
               </Text>
             </View>
-            <Text
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {i18n._("crownDescription")}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "TOP_COMMENT":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateComment", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              comment: notification.comment,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{
-              uri: notification.who[0].profilePicture,
-            }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{
+                uri: notification.who[0].profilePicture,
               }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-              {notification.who[0].certified && <CertifiedIcon />}
-            </Text>
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+                {notification.who[0].certified && <CertifiedIcon />}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("topCommentNotification")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("topCommentNotification")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.comment.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.comment.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     case "WON_DEBATE":
       return (
-        <View
-          style={{
-            width: "90%",
-            borderRadius: 10,
-            backgroundColor: themeSchema[theme].backgroundColor1,
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: 5,
-            marginBottom: 10, // android
-            padding: 15,
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("IsolateComment", {
+              setHomeDebates,
+              currentUser,
+              navigation,
+              debate: notification.debate,
+            });
           }}
         >
-          {notification.new && (
-            <View
-              style={{
-                width: 9,
-                height: 9,
-                backgroundColor: "#F47658",
-                position: "absolute",
-                //   alignSelf: "flex-end",
-                marginTop: 9,
-                borderRadius: 50,
-                right: 0,
-                marginRight: 10,
-              }}
-            />
-          )}
-          <Image
-            source={{ uri: notification.who[0].profilePicture }}
-            style={styles.userPicture}
-          />
           <View
             style={{
-              marginLeft: 20,
+              width: "90%",
+              borderRadius: 10,
+              backgroundColor: themeSchema[theme].backgroundColor1,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 5,
+              marginBottom: 10, // android
+              padding: 15,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "Montserrat_600SemiBold",
-                marginTop: -5,
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
-            </Text>
+            {notification.new && (
+              <View
+                style={{
+                  width: 9,
+                  height: 9,
+                  backgroundColor: "#F47658",
+                  position: "absolute",
+                  //   alignSelf: "flex-end",
+                  marginTop: 9,
+                  borderRadius: 50,
+                  right: 0,
+                  marginRight: 10,
+                }}
+              />
+            )}
+            <Image
+              source={{ uri: notification.who[0].profilePicture }}
+              style={styles.userPicture}
+            />
             <View
               style={{
-                flexDirection: "row",
-                marginTop: 10,
-                color: themeSchema[theme].colorText,
+                marginLeft: 20,
               }}
             >
               <Text
                 style={{
-                  fontSize: 11,
+                  fontSize: 14,
+                  fontFamily: "Montserrat_600SemiBold",
+                  marginTop: -5,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {`${notification.who[0].firstname} ${notification.who[0].lastname}`}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 10,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: "Montserrat_500Medium",
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${i18n._("wonDebateNotification")} ${getTimeSpent(
+                    notification.updatedAt
+                  )}`}
+                </Text>
+              </View>
+              <Text
+                numberOfLines={3}
+                style={{
+                  fontSize: 12,
+                  marginTop: 5,
                   fontFamily: "Montserrat_500Medium",
                   color: themeSchema[theme].colorText,
                 }}
               >
-                {`${i18n._("wonDebateNotification")} ${getTimeSpent(
-                  notification.updatedAt
-                )}`}
+                {notification.debate.content}
               </Text>
             </View>
-            <Text
-              numberOfLines={3}
-              style={{
-                fontSize: 12,
-                marginTop: 5,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-            >
-              {notification.debate.content}
-            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     default:
       return null;

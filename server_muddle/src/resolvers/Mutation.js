@@ -124,7 +124,7 @@ const fragmentDebateOwner = `
 const fragmentCommentFrom = `
   fragment GetCommentFrom on Comment {
     id
-    comment
+    content
     from {
       id
     }

@@ -255,8 +255,9 @@ const CreateUser = (props) => {
                 isEmpty(user.lastname) ||
                 isEmpty(user.email) ||
                 isEmpty(user.password) ||
-                isEmpty(user.birthdate) ||
-                moment(user.birthdate).isValid() === false
+                isEmpty(user.birthdate) 
+                // ||
+                // moment(user.birthdate).isValid() === false
               }
               onClick={async () => {
                 await createUser();

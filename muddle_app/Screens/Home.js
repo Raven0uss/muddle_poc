@@ -519,6 +519,7 @@ const Home = (props) => {
         navigation={navigation}
         route={route}
         scrollViewRef={scrollViewRef}
+        setHomeDebates={setDebates}
       />
       <CreateDebateButton navigation={navigation} />
     </View>

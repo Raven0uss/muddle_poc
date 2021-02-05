@@ -434,6 +434,583 @@ const Debate = (props) => {
   // console.log(voted);
   // console.log(setDebates);
   // console.log(debateIndex);
+
+  const debateHeaderComponent = React.useMemo(() => {
+    if (debate.type === "STANDARD" || debate.type === "MUDDLE")
+      return (
+        <View
+          style={{
+            ...styles.boxDebate,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <View style={styles.headDebate}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push("Profile", {
+                  userId: debate.owner.email,
+                });
+              }}
+            >
+              <Image
+                source={{ uri: debate.owner.profilePicture }}
+                style={styles.userPicture}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push("Profile", {
+                  userId: debate.owner.email,
+                });
+              }}
+            >
+              <Text
+                style={{
+                  ...styles.pseudo,
+                  color: themeSchema[theme].colorText,
+                }}
+              >
+                {debate.type === "MUDDLE"
+                  ? debate.owner.firstname
+                  : `${debate.owner.firstname} ${debate.owner.lastname}`}
+                {debate.owner.certified && <CertifiedIcon />}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* <ScrollView
+            style={{
+              // maxHeight: Dimensions.get("screen").height / 6,
+            }}
+          > */}
+          <View style={{ flexDirection: "row" }}>
+            {debate.crowned && (
+              <View
+                style={{
+                  width: 15,
+                  height: 15,
+                  backgroundColor: "#F47658",
+                  // marginRight: 10,
+                  position: "absolute",
+                  // marginTop: -1,
+                  // float: "left",
+                  borderRadius: 50,
+                  borderColor: themeSchema[theme].backgroundColor2,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={{ uri: badges.crown }}
+                  style={{
+                    width: 10,
+                    height: 8,
+                  }}
+                />
+              </View>
+            )}
+            <Text
+              style={{
+                ...styles.debateText,
+                color: themeSchema[theme].colorText,
+              }}
+            >
+              {debate.crowned && (
+                <View
+                  style={{
+                    width: 20,
+                    height: 1,
+                  }}
+                />
+              )}
+              {debate.content}
+            </Text>
+          </View>
+
+          {debate.image && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push("IsolateImage", {
+                  image: debate.image,
+                });
+              }}
+            >
+              <Image
+                source={{
+                  uri: debate.image,
+                }}
+                style={{
+                  width: Dimensions.get("screen").width / 1.15,
+                  height: 280,
+                  borderRadius: 5,
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+                resizeMode="cover"
+                resizeMethod="scale"
+              />
+            </TouchableOpacity>
+          )}
+          {/* 
+          // Use that to integrate image + add touchable oppacity for isolate image view
+          <Image
+            source={{
+              uri:
+                "https://images.lanouvellerepublique.fr/image/upload/5b95be27be7744fb5c8b467b.jpg",
+            }}
+            style={{
+              width: Dimensions.get("screen").width / 1.2,
+              height: 150,
+              marginRight: "auto",
+            }}
+            resizeMode="contain"
+          /> */}
+          {/* </ScrollView> */}
+          <View
+            style={{
+              height: 1,
+              backgroundColor: themeSchema[theme].hrLineColor,
+              width: "100%",
+              alignSelf: "center",
+            }}
+          />
+          <View style={styles.debateFooter}>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${commentsLength} ${i18n._("comment")}${
+              commentsLength > 1 ? "s" : ""
+            }`}</Text>
+          </View>
+          <View style={styles.debateActions}>
+            <TouchableOpacity
+              onPress={() => {
+                setPour((v) => v + 1);
+                setVoted("pour");
+                sendPositiveVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "positives",
+                  currentUser,
+                  debate,
+                });
+              }}
+              style={
+                voted
+                  ? {
+                      ...styles.votePourButton,
+                      backgroundColor:
+                        voted === "pour"
+                          ? "#F47658"
+                          : themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
+                    }
+                  : {
+                      ...styles.votePourButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
+                    }
+              }
+              disabled={voted || debate.closed}
+            >
+              <Text
+                // numberOfLines={1}
+                style={{
+                  color: themeSchema[theme].colorText,
+                  fontSize: 12,
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  textAlign: "center",
+                  fontFamily: voted
+                    ? "Montserrat_600SemiBold"
+                    : "Montserrat_500Medium",
+                }}
+              >
+                {voted || debate.closed
+                  ? displayPercent({
+                      votes: pour,
+                      totalVotes: votes,
+                      answer: debate.answerOne,
+                    })
+                  : debate.answerOne}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {}}
+              style={
+                voted
+                  ? {
+                      ...styles.voteContreButton,
+                      backgroundColor:
+                        voted === "contre"
+                          ? themeSchema[theme].colorText
+                          : themeSchema[theme].colorText3,
+                      borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
+                    }
+                  : {
+                      ...styles.voteContreButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                      borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
+                    }
+              }
+              onPress={() => {
+                setContre((v) => v + 1);
+                setVoted("contre");
+                sendNegativeVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "negatives",
+                  currentUser,
+                  debate,
+                });
+              }}
+              disabled={voted || debate.closed}
+            >
+              <Text
+                // numberOfLines={1}
+                style={
+                  voted
+                    ? {
+                        color:
+                          voted === "contre"
+                            ? themeSchema[theme].colorText3
+                            : themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_600SemiBold",
+                        textAlign: "center",
+                      }
+                    : {
+                        color: themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_500Medium",
+                        textAlign: "center",
+                      }
+                }
+              >
+                {voted || debate.closed
+                  ? displayPercent({
+                      votes: contre,
+                      totalVotes: votes,
+                      answer: debate.answerTwo,
+                    })
+                  : debate.answerTwo}
+              </Text>
+            </TouchableOpacity>
+            {Platform.OS === "ios" && (
+              <TouchableOpacity
+                onPress={() => {}}
+                style={{
+                  ...styles.commentButton,
+                  backgroundColor: themeSchema[theme].backgroundColor2,
+                  borderColor: themeSchema[theme].colorText,
+                  alignSelf: "center",
+                }}
+              >
+                <CustomIcon
+                  name="more-horiz"
+                  size={28}
+                  color={themeSchema[theme].colorText}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+      );
+    if (debate.type === "DUO")
+      return (
+        <View
+          style={{
+            ...styles.boxDebate,
+            backgroundColor: themeSchema[theme].backgroundColor2,
+          }}
+        >
+          <View style={styles.headDebateDuo}>
+            <View style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Profile", {
+                    userId: debate.ownerBlue.email,
+                  });
+                }}
+              >
+                <Image
+                  source={{ uri: debate.ownerBlue.profilePicture }}
+                  style={styles.userPictureBlue}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Profile", {
+                    userId: debate.ownerBlue.email,
+                  });
+                }}
+              >
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
+                  {debate.ownerBlue.certified && <CertifiedIcon />}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Profile", {
+                    userId: debate.ownerRed.email,
+                  });
+                }}
+              >
+                <Image
+                  source={{ uri: debate.ownerRed.profilePicture }}
+                  style={styles.userPictureRed}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Profile", {
+                    userId: debate.ownerRed.email,
+                  });
+                }}
+              >
+                <Text
+                  style={{
+                    ...styles.pseudoDuo,
+                    color: themeSchema[theme].colorText,
+                  }}
+                >
+                  {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
+                  {debate.ownerRed.certified && <CertifiedIcon />}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <Text
+            // numberOfLines={8}
+            style={{
+              ...styles.debateTextDuo,
+              color: themeSchema[theme].colorText,
+            }}
+          >
+            {debate.content}
+          </Text>
+          {debate.image && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push("IsolateImage", {
+                  image: debate.image,
+                });
+              }}
+            >
+              <Image
+                source={{
+                  uri: debate.image,
+                }}
+                style={{
+                  width: Dimensions.get("screen").width / 1.15,
+                  height: 280,
+                  borderRadius: 5,
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
+          )}
+
+          <View style={styles.debateActionsDuo}>
+            <TouchableOpacity
+              onPress={() => {
+                setPour((v) => v + 1);
+                setVoted("pour");
+                sendBlueVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "blueVotes",
+                  currentUser,
+                  debate,
+                });
+              }}
+              style={
+                voted
+                  ? {
+                      ...styles.votePourButton,
+                      backgroundColor:
+                        voted === "pour"
+                          ? "#F47658"
+                          : themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
+                    }
+                  : {
+                      ...styles.votePourButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                      height: manageHeightButton(debate),
+                    }
+              }
+              disabled={voted || debate.closed}
+            >
+              <Text
+                // numberOfLines={1}
+                style={{
+                  color: themeSchema[theme].colorText,
+                  fontSize: 12,
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  textAlign: "center",
+                  fontFamily:
+                    voted === "pour"
+                      ? "Montserrat_600SemiBold"
+                      : "Montserrat_500Medium",
+                }}
+              >
+                {voted || debate.closed
+                  ? displayPercent({
+                      votes: pour,
+                      totalVotes: votes,
+                      answer: debate.answerOne,
+                    })
+                  : debate.answerOne}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push("Debate", {
+                  debate,
+                });
+              }}
+              style={{
+                ...styles.commentDuoButton,
+                backgroundColor: themeSchema[theme].backgroundColor2,
+                borderColor: themeSchema[theme].colorText,
+                alignSelf: "center",
+              }}
+            >
+              <CustomIcon
+                name="more-horiz"
+                size={28}
+                color={themeSchema[theme].colorText}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setContre((v) => v + 1);
+                setVoted("contre");
+                sendRedVote();
+                voteDispatch({
+                  setDebates,
+                  setHomeDebates,
+                  debateIndex,
+                  voteType: "redVotes",
+                  currentUser,
+                  debate,
+                });
+              }}
+              style={
+                voted === "contre"
+                  ? {
+                      ...styles.voteRedButton,
+                      backgroundColor: contre
+                        ? themeSchema[theme].colorText
+                        : themeSchema[theme].colorText3,
+                      borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
+                    }
+                  : {
+                      ...styles.voteRedButton,
+                      backgroundColor: themeSchema[theme].backgroundColor2,
+                      borderColor: themeSchema[theme].colorText,
+                      height: manageHeightButton(debate),
+                    }
+              }
+              disabled={voted || debate.closed}
+            >
+              <Text
+                // numberOfLines={1}
+                style={
+                  voted === "contre"
+                    ? {
+                        color: contre
+                          ? themeSchema[theme].colorText3
+                          : themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_600SemiBold",
+                        textAlign: "center",
+                      }
+                    : {
+                        color: themeSchema[theme].colorText,
+                        fontSize: 12,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        fontFamily: "Montserrat_500Medium",
+                        textAlign: "center",
+                      }
+                }
+              >
+                {voted || debate.closed
+                  ? displayPercent({
+                      votes: contre,
+                      totalVotes: votes,
+                      answer: debate.answerTwo,
+                    })
+                  : debate.answerTwo}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              height: 1,
+              backgroundColor: themeSchema[theme].hrLineColor,
+              width: "100%",
+              alignSelf: "center",
+              marginTop: 15,
+            }}
+          />
+          <View style={styles.debateFooter}>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
+            <Text
+              style={{
+                ...styles.footerText,
+                color: themeSchema[theme].colorText,
+              }}
+            >{`${commentsLength} ${i18n._("comment")}${
+              commentsLength > 1 ? "s" : ""
+            }`}</Text>
+          </View>
+        </View>
+      );
+  });
+
   return (
     <View
       style={{
@@ -599,584 +1176,7 @@ const Debate = (props) => {
             },
           });
         }}
-        ListHeaderComponent={() => {
-          if (debate.type === "STANDARD" || debate.type === "MUDDLE")
-            return (
-              <View
-                style={{
-                  ...styles.boxDebate,
-                  backgroundColor: themeSchema[theme].backgroundColor2,
-                }}
-              >
-                <View style={styles.headDebate}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("Profile", {
-                        userId: debate.owner.email,
-                      });
-                    }}
-                  >
-                    <Image
-                      source={{ uri: debate.owner.profilePicture }}
-                      style={styles.userPicture}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("Profile", {
-                        userId: debate.owner.email,
-                      });
-                    }}
-                  >
-                    <Text
-                      style={{
-                        ...styles.pseudo,
-                        color: themeSchema[theme].colorText,
-                      }}
-                    >
-                      {debate.type === "MUDDLE"
-                        ? debate.owner.firstname
-                        : `${debate.owner.firstname} ${debate.owner.lastname}`}
-                      {debate.owner.certified && <CertifiedIcon />}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                {/* <ScrollView
-                  style={{
-                    // maxHeight: Dimensions.get("screen").height / 6,
-                  }}
-                > */}
-                <View style={{ flexDirection: "row" }}>
-                  {debate.crowned && (
-                    <View
-                      style={{
-                        width: 15,
-                        height: 15,
-                        backgroundColor: "#F47658",
-                        // marginRight: 10,
-                        position: "absolute",
-                        // marginTop: -1,
-                        // float: "left",
-                        borderRadius: 50,
-                        borderColor: themeSchema[theme].backgroundColor2,
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Image
-                        source={{ uri: badges.crown }}
-                        style={{
-                          width: 10,
-                          height: 8,
-                        }}
-                      />
-                    </View>
-                  )}
-                  <Text
-                    style={{
-                      ...styles.debateText,
-                      color: themeSchema[theme].colorText,
-                    }}
-                  >
-                    {debate.crowned && (
-                      <View
-                        style={{
-                          width: 20,
-                          height: 1,
-                        }}
-                      />
-                    )}
-                    {debate.content}
-                  </Text>
-                </View>
-
-                {debate.image && (
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("IsolateImage", {
-                        image: debate.image,
-                      });
-                    }}
-                  >
-                    <NoFlickerImage
-                      source={{
-                        uri: debate.image,
-                      }}
-                      style={{
-                        width: Dimensions.get("screen").width / 1.15,
-                        height: 280,
-                        borderRadius: 5,
-                        marginTop: 5,
-                        marginBottom: 5,
-                      }}
-                      resizeMode="cover"
-                    />
-                  </TouchableOpacity>
-                )}
-                {/* 
-                // Use that to integrate image + add touchable oppacity for isolate image view
-                <Image
-                  source={{
-                    uri:
-                      "https://images.lanouvellerepublique.fr/image/upload/5b95be27be7744fb5c8b467b.jpg",
-                  }}
-                  style={{
-                    width: Dimensions.get("screen").width / 1.2,
-                    height: 150,
-                    marginRight: "auto",
-                  }}
-                  resizeMode="contain"
-                /> */}
-                {/* </ScrollView> */}
-                <View
-                  style={{
-                    height: 1,
-                    backgroundColor: themeSchema[theme].hrLineColor,
-                    width: "100%",
-                    alignSelf: "center",
-                  }}
-                />
-                <View style={styles.debateFooter}>
-                  <Text
-                    style={{
-                      ...styles.footerText,
-                      color: themeSchema[theme].colorText,
-                    }}
-                  >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
-                  <Text
-                    style={{
-                      ...styles.footerText,
-                      color: themeSchema[theme].colorText,
-                    }}
-                  >{`${commentsLength} ${i18n._("comment")}${
-                    commentsLength > 1 ? "s" : ""
-                  }`}</Text>
-                </View>
-                <View style={styles.debateActions}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setPour((v) => v + 1);
-                      setVoted("pour");
-                      sendPositiveVote();
-                      voteDispatch({
-                        setDebates,
-                        setHomeDebates,
-                        debateIndex,
-                        voteType: "positives",
-                        currentUser,
-                        debate,
-                      });
-                    }}
-                    style={
-                      voted
-                        ? {
-                            ...styles.votePourButton,
-                            backgroundColor:
-                              voted === "pour"
-                                ? "#F47658"
-                                : themeSchema[theme].backgroundColor2,
-                            height: manageHeightButton(debate),
-                          }
-                        : {
-                            ...styles.votePourButton,
-                            backgroundColor:
-                              themeSchema[theme].backgroundColor2,
-                            height: manageHeightButton(debate),
-                          }
-                    }
-                    disabled={voted || debate.closed}
-                  >
-                    <Text
-                      // numberOfLines={1}
-                      style={{
-                        color: themeSchema[theme].colorText,
-                        fontSize: 12,
-                        paddingLeft: 12,
-                        paddingRight: 12,
-                        textAlign: "center",
-                        fontFamily: voted
-                          ? "Montserrat_600SemiBold"
-                          : "Montserrat_500Medium",
-                      }}
-                    >
-                      {voted || debate.closed
-                        ? displayPercent({
-                            votes: pour,
-                            totalVotes: votes,
-                            answer: debate.answerOne,
-                          })
-                        : debate.answerOne}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {}}
-                    style={
-                      voted
-                        ? {
-                            ...styles.voteContreButton,
-                            backgroundColor:
-                              voted === "contre"
-                                ? themeSchema[theme].colorText
-                                : themeSchema[theme].colorText3,
-                            borderColor: themeSchema[theme].colorText,
-                            height: manageHeightButton(debate),
-                          }
-                        : {
-                            ...styles.voteContreButton,
-                            backgroundColor:
-                              themeSchema[theme].backgroundColor2,
-                            borderColor: themeSchema[theme].colorText,
-                            height: manageHeightButton(debate),
-                          }
-                    }
-                    onPress={() => {
-                      setContre((v) => v + 1);
-                      setVoted("contre");
-                      sendNegativeVote();
-                      voteDispatch({
-                        setDebates,
-                        setHomeDebates,
-                        debateIndex,
-                        voteType: "negatives",
-                        currentUser,
-                        debate,
-                      });
-                    }}
-                    disabled={voted || debate.closed}
-                  >
-                    <Text
-                      // numberOfLines={1}
-                      style={
-                        voted
-                          ? {
-                              color:
-                                voted === "contre"
-                                  ? themeSchema[theme].colorText3
-                                  : themeSchema[theme].colorText,
-                              fontSize: 12,
-                              paddingLeft: 6,
-                              paddingRight: 6,
-                              fontFamily: "Montserrat_600SemiBold",
-                              textAlign: "center",
-                            }
-                          : {
-                              color: themeSchema[theme].colorText,
-                              fontSize: 12,
-                              paddingLeft: 6,
-                              paddingRight: 6,
-                              fontFamily: "Montserrat_500Medium",
-                              textAlign: "center",
-                            }
-                      }
-                    >
-                      {voted || debate.closed
-                        ? displayPercent({
-                            votes: contre,
-                            totalVotes: votes,
-                            answer: debate.answerTwo,
-                          })
-                        : debate.answerTwo}
-                    </Text>
-                  </TouchableOpacity>
-                  {Platform.OS === "ios" && (
-                    <TouchableOpacity
-                      onPress={() => {}}
-                      style={{
-                        ...styles.commentButton,
-                        backgroundColor: themeSchema[theme].backgroundColor2,
-                        borderColor: themeSchema[theme].colorText,
-                        alignSelf: "center",
-                      }}
-                    >
-                      <CustomIcon
-                        name="more-horiz"
-                        size={28}
-                        color={themeSchema[theme].colorText}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </View>
-              </View>
-            );
-          if (debate.type === "DUO")
-            return (
-              <View
-                style={{
-                  ...styles.boxDebate,
-                  backgroundColor: themeSchema[theme].backgroundColor2,
-                }}
-              >
-                <View style={styles.headDebateDuo}>
-                  <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.push("Profile", {
-                          userId: debate.ownerBlue.email,
-                        });
-                      }}
-                    >
-                      <Image
-                        source={{ uri: debate.ownerBlue.profilePicture }}
-                        style={styles.userPictureBlue}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.push("Profile", {
-                          userId: debate.ownerBlue.email,
-                        });
-                      }}
-                    >
-                      <Text
-                        style={{
-                          ...styles.pseudoDuo,
-                          color: themeSchema[theme].colorText,
-                        }}
-                      >
-                        {`${debate.ownerBlue.firstname} ${debate.ownerBlue.lastname}`}
-                        {debate.ownerBlue.certified && <CertifiedIcon />}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <View style={{ alignItems: "center" }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.push("Profile", {
-                          userId: debate.ownerRed.email,
-                        });
-                      }}
-                    >
-                      <Image
-                        source={{ uri: debate.ownerRed.profilePicture }}
-                        style={styles.userPictureRed}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.push("Profile", {
-                          userId: debate.ownerRed.email,
-                        });
-                      }}
-                    >
-                      <Text
-                        style={{
-                          ...styles.pseudoDuo,
-                          color: themeSchema[theme].colorText,
-                        }}
-                      >
-                        {`${debate.ownerRed.firstname} ${debate.ownerRed.lastname}`}
-                        {debate.ownerRed.certified && <CertifiedIcon />}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                <Text
-                  // numberOfLines={8}
-                  style={{
-                    ...styles.debateTextDuo,
-                    color: themeSchema[theme].colorText,
-                  }}
-                >
-                  {debate.content}
-                </Text>
-                {debate.image && (
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("IsolateImage", {
-                        image: debate.image,
-                      });
-                    }}
-                  >
-                    <Image
-                      source={{
-                        uri: debate.image,
-                      }}
-                      style={{
-                        width: Dimensions.get("screen").width / 1.15,
-                        height: 280,
-                        borderRadius: 5,
-                        marginTop: 5,
-                        marginBottom: 5,
-                      }}
-                      resizeMode="cover"
-                    />
-                  </TouchableOpacity>
-                )}
-
-                <View style={styles.debateActionsDuo}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setPour((v) => v + 1);
-                      setVoted("pour");
-                      sendBlueVote();
-                      voteDispatch({
-                        setDebates,
-                        setHomeDebates,
-                        debateIndex,
-                        voteType: "blueVotes",
-                        currentUser,
-                        debate,
-                      });
-                    }}
-                    style={
-                      voted
-                        ? {
-                            ...styles.votePourButton,
-                            backgroundColor:
-                              voted === "pour"
-                                ? "#F47658"
-                                : themeSchema[theme].backgroundColor2,
-                            height: manageHeightButton(debate),
-                          }
-                        : {
-                            ...styles.votePourButton,
-                            backgroundColor:
-                              themeSchema[theme].backgroundColor2,
-                            height: manageHeightButton(debate),
-                          }
-                    }
-                    disabled={voted || debate.closed}
-                  >
-                    <Text
-                      // numberOfLines={1}
-                      style={{
-                        color: themeSchema[theme].colorText,
-                        fontSize: 12,
-                        paddingLeft: 12,
-                        paddingRight: 12,
-                        textAlign: "center",
-                        fontFamily:
-                          voted === "pour"
-                            ? "Montserrat_600SemiBold"
-                            : "Montserrat_500Medium",
-                      }}
-                    >
-                      {voted || debate.closed
-                        ? displayPercent({
-                            votes: pour,
-                            totalVotes: votes,
-                            answer: debate.answerOne,
-                          })
-                        : debate.answerOne}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.push("Debate", {
-                        debate,
-                      });
-                    }}
-                    style={{
-                      ...styles.commentDuoButton,
-                      backgroundColor: themeSchema[theme].backgroundColor2,
-                      borderColor: themeSchema[theme].colorText,
-                      alignSelf: "center",
-                    }}
-                  >
-                    <CustomIcon
-                      name="more-horiz"
-                      size={28}
-                      color={themeSchema[theme].colorText}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setContre((v) => v + 1);
-                      setVoted("contre");
-                      sendRedVote();
-                      voteDispatch({
-                        setDebates,
-                        setHomeDebates,
-                        debateIndex,
-                        voteType: "redVotes",
-                        currentUser,
-                        debate,
-                      });
-                    }}
-                    style={
-                      voted === "contre"
-                        ? {
-                            ...styles.voteRedButton,
-                            backgroundColor: contre
-                              ? themeSchema[theme].colorText
-                              : themeSchema[theme].colorText3,
-                            borderColor: themeSchema[theme].colorText,
-                            height: manageHeightButton(debate),
-                          }
-                        : {
-                            ...styles.voteRedButton,
-                            backgroundColor:
-                              themeSchema[theme].backgroundColor2,
-                            borderColor: themeSchema[theme].colorText,
-                            height: manageHeightButton(debate),
-                          }
-                    }
-                    disabled={voted || debate.closed}
-                  >
-                    <Text
-                      // numberOfLines={1}
-                      style={
-                        voted === "contre"
-                          ? {
-                              color: contre
-                                ? themeSchema[theme].colorText3
-                                : themeSchema[theme].colorText,
-                              fontSize: 12,
-                              paddingLeft: 6,
-                              paddingRight: 6,
-                              fontFamily: "Montserrat_600SemiBold",
-                              textAlign: "center",
-                            }
-                          : {
-                              color: themeSchema[theme].colorText,
-                              fontSize: 12,
-                              paddingLeft: 6,
-                              paddingRight: 6,
-                              fontFamily: "Montserrat_500Medium",
-                              textAlign: "center",
-                            }
-                      }
-                    >
-                      {voted || debate.closed
-                        ? displayPercent({
-                            votes: contre,
-                            totalVotes: votes,
-                            answer: debate.answerTwo,
-                          })
-                        : debate.answerTwo}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View
-                  style={{
-                    height: 1,
-                    backgroundColor: themeSchema[theme].hrLineColor,
-                    width: "100%",
-                    alignSelf: "center",
-                    marginTop: 15,
-                  }}
-                />
-                <View style={styles.debateFooter}>
-                  <Text
-                    style={{
-                      ...styles.footerText,
-                      color: themeSchema[theme].colorText,
-                    }}
-                  >{`${votes} vote${votes > 1 ? "s" : ""}`}</Text>
-                  <Text
-                    style={{
-                      ...styles.footerText,
-                      color: themeSchema[theme].colorText,
-                    }}
-                  >{`${commentsLength} ${i18n._("comment")}${
-                    commentsLength > 1 ? "s" : ""
-                  }`}</Text>
-                </View>
-              </View>
-            );
-        }}
+        ListHeaderComponent={debateHeaderComponent}
         ListFooterComponent={() => {
           if (noMoreData) return <View style={{ height: 50, width: 10 }} />;
           // return null;

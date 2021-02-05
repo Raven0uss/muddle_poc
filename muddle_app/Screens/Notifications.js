@@ -15,7 +15,7 @@ import { muddle } from "../CustomProperties/IconsBase64";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import { defaultProfile } from "../CustomProperties/IconsBase64";
 import NotificationBox from "../Components/NotificationBox";
-import { isEmpty } from "lodash";
+import { get, isEmpty } from "lodash";
 import ThemeContext from "../CustomProperties/ThemeContext";
 import themeSchema from "../CustomProperties/Theme";
 import UserContext from "../CustomProperties/UserContext";
@@ -46,31 +46,95 @@ const GET_NOTIFICATIONS = gql`
       new
       debate {
         id
-        ownerRed {
+        content
+        createdAt
+        answerOne
+        answerTwo
+        image
+        type
+        crowned
+        owner {
           id
           certified
           firstname
           lastname
           email
           profilePicture
+          private
+          role
+          followers {
+            id
+          }
         }
         ownerBlue {
           id
           firstname
-          lastname
           certified
+          lastname
+          email
+          profilePicture
+          private
+          role
+          followers {
+            id
+          }
+        }
+        ownerRed {
+          id
+          firstname
+          certified
+          lastname
+          email
+          profilePicture
+          private
+          role
+          followers {
+            id
+          }
+        }
+        positives {
+          id
+        }
+        negatives {
+          id
+        }
+        redVotes {
+          id
+        }
+        blueVotes {
+          id
+        }
+        comments {
+          id
+        }
+        closed
+      }
+      comment {
+        id
+        debate {
+          id
+          closed
+        }
+        nested
+        from {
+          id
+          certified
+          firstname
+          lastname
           email
           profilePicture
         }
         content
-        answerOne
-        answerTwo
-        image
-        timelimitString
-      }
-      comment {
-        id
-        content
+        likes {
+          id
+        }
+        dislikes {
+          id
+        }
+        comments {
+          id
+        }
+        updatedAt
       }
     }
   }
@@ -98,13 +162,20 @@ const DELETE_NOTIFICATIONS = gql`
 const frequency = 10;
 let nbNotifications = frequency;
 
-const renderItem = ({ item }, navigation, theme, currentUser) => {
+const renderItem = (
+  { item },
+  navigation,
+  theme,
+  currentUser,
+  setHomeDebates
+) => {
   return (
     <NotificationBox
       theme={theme}
       notification={item}
       navigation={navigation}
       currentUser={currentUser}
+      setHomeDebates={setHomeDebates}
     />
   );
 };
@@ -116,20 +187,23 @@ const Notifications = (props) => {
   const [noMoreData, setNoMoreData] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
-  const { data, loading, error, fetchMore } = useQuery(GET_NOTIFICATIONS, {
-    variables: {
-      first: nbNotifications,
-      userId: currentUser.id,
-    },
-    onCompleted: (response) => {
-      const { notifications: queryResult } = response;
-      setNotifications(queryResult);
-      markAsReadNotifcations();
+  const { data, loading, error, fetchMore, refetch } = useQuery(
+    GET_NOTIFICATIONS,
+    {
+      variables: {
+        first: nbNotifications,
+        userId: currentUser.id,
+      },
+      onCompleted: (response) => {
+        const { notifications: queryResult } = response;
+        setNotifications(queryResult);
+        markAsReadNotifcations();
 
-      if (queryResult.length === 0) setNoMoreData(true);
-    },
-    fetchPolicy: "cache-and-network",
-  });
+        if (queryResult.length === 0) setNoMoreData(true);
+      },
+      fetchPolicy: "cache-and-network",
+    }
+  );
 
   const [markAsReadNotifcations] = useMutation(NOTIFICATIONS_UPDATE_VIEW, {
     variables: {
@@ -151,10 +225,13 @@ const Notifications = (props) => {
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
+    refetch();
     // markAsReadNotifcations();
   }, [isFocused]);
 
   const { navigation, route } = props;
+
+  const setHomeDebates = get(route, "params.setHomeDebates");
   return (
     <View style={styles.container}>
       <Header
@@ -225,7 +302,7 @@ const Notifications = (props) => {
           backgroundColor: themeSchema[theme].backgroundColor2,
         }}
         renderItem={(param) =>
-          renderItem(param, navigation, theme, currentUser)
+          renderItem(param, navigation, theme, currentUser, setHomeDebates)
         }
         keyExtractor={(item) => item.id}
         onEndReachedThreshold={0.5}

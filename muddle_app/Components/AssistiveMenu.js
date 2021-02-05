@@ -13,6 +13,7 @@ import Icon from "./Icon";
 import { gql, useQuery } from "@apollo/client";
 import Badge from "./Badge";
 import { useIsFocused } from "@react-navigation/native";
+import { get } from "lodash";
 
 const properties = {
   borderRadius: {
@@ -111,6 +112,7 @@ const AssistiveMenu = (props) => {
   }, [deploy]);
 
   const { navigation, route, scrollViewRef } = props;
+  const setHomeDebates = get(props, "setHomeDebates");
 
   const isFocused = useIsFocused();
   React.useEffect(() => {
@@ -400,7 +402,9 @@ const AssistiveMenu = (props) => {
               onPress={() => {
                 onDeploy(200);
                 if (route.name !== "Notifications")
-                  navigation.push("Notifications");
+                  navigation.push("Notifications", {
+                    setHomeDebates,
+                  });
               }}
             >
               <Icon name="notifications" size={32} />

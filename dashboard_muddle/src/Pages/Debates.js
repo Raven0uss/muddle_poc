@@ -82,7 +82,7 @@ const defineStatus = (debate) => {
     isNil(debate.timelimit)
       ? ""
       : `\nFermeture du débat le ${moment(debate.timelimit).format(
-          "DD MMM YYYY à hh:mm"
+          "DD MMM YYYY à HH:mm"
         )}`
   }`;
 };
@@ -385,7 +385,7 @@ const Debates = (props) => {
                     </div>
                     <div>
                       Créé le :{" "}
-                      {moment(debate.createdAt).format("DD MMM YYYY - hh:mm")}
+                      {moment(debate.createdAt).format("DD MMM YYYY - HH:mm")}
                     </div>
                     <div>Status : {defineStatus(debate)}</div>
                     <br />
@@ -1139,7 +1139,7 @@ const Debates = (props) => {
                     </div>
                     <div>
                       Publié le :{" "}
-                      {moment(comment.createdAt).format("DD MMM YYYY - hh:mm")}
+                      {moment(comment.createdAt).format("DD MMM YYYY - HH:mm")}
                     </div>
                     <br />
                     <div>Nombre de signalements : {comment.reports.length}</div>

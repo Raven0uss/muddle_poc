@@ -477,7 +477,11 @@ const Profile = (props) => {
     },
     onCompleted: (response) => {
       const { user: queryResult } = response;
+      console.log(response);
       setUser(queryResult);
+    },
+    onError: (err) => {
+      console.log(err);
     },
     fetchPolicy: "cache-and-network",
   });
@@ -485,6 +489,9 @@ const Profile = (props) => {
   const { navigation, route } = props;
   const { setHomeDebates } = route.params;
 
+  console.log(get(props, "route.params.userId"));
+  console.log(loading);
+  console.log(loadingPicture);
   if (user === null || loading || loadingPicture) {
     return (
       <SafeAreaView
@@ -512,6 +519,7 @@ const Profile = (props) => {
 
   const me = currentUser.id === user.id;
   // console.log(user.trophies);
+  console.log("wesh");
   return (
     <View
       style={{ flex: 1, backgroundColor: themeSchema[theme].backgroundColor1 }}

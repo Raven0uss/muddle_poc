@@ -343,9 +343,10 @@ const DebateBox = (props) => {
               source={{
                 uri: debate.image,
               }}
+              defaultSource={debate.image}
               style={{
                 width: Dimensions.get("screen").width / 1.2,
-                height: 140,
+                height: 180,
                 borderRadius: 5,
                 marginTop: 5,
                 marginBottom: 5,

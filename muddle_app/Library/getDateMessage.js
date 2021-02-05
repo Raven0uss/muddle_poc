@@ -18,12 +18,12 @@ const getDateMessage = (date) => {
 
   const format12 = is12Format(i18n.language);
   if (moment(date).isSame(now, "day")) {
-    return format12 ? from.format("hh:mm A") : from.format("HH[h]mm");
+    return format12 ? from.format("HH:mm A") : from.format("HH[h]mm");
   }
   const yesterday = moment().subtract(1, "days");
   if (moment(date).isSame(yesterday, "day")) {
     return `${i18n._("yesterday")} ${
-      format12 ? from.format("hh:mm A") : from.format("HH[h]mm")
+      format12 ? from.format("HH:mm A") : from.format("HH[h]mm")
     }`;
   }
 
@@ -31,7 +31,7 @@ const getDateMessage = (date) => {
 
   if (year === from.format("YYYY"))
     return `${from.format("ddd DD MMM")} - ${
-      format12 ? from.format("hh:mm A") : from.format("HH[h]mm")
+      format12 ? from.format("HH:mm A") : from.format("HH[h]mm")
     }`;
   return from.format("ddd DD MMM YYYY");
 };

@@ -241,10 +241,10 @@ const Query = prismaObjectType({
             (m) => blockedList.findIndex((b) => b.id === m.from.id) === -1
           ).length;
 
-          if (numberOfNewNotifications + numberOfNewMessages === 0) {
-            const user = await prisma.user({ id: currentUser.user.id });
-            clearApplicationBadges({ pushToken: user.pushToken });
-          }
+          // if (numberOfNewNotifications + numberOfNewMessages === 0) {
+          //   const user = await prisma.user({ id: currentUser.user.id });
+          //   clearApplicationBadges({ pushToken: user.pushToken });
+          // }
           return {
             notifications: numberOfNewNotifications,
             messages: numberOfNewMessages,
