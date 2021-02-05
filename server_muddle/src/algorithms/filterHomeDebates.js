@@ -1,7 +1,12 @@
 import { get } from "lodash";
 import moment from "moment";
 
-const filterHomeDebates = ({ debates, following }) => {
+const filterHomeDebates = ({
+  debates,
+  debatesFollowing,
+  debatesGenerated,
+  debatesCrowned,
+}) => {
   //   const followingListId = following.map((f) => f.id);
   //   const sortedDebates = debates.sort((a, b) => {
   //     if (a.type === "DUO") {
@@ -34,17 +39,37 @@ const filterHomeDebates = ({ debates, following }) => {
   //   });
 
   //   return sortedDebates;
+
   const sorted = debates.sort((a, b) => {
     if (a.crowned && a.closed === false) {
       if (b.crowned && b.closed === false) {
         return moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1;
       }
       return -1;
+
+      if (b.crowned && b.closed === false) return 1;
+      return moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1;
     }
-    if (b.crowned && b.closed === false) return 1;
-    return moment(b.updatedAt).isBefore(a.updatedAt) ? -1 : 1;
   });
-  return sorted;
+
+  const sortedFollowing = [...debatesFollowing, ...debatesGenerated].sort(
+    (a, b) => {
+      return moment(b.createdAt).isBefore(a.createdAt) ? -1 : 1;
+    }
+  );
+
+  const result = [...debatesCrowned, ...sortedFollowing, ...debates].reduce(
+    (acc, current) => {
+      const x = acc.find((item) => item.id === current.id);
+      if (!x) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    },
+    []
+  );
+  return result;
 };
 
 export default filterHomeDebates;

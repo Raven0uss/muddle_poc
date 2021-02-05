@@ -98,6 +98,81 @@ fragment BestDebate on Debate {
 }
 `;
 
+// const fragBestDebates_Followers = `
+// fragment BestDebateFollow on User {
+//   id
+//   following {
+//     id
+//     debates {
+//       id
+//       content
+//       answerOne
+//       answerTwo
+//       image
+//       type
+//       crowned
+//       owner {
+//         id
+//         certified
+//         firstname
+//         lastname
+//         email
+//         profilePicture
+//         private
+//         role
+//         followers {
+//           id
+//         }
+//       }
+//       ownerBlue {
+//         id
+//         certified
+//         firstname
+//         lastname
+//         email
+//         profilePicture
+//         private
+//         role
+//         followers {
+//           id
+//         }
+//       }
+//       ownerRed {
+//         id
+//         certified
+//         firstname
+//         lastname
+//         email
+//         profilePicture
+//         role
+//         private
+//         followers {
+//           id
+//         }
+//       }
+//       positives {
+//         id
+//       }
+//       negatives {
+//         id
+//       }
+//       redVotes {
+//         id
+//       }
+//       blueVotes {
+//         id
+//       }
+//       comments {
+//         id
+//       }
+//       createdAt
+//       updatedAt
+//       closed
+//     }
+//   }
+// }
+// `;
+
 const Query = prismaObjectType({
   name: "Query",
   definition(t) {
@@ -266,13 +341,46 @@ const Query = prismaObjectType({
           const debates = await prisma
             .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
             .$fragment(fragBestDebates);
-          const following = await prisma
+
+          const debatesFollowingReq = await prisma
             .user({ id: currentUser.user.id })
-            .following();
+            .following()
+            .debates({
+              orderBy: "updatedAt_DESC",
+              where: { published: true },
+              skip,
+              first,
+            })
+            .$fragment(fragBestDebates);
+
+          const debatesFollowing = [];
+          debatesFollowingReq.map((d) => {
+            const ds = get(d, "debates", []);
+            debatesFollowing.push(...ds);
+          });
+
+          const debatesGenerated = await prisma.debates({
+            orderBy: "updatedAt_DESC",
+            where: { published: true, type: "MUDDLE" },
+            skip,
+            first,
+          });
+
+          const debatesCrowned = await prisma.debates({
+            orderBy: "updatedAt_DESC",
+            where: { published: true, closed: false, crowned: true },
+            skip,
+            first,
+          });
+
+          console.log(debatesGenerated);
+          console.log(debatesCrowned);
 
           const sorted = filterHomeDebates({
             debates,
-            following,
+            debatesFollowing,
+            debatesGenerated,
+            debatesCrowned,
           });
 
           const skipProps = isNil(skip) ? 0 : skip;

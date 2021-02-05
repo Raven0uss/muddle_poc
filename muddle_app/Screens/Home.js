@@ -185,7 +185,7 @@ async function registerForPushNotificationsAsync() {
   return pushNotificiationToken;
 }
 
-const frequency = 20;
+const frequency = 15;
 let nbDebates = frequency;
 
 const pubFrequency = 8;
@@ -499,6 +499,7 @@ const Home = (props) => {
               setDebates((previousState) =>
                 [...previousState, ...moreDebates].reduce((acc, current) => {
                   const x = acc.find((item) => item.id === current.id);
+                  console.log(x);
                   if (!x) {
                     return acc.concat([current]);
                   } else {

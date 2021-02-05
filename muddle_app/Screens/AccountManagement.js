@@ -17,6 +17,7 @@ import ThemeContext from "../CustomProperties/ThemeContext";
 import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { removeItem } from "../CustomProperties/storage";
+import NotificationSetting from "react-native-open-notification";
 
 const AccountManagement = (props) => {
   const { theme } = React.useContext(ThemeContext);
@@ -122,7 +123,10 @@ const AccountManagement = (props) => {
             flexDirection: "row",
             alignItems: "center",
           }}
-          onPress={() => navigation.push("NotificationsManagement")}
+          onPress={() => {
+            NotificationSetting.open();
+            // navigation.push("NotificationsManagement");
+          }}
         >
           <CustomIcon name="notifications-active" size={28} color="#A3A3A3" />
           <Text
