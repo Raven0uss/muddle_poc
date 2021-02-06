@@ -6,6 +6,7 @@ const filterHomeDebates = ({
   debatesFollowing,
   debatesGenerated,
   debatesCrowned,
+  myDebates
 }) => {
   //   const followingListId = following.map((f) => f.id);
   //   const sortedDebates = debates.sort((a, b) => {
@@ -52,7 +53,7 @@ const filterHomeDebates = ({
     }
   });
 
-  const sortedFollowing = [...debatesFollowing, ...debatesGenerated].sort(
+  const sortedFollowing = [..myDebates, ...debatesFollowing, ...debatesGenerated].sort(
     (a, b) => {
       return moment(b.createdAt).isBefore(a.createdAt) ? -1 : 1;
     }

@@ -373,14 +373,22 @@ const Query = prismaObjectType({
             first,
           });
 
-          console.log(debatesGenerated);
-          console.log(debatesCrowned);
+          const myDebates = await prisma
+            .user({ id: currentUser.user.id })
+            .debates({
+              orderBy: "updatedAt_DESC",
+              where: { published: true },
+              skip,
+              first,
+            })
+            .$fragment(fragBestDebates);
 
           const sorted = filterHomeDebates({
             debates,
             debatesFollowing,
             debatesGenerated,
             debatesCrowned,
+            myDebates,
           });
 
           const skipProps = isNil(skip) ? 0 : skip;
