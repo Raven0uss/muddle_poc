@@ -176,6 +176,13 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+      <Box mt={5} style={{ textAlign: "center" }}>
+        <Link href="mailto:contact@muddles.fr">Contactez-nous</Link>
+        {" - "}
+        <Link onClick={() => history.push("/documents")}>
+          Conditions gérérales d'utilisation
+        </Link>
+      </Box>
     </Container>
   );
 }

@@ -2,6 +2,7 @@
   "expo": {
     "name": "Muddles",
     "icon": "./assets/icon_no_transparency.png",
+    "splash": "./assets/splash.png",
     "version": "1.0.1",
     "slug": "muddles",
     "ios": {
@@ -12,7 +13,8 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "package": "com.muddles.muddles",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": []
     }
   }
 }

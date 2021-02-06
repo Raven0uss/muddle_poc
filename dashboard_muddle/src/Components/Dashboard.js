@@ -194,6 +194,10 @@ export default function Dashboard() {
         setUser(queryUser);
       }
     },
+    onError: () => {
+      localStorage.removeItem("token");
+      history.replace("/");
+    },
   });
 
   const handleClick = (event) => {
