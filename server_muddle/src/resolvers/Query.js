@@ -341,7 +341,9 @@ const Query = prismaObjectType({
           const debates = await prisma
             .debates({
               orderBy: "updatedAt_DESC",
-              where: { published: true, skip, first },
+              where: { published: true },
+              skip,
+              first,
             })
             .$fragment(fragBestDebates);
 
