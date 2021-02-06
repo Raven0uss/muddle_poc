@@ -339,7 +339,10 @@ const Query = prismaObjectType({
       resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
         try {
           const debates = await prisma
-            .debates({ orderBy: "updatedAt_DESC", where: { published: true } })
+            .debates({
+              orderBy: "updatedAt_DESC",
+              where: { published: true, skip, first },
+            })
             .$fragment(fragBestDebates);
 
           const debatesFollowingReq = await prisma

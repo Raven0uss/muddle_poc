@@ -53,7 +53,7 @@ const filterHomeDebates = ({
     }
   });
 
-  const sortedFollowing = [..myDebates, ...debatesFollowing, ...debatesGenerated].sort(
+  const sortedFollowing = [...myDebates, ...debatesFollowing, ...debatesGenerated].sort(
     (a, b) => {
       return moment(b.createdAt).isBefore(a.createdAt) ? -1 : 1;
     }
