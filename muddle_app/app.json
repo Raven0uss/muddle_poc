@@ -2,12 +2,12 @@
   "expo": {
     "name": "Muddles",
     "icon": "./assets/icon_no_transparency.png",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "slug": "muddles",
     "ios": {
       "requireFullScreen": true,
       "bundleIdentifier": "com.muddles.muddles",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.1"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
