@@ -2,13 +2,15 @@
   "expo": {
     "name": "Muddles",
     "icon": "./assets/icon_no_transparency.png",
-    "splash": "./assets/splash.png",
-    "version": "1.0.1",
+    "splash": {
+      "image": "./assets/splash.png"
+    },
+    "version": "1.0.2",
     "slug": "muddles",
     "ios": {
       "requireFullScreen": true,
       "bundleIdentifier": "com.muddles.muddles",
-      "buildNumber": "1.0.1"
+      "buildNumber": "1.0.2"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
