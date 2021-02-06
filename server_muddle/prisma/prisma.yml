@@ -1,5 +1,5 @@
-# endpoint: http://52.47.56.241:4466 # Have to set value of container IP
-endpoint: http://localhost:4466 # To work in local
+endpoint: http://52.47.56.241:4466 # Have to set value of container IP
+# endpoint: http://localhost:4466 # To work in local
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma
