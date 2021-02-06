@@ -250,7 +250,19 @@ const Home = (props) => {
       try {
         const { homeDebates: queryResult } = response;
         // console.log("fetch");
-        setDebates(queryResult);
+
+        setDebates((previousState) => {
+          const previousFrequency = previousState.slice(
+            previousState.length - 15
+          );
+          // console.log(previousFrequency);
+          const newEntries = queryResult.filter(
+            (element) =>
+              previousFrequency.findIndex((pF) => pF.id === element.id) === -1
+          );
+          return [...previousState, ...newEntries];
+        });
+        // setDebates((d) => [...d, ...queryResult]);
         if (queryResult.length === 0) setNoMoreData(true);
       } catch (err) {
         console.log(err);
@@ -311,9 +323,10 @@ const Home = (props) => {
     setDebates([]);
     setNoMoreData(false);
     try {
-      await refetch();
-    } catch (err) {}
-    setRefreshing(false);
+      refetch().then(() => setRefreshing(false));
+    } catch (err) {
+      setRefreshing(false);
+    }
   }, []);
 
   useSubscription(NOTIFICATIONS_SUB, {
@@ -492,22 +505,22 @@ const Home = (props) => {
           // return ;
           nbDebates += frequency;
           await fetchMore({
-            variables: { first: frequency, skip: nbDebates - frequency },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const { homeDebates: moreDebates } = fetchMoreResult;
-              if (isEmpty(moreDebates)) return setNoMoreData(true);
-              setDebates((previousState) =>
-                [...previousState, ...moreDebates].reduce((acc, current) => {
-                  const x = acc.find((item) => item.id === current.id);
-                  console.log(x);
-                  if (!x) {
-                    return acc.concat([current]);
-                  } else {
-                    return acc;
-                  }
-                }, [])
-              );
-            },
+            variables: { first: nbDebates },
+            // updateQuery: (previousResult, { fetchMoreResult }) => {
+            //   const { homeDebates: moreDebates } = fetchMoreResult;
+            //   if (isEmpty(moreDebates)) return setNoMoreData(true);
+            //   setDebates((previousState) =>
+            //     [...previousState, ...moreDebates].reduce((acc, current) => {
+            //       const x = acc.find((item) => item.id === current.id);
+            //       console.log(x);
+            //       if (!x) {
+            //         return acc.concat([current]);
+            //       } else {
+            //         return acc;
+            //       }
+            //     }, [])
+            //   );
+            // },
           });
         }}
         ListFooterComponent={() => {

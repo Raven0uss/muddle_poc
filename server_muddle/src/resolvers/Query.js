@@ -338,11 +338,16 @@ const Query = prismaObjectType({
       },
       resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
         try {
+          console.log("first : ", first);
+
+          const skipValue = first - 15;
+          console.log("skip : ", skipValue);
+
           const debates = await prisma
             .debates({
-              orderBy: "updatedAt_DESC",
+              orderBy: "createdAt_DESC",
               where: { published: true },
-              skip,
+              skip: skipValue,
               first,
             })
             .$fragment(fragBestDebates);
@@ -351,9 +356,10 @@ const Query = prismaObjectType({
             .user({ id: currentUser.user.id })
             .following()
             .debates({
-              orderBy: "updatedAt_DESC",
+              orderBy: "createdAt_DESC",
               where: { published: true },
-              skip,
+              skip: skipValue,
+
               first,
             })
             .$fragment(fragBestDebates);
@@ -365,25 +371,28 @@ const Query = prismaObjectType({
           });
 
           const debatesGenerated = await prisma.debates({
-            orderBy: "updatedAt_DESC",
+            orderBy: "createdAt_DESC",
             where: { published: true, type: "MUDDLE" },
-            skip,
+            skip: skipValue,
+
             first,
           });
 
           const debatesCrowned = await prisma.debates({
-            orderBy: "updatedAt_DESC",
+            orderBy: "createdAt_DESC",
             where: { published: true, closed: false, crowned: true },
-            skip,
+            skip: skipValue,
+
             first,
           });
 
           const myDebates = await prisma
             .user({ id: currentUser.user.id })
             .debates({
-              orderBy: "updatedAt_DESC",
+              orderBy: "createdAt_DESC",
               where: { published: true },
-              skip,
+              skip: skipValue,
+
               first,
             })
             .$fragment(fragBestDebates);
@@ -396,10 +405,12 @@ const Query = prismaObjectType({
             myDebates,
           });
 
-          const skipProps = isNil(skip) ? 0 : skip;
+          const skipProps = skipValue;
           const firstProps = isNil(first) ? 0 : first;
-          if (firstProps === 0) return sorted.slice(skipProps);
-          return sorted.slice(skipProps, skipProps + firstProps);
+          console.log(sorted.length);
+          return sorted.slice(0, 15);
+          // if (firstProps === 0) return sorted.slice(skipProps);
+          // return sorted.slice(skipProps, skipProps + firstProps);
         } catch (err) {
           throw new Error(err);
         }
