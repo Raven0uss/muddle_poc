@@ -3,14 +3,16 @@
     "name": "Muddles",
     "icon": "./assets/icon_no_transparency.png",
     "splash": {
-      "image": "./assets/splash.png"
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#F47658"
     },
-    "version": "1.0.2",
+    "version": "1.0.3",
     "slug": "muddles",
     "ios": {
       "requireFullScreen": true,
       "bundleIdentifier": "com.muddles.muddles",
-      "buildNumber": "1.0.2"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "googleServicesFile": "./google-services.json",

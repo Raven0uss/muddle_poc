@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import "./App.css";
 import SignIn from "./Components/SignIn";
 import Dashboard from "./Components/Dashboard";
@@ -35,7 +36,6 @@ function App() {
             <Route path="/documents">
               <Documents />
             </Route>
-
             <Route path="/dashboard">
               <Dashboard />
             </Route>
