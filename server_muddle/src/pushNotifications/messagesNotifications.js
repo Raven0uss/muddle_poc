@@ -68,13 +68,13 @@ const getPushNotificationObject = ({
       fr: {
         sound: true,
         title: `${user} vous demande de clôturer le débat.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
       en: {
         sound: true,
 
         title: `${user} ask you to close the debate.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
     },
     deleteDebate: {
@@ -82,74 +82,74 @@ const getPushNotificationObject = ({
         sound: true,
 
         title: `${user} vous demande de supprimer le débat.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
       en: {
         sound: true,
         title: `${user} ask you to delete the debate.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
     },
     like: {
       fr: {
         title: `${user} a aimé votre commentaire.`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
       en: {
         title: `${user} liked your comment.`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
     },
     dislike: {
       fr: {
         title: `${user} n'a pas aimé votre commentaire`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
       en: {
         title: `${user} disliked your comment.`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
     },
     vote: {
       fr: {
         title: `${user} a voté sur votre débat.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
       en: {
         title: `${user} voted on your debate.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
     },
     comment: {
       fr: {
         title: `${user} a commenté votre débat.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
       en: {
         title: `${user} commented your debate.`,
-        body: `${debate.slice(0, 100)}${debate.length > 99 ? "..." : ""}`,
+        body: `${debate.slice(0, 100)}${debate.length > 100 ? "..." : ""}`,
       },
     },
     subcomment: {
       fr: {
         title: `${user} a répondu à votre commentaire.`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
       en: {
         title: `${user} answered to your comment.`,
-        body: `${comment.slice(0, 100)}${comment.length > 99 ? "..." : ""}`,
+        body: `${comment.slice(0, 100)}${comment.length > 100 ? "..." : ""}`,
       },
     },
     message: {
       fr: {
         sound: true,
         title: `${user}`,
-        body: `${message.slice(0, 100)}${message.length > 99 ? "..." : ""}`,
+        body: `${message.slice(0, 100)}${message.length > 100 ? "..." : ""}`,
       },
       en: {
         sound: true,
         title: `${user}`,
-        body: `${message.slice(0, 100)}${message.length > 99 ? "..." : ""}`,
+        body: `${message.slice(0, 100)}${message.length > 100 ? "..." : ""}`,
       },
     },
   };
