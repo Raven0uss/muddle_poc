@@ -186,7 +186,7 @@ async function registerForPushNotificationsAsync() {
 }
 
 const frequency = 15;
-let nbDebates = frequency;
+// let nbDebates = frequency;
 
 const pubFrequency = 8;
 
@@ -238,6 +238,7 @@ const Home = (props) => {
   const { currentUser, setCurrentUser } = React.useContext(UserContext);
 
   const [refreshing, setRefreshing] = React.useState(false);
+  const [nbDebates, setNbDebates] = React.useState(frequency);
 
   const [debates, setDebates] = React.useState([]);
   const [ads, setAds] = React.useState([]);
@@ -318,7 +319,7 @@ const Home = (props) => {
   }, []);
 
   const onRefresh = React.useCallback(async () => {
-    nbDebates = frequency;
+    setNbDebates(frequency);
     setRefreshing(true);
     setDebates([]);
     setNoMoreData(false);
@@ -503,7 +504,7 @@ const Home = (props) => {
         onEndReached={async () => {
           if (Platform.OS === "web" || noMoreData) return;
           // return ;
-          nbDebates += frequency;
+          setNbDebates((d) => d + frequency);
           await fetchMore({
             variables: { first: nbDebates },
             // updateQuery: (previousResult, { fetchMoreResult }) => {
