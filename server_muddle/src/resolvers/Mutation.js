@@ -2178,7 +2178,7 @@ const Mutation = prismaObjectType({
           });
           return { token };
         } catch (err) {
-          throw new Error("Invalid credentials");
+          throw new Error(err);
         }
       },
     });
