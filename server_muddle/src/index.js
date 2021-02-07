@@ -22,7 +22,6 @@ const img4io_apiSecret = process.env.IMG4IO_API_SECRET;
 const server = new GraphQLServer({
   schema,
   middlewares: [permissions],
-
   context: async ({ request }) => {
     // console.log(request.headers.token);
     const currentUser = await getCurrentUser(request);
@@ -156,6 +155,12 @@ server.express.post("/sns/email/error-notification", async function(
   }
 });
 
-server.start({ port: 4000, playground: false }, () => {
-  console.log("App running on http://localhost:4000");
-});
+server.start(
+  {
+    port: 4000,
+    playground: false,
+  },
+  () => {
+    console.log("App running on http://localhost:4000");
+  }
+);

@@ -120,6 +120,7 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://52.47.56.241:4466`
+  endpoint: `http://52.47.56.241:4466`,
+  secret: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNjEyNjU2MTAzLCJleHAiOjE2MTMyNjA5MDN9.9nVu_icC4mrD01bwmaCXL1wH5xcF3XBlabOLJYyWHn0`
 });
 exports.prisma = new exports.Prisma();

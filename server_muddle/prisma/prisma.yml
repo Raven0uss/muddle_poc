@@ -1,5 +1,5 @@
-# endpoint: http://52.47.56.241:4466 # Have to set value of container IP
-endpoint: http://localhost:4466 # To work in local
+endpoint: http://52.47.56.241:4466 # Have to set value of container IP
+# endpoint: http://localhost:4466 # To work in local
 datamodel:
   - ./datamodel/ad.prisma
   - ./datamodel/adTarget.prisma
@@ -20,6 +20,8 @@ databaseType: document
 generate:
   - generator: javascript-client
     output: ./generated/prisma-client/
+
+secret: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNjEyNjU2MTAzLCJleHAiOjE2MTMyNjA5MDN9.9nVu_icC4mrD01bwmaCXL1wH5xcF3XBlabOLJYyWHn0"
 
 seed:
   run: node ./seed.js
