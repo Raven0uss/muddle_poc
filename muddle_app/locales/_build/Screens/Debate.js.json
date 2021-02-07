@@ -1,9 +1,21 @@
 {
+  "comment": {
+    "origin": [
+      [
+        "Screens/Debate.js",
+        588
+      ],
+      [
+        "Screens/Debate.js",
+        1006
+      ]
+    ]
+  },
   "reportDebate": {
     "origin": [
       [
         "Screens/Debate.js",
-        479
+        1056
       ]
     ]
   },
@@ -11,7 +23,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        486
+        1063
       ]
     ]
   },
@@ -19,7 +31,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        490
+        1067
       ]
     ]
   },
@@ -27,7 +39,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        497
+        1074
       ]
     ]
   },
@@ -35,19 +47,7 @@
     "origin": [
       [
         "Screens/Debate.js",
-        501
-      ]
-    ]
-  },
-  "comment": {
-    "origin": [
-      [
-        "Screens/Debate.js",
-        751
-      ],
-      [
-        "Screens/Debate.js",
-        1173
+        1078
       ]
     ]
   },

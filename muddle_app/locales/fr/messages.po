@@ -13,33 +13,33 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: Components/NotificationBox.js:324
-#: Components/NotificationBox.js:1151
-#: Components/NotificationBox.js:1321
+#: Components/NotificationBox.js:351
+#: Components/NotificationBox.js:1279
+#: Components/NotificationBox.js:1460
 msgid "accept"
 msgstr "Accepter"
 
-#: Components/NotificationBox.js:591
+#: Components/NotificationBox.js:651
 msgid "acceptCloseDebate"
 msgstr "a accepté la fermeture de votre débat"
 
-#: Components/NotificationBox.js:753
+#: Components/NotificationBox.js:835
 msgid "acceptDeleteDebate"
 msgstr "a accepté la suppression de l'un de vos débats en duo"
 
-#: Components/NotificationBox.js:439
+#: Components/NotificationBox.js:477
 msgid "acceptYourInvitation"
 msgstr "a accepté votre invitation au débat"
 
-#: Screens/Login.js:166
+#: Screens/Login.js:167
 msgid "accessDenied"
 msgstr "Accès refusé"
 
-#: Screens/Menu.js:112
+#: Screens/Menu.js:135
 msgid "accountManagement"
 msgstr "Gestion de compte"
 
-#: Screens/SignUp.js:412
+#: Screens/SignUp.js:413
 msgid "accronymCGU"
 msgstr "CGU"
 
@@ -78,45 +78,45 @@ msgstr "Ne plus suivre"
 #~ msgid "ago"
 #~ msgstr "il y a {time}"
 
-#: Screens/SignUp.js:493
+#: Screens/SignUp.js:496
 msgid "alreadyMember?"
 msgstr "Déjà inscrit ?"
 
-#: Components/NotificationBox.js:184
-#: Components/NotificationBox.js:894
-#: Components/NotificationBox.js:989
-#: Components/NotificationBox.js:1424
-#: Components/NotificationBox.js:1519
+#: Components/NotificationBox.js:201
+#: Components/NotificationBox.js:999
+#: Components/NotificationBox.js:1106
+#: Components/NotificationBox.js:1575
+#: Components/NotificationBox.js:1682
 msgid "and"
 msgstr "et"
 
-#: Components/CommentBox.js:242
+#: Components/CommentBox.js:286
 msgid "answer"
 msgstr "Répondre"
 
-#: Components/NotificationBox.js:1013
+#: Components/NotificationBox.js:1130
 msgid "answerYourCommentPlural"
 msgstr "ont répondu à votre commentaire"
 
-#: Components/NotificationBox.js:1014
+#: Components/NotificationBox.js:1131
 msgid "answerYourCommentSingular"
 msgstr "a répondu à votre commentaire"
 
-#: Components/DebateBox.js:616
-#: Screens/Debate.js:486
+#: Components/DebateBox.js:617
+#: Screens/Debate.js:1063
 msgid "askCloseDebate"
 msgstr "Demander la fermeture"
 
-#: Components/DebateBox.js:623
-#: Screens/Debate.js:497
+#: Components/DebateBox.js:624
+#: Screens/Debate.js:1074
 msgid "askDeleteDebate"
 msgstr "Demander la suppression"
 
-#: Components/NotificationBox.js:1094
+#: Components/NotificationBox.js:1222
 msgid "askToCloseThisDebate"
 msgstr "a demandé de clore ce débat"
 
-#: Components/NotificationBox.js:1264
+#: Components/NotificationBox.js:1403
 msgid "askToDeleteThisDebate"
 msgstr "a demandé de supprimer ce débat"
 
@@ -124,15 +124,15 @@ msgstr "a demandé de supprimer ce débat"
 msgid "bestDebates"
 msgstr "Les meilleurs débats"
 
-#: Screens/SignUp.js:363
+#: Screens/SignUp.js:361
 msgid "birthdate"
 msgstr "Date de naissance"
 
-#: Screens/AccountManagement.js:160
+#: Screens/AccountManagement.js:164
 msgid "blackList"
 msgstr "Utilisateurs bloqués"
 
-#: Screens/SignUp.js:121
+#: Screens/SignUp.js:118
 msgid "bornInFuture"
 msgstr "Seriez-vous né dans le futur par hasard ?"
 
@@ -143,8 +143,7 @@ msgstr "Seriez-vous né dans le futur par hasard ?"
 msgid "cancel"
 msgstr "Annuler"
 
-#: Screens/Cgu.js:66
-#: Screens/Menu.js:160
+#: Screens/Menu.js:183
 msgid "cgu"
 msgstr "Conditions Générales d'Utilisation"
 
@@ -152,7 +151,7 @@ msgstr "Conditions Générales d'Utilisation"
 #~ msgid "changeEmail"
 #~ msgstr "Modifier mon adresse e-mail"
 
-#: Screens/AccountManagement.js:112
+#: Screens/AccountManagement.js:113
 msgid "changePassword"
 msgstr "Modifier mon mot de passe"
 
@@ -174,23 +173,23 @@ msgid "close"
 msgstr "Fermer"
 
 #: Components/DebateBox.js:246
-#: Screens/Debate.js:490
+#: Screens/Debate.js:1067
 msgid "closeDebate"
 msgstr "Clore le débat"
 
-#: Components/DebateBox.js:378
-#: Components/DebateBox.js:865
-#: Screens/Debate.js:751
-#: Screens/Debate.js:1173
+#: Components/DebateBox.js:379
+#: Components/DebateBox.js:866
+#: Screens/Debate.js:588
+#: Screens/Debate.js:1006
 #: Screens/Report.js:166
 msgid "comment"
 msgstr "commentaire"
 
-#: Components/NotificationBox.js:918
+#: Components/NotificationBox.js:1023
 msgid "commentYourDebatePlural"
 msgstr "ont commenté votre débat"
 
-#: Components/NotificationBox.js:919
+#: Components/NotificationBox.js:1024
 msgid "commentYourDebateSingular"
 msgstr "a commenté votre débat"
 
@@ -210,24 +209,24 @@ msgstr "Valider"
 msgid "confirmNewPassword"
 msgstr "Confirmation nouveau mot de passe"
 
-#: Screens/SignUp.js:345
+#: Screens/SignUp.js:343
 msgid "confirmPassword"
 msgstr "Confirmation mot de passe"
 
-#: Screens/Login.js:337
-#: Screens/SignUp.js:494
+#: Screens/Login.js:338
+#: Screens/SignUp.js:497
 msgid "connect"
 msgstr "Se connecter"
 
-#: Screens/Menu.js:184
+#: Screens/Menu.js:207
 msgid "contactUs"
 msgstr "Nous contacter"
 
-#: Screens/Login.js:400
+#: Screens/Login.js:401
 msgid "contactUsNow"
 msgstr "Contactez-nous !"
 
-#: Components/NotificationBox.js:1708
+#: Components/NotificationBox.js:1888
 msgid "crownDescription"
 msgstr "La couronne vous donne le privilège de créer un débat visible en premier dans le fil d'actualité de tout les utilisateurs. Vous avez 24H pour l'utiliser, mais n'oubliez pas : \"Un grand pouvoir implique de grandes responsabilités\"."
 
@@ -261,17 +260,17 @@ msgstr "Durée du débat"
 msgid "debateLimitationDurationMessage"
 msgstr "La durée maximum d'un débat est de 9 jours et 23 heures."
 
-#: Screens/Profile.js:971
+#: Screens/Profile.js:979
 msgid "debatesProfile"
 msgstr "Débats"
 
-#: Components/NotificationBox.js:369
-#: Components/NotificationBox.js:1195
-#: Components/NotificationBox.js:1365
+#: Components/NotificationBox.js:396
+#: Components/NotificationBox.js:1323
+#: Components/NotificationBox.js:1504
 msgid "decline"
 msgstr "Refuser"
 
-#: Screens/AccountManagement.js:184
+#: Screens/AccountManagement.js:188
 msgid "deleteAccount"
 msgstr "Supprimer mon compte"
 
@@ -289,8 +288,8 @@ msgstr ""
 msgid "deleteAccountTitle"
 msgstr "Supprimer mon compte"
 
-#: Components/CommentBox.js:105
-#: Screens/IsolateComment.js:310
+#: Components/CommentBox.js:122
+#: Screens/IsolateComment.js:328
 msgid "deleteComment"
 msgstr "Supprimer le commentaire"
 
@@ -299,7 +298,7 @@ msgid "deleteConversation"
 msgstr "Supprimer la conversation"
 
 #: Components/DebateBox.js:252
-#: Screens/Debate.js:501
+#: Screens/Debate.js:1078
 msgid "deleteDebate"
 msgstr "Supprimer le débat"
 
@@ -311,11 +310,11 @@ msgstr "Décrivez votre débat"
 msgid "didntLiked"
 msgstr "n'a pas aimé"
 
-#: Components/NotificationBox.js:1542
+#: Components/NotificationBox.js:1705
 msgid "didntLikedCommentPlural"
 msgstr "n'ont pas aimé votre commentaire"
 
-#: Components/NotificationBox.js:1543
+#: Components/NotificationBox.js:1706
 msgid "didntLikedCommentSingular"
 msgstr "n'a pas aimé votre commentaire"
 
@@ -323,7 +322,7 @@ msgstr "n'a pas aimé votre commentaire"
 msgid "disableCrown"
 msgstr "Désactiver la couronne"
 
-#: Screens/Menu.js:216
+#: Screens/Menu.js:233
 msgid "disconnect"
 msgstr "Se déconnecter"
 
@@ -347,35 +346,39 @@ msgstr "Débats en duo remportés"
 msgid "enableCrown"
 msgstr "Activer la couronne"
 
-#: Screens/SignUp.js:447
+#: Screens/SignUp.js:450
 msgid "errorEmailAlreadyUsed"
 msgstr "L'adresse email saisie est déjà enregistrée."
 
-#: Screens/SignUp.js:439
+#: Screens/ForgotPassword.js:56
+msgid "errorMessage_MailDoesntExist"
+msgstr "Cette adresse email n'existe pas dans nos services."
+
+#: Screens/SignUp.js:442
 msgid "errorOccurredServer"
 msgstr "Une erreur est survenue avec le serveur. Veuillez réessayer plus tard."
 
-#: Screens/SignUp.js:455
+#: Screens/SignUp.js:458
 msgid "errorUserBanned"
 msgstr "Vous avez été banni de nos services."
 
 #: Screens/CreateDebate.js:195
 #: Screens/Search.js:121
-#: Screens/SignUp.js:255
+#: Screens/SignUp.js:253
 msgid "firstname"
 msgstr "Prénom"
 
 #: Screens/Follow.js:97
-#: Screens/Profile.js:794
+#: Screens/Profile.js:802
 msgid "followers"
 msgstr "Abonnés"
 
 #: Screens/Follow.js:122
-#: Screens/Profile.js:832
+#: Screens/Profile.js:840
 msgid "following"
 msgstr "Abonnements"
 
-#: Components/NotificationBox.js:1624
+#: Components/NotificationBox.js:1798
 msgid "followingYou"
 msgstr "vous suit"
 
@@ -383,27 +386,27 @@ msgstr "vous suit"
 msgid "forAllQuestionsContact"
 msgstr "Pour toutes questions relatives à Muddles, veuillez nous contacter à l'adresse suivante :"
 
-#: Screens/ForgotPassword.js:77
+#: Screens/ForgotPassword.js:110
 msgid "forgotPassword"
 msgstr "Mot de passe oublié"
 
-#: Screens/Login.js:297
+#: Screens/Login.js:298
 msgid "forgotPassword?"
 msgstr "Mot de passe oublié ?"
 
-#: Screens/SignUp.js:389
+#: Screens/SignUp.js:387
 msgid "gender"
 msgstr "Genre"
 
-#: Screens/SignUp.js:380
+#: Screens/SignUp.js:378
 msgid "gender_man"
 msgstr "Homme"
 
-#: Screens/SignUp.js:384
+#: Screens/SignUp.js:382
 msgid "gender_not_defined"
 msgstr "Non défini"
 
-#: Screens/SignUp.js:376
+#: Screens/SignUp.js:374
 msgid "gender_woman"
 msgstr "Femme"
 
@@ -411,11 +414,11 @@ msgstr "Femme"
 msgid "generatedDebates"
 msgstr "Les débats générés"
 
-#: Screens/ForgotPassword.js:85
+#: Screens/ForgotPassword.js:118
 msgid "goToConnect"
 msgstr "S'identifier"
 
-#: Screens/Login.js:388
+#: Screens/Login.js:389
 msgid "goToSubscribe"
 msgstr "S'inscrire"
 
@@ -435,11 +438,11 @@ msgstr "Heures"
 msgid "hoursAgo"
 msgstr "il y a {time}h"
 
-#: Screens/SignUp.js:410
+#: Screens/SignUp.js:411
 msgid "iAcceptThe"
 msgstr "J'accepte les"
 
-#: Screens/Login.js:140
+#: Screens/Login.js:141
 msgid "invalidCredential"
 msgstr "L'identifiant ou le mot de passe est incorrect."
 
@@ -447,18 +450,17 @@ msgstr "L'identifiant ou le mot de passe est incorrect."
 msgid "invitePeople"
 msgstr "Inviter une personne"
 
-#: Components/NotificationBox.js:287
+#: Components/NotificationBox.js:314
 msgid "inviteYouDuoDebate"
 msgstr "vous invite à un débat en duo"
 
 #: Screens/CreateDebate.js:217
 #: Screens/Search.js:143
-#: Screens/SignUp.js:273
+#: Screens/SignUp.js:271
 msgid "lastname"
 msgstr "Nom"
 
-#: Screens/LegaleMentions.js:66
-#: Screens/Menu.js:136
+#: Screens/Menu.js:159
 msgid "legaleMention"
 msgstr "Mentions Légales & Confidentialité"
 
@@ -466,31 +468,31 @@ msgstr "Mentions Légales & Confidentialité"
 msgid "liked"
 msgstr "a aimé"
 
-#: Components/NotificationBox.js:1447
+#: Components/NotificationBox.js:1598
 msgid "likedCommentPlural"
 msgstr "ont aimé votre commentaire"
 
-#: Components/NotificationBox.js:1448
+#: Components/NotificationBox.js:1599
 msgid "likedCommentSingular"
 msgstr "a aimé votre commentaire"
 
-#: Screens/Profile.js:506
+#: Screens/Profile.js:513
 msgid "loadingPictureMessage"
 msgstr ""
 "Téléchargement de votre image...\n"
 "Veuillez patienter."
 
-#: Screens/ForgotPassword.js:50
-#: Screens/Login.js:251
-#: Screens/SignUp.js:293
+#: Screens/ForgotPassword.js:87
+#: Screens/Login.js:252
+#: Screens/SignUp.js:291
 msgid "mailAddress"
 msgstr "Adresse e-mail"
 
-#: Screens/AccountManagement.js:136
+#: Screens/AccountManagement.js:140
 msgid "manageNotifications"
 msgstr "Gérer les notifications"
 
-#: Screens/Profile.js:1008
+#: Screens/Profile.js:1016
 msgid "messagePrivateProfile"
 msgstr "Ce compte est privé"
 
@@ -510,7 +512,7 @@ msgstr "Modifier votre photo"
 msgid "moreOneWeekAgo"
 msgstr "il y a plus d'une semaine"
 
-#: Screens/Profile.js:748
+#: Screens/Profile.js:756
 msgid "muddleAccountDesc"
 msgstr "Équipe Muddles - Compte Officiel"
 
@@ -518,7 +520,7 @@ msgstr "Équipe Muddles - Compte Officiel"
 msgid "myDebates"
 msgstr "Mes débats"
 
-#: Screens/Login.js:398
+#: Screens/Login.js:399
 msgid "needContact?"
 msgstr "Besoin de renseignements ?"
 
@@ -526,12 +528,12 @@ msgstr "Besoin de renseignements ?"
 msgid "newPassword"
 msgstr "Nouveau mot de passe"
 
-#: Screens/Login.js:386
+#: Screens/Login.js:387
 msgid "noAccount?"
 msgstr "Pas de compte ?"
 
 #: Screens/ChangePassword.js:44
-#: Screens/SignUp.js:114
+#: Screens/SignUp.js:111
 msgid "notSamePassword"
 msgstr "Les mots de passe saisis ne sont pas identiques."
 
@@ -543,7 +545,7 @@ msgstr "L'email saisi est invalide."
 msgid "nowAgo"
 msgstr "à l'instant"
 
-#: Screens/SignUp.js:137
+#: Screens/SignUp.js:134
 msgid "old99years"
 msgstr "L'âge maximum pour s'inscrire est de 99 ans."
 
@@ -551,28 +553,28 @@ msgstr "L'âge maximum pour s'inscrire est de 99 ans."
 msgid "onThisDebate"
 msgstr "sur ce débat"
 
-#: Components/CommentBox.js:262
+#: Components/CommentBox.js:306
 msgid "otherAnswers"
 msgstr "autre(s) réponse(s)"
 
-#: Components/NotificationBox.js:186
-#: Components/NotificationBox.js:896
-#: Components/NotificationBox.js:991
-#: Components/NotificationBox.js:1426
-#: Components/NotificationBox.js:1521
+#: Components/NotificationBox.js:203
+#: Components/NotificationBox.js:1001
+#: Components/NotificationBox.js:1108
+#: Components/NotificationBox.js:1577
+#: Components/NotificationBox.js:1684
 msgid "otherPeoplePlural"
 msgstr "autres personnes"
 
-#: Components/NotificationBox.js:187
-#: Components/NotificationBox.js:897
-#: Components/NotificationBox.js:992
-#: Components/NotificationBox.js:1427
-#: Components/NotificationBox.js:1522
+#: Components/NotificationBox.js:204
+#: Components/NotificationBox.js:1002
+#: Components/NotificationBox.js:1109
+#: Components/NotificationBox.js:1578
+#: Components/NotificationBox.js:1685
 msgid "otherPeopleSingular"
 msgstr "autre personne"
 
-#: Screens/Login.js:269
-#: Screens/SignUp.js:316
+#: Screens/Login.js:270
+#: Screens/SignUp.js:314
 msgid "password"
 msgstr "Mot de passe"
 
@@ -620,15 +622,15 @@ msgstr "Passer en mode publique"
 msgid "publish"
 msgstr "Publier"
 
-#: Components/NotificationBox.js:672
+#: Components/NotificationBox.js:743
 msgid "rejectCloseDebate"
 msgstr "a rejeté la fermeture du débat"
 
-#: Components/NotificationBox.js:823
+#: Components/NotificationBox.js:916
 msgid "rejectDeleteDebate"
 msgstr "a rejeté la suppression du débat"
 
-#: Components/NotificationBox.js:521
+#: Components/NotificationBox.js:570
 msgid "rejectYourInvitation"
 msgstr "a rejeté votre invitation pour un débat en duo"
 
@@ -640,14 +642,14 @@ msgstr "Signaler"
 msgid "reportA"
 msgstr "Signaler un"
 
-#: Components/CommentBox.js:99
-#: Screens/IsolateComment.js:304
+#: Components/CommentBox.js:116
+#: Screens/IsolateComment.js:322
 msgid "reportComment"
 msgstr "Signaler le commentaire"
 
 #: Components/DebateBox.js:240
-#: Components/DebateBox.js:609
-#: Screens/Debate.js:479
+#: Components/DebateBox.js:610
+#: Screens/Debate.js:1056
 msgid "reportDebate"
 msgstr "Signaler le débat"
 
@@ -697,7 +699,7 @@ msgstr "Rechercher un contact"
 #~ msgid "searchUser"
 #~ msgstr "Rechercher un utilisateur"
 
-#: Components/CommentBox.js:262
+#: Components/CommentBox.js:306
 msgid "seeThe"
 msgstr "Voir"
 
@@ -709,11 +711,11 @@ msgstr "Passer en mode sombre"
 msgid "selectLightTheme"
 msgstr "Passer en mode clair"
 
-#: Components/NotificationBox.js:1695
+#: Components/NotificationBox.js:1875
 msgid "sendYouCrown"
 msgstr "vous a remis une couronne"
 
-#: Screens/Menu.js:88
+#: Screens/Menu.js:111
 msgid "settings"
 msgstr "Paramètres"
 
@@ -721,11 +723,11 @@ msgstr "Paramètres"
 msgid "sponsorised"
 msgstr "Sponsorisé"
 
-#: Screens/SignUp.js:480
+#: Screens/SignUp.js:483
 msgid "subscribe"
 msgstr "S'inscrire"
 
-#: Screens/SignUp.js:217
+#: Screens/SignUp.js:215
 msgid "succesMailSubscribe"
 msgstr "Un mail vous a été envoyé afin de valider votre inscription."
 
@@ -733,11 +735,11 @@ msgstr "Un mail vous a été envoyé afin de valider votre inscription."
 msgid "succesModifyPassword"
 msgstr "Votre mot de passe a bien été modifié. Veuillez vous reconnecter."
 
-#: Screens/DeleteAccount.js:70
+#: Screens/DeleteAccount.js:72
 msgid "successAccountDeleted"
 msgstr "Votre compte ainsi que toutes vos données ont été supprimé de nos services."
 
-#: Screens/ForgotPassword.js:65
+#: Screens/ForgotPassword.js:48
 msgid "successMessage_MailSendForgotPassword"
 msgstr "Un mail vous a été envoyé afin de recupérer votre compte."
 
@@ -750,7 +752,7 @@ msgstr "Changer la langue"
 msgid "that"
 msgstr "ceci"
 
-#: Components/NotificationBox.js:1777
+#: Components/NotificationBox.js:1968
 msgid "topCommentNotification"
 msgstr "Votre commentaire sur un débat, a été jugé comme étant le plus pertinent. Comme récompense pour votre popularité, vous avez remporté 5 points"
 
@@ -768,7 +770,7 @@ msgstr ""
 msgid "userBlockedTitle"
 msgstr "Utilisateurs bloqués"
 
-#: Components/NotificationBox.js:205
+#: Components/NotificationBox.js:222
 msgid "voteOnYourDebate"
 msgstr "a voté sur votre débat"
 
@@ -776,11 +778,11 @@ msgstr "a voté sur votre débat"
 msgid "votePrivacy"
 msgstr "Confidentialité des votes"
 
-#: Screens/Profile.js:943
+#: Screens/Profile.js:951
 msgid "votesProfile"
 msgstr "Votes"
 
-#: Components/NotificationBox.js:1858
+#: Components/NotificationBox.js:2060
 msgid "wonDebateNotification"
 msgstr "Félicitations, vous avez gagné un débat en duo ! Comme récompense pour votre victoire, vous avez remporté 10 points"
 
@@ -788,7 +790,7 @@ msgstr "Félicitations, vous avez gagné un débat en duo ! Comme récompense po
 msgid "yesterday"
 msgstr "hier"
 
-#: Screens/Chat.js:635
+#: Screens/Chat.js:662
 msgid "youCantContact"
 msgstr "Vous ne pouvez plus contacter cet utilisateur."
 
@@ -808,20 +810,20 @@ msgstr "Vous avez aimé"
 msgid "youVote"
 msgstr "Vous avez voté"
 
-#: Screens/SignUp.js:128
+#: Screens/SignUp.js:125
 msgid "young18years"
 msgstr "L'âge minimum pour s'inscrire est de 18 ans."
 
 #: Screens/Debate.js:1238
-#: Screens/IsolateComment.js:557
+#: Screens/IsolateComment.js:602
 msgid "yourComment"
 msgstr "Votre commentaire"
 
-#: Screens/Profile.js:970
+#: Screens/Profile.js:978
 msgid "yourDebatesProfile"
 msgstr "Mes débats"
 
-#: Screens/Chat.js:634
+#: Screens/Chat.js:661
 msgid "yourMessage"
 msgstr "Votre message"
 
@@ -830,6 +832,6 @@ msgstr "Votre message"
 msgid "yourOpinion"
 msgstr "Votre opinion"
 
-#: Screens/Profile.js:942
+#: Screens/Profile.js:950
 msgid "yourVotesProfile"
 msgstr "Mes votes"
