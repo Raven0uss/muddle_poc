@@ -44,6 +44,14 @@ const BAN_USER = gql`
   }
 `;
 
+const DELETE_USER = gql`
+  mutation($userId: ID!) {
+    deleteThisUser(userId: $userId, banned: false) {
+      value
+    }
+  }
+`;
+
 const CERTIF_USER = gql`
   mutation($userId: ID!) {
     updateUser(where: { id: $userId }, data: { certified: true }) {
@@ -131,6 +139,12 @@ const Users = (props) => {
   };
 
   const [banUser] = useMutation(BAN_USER, {
+    onCompleted: () => {
+      setPage((page) => page + 1);
+      setPage((page) => page - 1);
+    },
+  });
+  const [deleteUser] = useMutation(DELETE_USER, {
     onCompleted: () => {
       setPage((page) => page + 1);
       setPage((page) => page - 1);
@@ -467,6 +481,25 @@ const Users = (props) => {
                     }
                   >
                     Bannir l'utilisateur
+                  </button>
+                </Grid>
+                <Grid item xs={3}>
+                  <button
+                    onClick={() =>
+                      askSure(
+                        "Voulez-vous supprimer cet utilisateur ? ",
+                        async () => {
+                          await deleteUser({
+                            variables: {
+                              userId: user.id,
+                            },
+                          });
+                          refetch();
+                        }
+                      )
+                    }
+                  >
+                    Supprimer l'utilisateur
                   </button>
                 </Grid>
               </Grid>

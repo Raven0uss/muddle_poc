@@ -357,9 +357,11 @@ const Mutation = prismaObjectType({
           const checkUserBanned = await prisma.banUser({ email: args.email });
           if (!isNil(checkUserBanned)) throw new Error("User banned.");
 
+          const hashedPassword = bcrypt.hashSync(password, 12);
+
           const user = await prisma.createUser({
             email: args.email,
-            password: args.password,
+            password: hashedPassword,
             firstname: args.firstname,
             lastname: args.lastname,
             birthdate: args.birthdate,

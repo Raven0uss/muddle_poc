@@ -7,12 +7,12 @@
       "resizeMode": "cover",
       "backgroundColor": "#F47658"
     },
-    "version": "1.0.3",
+    "version": "1.0.4",
     "slug": "muddles",
     "ios": {
       "requireFullScreen": true,
       "bundleIdentifier": "com.muddles.muddles",
-      "buildNumber": "1.0.3"
+      "buildNumber": "1.0.4"
     },
     "android": {
       "googleServicesFile": "./google-services.json",

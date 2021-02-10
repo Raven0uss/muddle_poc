@@ -43,9 +43,9 @@ const buttonIsDisable = ({
     isEmpty(lastname) ||
     isEmpty(email) ||
     isEmpty(password) ||
-    isEmpty(confirmPassword) ||
-    isNil(birthdate) ||
-    isNil(gender)
+    isEmpty(confirmPassword)
+    // isNil(birthdate) ||
+    // isNil(gender)
   )
     return true;
 };
@@ -111,28 +111,30 @@ const checkInputs = ({
       message: i18n._("notSamePassword"),
     };
   }
-  const checkFuture = moment().isBefore(moment(birthdate));
-  if (checkFuture) {
-    return {
-      error: true,
-      message: i18n._("bornInFuture"),
-    };
-  }
-  const check9years = moment().isBefore(moment(birthdate).add(18, "years"));
-  if (check9years) {
-    return {
-      error: true,
-      message: i18n._("young18years"),
-    };
-  }
-  const check99years = moment(birthdate).isBefore(
-    moment().subtract(99, "years")
-  );
-  if (check99years) {
-    return {
-      error: true,
-      message: i18n._("old99years"),
-    };
+  if (birthdate !== null) {
+    const checkFuture = moment().isBefore(moment(birthdate));
+    if (checkFuture) {
+      return {
+        error: true,
+        message: i18n._("bornInFuture"),
+      };
+    }
+    const check9years = moment().isBefore(moment(birthdate).add(18, "years"));
+    if (check9years) {
+      return {
+        error: true,
+        message: i18n._("young18years"),
+      };
+    }
+    const check99years = moment(birthdate).isBefore(
+      moment().subtract(99, "years")
+    );
+    if (check99years) {
+      return {
+        error: true,
+        message: i18n._("old99years"),
+      };
+    }
   }
   return {
     error: false,
@@ -221,9 +223,11 @@ function SignUpComponent(props) {
       firstname: strUcFirst(form.firstname),
       lastname: strUcFirst(form.lastname),
       password: form.password,
-      birthdate: form.birthdate,
+      birthdate: isNil(form.birthdate)
+        ? moment().subtract(18, "years")
+        : birthdate,
       // birthdate: moment().subtract(10, "years"),
-      gender: get(form, "gender.value", null),
+      gender: get(form, "gender.value", "NO_INDICATION"),
     },
   });
 
@@ -358,7 +362,7 @@ function SignUpComponent(props) {
               secureTextEntry={!visibility}
             />
             <DatePicker
-              placeholder={i18n._("birthdate") + " *"}
+              placeholder={i18n._("birthdate")}
               date={form.birthdate}
               onDateChange={(birthdate) => {
                 setForm((previousState) => ({
@@ -384,7 +388,7 @@ function SignUpComponent(props) {
                 },
               ]}
               selected={form.gender}
-              placeholder={i18n._("gender") + " *"}
+              placeholder={i18n._("gender")}
               onSelect={(gender) =>
                 setForm({
                   ...form,
