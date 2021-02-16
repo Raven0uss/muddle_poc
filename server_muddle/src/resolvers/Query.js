@@ -304,16 +304,24 @@ const Query = prismaObjectType({
           const blockedList = await prisma
             .user({ id: currentUser.user.id })
             .blocked();
-          const messages = get(conversations, "[0].messages");
-          if (messages === undefined) throw new Error("messages is undefined");
-          // messages.filter((m) => {
-          //   const index = blockedList.findIndex((b) => b.id === m.from.id);
-          //   console.log(index);
-          // });
+          let messages = [];
+          conversations.map((conversation) => {
+            messages.push(get(conversation, "messages", []));
+          });
+
+          messages = flattenDeep(messages);
+          if (isNil(messages)) throw new Error("messages is undefined");
 
           const numberOfNewNotifications = notifications.length;
           const numberOfNewMessages = messages.filter(
-            (m) => blockedList.findIndex((b) => b.id === m.from.id) === -1
+            (m) =>
+              blockedList.findIndex((b) => {
+                const fromId = get(m, "from.id");
+                const blockedId = get(b, "id");
+                if (isNil(fromId) || isNil(blockedId))
+                  return b.id === m.from.id;
+                return 0;
+              }) === -1
           ).length;
 
           // if (numberOfNewNotifications + numberOfNewMessages === 0) {
@@ -338,10 +346,10 @@ const Query = prismaObjectType({
       },
       resolve: async (parent, { skip, first }, { prisma, currentUser }) => {
         try {
-          console.log("first : ", first);
+          // console.log("first : ", first);
 
           const skipValue = first - 15;
-          console.log("skip : ", skipValue);
+          // console.log("skip : ", skipValue);
 
           const debates = await prisma
             .debates({
@@ -407,7 +415,7 @@ const Query = prismaObjectType({
 
           const skipProps = skipValue;
           const firstProps = isNil(first) ? 0 : first;
-          console.log(sorted.length);
+          // console.log(sorted.length);
           return sorted.slice(0, 15);
           // if (firstProps === 0) return sorted.slice(skipProps);
           // return sorted.slice(skipProps, skipProps + firstProps);

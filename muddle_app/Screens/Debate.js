@@ -50,9 +50,9 @@ const displayPercent = ({ votes, totalVotes, answer }) => {
 };
 
 const manageHeightButton = ({ answerOne, answerTwo }) => {
-  const oneLine = 38;
-  const twoLines = 55;
-  const threeLines = 70;
+  const oneLine = 41;
+  const twoLines = 62;
+  const threeLines = 83;
 
   if (answerOne.length <= 14 && answerTwo.length <= 14) return oneLine;
 

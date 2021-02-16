@@ -66,9 +66,9 @@ const displayPercent = ({ votes, totalVotes, answer }) => {
 };
 
 const manageHeightButton = ({ answerOne, answerTwo }) => {
-  const oneLine = 38;
-  const twoLines = 55;
-  const threeLines = 80;
+  const oneLine = 41;
+  const twoLines = 60;
+  const threeLines = 83;
 
   if (answerOne.length <= 14 && answerTwo.length <= 14) return oneLine;
 
@@ -343,7 +343,6 @@ const DebateBox = (props) => {
               source={{
                 uri: debate.image,
               }}
-              defaultSource={debate.image}
               style={{
                 width: Dimensions.get("screen").width / 1.2,
                 height: 180,

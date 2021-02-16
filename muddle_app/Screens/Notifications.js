@@ -53,6 +53,7 @@ const GET_NOTIFICATIONS = gql`
         image
         type
         crowned
+        timelimitString
         owner {
           id
           certified

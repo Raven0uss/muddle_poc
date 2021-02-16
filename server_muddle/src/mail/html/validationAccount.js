@@ -179,7 +179,7 @@ const html_validationAccount = ({ firstname, lastname, token }) => {
 <div style="color:#555555;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 <div class="txtTinyMce-wrapper" style="line-height: 1.2; font-size: 12px; color: #555555; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14px;">
 <p style="line-height: 1.2; word-break: break-word; mso-line-height-alt: 14px; margin: 0;">
-<a href="">http://www.muddles.fr/confirm?token=${token}</a>
+<a href="http://www.muddles.fr/confirm?token=${token}">http://www.muddles.fr/confirm?token=${token}</a>
 </p>
 </div>
 </div>
