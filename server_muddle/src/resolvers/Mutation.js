@@ -289,7 +289,28 @@ const Mutation = prismaObjectType({
       resolve: async (parent, { email }, { prisma }) => {
         try {
           const user = await prisma.user({ email });
-          if (isNil(user)) throw new Error("invalid user");
+          if (isNil(user)) {
+            const tmpUser = await prisma.tmpUser({ email });
+            if (isNil(tmpUser)) throw new Error("invalid user");
+
+            const tokenTmp = jwt.sign({ tmpUser }, process.env.JWT_SECRET_KEY, {
+              expiresIn: 43200,
+            });
+
+            const html = html_validationAccount({
+              firstname: "",
+              lastname: "",
+              token: tokenTmp,
+            });
+
+            await sendMailNoReplyWithHeaderAndFooter(
+              email,
+              "Validation de mon compte", // to change oc
+              html
+            );
+
+            return { token: tokenTmp };
+          }
 
           const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, {
             expiresIn: 7200,

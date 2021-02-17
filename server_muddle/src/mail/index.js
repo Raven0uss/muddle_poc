@@ -56,12 +56,13 @@ const transporter = createTransport({
 
 const emailHeader = ``;
 
-const emailFooter = `<hr size="1" color="black">
-    <div display:"flex" justify-content="space-between">
-      <span style="font-family:arial;color:olive;display:inline-block;margin-top:8px;margin-left:4px;">
-      by <a href="https://www.muddles.fr/">Muddles</a></span>
-      <span style="font-family:arial;color:gray;float:right;margin-top:8px;">Keep in touch via <a href="https://twitter.com/Muddle">Twitter</a></span>
-    </div>`;
+// const emailFooter = `<hr size="1" color="black">
+//     <div display:"flex" justify-content="space-between">
+//       <span style="font-family:arial;color:olive;display:inline-block;margin-top:8px;margin-left:4px;">
+//       by <a href="https://www.muddles.fr/">Muddles</a></span>
+//       <span style="font-family:arial;color:gray;float:right;margin-top:8px;">Keep in touch via <a href="https://twitter.com/Muddle">Twitter</a></span>
+//     </div>`;
+const emailFooter = "";
 
 export async function sendMailNoReply({
   to,
