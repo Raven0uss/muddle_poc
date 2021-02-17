@@ -225,7 +225,7 @@ function SignUpComponent(props) {
       password: form.password,
       birthdate: isNil(form.birthdate)
         ? moment().subtract(18, "years")
-        : birthdate,
+        : form.birthdate,
       // birthdate: moment().subtract(10, "years"),
       gender: get(form, "gender.value", "NO_INDICATION"),
     },
@@ -473,7 +473,7 @@ function SignUpComponent(props) {
                     }
                   : {}),
               }}
-              // disabled={buttonIsDisable(form) || loading}
+              disabled={buttonIsDisable(form) || loading}
             >
               {loading ? (
                 <ActivityIndicator size={36} />
@@ -490,18 +490,19 @@ function SignUpComponent(props) {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.noAccountBloc}>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.goBack()}
+            disabled={loading}
+          >
+            <Text style={styles.noAccountText}>
+              {`${i18n._("alreadyMember?")} `}
+              <Text style={styles.subscriptionLink}>{i18n._("connect")}</Text>
+            </Text>
+          </TouchableWithoutFeedback>
+        </View>
       </ScrollView>
-      <View style={styles.noAccountBloc}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.goBack()}
-          disabled={loading}
-        >
-          <Text style={styles.noAccountText}>
-            {`${i18n._("alreadyMember?")} `}
-            <Text style={styles.subscriptionLink}>{i18n._("connect")}</Text>
-          </Text>
-        </TouchableWithoutFeedback>
-      </View>
+
       <Snackbar
         visible={snack.visible}
         onDismiss={() =>
