@@ -251,7 +251,11 @@ function LoginComponent(props) {
           <TextInput
             placeholder={i18n._("mailAddress")}
             value={email}
+            autoCapitalize="none"
             onChangeText={(e) => setEmail(e)}
+            onBlur={() => {
+              setEmail((e) => e.toLowerCase().trim());
+            }}
             style={{
               ...styles.input,
               color: themeSchema[theme].colorText,
@@ -268,6 +272,7 @@ function LoginComponent(props) {
           >
             <TextInput
               placeholder={i18n._("password")}
+              autoCapitalize="none"
               value={password}
               onChangeText={(p) => setPassword(p)}
               style={{

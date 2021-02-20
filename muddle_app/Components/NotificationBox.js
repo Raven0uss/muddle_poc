@@ -475,7 +475,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("acceptYourInvitation")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -568,7 +568,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("rejectYourInvitation")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -649,7 +649,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("acceptCloseDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -741,7 +741,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("rejectCloseDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -833,7 +833,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("acceptDeleteDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -914,7 +914,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("rejectDeleteDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -1220,7 +1220,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {` ${i18n._("askToCloseThisDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -1401,7 +1401,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {` ${i18n._("askToDeleteThisDebate")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -1796,7 +1796,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("followingYou")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -1966,7 +1966,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("topCommentNotification")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>
@@ -2058,7 +2058,7 @@ const NotificationBox = (props) => {
                   }}
                 >
                   {`${i18n._("wonDebateNotification")} ${getTimeSpent(
-                    notification.updatedAt
+                    notification.createdAt
                   )}`}
                 </Text>
               </View>

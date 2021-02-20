@@ -251,7 +251,7 @@ const Notifications = (props) => {
               width: 50,
               height: 28,
               marginTop: 8,
-              marginLeft: -32,
+              marginLeft: 0,
               marginBottom: 10,
             }}
           />

@@ -24,19 +24,34 @@ import i18n from "../i18n";
 import CertifiedIcon from "../Components/CertifiedIcon";
 import { isBlocked, isBlockingMe } from "../Library/isBlock";
 
+// const GET_USERS = gql`
+//   query($firstname: String!, $lastname: String!) {
+//     users(
+//       where: {
+//         firstname_contains: $firstname
+//         lastname_contains: $lastname
+//         AND: [
+//           { role_not: MUDDLE }
+//           { role_not: ADMIN }
+//           { role_not: MODERATOR }
+//         ]
+//       }
+//     ) {
+//       id
+//       firstname
+//       lastname
+//       email
+//       certified
+//       profilePicture
+//       coverPicture
+//       crowned
+//     }
+//   }
+// `;
+
 const GET_USERS = gql`
-  query($firstname: String!, $lastname: String!) {
-    users(
-      where: {
-        firstname_contains: $firstname
-        lastname_contains: $lastname
-        AND: [
-          { role_not: MUDDLE }
-          { role_not: ADMIN }
-          { role_not: MODERATOR }
-        ]
-      }
-    ) {
+  query($name: String!) {
+    usersInsensitiveCase(name: $name) {
       id
       firstname
       lastname
@@ -53,19 +68,20 @@ const Search = (props) => {
   const { theme } = React.useContext(ThemeContext);
   const { currentUser } = React.useContext(UserContext);
   const [users, setUsers] = React.useState([]);
-  const [firstname, setFirstname] = React.useState("");
-  const [lastname, setLastname] = React.useState("");
+  const [name, setName] = React.useState("");
   const [skipFetch, setSkipFetch] = React.useState(true);
   const { loading, error } = useQuery(GET_USERS, {
     variables: {
-      firstname: strUcFirst(firstname),
-      lastname: strUcFirst(lastname),
+      name: strUcFirst(name.trim()),
     },
     onCompleted: (response) => {
-      const { users: queryResult } = response;
+      const { usersInsensitiveCase: queryResult } = response;
 
       setUsers(queryResult);
       setSkipFetch(true);
+    },
+    onError: (err) => {
+      console.log(err);
     },
     skip: skipFetch,
   });
@@ -118,30 +134,8 @@ const Search = (props) => {
             }}
           >
             <TextInput
-              placeholder={i18n._("firstname")}
-              value={firstname}
-              style={{
-                height: 40,
-                borderRadius: 10,
-                width: "100%",
-                backgroundColor: themeSchema[theme].backgroundColor1,
-                // marginLeft: "auto",
-                // marginRight: "auto",
-                padding: 10,
-                paddingLeft: 20,
-                paddingRight: 20,
-                fontSize: 14,
-                // marginBottom: 14,
-                fontFamily: "Montserrat_500Medium",
-                color: themeSchema[theme].colorText,
-              }}
-              keyboardType="default"
-              placeholderTextColor={themeSchema[theme].colorText}
-              onChangeText={(s) => setFirstname(s)}
-            />
-            <TextInput
-              placeholder={i18n._("lastname")}
-              value={lastname}
+              placeholder={i18n._("search")}
+              value={name}
               style={{
                 height: 40,
                 borderRadius: 10,
@@ -161,7 +155,7 @@ const Search = (props) => {
               }}
               keyboardType="default"
               placeholderTextColor={themeSchema[theme].colorText}
-              onChangeText={(s) => setLastname(s)}
+              onChangeText={(s) => setName(s)}
             />
           </View>
 
@@ -178,7 +172,7 @@ const Search = (props) => {
               Keyboard.dismiss();
               setSkipFetch(false);
             }}
-            disabled={firstname.length === 0 && lastname.length === 0}
+            disabled={name.length === 0}
           >
             <Text
               style={{

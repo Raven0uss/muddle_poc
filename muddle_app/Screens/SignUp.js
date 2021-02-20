@@ -78,6 +78,20 @@ const checkInputs = ({
   birthdate,
   cgu,
 }) => {
+  if (firstname.search(/^[a-zA-Zèéàáêâç \-]*$/g) === -1) {
+    return {
+      error: true,
+      message: i18n._("firstnameContainNotAllowedChar"),
+    };
+  }
+
+  if (lastname.search(/^[a-zA-Zèéàáêâç \-]*$/g) === -1) {
+    return {
+      error: true,
+      message: i18n._("lastnameContainNotAllowedChar"),
+    };
+  }
+
   if (cgu === false)
     return {
       error: true,
@@ -256,12 +270,20 @@ function SignUpComponent(props) {
               <TextInput
                 placeholder={i18n._("firstname") + " *"}
                 value={form.firstname}
-                onChangeText={(firstname) =>
+                onChangeText={(firstname) => {
                   setForm((previousState) => ({
                     ...previousState,
-                    firstname: strUcFirst(firstname),
-                  }))
-                }
+                    firstname,
+                  }));
+                }}
+                onBlur={() => {
+                  setForm((previousState) => ({
+                    ...previousState,
+                    firstname: strUcFirst(
+                      previousState.firstname.trim().replace(/ {1,}/g, " ")
+                    ),
+                  }));
+                }}
                 style={{
                   ...styles.input,
                   width: "48%",
@@ -274,12 +296,20 @@ function SignUpComponent(props) {
               <TextInput
                 placeholder={i18n._("lastname") + " *"}
                 value={form.lastname}
-                onChangeText={(lastname) =>
+                onBlur={() => {
                   setForm((previousState) => ({
                     ...previousState,
-                    lastname: strUcFirst(lastname),
-                  }))
-                }
+                    lastname: strUcFirst(
+                      previousState.lastname.trim().replace(/ {1,}/g, " ")
+                    ),
+                  }));
+                }}
+                onChangeText={(lastname) => {
+                  setForm((previousState) => ({
+                    ...previousState,
+                    lastname: lastname,
+                  }));
+                }}
                 style={{
                   ...styles.input,
                   width: "48%",
@@ -294,12 +324,20 @@ function SignUpComponent(props) {
             <TextInput
               placeholder={i18n._("mailAddress") + " *"}
               value={form.email}
-              onChangeText={(email) =>
+              autoCapitalize="none"
+              onBlur={() => {
                 setForm((previousState) => ({
                   ...previousState,
-                  email: email.toLowerCase(),
-                }))
-              }
+                  email: previousState.email.toLowerCase().trim(),
+                }));
+              }}
+              onChangeText={(email) => {
+                console.log(email);
+                setForm((previousState) => ({
+                  ...previousState,
+                  email: email,
+                }));
+              }}
               style={{
                 ...styles.input,
                 color: themeSchema[theme].colorText,
@@ -331,6 +369,7 @@ function SignUpComponent(props) {
                 keyboardType="default"
                 placeholderTextColor={themeSchema[theme].colorText}
                 secureTextEntry={!visibility}
+                autoCapitalize="none"
               />
               <View style={styles.passwordIcon}>
                 <TouchableOpacity onPress={() => setVisibility((v) => !v)}>
@@ -346,6 +385,7 @@ function SignUpComponent(props) {
             <TextInput
               placeholder={i18n._("confirmPassword") + " *"}
               value={form.confirmPassword}
+              autoCapitalize="none"
               onChangeText={(confirmPassword) =>
                 setForm((previousState) => ({
                   ...previousState,

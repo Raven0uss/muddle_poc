@@ -194,10 +194,10 @@ const Mutation = prismaObjectType({
           )
             getGender = "NO_INDICATION";
           const user = await prisma.createTmpUser({
-            email,
+            email: email.trim().toLowerCase(),
             password: hashedPassword,
-            firstname,
-            lastname,
+            firstname: firstname.trim(),
+            lastname: lastname.trim(),
             birthdate,
             gender: getGender,
           });
@@ -286,8 +286,9 @@ const Mutation = prismaObjectType({
       args: {
         email: stringArg(),
       },
-      resolve: async (parent, { email }, { prisma }) => {
+      resolve: async (parent, { email: emailReceived }, { prisma }) => {
         try {
+          const email = emailReceived.trim().toLowerCase();
           const user = await prisma.user({ email });
           if (isNil(user)) {
             const tmpUser = await prisma.tmpUser({ email });
@@ -381,10 +382,10 @@ const Mutation = prismaObjectType({
           const hashedPassword = bcrypt.hashSync(password, 12);
 
           const user = await prisma.createUser({
-            email: args.email,
+            email: args.email.trim().toLowerCase(),
             password: hashedPassword,
-            firstname: args.firstname,
-            lastname: args.lastname,
+            firstname: args.firstname.trim(),
+            lastname: args.lastname.trim(),
             birthdate: args.birthdate,
             gender: args.gender,
             role: args.role,
@@ -2275,6 +2276,9 @@ const Mutation = prismaObjectType({
               message,
             })
           );
+          return {
+            value: 0,
+          };
         } catch (err) {
           throw new Error(err);
         }

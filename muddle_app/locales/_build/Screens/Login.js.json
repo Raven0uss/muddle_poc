@@ -27,7 +27,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        270
+        274
       ]
     ]
   },
@@ -35,7 +35,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        298
+        303
       ]
     ]
   },
@@ -43,7 +43,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        338
+        343
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        387
+        392
       ]
     ]
   },
@@ -59,7 +59,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        389
+        394
       ]
     ]
   },
@@ -67,7 +67,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        399
+        404
       ]
     ]
   },
@@ -75,7 +75,7 @@
     "origin": [
       [
         "Screens/Login.js",
-        401
+        406
       ]
     ]
   }

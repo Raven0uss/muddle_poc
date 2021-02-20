@@ -15,7 +15,7 @@
       ]
     ]
   },
-  "haveToAcceptCGU": {
+  "firstnameContainNotAllowedChar": {
     "origin": [
       [
         "Screens/SignUp.js",
@@ -23,11 +23,27 @@
       ]
     ]
   },
+  "lastnameContainNotAllowedChar": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        91
+      ]
+    ]
+  },
+  "haveToAcceptCGU": {
+    "origin": [
+      [
+        "Screens/SignUp.js",
+        98
+      ]
+    ]
+  },
   "notValidEmail": {
     "origin": [
       [
         "Screens/SignUp.js",
-        90
+        104
       ]
     ]
   },
@@ -35,7 +51,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        95
+        109
       ]
     ]
   },
@@ -43,7 +59,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        101
+        115
       ]
     ]
   },
@@ -51,7 +67,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        111
+        125
       ]
     ]
   },
@@ -59,7 +75,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        118
+        133
       ]
     ]
   },
@@ -67,7 +83,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        125
+        140
       ]
     ]
   },
@@ -75,7 +91,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        134
+        149
       ]
     ]
   },
@@ -83,7 +99,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        215
+        231
       ]
     ]
   },
@@ -91,7 +107,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        253
+        271
       ]
     ]
   },
@@ -99,7 +115,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        271
+        297
       ]
     ]
   },
@@ -107,7 +123,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        291
+        325
       ]
     ]
   },
@@ -115,7 +131,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        314
+        356
       ]
     ]
   },
@@ -123,7 +139,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        343
+        386
       ]
     ]
   },
@@ -131,7 +147,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        361
+        405
       ]
     ]
   },
@@ -139,7 +155,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        374
+        418
       ]
     ]
   },
@@ -147,7 +163,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        378
+        422
       ]
     ]
   },
@@ -155,7 +171,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        382
+        426
       ]
     ]
   },
@@ -163,7 +179,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        387
+        431
       ]
     ]
   },
@@ -171,7 +187,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        411
+        455
       ]
     ]
   },
@@ -179,7 +195,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        413
+        457
       ]
     ]
   },
@@ -187,7 +203,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        442
+        486
       ]
     ]
   },
@@ -195,7 +211,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        450
+        494
       ]
     ]
   },
@@ -203,7 +219,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        458
+        502
       ]
     ]
   },
@@ -211,7 +227,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        483
+        527
       ]
     ]
   },
@@ -219,7 +235,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        496
+        539
       ]
     ]
   },
@@ -227,7 +243,7 @@
     "origin": [
       [
         "Screens/SignUp.js",
-        497
+        540
       ]
     ]
   }

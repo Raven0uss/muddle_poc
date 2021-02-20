@@ -86,7 +86,11 @@ function ForgotPasswordComponent(props) {
           <TextInput
             placeholder={i18n._("mailAddress")}
             value={email}
+            autoCapitalize="none"
             onChangeText={(e) => setEmail(e)}
+            onBlur={() => {
+              setEmail((e) => e.toLowerCase().trim());
+            }}
             style={{
               ...styles.input,
               backgroundColor: themeSchema[theme].backgroundColor2,

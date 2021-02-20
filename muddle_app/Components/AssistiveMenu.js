@@ -429,7 +429,7 @@ const AssistiveMenu = (props) => {
                 if (route.name !== "Menu") navigation.push("Menu");
               }}
             >
-              <Icon name="menu" size={32} />
+              <Icon name="settings" size={28} />
             </TouchableOpacity>
           </>
         )}

@@ -18,7 +18,6 @@ const getPushNotificationObject = ({
       },
       en: {
         sound: true,
-
         title: "You got the crown !",
         body:
           "Muddles team gave you a crown. You have 24H to create a debate. This debate will be placed in the top of the feeds for all users.",

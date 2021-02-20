@@ -639,6 +639,44 @@ const Query = prismaObjectType({
       },
     });
 
+    t.list.field("usersInsensitiveCase", {
+      type: "User",
+      args: { name: stringArg() },
+      resolve: async (parent, args, { prisma }) => {
+        try {
+          const users = await prisma.users({
+            where: {
+              AND: [
+                // { role_not: "MUDDLE" },
+                { role_not: "ADMIN" },
+                { role_not: "MODERATOR" },
+              ],
+            },
+          });
+          const name = args.name.toLowerCase().trim();
+          const filtered = users.filter((user) => {
+            const firstname = get(user, "firstname");
+            const lastname = get(user, "lastname");
+            if (isNil(firstname) || isNil(lastname)) return false;
+            const fullname =
+              firstname.toLowerCase() + " " + lastname.toLowerCase();
+            const fullnameReverse =
+              lastname.toLowerCase() + " " + firstname.toLowerCase();
+            if (
+              fullname.trim().includes(name) ||
+              fullnameReverse.trim().includes(name)
+            )
+              return true;
+            return false;
+          });
+          return filtered;
+        } catch (err) {
+          console.log(err);
+          throw new Error(err);
+        }
+      },
+    });
+
     // trophies
     // t.list.field("trophies", {
     //   type: "Trophy",

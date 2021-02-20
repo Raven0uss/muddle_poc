@@ -9,7 +9,7 @@ const sendPushNotification = ({
   subtitle = null,
   body,
   sound = false,
-  badge,
+  badge = 0,
   data = {},
 }) => {
   if (!Expo.isExpoPushToken(pushToken)) {
@@ -49,7 +49,8 @@ const chunkAndSendMessages = async (messages) => {
   for (let chunk of chunks) {
     try {
       console.log(chunk);
-      await expo.sendPushNotificationsAsync(chunk);
+      const response = await expo.sendPushNotificationsAsync(chunk);
+      console.log(response);
     } catch (err) {
       console.error(err);
     }
