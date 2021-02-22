@@ -4348,7 +4348,7 @@ type User {
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction!]
   mailStatus: MailStatus!
   mailErrors: [Int!]!
-  pushToken: String
+  pushToken: [String!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -4391,7 +4391,7 @@ input UserCreateInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreatemailErrorsInput {
@@ -4463,6 +4463,10 @@ input UserCreateOneWithoutTrophiesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreatepushTokenInput {
+  set: [String!]
+}
+
 input UserCreateWithoutBlockedInput {
   id: ID
   firstname: String!
@@ -4494,7 +4498,7 @@ input UserCreateWithoutBlockedInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutBlockingInput {
@@ -4528,7 +4532,7 @@ input UserCreateWithoutBlockingInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutConversationsInput {
@@ -4562,7 +4566,7 @@ input UserCreateWithoutConversationsInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutDebatesBlueInput {
@@ -4596,7 +4600,7 @@ input UserCreateWithoutDebatesBlueInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutDebatesInput {
@@ -4630,7 +4634,7 @@ input UserCreateWithoutDebatesInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutDebatesRedInput {
@@ -4664,7 +4668,7 @@ input UserCreateWithoutDebatesRedInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutFollowersInput {
@@ -4698,7 +4702,7 @@ input UserCreateWithoutFollowersInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutFollowingInput {
@@ -4732,7 +4736,7 @@ input UserCreateWithoutFollowingInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutInteractionsInput {
@@ -4766,7 +4770,7 @@ input UserCreateWithoutInteractionsInput {
   conversations: ConversationCreateManyWithoutSpeakersInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutNotificationsInput {
@@ -4800,7 +4804,7 @@ input UserCreateWithoutNotificationsInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 input UserCreateWithoutTrophiesInput {
@@ -4834,7 +4838,7 @@ input UserCreateWithoutTrophiesInput {
   interactions: InteractionCreateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserCreatemailErrorsInput
-  pushToken: String
+  pushToken: UserCreatepushTokenInput
 }
 
 type UserEdge {
@@ -4881,8 +4885,6 @@ enum UserOrderByInput {
   lastConnected_DESC
   mailStatus_ASC
   mailStatus_DESC
-  pushToken_ASC
-  pushToken_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -4910,7 +4912,7 @@ type UserPreviousValues {
   lastConnected: DateTime
   mailStatus: MailStatus!
   mailErrors: [Int!]!
-  pushToken: String
+  pushToken: [String!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -5078,20 +5080,6 @@ input UserScalarWhereInput {
   mailStatus_not: MailStatus
   mailStatus_in: [MailStatus!]
   mailStatus_not_in: [MailStatus!]
-  pushToken: String
-  pushToken_not: String
-  pushToken_in: [String!]
-  pushToken_not_in: [String!]
-  pushToken_lt: String
-  pushToken_lte: String
-  pushToken_gt: String
-  pushToken_gte: String
-  pushToken_contains: String
-  pushToken_not_contains: String
-  pushToken_starts_with: String
-  pushToken_not_starts_with: String
-  pushToken_ends_with: String
-  pushToken_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -5160,7 +5148,7 @@ input UserUpdateDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateInput {
@@ -5194,7 +5182,7 @@ input UserUpdateInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdatemailErrorsInput {
@@ -5221,7 +5209,7 @@ input UserUpdateManyDataInput {
   lastConnected: DateTime
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateManyInput {
@@ -5256,7 +5244,7 @@ input UserUpdateManyMutationInput {
   lastConnected: DateTime
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateManyWithoutBlockedInput {
@@ -5393,6 +5381,10 @@ input UserUpdateOneWithoutDebatesRedInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdatepushTokenInput {
+  set: [String!]
+}
+
 input UserUpdateWithoutBlockedDataInput {
   firstname: String
   lastname: String
@@ -5423,7 +5415,7 @@ input UserUpdateWithoutBlockedDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutBlockingDataInput {
@@ -5456,7 +5448,7 @@ input UserUpdateWithoutBlockingDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutConversationsDataInput {
@@ -5489,7 +5481,7 @@ input UserUpdateWithoutConversationsDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutDebatesBlueDataInput {
@@ -5522,7 +5514,7 @@ input UserUpdateWithoutDebatesBlueDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutDebatesDataInput {
@@ -5555,7 +5547,7 @@ input UserUpdateWithoutDebatesDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutDebatesRedDataInput {
@@ -5588,7 +5580,7 @@ input UserUpdateWithoutDebatesRedDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutFollowersDataInput {
@@ -5621,7 +5613,7 @@ input UserUpdateWithoutFollowersDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutFollowingDataInput {
@@ -5654,7 +5646,7 @@ input UserUpdateWithoutFollowingDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutInteractionsDataInput {
@@ -5687,7 +5679,7 @@ input UserUpdateWithoutInteractionsDataInput {
   conversations: ConversationUpdateManyWithoutSpeakersInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutNotificationsDataInput {
@@ -5720,7 +5712,7 @@ input UserUpdateWithoutNotificationsDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithoutTrophiesDataInput {
@@ -5753,7 +5745,7 @@ input UserUpdateWithoutTrophiesDataInput {
   interactions: InteractionUpdateManyWithoutWhoInput
   mailStatus: MailStatus
   mailErrors: UserUpdatemailErrorsInput
-  pushToken: String
+  pushToken: UserUpdatepushTokenInput
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -6037,20 +6029,6 @@ input UserWhereInput {
   mailStatus_not: MailStatus
   mailStatus_in: [MailStatus!]
   mailStatus_not_in: [MailStatus!]
-  pushToken: String
-  pushToken_not: String
-  pushToken_in: [String!]
-  pushToken_not_in: [String!]
-  pushToken_lt: String
-  pushToken_lte: String
-  pushToken_gt: String
-  pushToken_gte: String
-  pushToken_contains: String
-  pushToken_not_contains: String
-  pushToken_starts_with: String
-  pushToken_not_starts_with: String
-  pushToken_ends_with: String
-  pushToken_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

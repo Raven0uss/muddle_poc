@@ -15,6 +15,7 @@ import { sendPushNotification } from "../pushNotifications";
 import getPushNotificationObject from "../pushNotifications/messagesNotifications";
 import html_validationAccount from "../mail/html/validationAccount";
 import html_forgotPassword from "../mail/html/forgotPassword";
+import { prisma } from "../../prisma/generated/prisma-client";
 
 // Mutations
 const exposedMutations = {
@@ -1876,7 +1877,7 @@ const Mutation = prismaObjectType({
           sendPushNotification(
             getPushNotificationObject({
               pushToken: updatedUser.pushToken,
-              type: "crown",
+              type: "crowned",
               language: updatedUser.language,
             })
           );
@@ -2230,7 +2231,7 @@ const Mutation = prismaObjectType({
     });
 
     t.field("checkPushToken", {
-      type: "User",
+      type: "Token",
       args: {
         pushToken: stringArg(),
         userId: idArg(),
@@ -2238,17 +2239,18 @@ const Mutation = prismaObjectType({
       resolve: async (parent, { pushToken, userId }, { prisma }) => {
         try {
           const user = await prisma.user({ id: userId });
-          const currentPushToken = get(user, "pushToken");
-          if (currentPushToken !== pushToken) {
+          const currentPushToken = get(user, "pushToken", []);
+          if (currentPushToken.includes(pushToken) === false) {
+            currentPushToken.push(pushToken);
             const updatedUser = await prisma.updateUser({
               where: { id: userId },
               data: {
-                pushToken,
+                pushToken: { set: currentPushToken },
               },
             });
-            return updatedUser;
+            return { token: pushToken };
           } else {
-            return user;
+            return { token: pushToken };
           }
         } catch (err) {
           throw new Error(err);
@@ -2285,27 +2287,60 @@ const Mutation = prismaObjectType({
       },
     });
 
-    // t.field("blockUser", {
-    //   type: "User",
+    // Solution to implement multi devices push notifications
+    // t.field("addPushToken", {
+    //   type: "NoValue",
     //   args: {
-    //     userId: idArg()
+    //     userId: idArg(),
+    //     pushToken: stringArg(),
     //   },
-    //   resolve: async (parent, { userId }, { prisma, currentUser }) => {
-
-    //   }
-    // })
-
-    // t.field("imageUpload", {
-    //   type: "ImageURI",
-    //   args: {
-    //     localUri: stringArg(),
-    //   },
-    //   resolve: async (parent, { localUri }, ctx) => {
-    //     return {
-    //       image: "test",
-    //     };
+    //   resolve: async (parent, { userId, pushToken }) => {
+    //     try {
+    //       const user = await prisma.user({ id: userId });
+    //       if (isNil(user)) throw new Error("user unrecognized");
+    //       const pushTokenList = get(user, "pushToken", []);
+    //       if (pushTokenList.includes(pushToken)) return { value: 0 };
+    //       pushTokenList.push(pushToken);
+    //       await prisma.updateUser({
+    //         where: { id: userId },
+    //         data: {
+    //           pushToken: pushTokenList,
+    //         },
+    //       });
+    //     } catch (err) {
+    //       throw new Error(err);
+    //     }
     //   },
     // });
+
+    t.field("removePushToken", {
+      type: "NoValue",
+      args: {
+        userId: idArg(),
+        pushToken: stringArg(),
+      },
+      resolve: async (parent, { userId, pushToken }) => {
+        try {
+          const user = await prisma.user({ id: userId });
+          if (isNil(user)) throw new Error("user unrecognized");
+          const pushTokenList = get(user, "pushToken", []);
+          if (pushTokenList.includes(pushToken) === false) return { value: 0 };
+          const index = pushTokenList.findIndex((pT) => pT === pushToken);
+          pushTokenList.splice(index, 1);
+          await prisma.updateUser({
+            where: { id: userId },
+            data: {
+              pushToken: {
+                set: pushTokenList,
+              },
+            },
+          });
+          return { value: 0 };
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    });
   },
 });
 

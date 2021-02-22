@@ -64,7 +64,7 @@ type User {
   interactions: [Interaction]
   mailStatus: MailStatus! @default(value: HEALTHY)
   mailErrors: [Int!]!
-  pushToken: String
+  pushToken: [String]
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

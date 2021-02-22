@@ -97,7 +97,7 @@ async function main() {
   // Create two users to test the chat
 
   const A = await prisma.createUser({
-    email: "userA",
+    email: "usera",
     password: bcrypt.hashSync("test", 12),
     firstname: "Elliot",
     lastname: "Alderson",
@@ -109,7 +109,7 @@ async function main() {
   });
 
   const B = await prisma.createUser({
-    email: "userB",
+    email: "userb",
     password: bcrypt.hashSync("test", 12),
     firstname: "Mister",
     lastname: "Robot",

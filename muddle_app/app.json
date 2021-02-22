@@ -7,18 +7,18 @@
       "resizeMode": "cover",
       "backgroundColor": "#F47658"
     },
-    "version": "1.0.10",
+    "version": "1.0.11",
     "slug": "muddles",
     "ios": {
       "requireFullScreen": true,
       "bundleIdentifier": "com.muddles.muddles",
-      "buildNumber": "1.0.10",
+      "buildNumber": "1.0.11",
       "supportsTablet": true
     },
     "android": {
       "googleServicesFile": "./google-services.json",
       "package": "com.muddles.muddles",
-      "versionCode": 6,
+      "versionCode": 7,
       "permissions": ["CAMERA"],
       "useNextNotificationsApi": true
     }

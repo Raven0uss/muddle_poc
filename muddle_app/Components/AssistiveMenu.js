@@ -7,6 +7,7 @@ import {
   Animated,
   TouchableOpacity,
   Text,
+  Platform,
 } from "react-native";
 import { Easing } from "react-native-reanimated";
 import Icon from "./Icon";
@@ -14,6 +15,7 @@ import { gql, useQuery } from "@apollo/client";
 import Badge from "./Badge";
 import { useIsFocused } from "@react-navigation/native";
 import { get } from "lodash";
+import { setBadgeCountAsync } from "expo-notifications";
 
 const properties = {
   borderRadius: {
@@ -66,9 +68,13 @@ const AssistiveMenu = (props) => {
       const { newNotifications: queryResponse } = response;
 
       setNewNotifications(queryResponse);
+      const messagesN = get(queryResponse, "messages", 0);
+      const notificationsN = get(queryResponse, "notifications", 0);
+      if (Platform.OS === "ios") setBadgeCountAsync(messagesN + notificationsN);
     },
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
+    pollInterval: 10000,
   });
 
   const [borderTopRadiusButton] = React.useState(

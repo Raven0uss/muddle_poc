@@ -37,7 +37,8 @@
     "react-native-webview": "^11.2.1",
     "recyclerlistview": "^3.0.0",
     "rn-pdf-reader-js": "^4.1.1",
-    "subscriptions-transport-ws": "^0.9.18"
+    "subscriptions-transport-ws": "^0.9.18",
+    "expo-notifications": "~0.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

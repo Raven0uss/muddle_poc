@@ -18,11 +18,13 @@ import UserContext from "../CustomProperties/UserContext";
 import themeSchema from "../CustomProperties/Theme";
 import { removeItem } from "../CustomProperties/storage";
 import { useMutation, gql } from "@apollo/client";
+import { getDevicePushTokenAsync } from "expo-notifications";
+
 
 const DELETE_PUSH_TOKEN = gql`
-  mutation($userId: ID!) {
-    updateUser(where: { id: $userId }, data: { pushToken: null }) {
-      id
+  mutation($userId: ID!, $pushToken: String!) {
+    removePushToken(userId: $userId, pushToken: $pushToken) {
+      value
     }
   }
 `;
@@ -37,9 +39,12 @@ const Menu = (props) => {
     setRefresh(true);
   }, [isFocused]);
 
+  console.log(currentUser.pushToken);
+
   const [deletePushToken] = useMutation(DELETE_PUSH_TOKEN, {
     variables: {
       userId: currentUser.id,
+      pushToken: currentUser.pushToken,
     },
     onCompleted: () => {
       removeItem("token");

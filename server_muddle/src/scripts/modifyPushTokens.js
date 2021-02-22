@@ -5,12 +5,11 @@ const main = async () => {
   const users = await prisma.users();
   users.map(async (user) => {
     const id = get(user, "id");
-    var email = get(user, "email");
-    if (email !== undefined) {
-      email = email.toLowerCase();
+    var pushToken = get(user, "pushToken");
+    if (pushToken !== undefined) {
       await prisma.updateUser({
         data: {
-          email,
+          pushToken: null,
         },
         where: {
           id,

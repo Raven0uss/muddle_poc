@@ -79,6 +79,9 @@ const Stack = createStackNavigator();
 // const mode = "APP";
 const mode = "LOGIN";
 
+// const DISABLE_LOG = true;
+const DISABLE_LOG = false;
+
 const setInitialRoute = () => {
   switch (mode) {
     case "COMPONENTS":
@@ -132,6 +135,8 @@ export default function App() {
         setTheme(elementTheme);
       }
     };
+
+    if (DISABLE_LOG) console.log = function () {};
 
     setStorage();
   }, []);

@@ -152,13 +152,12 @@ const GET_ADS = gql`
 const REFRESH_PUSH_TOKEN = gql`
   mutation($userId: ID!, $pushToken: String!) {
     checkPushToken(userId: $userId, pushToken: $pushToken) {
-      id
+      token
     }
   }
 `;
 
 async function registerForPushNotificationsAsync() {
-  console.log("test");
   const { status: existingStatus } = await Permissions.getAsync(
     Permissions.NOTIFICATIONS
   );
@@ -181,7 +180,7 @@ async function registerForPushNotificationsAsync() {
 
   // Get the token that uniquely identifies this device
   const pushNotificiationToken = await Notifications.getExpoPushTokenAsync();
-  console.log(pushNotificiationToken);
+  // console.log(pushNotificiationToken);
   return pushNotificiationToken;
 }
 
@@ -243,6 +242,8 @@ const Home = (props) => {
   const [debates, setDebates] = React.useState([]);
   const [ads, setAds] = React.useState([]);
   const [noMoreData, setNoMoreData] = React.useState(false);
+
+
   const { data, loading, error, fetchMore, refetch } = useQuery(GET_DEBATES, {
     variables: {
       first: nbDebates,
@@ -289,7 +290,7 @@ const Home = (props) => {
 
   const [refreshPushToken] = useMutation(REFRESH_PUSH_TOKEN, {
     onCompleted: (response) => {
-      const newPushToken = get(response, "checkPushToken.pushToken");
+      const newPushToken = get(response, "checkPushToken.token");
       if (!isNil(newPushToken)) {
         setCurrentUser((cu) => ({
           ...cu,
@@ -301,7 +302,7 @@ const Home = (props) => {
 
   React.useEffect(() => {
     const managePushNotificationToken = async () => {
-      console.log("managePushNotification");
+      // console.log("managePushNotification");
       const pushToken = await registerForPushNotificationsAsync();
       console.log(pushToken);
       if (pushToken !== null) {

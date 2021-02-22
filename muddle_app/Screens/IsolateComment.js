@@ -386,7 +386,7 @@ const IsolateComment = (props) => {
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const { comment: moreComments } = fetchMoreResult;
               if (isEmpty(moreComments.comments)) return setNoMoreData(true);
-              console.log(moreComments.comments);
+              // console.log(moreComments.comments);
               setComments((previousState) =>
                 [...previousState.comments, ...moreComments.comments].reduce(
                   (acc, current) => {

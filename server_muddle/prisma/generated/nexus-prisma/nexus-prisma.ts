@@ -292,6 +292,7 @@ export interface NexusPrismaTypes {
       MessageCreateManyWithoutConversationInput: MessageCreateManyWithoutConversationInputInputObject
       MessageCreateWithoutConversationInput: MessageCreateWithoutConversationInputInputObject
       UserCreatemailErrorsInput: UserCreatemailErrorsInputInputObject
+      UserCreatepushTokenInput: UserCreatepushTokenInputInputObject
       CommentCreateManyInput: CommentCreateManyInputInputObject
       ReportCreateManyWithoutDebateInput: ReportCreateManyWithoutDebateInputInputObject
       ReportCreateWithoutDebateInput: ReportCreateWithoutDebateInputInputObject
@@ -348,6 +349,7 @@ export interface NexusPrismaTypes {
       UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
       UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
       UserUpdatemailErrorsInput: UserUpdatemailErrorsInputInputObject
+      UserUpdatepushTokenInput: UserUpdatepushTokenInputInputObject
       ReportUpdateManyWithoutCommentInput: ReportUpdateManyWithoutCommentInputInputObject
       ReportUpdateWithWhereUniqueWithoutCommentInput: ReportUpdateWithWhereUniqueWithoutCommentInputInputObject
       ReportUpdateWithoutCommentDataInput: ReportUpdateWithoutCommentDataInputInputObject
@@ -2715,8 +2717,8 @@ export interface UserFieldDetails {
     type: 'String'
     args: {}
     description: string
-    list: undefined
-    nullable: true
+    list: true
+    nullable: false
     resolve: undefined
   }
   createdAt: {
@@ -9884,8 +9886,8 @@ export interface UserPreviousValuesFieldDetails {
     type: 'String'
     args: {}
     description: string
-    list: undefined
-    nullable: true
+    list: true
+    nullable: false
     resolve: undefined
   }
   createdAt: {
@@ -10815,20 +10817,6 @@ export interface UserWhereInput {
   mailStatus_not?: prisma.MailStatus | null
   mailStatus_in?: prisma.MailStatus[]
   mailStatus_not_in?: prisma.MailStatus[]
-  pushToken?: string | null
-  pushToken_not?: string | null
-  pushToken_in?: string[]
-  pushToken_not_in?: string[]
-  pushToken_lt?: string | null
-  pushToken_lte?: string | null
-  pushToken_gt?: string | null
-  pushToken_gte?: string | null
-  pushToken_contains?: string | null
-  pushToken_not_contains?: string | null
-  pushToken_starts_with?: string | null
-  pushToken_not_starts_with?: string | null
-  pushToken_ends_with?: string | null
-  pushToken_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -11022,20 +11010,6 @@ export type UserWhereInputInputObject =
   | { name: 'mailStatus_not', alias?: string  } 
   | { name: 'mailStatus_in', alias?: string  } 
   | { name: 'mailStatus_not_in', alias?: string  } 
-  | { name: 'pushToken', alias?: string  } 
-  | { name: 'pushToken_not', alias?: string  } 
-  | { name: 'pushToken_in', alias?: string  } 
-  | { name: 'pushToken_not_in', alias?: string  } 
-  | { name: 'pushToken_lt', alias?: string  } 
-  | { name: 'pushToken_lte', alias?: string  } 
-  | { name: 'pushToken_gt', alias?: string  } 
-  | { name: 'pushToken_gte', alias?: string  } 
-  | { name: 'pushToken_contains', alias?: string  } 
-  | { name: 'pushToken_not_contains', alias?: string  } 
-  | { name: 'pushToken_starts_with', alias?: string  } 
-  | { name: 'pushToken_not_starts_with', alias?: string  } 
-  | { name: 'pushToken_ends_with', alias?: string  } 
-  | { name: 'pushToken_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -12812,7 +12786,7 @@ export interface UserCreateInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
@@ -12889,7 +12863,7 @@ export interface UserCreateWithoutFollowingInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutFollowingInputInputObject =
   | Extract<keyof UserCreateWithoutFollowingInput, string>
@@ -12965,7 +12939,7 @@ export interface UserCreateWithoutBlockingInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutBlockingInputInputObject =
   | Extract<keyof UserCreateWithoutBlockingInput, string>
@@ -13041,7 +13015,7 @@ export interface UserCreateWithoutFollowersInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutFollowersInputInputObject =
   | Extract<keyof UserCreateWithoutFollowersInput, string>
@@ -13117,7 +13091,7 @@ export interface UserCreateWithoutBlockedInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutBlockedInputInputObject =
   | Extract<keyof UserCreateWithoutBlockedInput, string>
@@ -13253,7 +13227,7 @@ export interface UserCreateWithoutDebatesBlueInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutDebatesBlueInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesBlueInput, string>
@@ -13389,7 +13363,7 @@ export interface UserCreateWithoutDebatesInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutDebatesInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesInput, string>
@@ -13525,7 +13499,7 @@ export interface UserCreateWithoutDebatesRedInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutDebatesRedInputInputObject =
   | Extract<keyof UserCreateWithoutDebatesRedInput, string>
@@ -13851,7 +13825,7 @@ export interface UserCreateWithoutInteractionsInput {
   conversations?: ConversationCreateManyWithoutSpeakersInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutInteractionsInputInputObject =
   | Extract<keyof UserCreateWithoutInteractionsInput, string>
@@ -13962,6 +13936,13 @@ export interface UserCreatemailErrorsInput {
 }
 export type UserCreatemailErrorsInputInputObject =
   | Extract<keyof UserCreatemailErrorsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface UserCreatepushTokenInput {
+  set?: string[]
+}
+export type UserCreatepushTokenInputInputObject =
+  | Extract<keyof UserCreatepushTokenInput, string>
   | { name: 'set', alias?: string  } 
   
 export interface CommentCreateManyInput {
@@ -14240,7 +14221,7 @@ export interface UserUpdateDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateDataInputInputObject =
   | Extract<keyof UserUpdateDataInput, string>
@@ -14338,7 +14319,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutFollowingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowingDataInput, string>
@@ -14435,7 +14416,7 @@ export interface UserUpdateWithoutBlockingDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutBlockingDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockingDataInput, string>
@@ -14532,7 +14513,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutFollowersDataInputInputObject =
   | Extract<keyof UserUpdateWithoutFollowersDataInput, string>
@@ -14629,7 +14610,7 @@ export interface UserUpdateWithoutBlockedDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutBlockedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutBlockedDataInput, string>
@@ -14792,7 +14773,7 @@ export interface UserUpdateWithoutDebatesBlueDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutDebatesBlueDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesBlueDataInput, string>
@@ -14955,7 +14936,7 @@ export interface UserUpdateWithoutDebatesDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutDebatesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesDataInput, string>
@@ -15118,7 +15099,7 @@ export interface UserUpdateWithoutDebatesRedDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutDebatesRedDataInputInputObject =
   | Extract<keyof UserUpdateWithoutDebatesRedDataInput, string>
@@ -15527,20 +15508,6 @@ export interface UserScalarWhereInput {
   mailStatus_not?: prisma.MailStatus | null
   mailStatus_in?: prisma.MailStatus[]
   mailStatus_not_in?: prisma.MailStatus[]
-  pushToken?: string | null
-  pushToken_not?: string | null
-  pushToken_in?: string[]
-  pushToken_not_in?: string[]
-  pushToken_lt?: string | null
-  pushToken_lte?: string | null
-  pushToken_gt?: string | null
-  pushToken_gte?: string | null
-  pushToken_contains?: string | null
-  pushToken_not_contains?: string | null
-  pushToken_starts_with?: string | null
-  pushToken_not_starts_with?: string | null
-  pushToken_ends_with?: string | null
-  pushToken_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -15725,20 +15692,6 @@ export type UserScalarWhereInputInputObject =
   | { name: 'mailStatus_not', alias?: string  } 
   | { name: 'mailStatus_in', alias?: string  } 
   | { name: 'mailStatus_not_in', alias?: string  } 
-  | { name: 'pushToken', alias?: string  } 
-  | { name: 'pushToken_not', alias?: string  } 
-  | { name: 'pushToken_in', alias?: string  } 
-  | { name: 'pushToken_not_in', alias?: string  } 
-  | { name: 'pushToken_lt', alias?: string  } 
-  | { name: 'pushToken_lte', alias?: string  } 
-  | { name: 'pushToken_gt', alias?: string  } 
-  | { name: 'pushToken_gte', alias?: string  } 
-  | { name: 'pushToken_contains', alias?: string  } 
-  | { name: 'pushToken_not_contains', alias?: string  } 
-  | { name: 'pushToken_starts_with', alias?: string  } 
-  | { name: 'pushToken_not_starts_with', alias?: string  } 
-  | { name: 'pushToken_ends_with', alias?: string  } 
-  | { name: 'pushToken_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -15788,7 +15741,7 @@ export interface UserUpdateManyDataInput {
   lastConnected?: string | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateManyDataInputInputObject =
   | Extract<keyof UserUpdateManyDataInput, string>
@@ -15818,6 +15771,13 @@ export interface UserUpdatemailErrorsInput {
 }
 export type UserUpdatemailErrorsInputInputObject =
   | Extract<keyof UserUpdatemailErrorsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface UserUpdatepushTokenInput {
+  set?: string[]
+}
+export type UserUpdatepushTokenInputInputObject =
+  | Extract<keyof UserUpdatepushTokenInput, string>
   | { name: 'set', alias?: string  } 
   
 export interface ReportUpdateManyWithoutCommentInput {
@@ -16561,7 +16521,7 @@ export interface UserUpdateWithoutInteractionsDataInput {
   conversations?: ConversationUpdateManyWithoutSpeakersInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutInteractionsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutInteractionsDataInput, string>
@@ -18030,7 +17990,7 @@ export interface UserCreateWithoutConversationsInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutConversationsInputInputObject =
   | Extract<keyof UserCreateWithoutConversationsInput, string>
@@ -18139,7 +18099,7 @@ export interface UserUpdateWithoutConversationsDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutConversationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutConversationsDataInput, string>
@@ -18462,7 +18422,7 @@ export interface UserCreateWithoutNotificationsInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutNotificationsInputInputObject =
   | Extract<keyof UserCreateWithoutNotificationsInput, string>
@@ -18579,7 +18539,7 @@ export interface UserUpdateWithoutNotificationsDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutNotificationsDataInputInputObject =
   | Extract<keyof UserUpdateWithoutNotificationsDataInput, string>
@@ -18970,7 +18930,7 @@ export interface UserCreateWithoutTrophiesInput {
   interactions?: InteractionCreateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserCreatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserCreatepushTokenInput | null
 }
 export type UserCreateWithoutTrophiesInputInputObject =
   | Extract<keyof UserCreateWithoutTrophiesInput, string>
@@ -19064,7 +19024,7 @@ export interface UserUpdateWithoutTrophiesDataInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateWithoutTrophiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutTrophiesDataInput, string>
@@ -19148,7 +19108,7 @@ export interface UserUpdateInput {
   interactions?: InteractionUpdateManyWithoutWhoInput | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
@@ -19204,7 +19164,7 @@ export interface UserUpdateManyMutationInput {
   lastConnected?: string | null
   mailStatus?: prisma.MailStatus | null
   mailErrors?: UserUpdatemailErrorsInput | null
-  pushToken?: string | null
+  pushToken?: UserUpdatepushTokenInput | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
@@ -19729,8 +19689,6 @@ export type UserOrderByInputValues =
   | 'lastConnected_DESC'
   | 'mailStatus_ASC'
   | 'mailStatus_DESC'
-  | 'pushToken_ASC'
-  | 'pushToken_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

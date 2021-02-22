@@ -12,7 +12,7 @@ const getPushNotificationObject = ({
     crowned: {
       fr: {
         sound: true,
-        title: "Vous obtenu la couronne !",
+        title: "Vous avez obtenu la couronne !",
         body:
           "L'équipe Muddles vient de vous délivrer une couronne. Vous avez 24H pour créer un débat. Celui sera en top débat sur le fil d'actualité de chaque utilisateur.",
       },

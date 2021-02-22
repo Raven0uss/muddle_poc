@@ -9,27 +9,27 @@ const sendPushNotification = ({
   subtitle = null,
   body,
   sound = false,
-  badge = 0,
+  badge = 1,
   data = {},
 }) => {
-  if (!Expo.isExpoPushToken(pushToken)) {
-    console.error(`Push token ${pushToken} is not a valid Expo push token`);
-    return;
-  }
-  console.log("wesh");
+  let tokenList = pushToken.filter((pT) => {
+    if (!Expo.isExpoPushToken(pT)) {
+      console.error(`Push token ${pT} is not a valid Expo push token`);
+      return false;
+    }
+    return true;
+  });
 
   // https://docs.expo.io/push-notifications/sending-notifications/#message-request-format
-  const messages = [
-    {
-      to: pushToken,
-      title,
-      body,
-      sound: sound ? "default" : null,
-      badge,
-      data,
-      ...(isNil(subtitle) ? {} : { subtitle }),
-    },
-  ];
+  const messages = tokenList.map((token) => ({
+    to: token,
+    title,
+    body,
+    sound: sound ? "default" : null,
+    badge,
+    data,
+    ...(isNil(subtitle) ? {} : { subtitle }),
+  }));
   chunkAndSendMessages(messages);
   return;
 };
